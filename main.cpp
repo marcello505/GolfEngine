@@ -1,7 +1,11 @@
 #include <iostream>
+#include <SDL.h>
 
 int main()
 {
-    std::cout << "Hello, World!" << std::endl;
+    auto d = SDL_GetTicks();
+
+
+    std::cout << d << std::endl;
     return 0;
 }
