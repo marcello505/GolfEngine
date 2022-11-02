@@ -25,7 +25,12 @@ include_directories(${SDL2_MIXER_INCLUDE_DIRS})
 #Source Files
 set(SCENE_SOURCES
         src/Scene/Scene.cpp
-        src/Scene/GameObject.cpp)
+        src/Scene/GameObject.cpp
+        src/Scene/RenderShape/LineRenderShape.cpp
+        src/Scene/RenderShape/RectRenderShape.cpp
+        src/Scene/RenderShape/CircleRenderShape.cpp
+        src/Scene/RenderShape/SpriteRenderShape.cpp
+        src/Scene/RenderShape/ParticleSystemRenderShape.cpp)
 
 # Main Project
 add_library(${PROJECT_NAME}
