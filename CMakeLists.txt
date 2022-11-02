@@ -38,6 +38,13 @@ set(SERVICES_SOURCES
 set(SCENE_SOURCES
         src/Scene/Scene.cpp
         src/Scene/GameObject.cpp
+        src/Scene/AudioSource.cpp
+        src/Scene/Component.cpp
+        src/Scene/BehaviourScript.cpp
+        src/Scene/Drawable.cpp
+        src/Scene/Animator.cpp
+        src/Scene/ParticleSystem.cpp
+        src/Scene/Pathfinding.cpp
         src/Scene/Scene.h
         src/Scene/GameObject.h
         src/Scene/Transform.h

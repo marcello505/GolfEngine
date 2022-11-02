@@ -1,5 +1,6 @@
 //
-// Created by olafv on 11/2/2022.
+// Created by olafv on 11/02/2022.
+// Created by jaaps on 11/02/2022.
 //
 
 #ifndef GOLFENGINE_VECTOR2_H
