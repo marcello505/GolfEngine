@@ -23,3 +23,7 @@ include_directories(${IMGUI_INCLUDE_DIRS})
 add_executable(${PROJECT_NAME} main.cpp)
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} IMGUI)
+
+
+# Sub Projects
+add_subdirectory(tests)
