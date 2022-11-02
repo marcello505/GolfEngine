@@ -4,10 +4,28 @@
 
 #ifndef GOLFENGINE_GAMEOBJECT_H
 #define GOLFENGINE_GAMEOBJECT_H
+#include <string>
 
+//TODO replace this with include
+class Component;
 
 class GameObject {
-
+private:
+    bool _active;
+public:
+    std::string name;
+    std::string tag;
+    std::uint32_t layer;
+    bool recordable;
+    void addComponent(Component component);
+    template<typename C, typename ... args> void addComponent(args...);
+    template<typename C> void getComponent() const;
+    void removeComponent(Component component);
+    bool isActiveInWorld() const;
+    bool isActiveSelf() const;
+    bool getActive() const;
+    void setActive(bool active);
+    void onUpdate();
 };
 
 
