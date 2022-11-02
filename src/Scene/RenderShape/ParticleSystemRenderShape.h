@@ -16,7 +16,7 @@ public:
     void applyTransform(const Transform& transform) override;
 private:
     std::vector<SpriteRenderShape> _particles;
-    int particleCount;
+    int _particleCount;
 };
 
 
