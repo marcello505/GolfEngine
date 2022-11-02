@@ -9,7 +9,7 @@
 class Scene {
 
 public:
-   void startRecording(std::string actionToLock);
+   void startRecording(const std::string& actionToLock);
    void stopRecording();
    void playRecording();
 };

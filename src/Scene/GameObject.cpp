@@ -3,8 +3,8 @@
 //
 
 #include "GameObject.h"
-bool GameObject::isActiveInWorld(){return false;};
-bool GameObject::isActiveSelf(){return false;};
-bool GameObject::getActive(){return false;};
+bool GameObject::isActiveInWorld() const {return false;};
+bool GameObject::isActiveSelf() const {return false;};
+bool GameObject::getActive() const {return false;};
 void GameObject::setActive(bool active){};
 void GameObject::onUpdate(){};

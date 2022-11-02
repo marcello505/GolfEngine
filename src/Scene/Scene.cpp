@@ -4,6 +4,6 @@
 
 #include "Scene.h"
 
-void Scene::startRecording(std::string actionToLock){};
+void Scene::startRecording(const std::string& actionToLock){};
 void Scene::stopRecording(){};
 void Scene::playRecording(){};
