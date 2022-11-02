@@ -4,9 +4,42 @@
 
 #include "ActionMap.h"
 
-void ActionMap::addAction(std::string name){};
-void ActionMap::addInputKeyToAction(std::string action, InputKey inputKey){};
-bool ActionMap::isJustPressed(std::string action){return false;};
-bool ActionMap::isJustReleased(std::string action){return false;};
-bool ActionMap::isPressed(std::string action){return false;};
-bool ActionMap::isReleased(std::string action){return false;};
+void ActionMap::addAction(const std::string &name) {
+
+}
+
+void ActionMap::addInputKeyToAction(const std::string &action, InputKey inputKey) {
+
+}
+
+bool ActionMap::isJustPressed(const std::string &action) const {
+    return false;
+}
+
+bool ActionMap::isJustReleased(const std::string &action) const {
+    return false;
+}
+
+bool ActionMap::isPressed(const std::string &action) const {
+    return false;
+}
+
+bool ActionMap::isReleased(const std::string &action) const {
+    return false;
+}
+
+Vector2 ActionMap::getMousePosition() const {
+    return Vector2();
+}
+
+void ActionMap::setInputKeyPressed(InputKey inputKey, bool pressed) {
+
+}
+
+void ActionMap::setMousePosition() {
+
+}
+
+void ActionMap::update() {
+
+}

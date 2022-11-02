@@ -41,7 +41,13 @@ set(SCENE_SOURCES
         src/Scene/Scene.h
         src/Scene/GameObject.h
         src/Scene/Transform.h
-        src/Scene/Vector2.h)
+        src/Scene/Vector2.h
+        src/Scene/RenderShape/LineRenderShape.cpp
+        src/Scene/RenderShape/RectRenderShape.cpp
+        src/Scene/RenderShape/CircleRenderShape.cpp
+        src/Scene/RenderShape/SpriteRenderShape.cpp
+        src/Scene/RenderShape/ParticleSystemRenderShape.cpp
+        src/Scene/UIObject/Button.cpp)
 
 set(CORE_SOURCES
         src/Core/GameLoop.cpp
