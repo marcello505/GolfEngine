@@ -11,11 +11,11 @@
 class Box2DPhysicsService :  public PhysicsService {
 public:
     Box2DPhysicsService();
-    void addRigidBody(const Rigidbody& rigidBody) override;
-    void removeRigidBody(const Rigidbody& rigidBody) override;
+    void addRigidBody(const RigidBody& rigidBody) override;
+    void removeRigidBody(const RigidBody& rigidBody) override;
     void update() override;
 private:
-    std::vector<Rigidbody*> _rigidBodies;
+    std::vector<RigidBody*> _rigidBodies;
 };
 
 

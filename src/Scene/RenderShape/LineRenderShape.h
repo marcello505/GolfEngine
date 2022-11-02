@@ -6,9 +6,8 @@
 #define SPC_PROJECT_LINERENDERSHAPE_H
 
 #include "RenderShape.h"
-// TODO replace with include
-class Vector2;
-class Color;
+#include "../Vector2.h"
+#include "../Color.h"
 
 class LineRenderShape : public RenderShape {
 public:

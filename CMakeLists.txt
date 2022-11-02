@@ -23,13 +23,10 @@ find_package(SDL2_IMAGE REQUIRED) #Include dirs is included on target_link_libra
 include_directories(${SDL2_INCLUDE_DIRS})
 include_directories(${IMGUI_INCLUDE_DIRS})
 
-set(INPUT_SOURCES
-        src/Input/Action.h
-        src/Input/ActionMap.cpp
-        src/Input/ActionMap.h
-        src/Input/InputKey.h)
-
 #Source Files
+set(INPUT_SOURCES
+        src/Input/ActionMap.cpp)
+
 set(SERVICES_SOURCES
         src/Services/Box2DPhysicsService.cpp
         src/Services/SDLAudioService.cpp
@@ -37,32 +34,26 @@ set(SERVICES_SOURCES
         src/Services/SDLInputService.cpp)
 set(SCENE_SOURCES
         src/Scene/Scene.cpp
-        src/Scene/GameObject.cpp
-        src/Scene/AudioSource.cpp
-        src/Scene/Component.cpp
-        src/Scene/BehaviourScript.cpp
-        src/Scene/Drawable.cpp
-        src/Scene/Animator.cpp
-        src/Scene/ParticleSystem.cpp
-        src/Scene/Pathfinding.cpp
-        src/Scene/Scene.h
-        src/Scene/GameObject.h
-        src/Scene/Transform.h
-        src/Scene/Vector2.h
+        src/Scene/GameObjects/GameObject.cpp
+        src/Scene/Components/AudioSource.cpp
+        src/Scene/Components/Component.cpp
+        src/Scene/Components/BehaviourScript.cpp
+        src/Scene/Components/Drawable.cpp
+        src/Scene/Components/Animator.cpp
+        src/Scene/Components/ParticleSystem.cpp
+        src/Scene/Components/Pathfinding.cpp
         src/Scene/RenderShape/LineRenderShape.cpp
         src/Scene/RenderShape/RectRenderShape.cpp
         src/Scene/RenderShape/CircleRenderShape.cpp
         src/Scene/RenderShape/SpriteRenderShape.cpp
         src/Scene/RenderShape/ParticleSystemRenderShape.cpp
-        src/Scene/UIObject/Button.cpp)
+        src/Scene/GameObjects/UIObject/Button.cpp)
 
 set(CORE_SOURCES
         src/Core/GameLoop.cpp
-        src/Core/GameLoop.h
         src/Core/SceneManager.cpp
-        src/Core/SceneManager.h
-        src/Core/ProjectSettings.cpp
-        src/Core/ProjectSettings.h)
+        src/Core/ProjectSettings.cpp)
+
 # Main Project
 add_library(${PROJECT_NAME}
         ${SCENE_SOURCES}

@@ -6,17 +6,16 @@
 #define SPC_PROJECT_CIRCLERENDERSHAPE_H
 
 #include "RenderShape.h"
-// TODO replace with include
-class Vector2;
-class Color;
+#include "../Vector2.h"
+#include "../Color.h"
 
-class CircleRenderShape {
+class CircleRenderShape : public RenderShape{
 public:
     CircleRenderShape();
     RenderShapeType getType() override;
     void applyTransform(const Transform& transform) override;
 private:
-    vector2 _position;
+    Vector2 _position;
     float _radius;
     Color _color;
 };

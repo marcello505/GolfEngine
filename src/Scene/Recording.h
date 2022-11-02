@@ -9,11 +9,9 @@
 #include <map>
 #include "../Input/Action.h"
 
-class Recording {
-private:
-    std::vector<std::byte> _startingSnapshot;
-    std::map<int, std::vector<Action>> _inputs
-
+struct Recording {
+    std::vector<std::byte> startingSnapshot;
+    std::map<int, std::vector<Action>> inputs;
 };
 
 

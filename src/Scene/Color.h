@@ -7,12 +7,12 @@
 
 
 #include <cstddef>
+#include <cstdint>
 
 struct Color {
-    //TODO std::byte should be uint8_t
-    std::byte r8;
-    std::byte g8;
-    std::byte b8;
+    std::uint8_t r8;
+    std::uint8_t g8;
+    std::uint8_t b8;
 };
 
 

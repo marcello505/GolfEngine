@@ -6,8 +6,7 @@
 #define SPC_PROJECT_CAMERA_H
 
 #include "GameObject.h"
-// TODO replace with include
-class Color;
+#include "../Color.h"
 
 class Camera : public GameObject {
 private:

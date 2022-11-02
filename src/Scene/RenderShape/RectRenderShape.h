@@ -6,11 +6,10 @@
 #define SPC_PROJECT_RECTRENDERSHAPE_H
 
 #include "RenderShape.h"
-// TODO replace with include
-class Rect2;
-class Color;
+#include "../Rect2.h"
+#include "../Color.h"
 
-class RectRenderShape {
+class RectRenderShape : public RenderShape {
 public:
     RectRenderShape();
     RenderShapeType getType() override;

@@ -4,8 +4,8 @@
 
 #ifndef GOLFENGINE_DRAWABLE_H
 #define GOLFENGINE_DRAWABLE_H
+#include "../RenderShape/RenderShape.h"
 
-//TODO import rendershape
 class Drawable {
 public:
     virtual RenderShape getRenderShape() = 0;

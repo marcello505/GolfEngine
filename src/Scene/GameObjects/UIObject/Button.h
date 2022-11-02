@@ -10,8 +10,7 @@
 class Button : public UIObject{
 public:
     bool interactable() const;
-    void onClick()
-
+    void onClick();
 };
 
 

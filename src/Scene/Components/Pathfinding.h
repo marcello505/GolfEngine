@@ -7,7 +7,7 @@
 
 
 #include <vector>
-#include "Vector2.h"
+#include "../Vector2.h"
 #include "Component.h"
 class Pathfinding : public Component{
 public:

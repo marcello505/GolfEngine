@@ -5,13 +5,11 @@
 #ifndef SPC_PROJECT_RENDERSERVICE_H
 #define SPC_PROJECT_RENDERSERVICE_H
 
-// TODO replace with include
-//#include "../../Scene/Drawable.h"
-class Drawable;
+#include "../../Scene/Components/Drawable.h"
 
 class RenderService{
 public:
-    virtual void addDrawable(const Drawable& drawable);
+    virtual void addDrawable(const Drawable& drawable) = 0;
     virtual void removeDrawable(const Drawable& drawable) = 0;
     virtual void render() = 0;
     virtual void setScreenSize(int width, int height) = 0;

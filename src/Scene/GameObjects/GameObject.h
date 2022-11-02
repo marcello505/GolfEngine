@@ -6,8 +6,7 @@
 #define GOLFENGINE_GAMEOBJECT_H
 #include <string>
 
-//TODO replace this with include
-class Component;
+#include "../Components/Component.h"
 
 class GameObject {
 private:

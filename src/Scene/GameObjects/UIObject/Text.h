@@ -9,8 +9,7 @@
 #include <string>
 #include "Alignment.h"
 
-//TODO replace this wit correct Color include
-class Color;
+#include "../../Color.h"
 
 class Text {
 private:

@@ -6,9 +6,8 @@
 #define SPC_PROJECT_SPRITERENDERSHAPE_H
 
 #include "RenderShape.h"
-// TODO replace with include
-class Rect2;
-class Color;
+#include "../Rect2.h"
+#include "../Color.h"
 
 class SpriteRenderShape : public RenderShape {
 public:

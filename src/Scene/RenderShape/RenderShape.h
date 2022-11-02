@@ -6,8 +6,7 @@
 #define SPC_PROJECT_RENDERSHAPE_H
 
 #include "RenderShapeType.h"
-// TODO replace with include
-class Transform;
+#include "../Transform.h"
 
 class RenderShape{
 public:

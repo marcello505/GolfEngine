@@ -7,8 +7,8 @@
 
 
 #include <string>
-#include "Color.h"
-#include "Rect2.h"
+#include "../Color.h"
+#include "../Rect2.h"
 #include "Component.h"
 class Sprite : public Component {
 private:

@@ -7,10 +7,10 @@
 Box2DPhysicsService::Box2DPhysicsService() {
 }
 
-void Box2DPhysicsService::addRigidBody(const Rigidbody& rigidBody) {
+void Box2DPhysicsService::addRigidBody(const RigidBody& rigidBody) {
 }
 
-void Box2DPhysicsService::removeRigidBody(const Rigidbody& rigidBody) {
+void Box2DPhysicsService::removeRigidBody(const RigidBody& rigidBody) {
 }
 
 void Box2DPhysicsService::update() {
