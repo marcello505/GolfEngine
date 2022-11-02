@@ -9,10 +9,10 @@
 #include "RigidBodyTypes.h"
 
 struct RigidBody {
-private:
-    float _mass;
-    float _gravityScale;
-    RigidBodyTypes _bodyType;
+
+    float mass;
+    float gravityScale;
+    RigidBodyTypes bodyType;
 };
 
 

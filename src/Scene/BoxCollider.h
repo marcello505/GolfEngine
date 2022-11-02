@@ -7,9 +7,8 @@
 
 
 struct BoxCollider {
-private:
-    float _width;
-    float _height;
+    float width;
+    float height;
 };
 
 

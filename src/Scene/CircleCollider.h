@@ -7,8 +7,8 @@
 
 
 struct CircleCollider {
-private:
-    float _radius;
+
+    float radius;
 };
 
 

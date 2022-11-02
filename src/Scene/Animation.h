@@ -9,13 +9,13 @@
 #include <string>
 
 struct Animation {
-private:
-    std::string _spriteSheetPath;
-    float _playSpeed;
-    int _rows;
-    int _cols;
-    int _beginCell;
-    int _endCell;
+
+    std::string _priteSheetPath;
+    float playSpeed;
+    int rows;
+    int cols;
+    int beginCell;
+    int endCell;
 };
 
 
