@@ -5,8 +5,6 @@
 #ifndef GOLFENGINE_INPUTKEY_H
 #define GOLFENGINE_INPUTKEY_H
 
-#endif //GOLFENGINE_INPUTKEY_H
-
 enum InputKey{
     Key_Left,
     Key_Right,
@@ -18,3 +16,6 @@ enum InputKey{
     Key_S,
     Key_D,
 };
+
+#endif //GOLFENGINE_INPUTKEY_H
+
