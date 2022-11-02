@@ -8,7 +8,7 @@
 
 class Component {
 private:
-    bool active;
+    bool _active;
 public:
     void onStart();
     void onUpdate();

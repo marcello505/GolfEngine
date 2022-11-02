@@ -6,8 +6,11 @@
 #define GOLFENGINE_RIGIDBODYTYPES_H
 
 
-struct RigidBodyTypes {
-
+enum class RigidBodyTypes {
+    DynamicBody,
+    StaticBody,
+    KinematicBody,
+    AreaBody,
 };
 
 

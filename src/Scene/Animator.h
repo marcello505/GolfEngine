@@ -12,11 +12,11 @@
 
 class Animator {
 public:
-    int fps;
     void play(std::string animation, bool looping);
     void stop();
 private:
     std::map<std::string, Animation> _animations;
+    int _fps;
 };
 
 

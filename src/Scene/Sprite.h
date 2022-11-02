@@ -11,14 +11,14 @@
 #include "Rect2.h"
 
 struct Sprite {
-public:
-    std::string sprite;
-    Rect2 imageSource;
-    Color color;
-    bool flipX;
-    bool flipY;
-    int sortingLayer;
-    int orderInLayer;
+private:
+    std::string _sprite;
+    Rect2 _imageSource;
+    Color _color;
+    bool _flipX;
+    bool _flipY;
+    int _sortingLayer;
+    int _orderInLayer;
 };
 
 

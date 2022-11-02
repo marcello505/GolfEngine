@@ -11,12 +11,13 @@
 class AudioSource {
 
 public:
-    std::string audioClip;
-    bool playOnAwake;
-    bool loop;
-    int volume;
     void play(bool loop);
     void stop();
+private:
+    std::string _audioClip;
+    bool _playOnAwake;
+    bool _loop;
+    int _volume;
 };
 
 

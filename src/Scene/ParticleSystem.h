@@ -8,11 +8,12 @@
 
 class ParticleSystem {
 public:
-    int particlesPerSecond;
-    float duration;
+
     void play(bool looping);
     void stop();
-
+private:
+    int _particlesPerSecond;
+    float _duration;
 };
 
 

@@ -10,7 +10,6 @@
 #include "Vector2.h"
 
 struct Rect2 {
-public:
     Vector2 position;
     Vector2 size;
 };
