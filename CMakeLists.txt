@@ -42,7 +42,8 @@ set(SCENE_SOURCES
         src/Scene/RenderShape/RectRenderShape.cpp
         src/Scene/RenderShape/CircleRenderShape.cpp
         src/Scene/RenderShape/SpriteRenderShape.cpp
-        src/Scene/RenderShape/ParticleSystemRenderShape.cpp)
+        src/Scene/RenderShape/ParticleSystemRenderShape.cpp
+        src/Scene/UIObject/Button.cpp)
 
 set(CORE_SOURCES
         src/Core/GameLoop.cpp
