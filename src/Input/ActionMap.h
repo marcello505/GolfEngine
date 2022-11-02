@@ -19,12 +19,12 @@ private:
     void update();
     void setMousePosition();
 public:
-    void addAction(string name);
-    void addInputKeyToAction(string action, InputKey inputKey);
-    bool isJustPressed(string action);
-    bool isJustReleased(string action);
-    bool isPressed(string action);
-    bool isReleased(string action);
+    void addAction(std::string name);
+    void addInputKeyToAction(std::string action, InputKey inputKey);
+    bool isJustPressed(std::string action);
+    bool isJustReleased(std::string action);
+    bool isPressed(std::string action);
+    bool isReleased(std::string action);
     Vector2 getMousePosition();
 };
 

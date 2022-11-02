@@ -4,12 +4,12 @@
 
 #ifndef GOLFENGINE_ACTION_H
 #define GOLFENGINE_ACTION_H
-
-#endif //GOLFENGINE_ACTION_H
-
+#include <string>
 class Action {
 public:
-    string name;
+    std::string name;
     bool pressed;
     bool justInput;
 };
+#endif //GOLFENGINE_ACTION_H
+
