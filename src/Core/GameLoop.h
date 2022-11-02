@@ -5,11 +5,10 @@
 #ifndef SPC_PROJECT_GAMELOOP_H
 #define SPC_PROJECT_GAMELOOP_H
 
-//TODO Remove this if Skeleton/services is finished
-class AudioService;
-class InputService;
-class RenderService;
-class PhysicsService;
+#include "../Services/Abstracts/AudioService.h"
+#include "../Services/Abstracts/InputService.h"
+#include "../Services/Abstracts/RenderService.h"
+#include "../Services/Abstracts/PhysicsService.h"
 
 class GameLoop {
 public:
