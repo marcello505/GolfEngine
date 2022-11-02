@@ -4,19 +4,19 @@
 
 #include "GameLoop.h"
 
-void GameLoop::setAudioService(const AudioService &audioService) {
+void GameLoop::setAudioService(const AudioService& audioService) {
 
 }
 
-void GameLoop::setInputService(const InputService &inputService) {
+void GameLoop::setInputService(const InputService& inputService) {
 
 }
 
-void GameLoop::setRenderService(const RenderService &renderService) {
+void GameLoop::setRenderService(const RenderService& renderService) {
 
 }
 
-void GameLoop::setPhysicsService(const PhysicsService &physicsService) {
+void GameLoop::setPhysicsService(const PhysicsService& physicsService) {
 
 }
 
