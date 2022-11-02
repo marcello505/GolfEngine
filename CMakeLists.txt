@@ -22,6 +22,12 @@ include_directories(${SDL2_INCLUDE_DIRS})
 include_directories(${IMGUI_INCLUDE_DIRS})
 include_directories(${SDL2_MIXER_INCLUDE_DIRS})
 
+set(INPUT_SOURCES
+        src/Input/Action.h
+        src/Input/ActionMap.cpp
+        src/Input/ActionMap.h
+        src/Input/InputKey.h)
+
 #Source Files
 set(SCENE_SOURCES
         src/Scene/Scene.cpp
@@ -29,7 +35,8 @@ set(SCENE_SOURCES
 
 # Main Project
 add_library(${PROJECT_NAME}
-        ${SCENE_SOURCES})
+        ${SCENE_SOURCES}
+        ${INPUT_SOURCES})
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} ${SDL2_MIXER_LIBRARIES})
 
