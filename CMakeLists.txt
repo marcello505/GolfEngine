@@ -30,6 +30,11 @@ set(INPUT_SOURCES
         src/Input/InputKey.h)
 
 #Source Files
+set(SERVICES_SOURCES
+        src/Services/Box2DPhysicsService.cpp
+        src/Services/SDLAudioService.cpp
+        src/Services/SDLRenderService.cpp
+        src/Services/SDLInputService.cpp)
 set(SCENE_SOURCES
         src/Scene/Scene.cpp
         src/Scene/GameObject.cpp)
@@ -44,8 +49,10 @@ set(CORE_SOURCES
 # Main Project
 add_library(${PROJECT_NAME}
         ${SCENE_SOURCES}
+        ${SERVICES_SOURCES}
         ${INPUT_SOURCES}
         ${CORE_SOURCES})
+
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} SDL2_mixer::SDL2_mixer)
 target_link_libraries(${PROJECT_NAME} SDL2_image::SDL2_image)
