@@ -12,7 +12,7 @@
 
 class Animator {
 public:
-    void play(std::string animation, bool looping);
+    void play(const std::string& animation, bool looping);
     void stop();
 private:
     std::map<std::string, Animation> _animations;
