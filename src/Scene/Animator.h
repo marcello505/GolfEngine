@@ -9,9 +9,9 @@
 #include <string>
 #include <map>
 #include "Animation.h"
-#include "Collider.h"
+#include "Component.h"
 
-class Animator : public Collider {
+class Animator : public Component {
 public:
     void play(const std::string& animation, bool looping);
     void stop();

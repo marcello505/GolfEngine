@@ -7,9 +7,9 @@
 
 
 #include <string>
-#include "Collider.h"
+#include "Component.h"
 
-class AudioSource : public Collider{
+class AudioSource : public Component{
 
 public:
     void play(bool loop);
