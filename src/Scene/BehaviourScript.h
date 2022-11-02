@@ -8,8 +8,8 @@
 
 class BehaviourScript {
 public:
-    void onStart();
-    void onUpdate();
+    virtual void onStart();
+    virtual void onUpdate();
 };
 
 
