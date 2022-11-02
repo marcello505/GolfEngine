@@ -5,7 +5,7 @@
 #ifndef GOLFENGINE_DRAWABLE_H
 #define GOLFENGINE_DRAWABLE_H
 
-
+//TODO import rendershape
 class Drawable {
 public:
     virtual RenderShape getRenderShape() = 0;
