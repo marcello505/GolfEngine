@@ -33,10 +33,18 @@ set(SCENE_SOURCES
         src/Scene/Scene.cpp
         src/Scene/GameObject.cpp)
 
+set(CORE_SOURCES
+        src/Core/GameLoop.cpp
+        src/Core/GameLoop.h
+        src/Core/SceneManager.cpp
+        src/Core/SceneManager.h
+        src/Core/ProjectSettings.cpp
+        src/Core/ProjectSettings.h)
 # Main Project
 add_library(${PROJECT_NAME}
         ${SCENE_SOURCES}
-        ${INPUT_SOURCES})
+        ${INPUT_SOURCES}
+        ${CORE_SOURCES})
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} ${SDL2_MIXER_LIBRARIES})
 
