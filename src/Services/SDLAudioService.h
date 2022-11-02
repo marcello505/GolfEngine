@@ -21,8 +21,8 @@ public:
     void setGlobalVolume(float volume) override;
     void clearAudio() override;
 private:
-    std::map<const std::string&, Mix_Chunk*> _soundEffects;
-    std::map<const std::string&, Mix_Music*> _music;
+    std::map<std::string, Mix_Chunk*> _soundEffects;
+    std::map<std::string, Mix_Music*> _music;
 };
 
 
