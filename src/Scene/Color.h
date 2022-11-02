@@ -9,6 +9,7 @@
 #include <cstddef>
 
 struct Color {
+    //TODO std::byte should be uint8_t
     std::byte r8;
     std::byte g8;
     std::byte b8;
