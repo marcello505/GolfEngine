@@ -12,8 +12,8 @@ class Color;
 class Camera : public GameObject {
 private:
     Color _backgroundColor;
-    float aspectWidth;
-    float aspectHeight;
+    float _aspectWidth;
+    float _aspectHeight;
 };
 
 
