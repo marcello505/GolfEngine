@@ -5,11 +5,11 @@
 #ifndef GOLFENGINE_TRANSFORM_H
 #define GOLFENGINE_TRANSFORM_H
 #include <string>
+#include "Vector2.h"
 
-class Transform {
-public:
-    std::string _name;
-    bool _pressed;
-    bool _justInput;
+struct Transform {
+    Vector2 position;
+    float rotation;
+    Vector2 scale;
 };
 #endif //GOLFENGINE_TRANSFORM_H
