@@ -4,10 +4,14 @@
 
 #ifndef GOLFENGINE_SCENE_H
 #define GOLFENGINE_SCENE_H
-
+#include <string>
 
 class Scene {
 
+public:
+   void startRecording(std::string actionToLock);
+   void stopRecording();
+   void playRecording();
 };
 
 

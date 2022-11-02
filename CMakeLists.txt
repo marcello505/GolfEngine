@@ -37,7 +37,11 @@ set(SERVICES_SOURCES
         src/Services/SDLInputService.cpp)
 set(SCENE_SOURCES
         src/Scene/Scene.cpp
-        src/Scene/GameObject.cpp)
+        src/Scene/GameObject.cpp
+        src/Scene/Scene.h
+        src/Scene/GameObject.h
+        src/Scene/Transform.h
+        src/Scene/Vector2.h)
 
 set(CORE_SOURCES
         src/Core/GameLoop.cpp
