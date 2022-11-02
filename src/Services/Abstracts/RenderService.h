@@ -5,7 +5,9 @@
 #ifndef SPC_PROJECT_RENDERSERVICE_H
 #define SPC_PROJECT_RENDERSERVICE_H
 
-#include "../../Scene/Drawable.h"
+// TODO replace with include
+//#include "../../Scene/Drawable.h"
+class Drawable;
 
 class RenderService{
 public:

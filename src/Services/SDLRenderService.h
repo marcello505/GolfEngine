@@ -8,7 +8,6 @@
 #include "Abstracts/RenderService.h"
 #include <SDL.h>
 #include <map>
-#include "../Scene/Drawable.h"
 #include <vector>
 
 class SDLRenderService : public RenderService {
@@ -23,8 +22,8 @@ private:
     int _screenSizeHeight;
     SDL_Window* _window;
     SDL_Renderer* _renderer;
-    std::vector<Drawable> _drawables;
-    std::map<const std::string&, SDL_Texture> _cachedTextures;
+    std::vector<Drawable*> _drawables;
+    std::map<const std::string&, SDL_Texture*> _cachedTextures;
 };
 
 

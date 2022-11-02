@@ -5,12 +5,14 @@
 #ifndef SPC_PROJECT_PHYSICSSERVICE_H
 #define SPC_PROJECT_PHYSICSSERVICE_H
 
-#include "../../Scene/Rigidbody.h"
+// TODO replace with include
+//#include "../../Scene/Rigidbody.h"
+class Rigidbody;
 
 class PhysicsService {
 public:
-    virtual void addRigidBody(RigidBody& rigidBody) = 0;
-    virtual void removeRigidBody(RigidBody& rigidBody) = 0;
+    virtual void addRigidBody(Rigidbody& rigidBody) = 0;
+    virtual void removeRigidBody(Rigidbody& rigidBody) = 0;
     virtual void update() = 0;
 };
 
