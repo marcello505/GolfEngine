@@ -11,8 +11,8 @@ class Drawable;
 
 class RenderService{
 public:
-    virtual void addDrawable(Drawable& drawable);
-    virtual void removeDrawable(Drawable& drawable) = 0;
+    virtual void addDrawable(const Drawable& drawable);
+    virtual void removeDrawable(const Drawable& drawable) = 0;
     virtual void render() = 0;
     virtual void setScreenSize(int width, int height) = 0;
 };

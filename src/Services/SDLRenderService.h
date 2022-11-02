@@ -9,12 +9,13 @@
 #include <SDL.h>
 #include <map>
 #include <vector>
+#include <string>
 
 class SDLRenderService : public RenderService {
 public:
     SDLRenderService();
-    void addDrawable(Drawable& drawable) override;
-    void removeDrawable(Drawable& drawable) override;
+    void addDrawable(const Drawable& drawable) override;
+    void removeDrawable(const Drawable& drawable) override;
     void render() override;
     void setScreenSize(int width, int height) override;
 private:

@@ -7,10 +7,10 @@
 SDLRenderService::SDLRenderService() {
 }
 
-void SDLRenderService::addDrawable(Drawable& drawable) {
+void SDLRenderService::addDrawable(const Drawable& drawable) {
 }
 
-void SDLRenderService::removeDrawable(Drawable& drawable) {
+void SDLRenderService::removeDrawable(const Drawable& drawable) {
 }
 
 void SDLRenderService::render() {

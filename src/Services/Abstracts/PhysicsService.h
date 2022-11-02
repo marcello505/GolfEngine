@@ -11,8 +11,8 @@ class Rigidbody;
 
 class PhysicsService {
 public:
-    virtual void addRigidBody(Rigidbody& rigidBody) = 0;
-    virtual void removeRigidBody(Rigidbody& rigidBody) = 0;
+    virtual void addRigidBody(const Rigidbody& rigidBody) = 0;
+    virtual void removeRigidBody(const Rigidbody& rigidBody) = 0;
     virtual void update() = 0;
 };
 
