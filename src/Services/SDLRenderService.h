@@ -24,7 +24,7 @@ private:
     SDL_Window* _window;
     SDL_Renderer* _renderer;
     std::vector<Drawable*> _drawables;
-    std::map<const std::string&, SDL_Texture*> _cachedTextures;
+    std::map<std::string, SDL_Texture*> _cachedTextures;
 };
 
 

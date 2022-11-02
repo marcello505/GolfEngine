@@ -27,3 +27,7 @@ void SDLAudioService::setVolumeChannel(int channel, float volume) {
 
 void SDLAudioService::setGlobalVolume(float volume) {
 }
+
+void SDLAudioService::clearAudio() {
+
+}

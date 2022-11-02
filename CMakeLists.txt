@@ -34,7 +34,9 @@ set(SCENE_SOURCES
 
 # Main Project
 add_library(${PROJECT_NAME}
-        ${SCENE_SOURCES})
+        ${SCENE_SOURCES}
+        ${SERVICES_SOURCES}
+        )
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} ${SDL2_MIXER_LIBRARIES})
 
