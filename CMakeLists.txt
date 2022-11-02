@@ -23,6 +23,11 @@ include_directories(${IMGUI_INCLUDE_DIRS})
 include_directories(${SDL2_MIXER_INCLUDE_DIRS})
 
 #Source Files
+set(SERVICES_SOURCES
+        src/Services/Box2DPhysicsService.cpp
+        src/Services/SDLAudioService.cpp
+        src/Services/SDLRenderService.cpp
+        src/Services/SDLInputService.cpp)
 set(SCENE_SOURCES
         src/Scene/Scene.cpp
         src/Scene/GameObject.cpp)
