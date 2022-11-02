@@ -4,9 +4,9 @@
 
 #ifndef GOLFENGINE_COLLIDER_H
 #define GOLFENGINE_COLLIDER_H
+#include "Component.h"
 
-
-struct Collider {
+class Collider : public Component {
 
 };
 

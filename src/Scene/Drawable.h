@@ -8,7 +8,7 @@
 
 class Drawable {
 public:
-    RenderShape getRenderShape();
+    virtual RenderShape getRenderShape() = 0;
 };
 
 

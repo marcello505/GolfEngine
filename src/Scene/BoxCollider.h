@@ -4,11 +4,12 @@
 
 #ifndef GOLFENGINE_BOXCOLLIDER_H
 #define GOLFENGINE_BOXCOLLIDER_H
+#include "Collider.h"
 
-
-struct BoxCollider {
-    float width;
-    float height;
+class BoxCollider : public Collider {
+private:
+    float _width;
+    float _height;
 };
 
 

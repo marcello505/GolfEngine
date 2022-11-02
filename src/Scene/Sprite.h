@@ -9,15 +9,16 @@
 #include <string>
 #include "Color.h"
 #include "Rect2.h"
-
-struct Sprite {
-    std::string sprite;
-    Rect2 imageSource;
-    Color color;
-    bool flipX;
-    bool flipY;
-    int sortingLayer;
-    int orderInLayer;
+#include "Component.h"
+class Sprite : public Component {
+private:
+    std::string _sprite;
+    Rect2 _imageSource;
+    Color _color;
+    bool _flipX;
+    bool _flipY;
+    int _sortingLayer;
+    int _orderInLayer;
 };
 
 

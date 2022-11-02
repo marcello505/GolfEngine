@@ -7,8 +7,9 @@
 
 
 #include <string>
+#include "Collider.h"
 
-class AudioSource {
+class AudioSource : public Collider{
 
 public:
     void play(bool loop);

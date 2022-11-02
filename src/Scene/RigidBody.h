@@ -7,12 +7,12 @@
 
 
 #include "RigidBodyTypes.h"
-
-struct RigidBody {
-
-    float mass;
-    float gravityScale;
-    RigidBodyTypes bodyType;
+#include "Component.h"
+class RigidBody : public Component {
+private:
+    float _mass;
+    float _gravityScale;
+    RigidBodyTypes _bodyType;
 };
 
 

@@ -10,9 +10,9 @@ class Component {
 private:
     bool _active;
 public:
-    void onStart();
-    void onUpdate();
-    void onRemove();
+    virtual void onStart() = 0;
+    virtual void onUpdate() = 0;
+    virtual void onRemove() = 0;
     bool getActive();
     void setActive(bool active);
 };

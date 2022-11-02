@@ -4,9 +4,9 @@
 
 #ifndef GOLFENGINE_BEHAVIOURSCRIPT_H
 #define GOLFENGINE_BEHAVIOURSCRIPT_H
+#include "Collider.h"
 
-
-class BehaviourScript {
+class BehaviourScript : public Collider {
 public:
     virtual void onStart();
     virtual void onUpdate();

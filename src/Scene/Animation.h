@@ -10,7 +10,7 @@
 
 struct Animation {
 
-    std::string _priteSheetPath;
+    std::string spriteSheetPath;
     float playSpeed;
     int rows;
     int cols;

@@ -5,8 +5,8 @@
 #ifndef GOLFENGINE_PARTICLESYSTEM_H
 #define GOLFENGINE_PARTICLESYSTEM_H
 
-
-class ParticleSystem {
+#include "Component.h"
+class ParticleSystem : public Component{
 public:
 
     void play(bool looping);

@@ -8,8 +8,8 @@
 
 #include <vector>
 #include "Vector2.h"
-
-class Pathfinding {
+#include "Component.h"
+class Pathfinding : public Component{
 public:
     void navigateToPosition(Vector2 pos);
 };

@@ -4,11 +4,11 @@
 
 #ifndef GOLFENGINE_CIRCLECOLLIDER_H
 #define GOLFENGINE_CIRCLECOLLIDER_H
+#include "Collider.h"
 
-
-struct CircleCollider {
-
-    float radius;
+class CircleCollider : public Collider{
+private:
+    float _radius;
 };
 
 
