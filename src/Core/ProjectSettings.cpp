@@ -4,11 +4,11 @@
 
 #include "ProjectSettings.h"
 
-void ProjectSettings::setSettings(std::string key, std::string value) {
+void ProjectSettings::setSettings(const std::string& key, const std::string& value) {
 
 }
 
-void ProjectSettings::getSettings(std::string key, std::string value) const {
+void ProjectSettings::getSettings(const std::string& key) const {
 
 }
 

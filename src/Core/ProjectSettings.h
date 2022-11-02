@@ -12,8 +12,8 @@ class ProjectSettings {
 private:
     std::map<std::string, std::string> settings;
 public:
-    void setSettings(std::string key, std::string value);
-    void getSettings(std::string key, std::string value) const;
+    void setSettings(const std::string& key, const std::string& value);
+    void getSettings(const std::string& key) const;
 };
 
 
