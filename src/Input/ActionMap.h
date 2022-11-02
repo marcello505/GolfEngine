@@ -9,7 +9,7 @@
 #include <vector>
 #include "Action.h"
 #include "InputKey.h"
-#include "Scene/Vector2.h"
+#include "../Scene/Vector2.h"
 
 class ActionMap {
 private:
@@ -19,13 +19,13 @@ private:
     void update();
     void setMousePosition();
 public:
-    void addAction(std::string name);
-    void addInputKeyToAction(std::string action, InputKey inputKey);
-    bool isJustPressed(std::string action);
-    bool isJustReleased(std::string action);
-    bool isPressed(std::string action);
-    bool isReleased(std::string action);
-    Vector2 getMousePosition();
+    void addAction(const std::string& name);
+    void addInputKeyToAction(const std::string& action, InputKey inputKey);
+    bool isJustPressed(const std::string& action) const;
+    bool isJustReleased(const std::string& action) const;
+    bool isPressed(const std::string& action) const;
+    bool isReleased(const std::string& action) const;
+    Vector2 getMousePosition() const;
 };
 
 
