@@ -12,9 +12,11 @@
 class SceneManager {
 private:
     std::vector<Scene> scenes;
+    Scene currentScene;
 public:
     void changeScene(const Scene& scene);
     void addScene(const Scene& scene);
+    Scene& getCurrentScene();
 
 };
 

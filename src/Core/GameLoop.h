@@ -9,9 +9,13 @@
 #include "../Services/Abstracts/InputService.h"
 #include "../Services/Abstracts/RenderService.h"
 #include "../Services/Abstracts/PhysicsService.h"
+#include "SceneManager.h"
 
 class GameLoop {
+private:
+    SceneManager _sceneManager;
 public:
+    GameLoop();
     void setAudioService(const AudioService& audioService);
     void setInputService(const InputService& inputService);
     void setRenderService(const RenderService& renderService);

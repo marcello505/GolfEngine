@@ -31,3 +31,7 @@ void GameLoop::start() {
 void GameLoop::stop() {
 
 }
+
+GameLoop::GameLoop() : _sceneManager(SceneManager()){
+
+}
