@@ -6,7 +6,8 @@ set(CMAKE_CXX_STANDARD 17)
 # Sources
 set(TEST_SOURCES
         LibSDL2ImageTests.cpp
-        LibSDL2MixerTests.cpp)
+        LibSDL2MixerTests.cpp
+        SceneManagerTests.cpp)
 
 # Main Project
 add_executable(Golf_Tests main.cpp
