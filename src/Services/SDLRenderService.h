@@ -14,10 +14,16 @@
 class SDLRenderService : public RenderService {
 public:
     SDLRenderService();
-    void addDrawable(const Drawable& drawable) override;
-    void removeDrawable(const Drawable& drawable) override;
+    ~SDLRenderService();
+    SDLRenderService(SDLRenderService& sdlRenderService) = delete;
+    SDLRenderService& operator=(SDLRenderService* other) = delete;
+    SDLRenderService(SDLRenderService&& other) noexcept;
+    SDLRenderService& operator=(SDLRenderService&& other) noexcept;
+    void addDrawable(Drawable* drawable) override;
+    void removeDrawable(Drawable* drawable) override;
     void render() override;
     void setScreenSize(int width, int height) override;
+    void setFullScreen(bool fullScreen) override;
 private:
     int _screenSizeWidth;
     int _screenSizeHeight;
