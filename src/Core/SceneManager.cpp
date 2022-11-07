@@ -5,13 +5,19 @@
 #include "SceneManager.h"
 
 void SceneManager::changeScene(const Scene& scene) {
-    currentScene = scene;
+    _currentScene = scene;
 }
 
 void SceneManager::addScene(const Scene& scene) {
-    scenes.emplace_back(scene);
+    _scenes.emplace_back(scene);
 }
 
 Scene& SceneManager::getCurrentScene() {
-    return currentScene;
+    return _currentScene;
 }
+
+std::vector<Scene> SceneManager::getScenes() const {
+    return _scenes;
+}
+
+SceneManager::SceneManager() = default;

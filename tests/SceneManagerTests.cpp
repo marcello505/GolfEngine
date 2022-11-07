@@ -3,8 +3,10 @@
 //
 
 #include <doctest.h>
+#include "core/SceneManager.h"
 
 TEST_CASE("SceneManger is able to add Scene"){
-
-    CHECK_GT(0, );
+        SceneManager sceneManager = SceneManager();
+        sceneManager.addScene(Scene());
+        CHECK_EQ(1,sceneManager.getScenes().size());
 }
