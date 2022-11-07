@@ -8,17 +8,21 @@ GameTic GolfEngine::Time::getPhysicsDeltaTime() const {
     return _physicsDeltaTime;
 }
 
+GameTic GolfEngine::Time::getRenderDeltaTime() const {
+    return _renderDeltaTime;
+}
+
 void GolfEngine::Time::measurePhysicsCall() {
     //TODO find a way to shield this
     auto current = std::chrono::steady_clock::now();
-    auto elapsed = current - _previousPhysicsCall;
+    std::chrono::duration<GameTic, std::milli> elapsed = current - _previousPhysicsCall;
     _previousPhysicsCall = current;
     _physicsFpsCounter += elapsed;
     _physicsCalls++;
-    //TODO assign delta time
+    _physicsDeltaTime = elapsed.count() / 1000.f;
 
     if(_physicsFpsCounter >= _interval){
-        _fpsPhysics = _physicsCalls * (1000 / _interval.count());
+        _fpsPhysics = (1000.f / _interval.count()) * (GameTic)_physicsCalls;
         _physicsCalls = 0;
         _physicsFpsCounter -= _interval;
     }
@@ -27,15 +31,23 @@ void GolfEngine::Time::measurePhysicsCall() {
 void GolfEngine::Time::measureRenderCall() {
     //TODO find a way to shield this
     auto current = std::chrono::steady_clock::now();
-    auto elapsed = current - _previousRenderCall;
+    std::chrono::duration<GameTic, std::milli> elapsed = current - _previousRenderCall;
     _previousRenderCall = current;
     _renderFpsCounter += elapsed;
     _renderCalls++;
-    //TODO assign delta time
+    _renderDeltaTime = elapsed.count() / 1000.f;
 
     if(_renderFpsCounter >= _interval){
-        _fpsRender = _renderCalls * (1000 / _interval.count());
+        _fpsRender = (1000.f / _interval.count()) * (GameTic)_renderCalls;
         _renderCalls = 0;
         _renderFpsCounter -= _interval;
     }
+}
+
+GameTic GolfEngine::Time::getPhysicsFps() const {
+    return _fpsPhysics;
+}
+
+GameTic GolfEngine::Time::getRenderFps() const {
+    return _fpsRender;
 }

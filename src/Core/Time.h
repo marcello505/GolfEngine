@@ -24,17 +24,17 @@ namespace GolfEngine{
     private:
 
         //Fields
-        std::chrono::duration<GameTic, std::milli> _interval {1000};
+        std::chrono::duration<GameTic, std::milli> _interval {500};
         std::chrono::steady_clock::time_point _previousRenderCall = std::chrono::steady_clock::now();
-        std::chrono::duration<GameTic, std::milli> _renderFpsCounter {};
+        std::chrono::duration<GameTic, std::milli> _renderFpsCounter {0.f};
         std::chrono::steady_clock::time_point _previousPhysicsCall = std::chrono::steady_clock::now();
-        std::chrono::duration<GameTic, std::milli> _physicsFpsCounter {};
+        std::chrono::duration<GameTic, std::milli> _physicsFpsCounter {0.f};
         GameTic _renderDeltaTime {};
         GameTic _physicsDeltaTime {};
         int _physicsCalls {0};
         int _renderCalls {0};
-        int _fpsPhysics {0};
-        int _fpsRender {0};
+        GameTic _fpsPhysics {0};
+        GameTic _fpsRender {0};
     };
 
 }

@@ -41,6 +41,8 @@ void GameLoop::processInput() {
 }
 
 void GameLoop::update() {
+    time->measurePhysicsCall();
+
     if(_physicsService){
         _physicsService->update();
     }
@@ -53,6 +55,8 @@ void GameLoop::update() {
 }
 
 void GameLoop::render() {
+    time->measureRenderCall();
+
     if(_renderService){
         _renderService->render();
     }
