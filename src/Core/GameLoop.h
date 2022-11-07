@@ -11,8 +11,9 @@
 #include "../Services/Abstracts/InputService.h"
 #include "../Services/Abstracts/RenderService.h"
 #include "../Services/Abstracts/PhysicsService.h"
-
-typedef float GameTic;
+#include "SceneManager.h"
+#include "../Input/ActionMap.h"
+#include "Time.h"
 
 class GameLoop {
 public:
@@ -34,6 +35,9 @@ private:
     std::unique_ptr<InputService> _inputService {};
     std::unique_ptr<RenderService> _renderService {};
     std::unique_ptr<PhysicsService> _physicsService {};
+    std::unique_ptr<SceneManager> _sceneManager = std::make_unique<SceneManager>();
+    std::unique_ptr<ActionMap> _actionMap = std::make_unique<ActionMap>();
+    std::unique_ptr<GolfEngine::Time> _time = std::make_unique<GolfEngine::Time>();
     bool _running {true};
     std::chrono::duration<GameTic, std::milli> _msPerUpdate {1000.f/ 60};
 

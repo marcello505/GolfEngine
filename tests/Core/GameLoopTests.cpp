@@ -51,7 +51,7 @@ namespace GameLoopTests{
     class DummyPhysicsService : public PhysicsService{
     public:
         //Fields
-        std::chrono::duration<GameTic, std::milli> targetTime {1000};
+        std::chrono::duration<GameTic, std::milli> targetTime {1010};
         std::chrono::steady_clock::time_point previous = std::chrono::steady_clock::now();
         std::chrono::duration<GameTic, std::milli> totalTime {};
         int physicsCalls {0};

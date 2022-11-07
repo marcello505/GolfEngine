@@ -52,7 +52,7 @@ set(SCENE_SOURCES
 set(CORE_SOURCES
         src/Core/GameLoop.cpp
         src/Core/SceneManager.cpp
-        src/Core/ProjectSettings.cpp)
+        src/Core/ProjectSettings.cpp src/Core/Time.cpp src/Core/Time.h)
 
 # Main Project
 add_library(${PROJECT_NAME}

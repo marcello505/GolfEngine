@@ -46,6 +46,10 @@ void GameLoop::update() {
     }
 
     //TODO add SceneManager code
+
+    if(_actionMap){
+        //TODO update ActionMap
+    }
 }
 
 void GameLoop::render() {
