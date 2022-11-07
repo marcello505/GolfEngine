@@ -11,9 +11,14 @@
 
 class LineRenderShape : public RenderShape {
 public:
-    LineRenderShape();
+    LineRenderShape(Vector2 posA, Vector2 posB, Color color = Color(255,255,255));
     RenderShapeType getType() override;
     void applyTransform(const Transform& transform) override;
+
+    // Getter
+    [[nodiscard]] Vector2 positionA() const;
+    [[nodiscard]] Vector2 positionB() const;
+    [[nodiscard]] Color color() const;
 private:
     Vector2 _positionA;
     Vector2 _positionB;

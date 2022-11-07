@@ -10,6 +10,8 @@
 #include <map>
 #include <vector>
 #include <string>
+#include "../Scene/RenderShape/RectRenderShape.h"
+#include "../Scene/RenderShape/LineRenderShape.h"
 
 class SDLRenderService : public RenderService {
 public:
@@ -24,9 +26,18 @@ public:
     void render() override;
     void setScreenSize(int width, int height) override;
     void setFullScreen(bool fullScreen) override;
+
+    // Getters
+    [[nodiscard]] int screenSizeWidth() const;
+    [[nodiscard]] int screenSizeHeight() const;
+    [[nodiscard]] bool fullScreen() const;
+private:
+    void renderRect(RectRenderShape& renderShape);
+    void renderLine(LineRenderShape& renderShape);
 private:
     int _screenSizeWidth;
     int _screenSizeHeight;
+    bool _fullScreen;
     SDL_Window* _window;
     SDL_Renderer* _renderer;
     std::vector<Drawable*> _drawables;

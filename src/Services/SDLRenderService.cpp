@@ -7,7 +7,7 @@
 #include <algorithm>
 
 SDLRenderService::SDLRenderService()
-    : _screenSizeHeight{480}, _screenSizeWidth{640}, _window{nullptr}, _renderer{nullptr}
+    : _screenSizeHeight{480}, _screenSizeWidth{640}, _window{nullptr}, _renderer{nullptr}, _fullScreen{false}
 {
     // Init SDL
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0){
@@ -39,6 +39,7 @@ SDLRenderService::SDLRenderService(SDLRenderService &&other) noexcept {
     _cachedTextures = std::move(other._cachedTextures);
     _screenSizeWidth = other._screenSizeWidth;
     _screenSizeHeight = other._screenSizeHeight;
+    _fullScreen = other._fullScreen;
 }
 
 SDLRenderService &SDLRenderService::operator=(SDLRenderService &&other)  noexcept {
@@ -56,6 +57,7 @@ SDLRenderService &SDLRenderService::operator=(SDLRenderService &&other)  noexcep
         _cachedTextures = std::move(other._cachedTextures);
         _screenSizeWidth = other._screenSizeWidth;
         _screenSizeHeight = other._screenSizeHeight;
+        _fullScreen = other._fullScreen;
 
         // Reset pointers of other
         other._window = nullptr;
@@ -89,6 +91,23 @@ void SDLRenderService::render() {
     // Clear screen
     SDL_RenderClear(_renderer);
 
+    // Loop through all registered drawables
+    for(auto drawable : _drawables){
+        auto* renderShape = drawable->getRenderShape();
+        switch (renderShape->getType()) {
+            case RenderShapeType::RectShape:
+                renderRect(reinterpret_cast<RectRenderShape&>(*renderShape));
+                break;
+            case RenderShapeType::LineShape:
+                renderLine(reinterpret_cast<LineRenderShape&>(*renderShape));
+                break;
+            case RenderShapeType::CircleShape:
+            case RenderShapeType::SpriteShape:
+            case RenderShapeType::ParticleSystemShape:
+                break;
+        }
+    }
+
     SDL_SetRenderDrawColor(_renderer, 50, 50, 50, 255);
 
     // Displays all the updates made in the back buffer
@@ -101,5 +120,43 @@ void SDLRenderService::setScreenSize(int width, int height) {
 
 void SDLRenderService::setFullScreen(bool fullScreen) {
     // Set window flags fullscreen or 0 for no fullscreen
-    SDL_SetWindowFullscreen(_window, fullScreen? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
+    if(_fullScreen != fullScreen)
+        SDL_SetWindowFullscreen(_window, fullScreen? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
+    _fullScreen = fullScreen;
 }
+
+int SDLRenderService::screenSizeWidth() const {
+    return _screenSizeWidth;
+}
+
+int SDLRenderService::screenSizeHeight() const {
+    return _screenSizeHeight;
+}
+
+bool SDLRenderService::fullScreen() const {
+    return _fullScreen;
+}
+
+void SDLRenderService::renderRect(RectRenderShape& renderShape) {
+    // Set color
+    SDL_SetRenderDrawColor(_renderer, renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, 255);
+
+    // Set rect
+    SDL_Rect rect;
+    rect.x = (int)renderShape.rect().position.x;
+    rect.y = (int)renderShape.rect().position.y;
+    rect.w = (int)renderShape.rect().size.x;
+    rect.h = (int)renderShape.rect().size.y;
+
+    // Draw rect
+    SDL_RenderDrawRect(_renderer, &rect);
+}
+
+void SDLRenderService::renderLine(LineRenderShape& renderShape) {
+    // Set color
+    SDL_SetRenderDrawColor(_renderer, renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, 255);
+
+    // Draw Line
+    SDL_RenderDrawLineF(_renderer, renderShape.positionA().x, renderShape.positionA().y, renderShape.positionB().x, renderShape.positionB().y);
+}
+

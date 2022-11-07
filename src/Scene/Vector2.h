@@ -9,5 +9,7 @@ struct Vector2
 {
     float x;
     float y;
+    Vector2() : x{0}, y{0}{}
+    Vector2(float X, float Y) : x{X}, y{Y}{}
 };
 #endif //GOLFENGINE_VECTOR2_H
