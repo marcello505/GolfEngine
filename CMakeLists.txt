@@ -33,7 +33,8 @@ set(SERVICES_SOURCES
         src/Services/SDLRenderService.cpp
         src/Services/SDLInputService.cpp
         src/Services/Singletons/PhysicsSingleton.cpp
-        src/Services/Singletons/AudioSingleton.cpp)
+        src/Services/Singletons/AudioSingleton.cpp
+        src/Services/Singletons/RenderSingleton.cpp)
 
 set(SCENE_SOURCES
         src/Scene/Scene.cpp
