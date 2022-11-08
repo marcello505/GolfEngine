@@ -34,7 +34,8 @@ set(SERVICES_SOURCES
         src/Services/SDLInputService.cpp
         src/Services/Singletons/PhysicsSingleton.cpp
         src/Services/Singletons/AudioSingleton.cpp
-        src/Services/Singletons/RenderSingleton.cpp)
+        src/Services/Singletons/RenderSingleton.cpp
+        src/Services/Singletons/InputSingleton.cpp)
 
 set(SCENE_SOURCES
         src/Scene/Scene.cpp

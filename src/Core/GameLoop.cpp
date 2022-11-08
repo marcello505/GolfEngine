@@ -11,6 +11,7 @@
 #include "../Services/Singletons/PhysicsSingleton.h"
 #include "../Services/Singletons/AudioSingleton.h"
 #include "../Services/Singletons/RenderSingleton.h"
+#include "../Services/Singletons/InputSingleton.h"
 
 using namespace GolfEngine::Services;
 
@@ -40,8 +41,8 @@ void GameLoop::stop() {
 }
 
 void GameLoop::processInput() {
-    if(_inputService){
-        _inputService->handleInputs();
+    if(Input::hasService()){
+        Input::getService()->handleInputs();
     }
 }
 
@@ -85,7 +86,7 @@ void GameLoop::setAudioService(AudioService* audioService) {
 }
 
 void GameLoop::setInputService(InputService* inputService) {
-    _inputService.reset(inputService);
+    Input::setService(inputService);
 }
 
 void GameLoop::setRenderService(RenderService* renderService) {
