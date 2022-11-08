@@ -6,15 +6,16 @@
 #include <memory>
 #include "RectDrawable.h"
 #include "LineDrawable.h"
+#include "Services/Singletons/RenderSingleton.h"
 
 bool running;
 bool fullscreen;
-std::unique_ptr<SDLRenderService> rs;
 
 void input();
 
 int main(int argc, char* argv[]){
-    rs = std::make_unique<SDLRenderService>();
+    GolfEngine::Services::Render::setService(new SDLRenderService());
+    RenderService* rs = GolfEngine::Services::Render::getService();
     fullscreen = false;
     running = true;
     auto* rect = new RectDrawable(Rect2(Vector2(10,10), Vector2(50,50)), Transform(Vector2(10,10), 0, Vector2(1,1)), Color(255,0,0));
@@ -41,7 +42,7 @@ void input(){
                 running = false;
             else if(e.key.keysym.sym == SDLK_RETURN){
                 fullscreen = !fullscreen;
-                rs->setFullScreen(fullscreen);
+                GolfEngine::Services::Render::getService()->setFullScreen(fullscreen);
             }
         }
     }
