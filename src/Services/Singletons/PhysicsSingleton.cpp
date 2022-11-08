@@ -2,23 +2,27 @@
 // Created by marcello on 11/8/22.
 //
 
+#include <memory>
 #include "PhysicsSingleton.h"
 
-std::unique_ptr<PhysicsService> globalPhysicsInstance {};
+namespace GolfEngine::Services::Physics{
+    std::unique_ptr<PhysicsService> globalPhysicsInstance {};
 
-PhysicsService* GolfEngine::Services::Physics::getService() {
-    if(globalPhysicsInstance){
-        return globalPhysicsInstance.get();
+    PhysicsService* getService() {
+        if(globalPhysicsInstance){
+            return globalPhysicsInstance.get();
+        }
+        else{
+            return nullptr;
+        }
     }
-    else{
-        return nullptr;
+
+    void setService(PhysicsService* service) {
+        globalPhysicsInstance.reset(service);
+    }
+
+    bool hasService() {
+        return (bool)globalPhysicsInstance;
     }
 }
 
-void GolfEngine::Services::Physics::setService(PhysicsService* service) {
-    globalPhysicsInstance.reset(service);
-}
-
-bool GolfEngine::Services::Physics::hasService() {
-    return (bool)globalPhysicsInstance;
-}

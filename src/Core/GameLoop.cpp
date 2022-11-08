@@ -9,6 +9,7 @@
 #include "../Services/SDLRenderService.h"
 #include "../Services/Box2DPhysicsService.h"
 #include "../Services/Singletons/PhysicsSingleton.h"
+#include "../Services/Singletons/AudioSingleton.h"
 
 using namespace GolfEngine::Services;
 
@@ -79,7 +80,7 @@ void GameLoop::setFramesPerSeccond(GameTic fps) {
 }
 
 void GameLoop::setAudioService(AudioService* audioService) {
-    _audioService.reset(audioService);
+    Audio::setService(audioService);
 }
 
 void GameLoop::setInputService(InputService* inputService) {
