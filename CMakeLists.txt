@@ -31,7 +31,9 @@ set(SERVICES_SOURCES
         src/Services/Box2DPhysicsService.cpp
         src/Services/SDLAudioService.cpp
         src/Services/SDLRenderService.cpp
-        src/Services/SDLInputService.cpp)
+        src/Services/SDLInputService.cpp
+        src/Services/Singletons/PhysicsSingleton.cpp)
+
 set(SCENE_SOURCES
         src/Scene/Scene.cpp
         src/Scene/GameObjects/GameObject.cpp

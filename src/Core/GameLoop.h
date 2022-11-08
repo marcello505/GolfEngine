@@ -37,7 +37,6 @@ private:
     std::unique_ptr<AudioService> _audioService {};
     std::unique_ptr<InputService> _inputService {};
     std::unique_ptr<RenderService> _renderService {};
-    std::unique_ptr<PhysicsService> _physicsService {};
     std::unique_ptr<SceneManager> _sceneManager = std::make_unique<SceneManager>();
     std::unique_ptr<ActionMap> _actionMap = std::make_unique<ActionMap>();
     bool _running {true};

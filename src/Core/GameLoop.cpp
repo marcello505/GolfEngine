@@ -8,6 +8,9 @@
 #include "../Services/SDLInputService.h"
 #include "../Services/SDLRenderService.h"
 #include "../Services/Box2DPhysicsService.h"
+#include "../Services/Singletons/PhysicsSingleton.h"
+
+using namespace GolfEngine::Services;
 
 void GameLoop::start() {
     auto previous = std::chrono::steady_clock::now();
@@ -43,8 +46,8 @@ void GameLoop::processInput() {
 void GameLoop::update() {
     time->measurePhysicsCall();
 
-    if(_physicsService){
-        _physicsService->update();
+    if(Physics::hasService()){
+        Physics::getService()->update();
     }
 
     //TODO add SceneManager code
@@ -88,7 +91,7 @@ void GameLoop::setRenderService(RenderService* renderService) {
 }
 
 void GameLoop::setPhysicsService(PhysicsService* physicsService) {
-    _physicsService.reset(physicsService);
+    Physics::setService(physicsService);
 }
 
 bool GameLoop::isGameRunning() const {
