@@ -24,13 +24,12 @@ public:
     template<typename C> void getComponent() const;
     void removeComponent(Component component);
     bool isActiveInWorld() const;
-    bool isActiveSelf() const;
+    bool isActiveSelf() const;  
     bool getActive() const;
     void setActive(bool active);
     void onUpdate();
 
     //Method to use for tree of gameObjects
-    void removeGameObject(const GameObject &gameObject);
     void addGameObject(const GameObject &gameObject);
     std::vector<GameObject>& getGameObjects();
 };

@@ -15,15 +15,6 @@ void GameObject::addGameObject(const GameObject& gameObject) {
     _gameObjects.push_back(gameObject);
 }
 
-/// Method used to remove object from gameObjects tree;
-/// \param gameObject
-void GameObject::removeGameObject(const GameObject& gameObject) {
-    //TODO fix FIND_IF
-   // auto objectToRemove = std::find_if(_gameObjects.begin(), _gameObjects.end(), [gameObject] (GameObject& g)  {g == gameObject});
-    //_gameObjects.erase(objectToRemove);
-
-}
-
 /// return tree of game objects
 /// \return
 std::vector<GameObject>& GameObject::getGameObjects() {
