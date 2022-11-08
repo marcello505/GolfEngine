@@ -51,7 +51,7 @@ namespace GameLoopTests{
     class DummyPhysicsService : public PhysicsService{
     public:
         //Fields
-        std::chrono::duration<GameTic, std::milli> targetTime {1000.f};
+        std::chrono::duration<GameTic, std::milli> targetTime {1000};
         std::chrono::steady_clock::time_point previous = std::chrono::steady_clock::now();
         std::chrono::duration<GameTic, std::milli> totalTime {0.f};
         int physicsCalls {0};
@@ -77,6 +77,7 @@ namespace GameLoopTests{
     };
 }
 
+
 TEST_CASE("GameLoop.start() calls dummy InputService"){
     //Arrange
     auto* dummyService = new GameLoopTests::DummyInputService {};
@@ -89,9 +90,12 @@ TEST_CASE("GameLoop.start() calls dummy InputService"){
 
     //Assert
     CHECK_GT(dummyService->callCount, 0);
+
+    //Clean up (needs to be done because otherwise the service will interfere with other tests)
+    gameLoop.setInputService(nullptr);
 }
 
-TEST_CASE("GameLoop.start() calls dummy RenderService as much as possible"){
+TEST_CASE("GameLoop.start() calls dummy RenderService"){
     //Arrange
     auto* dummyService = new GameLoopTests::DummyRenderService {};
     GameLoop gameLoop {};
@@ -103,11 +107,22 @@ TEST_CASE("GameLoop.start() calls dummy RenderService as much as possible"){
     gameLoop.start();
 
     //Assert
-    CHECK_GE(gameLoop.time->getRenderFps(), 60); // Atleast 60FPS
-    CHECK_GE(dummyService->renderCalls, 60); //Atleast 60FPS
+    SUBCASE("RenderFps is atleast 60"){
+        CHECK_GE(gameLoop.time->getRenderFps(), 60); // Atleast 60FPS
+    }
+    SUBCASE("DummyService RenderCalls is atleast 60"){
+        CHECK_GE(dummyService->renderCalls, 60); //Atleast 60FPS
+    }
+    SUBCASE("RenderDeltaTime is 60fps or faster"){
+        CHECK_LE(gameLoop.time->getRenderDeltaTime(), 0.016667f);
+        CHECK_GT(gameLoop.time->getRenderDeltaTime(), 0.f);
+    }
+
+    //Clean up (needs to be done because otherwise the service will interfere with other tests)
+    gameLoop.setRenderService(nullptr);
 }
 
-TEST_CASE("GameLoop.start() calls dummy PhysicsService at a consistent framerate"){
+TEST_CASE("GameLoop.start() calls dummy PhysicsService"){
     //Arrange
     GameLoop gameLoop {};
     auto* dummyService = new GameLoopTests::DummyPhysicsService {};
@@ -119,44 +134,20 @@ TEST_CASE("GameLoop.start() calls dummy PhysicsService at a consistent framerate
     gameLoop.start();
 
     //Assert
-    // Physics calls should be around 60 fps.
-    // Since this is based on system performance we allow a small margin of error
-    CHECK_GE(gameLoop.time->getPhysicsFps(), 59);
-    CHECK_LE(gameLoop.time->getPhysicsFps(), 61);
-    CHECK_GT(dummyService->physicsCalls, 0);
-}
+    SUBCASE("Physics FPS is around 60 fps"){
+        // Since this is based on system performance we allow a small margin of error
+        CHECK_GE(gameLoop.time->getPhysicsFps(), 59);
+        CHECK_LE(gameLoop.time->getPhysicsFps(), 61);
+    }
+    SUBCASE("DummyService gets called"){
+        CHECK_GT(dummyService->physicsCalls, 0);
+    }
+    SUBCASE("Physics DeltaTime should be around 0.0167"){
+        // Since this is based on system performance we allow a small margin of error
+        CHECK_GE(gameLoop.time->getPhysicsDeltaTime(), 0.015f);
+        CHECK_LE(gameLoop.time->getPhysicsDeltaTime(), 0.017f);
+    }
 
-TEST_CASE("Time.getPhysicsDeltaTime() give a consistent delta time"){
-    //Arrange
-    GameLoop gameLoop {};
-    auto* dummyService = new GameLoopTests::DummyPhysicsService {};
-    gameLoop.setFramesPerSeccond(60.f);
-    dummyService->gameLoop = &gameLoop;
-    gameLoop.setPhysicsService(dummyService);
-
-    //Act
-    gameLoop.start();
-
-    //Assert
-    // Physics DeltaTime should be 0.016666667.
-    // Since this is based on system performance we allow a small margin of error
-    CHECK_GE(gameLoop.time->getPhysicsDeltaTime(), 0.015f);
-    CHECK_LE(gameLoop.time->getPhysicsDeltaTime(), 0.017f);
-}
-
-TEST_CASE("Time.getRenderDeltaTime() is as fast as possible"){
-    //Arrange
-    GameLoop gameLoop {};
-    auto* dummyService = new GameLoopTests::DummyPhysicsService {};
-    gameLoop.setFramesPerSeccond(60.f);
-    dummyService->gameLoop = &gameLoop;
-    gameLoop.setPhysicsService(dummyService);
-
-    //Act
-    gameLoop.start();
-
-    //Assert
-    // Render DeltaTime should be 0.016666667 or less.
-    CHECK_LE(gameLoop.time->getRenderDeltaTime(), 0.016667f);
-    CHECK_GT(gameLoop.time->getRenderDeltaTime(), 0.f);
+    //Clean up (needs to be done because otherwise the service will interfere with other tests)
+    gameLoop.setPhysicsService(nullptr);
 }

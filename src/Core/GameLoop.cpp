@@ -10,6 +10,7 @@
 #include "../Services/Box2DPhysicsService.h"
 #include "../Services/Singletons/PhysicsSingleton.h"
 #include "../Services/Singletons/AudioSingleton.h"
+#include "../Services/Singletons/RenderSingleton.h"
 
 using namespace GolfEngine::Services;
 
@@ -61,8 +62,8 @@ void GameLoop::update() {
 void GameLoop::render() {
     time->measureRenderCall();
 
-    if(_renderService){
-        _renderService->render();
+    if(Render::hasService()){
+        Render::getService()->render();
     }
 }
 
@@ -88,7 +89,7 @@ void GameLoop::setInputService(InputService* inputService) {
 }
 
 void GameLoop::setRenderService(RenderService* renderService) {
-    _renderService.reset(renderService);
+    Render::setService(renderService);
 }
 
 void GameLoop::setPhysicsService(PhysicsService* physicsService) {
