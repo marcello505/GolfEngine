@@ -51,3 +51,11 @@ GameTic GolfEngine::Time::getPhysicsFps() const {
 GameTic GolfEngine::Time::getRenderFps() const {
     return _fpsRender;
 }
+
+GameTic GolfEngine::Time::getTimeScale() const {
+    return _timeScale;
+}
+
+void GolfEngine::Time::setTimeScale(GameTic timeScale) {
+    _timeScale = timeScale;
+}

@@ -18,6 +18,8 @@ namespace GolfEngine{
         GameTic getPhysicsFps() const;
         GameTic getRenderDeltaTime() const;
         GameTic getPhysicsDeltaTime() const;
+        GameTic getTimeScale() const;
+        void setTimeScale(GameTic timeScale);
 
         void measureRenderCall();
         void measurePhysicsCall();
@@ -35,6 +37,7 @@ namespace GolfEngine{
         int _renderCalls {0};
         GameTic _fpsPhysics {0};
         GameTic _fpsRender {0};
+        GameTic _timeScale {1.0f};
     };
 
 }

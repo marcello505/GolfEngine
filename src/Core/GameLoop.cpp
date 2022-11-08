@@ -21,9 +21,9 @@ void GameLoop::start() {
 
         processInput();
 
-        while(lag >= _msPerUpdate){
+        while(lag >= _msPerUpdate / time->getTimeScale()){
             update();
-            lag -= _msPerUpdate;
+            lag -= _msPerUpdate / time->getTimeScale();
         }
 
         render();
