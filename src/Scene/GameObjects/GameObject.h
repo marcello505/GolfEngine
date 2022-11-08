@@ -5,12 +5,15 @@
 #ifndef GOLFENGINE_GAMEOBJECT_H
 #define GOLFENGINE_GAMEOBJECT_H
 #include <string>
+#include <vector>
+#include <algorithm>
 
 #include "../Components/Component.h"
 
 class GameObject {
 private:
     bool _active;
+    std::vector<GameObject> _gameObjects;
 public:
     std::string name;
     std::string tag;
@@ -25,6 +28,11 @@ public:
     bool getActive() const;
     void setActive(bool active);
     void onUpdate();
+
+    //Method to use for tree of gameObjects
+    void removeGameObject(const GameObject &gameObject);
+    void addGameObject(const GameObject &gameObject);
+    std::vector<GameObject>& getGameObjects();
 };
 
 
