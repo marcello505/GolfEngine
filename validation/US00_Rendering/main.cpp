@@ -10,6 +10,7 @@
 
 bool running;
 bool fullscreen;
+RectDrawable* rect;
 
 void input();
 
@@ -18,13 +19,12 @@ int main(int argc, char* argv[]){
     RenderService* rs = GolfEngine::Services::Render::getService();
     fullscreen = false;
     running = true;
-    auto* rect = new RectDrawable(Rect2(Vector2(10,10), Vector2(50,50)), Transform(Vector2(10,10), 0, Vector2(1,1)), Color(255,0,0));
-    auto* line = new LineDrawable(Vector2(10, 100), Vector2(110,100), Color(0,255,0));
+    rect = new RectDrawable(Rect2(Vector2(0,0), Vector2(50,50)), Transform(Vector2(200,100), 0, Vector2(1,1)), Color(255,0,0));
+    auto* line = new LineDrawable(Vector2(10, 100), Vector2(110,125), Color(0,255,0));
     rs->addDrawable(rect);
     rs->addDrawable(line);
     while(running){
         input();
-
         rs->render();
     }
     return 0;
@@ -44,6 +44,10 @@ void input(){
                 fullscreen = !fullscreen;
                 GolfEngine::Services::Render::getService()->setFullScreen(fullscreen);
             }
+            else if(e.key.keysym.sym == SDLK_LEFT)
+                rect->rotate(-0.1f);
+            else if(e.key.keysym.sym == SDLK_RIGHT)
+                rect->rotate(0.1f);
         }
     }
 }

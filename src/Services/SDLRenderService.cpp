@@ -5,6 +5,8 @@
 #include "SDLRenderService.h"
 #include <iostream>
 #include <algorithm>
+#include <math.h>
+
 
 SDLRenderService::SDLRenderService()
     : _screenSizeHeight{480}, _screenSizeWidth{640}, _window{nullptr}, _renderer{nullptr}, _fullScreen{false}
@@ -141,15 +143,42 @@ void SDLRenderService::renderRect(RectRenderShape& renderShape) {
     // Set color
     SDL_SetRenderDrawColor(_renderer, renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, 255);
 
-    // Set rect
-    SDL_Rect rect;
-    rect.x = (int)renderShape.rect().position.x;
-    rect.y = (int)renderShape.rect().position.y;
-    rect.w = (int)renderShape.rect().size.x;
-    rect.h = (int)renderShape.rect().size.y;
+    // Set Rect center to the origin (0,0)
+    float xCenter = renderShape.rect().position.x + renderShape.rect().size.x / 2;
+    float yCenter = renderShape.rect().position.y + renderShape.rect().size.y / 2;
 
-    // Draw rect
-    SDL_RenderDrawRect(_renderer, &rect);
+    std::vector<std::pair<float, float>> points;
+    points.emplace_back(renderShape.rect().position.x - xCenter,
+                        renderShape.rect().position.y - yCenter);
+    points.emplace_back(renderShape.rect().position.x + renderShape.rect().size.x - xCenter,
+                        renderShape.rect().position.y - yCenter);
+    points.emplace_back(renderShape.rect().position.x - xCenter,
+                        renderShape.rect().position.y + renderShape.rect().size.y - yCenter);
+    points.emplace_back(renderShape.rect().position.x + renderShape.rect().size.x - xCenter,
+                        renderShape.rect().position.y + renderShape.rect().size.y - yCenter);
+
+    // Calculate new points with rotation
+    for(auto& point : points){
+        float tempX = point.first, tempY = point.second;
+        point.first = tempX * cos(renderShape.rotation()) - tempY * sin(renderShape.rotation());
+        point.second = tempX * sin(renderShape.rotation()) + tempY * cos(renderShape.rotation());
+    }
+
+    // Translate rect back to original position
+    for(auto& point : points){
+        point.first += xCenter;
+        point.second += yCenter;
+    }
+
+    // Draw the lines to make the rectangle
+    //First to second
+    SDL_RenderDrawLine(_renderer, (int)points.at(0).first, (int)points.at(0).second, (int)points.at(1).first, (int)points.at(1).second);
+    //First to third
+    SDL_RenderDrawLine(_renderer, (int)points.at(0).first, (int)points.at(0).second, (int)points.at(2).first, (int)points.at(2).second);
+    //Second to Last
+    SDL_RenderDrawLine(_renderer, (int)points.at(1).first, (int)points.at(1).second, (int)points.at(3).first, (int)points.at(3).second);
+    //Third to Last
+    SDL_RenderDrawLine(_renderer, (int)points.at(2).first, (int)points.at(2).second, (int)points.at(3).first, (int)points.at(3).second);
 }
 
 void SDLRenderService::renderLine(LineRenderShape& renderShape) {

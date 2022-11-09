@@ -12,6 +12,6 @@ struct Transform {
     float rotation;
     Vector2 scale;
     Transform() : position{Vector2(0,0)}, rotation{0}, scale{Vector2(0,0)}{}
-    Transform(Vector2 p, float r, Vector2 s) : position{p}, rotation{0}, scale{s}{}
+    Transform(Vector2 p, float r, Vector2 s) : position{p}, rotation{r}, scale{s}{}
 };
 #endif //GOLFENGINE_TRANSFORM_H

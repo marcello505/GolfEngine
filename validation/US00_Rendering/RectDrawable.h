@@ -14,6 +14,7 @@ class RectDrawable : public Drawable {
 public:
     RectDrawable(Rect2 rect, Transform transform, Color color);
     RenderShape* getRenderShape() override;
+    void rotate(float amount);
 private:
     std::unique_ptr<RectRenderShape> _renderShape;
     Transform _transform;
