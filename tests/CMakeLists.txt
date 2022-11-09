@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(TEST_SOURCES
         LibSDL2ImageTests.cpp
         LibSDL2MixerTests.cpp
-        SceneManagerTests.cpp
+        SceneTests.cpp
         LibSDL2Tests.cpp)
 
 

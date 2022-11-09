@@ -3,9 +3,6 @@
 //
 
 #include "GameLoop.h"
-GameLoop::GameLoop() : _sceneManager(SceneManager()){
-
-}
 void GameLoop::setAudioService(const AudioService& audioService) {
 
 }
