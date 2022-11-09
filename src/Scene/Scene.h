@@ -15,6 +15,9 @@ public:
    void startRecording(const std::string& actionToLock);
    void stopRecording();
    void playRecording();
+
+   void setRootGameObject(const GameObject& gameObject);
+    GameObject& getRootGameObject();
 };
 
 
