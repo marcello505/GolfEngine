@@ -157,11 +157,14 @@ void SDLRenderService::renderRect(RectRenderShape& renderShape) {
     points.emplace_back(renderShape.rect().position.x + renderShape.rect().size.x - xCenter,
                         renderShape.rect().position.y + renderShape.rect().size.y - yCenter);
 
+    //Convert degrees to rads
+    float radians = (float)renderShape.rotation() * (M_PI / 180.0f);
+
     // Calculate new points with rotation
     for(auto& point : points){
         float tempX = point.first, tempY = point.second;
-        point.first = tempX * cos(renderShape.rotation()) - tempY * sin(renderShape.rotation());
-        point.second = tempX * sin(renderShape.rotation()) + tempY * cos(renderShape.rotation());
+        point.first = tempX * cos(radians) - tempY * sin(radians);
+        point.second = tempX * sin(radians) + tempY * cos(radians);
     }
 
     // Translate rect back to original position
