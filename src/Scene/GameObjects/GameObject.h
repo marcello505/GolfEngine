@@ -6,7 +6,6 @@
 #define GOLFENGINE_GAMEOBJECT_H
 #include <string>
 #include <vector>
-#include <algorithm>
 
 #include "../Components/Component.h"
 
@@ -24,7 +23,7 @@ public:
     template<typename C> void getComponent() const;
     void removeComponent(Component component);
     bool isActiveInWorld() const;
-    bool isActiveSelf() const;  
+    bool isActiveSelf() const;
     bool getActive() const;
     void setActive(bool active);
     void onUpdate();

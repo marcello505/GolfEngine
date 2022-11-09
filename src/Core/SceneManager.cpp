@@ -14,14 +14,12 @@ void SceneManager::addScene(const Scene& scene) {
 
 Scene& SceneManager::getCurrentScene() {
     return _currentScene;
-    }
+}
 
 std::vector<Scene> SceneManager::getScenes() const {
     return _scenes;
 }
 
-SceneManager::SceneManager() {
 
-}
 
 

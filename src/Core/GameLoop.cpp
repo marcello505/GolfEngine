@@ -3,6 +3,7 @@
 //
 
 #include "GameLoop.h"
+
 void GameLoop::setAudioService(const AudioService& audioService) {
 
 }
@@ -30,5 +31,3 @@ void GameLoop::start() {
 void GameLoop::stop() {
 
 }
-
-
