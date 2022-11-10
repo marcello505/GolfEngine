@@ -6,8 +6,9 @@
 
 #include <utility>
 
-SpriteRenderShape::SpriteRenderShape(Rect2 rect, std::string path, Rect2 imageSource, float rotation, Color color)
-    : _rect{rect}, _path{std::move(path)}, _imageSource{imageSource}, _rotation{rotation}, _color{color}, _initialSize{rect.size}
+SpriteRenderShape::SpriteRenderShape(std::string path, Vector2 position, Vector2 pixelScale, Rect2 imageSource, Vector2 pivotPointOffset, float rotation, Color color)
+    : _position{position}, _path{std::move(path)}, _imageSource{imageSource}, _rotation{rotation}, _color{color},
+    _initialPixelScale{pixelScale}, _pivotPoint{pivotPointOffset}, _pixelScale{pixelScale}
 {
 }
 
@@ -16,14 +17,12 @@ RenderShapeType SpriteRenderShape::getType() {
 }
 
 void SpriteRenderShape::applyTransform(const Transform& transform) {
-    _rect.position = transform.position;
+    _position = transform.position;
     _rotation = transform.rotation;
-    _rect.size.x = _initialSize.x * transform.scale.x;
-    _rect.size.y = _initialSize.y * transform.scale.y;
-}
-
-Rect2 SpriteRenderShape::rect() const {
-    return _rect;
+    if(_initialPixelScale.x != 0)
+        _pixelScale.x = (1/_initialPixelScale.x) * transform.scale.x;
+    if(_initialPixelScale.y != 0)
+        _pixelScale.y = (1/_initialPixelScale.y) * transform.scale.y;
 }
 
 float SpriteRenderShape::rotation() const {
@@ -40,4 +39,16 @@ Rect2 SpriteRenderShape::imageSource() const {
 
 Color SpriteRenderShape::color() const {
     return _color;
+}
+
+Vector2 SpriteRenderShape::pivotPoint() const {
+    return _pivotPoint;
+}
+
+Vector2 SpriteRenderShape::position() const {
+    return _position;
+}
+
+Vector2 SpriteRenderShape::pixelScale() const {
+    return _pixelScale;
 }

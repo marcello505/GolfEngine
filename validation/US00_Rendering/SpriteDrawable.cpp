@@ -4,8 +4,8 @@
 
 #include "SpriteDrawable.h"
 
-SpriteDrawable::SpriteDrawable(Rect2 rect, const std::string& path, Rect2 imageSource, Transform transform, Color color) : _transform{transform} {
-    _renderShape = std::make_unique<SpriteRenderShape>(rect, path, imageSource, _transform.rotation, color);
+SpriteDrawable::SpriteDrawable(const std::string& path, Vector2 pixelScale, Rect2 imageSource, Transform transform, Color color) : _transform{transform} {
+    _renderShape = std::make_unique<SpriteRenderShape>(path, transform.position, pixelScale, imageSource, Vector2(), _transform.rotation, color);
 }
 
 RenderShape* SpriteDrawable::getRenderShape() {
@@ -15,4 +15,9 @@ RenderShape* SpriteDrawable::getRenderShape() {
 
 void SpriteDrawable::rotate(float amount) {
     _transform.rotation += amount;
+}
+
+void SpriteDrawable::scale(float amount) {
+    _transform.scale.x += amount;
+    _transform.scale.y += amount;
 }

@@ -180,8 +180,8 @@ namespace GolfEngine::Services::Render {
 
         // Translate rect back to original position
         for (auto &point: points) {
-            point.first += xCenter;
-            point.second += yCenter;
+            point.first += xCenter - renderShape.rect().size.x / 2;
+            point.second += yCenter - renderShape.rect().size.y / 2;
         }
 
         // Draw the lines to make the rectangle
@@ -214,27 +214,14 @@ namespace GolfEngine::Services::Render {
         auto* texture {loadSprite(renderShape.path())};
         if(texture == nullptr) {return;}
 
-        // Convert Rect2 to SDL_Rect
+        // Creating destination rect
+        float dstWidth = (texture->width() * renderShape.pixelScale().x);
+        float dstHeight = (texture->height() * renderShape.pixelScale().y);
         SDL_Rect dstRect;
-        auto renderShapeRect {renderShape.rect()};
-        dstRect.x = renderShapeRect.position.x;
-        dstRect.y = renderShapeRect.position.y;
-        dstRect.w = renderShapeRect.size.x;
-        dstRect.h = renderShapeRect.size.y;
-
-        // Scale size to imageDimensions
-        float scaleFactor;
-        if(texture->width() > texture->height()){
-            scaleFactor = (float)texture->height() / (float)texture->width();
-            dstRect.h *= scaleFactor;
-        }
-        else{
-            scaleFactor = (float)texture->width() / (float)texture->height();
-            dstRect.w *= scaleFactor;
-        }
-
-
-
+        dstRect.x = renderShape.position().x - (dstWidth/2);
+        dstRect.y = renderShape.position().y - (dstHeight/2);
+        dstRect.w = dstWidth;
+        dstRect.h = dstHeight;
 
         // Convert Rect2 to SDL_Rect only if there is a given size, else just use the full size by giving a nullptr
         SDL_Rect srcRect;
@@ -248,6 +235,7 @@ namespace GolfEngine::Services::Render {
             srcRect.h = imageSource.size.y;
         }
 
+        // Render sprite
         SDL_RenderCopyEx(_renderer, texture->texture(), useFullSize? nullptr : &srcRect, &dstRect,
                          renderShape.rotation(), nullptr, SDL_FLIP_NONE);
     }

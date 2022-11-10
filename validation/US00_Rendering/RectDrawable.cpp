@@ -16,3 +16,8 @@ RenderShape* RectDrawable::getRenderShape() {
 void RectDrawable::rotate(float amount) {
     _transform.rotation += amount;
 }
+
+void RectDrawable::scale(float amount) {
+    _transform.scale.x += amount;
+    _transform.scale.y += amount;
+}

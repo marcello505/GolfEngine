@@ -11,23 +11,27 @@
 
 class SpriteRenderShape : public RenderShape {
 public:
-    /// Leave imageSource empty to select entire image
-    SpriteRenderShape(Rect2 rect, std::string path, Rect2 imageSource = Rect2(), float rotation = 0, Color color = Color(255,255,255));
+    /// @param imageSource Selection of image to render, give a Rect with size values 0 to select entire image
+    explicit SpriteRenderShape(std::string path, Vector2 position = Vector2(), Vector2 pixelScale = Vector2(1,1), Rect2 imageSource = Rect2(), Vector2 pivotPointOffset = Vector2(), float rotation = 0, Color color = Color(255,255,255));
     RenderShapeType getType() override;
     void applyTransform(const Transform& transform) override;
 
-    [[nodiscard]] Rect2 rect() const;
+    [[nodiscard]] Vector2 position() const;
+    [[nodiscard]] Vector2 pixelScale() const;
     [[nodiscard]] float rotation() const;
     [[nodiscard]] std::string path() const;
     [[nodiscard]] Rect2 imageSource() const;
     [[nodiscard]] Color color() const;
+    [[nodiscard]] Vector2 pivotPoint() const;
 private:
-    Rect2 _rect;
+    Vector2 _position;
+    Vector2 _pixelScale;
     float _rotation;
     std::string _path;
     Rect2 _imageSource;
     Color _color;
-    Vector2 _initialSize;
+    Vector2 _initialPixelScale;
+    Vector2 _pivotPoint;
 };
 
 
