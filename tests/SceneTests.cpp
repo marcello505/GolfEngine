@@ -15,7 +15,7 @@ TEST_CASE("SceneManger is able to add Scene"){
     //Assert
     CHECK_EQ(1,sceneManager.getScenes().size());
 }
-TEST_CASE("SceneManger is able to add Scene"){
+TEST_CASE("SceneManger is able to change Scene"){
     //Arrange
     SceneManager sceneManager = SceneManager();
     Scene scene =Scene();
@@ -29,7 +29,6 @@ TEST_CASE("SceneManger is able to add Scene"){
     //Assert
     CHECK_EQ("test", sceneManager.getCurrentScene().getRootGameObject().name);
 }
-
 
 TEST_CASE("Scene is able to change root"){
     //Arrange

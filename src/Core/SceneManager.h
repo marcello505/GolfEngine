@@ -19,6 +19,9 @@ public:
     Scene& getCurrentScene();
     std::vector<Scene> getScenes() const;
 
+    template <class It>
+    void deleteScene(It iterator);
+
 };
 
 
