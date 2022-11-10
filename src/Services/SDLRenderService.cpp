@@ -210,16 +210,26 @@ namespace GolfEngine::Services::Render {
     }
 
     void SDLRenderService::renderSprite(SpriteRenderShape& renderShape) {
-        // Load sprite with path
+        // Load sprite
         auto* texture {loadSprite(renderShape.path())};
         if(texture == nullptr) {return;}
 
+        // Calculate desired width and height of sprite
+        float dstWidth {(texture->width() * renderShape.pixelScale().x)};
+        float dstHeight {(texture->height() * renderShape.pixelScale().y)};
+
+        // Determine pivot point
+        SDL_Point pivotPoint;
+        if(renderShape.pivotPoint().x == 0 && renderShape.pivotPoint().y == 0)
+            pivotPoint = {(int)(dstWidth / 2), (int)(dstHeight / 2)};
+        else
+            pivotPoint = {(int)(renderShape.pivotPoint().x * renderShape.pixelScale().x),
+                          (int)(renderShape.pivotPoint().y * renderShape.pixelScale().y)};
+
         // Creating destination rect
-        float dstWidth = (texture->width() * renderShape.pixelScale().x);
-        float dstHeight = (texture->height() * renderShape.pixelScale().y);
         SDL_Rect dstRect;
-        dstRect.x = renderShape.position().x - (dstWidth/2);
-        dstRect.y = renderShape.position().y - (dstHeight/2);
+        dstRect.x = renderShape.position().x - pivotPoint.x;
+        dstRect.y = renderShape.position().y - pivotPoint.y;
         dstRect.w = dstWidth;
         dstRect.h = dstHeight;
 
@@ -234,14 +244,6 @@ namespace GolfEngine::Services::Render {
             srcRect.w = imageSource.size.x;
             srcRect.h = imageSource.size.y;
         }
-
-        // Determine pivot point
-        SDL_Point pivotPoint;
-        if(renderShape.pivotPoint().x == 0 && renderShape.pivotPoint().y == 0)
-            pivotPoint = {(int)(dstWidth / 2), (int)(dstHeight / 2)};
-        else
-            pivotPoint = {(int)(renderShape.pivotPoint().x * renderShape.pixelScale().x),
-                          (int)(renderShape.pivotPoint().y * renderShape.pixelScale().y)};
 
         // Render sprite
         SDL_RenderCopyEx(_renderer, texture->texture(), useFullSize? nullptr : &srcRect, &dstRect,
