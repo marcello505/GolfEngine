@@ -3,7 +3,7 @@
 //
 
 #include <doctest.h>
-#include "core/SceneManager.h"
+#include "Core/SceneManager.h"
 
 TEST_CASE("SceneManger is able to add Scene"){
     //Arrange
@@ -15,10 +15,11 @@ TEST_CASE("SceneManger is able to add Scene"){
     //Assert
     CHECK_EQ(1,sceneManager.getScenes().size());
 }
-TEST_CASE("SceneManger is able to add Scene"){
+TEST_CASE("SceneManger is able to change Scene"){
     //Arrange
     SceneManager sceneManager = SceneManager();
     Scene scene =Scene();
+    sceneManager.addScene(scene);
     GameObject go = GameObject();
     go.name = "test";
     scene.setRootGameObject(go);
@@ -28,6 +29,20 @@ TEST_CASE("SceneManger is able to add Scene"){
 
     //Assert
     CHECK_EQ("test", sceneManager.getCurrentScene().getRootGameObject().name);
+}
+TEST_CASE("SceneManger is able to delete Scene"){
+    //Arrange
+    SceneManager sceneManager = SceneManager();
+    sceneManager.addScene(Scene{});
+    int beginSize = sceneManager.getScenes().size();
+    //Act
+    auto scenes = sceneManager.getScenes();
+    auto it = scenes.begin();
+    sceneManager.deleteScene(it);
+
+    //Assert
+    CHECK_EQ(0,sceneManager.getScenes().size());
+    CHECK_EQ(1,beginSize);
 }
 
 
