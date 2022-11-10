@@ -15,7 +15,7 @@ class ActionMap {
 private:
     std::map<std::string, Action> _actions;
     std::map<InputKey, std::vector<Action>> _inputKeys;
-    void setInputKeyPressed(InputKey inputKey, bool pressed);
+
     void update();
     void setMousePosition();
 public:
@@ -26,7 +26,7 @@ public:
     bool isPressed(const std::string& action) const;
     bool isReleased(const std::string& action) const;
     Vector2 getMousePosition() const;
+    ActionMap();
+    void setInputKeyPressed(InputKey inputKey, bool pressed);
 };
-
-
 #endif //GOLFENGINE_ACTIONMAP_H

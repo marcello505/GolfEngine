@@ -1,16 +1,18 @@
-//
-// Created by conner on 11/2/2022.
-//
 
 #ifndef SPC_PROJECT_SDLINPUTSERVICE_H
 #define SPC_PROJECT_SDLINPUTSERVICE_H
+#include "../Input/ActionMap.h"
+#include "../Input/InputKey.h"
 
-#include "Abstracts/InputService.h"
 
-class SDLInputService : public InputService {
+class SDLInputService {
+private:
+    ActionMap _actionMap;
+    std::map<std::string, InputKey> _inputBinds;
+    void bindKeys();
 public:
-    SDLInputService();
-    void handleInputs() override;
+    SDLInputService(const ActionMap& actionMap);
+    void handleInputs();
 };
 
 
