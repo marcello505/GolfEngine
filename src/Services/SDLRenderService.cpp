@@ -227,16 +227,16 @@ namespace GolfEngine::Services::Render {
         if(texture == nullptr) {return;}
 
         // Calculate desired width and height of sprite
-        float dstWidth {(texture->width() * renderShape.pixelScale().x)};
-        float dstHeight {(texture->height() * renderShape.pixelScale().y)};
+        float dstWidth {(texture->width() * abs(renderShape.pixelScale().x))};
+        float dstHeight {(texture->height() * abs(renderShape.pixelScale().y))};
 
         // Determine pivot point
         SDL_Point pivotPoint;
         if(renderShape.pivotPoint().x == 0 && renderShape.pivotPoint().y == 0)
             pivotPoint = {(int)(dstWidth / 2), (int)(dstHeight / 2)};
         else
-            pivotPoint = {(int)(renderShape.pivotPoint().x * renderShape.pixelScale().x),
-                          (int)(renderShape.pivotPoint().y * renderShape.pixelScale().y)};
+            pivotPoint = {(int)(renderShape.pivotPoint().x * abs(renderShape.pixelScale().x)),
+                          (int)(renderShape.pivotPoint().y * abs(renderShape.pixelScale().y))};
 
         // Creating destination rect
         SDL_Rect dstRect;
@@ -257,9 +257,20 @@ namespace GolfEngine::Services::Render {
             srcRect.h = imageSource.size.y;
         }
 
+        // Flip sprite if scale is a negative value
+        SDL_RendererFlip flip;
+        if(renderShape.pixelScale().x > 0 && renderShape.pixelScale().y > 0)
+            flip = SDL_FLIP_NONE;
+        else if(renderShape.pixelScale().x < 0 && renderShape.pixelScale().y > 0)
+            flip = SDL_FLIP_HORIZONTAL;
+        else if(renderShape.pixelScale().x > 0 && renderShape.pixelScale().y < 0)
+            flip = SDL_FLIP_VERTICAL;
+        else
+            flip = (SDL_RendererFlip)(SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL);
+
         // Render sprite
         SDL_RenderCopyEx(_renderer, texture->texture(), useFullSize? nullptr : &srcRect, &dstRect,
-                         renderShape.rotation(), &pivotPoint, SDL_FLIP_NONE);
+                         renderShape.rotation(), &pivotPoint, flip);
     }
 
     Texture* SDLRenderService::loadSprite(const std::string& path) {
