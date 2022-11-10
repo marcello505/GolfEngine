@@ -8,6 +8,7 @@
 #include "../Services/SDLInputService.h"
 #include "../Services/SDLRenderService.h"
 #include "../Services/Box2DPhysicsService.h"
+#define GOLFENGINE_SINGLETON_PRIVATE //Grants access to the "private" methods of singletons
 #include "../Services/Singletons/PhysicsSingleton.h"
 #include "../Services/Singletons/AudioSingleton.h"
 #include "../Services/Singletons/RenderSingleton.h"

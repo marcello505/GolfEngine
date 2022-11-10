@@ -13,7 +13,10 @@
 namespace GolfEngine::Services::Audio{
     AudioService* getService();
     bool hasService();
+
+#ifdef GOLFENGINE_SINGLETON_PRIVATE
     void setService(AudioService* service);
+#endif
 }
 
 

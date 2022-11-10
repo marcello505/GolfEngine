@@ -3,6 +3,7 @@
 //
 
 #include <memory>
+#define GOLFENGINE_SINGLETON_PRIVATE
 #include "PhysicsSingleton.h"
 
 namespace GolfEngine::Services::Physics{

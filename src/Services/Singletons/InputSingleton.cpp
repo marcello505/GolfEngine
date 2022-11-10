@@ -2,6 +2,7 @@
 // Created by marcello on 11/8/22.
 //
 
+#define GOLFENGINE_SINGLETON_PRIVATE
 #include "InputSingleton.h"
 #include <memory>
 

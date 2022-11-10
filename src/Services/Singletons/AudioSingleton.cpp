@@ -1,3 +1,4 @@
+#define GOLFENGINE_SINGLETON_PRIVATE
 #include "AudioSingleton.h"
 #include <memory>
 

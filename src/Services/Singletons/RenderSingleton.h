@@ -10,7 +10,10 @@
 namespace GolfEngine::Services::Render{
     RenderService* getService();
     bool hasService();
+    //TODO Add preprocessor commands to hide setService
+//#ifdef GOLFENGINE_SINGLETON_PRIVATE
     void setService(RenderService* service);
+//#endif
 }
 
 

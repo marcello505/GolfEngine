@@ -13,7 +13,10 @@
 namespace GolfEngine::Services::Physics{
     PhysicsService* getService();
     bool hasService();
+
+#ifdef GOLFENGINE_SINGLETON_PRIVATE
     void setService(PhysicsService* service);
+#endif
 }
 
 
