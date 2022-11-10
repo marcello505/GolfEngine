@@ -3,7 +3,7 @@
 //
 
 #include <doctest.h>
-#include "core/SceneManager.h"
+#include "Core/SceneManager.h"
 
 TEST_CASE("SceneManger is able to add Scene"){
     //Arrange
@@ -32,10 +32,11 @@ TEST_CASE("SceneManger is able to change Scene"){
 TEST_CASE("SceneManger is able to delete Scene"){
     //Arrange
     SceneManager sceneManager = SceneManager();
-    sceneManager.addScene(Scene());
+    sceneManager.addScene(Scene{});
     int beginSize = sceneManager.getScenes().size();
     //Act
-    auto it = sceneManager.getScenes().begin();
+    auto scenes = sceneManager.getScenes();
+    auto it = scenes.begin();
     sceneManager.deleteScene(it);
 
     //Assert
