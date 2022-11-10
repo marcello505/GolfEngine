@@ -12,7 +12,7 @@
 
 class RectDrawable : public Drawable {
 public:
-    RectDrawable(Rect2 rect, Transform transform, Color color);
+    RectDrawable(Rect2 rect, Transform transform, Vector2 pivotPoint = Vector2(), Color color = Color(255,255,255));
     RenderShape* getRenderShape() override;
     void rotate(float amount);
     void scale(float amount);

@@ -4,8 +4,8 @@
 
 #include "RectDrawable.h"
 
-RectDrawable::RectDrawable(Rect2 rect, Transform transform, Color color) : _transform{transform} {
-    _renderShape = std::make_unique<RectRenderShape>(rect, _transform.rotation, color);
+RectDrawable::RectDrawable(Rect2 rect, Transform transform, Vector2 pivotPoint, Color color) : _transform{transform} {
+    _renderShape = std::make_unique<RectRenderShape>(rect, _transform.rotation, pivotPoint, color);
 }
 
 RenderShape* RectDrawable::getRenderShape() {

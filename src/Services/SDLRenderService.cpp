@@ -154,24 +154,36 @@ namespace GolfEngine::Services::Render {
         // Set color
         SDL_SetRenderDrawColor(_renderer, renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, 255);
 
-        // Set Rect center to the origin (0,0)
-        float xCenter = renderShape.rect().position.x + renderShape.rect().size.x / 2;
-        float yCenter = renderShape.rect().position.y + renderShape.rect().size.y / 2;
+        float xPivot;
+        float yPivot;
 
+        // Set Rect center to the origin (0,0), with center of rect as pivot point
+        if(renderShape.pivotPoint().x == 0 && renderShape.pivotPoint().y == 0){
+            xPivot = renderShape.rect().size.x / 2;
+            yPivot = renderShape.rect().size.y / 2;
+        }
+        // Set Rect center to the origin (0,0), with custom pivot point
+        else{
+            xPivot = renderShape.pivotPoint().x;
+            yPivot = renderShape.pivotPoint().y;
+        }
+
+        float xOrigin = renderShape.rect().position.x + xPivot;
+        float yOrigin = renderShape.rect().position.y + yPivot;
         std::vector<std::pair<float, float>> points;
-        points.emplace_back(renderShape.rect().position.x - xCenter,
-                            renderShape.rect().position.y - yCenter);
-        points.emplace_back(renderShape.rect().position.x + renderShape.rect().size.x - xCenter,
-                            renderShape.rect().position.y - yCenter);
-        points.emplace_back(renderShape.rect().position.x - xCenter,
-                            renderShape.rect().position.y + renderShape.rect().size.y - yCenter);
-        points.emplace_back(renderShape.rect().position.x + renderShape.rect().size.x - xCenter,
-                            renderShape.rect().position.y + renderShape.rect().size.y - yCenter);
+        points.emplace_back(renderShape.rect().position.x - xOrigin,
+                            renderShape.rect().position.y - yOrigin);
+        points.emplace_back(renderShape.rect().position.x + renderShape.rect().size.x - xOrigin,
+                            renderShape.rect().position.y - yOrigin);
+        points.emplace_back(renderShape.rect().position.x - xOrigin,
+                            renderShape.rect().position.y + renderShape.rect().size.y - yOrigin);
+        points.emplace_back(renderShape.rect().position.x + renderShape.rect().size.x - xOrigin,
+                            renderShape.rect().position.y + renderShape.rect().size.y - yOrigin);
 
         //Convert degrees to rads
-        float radians = (float) renderShape.rotation() * (M_PI / 180.0f);
+        float radians {(float) (renderShape.rotation() * (M_PI / 180.0f))};
 
-        // Calculate new points with rotation
+        // Calculate new points with the use of a rotation matrix
         for (auto &point: points) {
             float tempX = point.first, tempY = point.second;
             point.first = tempX * std::cos(radians) - tempY * std::sin(radians);
@@ -180,8 +192,8 @@ namespace GolfEngine::Services::Render {
 
         // Translate rect back to original position and set center point to center of rect
         for (auto &point: points) {
-            point.first += xCenter - renderShape.rect().size.x / 2;
-            point.second += yCenter - renderShape.rect().size.y / 2;
+            point.first += xOrigin - renderShape.rect().size.x / 2;
+            point.second += yOrigin - renderShape.rect().size.y / 2;
         }
 
         // Draw the lines to make the rectangle

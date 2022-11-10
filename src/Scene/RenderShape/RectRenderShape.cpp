@@ -4,8 +4,8 @@
 
 #include "RectRenderShape.h"
 
-RectRenderShape::RectRenderShape(Rect2 rect, float rotation, Color color)
-    : _rect{rect}, _rotation{rotation}, _color{color}, _initialSize{rect.size}
+RectRenderShape::RectRenderShape(Rect2 rect, float rotation, Vector2 pivotPoint, Color color)
+    : _rect{rect}, _rotation{rotation}, _color{color}, _initialSize{rect.size}, _pivotPoint{pivotPoint}, _initialPivotPoint{pivotPoint}
 {
 }
 
@@ -30,4 +30,10 @@ void RectRenderShape::applyTransform(const Transform& transform) {
     _rotation = transform.rotation;
     _rect.size.x = _initialSize.x * transform.scale.x;
     _rect.size.y = _initialSize.y * transform.scale.y;
+    _pivotPoint.x = _initialPivotPoint.x * transform.scale.x;
+    _pivotPoint.y = _initialPivotPoint.y * transform.scale.y;
+}
+
+Vector2 RectRenderShape::pivotPoint() const {
+    return _pivotPoint;
 }

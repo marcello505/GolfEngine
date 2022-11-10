@@ -21,8 +21,11 @@ int main(int argc, char* argv[]){
     RenderService* rs = GolfEngine::Services::Render::getService();
     fullscreen = false;
     running = true;
-    rect = new RectDrawable(Rect2(Vector2(0,0), Vector2(50,50)), Transform(Vector2(120,118), 0, Vector2(2,3)), Color(255,0,0));
-    auto* line = new LineDrawable(Vector2(10, 100), Vector2(250,400), Color(0,255,0));
+    rect = new RectDrawable(Rect2(Vector2(0,0), Vector2(100,100)),
+                            Transform(Vector2(100,100), 0, Vector2(1,1.5)),
+                            Vector2(50,75),
+                            Color(255,0,0));
+//    auto* line = new LineDrawable(Vector2(10, 100), Vector2(250,400), Color(0,255,0));
     sprite = new SpriteDrawable(R"(D:\Avans\Jaar4\MinorSPC\SPC-Project\validation\US00_Rendering\res\player.png)",
                                 Vector2(2,2),
                                 Rect2(),
