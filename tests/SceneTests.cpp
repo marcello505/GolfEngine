@@ -19,6 +19,7 @@ TEST_CASE("SceneManger is able to change Scene"){
     //Arrange
     SceneManager sceneManager = SceneManager();
     Scene scene =Scene();
+    sceneManager.addScene(scene);
     GameObject go = GameObject();
     go.name = "test";
     scene.setRootGameObject(go);
