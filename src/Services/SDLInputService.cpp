@@ -3,7 +3,7 @@
 #include <SDL.h>
 
 
-SDLInputService::SDLInputService(const ActionMap& actionMap)
+SDLInputService::SDLInputService(ActionMap* actionMap)
 {
     _actionMap = actionMap;
     bindKeys();
@@ -20,13 +20,13 @@ void SDLInputService::handleInputs()
             if (event.type == SDL_KEYDOWN)
             {
                 auto key = _inputBinds.find(SDL_GetKeyName(event.key.keysym.sym))->second;
-                _actionMap.setInputKeyPressed(key, true);
+                _actionMap->setInputKeyPressed(key, true);
             }
 
             if (event.type == SDL_KEYUP)
             {
                 auto key = _inputBinds.find(SDL_GetKeyName(event.key.keysym.sym))->second;
-                _actionMap.setInputKeyPressed(key, false);
+                _actionMap->setInputKeyPressed(key, false);
             }
 
             if (event.type == SDL_MOUSEBUTTONDOWN)

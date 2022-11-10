@@ -72,3 +72,4 @@ target_link_libraries(${PROJECT_NAME} SDL2_image::SDL2_image)
 
 # Sub Projects
 add_subdirectory(tests)
+add_subdirectory(validation/US03_InputService)
