@@ -192,8 +192,8 @@ namespace GolfEngine::Services::Render {
 
         // Translate rect back to original position and set center point to center of rect
         for (auto &point: points) {
-            point.first += xOrigin - renderShape.rect().size.x / 2;
-            point.second += yOrigin - renderShape.rect().size.y / 2;
+            point.first += xOrigin - xPivot;
+            point.second += yOrigin - yPivot;
         }
 
         // Draw the lines to make the rectangle
