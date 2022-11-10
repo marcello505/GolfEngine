@@ -11,6 +11,10 @@
 
 class RectRenderShape : public RenderShape {
 public:
+    /// @param rect Rect with position (center of rectangle) and initial size in pixels
+    /// @param rotation Angle of rectangle in degrees
+    /// @param pivotPoint Custom pivot point relative to the size given in rect parameter (size/2 = center)
+    /// @param color Color used to draw the rectangle
     explicit RectRenderShape(Rect2 rect, float rotation = 0, Vector2 pivotPoint = Vector2(), Color color = Color(255,255,255));
     RenderShapeType getType() override;
     void applyTransform(const Transform& transform) override;
