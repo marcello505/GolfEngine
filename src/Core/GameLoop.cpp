@@ -90,6 +90,7 @@ void GameLoop::setInputService(InputService* inputService) {
     Input::setService(inputService);
 }
 
+
 void GameLoop::setRenderService(RenderService* renderService) {
     Render::setService(renderService);
 }
