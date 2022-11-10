@@ -178,7 +178,7 @@ namespace GolfEngine::Services::Render {
             point.second = tempX * std::sin(radians) + tempY * std::cos(radians);
         }
 
-        // Translate rect back to original position
+        // Translate rect back to original position and set center point to center of rect
         for (auto &point: points) {
             point.first += xCenter - renderShape.rect().size.x / 2;
             point.second += yCenter - renderShape.rect().size.y / 2;
@@ -235,9 +235,17 @@ namespace GolfEngine::Services::Render {
             srcRect.h = imageSource.size.y;
         }
 
+        // Determine pivot point
+        SDL_Point pivotPoint;
+        if(renderShape.pivotPoint().x == 0 && renderShape.pivotPoint().y == 0)
+            pivotPoint = {(int)(dstWidth / 2), (int)(dstHeight / 2)};
+        else
+            pivotPoint = {(int)(renderShape.pivotPoint().x * renderShape.pixelScale().x),
+                          (int)(renderShape.pivotPoint().y * renderShape.pixelScale().y)};
+
         // Render sprite
         SDL_RenderCopyEx(_renderer, texture->texture(), useFullSize? nullptr : &srcRect, &dstRect,
-                         renderShape.rotation(), nullptr, SDL_FLIP_NONE);
+                         renderShape.rotation(), &pivotPoint, SDL_FLIP_NONE);
     }
 
     Texture* SDLRenderService::loadSprite(const std::string& path) {

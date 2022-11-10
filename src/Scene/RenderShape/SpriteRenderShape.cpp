@@ -6,9 +6,9 @@
 
 #include <utility>
 
-SpriteRenderShape::SpriteRenderShape(std::string path, Vector2 position, Vector2 pixelScale, Rect2 imageSource, Vector2 pivotPointOffset, float rotation, Color color)
+SpriteRenderShape::SpriteRenderShape(std::string path, Vector2 position, float rotation, Vector2 pixelScale, Rect2 imageSource, Vector2 pivotPoint, Color color)
     : _position{position}, _path{std::move(path)}, _imageSource{imageSource}, _rotation{rotation}, _color{color},
-    _initialPixelScale{pixelScale}, _pivotPoint{pivotPointOffset}, _pixelScale{pixelScale}
+    _initialPixelScale{pixelScale}, _pivotPoint{pivotPoint}, _pixelScale{pixelScale}
 {
 }
 
