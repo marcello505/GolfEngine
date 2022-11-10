@@ -7,8 +7,9 @@ set(CMAKE_CXX_STANDARD 17)
 set(TEST_SOURCES
         LibSDL2ImageTests.cpp
         LibSDL2MixerTests.cpp
-        SceneTests.cpp
-        LibSDL2Tests.cpp)
+        LibSDL2Tests.cpp
+        Core/GameLoopTests.cpp
+        SceneTests.cpp)
 
 
 # Main Project
