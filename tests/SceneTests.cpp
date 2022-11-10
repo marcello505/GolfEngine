@@ -29,6 +29,20 @@ TEST_CASE("SceneManger is able to change Scene"){
     //Assert
     CHECK_EQ("test", sceneManager.getCurrentScene().getRootGameObject().name);
 }
+TEST_CASE("SceneManger is able to delete Scene"){
+    //Arrange
+    SceneManager sceneManager = SceneManager();
+    sceneManager.addScene(Scene());
+    int beginSize = sceneManager.getScenes().size();
+    //Act
+    auto it = sceneManager.getScenes().begin();
+    sceneManager.deleteScene(it);
+
+    //Assert
+    CHECK_EQ(0,sceneManager.getScenes().size());
+    CHECK_EQ(1,beginSize);
+}
+
 
 TEST_CASE("Scene is able to change root"){
     //Arrange

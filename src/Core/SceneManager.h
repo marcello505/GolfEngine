@@ -20,7 +20,9 @@ public:
     std::vector<Scene> getScenes() const;
 
     template <class It>
-    void deleteScene(It iterator);
+    void deleteScene(It iterator){
+        _scenes.erase(iterator);
+    }
 
 };
 
