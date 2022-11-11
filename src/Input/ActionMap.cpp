@@ -15,7 +15,7 @@ ActionMap::ActionMap()
 
 // add action to actionlist
 void ActionMap::addAction(const std::string& name) {
-    if (_actions.count(name) > 0)
+    if (_actions.count(name) <= 0)
     {
         Action action;
         action.name = name;

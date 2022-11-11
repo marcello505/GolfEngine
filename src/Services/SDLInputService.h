@@ -12,7 +12,7 @@ private:
     ActionMap* _actionMap;
     std::map<std::string, InputKey> _inputBinds;
     void bindKeys();
-    void handleMouseEvent(SLD_Event event, bool pressed);
+    void handleMouseEvent(SDL_Event event, bool pressed);
 public:
     bool hasRecievedQuitSignal;
     SDLInputService(ActionMap* actionMap);
