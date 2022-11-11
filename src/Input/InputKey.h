@@ -236,7 +236,10 @@ enum InputKey {
     Key_Question,
     Key_QuoteDbl,
     Key_RightParen,
-    Key_Underscore
+    Key_Underscore,
+    Mouse_Left,
+    Mouse_Middle,
+    Mouse_Right,
 };
 
 #endif //GOLFENGINE_INPUTKEY_H

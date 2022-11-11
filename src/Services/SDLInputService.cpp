@@ -12,8 +12,9 @@ SDLInputService::SDLInputService(ActionMap* actionMap)
 void SDLInputService::handleInputs()
 {
     SDL_Event event;
+    bool running = true;
 
-    while (true)
+    while (running)
     {
         while (SDL_PollEvent(&event))
         {
@@ -31,11 +32,32 @@ void SDLInputService::handleInputs()
 
             if (event.type == SDL_MOUSEBUTTONDOWN)
             {
-                std::cout << "Mouse event" << std::endl;
-            }
+                int x, y;
+                Uint32 buttons;
+                SDL_PumpEvents();  // make sure we have the latest mouse state.
+                buttons = SDL_GetMouseState(&x, &y);
+                _actionMap->setMousePosition(x, y);
+                _actionMap->getMousePosition();
 
+                switch(event.button.button){
+                    case 1:
+                        _actionMap->setInputKeyPressed(Mouse_Left, true);
+                        break;
+                    case 2:
+                        _actionMap->setInputKeyPressed(Mouse_Middle, true);
+                        break;
+                    case 3:
+                        _actionMap->setInputKeyPressed(Mouse_Right, true);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            if (event.type==SDL_QUIT)
+            {
+                running = false;
+            }
         }
-        /*	std::cout << "rolling" << std::endl;*/
     }
 }
 
