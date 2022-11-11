@@ -32,8 +32,12 @@ set(SERVICES_SOURCES
         src/Services/SDLAudioService.cpp
         src/Services/SDLRenderService.cpp
         src/Services/SDLInputService.cpp
+        src/Services/Singletons/PhysicsSingleton.cpp
+        src/Services/Singletons/AudioSingleton.cpp
         src/Services/Singletons/RenderSingleton.cpp
+        src/Services/Singletons/InputSingleton.cpp
         src/Services/Render/Texture.cpp)
+
 set(SCENE_SOURCES
         src/Scene/Scene.cpp
         src/Scene/GameObjects/GameObject.cpp
@@ -54,7 +58,7 @@ set(SCENE_SOURCES
 set(CORE_SOURCES
         src/Core/GameLoop.cpp
         src/Core/SceneManager.cpp
-        src/Core/ProjectSettings.cpp)
+        src/Core/ProjectSettings.cpp src/Core/Time.cpp)
 
 # Main Project
 add_library(${PROJECT_NAME}

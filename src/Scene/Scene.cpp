@@ -6,4 +6,11 @@
 
 void Scene::startRecording(const std::string& actionToLock){};
 void Scene::stopRecording(){};
-void Scene::playRecording(){};
+void Scene::playRecording(){}
+
+void Scene::setRootGameObject(const GameObject& gameObject) {
+    _rootGameObject = gameObject;
+};
+GameObject& Scene::getRootGameObject() {
+    return _rootGameObject;
+};

@@ -2,6 +2,8 @@
 // Created by conner on 11/8/2022.
 //
 
+//TODO Add preprocessor commands to hide setService
+//#define GOLFENGINE_SINGLETON_PRIVATE
 #include "RenderSingleton.h"
 #include <memory>
 
