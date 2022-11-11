@@ -25,14 +25,17 @@ int main(int argc, char* argv[]){
                             Transform(Vector2(200,200), 0, Vector2(1,1)),
                             Vector2(50,75),
                             Color(255,0,0));
-//    auto* line = new LineDrawable(Vector2(10, 100), Vector2(250,400), Color(0,255,0));
+    auto* rect2 = new RectDrawable(Rect2(Vector2(0,0), Vector2(100,100)),
+                            Transform(Vector2(200,200), 0, Vector2(1,1)),
+                            Vector2(),
+                            Color(255,0,0));
     sprite = new SpriteDrawable(R"(D:\Avans\Jaar4\MinorSPC\SPC-Project\validation\US00_Rendering\res\player.png)",
                                 Vector2(2,2),
                                 Rect2(),
                                 Transform(Vector2(200,200), 0, Vector2(1,1)),
                                 Vector2(120,218));
     rs->addDrawable(rect);
-//    rs->addDrawable(line);
+    rs->addDrawable(rect2);
     rs->addDrawable(sprite);
     while(running){
         input();

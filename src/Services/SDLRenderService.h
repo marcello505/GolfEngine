@@ -22,17 +22,28 @@ public:
     SDLRenderService();
     ~SDLRenderService();
 
+    // RAII
     SDLRenderService(SDLRenderService &sdlRenderService) = delete;
     SDLRenderService &operator=(SDLRenderService *other) = delete;
     SDLRenderService(SDLRenderService &&other) noexcept;
     SDLRenderService &operator=(SDLRenderService &&other) noexcept;
 
+    /// Adds a drawable to the list of registered drawables
+    /// \param drawable to be added
     void addDrawable(Drawable *drawable) override;
+    /// Removes a drawable from the list of registered drawables
+    /// \param drawable to be removed
     void removeDrawable(Drawable *drawable) override;
 
+    /// Renders all drawables in registered drawable list
     void render() override;
 
+    /// Sets the window size to the given sizes
+    /// \param width new width of window
+    /// \param height new height of window
     void setScreenSize(int width, int height) override;
+    /// Sets the window to fullscreen
+    /// \param fullScreen true is fullscreen
     void setFullScreen(bool fullScreen) override;
 
     // Getters

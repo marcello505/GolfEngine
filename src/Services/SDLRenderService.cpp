@@ -12,7 +12,7 @@ namespace GolfEngine::Services::Render {
     SDLRenderService::SDLRenderService()
             : _screenSizeHeight{480}, _screenSizeWidth{640}, _window{nullptr}, _renderer{nullptr}, _fullScreen{false} {
         // Init SDL
-        if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+        if (SDL_Init(SDL_INIT_VIDEO) < 0) {
             std::cerr << "Error: " << SDL_GetError() << std::endl;
         }
 
@@ -190,7 +190,7 @@ namespace GolfEngine::Services::Render {
             point.second = tempX * std::sin(radians) + tempY * std::cos(radians);
         }
 
-        // Translate rect back to original position and set center point to center of rect
+        // Translate rect back to original position and set center point to pivot point
         for (auto &point: points) {
             point.first += xOrigin - xPivot;
             point.second += yOrigin - yPivot;
