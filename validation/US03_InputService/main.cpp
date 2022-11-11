@@ -2,8 +2,6 @@
 #include <memory>
 #include <iostream>
 #include "Services/SDLInputService.h"
-#include "Input/ActionMap.h"
-#include <SDL_image.h>
 
 int main(int argc, char* argv[])
 {
