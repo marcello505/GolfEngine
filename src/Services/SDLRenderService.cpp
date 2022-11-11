@@ -236,6 +236,7 @@ namespace GolfEngine::Services::Render {
 
         // Determine pivot point
         SDL_Point pivotPoint;
+        // Set pivot point to center if no pivot point has been set
         if(renderShape.pivotPoint().x == 0 && renderShape.pivotPoint().y == 0)
             pivotPoint = {(int)(dstWidth / 2), (int)(dstHeight / 2)};
         else{
@@ -277,15 +278,12 @@ namespace GolfEngine::Services::Render {
         }
 
         // Flip sprite if scale is a negative value
-        SDL_RendererFlip flip;
-        if(renderShape.pixelScale().x > 0 && renderShape.pixelScale().y > 0)
-            flip = SDL_FLIP_NONE;
-        else if(renderShape.pixelScale().x < 0 && renderShape.pixelScale().y > 0)
-            flip = SDL_FLIP_HORIZONTAL;
-        else if(renderShape.pixelScale().x > 0 && renderShape.pixelScale().y < 0)
-            flip = SDL_FLIP_VERTICAL;
-        else
-            flip = (SDL_RendererFlip)(SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL);
+        SDL_RendererFlip flip = SDL_FLIP_NONE;
+        if(renderShape.pixelScale().x < 0)
+            flip = (SDL_RendererFlip)(flip | (SDL_FLIP_HORIZONTAL));
+        if(renderShape.pixelScale().y < 0)
+            flip = (SDL_RendererFlip)(flip | (SDL_FLIP_VERTICAL));
+
 
         // Render sprite
         SDL_RenderCopyEx(_renderer, texture->texture(), useFullSize? nullptr : &srcRect, &dstRect,
