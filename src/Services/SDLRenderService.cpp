@@ -226,6 +226,10 @@ namespace GolfEngine::Services::Render {
         auto* texture {loadSprite(renderShape.path())};
         if(texture == nullptr) {return;}
 
+        // Set color and blend mode
+        texture->setColor(renderShape.color());
+        texture->setBlendMode(SDL_BLENDMODE_BLEND);
+
         // Calculate desired width and height of sprite
         float dstWidth {(texture->width() * abs(renderShape.pixelScale().x))};
         float dstHeight {(texture->height() * abs(renderShape.pixelScale().y))};

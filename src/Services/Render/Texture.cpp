@@ -53,4 +53,12 @@ namespace GolfEngine::Services::Render {
         return _texture;
     }
 
+    void Texture::setColor(Color color) {
+        SDL_SetTextureColorMod(_texture, color.r8, color.g8, color.b8);
+    }
+
+    void Texture::setBlendMode(SDL_BlendMode blending) {
+        SDL_SetTextureBlendMode(_texture, blending);
+    }
+
 }
