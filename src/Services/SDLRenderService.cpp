@@ -238,9 +238,24 @@ namespace GolfEngine::Services::Render {
         SDL_Point pivotPoint;
         if(renderShape.pivotPoint().x == 0 && renderShape.pivotPoint().y == 0)
             pivotPoint = {(int)(dstWidth / 2), (int)(dstHeight / 2)};
-        else
-            pivotPoint = {(int)(renderShape.pivotPoint().x * abs(renderShape.pixelScale().x)),
-                          (int)(renderShape.pivotPoint().y * abs(renderShape.pixelScale().y))};
+        else{
+            // Mirror the x and y of the pivot point if scale is negative
+            float pivotX;
+            float pivotY;
+            if(renderShape.pixelScale().x < 0)
+                pivotX = (1 - (renderShape.pivotPoint().x / texture->width())) * texture->width();
+            else
+                pivotX = renderShape.pivotPoint().x;
+
+            if(renderShape.pixelScale().y < 0)
+                pivotY = (1 - (renderShape.pivotPoint().y / texture->height())) * texture->height();
+            else
+                pivotY= renderShape.pivotPoint().y;
+
+            // Set pivot point
+            pivotPoint = {(int)(pivotX * abs(renderShape.pixelScale().x)),
+                          (int)(pivotY * abs(renderShape.pixelScale().y))};
+        }
 
         // Creating destination rect
         SDL_Rect dstRect;
