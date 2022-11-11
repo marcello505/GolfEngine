@@ -46,7 +46,11 @@ bool ActionMap::isJustPressed(const std::string& action) const
 
 bool ActionMap::isJustReleased(const std::string& action) const
 {
-    return false; // ??
+    if (_actions.find(action) != _actions.end() && _actions.find(action)->second.justInput
+    && !(_actions.find(action)->second.pressed)) {
+        return true;
+    }
+    return false;
 }
 
 bool ActionMap::isPressed(const std::string& action) const

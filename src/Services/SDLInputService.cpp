@@ -12,54 +12,74 @@ SDLInputService::SDLInputService(ActionMap* actionMap)
 void SDLInputService::handleInputs()
 {
     SDL_Event event;
-    bool running = true;
 
-    while (running)
+    while (SDL_PollEvent(&event))
     {
-        while (SDL_PollEvent(&event))
+        if (event.type == SDL_KEYDOWN)
         {
-            if (event.type == SDL_KEYDOWN)
-            {
-                auto key = _inputBinds.find(SDL_GetKeyName(event.key.keysym.sym))->second;
-                _actionMap->setInputKeyPressed(key, true);
-            }
+            auto key = _inputBinds.find(SDL_GetKeyName(event.key.keysym.sym))->second;
+            _actionMap->setInputKeyPressed(key, true);
+        }
 
-            if (event.type == SDL_KEYUP)
-            {
-                auto key = _inputBinds.find(SDL_GetKeyName(event.key.keysym.sym))->second;
-                _actionMap->setInputKeyPressed(key, false);
-            }
+        if (event.type == SDL_KEYUP)
+        {
+            auto key = _inputBinds.find(SDL_GetKeyName(event.key.keysym.sym))->second;
+            _actionMap->setInputKeyPressed(key, false);
+        }
 
-            if (event.type == SDL_MOUSEBUTTONDOWN)
-            {
-                int x, y;
-                Uint32 buttons;
-                SDL_PumpEvents();  // make sure we have the latest mouse state.
-                buttons = SDL_GetMouseState(&x, &y);
-                _actionMap->setMousePosition(x, y);
-                _actionMap->getMousePosition();
+        if (event.type == SDL_MOUSEBUTTONDOWN)
+        {
+            int x, y;
+            Uint32 buttons;
+            SDL_PumpEvents();  // make sure we have the latest mouse state.
+            buttons = SDL_GetMouseState(&x, &y);
+            _actionMap->setMousePosition(x, y);
+            _actionMap->getMousePosition();
 
-                switch(event.button.button){
-                    case 1:
-                        _actionMap->setInputKeyPressed(Mouse_Left, true);
-                        break;
-                    case 2:
-                        _actionMap->setInputKeyPressed(Mouse_Middle, true);
-                        break;
-                    case 3:
-                        _actionMap->setInputKeyPressed(Mouse_Right, true);
-                        break;
-                    default:
-                        break;
-                }
+            switch(event.button.button){
+                case 1:
+                    _actionMap->setInputKeyPressed(Mouse_Left, true);
+                    break;
+                case 2:
+                    _actionMap->setInputKeyPressed(Mouse_Middle, true);
+                    break;
+                case 3:
+                    _actionMap->setInputKeyPressed(Mouse_Right, true);
+                    break;
+                default:
+                    break;
             }
-            if (event.type==SDL_QUIT)
-            {
-                running = false;
+        }
+        if (event.type == SDL_MOUSEBUTTONUP)
+        {
+            int x, y;
+            Uint32 buttons;
+            SDL_PumpEvents();  // make sure we have the latest mouse state.
+            buttons = SDL_GetMouseState(&x, &y);
+            _actionMap->setMousePosition(x, y);
+            _actionMap->getMousePosition();
+
+            switch(event.button.button){
+                case 1:
+                    _actionMap->setInputKeyPressed(Mouse_Left, false);
+                    break;
+                case 2:
+                    _actionMap->setInputKeyPressed(Mouse_Middle, false);
+                    break;
+                case 3:
+                    _actionMap->setInputKeyPressed(Mouse_Right, false);
+                    break;
+                default:
+                    break;
             }
+        }
+        if (event.type==SDL_QUIT)
+        {
+            hasRecievedQuitSignal = true;
         }
     }
 }
+
 
 void SDLInputService::bindKeys() {
 

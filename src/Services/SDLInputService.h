@@ -5,13 +5,16 @@
 #include "Abstracts/InputService.h"
 #include "../Input/ActionMap.h"
 #include "../Input/InputKey.h"
+#include <SDL.h>
 
 class SDLInputService {
 private:
     ActionMap* _actionMap;
     std::map<std::string, InputKey> _inputBinds;
     void bindKeys();
+
 public:
+    bool hasRecievedQuitSignal;
     SDLInputService(ActionMap* actionMap);
     void handleInputs();
 };
