@@ -38,7 +38,7 @@ void ActionMap::addInputKeyToAction(const std::string& action, InputKey inputKey
 bool ActionMap::isJustPressed(const std::string& action) const
 {
 
-    if (_actions.find(action) != _actions.end() && _actions.find(action)->second.justInput)
+    if (_actions.count(action) > 0 && _actions.find(action)->second.justInput)
     {
 /*        throw "Just pressed " + _actions.find(action)->second.name;*/
         std::cout << "Just pressed " << _actions.find(action)->second.name << std::endl;;
@@ -51,7 +51,7 @@ bool ActionMap::isJustPressed(const std::string& action) const
 // check if action is just released (important for gameloop)
 bool ActionMap::isJustReleased(const std::string& action) const
 {
-    if (_actions.find(action) != _actions.end() && _actions.find(action)->second.justInput
+    if (_actions.count(action) > 0  && _actions.find(action)->second.justInput
     && !(_actions.find(action)->second.pressed)) {
         return true;
     }
@@ -62,7 +62,7 @@ bool ActionMap::isJustReleased(const std::string& action) const
 bool ActionMap::isPressed(const std::string& action) const
 {
 
-    if (_actions.find(action) != _actions.end() && _actions.find(action)->second.pressed)
+    if (_actions.count(action) > 0  && _actions.find(action)->second.pressed)
     {
         std::cout << "Pressed " << _actions.find(action)->second.name << std::endl;;
         return true;
@@ -74,7 +74,7 @@ bool ActionMap::isPressed(const std::string& action) const
 // check if action is released
 bool ActionMap::isReleased(const std::string& action) const
 {
-    if (_actions.find(action) != _actions.end() && !_actions.find(action)->second.pressed)
+    if (_actions.count(action) > 0  && !_actions.find(action)->second.pressed)
     {
         std::cout << "Released " << _actions.find(action)->second.name << std::endl;
         return true;
