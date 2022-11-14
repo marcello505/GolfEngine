@@ -72,7 +72,7 @@ void GameLoop::render() {
 void GameLoop::useDefaultServices() {
     setAudioService(new SDLAudioService {});
     setInputService(new SDLInputService {});
-    setRenderService(new SDLRenderService {});
+    setRenderService(new Render::SDLRenderService {});
     setPhysicsService(new Box2DPhysicsService {});
 }
 
