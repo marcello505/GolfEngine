@@ -54,3 +54,9 @@ GameObject* GameObject::childAt(int index) {
 GameObject& GameObject::parent() const {
     return *_parent;
 }
+
+void GameObject::removeComponent(Component& component) {
+    auto it = std::find(_components.begin(), _components.end(), &component);
+    if(it != _components.end())
+        _components.erase(it);
+}

@@ -18,3 +18,16 @@ TEST_CASE("Component creation on GameObject"){
     auto script {go.getComponent<BehaviourScript>()};
     CHECK_NE(script, nullptr);
 }
+
+TEST_CASE("Component removal on GameObject"){
+    // Arrange
+    Scene scene{};
+    GameObject go{&scene};
+
+    // Act
+    go.addComponent<BehaviourScript>();
+    go.removeComponent(*go.getComponent<BehaviourScript>());
+
+    // Assert
+    CHECK_EQ(go.getComponent<BehaviourScript>(), nullptr);
+}
