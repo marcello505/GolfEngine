@@ -14,6 +14,27 @@ namespace GolfEngine::Services::Render {
         SDL_DestroyTexture(_texture);
     }
 
+    Texture::Texture(Texture&& other) noexcept{
+        _texture = other._texture;
+        other._texture = nullptr;
+
+        _width = other._width;
+        _height = other._height;
+    }
+
+    Texture& Texture::operator-(Texture&& other){
+        if(this != &other){
+            SDL_DestroyTexture(_texture);
+
+            _texture = other._texture;
+            _width = other._width;
+            _height = other._height;
+
+            other._texture = nullptr;
+        }
+        return *this;
+    }
+
     bool Texture::loadFromFile(const std::string& path, SDL_Renderer& renderer) {
         // Load surface
         SDL_Surface* surface = IMG_Load(path.c_str());
