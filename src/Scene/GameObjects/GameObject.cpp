@@ -7,11 +7,8 @@ GameObject::GameObject(Scene* scene, GameObject* parent, const char* name, const
 }
 
 GameObject::~GameObject() {
-//    if(!_components.empty()){
-//        for(auto* comp : _components){
-//
-//        }
-//    }
+    if(!_components.empty())
+        _components.erase(_components.begin(), _components.end());
 
     if(!_children.empty()){
         for(auto* child : _children){
