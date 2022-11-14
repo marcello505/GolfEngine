@@ -35,7 +35,8 @@ set(SERVICES_SOURCES
         src/Services/Singletons/PhysicsSingleton.cpp
         src/Services/Singletons/AudioSingleton.cpp
         src/Services/Singletons/RenderSingleton.cpp
-        src/Services/Singletons/InputSingleton.cpp)
+        src/Services/Singletons/InputSingleton.cpp
+        src/Services/Render/Texture.cpp)
 
 set(SCENE_SOURCES
         src/Scene/Scene.cpp
@@ -72,4 +73,8 @@ target_link_libraries(${PROJECT_NAME} SDL2_image::SDL2_image)
 
 # Sub Projects
 add_subdirectory(tests)
+
 add_subdirectory(validation/US03_InputService)
+
+add_subdirectory(validation/US00_Rendering)
+
