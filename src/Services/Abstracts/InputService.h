@@ -8,6 +8,7 @@
 class InputService {
 public:
     virtual void handleInputs() = 0;
+    bool hasRecievedQuitSignal();
 };
 
 
