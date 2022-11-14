@@ -16,8 +16,13 @@ public:
    void stopRecording();
    void playRecording();
 
+   /// Sets rootGameObject
+   /// \param gameObject
    void setRootGameObject(const GameObject& gameObject);
-    GameObject& getRootGameObject();
+
+   /// Returns root GameObject
+   /// \return
+   GameObject& getRootGameObject();
 };
 
 

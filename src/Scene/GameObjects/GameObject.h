@@ -12,7 +12,7 @@
 class GameObject {
 private:
     bool _active;
-    std::vector<GameObject> _gameObjects;
+    std::vector<GameObject> _gameObjects {};
 public:
     std::string name;
     std::string tag;

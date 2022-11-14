@@ -19,7 +19,3 @@ Scene& SceneManager::getCurrentScene() {
 std::vector<Scene> SceneManager::getScenes() const {
     return _scenes;
 }
-
-
-
-
