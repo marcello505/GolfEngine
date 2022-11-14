@@ -9,6 +9,7 @@
 #include <vector>
 #include "../Components/Component.h"
 #include "../Scene.h"
+#include <algorithm>
 
 // Forward declaration
 class Scene;
@@ -18,7 +19,8 @@ private:
     bool _active;
     Scene* _scene;
     GameObject* _parent;
-    std::vector<GameObject*> _children {};
+    std::vector<GameObject*> _children;
+    std::vector<Component*> _components;
 public:
     std::string name;
     std::string tag;
@@ -28,8 +30,25 @@ public:
 public:
     explicit GameObject(Scene* scene, GameObject* parent = nullptr, const char* name = nullptr, const char* tag = nullptr);
     ~GameObject();
-    template<typename C, typename ... args> void addComponent(args...);
-    template<typename C> void getComponent() const;
+    template<typename C, typename ... Args>
+    void addComponent(Args... args) {
+        _components.emplace_back(new C(std::forward<Args>(args)...));
+    };
+
+    template<typename C>
+    C* getComponent() const {
+        if(!_components.empty()){
+            for(auto* comp : _components){
+                // Try to cast to desired component
+                auto castedComp = dynamic_cast<C*>(comp);
+                // Return if cast was successful
+                if(castedComp)
+                    return castedComp;
+            }
+        }
+        return nullptr;
+    };
+
     void removeComponent(Component& component);
     [[nodiscard]] bool isActiveInWorld() const;
     [[nodiscard]] bool isActiveSelf() const;

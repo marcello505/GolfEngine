@@ -7,14 +7,14 @@
 
 
 class Component {
-private:
+protected:
     bool _active;
 public:
     virtual void onStart() = 0;
     virtual void onUpdate() = 0;
     virtual void onRemove() = 0;
-    bool getActive();
-    void setActive(bool active);
+    virtual bool getActive()  = 0;
+    virtual void setActive(bool active) = 0;
 };
 
 

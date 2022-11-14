@@ -1,4 +1,5 @@
 #include "GameObject.h"
+#include <algorithm>
 
 GameObject::GameObject(Scene* scene, GameObject* parent, const char* name, const char* tag) : _scene{scene}, _active{true}, layer{0}, recordable{false},
     name{name? name : ""}, tag{tag? tag : ""}, _parent{parent? parent : scene->getRootGameObject()} {
@@ -6,7 +7,11 @@ GameObject::GameObject(Scene* scene, GameObject* parent, const char* name, const
 }
 
 GameObject::~GameObject() {
-    // TODO destroy components
+//    if(!_components.empty()){
+//        for(auto* comp : _components){
+//
+//        }
+//    }
 
     if(!_children.empty()){
         for(auto* child : _children){

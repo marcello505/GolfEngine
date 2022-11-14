@@ -11,3 +11,7 @@ void BehaviourScript::onStart() {
 void BehaviourScript::onUpdate() {
 
 }
+
+void BehaviourScript::onRemove() {
+
+}
