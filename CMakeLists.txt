@@ -18,6 +18,7 @@ find_package(SDL2 REQUIRED)
 find_package(IMGUI REQUIRED)
 find_package(SDL2_MIXER REQUIRED) #Include dirs is included on target_link_libraries call
 find_package(SDL2_IMAGE REQUIRED) #Include dirs is included on target_link_libraries call
+add_subdirectory(libs/box2d-2.4.1) #Include dirs is included on target_link_libraries call
 
 # Includes
 include_directories(${SDL2_INCLUDE_DIRS})
