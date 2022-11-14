@@ -8,12 +8,12 @@
 #include "Abstracts/AudioService.h"
 #include <SDL_mixer.h>
 #include <map>
-
+#include <SDL.h>
 class SDLAudioService : public AudioService {
 public:
-    SDLAudioService();
+    SDLAudioService(int amountOfChannels);
     void playOnChannel(int channel, const std::string& path, float volume) override;
-    void preloadAudio(const std::string& path) override;
+    void preloadAudio(const char* path) override;
     void resumeAudio(int channel) override;
     void pauseAudio(int channel) override;
     void haltAudio(int channel) override;
@@ -21,6 +21,8 @@ public:
     void setGlobalVolume(float volume) override;
     void clearAudio() override;
 private:
+    bool channelExists(int channel);
+    int _amountOfChannels;
     std::map<std::string, Mix_Chunk*> _soundEffects;
     std::map<std::string, Mix_Music*> _music;
 };
