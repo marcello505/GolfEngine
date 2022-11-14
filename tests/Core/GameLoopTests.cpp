@@ -73,8 +73,9 @@ namespace GameLoopTests{
         }
 
         //Unused
-        void addRigidBody(const RigidBody& rigidBody) override {}
-        void removeRigidBody(const RigidBody& rigidBody) override {}
+        void addRigidBody(RigidBody* pRigidBody) override {}
+        void removeRigidBody(RigidBody* pRigidBody) override {}
+        void setGravity(const Vector2& vec2) override {}
     };
 }
 

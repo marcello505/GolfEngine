@@ -76,7 +76,7 @@ void GameLoop::useDefaultServices() {
 
     setRenderService(new Render::SDLRenderService {});
 
-    setPhysicsService(new Box2DPhysicsService {});
+    setPhysicsService(new Physics::Box2DPhysicsService {});
 }
 
 // SETTERS AND GETTERS

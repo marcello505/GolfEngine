@@ -54,7 +54,9 @@ set(SCENE_SOURCES
         src/Scene/RenderShape/CircleRenderShape.cpp
         src/Scene/RenderShape/SpriteRenderShape.cpp
         src/Scene/RenderShape/ParticleSystemRenderShape.cpp
-        src/Scene/GameObjects/UIObject/Button.cpp)
+        src/Scene/GameObjects/UIObject/Button.cpp
+        src/Scene/Components/RigidBody.cpp
+        src/Scene/Components/BoxCollider.cpp)
 
 set(CORE_SOURCES
         src/Core/GameLoop.cpp
@@ -68,9 +70,11 @@ add_library(${PROJECT_NAME}
         ${INPUT_SOURCES}
         ${CORE_SOURCES})
 
+target_include_directories(${PROJECT_NAME} PUBLIC ./src)
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} SDL2_mixer::SDL2_mixer)
 target_link_libraries(${PROJECT_NAME} SDL2_image::SDL2_image)
+target_link_libraries(${PROJECT_NAME} box2d)
 
 # Sub Projects
 add_subdirectory(tests)
@@ -78,4 +82,4 @@ add_subdirectory(tests)
 add_subdirectory(validation/US03_InputService)
 
 add_subdirectory(validation/US00_Rendering)
-
+add_subdirectory(validation/US14_PhysicsService)

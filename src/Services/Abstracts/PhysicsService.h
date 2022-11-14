@@ -5,13 +5,15 @@
 #ifndef SPC_PROJECT_PHYSICSSERVICE_H
 #define SPC_PROJECT_PHYSICSSERVICE_H
 #include "../../Scene/Components/RigidBody.h"
+#include "../../Scene/Vector2.h"
 
 
 class PhysicsService {
 public:
-    virtual void addRigidBody(const RigidBody& rigidBody) = 0;
-    virtual void removeRigidBody(const RigidBody& rigidBody) = 0;
+    virtual void addRigidBody(RigidBody* pRigidBody) = 0;
+    virtual void removeRigidBody(RigidBody* pRigidBody) = 0;
     virtual void update() = 0;
+    virtual void setGravity(const Vector2& vec2) = 0;
 };
 
 
