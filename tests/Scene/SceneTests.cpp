@@ -2,7 +2,7 @@
 // Created by lucas on 7-11-2022.
 //
 
-#include <doctest.h>
+#include <../doctest/doctest.h>
 #include "Core/SceneManager.h"
 
 TEST_CASE("SceneManger is able to add Scene"){
