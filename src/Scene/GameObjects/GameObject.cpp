@@ -1,17 +1,54 @@
 #include "GameObject.h"
-bool GameObject::isActiveInWorld() const {return false;};
-bool GameObject::isActiveSelf() const {return false;};
-bool GameObject::getActive() const {return false;};
-void GameObject::setActive(bool active){};
-void GameObject::onUpdate(){}
 
-void GameObject::addGameObject(const GameObject& gameObject) {
-    _gameObjects.push_back(gameObject);
+GameObject::GameObject(Scene* scene, GameObject* parent, const char* name, const char* tag) : _scene{scene}, _active{true}, layer{0}, recordable{false},
+    name{name? name : ""}, tag{tag? tag : ""}, _parent{parent? parent : scene->getRootGameObject()} {
+
 }
 
-std::vector<GameObject>& GameObject::getGameObjects() {
-    return _gameObjects;
-};
+GameObject::~GameObject() {
+    // TODO destroy components
 
+    if(!_children.empty()){
+        for(auto* child : _children){
+            delete child;
+        }
+    }
+}
 
+bool GameObject::isActiveInWorld() const {return false;}
+bool GameObject::isActiveSelf() const {return false;}
 
+bool GameObject::getActive() const {
+    return _active;
+}
+
+void GameObject::setActive(bool active){
+    _active = active;
+
+    // TODO de/activate all components
+}
+
+void GameObject::onUpdate() {
+    // TODO update all components
+
+    // Update all children of this gameObject
+    for(auto* child : _children){
+        child->onUpdate();
+    }
+}
+
+void GameObject::addChild(GameObject *gameObject) {
+    _children.push_back(gameObject);
+}
+
+std::vector<GameObject*>& GameObject::children() {
+    return _children;
+}
+
+GameObject* GameObject::childAt(int index) {
+    return _children.at(index);
+}
+
+GameObject& GameObject::parent() const {
+    return *_parent;
+}

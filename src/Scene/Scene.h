@@ -8,21 +8,26 @@
 #include <vector>
 #include "GameObjects/GameObject.h"
 
+// Forward declaration
+class GameObject;
+
 class Scene {
 private:
-    GameObject _rootGameObject;
+    GameObject* _rootGameObject;
 public:
+   Scene();
+   ~Scene();
    void startRecording(const std::string& actionToLock);
    void stopRecording();
    void playRecording();
 
    /// Sets rootGameObject
    /// \param gameObject
-   void setRootGameObject(const GameObject& gameObject);
+   void setRootGameObject(GameObject* gameObject);
 
    /// Returns root GameObject
    /// \return
-   GameObject& getRootGameObject();
+   GameObject* getRootGameObject();
 };
 
 
