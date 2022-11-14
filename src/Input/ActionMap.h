@@ -24,9 +24,9 @@ public:
     bool isJustReleased(const std::string& action) const;
     bool isPressed(const std::string& action) const;
     bool isReleased(const std::string& action) const;
-    Vector2 getMousePosition() const; //moet private
+    Vector2 getMousePosition() const;
     void setMousePosition(int x, int y);
     ActionMap();
-    void setInputKeyPressed(InputKey inputKey, bool pressed); //moet private
+    void setInputKeyPressed(InputKey inputKey, bool pressed);
 };
 #endif //GOLFENGINE_ACTIONMAP_H
