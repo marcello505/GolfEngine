@@ -232,9 +232,9 @@ namespace GolfEngine::Services::Render {
         // Set color
         SDL_SetRenderDrawColor(_renderer, renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, renderShape.color().a);
 
-        const int32_t diameter = (renderShape.radius() * 2);
+        const int32_t diameter = (abs(renderShape.radius()) * 2);
 
-        int32_t x = (renderShape.radius() - 1);
+        int32_t x = (abs(renderShape.radius()) - 1);
         int32_t y = 0;
         int32_t tx = 1;
         int32_t ty = 1;

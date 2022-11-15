@@ -11,7 +11,7 @@
 
 class CircleRenderShape : public RenderShape{
 public:
-    CircleRenderShape(Vector2 vector2, float d, Color color);
+    CircleRenderShape(Vector2 position, float radius, Color color);
     RenderShapeType getType() override;
     void applyTransform(const Transform& transform) override;
 
