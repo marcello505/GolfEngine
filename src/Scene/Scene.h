@@ -21,12 +21,10 @@ public:
    void stopRecording();
    void playRecording();
 
-   /// Sets rootGameObject
-   /// \param gameObject
-   void setRootGameObject(GameObject* gameObject);
+   void startScene();
+   void updateScene();
 
-   /// Returns root GameObject
-   /// \return
+   void setRootGameObject(GameObject* gameObject);
    GameObject* getRootGameObject();
 };
 

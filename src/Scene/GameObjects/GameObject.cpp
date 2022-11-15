@@ -2,24 +2,30 @@
 #include <algorithm>
 
 GameObject::GameObject(Scene* scene, GameObject* parent, const char* name, const char* tag) : _scene{scene}, _active{true}, layer{0}, recordable{false},
-    name{name? name : ""}, tag{tag? tag : ""}, _parent{parent? parent : scene->getRootGameObject()} {
-
+    name{name? name : ""}, tag{tag? tag : ""}, _parent{parent? parent : scene->getRootGameObject()}, _components{new std::vector<Component*>{}} {
+    if(_parent != this && _parent != nullptr)
+        _parent->addChild(this);
 }
 
 GameObject::~GameObject() {
-    if(!_components.empty()){
+    if(!_components->empty()){
         // Call on remove function for all components
-        for(auto& comp : _components)
+        for(auto& comp : *_components)
             comp->onRemove();
 
         // Erase components list
-        _components.erase(_components.begin(), _components.end());
+        _components->erase(_components->begin(), _components->end());
     }
+    else
+        delete _components;
 
     // Destroy and call destructor for all child game objects
     if(!_children.empty()){
         for(auto* child : _children){
-            delete child;
+            if(child){
+                delete child;
+                child = nullptr;
+            }
         }
     }
 }
@@ -39,15 +45,15 @@ void GameObject::setActive(bool active){
     _active = active;
 
     // De/Activate all components
-    for(auto& comp : _components){
+    for(auto& comp : *_components){
         comp->setActive(active);
     }
 }
 
 void GameObject::onStart() {
     // Call on start for all components
-    if(!_components.empty()){
-      for(auto& comp : _components)
+    if(!_components->empty()){
+      for(auto& comp : *_components)
           comp->onStart();
     }
 
@@ -60,7 +66,7 @@ void GameObject::onStart() {
 
 void GameObject::onUpdate() {
     // Update all components
-    for(auto& comp : _components){
+    for(auto& comp : *_components){
         comp->onUpdate();
     }
 
@@ -70,7 +76,7 @@ void GameObject::onUpdate() {
     }
 }
 
-void GameObject::addChild(GameObject *gameObject) {
+void GameObject::addChild(GameObject* gameObject) {
     _children.push_back(gameObject);
 }
 
@@ -87,7 +93,8 @@ GameObject& GameObject::parent() const {
 }
 
 void GameObject::removeComponent(Component& component) {
-    auto it = std::find(_components.begin(), _components.end(), &component);
-    if(it != _components.end())
-        _components.erase(it);
+    auto it = std::find(_components->begin(), _components->end(), &component);
+    if(it != _components->end()) {
+        _components->erase(it);
+    }
 }

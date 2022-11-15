@@ -20,7 +20,7 @@ private:
     Scene* _scene;
     GameObject* _parent;
     std::vector<GameObject*> _children;
-    std::vector<Component*> _components;
+    std::vector<Component*>* _components;
 public:
     std::string name;
     std::string tag;
@@ -32,13 +32,13 @@ public:
     ~GameObject();
     template<typename C, typename ... Args>
     void addComponent(Args... args) {
-        _components.emplace_back(new C(std::forward<Args>(args)...));
+        _components->emplace_back(new C(std::forward<Args>(args)...));
     };
 
     template<typename C>
     C* getComponent() const {
-        if(!_components.empty()){
-            for(auto* comp : _components){
+        if(!_components->empty()){
+            for(auto* comp : *_components){
                 // Try to cast to desired component
                 auto castedComp = dynamic_cast<C*>(comp);
                 // Return if cast was successful
