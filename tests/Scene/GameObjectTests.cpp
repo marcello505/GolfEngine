@@ -11,6 +11,7 @@ namespace GameObjectTests{
     private:
         int _count = 0;
     public:
+        explicit Counter(GameObject* gameObject) : BehaviourScript(gameObject){}
         void onStart() override {
             _count = 0;
         }
@@ -27,7 +28,7 @@ TEST_CASE("Component creation on GameObject"){
     GameObject* go {new GameObject{scene}};
 
     // Act
-    go->addComponent<BehaviourScript>();
+    go->addComponent<BehaviourScript>(go);
 
     // Assert
     auto script {go->getComponent<BehaviourScript>()};
@@ -43,7 +44,7 @@ TEST_CASE("Component removal on GameObject"){
     GameObject* go{new GameObject{scene}};
 
     // Act
-    go->addComponent<BehaviourScript>();
+    go->addComponent<BehaviourScript>(go);
     go->removeComponent(*go->getComponent<BehaviourScript>());
 
     // Assert
@@ -57,7 +58,7 @@ TEST_CASE("Custom behavior script on GameObject"){
     // Arrange
     Scene* scene{new Scene{}};
     GameObject* go{new GameObject{scene}};
-    go->addComponent<GameObjectTests::Counter>();
+    go->addComponent<GameObjectTests::Counter>(go);
 
     // Act
     scene->startScene();

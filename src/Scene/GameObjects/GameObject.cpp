@@ -65,6 +65,9 @@ void GameObject::onStart() {
 }
 
 void GameObject::onUpdate() {
+    // Do not update if GameObject is inactive
+    if(!_active) {return;}
+
     // Update all components
     for(auto& comp : *_components){
         comp->onUpdate();

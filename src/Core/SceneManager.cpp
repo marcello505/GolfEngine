@@ -15,8 +15,6 @@ namespace Core {
             sceneManager = new SceneManager();
         return sceneManager;
     }
-//    std::map<std::string, Scene *> SceneManager::_scenes{};
-//    Scene *SceneManager::_currentScene{nullptr};
 
     void SceneManager::loadScene(const std::string& sceneName) {
         auto sceneIt = _scenes.find(sceneName);

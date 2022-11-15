@@ -5,10 +5,15 @@
 #ifndef GOLFENGINE_COMPONENT_H
 #define GOLFENGINE_COMPONENT_H
 
+#include "../GameObjects/GameObject.h"
+
+// Forward declaration
+class GameObject;
 
 class Component {
 protected:
     bool _active;
+    GameObject* _gameObject;
 public:
     virtual void onStart() = 0;
     virtual void onUpdate() = 0;

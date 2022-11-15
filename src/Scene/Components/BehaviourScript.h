@@ -8,6 +8,7 @@
 
 class BehaviourScript : public Component {
 public:
+    explicit BehaviourScript(GameObject* gameObject) {_gameObject = gameObject;};
     virtual void onStart() override {};
     virtual void onUpdate() override {};
     virtual void onRemove() override {};

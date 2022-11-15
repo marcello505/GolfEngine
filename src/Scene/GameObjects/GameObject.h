@@ -13,6 +13,7 @@
 
 // Forward declaration
 class Scene;
+class Component;
 
 class GameObject {
 private:
