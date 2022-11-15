@@ -28,7 +28,8 @@ SDLAudioService::SDLAudioService(int amountOfChannels)
 
 void SDLAudioService::playOnChannel(int channel, const std::string &path, float volume)
 {
-    if (_soundEffects.count(path) > 0 && channelExists(channel))
+    setVolumeChannel(channel, volume);
+    if (!(_soundEffects.count(path)) > 0 && channelExists(channel))
     {
         std::cout << "Sound or channel doesnt exist.\n";
         return;
