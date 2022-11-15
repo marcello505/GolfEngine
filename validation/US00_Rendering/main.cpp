@@ -23,8 +23,8 @@ int main(int argc, char* argv[]){
     RenderService* rs = GolfEngine::Services::Render::getService();
     fullscreen = false;
     running = true;
-    rect = new RectDrawable(Rect2(Vector2(0,0), Vector2(100,100)),
-                            Transform(Vector2(200,200), 0, Vector2(1,1)),
+    rect = new RectDrawable(Rect2(Vector2(100,100), Vector2(100,100)),
+                            Transform(Vector2(0,0), 0, Vector2(1,1)),
                             Vector2(50,75),
                             Color(255,0,0,255));
     auto* rect2 = new RectDrawable(Rect2(Vector2(0,0), Vector2(100,100)),
@@ -32,13 +32,14 @@ int main(int argc, char* argv[]){
                             Vector2(),
                             Color(255,0,0));
     sprite = new SpriteDrawable(R"(..\..\..\validation\US00_Rendering\res\player.png)",
+                                Vector2(100,100),
                                 Vector2(2,2),
                                 Rect2(),
-                                Transform(Vector2(200,200), 0, Vector2(1,1)),
+                                Transform(Vector2(100,100), 0, Vector2(1,1)),
                                 Vector2(120,218),
                                 Color(255,255,255,100));
 
-    circle = new CircleDrawable(Vector2(100,0),
+    circle = new CircleDrawable(Vector2(100,100),
                                 50,
                                 Color(255,0,0, 50),
                                 Transform(Vector2(200,200), 0, Vector2(1,1)));

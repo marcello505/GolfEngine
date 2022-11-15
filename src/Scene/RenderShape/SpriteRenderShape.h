@@ -42,6 +42,7 @@ private:
     Color _color;
     Vector2 _initialPixelScale;
     Vector2 _pivotPoint;
+    Vector2 _initialPosition;
 };
 
 
