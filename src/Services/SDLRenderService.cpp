@@ -3,6 +3,7 @@
 //
 
 #include "SDLRenderService.h"
+#include "../Scene/RenderShape/TextRenderShape.h"
 #include <cmath>
 #include <iostream>
 #include <algorithm>
@@ -116,6 +117,9 @@ namespace GolfEngine::Services::Render {
                     renderSprite(reinterpret_cast<SpriteRenderShape &>(*renderShape));
                     break;
                 case RenderShapeType::CircleShape:
+                    break;
+                case RenderShapeType::TextRenderShape:
+                    renderText(reinterpret_cast<TextRenderShape &>(*renderShape))
                 case RenderShapeType::ParticleSystemShape:
                     break;
             }
@@ -314,4 +318,20 @@ namespace GolfEngine::Services::Render {
             delete texture.second;
         }
     }
+
+    void SDLRenderService::renderText(TextRenderShape &renderShape) {
+        TTF_Font* Sans = TTF_OpenFont("Sans.ttf", 24);
+
+        // this is the color in rgb format,
+        // maxing out all would give you the color white,
+        // and it will be your text's color
+                SDL_Color White = {255, 255, 255};
+
+        // as TTF_RenderText_Solid could only be used on
+        // SDL_Surface then you have to create the surface first
+        SDL_Surface* surfaceMessage =
+                TTF_RenderText_Solid(Sans, "put your text here", White);
+    }
+
+
 }

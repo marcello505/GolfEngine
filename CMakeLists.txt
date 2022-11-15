@@ -10,6 +10,7 @@ if(WIN32)
     set(SDL2_DIR libs/sdl2/cmake)
     set(SDL2_MIXER_DIR libs/sdl2_mixer/cmake)
     set(SDL2_IMAGE_DIR libs/sdl2_image/cmake)
+    set(SDL2_TTF_DIR libs/sdl2_ttf/cmake)
 endif()
 set(IMGUI_DIR libs/imgui/cmake)
 
@@ -18,6 +19,7 @@ find_package(SDL2 REQUIRED)
 find_package(IMGUI REQUIRED)
 find_package(SDL2_MIXER REQUIRED) #Include dirs is included on target_link_libraries call
 find_package(SDL2_IMAGE REQUIRED) #Include dirs is included on target_link_libraries call
+find_package(SDL2_TTF REQUIRED) #Include dirs is included on target_link_libraries call
 
 # Includes
 include_directories(${SDL2_INCLUDE_DIRS})
@@ -58,7 +60,7 @@ set(SCENE_SOURCES
 set(CORE_SOURCES
         src/Core/GameLoop.cpp
         src/Core/SceneManager.cpp
-        src/Core/ProjectSettings.cpp src/Core/Time.cpp)
+        src/Core/ProjectSettings.cpp src/Core/Time.cpp src/Scene/RenderShape/TextRenderShape.cpp src/Scene/RenderShape/TextRenderShape.h)
 
 # Main Project
 add_library(${PROJECT_NAME}
@@ -70,6 +72,7 @@ add_library(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} SDL2_mixer::SDL2_mixer)
 target_link_libraries(${PROJECT_NAME} SDL2_image::SDL2_image)
+#target_link_libraries(${PROJECT_NAME} SDL2_ttf::SDL2_ttf)
 
 # Sub Projects
 add_subdirectory(tests)
@@ -77,4 +80,6 @@ add_subdirectory(tests)
 add_subdirectory(validation/US03_InputService)
 
 add_subdirectory(validation/US00_Rendering)
+
+add_subdirectory(validation/US04_RenderFPS)
 

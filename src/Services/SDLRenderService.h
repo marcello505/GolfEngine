@@ -14,6 +14,7 @@
 #include "../Scene/RenderShape/LineRenderShape.h"
 #include "../Scene/RenderShape/SpriteRenderShape.h"
 #include "Render/Texture.h"
+#include "Scene/RenderShape/TextRenderShape.h"
 
 namespace GolfEngine::Services::Render {
 
@@ -53,10 +54,11 @@ public:
 private:
     void renderRect(RectRenderShape &renderShape);
     void renderLine(LineRenderShape &renderShape);
+    void renderText(TextRenderShape &renderShape);
     Texture* loadSprite(const std::string& path);
     void renderSprite(SpriteRenderShape &renderShape);
     void clearTextureCache();
-private:
+
     int _screenSizeWidth;
     int _screenSizeHeight;
     bool _fullScreen;
@@ -64,6 +66,7 @@ private:
     SDL_Renderer *_renderer;
     std::vector<Drawable *> _drawables;
     std::map<std::string, Texture*> _cachedTextures;
+
 };
 
 }
