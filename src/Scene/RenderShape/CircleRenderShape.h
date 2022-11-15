@@ -11,10 +11,20 @@
 
 class CircleRenderShape : public RenderShape{
 public:
-    CircleRenderShape();
+    CircleRenderShape(Vector2 vector2, float d, Color color);
     RenderShapeType getType() override;
     void applyTransform(const Transform& transform) override;
+
+    //getters
+    [[nodiscard]] Vector2 position() const;
+    [[nodiscard]] float radius() const;
+    [[nodiscard]] Color color() const;
+
+
 private:
+    Vector2 _initialPosition;
+    float _initialRadius;
+
     Vector2 _position;
     float _radius;
     Color _color;
