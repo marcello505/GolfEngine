@@ -34,7 +34,7 @@ namespace GolfEngine::Services::Render {
         SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY,
                     "2"); // Increases quality with the scaling of textures, 0 nothing, 1 linear filtering, 2 anisotropic filtering
 
-        //Makes alpha blending possible(used for transparency)
+        //Makes alpha blending possible(used for opacity)
         SDL_SetRenderDrawBlendMode(_renderer, SDL_BLENDMODE_BLEND);
 
     }
