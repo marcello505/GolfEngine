@@ -42,8 +42,6 @@ set(SCENE_SOURCES
         src/Scene/Scene.cpp
         src/Scene/GameObjects/GameObject.cpp
         src/Scene/Components/AudioSource.cpp
-        src/Scene/Components/Component.cpp
-        src/Scene/Components/BehaviourScript.cpp
         src/Scene/Components/Drawable.cpp
         src/Scene/Components/Animator.cpp
         src/Scene/Components/ParticleSystem.cpp

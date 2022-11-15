@@ -7,9 +7,16 @@ GameObject::GameObject(Scene* scene, GameObject* parent, const char* name, const
 }
 
 GameObject::~GameObject() {
-    if(!_components.empty())
-        _components.erase(_components.begin(), _components.end());
+    if(!_components.empty()){
+        // Call on remove function for all components
+        for(auto& comp : _components)
+            comp->onRemove();
 
+        // Erase components list
+        _components.erase(_components.begin(), _components.end());
+    }
+
+    // Destroy and call destructor for all child game objects
     if(!_children.empty()){
         for(auto* child : _children){
             delete child;
@@ -25,16 +32,40 @@ bool GameObject::getActive() const {
 }
 
 void GameObject::setActive(bool active){
+    // Only continue if changing to new active state
+    if(_active == active) {return;}
+
+    // Update state
     _active = active;
 
-    // TODO de/activate all components
+    // De/Activate all components
+    for(auto& comp : _components){
+        comp->setActive(active);
+    }
+}
+
+void GameObject::onStart() {
+    // Call on start for all components
+    if(!_components.empty()){
+      for(auto& comp : _components)
+          comp->onStart();
+    }
+
+    // Call start for all child game objects
+    if(!_children.empty()){
+        for(auto& child : _children)
+            child->onStart();
+    }
 }
 
 void GameObject::onUpdate() {
-    // TODO update all components
+    // Update all components
+    for(auto& comp : _components){
+        comp->onUpdate();
+    }
 
     // Update all children of this gameObject
-    for(auto* child : _children){
+    for(auto& child : _children){
         child->onUpdate();
     }
 }

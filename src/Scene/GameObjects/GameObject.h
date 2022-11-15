@@ -54,6 +54,7 @@ public:
     [[nodiscard]] bool isActiveSelf() const;
     [[nodiscard]] bool getActive() const;
     void setActive(bool active);
+    void onStart();
     void onUpdate();
 
     //Method to use for tree of gameObjects
