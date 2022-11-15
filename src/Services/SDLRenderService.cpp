@@ -267,7 +267,6 @@ namespace GolfEngine::Services::Render {
                 tx += 2;
                 error += (tx - diameter);
             }
-
         }
     }
 
@@ -279,7 +278,7 @@ namespace GolfEngine::Services::Render {
 
         // Set color and blend mode
         texture->setColor(renderShape.color());
-        texture->setBlendMode(SDL_BLENDMODE_BLEND);
+        texture->setAlphaMod(renderShape.color().a);
 
         // Calculate desired width and height of sprite
         float dstWidth {(texture->width() * abs(renderShape.pixelScale().x))};

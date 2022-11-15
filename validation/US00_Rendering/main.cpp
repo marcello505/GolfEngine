@@ -31,11 +31,12 @@ int main(int argc, char* argv[]){
                             Transform(Vector2(200,200), 0, Vector2(1,1)),
                             Vector2(),
                             Color(255,0,0));
-    sprite = new SpriteDrawable(R"(D:\Avans\Jaar4\MinorSPC\SPC-Project\validation\US00_Rendering\res\player.png)",
+    sprite = new SpriteDrawable(R"(..\..\..\validation\US00_Rendering\res\player.png)",
                                 Vector2(2,2),
                                 Rect2(),
                                 Transform(Vector2(200,200), 0, Vector2(1,1)),
-                                Vector2(120,218));
+                                Vector2(120,218),
+                                Color(255,255,255,100));
 
     circle = new CircleDrawable(Vector2(100,0),
                                 50,
@@ -45,7 +46,7 @@ int main(int argc, char* argv[]){
     rs->addDrawable(circle);
     rs->addDrawable(rect);
     //rs->addDrawable(rect2);
-    //rs->addDrawable(sprite);
+    rs->addDrawable(sprite);
     while(running){
         input();
         rs->render();
