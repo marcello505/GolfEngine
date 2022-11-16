@@ -13,7 +13,7 @@ namespace Core {
 class SceneManager {
 private:
     std::map<std::string, Scene *> _scenes;
-    Scene *_currentScene;
+    Scene* _currentScene;
 
     static SceneManager* sceneManager;
 
@@ -35,7 +35,7 @@ public:
 
     /// Returns reference to _currentScene
     /// \return
-    Scene &getCurrentScene();
+    Scene* getCurrentScene();
 
     /// Returns vector of _scenes
     /// \return

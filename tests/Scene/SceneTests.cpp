@@ -4,6 +4,12 @@
 
 #include <../doctest/doctest.h>
 #include "Core/SceneManager.h"
+#include "Scene/Components/BehaviourScript.h"
+
+namespace SceneTests{
+    class DummyScript : public BehaviourScript{
+    };
+}
 
 TEST_CASE("SceneManger is able to add Scene"){
     //Arrange
@@ -22,11 +28,11 @@ TEST_CASE("SceneManger is able to change Scene"){
     auto* sm = Core::SceneManager::GetSceneManager();
 
     Core::SceneManager::GetSceneManager()->createScene("main");
-    auto prevScene = &Core::SceneManager::GetSceneManager()->getCurrentScene();
+    auto prevScene = Core::SceneManager::GetSceneManager()->getCurrentScene();
 
     //Act
     Core::SceneManager::GetSceneManager()->loadScene("main");
-    auto currentScene = &Core::SceneManager::GetSceneManager()->getCurrentScene();
+    auto currentScene = Core::SceneManager::GetSceneManager()->getCurrentScene();
 
     //Assert
     CHECK_NE(prevScene, currentScene);
@@ -67,4 +73,23 @@ TEST_CASE("Scene is able to change root"){
 
     // Cleanup
     delete scene;
+}
+
+TEST_CASE("Scene is able to load and copy more advanced Scene"){
+    // Arrange
+    auto* scene = Core::SceneManager::GetSceneManager()->createScene("main");
+    auto* go1 = new GameObject{scene};
+    go1->addComponent<BehaviourScript>();
+    go1->addComponent<SceneTests::DummyScript>();
+    auto* go2 = new GameObject{scene, go1};
+    go2->addComponent<SceneTests::DummyScript>();
+
+    // Act
+    Core::SceneManager::GetSceneManager()->loadScene("main");
+    auto loadedScene = Core::SceneManager::GetSceneManager()->getCurrentScene();
+
+    // Assert
+    auto* child = Core::SceneManager::GetSceneManager()->getCurrentScene()->getRootGameObject()->childAt(0)->childAt(0);
+    CHECK_NE(child, nullptr);
+    CHECK_NE(go2, child);
 }
