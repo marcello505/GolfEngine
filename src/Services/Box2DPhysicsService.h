@@ -33,6 +33,11 @@ namespace GolfEngine::Services::Physics{
         void update(GameTic timeStep) override;
         void setGravity(const Vector2& vec2) override;
 
+
+        // RigidBody specific methods
+        void applyForceToCenter(RigidBody* pRigidBody, const Vector2& force) override;
+        void setTransform(RigidBody* pRigidBody, const Transform& transform) override;
+
         // Methods for testing
         int getBodyCount() const;
     private:

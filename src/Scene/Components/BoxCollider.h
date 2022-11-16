@@ -5,11 +5,13 @@
 #ifndef GOLFENGINE_BOXCOLLIDER_H
 #define GOLFENGINE_BOXCOLLIDER_H
 #include "../Vector2.h"
+#include "../RenderShape/RectRenderShape.h"
 #include "Collider.h"
 
 class BoxCollider : public Collider {
 public:
-    explicit BoxCollider(const Vector2& vec2) : _shapeExtents{vec2} {};
+    //TODO make the _rectRenderShape initialisation more natural
+    explicit BoxCollider(const Vector2& vec2) : _shapeExtents{vec2}, _rectRenderShape{{{}, {vec2.x * 2, vec2.y * 2}}} {};
     ColliderShapes getColliderShape() override;
     const Vector2& getShapeExtents() const;
 
@@ -26,7 +28,8 @@ public:
     RenderShape* getRenderShape() override;
 
 private:
-    GameObject* _parent;
+    GameObject* _parent {};
+    RectRenderShape _rectRenderShape;
     Vector2 _shapeExtents;
 };
 

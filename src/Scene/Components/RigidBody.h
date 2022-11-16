@@ -46,9 +46,14 @@ public:
     std::vector<Collider*> getColliders() const;
     GameObject* getParentGameObject() const;
 
+    //Pass Through methods
+    void applyForceToCenter(const Vector2& force);
+    void setTransform(const Transform& transform);
+
+
 
 private:
-    GameObject* _parent;
+    GameObject* _parent {};
     RigidBodyDef _rigidBodyDef;
 };
 

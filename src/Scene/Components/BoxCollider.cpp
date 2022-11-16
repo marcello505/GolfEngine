@@ -2,10 +2,14 @@
 // Created by marcello on 11/14/22.
 //
 
+#include "Services/Singletons/RenderSingleton.h"
 #include "BoxCollider.h"
 
 void BoxCollider::onStart() {
-
+    //TODO make it so that this only happens if debug is on
+    if(GolfEngine::Services::Render::hasService()){
+        GolfEngine::Services::Render::getService()->addDrawable(this);
+    }
 }
 
 void BoxCollider::onUpdate() {
@@ -13,7 +17,9 @@ void BoxCollider::onUpdate() {
 }
 
 void BoxCollider::onRemove() {
-
+    if(GolfEngine::Services::Render::hasService()){
+        GolfEngine::Services::Render::getService()->removeDrawable(this);
+    }
 }
 
 ColliderShapes BoxCollider::getColliderShape() {
@@ -41,5 +47,8 @@ Component* BoxCollider::clone() const {
 }
 
 RenderShape* BoxCollider::getRenderShape() {
-    return nullptr;
+    if(_parent != nullptr){
+        _rectRenderShape.applyTransform(_parent->getWorldTransform());
+    }
+    return &_rectRenderShape;
 }

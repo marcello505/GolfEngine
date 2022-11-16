@@ -8,6 +8,16 @@
 
 
 namespace GolfEngine::Services::Physics{
+    // Degrees to Radians
+    float deg2Rad(float deg){
+        return deg * M_PI / 180.0f;
+    }
+
+    // Radians to Degrees
+    float rad2Deg(float rad){
+        return 180.0f * rad / M_PI;
+    }
+
     void Box2DPhysicsService::addRigidBody(RigidBody* pRigidBody) {
         // * Error Handling *
         // Check for nullptr
@@ -46,7 +56,7 @@ namespace GolfEngine::Services::Physics{
             if(parentGameObject != nullptr){
                 worldTransform = parentGameObject->getWorldTransform();
                 bodyDef.position = {worldTransform.position.x / PhysicsSpaceToWorldSpace, worldTransform.position.y / PhysicsSpaceToWorldSpace};
-                bodyDef.angle = worldTransform.rotation * (M_PI / 180.0f);
+                bodyDef.angle = deg2Rad(worldTransform.rotation);
             }
             //bodyDef.position = pRigidBody->getPosition()
             pBody = _world.CreateBody(&bodyDef);
@@ -73,6 +83,9 @@ namespace GolfEngine::Services::Physics{
 
             pBody->CreateFixture(&fixtureDef);
         }
+
+        //Add pBody and pRigidBody to the map
+        _rigidBodies.emplace(pRigidBody, pBody);
     }
 
     void Box2DPhysicsService::removeRigidBody(RigidBody* pRigidBody) {
@@ -92,17 +105,20 @@ namespace GolfEngine::Services::Physics{
         // Update Rigidbodies
         for(auto item = _rigidBodies.begin(); item != _rigidBodies.end(); ++item){
             b2Body* body = item->second;
-            GameObject* parent = item->first->getParentGameObject();
 
-            //Update position and rotation
-            if(parent != nullptr){
-                auto& position = body->GetPosition();
-                float rotation = body->GetAngle() * (M_PI / 180.0f);
-                parent->setWorldTransform({
-                    {position.x, position.y},
-                    rotation,
-                    {1.f, 1.f}
-                });
+            if(body->IsEnabled()){
+                GameObject* parent = item->first->getParentGameObject();
+
+                //Update position and rotation
+                if(parent != nullptr){
+                    auto& position = body->GetPosition();
+                    float rotation = rad2Deg(body->GetAngle());
+                    parent->setWorldTransform({
+                        {position.x * PhysicsSpaceToWorldSpace, position.y * PhysicsSpaceToWorldSpace},
+                        rotation,
+                        {1.f, 1.f}
+                    });
+                }
             }
         }
 
@@ -123,6 +139,23 @@ namespace GolfEngine::Services::Physics{
 
     int Box2DPhysicsService::getBodyCount() const {
         return _world.GetBodyCount();
+    }
+
+    void Box2DPhysicsService::applyForceToCenter(RigidBody* pRigidBody, const Vector2& force) {
+        auto body = getB2Body(pRigidBody);
+        if(body){
+            b2Vec2 b2Force = body.value()->GetWorldVector(b2Vec2{force.x, force.y});
+            body.value()->ApplyForceToCenter(b2Force, true);
+        }
+    }
+
+    void Box2DPhysicsService::setTransform(RigidBody* pRigidBody, const Transform& transform) {
+        auto body = getB2Body(pRigidBody);
+        if(body){
+            b2Vec2 b2Position {transform.position.x, transform.position.y};
+            float angle = deg2Rad(transform.rotation);
+            body.value()->SetTransform(b2Position, angle);
+        }
     }
 }
 

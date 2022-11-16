@@ -20,7 +20,7 @@ class GameObject {
 private:
     bool _active;
     Scene* _scene;
-    GameObject* _parent;
+    GameObject* _parent {};
     std::vector<GameObject*> _children;
     std::vector<Component*>* _components;
     Transform _localTransform {};

@@ -4,15 +4,21 @@
 #include <Services/Box2DPhysicsService.h>
 
 
-TEST_CASE("RigidBody.onStart() adds itself to the physics simulation"){
+TEST_CASE("RigidBody adds/removes itself to the physics simulation"){
     //Arrange
-    GolfEngine::Services::Physics::Box2DPhysicsService box2DPhysicsService {};
-    GolfEngine::Services::Physics::setService(&box2DPhysicsService);
-    RigidBody rigidBody {};
+    auto* box2DPhysicsService = new GolfEngine::Services::Physics::Box2DPhysicsService{};
+    GolfEngine::Services::Physics::setService(box2DPhysicsService);
+    auto* rigidBody = new RigidBody{};
 
     //Act
-    rigidBody.onStart();
+    rigidBody->onStart();
 
     //Assert
-    CHECK_GT(box2DPhysicsService.getBodyCount(), 0);
+    SUBCASE("Added"){
+        CHECK_GT(box2DPhysicsService->getBodyCount(), 0);
+    }
+    SUBCASE("Removed"){
+        rigidBody->onRemove();
+        CHECK_EQ(box2DPhysicsService->getBodyCount(), 0);
+    }
 }

@@ -33,11 +33,12 @@ std::vector<Collider*> RigidBody::getColliders() const {
 }
 
 bool RigidBody::getActive() {
+    //TODO fill this
     return false;
 }
 
 void RigidBody::setActive(bool active) {
-
+    //TODO enable/disable in the physics world
 }
 
 void RigidBody::setParentGameObject(GameObject* gameObject) {
@@ -50,4 +51,16 @@ Component* RigidBody::clone() const {
 
 GameObject* RigidBody::getParentGameObject() const {
     return _parent;
+}
+
+void RigidBody::applyForceToCenter(const Vector2& force) {
+    if(GolfEngine::Services::Physics::hasService()){
+        GolfEngine::Services::Physics::getService()->applyForceToCenter(this, force);
+    }
+}
+
+void RigidBody::setTransform(const Transform& transform) {
+    if(GolfEngine::Services::Physics::hasService()){
+        GolfEngine::Services::Physics::getService()->setTransform(this, transform);
+    }
 }
