@@ -19,7 +19,7 @@ namespace Core {
     void SceneManager::loadScene(const std::string& sceneName) {
         auto sceneIt = _scenes.find(sceneName);
         if (sceneIt != _scenes.end())
-            _currentScene = sceneIt->second;
+            _currentScene = new Scene(*sceneIt->second);
         // TODO maybe throw exception for not finding the scene?
     }
 

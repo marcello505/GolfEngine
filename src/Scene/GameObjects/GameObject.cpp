@@ -2,7 +2,7 @@
 #include <algorithm>
 
 GameObject::GameObject(Scene* scene, GameObject* parent, const char* name, const char* tag) : _scene{scene}, _active{true}, layer{0}, recordable{false},
-    name{name? name : ""}, tag{tag? tag : ""}, _parent{parent? parent : scene->getRootGameObject()}, _components{new std::vector<Component*>{}} {
+    name{name? name : ""}, tag{tag? tag : "default"}, _parent{parent? parent : scene->getRootGameObject()}, _components{new std::vector<Component*>{}} {
     if(_parent != this && _parent != nullptr)
         _parent->addChild(this);
 }
@@ -29,6 +29,87 @@ GameObject::~GameObject() {
         }
     }
 }
+
+GameObject::GameObject(const GameObject& other){
+    // copy primitives
+    _scene = other._scene;
+    _parent = other._parent;
+    _active = other._active;
+    name = other.name;
+    tag = other.tag;
+    layer = other.layer;
+    recordable = other.recordable;
+
+    // copy components
+    _components = new std::vector<Component*>{};
+    auto& componentsToCopy = other._components;
+    for(auto& comp : *componentsToCopy){
+        _components->emplace_back(comp->clone());
+    }
+
+    // copy children game objects
+    auto& childrenToCopy = other._children;
+    for(auto& child : childrenToCopy){
+        _children.push_back(new GameObject(*child));
+    }
+}
+
+GameObject& GameObject::operator=(const GameObject& other){
+    if(this != &other){
+        // Delete existing pointers
+        if(!_components->empty()){
+            // Call on remove function for all components
+            for(auto& comp : *_components)
+                comp->onRemove();
+
+            // Erase components list
+            _components->erase(_components->begin(), _components->end());
+        }
+        else
+            delete _components;
+
+        // Destroy all child game objects
+        if(!_children.empty()){
+            for(auto* child : _children){
+                if(child){
+                    delete child;
+                    child = nullptr;
+                }
+            }
+        }
+
+        // copy primitives
+        _scene = other._scene;
+        _parent = other._parent;
+        _active = other._active;
+        name = other.name;
+        tag = other.tag;
+        layer = other.layer;
+        recordable = other.recordable;
+
+        // copy components
+        _components = new std::vector<Component*>{};
+        auto& componentsToCopy = other._components;
+        for(auto& comp : *componentsToCopy){
+            _components->emplace_back(comp->clone());
+        }
+
+        // copy children game objects
+        auto& childrenToCopy = other._children;
+        for(auto& child : childrenToCopy){
+            _children.push_back(new GameObject(*child));
+        }
+    }
+    return *this;
+}
+
+//GameObject::GameObject(GameObject &&other) {
+//
+//}
+//
+//GameObject& GameObject::operator=(GameObject&& other){
+//
+//}
 
 bool GameObject::isActiveInWorld() const {return false;}
 bool GameObject::isActiveSelf() const {return false;}

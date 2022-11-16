@@ -21,6 +21,9 @@ public:
     virtual bool getActive()  = 0;
     virtual void setActive(bool active) = 0;
     virtual void setParentGameObject(GameObject* gameObject) = 0;
+    /// Function used in GameObject to copy another GameObject
+    /// \return A copy of the component
+    virtual Component* clone() const = 0;
 };
 
 

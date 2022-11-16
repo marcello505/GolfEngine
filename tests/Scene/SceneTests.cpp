@@ -19,6 +19,8 @@ TEST_CASE("SceneManger is able to add Scene"){
 
 TEST_CASE("SceneManger is able to change Scene"){
     //Arrange
+    auto* sm = Core::SceneManager::GetSceneManager();
+
     Core::SceneManager::GetSceneManager()->createScene("main");
     auto prevScene = &Core::SceneManager::GetSceneManager()->getCurrentScene();
 

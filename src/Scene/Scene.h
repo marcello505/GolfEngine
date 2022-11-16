@@ -17,6 +17,11 @@ private:
 public:
    Scene();
    ~Scene();
+   Scene(const Scene& other);
+   Scene& operator=(const Scene& other);
+   explicit Scene(Scene&& other) = delete;
+   Scene& operator=(Scene&& other) = delete;
+
    void startRecording(const std::string& actionToLock);
    void stopRecording();
    void playRecording();
