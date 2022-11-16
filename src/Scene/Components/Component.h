@@ -20,6 +20,7 @@ public:
     virtual void onRemove() = 0;
     virtual bool getActive()  = 0;
     virtual void setActive(bool active) = 0;
+    virtual void setParentGameObject(GameObject* gameObject) = 0;
 };
 
 

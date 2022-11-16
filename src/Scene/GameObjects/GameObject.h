@@ -32,8 +32,10 @@ public:
     explicit GameObject(Scene* scene, GameObject* parent = nullptr, const char* name = nullptr, const char* tag = nullptr);
     ~GameObject();
     template<typename C, typename ... Args>
-    void addComponent(Args... args) {
-        _components->emplace_back(new C(std::forward<Args>(args)...));
+    C* addComponent(Args... args) {
+        auto* newComp = _components->emplace_back(new C(std::forward<Args>(args)...));
+        newComp->setParentGameObject(this);
+        return reinterpret_cast<C*>(newComp);
     };
 
     template<typename C>
