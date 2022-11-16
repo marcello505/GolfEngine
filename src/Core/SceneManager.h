@@ -18,6 +18,7 @@ private:
     static SceneManager* sceneManager;
 
     SceneManager();
+    ~SceneManager();
 public:
     /// This method is used to get access to the scene manager instance
     /// \return Returns the global scene manager instance

@@ -10,6 +10,13 @@ namespace Core {
     SceneManager::SceneManager() : _currentScene{nullptr}, _scenes{}{
     }
 
+    SceneManager::~SceneManager() {
+        delete _currentScene;
+
+        for(auto& scene : _scenes)
+            delete scene.second;
+    }
+
     SceneManager* SceneManager::GetSceneManager() {
         if(sceneManager == nullptr)
             sceneManager = new SceneManager();
@@ -18,8 +25,10 @@ namespace Core {
 
     void SceneManager::loadScene(const std::string& sceneName) {
         auto sceneIt = _scenes.find(sceneName);
-        if (sceneIt != _scenes.end())
+        if (sceneIt != _scenes.end()){
+            delete _currentScene;
             _currentScene = new Scene(*sceneIt->second);
+        }
         // TODO maybe throw exception for not finding the scene?
     }
 
