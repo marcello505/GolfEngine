@@ -5,6 +5,8 @@
 #ifndef SPC_PROJECT_SPRITERENDERSHAPE_H
 #define SPC_PROJECT_SPRITERENDERSHAPE_H
 
+#include <string>
+
 #include "RenderShape.h"
 #include "../Rect2.h"
 #include "../Color.h"

@@ -16,8 +16,8 @@ private:
     std::map<std::string, Action> _actions;
     std::map<InputKey, std::vector<Action>> _inputKeys;
     Vector2 mousePosition;
-    void update();
 public:
+    void update();
     void addAction(const std::string& name);
     void addInputKeyToAction(const std::string& action, InputKey inputKey);
     bool isJustPressed(const std::string& action) const;

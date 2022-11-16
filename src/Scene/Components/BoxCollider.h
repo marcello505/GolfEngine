@@ -10,13 +10,23 @@
 class BoxCollider : public Collider {
 public:
     explicit BoxCollider(const Vector2& vec2) : _shapeExtents{vec2} {};
-    void onStart() override;
-    void onUpdate() override;
-    void onRemove() override;
     ColliderShapes getColliderShape() override;
     const Vector2& getShapeExtents() const;
 
+    // Component overrides
+    void onStart() override;
+    void onUpdate() override;
+    void onRemove() override;
+    Component* clone() const override;
+    bool getActive() override;
+    void setActive(bool active) override;
+    void setParentGameObject(GameObject* gameObject) override;
+
+    //Drawable overrides
+    RenderShape* getRenderShape() override;
+
 private:
+    GameObject* _parent;
     Vector2 _shapeExtents;
 };
 

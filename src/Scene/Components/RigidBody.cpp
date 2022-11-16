@@ -31,3 +31,23 @@ std::vector<Collider*> RigidBody::getColliders() const {
 
     return result;
 }
+
+bool RigidBody::getActive() {
+    return false;
+}
+
+void RigidBody::setActive(bool active) {
+
+}
+
+void RigidBody::setParentGameObject(GameObject* gameObject) {
+    _parent = gameObject;
+}
+
+Component* RigidBody::clone() const {
+    return new RigidBody{*this};
+}
+
+GameObject* RigidBody::getParentGameObject() const {
+    return _parent;
+}

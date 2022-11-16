@@ -36,13 +36,19 @@ public:
     void onStart() override;
     void onUpdate() override;
     void onRemove() override;
+    bool getActive() override;
+    void setActive(bool active) override;
+    void setParentGameObject(GameObject* gameObject) override;
+    Component* clone() const override;
 
     //Getters
     const RigidBodyDef& getRigidBodyDef() const;
     std::vector<Collider*> getColliders() const;
+    GameObject* getParentGameObject() const;
 
 
 private:
+    GameObject* _parent;
     RigidBodyDef _rigidBodyDef;
 };
 

@@ -182,3 +182,29 @@ void GameObject::removeComponent(Component& component) {
         _components->erase(it);
     }
 }
+
+const Transform& GameObject::getLocalTransform() const {
+    return _localTransform;
+}
+
+void GameObject::setLocalTransform(const Transform& rTransform) {
+    _localTransform = rTransform;
+}
+
+Transform GameObject::getWorldTransform() const {
+    Transform result {};
+
+    if(_parent != nullptr){
+        result += _parent->getWorldTransform();
+    }
+    result += _localTransform;
+
+    return result;
+}
+
+void GameObject::setWorldTransform(const Transform& rTransform) {
+    Transform worldTransform = getWorldTransform();
+    Transform worldAndLocalDiff = worldTransform - getLocalTransform();
+
+    setLocalTransform(rTransform - worldAndLocalDiff);
+}

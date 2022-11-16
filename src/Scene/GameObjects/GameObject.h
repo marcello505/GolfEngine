@@ -7,6 +7,7 @@
 
 #include <string>
 #include <vector>
+#include "../Transform.h"
 #include "../Components/Component.h"
 #include "../Scene.h"
 #include <algorithm>
@@ -22,6 +23,7 @@ private:
     GameObject* _parent;
     std::vector<GameObject*> _children;
     std::vector<Component*>* _components;
+    Transform _localTransform {};
 public:
     std::string name;
     std::string tag;
@@ -84,6 +86,18 @@ public:
     std::vector<GameObject*>& children();
     GameObject* childAt(int index);
     [[nodiscard]] GameObject& parent() const;
+
+    /// Return the local transform
+    /// \return const Transform reference to the local transform
+    const Transform& getLocalTransform() const;
+    void setLocalTransform(const Transform& rTransform);
+    /// Calculates the current world transform and returns it
+    /// \return A Transform instance which is the current world transform
+    Transform getWorldTransform() const;
+
+    /// Sets the current local transform so that it matches the given world transform
+    /// \param rTransform the world transform that should be set
+    void setWorldTransform(const Transform& rTransform);
 };
 
 

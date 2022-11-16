@@ -13,6 +13,7 @@ namespace GameLoopTests{
                 gameLoop->stop();
             }
         }
+        bool hasRecievedQuitSignal() override{ return false; };
 
         //Fields
         int callCount {0};
@@ -59,7 +60,7 @@ namespace GameLoopTests{
         GameLoop* gameLoop {nullptr};
 
         //Methods
-        void update() override {
+        void update(GameTic timeStep) override {
             auto current = std::chrono::steady_clock::now();
             auto elapsed = current - previous;
             previous = current;

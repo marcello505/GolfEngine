@@ -2,13 +2,12 @@
 // Created by conner on 11/2/2022.
 //
 
+#include <cmath>
 #include "Box2DPhysicsService.h"
 #include "Scene/Components/BoxCollider.h"
 
-namespace GolfEngine::Services::Physics{
-    Box2DPhysicsService::Box2DPhysicsService() {
-    }
 
+namespace GolfEngine::Services::Physics{
     void Box2DPhysicsService::addRigidBody(RigidBody* pRigidBody) {
         // * Error Handling *
         // Check for nullptr
@@ -16,6 +15,7 @@ namespace GolfEngine::Services::Physics{
             return;
         }
 
+        Transform worldTransform {};
         auto& rigidDef = pRigidBody->getRigidBodyDef();
         b2Body* pBody;
 
@@ -41,7 +41,13 @@ namespace GolfEngine::Services::Physics{
             bodyDef.angularDamping = rigidDef.angularDamping;
             bodyDef.fixedRotation = rigidDef.fixedRotation;
             bodyDef.gravityScale = rigidDef.gravityScale;
-            //TODO add position
+
+            GameObject* parentGameObject = pRigidBody->getParentGameObject();
+            if(parentGameObject != nullptr){
+                worldTransform = parentGameObject->getWorldTransform();
+                bodyDef.position = {worldTransform.position.x / PhysicsSpaceToWorldSpace, worldTransform.position.y / PhysicsSpaceToWorldSpace};
+                bodyDef.angle = worldTransform.rotation * (M_PI / 180.0f);
+            }
             //bodyDef.position = pRigidBody->getPosition()
             pBody = _world.CreateBody(&bodyDef);
         }
@@ -60,7 +66,7 @@ namespace GolfEngine::Services::Physics{
                 case ColliderShapes::Box:
                     auto* boxItem = (BoxCollider*)item;
                     auto extents = boxItem->getShapeExtents();
-                    box.SetAsBox(extents.x / _physicsSpace2WorldSpace, extents.y / _physicsSpace2WorldSpace);
+                    box.SetAsBox(extents.x / PhysicsSpaceToWorldSpace * worldTransform.scale.x, extents.y / PhysicsSpaceToWorldSpace * worldTransform.scale.y);
                     fixtureDef.shape = &box;
                     break;
             }
@@ -79,7 +85,27 @@ namespace GolfEngine::Services::Physics{
 
     }
 
-    void Box2DPhysicsService::update() {
+    void Box2DPhysicsService::update(GameTic timeStep) {
+        // Advance Physics World
+        _world.Step(timeStep, _velocityIterations, _positionIterations);
+
+        // Update Rigidbodies
+        for(auto item = _rigidBodies.begin(); item != _rigidBodies.end(); ++item){
+            b2Body* body = item->second;
+            GameObject* parent = item->first->getParentGameObject();
+
+            //Update position and rotation
+            if(parent != nullptr){
+                auto& position = body->GetPosition();
+                float rotation = body->GetAngle() * (M_PI / 180.0f);
+                parent->setWorldTransform({
+                    {position.x, position.y},
+                    rotation,
+                    {1.f, 1.f}
+                });
+            }
+        }
+
     }
 
     void Box2DPhysicsService::setGravity(const Vector2& vec2) {
