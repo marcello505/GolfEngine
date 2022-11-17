@@ -37,9 +37,11 @@ namespace GolfEngine::Services::Physics{
         // RigidBody specific methods
         void applyForceToCenter(RigidBody* pRigidBody, const Vector2& force) override;
         void setTransform(RigidBody* pRigidBody, const Transform& transform) override;
+        void setEnabled(RigidBody* pRigidBody, bool enabled) override;
 
         // Methods for testing
         int getBodyCount() const;
+        int getFixtureCount() const;
     private:
         // Fields
         /// Start the box2d world with (0.0, 0.0) gravity

@@ -5,6 +5,7 @@
 #include <cmath>
 #include "Box2DPhysicsService.h"
 #include "Scene/Components/BoxCollider.h"
+#include "Scene/Components/CircleCollider.h"
 
 
 namespace GolfEngine::Services::Physics{
@@ -71,14 +72,25 @@ namespace GolfEngine::Services::Physics{
             fixtureDef.density = rigidDef.density;
 
             b2PolygonShape box {};
+            b2CircleShape circle {};
 
             switch(item->getColliderShape()){
+                case ColliderShapes::Circle:
+                {
+                    auto* circleItem = (CircleCollider*)item;
+                    auto radius = circleItem->getRadius();
+                    circle.m_radius = radius / PhysicsSpaceToWorldSpace;
+                    fixtureDef.shape = &circle;
+                    break;
+                }
                 case ColliderShapes::Box:
+                {
                     auto* boxItem = (BoxCollider*)item;
                     auto extents = boxItem->getShapeExtents();
                     box.SetAsBox(extents.x / PhysicsSpaceToWorldSpace * worldTransform.scale.x, extents.y / PhysicsSpaceToWorldSpace * worldTransform.scale.y);
                     fixtureDef.shape = &box;
                     break;
+                }
             }
 
             pBody->CreateFixture(&fixtureDef);
@@ -156,6 +168,29 @@ namespace GolfEngine::Services::Physics{
             float angle = deg2Rad(transform.rotation);
             body.value()->SetTransform(b2Position, angle);
         }
+    }
+
+    void Box2DPhysicsService::setEnabled(RigidBody* pRigidBody, bool enabled) {
+        auto body = getB2Body(pRigidBody);
+        if(body){
+            body.value()->SetEnabled(enabled);
+        }
+
+    }
+
+    int Box2DPhysicsService::getFixtureCount() const {
+        int total {};
+
+        const b2Body* bodyList = _world.GetBodyList();
+        while (bodyList != nullptr){
+            const b2Fixture* fixtureList = bodyList->GetFixtureList();
+            while(fixtureList != nullptr){
+                total++;
+                fixtureList = fixtureList->GetNext();
+            }
+            bodyList = bodyList->GetNext();
+        }
+        return total;
     }
 }
 

@@ -79,6 +79,7 @@ namespace GameLoopTests{
         void setGravity(const Vector2& vec2) override {}
         void applyForceToCenter(RigidBody* pRigidBody, const Vector2& force) override {}
         void setTransform(RigidBody* pRigidBody, const Transform& transform) override {}
+        void setEnabled(RigidBody* pRigidBody, bool enabled) override {}
     };
 }
 

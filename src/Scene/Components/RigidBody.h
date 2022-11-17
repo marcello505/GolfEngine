@@ -53,6 +53,7 @@ public:
 
 
 private:
+    bool _active {true};
     GameObject* _parent {};
     RigidBodyDef _rigidBodyDef;
 };

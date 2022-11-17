@@ -1,6 +1,7 @@
 #include "../../Services/Singletons/PhysicsSingleton.h"
 #include "RigidBody.h"
 #include "BoxCollider.h"
+#include "CircleCollider.h"
 
 void RigidBody::onStart() {
     if(GolfEngine::Services::Physics::hasService()){
@@ -22,23 +23,30 @@ const RigidBodyDef& RigidBody::getRigidBodyDef() const {
     return _rigidBodyDef;
 }
 
-BoxCollider tmpRigidBodyBoxCollider {{10.f, 10.f}};
 std::vector<Collider*> RigidBody::getColliders() const {
-    //TODO replace this with actually getting the Colliders from GameObject
-
     std::vector<Collider*> result {};
-    result.push_back(&tmpRigidBodyBoxCollider);
+    if(_parent != nullptr){
+        //TODO make this so that multiple instances of the same type work?
+        auto* pBoxCollider = _parent->getComponent<BoxCollider>();
+        auto* pCircleCollider = _parent->getComponent<CircleCollider>();
+
+        if(pBoxCollider != nullptr) result.push_back(pBoxCollider);
+        if(pCircleCollider != nullptr) result.push_back(pCircleCollider);
+    }
+
 
     return result;
 }
 
 bool RigidBody::getActive() {
-    //TODO fill this
-    return false;
+    return _active;
 }
 
 void RigidBody::setActive(bool active) {
-    //TODO enable/disable in the physics world
+    _active = active;
+    if(GolfEngine::Services::Physics::hasService()){
+        GolfEngine::Services::Physics::getService()->setEnabled(this, active);
+    }
 }
 
 void RigidBody::setParentGameObject(GameObject* gameObject) {

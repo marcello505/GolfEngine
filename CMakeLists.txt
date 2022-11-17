@@ -54,7 +54,7 @@ set(SCENE_SOURCES
         src/Scene/RenderShape/ParticleSystemRenderShape.cpp
         src/Scene/GameObjects/UIObject/Button.cpp
         src/Scene/Components/RigidBody.cpp
-        src/Scene/Components/BoxCollider.cpp)
+        src/Scene/Components/BoxCollider.cpp src/Scene/Components/CircleCollider.cpp)
 
 set(CORE_SOURCES
         src/Core/GameLoop.cpp
