@@ -20,7 +20,8 @@ public:
     Texture(Texture&& other) noexcept;
     Texture& operator-(Texture&& other);
 
-    bool loadFromFile(const std::string& path, SDL_Renderer& renderer);
+    bool loadFromFileSprite(const std::string& path, SDL_Renderer& renderer);
+    bool loadFromFileText(const std::string &path, std::string text, SDL_Renderer &renderer, size_t fontSize);
 
     void free();
     void setColor(Color color);
@@ -29,13 +30,17 @@ public:
 
     [[nodiscard]] int width() const;
     [[nodiscard]] int height() const;
+    [[nodiscard]] size_t fontSize() const;
     [[nodiscard]] SDL_Texture* texture() const;
 
-private:
+
+    private:
     SDL_Texture* _texture;
     int _width;
     int _height;
-};
+    size_t _fontSize;
+
+    };
 
 }
 

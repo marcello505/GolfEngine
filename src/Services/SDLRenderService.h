@@ -14,7 +14,7 @@
 #include "../Scene/RenderShape/LineRenderShape.h"
 #include "../Scene/RenderShape/SpriteRenderShape.h"
 #include "Render/Texture.h"
-#include "Scene/RenderShape/TextRenderShape.h"
+#include "../Scene/RenderShape/TextRenderShape.h"
 
 namespace GolfEngine::Services::Render {
 
@@ -67,6 +67,7 @@ private:
     std::vector<Drawable *> _drawables;
     std::map<std::string, Texture*> _cachedTextures;
 
+    Texture *loadText(const std::string &path, std::string text, size_t fontSize);
 };
 
 }

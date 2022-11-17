@@ -72,7 +72,7 @@ add_library(${PROJECT_NAME}
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} SDL2_mixer::SDL2_mixer)
 target_link_libraries(${PROJECT_NAME} SDL2_image::SDL2_image)
-#target_link_libraries(${PROJECT_NAME} SDL2_ttf::SDL2_ttf)
+target_link_libraries(${PROJECT_NAME} SDL2_ttf::SDL2_ttf)
 
 # Sub Projects
 add_subdirectory(tests)

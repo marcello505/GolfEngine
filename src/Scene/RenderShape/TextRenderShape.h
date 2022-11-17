@@ -11,18 +11,28 @@
 
 class TextRenderShape : public RenderShape {
 public:
-    TextRenderShape(Vector2 pos, std::string text,int fontSize, Color color);
+    TextRenderShape(Vector2 pos, float rotation, std::string text, size_t fontSize, Color color, std::string filePath);
     RenderShapeType getType() override;
     void applyTransform(const Transform& transform) override;
 
     // Getter
     [[nodiscard]] Vector2 position() const;
+    [[nodiscard]] float rotation() const;
     [[nodiscard]] std::string text() const;
     [[nodiscard]] Color color() const;
+    [[nodiscard]] std::string filePath() const;
+    [[nodiscard]] size_t fontSize() const;
+
+    int scale();
+
 private:
     Vector2 _position;
+    float _rotation;
     std::string _text;
     Color _color;
+    std::string _filePath;
+    size_t _fontSize;
+    Vector2 _initialPosition;
 };
 
 #endif //GOLFENGINE_TEXTRENDERSHAPE_H

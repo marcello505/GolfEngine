@@ -7,6 +7,7 @@
 #include <cmath>
 #include <iostream>
 #include <algorithm>
+#include <SDL_ttf.h>
 
 namespace GolfEngine::Services::Render {
 
@@ -21,6 +22,12 @@ namespace GolfEngine::Services::Render {
         if(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) < 0)
         {
             printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
+        }
+
+        //initialize TTF support
+        if(TTF_Init() == -1){
+            printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
+
         }
 
         // Create window and renderer
@@ -119,7 +126,7 @@ namespace GolfEngine::Services::Render {
                 case RenderShapeType::CircleShape:
                     break;
                 case RenderShapeType::TextRenderShape:
-                    renderText(reinterpret_cast<TextRenderShape &>(*renderShape))
+                    renderText(reinterpret_cast<TextRenderShape &>(*renderShape));
                 case RenderShapeType::ParticleSystemShape:
                     break;
             }
@@ -303,7 +310,7 @@ namespace GolfEngine::Services::Render {
         else{
             // Load new texture
             auto* newTexture = new Texture();
-            if(newTexture->loadFromFile(path, *_renderer)){
+            if(newTexture->loadFromFileSprite(path, *_renderer)){
                 _cachedTextures.insert({path, newTexture});
                 return newTexture;
             }
@@ -320,17 +327,36 @@ namespace GolfEngine::Services::Render {
     }
 
     void SDLRenderService::renderText(TextRenderShape &renderShape) {
-        TTF_Font* Sans = TTF_OpenFont("Sans.ttf", 24);
+        auto* texture {loadText(renderShape.filePath(), renderShape.text(), renderShape.fontSize())};
+        if(texture == nullptr) {return;}
 
-        // this is the color in rgb format,
-        // maxing out all would give you the color white,
-        // and it will be your text's color
-                SDL_Color White = {255, 255, 255};
 
-        // as TTF_RenderText_Solid could only be used on
-        // SDL_Surface then you have to create the surface first
-        SDL_Surface* surfaceMessage =
-                TTF_RenderText_Solid(Sans, "put your text here", White);
+
+        SDL_Rect dstRect;
+        dstRect.x = renderShape.position().x;
+        dstRect.y = renderShape.position().y;
+        dstRect.w = texture->width();
+        dstRect.h = texture->height();
+
+        SDL_RenderCopyEx(_renderer, texture->texture(), nullptr, &dstRect, renderShape.rotation(), nullptr, SDL_FLIP_NONE);
+    }
+
+
+    Texture* SDLRenderService::loadText(const std::string& path, std::string text , size_t fontSize) {
+        auto cachedTexture = _cachedTextures.find(path);
+        if(cachedTexture != _cachedTextures.end() && cachedTexture->second->fontSize() == fontSize){
+            // Use existing texture
+            return cachedTexture->second;
+        }
+        else{
+            // Load new texture
+            auto* newTexture = new Texture();
+            if(newTexture->loadFromFileText(path, text ,*_renderer, fontSize)){
+                _cachedTextures.insert({path, newTexture});
+                return newTexture;
+            }
+            return nullptr;
+        }
     }
 
 

@@ -9,7 +9,7 @@ set(TEST_SOURCES
         LibSDL2MixerTests.cpp
         LibSDL2Tests.cpp
         Core/GameLoopTests.cpp
-        SceneTests.cpp)
+        SceneTests.cpp libSDL2TtfTest.cpp)
 
 
 # Main Project
