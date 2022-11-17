@@ -12,7 +12,7 @@
 class SDLAudioService : public AudioService {
 public:
     SDLAudioService(int amountOfChannels);
-    void playOnChannel(int channel, const std::string& path, float volume) override;
+    void playOnChannel(int channel, const std::string& path) override;
     void preloadAudio(const char* path) override;
     void resumeAudio(int channel) override;
     void pauseAudio(int channel) override;

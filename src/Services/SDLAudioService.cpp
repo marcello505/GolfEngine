@@ -8,7 +8,6 @@
 SDLAudioService::SDLAudioService(int amountOfChannels)
 {
     _amountOfChannels = amountOfChannels;
-    bool m_SoundInitilized = false;
     int audio_rate = 22050;
     Uint16 audio_format = AUDIO_S16SYS;
     int audio_channels = _amountOfChannels;
@@ -19,16 +18,11 @@ SDLAudioService::SDLAudioService(int amountOfChannels)
         std::cout << "Couldn't init audio: %s", Mix_GetError();
         exit(-1);
     }
-    else
-    {
-        m_SoundInitilized = true;
-    }
 
 }
 
-void SDLAudioService::playOnChannel(int channel, const std::string &path, float volume)
+void SDLAudioService::playOnChannel(int channel, const std::string &path)
 {
-    setVolumeChannel(channel, volume);
     if (!(_soundEffects.count(path)) > 0 && channelExists(channel))
     {
         std::cout << "Sound or channel doesnt exist.\n";
@@ -88,6 +82,8 @@ void SDLAudioService::setGlobalVolume(float volume)
 
 void SDLAudioService::clearAudio()
 {
+    _soundEffects.clear();
+    _music.clear();
 }
 
 bool SDLAudioService::channelExists(int channel)

@@ -9,7 +9,7 @@
 
 class AudioService{
 public:
-    virtual void playOnChannel(int channel, const std::string& path, float volume) = 0;
+    virtual void playOnChannel(int channel, const std::string& path) = 0;
     virtual void preloadAudio(const char* path) = 0;
     virtual void resumeAudio(int channel) = 0;
     virtual void pauseAudio(int channel) = 0;
