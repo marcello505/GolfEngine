@@ -8,12 +8,12 @@
 SDLAudioService::SDLAudioService(int amountOfChannels)
 {
     _amountOfChannels = amountOfChannels;
-    int audio_rate = 22050;
-    Uint16 audio_format = AUDIO_S16SYS;
-    int audio_channels = _amountOfChannels;
-    int audio_buffers = 4096;
+    int frequency = 22050; //frequency
+    Uint16 audio_format = AUDIO_S16SYS ; //format
+    int audio_channels = _amountOfChannels; //channels for use
+    int chunk_size = 4096; //chunksize
 
-    if (Mix_OpenAudio(audio_rate, audio_format, audio_channels, audio_buffers) != 0)
+    if (Mix_OpenAudio(frequency, audio_format, audio_channels, chunk_size) != 0) //Open the default audio device for playback
     {
         std::cout << "Couldn't init audio: %s", Mix_GetError();
         exit(-1);
@@ -21,23 +21,24 @@ SDLAudioService::SDLAudioService(int amountOfChannels)
 
 }
 
-void SDLAudioService::playOnChannel(int channel, const std::string &path)
+void SDLAudioService::playOnChannel(int channel, const std::string &path, float volume)
 {
-    if (!(_soundEffects.count(path)) > 0 && channelExists(channel))
+    if (!(_sounds.count(path)) > 0 && channelExists(channel)) //check if chunk and sound exist
     {
         std::cout << "Sound or channel doesnt exist.\n";
         return;
     }
-    Mix_PlayChannel(channel, _soundEffects.find(path)->second, 0);
+    Mix_VolumeChunk(_sounds.find(path)->second, volume); // set volume of chunk
+    Mix_PlayChannel(channel, _sounds.find(path)->second, 0); // play chunk on channel, without loop
 }
 
 void SDLAudioService::preloadAudio(const char* path)
 {
-    Mix_Chunk* tmpChunk = Mix_LoadWAV(path);
+    Mix_Chunk* tmpChunk = Mix_LoadWAV(path); // load in chunk with path
 
-    if (tmpChunk != nullptr)
+    if (tmpChunk != nullptr) //if chunk is made succesfully
     {
-        _soundEffects.insert(std::pair<std::string, Mix_Chunk*>(path, tmpChunk));
+        _sounds.insert(std::pair<std::string, Mix_Chunk*>(path, tmpChunk));  // insert chunk into list
         std::cout << " Sound is Ready, path: " << path << '\n';
     }
     else
@@ -48,45 +49,44 @@ void SDLAudioService::preloadAudio(const char* path)
 
 void SDLAudioService::resumeAudio(int channel)
 {
-    if(channelExists(channel)){
-        Mix_Resume(channel);
+    if(channelExists(channel)){ // if channel exists
+        Mix_Resume(channel); // resume audio
     }
-
 }
 
 void SDLAudioService::pauseAudio(int channel)
 {
-    if(channelExists(channel)) {
-        Mix_Pause(channel);
+    if(channelExists(channel)) { // if channel exists
+        Mix_Pause(channel); // pause audio
     }
 }
 
 void SDLAudioService::haltAudio(int channel)
 {
-    if(channelExists(channel)) {
-        Mix_HaltChannel(channel);
+    if(channelExists(channel)) { // if channel exists
+        Mix_HaltChannel(channel); // halt audio
     }
 }
 
 void SDLAudioService::setVolumeChannel(int channel, float volume)
 {
-    if(channelExists(channel)) {
-        Mix_Volume(channel, volume);
+    if(channelExists(channel)) // if channel exists
+    {
+        Mix_Volume(channel, volume); // set volume of channel
     }
 }
 
 void SDLAudioService::setGlobalVolume(float volume)
 {
-    Mix_Volume(-1, volume);
+    Mix_Volume(-1, volume); // set global volume
 }
 
 void SDLAudioService::clearAudio()
 {
-    _soundEffects.clear();
-    _music.clear();
+    _sounds.clear(); // clear audiolist
 }
 
 bool SDLAudioService::channelExists(int channel)
 {
-    return channel > -1 && channel < _amountOfChannels;
+    return channel > -1 && channel < _amountOfChannels; // channel is in range between 0 and amount of channels
 }

@@ -3,27 +3,38 @@
 #include <iostream>
 #include <vector>
 #include "Services/SDLAudioService.h"
+#include <filesystem>
 
-bool running = true;
-bool paused = false;
-std::vector<int> channelVolumes {10, 10, 10, 10};
-float globalVolume = 10;
+bool running = true; // outer loop input
+bool paused = false; // for pause/resume toggle
+std::vector<float> channelVolumes {50, 50, 50, 50}; // storage for channel volumes
+float globalVolume = 80; // global volume
 void getInput(SDLAudioService *audioService);
+
+// asset paths
+const char* gunCockingPath = R"(..\..\..\validation\US12_AudioService\resources\gun-cocking-01.wav)";
+const char* shortShotPath = R"(..\..\..\validation\US12_AudioService\resources\short-shot.wav)";
+const char* grenadePath = R"(..\..\..\validation\US12_AudioService\resources\grenade.mp3)";
+const char* mgsThemePath = R"(..\..\..\validation\US12_AudioService\resources\mgs-theme.mp3)";
 
 int main(int argc, char* argv[])
 {
+    // instantiate sdl window for catching events
     SDL_Window* window = nullptr;
 
+    // instantiate audioservice
     std::unique_ptr<SDLAudioService>_audioService(new SDLAudioService(3));
-    _audioService->setVolumeChannel(0, channelVolumes[0]);
-    _audioService->setVolumeChannel(1, channelVolumes[1]);
-    _audioService->setVolumeChannel(2, channelVolumes[2]);
-    _audioService->setVolumeChannel(3, channelVolumes[3]);
-    _audioService->preloadAudio("D:/GitHub/SPC-Project/validation/US12_AudioService/resources/gun-cocking-01.wav");
-    _audioService->preloadAudio("D:/GitHub/SPC-Project/validation/US12_AudioService/resources/short-shot.wav");
-    _audioService->preloadAudio("D:/GitHub/SPC-Project/validation/US12_AudioService/resources/grenade.mp3");
-    _audioService->preloadAudio("D:/GitHub/SPC-Project/validation/US12_AudioService/resources/mgs-theme.mp3");
-    _audioService->playOnChannel(0, "D:/GitHub/SPC-Project/validation/US12_AudioService/resources/mgs-theme.mp3");
+
+    std::filesystem::current_path();
+
+    //setup audio sources
+    _audioService->preloadAudio(gunCockingPath);
+    _audioService->preloadAudio(shortShotPath);
+    _audioService->preloadAudio(grenadePath);
+    _audioService->preloadAudio(mgsThemePath);
+
+    //play music on start
+    _audioService->playOnChannel(0, mgsThemePath, 80);
 
     // initialize video
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -38,6 +49,8 @@ int main(int argc, char* argv[])
     while(running) {
         getInput(_audioService.get());
     }
+
+    //cleanup
     SDL_DestroyWindow(window);
     _audioService->clearAudio();
     return 0;
@@ -45,25 +58,21 @@ int main(int argc, char* argv[])
 
 void getInput(SDLAudioService *audioService) {
     SDL_Event e;
-    while(SDL_PollEvent(&e)) {
-        if(e.type == SDL_QUIT) {
+    while(SDL_PollEvent(&e)) { //catch input events
+        if(e.type == SDL_QUIT) { // for closing window
             running = false;
         }
         else if(e.type == SDL_KEYDOWN){
-            if(e.key.keysym.sym == SDLK_LEFT){
-
-                audioService->playOnChannel(1, "D:/GitHub/SPC-Project/validation/US12_AudioService/"
-                                                "resources/gun-cocking-01.wav");
+            if(e.key.keysym.sym == SDLK_LEFT){ // for playing a sound
+                audioService->playOnChannel(1, gunCockingPath, 100);
             }
-            else if(e.key.keysym.sym == SDLK_RIGHT){
-                audioService->playOnChannel(2, "D:/GitHub/SPC-Project/validation/US12_AudioService/"
-                                               "resources/short-shot.wav");
+            else if(e.key.keysym.sym == SDLK_RIGHT){ // for playing a sound
+                audioService->playOnChannel(2, shortShotPath, 100);
             }
-            else if(e.key.keysym.sym == SDLK_UP){
-                audioService->playOnChannel(3, "D:/GitHub/SPC-Project/validation/US12_AudioService/"
-                                               "resources/grenade.mp3");
+            else if(e.key.keysym.sym == SDLK_UP){ //for playing a sound
+                audioService->playOnChannel(3, grenadePath, 100);
             }
-            else if(e.key.keysym.sym == SDLK_DOWN){
+            else if(e.key.keysym.sym == SDLK_DOWN){ // for toggling pause / resuming of audio
                 paused = !paused;
                 if(paused)
                 {
@@ -72,27 +81,27 @@ void getInput(SDLAudioService *audioService) {
                 }
                 audioService->resumeAudio(0);
             }
-            else if(e.key.keysym.sym == SDLK_KP_ENTER){
+            else if(e.key.keysym.sym == SDLK_KP_ENTER){ // for halting audio
                 audioService->haltAudio(0);
             }
-            else if(e.key.keysym.sym == SDLK_LEFTBRACKET){
+            else if(e.key.keysym.sym == SDLK_LEFTBRACKET){ // for setting volume of channel down
                 channelVolumes[2] -= 1;
                 audioService->setVolumeChannel(2,  channelVolumes[2]);
             }
-            else if(e.key.keysym.sym == SDLK_RIGHTBRACKET){
+            else if(e.key.keysym.sym == SDLK_RIGHTBRACKET){ // for setting volume of channel up
                 channelVolumes[2] += 1;
-                audioService->setVolumeChannel(2,  channelVolumes[2]);
+                audioService->setVolumeChannel(2, channelVolumes[2]);
             }
-            else if(e.key.keysym.sym == SDLK_BACKSLASH){
+            else if(e.key.keysym.sym == SDLK_BACKSLASH){ // for setting global volume down
                 globalVolume -= 1;
                 audioService->setGlobalVolume(globalVolume);
             }
-            else if(e.key.keysym.sym == SDLK_SLASH){
+            else if(e.key.keysym.sym == SDLK_SLASH){ // for setting global volume up
                 globalVolume += 1;
                 audioService->setGlobalVolume(globalVolume);
             }
-            else if(e.key.keysym.sym == SDLK_KP_3){
-                audioService->playOnChannel(0, "D:/GitHub/SPC-Project/validation/US12_AudioService/resources/mgs-theme.mp3");
+            else if(e.key.keysym.sym == SDLK_KP_3){ // for playing sound after halt
+                audioService->playOnChannel(0, mgsThemePath, 80);
             }
         }
     }
