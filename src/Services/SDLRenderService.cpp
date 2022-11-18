@@ -3,7 +3,6 @@
 //
 
 #include "SDLRenderService.h"
-#include "../Scene/RenderShape/CircleRenderShape.h"
 #include <cmath>
 #include <iostream>
 #include <algorithm>

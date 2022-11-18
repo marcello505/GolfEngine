@@ -27,7 +27,8 @@ Color RectRenderShape::color() const {
 
 void RectRenderShape::applyTransform(const Transform& transform) {
     _rect.position.x = _initialPosition.x + transform.position.x;
-    _rect.position.y = _initialPosition.y + transform.position.y;    _rotation = transform.rotation;
+    _rect.position.y = _initialPosition.y + transform.position.y;
+    _rotation = transform.rotation;
     _rect.size.x = _initialSize.x * transform.scale.x;
     _rect.size.y = _initialSize.y * transform.scale.y;
     _pivotPoint.x = _initialPivotPoint.x * transform.scale.x;
