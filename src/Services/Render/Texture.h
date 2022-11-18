@@ -21,7 +21,6 @@ public:
     Texture& operator-(Texture&& other);
 
     bool loadFromFileSprite(const std::string& path, SDL_Renderer& renderer);
-    bool loadFromFileText(const std::string &path, std::string text, SDL_Renderer &renderer, size_t fontSize);
 
     void free();
     void setColor(Color color);
@@ -38,7 +37,6 @@ public:
     SDL_Texture* _texture;
     int _width;
     int _height;
-    size_t _fontSize;
 
     };
 

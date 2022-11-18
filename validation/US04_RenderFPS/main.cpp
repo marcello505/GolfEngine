@@ -14,25 +14,26 @@ bool running = true;
 void input();
 TextDrawable* text;
 TextDrawable* text2;
+RenderService* rs;
 
 int main(int argc, char* argv[])
 {
 
     GameLoop gl = GameLoop();
     gl.setRenderService(new GolfEngine::Services::Render::SDLRenderService());
-    RenderService* rs = GolfEngine::Services::Render::getService();
+    rs  = GolfEngine::Services::Render::getService();
     auto *rect = new RectDrawable(Rect2(Vector2(0, 0), Vector2(100, 100)),
                                           Transform(Vector2(200, 200), 0, Vector2(1, 1)),
                                           Vector2(50, 75),
                                           Color(255, 0, 0));
 
 
-    text= new TextDrawable(Vector2(0,0),
+    text = new TextDrawable(Vector2(0,0),
                                  Transform(Vector2(0,0), 45,Vector2(1,1)  ), "Dit is SDL_rendered text", 20 ,Color(), R"(..\..\..\validation\US04_RenderFPS\files\roman.ttf)" );
 
 
     text2= new TextDrawable(Vector2(50,50),
-                                 Transform(Vector2(0,0), 0,Vector2(1,1)  ), "Dit is SDL_rendered text", 50 ,Color(), R"(..\..\..\validation\US04_RenderFPS\files\roman.ttf)" );
+                                 Transform(Vector2(0,0), 45,Vector2(1,1)  ), "Dit is SDL_rendered text", 50 ,Color(), R"(..\..\..\validation\US04_RenderFPS\files\roman.ttf)" );
 
 //    rs->addDrawable(rect);
     rs->addDrawable(text);
@@ -42,6 +43,7 @@ int main(int argc, char* argv[])
     while(running){
         input();
         rs->render();
+
     }
 
     return 0;
@@ -74,6 +76,23 @@ void input(){
             }
             else if(e.key.keysym.sym == SDLK_DOWN){
                 text->move(0, 10);
+            }
+            else if(e.key.keysym.sym == SDLK_t){
+        rs->removeDrawable(text);
+
+
+                text = new TextDrawable(Vector2(100,100),
+                                       Transform(Vector2(0,0), 0,Vector2(1,1)  ), "Dit is nieuwe tekst", 20 ,Color(), R"(..\..\..\validation\US04_RenderFPS\files\roman.ttf)" );
+
+                rs->addDrawable(text);
+            }
+            else if(e.key.keysym.sym == SDLK_y){
+                rs->removeDrawable(text);
+
+                text = new TextDrawable(Vector2(100,100),
+                                        Transform(Vector2(0,0), 0,Vector2(1,1)  ), "Dit is SDL_rendered text", 20 ,Color(), R"(..\..\..\validation\US04_RenderFPS\files\roman.ttf)" );
+                rs->addDrawable(text);
+
             }
 
         }

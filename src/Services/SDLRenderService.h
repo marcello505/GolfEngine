@@ -10,6 +10,7 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <SDL_ttf.h>
 #include "../Scene/RenderShape/RectRenderShape.h"
 #include "../Scene/RenderShape/LineRenderShape.h"
 #include "../Scene/RenderShape/SpriteRenderShape.h"
@@ -66,8 +67,13 @@ private:
     SDL_Renderer *_renderer;
     std::vector<Drawable *> _drawables;
     std::map<std::string, Texture*> _cachedTextures;
+    std::map<std::string, std::pair<size_t , TTF_Font*>> _cachedFonts;
 
-    Texture *loadText(const std::string &path, std::string text, size_t fontSize);
+    TTF_Font * loadText(const std::string &path, size_t fontSize);
+
+    void clearFontCache();
+
+    bool drawFont(TTF_Font *pFont);
 };
 
 }

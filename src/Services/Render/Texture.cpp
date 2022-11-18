@@ -60,34 +60,6 @@ namespace GolfEngine::Services::Render {
         return true;
     }
 
-    bool Texture::loadFromFileText(const std::string& path, std::string text, SDL_Renderer& renderer, size_t fontSize) {
-        TTF_Font* font = TTF_OpenFont(path.c_str(), fontSize);
-        if(!font) {
-            printf("Unable to font image %s, Error: %s\n", path.c_str(), TTF_GetError());
-            return false;
-        }
-
-        // TODO add COLOR
-        SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), {255, 255, 255});
-        if(surface == nullptr){
-            printf("Unable to load image %s, Error: %s\n", path.c_str(), IMG_GetError());
-            return false;
-        }
-        _width = surface->w;
-        _height = surface->h;
-        _fontSize =fontSize;
-        // Create texture from surface
-        _texture = SDL_CreateTextureFromSurface(&renderer, surface);
-        // Free surface memory
-        SDL_FreeSurface(surface);
-        if(_texture == nullptr){
-            printf("Unable to create texture from %s, Error: %s\n", path.c_str(), SDL_GetError());
-            return false;
-        }
-
-        return true;
-    }
-
     void Texture::free() {
         SDL_DestroyTexture(_texture);
     }
@@ -111,9 +83,4 @@ namespace GolfEngine::Services::Render {
     void Texture::setBlendMode(SDL_BlendMode blending) {
         SDL_SetTextureBlendMode(_texture, blending);
     }
-
-    size_t Texture::fontSize() const {
-        return _fontSize;
-    }
-
 }

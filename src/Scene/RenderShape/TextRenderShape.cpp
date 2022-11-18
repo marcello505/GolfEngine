@@ -13,6 +13,10 @@ RenderShapeType TextRenderShape::getType() {
     return RenderShapeType::TextRenderShape;
 }
 
+void TextRenderShape::setText(std::string &text) {
+    _text = text;
+}
+
 void TextRenderShape::applyTransform(const Transform &transform) {
     _position.x = _initialPosition.x + transform.position.x;
     _position.y = _initialPosition.y + transform.position.y;
@@ -42,3 +46,5 @@ Color TextRenderShape::color() const {
 std::string TextRenderShape::filePath() const {
     return _filePath;
 }
+
+
