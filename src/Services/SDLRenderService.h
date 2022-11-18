@@ -14,6 +14,7 @@
 #include "../Scene/RenderShape/RectRenderShape.h"
 #include "../Scene/RenderShape/LineRenderShape.h"
 #include "../Scene/RenderShape/SpriteRenderShape.h"
+#include "../Scene/RenderShape/CircleRenderShape.h"
 #include "Render/Texture.h"
 #include "../Scene/RenderShape/TextRenderShape.h"
 
@@ -33,6 +34,7 @@ public:
     /// Adds a drawable to the list of registered drawables
     /// \param drawable to be added
     void addDrawable(Drawable *drawable) override;
+
     /// Removes a drawable from the list of registered drawables
     /// \param drawable to be removed
     void removeDrawable(Drawable *drawable) override;
@@ -44,6 +46,7 @@ public:
     /// \param width new width of window
     /// \param height new height of window
     void setScreenSize(int width, int height) override;
+
     /// Sets the window to fullscreen
     /// \param fullScreen true is fullscreen
     void setFullScreen(bool fullScreen) override;
@@ -56,9 +59,12 @@ private:
     void renderRect(RectRenderShape &renderShape);
     void renderLine(LineRenderShape &renderShape);
     void renderText(TextRenderShape &renderShape);
+    void renderCircle(CircleRenderShape &renderShape);
+
     Texture* loadSprite(const std::string& path);
     void renderSprite(SpriteRenderShape &renderShape);
     void clearTextureCache();
+    void clearFontCache();
 
     int _screenSizeWidth;
     int _screenSizeHeight;
@@ -71,9 +77,8 @@ private:
 
     TTF_Font * loadText(const std::string &path, size_t fontSize);
 
-    void clearFontCache();
-
     bool drawFont(TTF_Font *pFont);
+
 };
 
 }

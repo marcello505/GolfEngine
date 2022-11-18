@@ -40,6 +40,10 @@ namespace GolfEngine::Services::Render {
         SDL_ShowCursor(1); // 0 is disable cursor, 1 is enable
         SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY,
                     "2"); // Increases quality with the scaling of textures, 0 nothing, 1 linear filtering, 2 anisotropic filtering
+
+        //Makes alpha blending possible(used for opacity)
+        SDL_SetRenderDrawBlendMode(_renderer, SDL_BLENDMODE_BLEND);
+
     }
 
     SDLRenderService::~SDLRenderService() {
@@ -128,9 +132,11 @@ namespace GolfEngine::Services::Render {
                     renderSprite(reinterpret_cast<SpriteRenderShape &>(*renderShape));
                     break;
                 case RenderShapeType::CircleShape:
+                    renderCircle(reinterpret_cast<CircleRenderShape &>(*renderShape));
                     break;
                 case RenderShapeType::TextRenderShape:
                     renderText(reinterpret_cast<TextRenderShape &>(*renderShape));
+                    break;
                 case RenderShapeType::ParticleSystemShape:
                     break;
             }
@@ -167,7 +173,7 @@ namespace GolfEngine::Services::Render {
 
     void SDLRenderService::renderRect(RectRenderShape &renderShape) {
         // Set color
-        SDL_SetRenderDrawColor(_renderer, renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, 255);
+        SDL_SetRenderDrawColor(_renderer, renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, renderShape.color().a);
 
         float xPivot;
         float yPivot;
@@ -228,13 +234,56 @@ namespace GolfEngine::Services::Render {
 
     void SDLRenderService::renderLine(LineRenderShape &renderShape) {
         // Set color
-        SDL_SetRenderDrawColor(_renderer, renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, 255);
+        SDL_SetRenderDrawColor(_renderer, renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, renderShape.color().a);
 
         // Draw Line
         SDL_RenderDrawLineF(_renderer,
                             renderShape.positionA().x, renderShape.positionA().y,
                             renderShape.positionB().x, renderShape.positionB().y);
     }
+
+    void SDLRenderService::renderCircle(CircleRenderShape &renderShape) {
+        // Set color
+        SDL_SetRenderDrawColor(_renderer, renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, renderShape.color().a);
+
+        const int32_t diameter = (abs(renderShape.radius()) * 2);
+
+        int32_t x = (abs(renderShape.radius()) - 1);
+        int32_t y = 0;
+        int32_t tx = 1;
+        int32_t ty = 1;
+        int32_t error = (tx - diameter);
+
+
+
+        while (x >= y)
+        {
+            //  Each of the following renders an octant of the circle
+            SDL_RenderDrawPoint(_renderer, renderShape.position().x + x, renderShape.position().y + y);
+            SDL_RenderDrawPoint(_renderer, renderShape.position().x + x, renderShape.position().y - y);
+            SDL_RenderDrawPoint(_renderer, renderShape.position().x - x, renderShape.position().y - y);
+            SDL_RenderDrawPoint(_renderer, renderShape.position().x - x, renderShape.position().y + y);
+            SDL_RenderDrawPoint(_renderer, renderShape.position().x + y, renderShape.position().y - x);
+            SDL_RenderDrawPoint(_renderer, renderShape.position().x + y, renderShape.position().y + x);
+            SDL_RenderDrawPoint(_renderer, renderShape.position().x - y, renderShape.position().y - x);
+            SDL_RenderDrawPoint(_renderer, renderShape.position().x - y, renderShape.position().y + x);
+
+            if (error <= 0)
+            {
+                ++y;
+                error += ty;
+                ty += 2;
+            }
+
+            if (error > 0)
+            {
+                --x;
+                tx += 2;
+                error += (tx - diameter);
+            }
+        }
+    }
+
 
     void SDLRenderService::renderSprite(SpriteRenderShape& renderShape) {
         // Load sprite
@@ -243,7 +292,7 @@ namespace GolfEngine::Services::Render {
 
         // Set color and blend mode
         texture->setColor(renderShape.color());
-        texture->setBlendMode(SDL_BLENDMODE_BLEND);
+        texture->setAlphaMod(renderShape.color().a);
 
         // Calculate desired width and height of sprite
         float dstWidth {(texture->width() * abs(renderShape.pixelScale().x))};
@@ -390,6 +439,5 @@ namespace GolfEngine::Services::Render {
     bool SDLRenderService::drawFont(TTF_Font *pFont) {
         return false;
     }
-
-
 }
+

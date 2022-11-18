@@ -25,7 +25,7 @@ public:
     void free();
     void setColor(Color color);
     void setBlendMode( SDL_BlendMode blending );
-//    void setAlpha( Uint8 alpha );
+    void setAlphaMod( Uint8 alpha );
 
     [[nodiscard]] int width() const;
     [[nodiscard]] int height() const;
