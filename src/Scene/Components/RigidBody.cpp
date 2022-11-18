@@ -72,3 +72,27 @@ void RigidBody::setTransform(const Transform& transform) {
         GolfEngine::Services::Physics::getService()->setTransform(this, transform);
     }
 }
+
+void RigidBody::setLinearDamping(float linearDamping) {
+    if(GolfEngine::Services::Physics::hasService()){
+        GolfEngine::Services::Physics::getService()->setLinearDamping(this, linearDamping);
+    }
+}
+
+void RigidBody::setAngularDamping(float angularDamping) {
+    if(GolfEngine::Services::Physics::hasService()){
+        GolfEngine::Services::Physics::getService()->setAngularDamping(this, angularDamping);
+    }
+}
+
+void RigidBody::setFixedRotation(bool fixedRotation) {
+    if(GolfEngine::Services::Physics::hasService()){
+        GolfEngine::Services::Physics::getService()->setFixedRotation(this, fixedRotation);
+    }
+}
+
+void RigidBody::setGravityScale(float gravityScale) {
+    if(GolfEngine::Services::Physics::hasService()){
+        GolfEngine::Services::Physics::getService()->setGravityScale(this, gravityScale);
+    }
+}

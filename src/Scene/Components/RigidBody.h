@@ -49,9 +49,10 @@ public:
     //Pass Through methods
     void applyForceToCenter(const Vector2& force);
     void setTransform(const Transform& transform);
-
-
-
+    void setLinearDamping(float linearDamping);
+    void setAngularDamping(float angularDamping);
+    void setFixedRotation(bool fixedRotation);
+    void setGravityScale(float gravityScale);
 private:
     bool _active {true};
     GameObject* _parent {};

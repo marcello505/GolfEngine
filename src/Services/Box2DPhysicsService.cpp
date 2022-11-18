@@ -192,5 +192,33 @@ namespace GolfEngine::Services::Physics{
         }
         return total;
     }
+
+    void Box2DPhysicsService::setLinearDamping(RigidBody* pRigidBody, float linearDamping) {
+        auto body = getB2Body(pRigidBody);
+        if(body){
+            body.value()->SetLinearDamping(linearDamping);
+        }
+    }
+
+    void Box2DPhysicsService::setAngularDamping(RigidBody* pRigidBody, float angularDamping) {
+        auto body = getB2Body(pRigidBody);
+        if(body){
+            body.value()->SetAngularDamping(angularDamping);
+        }
+    }
+
+    void Box2DPhysicsService::setFixedRotation(RigidBody* pRigidBody, bool fixedRotation) {
+        auto body = getB2Body(pRigidBody);
+        if(body){
+            body.value()->SetFixedRotation(fixedRotation);
+        }
+    }
+
+    void Box2DPhysicsService::setGravityScale(RigidBody* pRigidBody, float gravityScale) {
+        auto body = getB2Body(pRigidBody);
+        if(body){
+            body.value()->SetGravityScale(gravityScale);
+        }
+    }
 }
 

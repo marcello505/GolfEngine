@@ -80,6 +80,10 @@ namespace GameLoopTests{
         void applyForceToCenter(RigidBody* pRigidBody, const Vector2& force) override {}
         void setTransform(RigidBody* pRigidBody, const Transform& transform) override {}
         void setEnabled(RigidBody* pRigidBody, bool enabled) override {}
+        void setLinearDamping(RigidBody* pRigidBody, float linearDamping) override {}
+        void setAngularDamping(RigidBody* pRigidBody, float angularDamping) override {}
+        void setFixedRotation(RigidBody* pRigidBody, bool fixedRotation) override {}
+        void setGravityScale(RigidBody* pRigidBody, float gravityScale) override {}
     };
 }
 

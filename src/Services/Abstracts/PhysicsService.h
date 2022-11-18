@@ -20,6 +20,10 @@ public:
     virtual void applyForceToCenter(RigidBody* pRigidBody, const Vector2& force) = 0;
     virtual void setTransform(RigidBody* pRigidBody, const Transform& transform) = 0;
     virtual void setEnabled(RigidBody* pRigidBody, bool enabled) = 0;
+    virtual void setLinearDamping(RigidBody* pRigidBody, float linearDamping) = 0;
+    virtual void setAngularDamping(RigidBody* pRigidBody, float angularDamping) = 0;
+    virtual void setFixedRotation(RigidBody* pRigidBody, bool fixedRotation) = 0;
+    virtual void setGravityScale(RigidBody* pRigidBody, float gravityScale) = 0;
 };
 
 
