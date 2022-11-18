@@ -1,10 +1,8 @@
 #include "GameObject.h"
 #include <algorithm>
 
-GameObject::GameObject(Scene* scene, GameObject* parent, const char* name, const char* tag) : _scene{scene}, _active{true}, layer{0}, recordable{false},
-    name{name? name : ""}, tag{tag? tag : "default"}, _parent{parent? parent : scene->getRootGameObject()}, _components{new std::vector<Component*>{}} {
-    if(_parent != this && _parent != nullptr)
-        _parent->addChild(this);
+GameObject::GameObject(GameObject* parent, const char* name, const char* tag) :_active{true}, layer{0}, recordable{false},
+    name{name? name : ""}, tag{tag? tag : "default"}, _parent{parent}, _components{new std::vector<Component*>{}} {
 }
 
 GameObject::~GameObject() {
@@ -21,9 +19,9 @@ GameObject::~GameObject() {
 
     // Destroy and call destructor for all child game objects
     if(!_children.empty()){
-        for(auto* child : _children){
+        for(auto& child : _children){
             if(child){
-                delete child;
+                child.reset();
                 child = nullptr;
             }
         }
@@ -32,7 +30,6 @@ GameObject::~GameObject() {
 
 GameObject::GameObject(const GameObject& other){
     // copy primitives
-    _scene = other._scene;
     _parent = other._parent;
     _active = other._active;
     name = other.name;
@@ -50,7 +47,7 @@ GameObject::GameObject(const GameObject& other){
     // copy children game objects
     auto& childrenToCopy = other._children;
     for(auto& child : childrenToCopy){
-        _children.push_back(new GameObject(*child));
+        _children.push_back(std::make_unique<GameObject>(*child));
     }
 }
 
@@ -70,16 +67,15 @@ GameObject& GameObject::operator=(const GameObject& other){
 
         // Destroy all child game objects
         if(!_children.empty()){
-            for(auto* child : _children){
+            for(auto& child : _children){
                 if(child){
-                    delete child;
+                    child.reset();
                     child = nullptr;
                 }
             }
         }
 
         // copy primitives
-        _scene = other._scene;
         _parent = other._parent;
         _active = other._active;
         name = other.name;
@@ -97,7 +93,7 @@ GameObject& GameObject::operator=(const GameObject& other){
         // copy children game objects
         auto& childrenToCopy = other._children;
         for(auto& child : childrenToCopy){
-            _children.push_back(new GameObject(*child));
+            _children.push_back(std::make_unique<GameObject>(*child));
         }
     }
     return *this;
@@ -152,16 +148,29 @@ void GameObject::onUpdate() {
     }
 }
 
-void GameObject::addChild(GameObject* gameObject) {
-    _children.push_back(gameObject);
+GameObject* GameObject::createChildGameObject(GameObject& gameObject) {
+    _children.push_back(std::make_unique<GameObject>(gameObject));
+    auto* newGameObject {&_children.back()};
+    newGameObject->get()->_parent = this;
+
+    return newGameObject->get();
 }
 
-std::vector<GameObject*>& GameObject::children() {
+
+GameObject* GameObject::createChildGameObject(GameObject* gameObject) {
+    _children.push_back(std::make_unique<GameObject>(gameObject));
+    auto* newGameObject {&_children.back()};
+    newGameObject->get()->_parent = this;
+
+    return newGameObject->get();
+}
+
+std::vector<std::unique_ptr<GameObject>>& GameObject::children() {
     return _children;
 }
 
 GameObject* GameObject::childAt(int index) {
-    return _children.at(index);
+    return _children.at(index).get();
 }
 
 GameObject& GameObject::parent() const {

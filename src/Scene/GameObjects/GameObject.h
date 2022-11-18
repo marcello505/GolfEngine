@@ -18,9 +18,8 @@ class Component;
 class GameObject {
 private:
     bool _active;
-    Scene* _scene;
     GameObject* _parent;
-    std::vector<GameObject*> _children;
+    std::vector<std::unique_ptr<GameObject>> _children;
     std::vector<Component*>* _components;
 public:
     std::string name;
@@ -30,11 +29,11 @@ public:
 
 public:
     /// GameObject constructor
-    /// \param scene The scene the GameObject belongs to
+    /// \param scene The scene the GameObject belongs to, if nullptr this object will be seen as a prefab and developer is responsible for its deletion
     /// \param parent The parent of the GameObject (when nullptr, root GameObject of scene will become partner)
     /// \param name The name of the GameObject (nullptr is results in "")
     /// \param tag The tag of the GameObject (nullptr results in "default")
-    explicit GameObject(Scene* scene, GameObject* parent = nullptr, const char* name = nullptr, const char* tag = nullptr);
+    explicit GameObject(GameObject* parent = nullptr, const char* name = nullptr, const char* tag = nullptr);
     ~GameObject();
     explicit GameObject(const GameObject& other);
     GameObject& operator=(const GameObject& other);
@@ -80,8 +79,9 @@ public:
     void onStart();
     void onUpdate();
 
-    void addChild(GameObject* gameObject);
-    std::vector<GameObject*>& children();
+    GameObject* createChildGameObject(GameObject& gameObject);
+    GameObject* createChildGameObject(GameObject* gameObject);
+    std::vector<std::unique_ptr<GameObject>>& children();
     GameObject* childAt(int index);
     [[nodiscard]] GameObject& parent() const;
 };

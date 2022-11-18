@@ -66,7 +66,8 @@ TEST_CASE("SceneManger is able to delete Scene"){
 TEST_CASE("Scene is able to change root"){
     //Arrange
     auto* scene = new Scene();
-   auto* go = new GameObject{scene};
+    auto* go = new GameObject();
+
    go->name = "test";
    go->tag = "testTag";
 
@@ -84,10 +85,10 @@ TEST_CASE("Scene is able to change root"){
 TEST_CASE("Scene is able to load and copy more advanced Scene"){
     // Arrange
     auto* scene = Core::SceneManager::GetSceneManager()->createScene("main");
-    auto* go1 = new GameObject{scene};
+    auto* go1 = scene->createGameObject(new GameObject{});
     go1->addComponent<BehaviourScript>();
     go1->addComponent<SceneTests::DummyScript>();
-    auto* go2 = new GameObject{scene, go1};
+    auto* go2 = scene->createGameObject(new GameObject{}, go1);
     go2->addComponent<SceneTests::DummyScript>();
 
     // Act
@@ -103,7 +104,7 @@ TEST_CASE("Scene is able to load and copy more advanced Scene"){
 TEST_CASE("Loading scene from a behaviour script"){
     // Arrange
     auto* scene = Core::SceneManager::GetSceneManager()->createScene("main");
-    auto* go = new GameObject(scene);
+    auto* go = scene->createGameObject(new GameObject{});
     go->addComponent<SceneTests::DummyGameManager>();
     Core::SceneManager::GetSceneManager()->loadScene("main");
 

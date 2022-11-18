@@ -24,7 +24,7 @@ namespace GameObjectTests{
 TEST_CASE("Component creation on GameObject"){
     // Arrange
     Scene* scene {new Scene{}};
-    GameObject* go {new GameObject{scene}};
+    GameObject* go {scene->createGameObject(new GameObject{})};
 
     // Act
     go->addComponent<BehaviourScript>();
@@ -40,7 +40,7 @@ TEST_CASE("Component creation on GameObject"){
 TEST_CASE("Component removal on GameObject"){
     // Arrange
     Scene* scene{new Scene{}};
-    GameObject* go{new GameObject{scene}};
+    GameObject* go {scene->createGameObject(new GameObject{})};
 
     // Act
     go->addComponent<BehaviourScript>();
@@ -56,7 +56,7 @@ TEST_CASE("Component removal on GameObject"){
 TEST_CASE("Custom behavior script on GameObject"){
     // Arrange
     Scene* scene{new Scene{}};
-    GameObject* go{new GameObject{scene}};
+    GameObject* go{scene->createGameObject(new GameObject{})};
     go->addComponent<GameObjectTests::Counter>();
 
     // Act

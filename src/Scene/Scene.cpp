@@ -5,29 +5,25 @@
 #include "Scene.h"
 
 Scene::Scene() : _rootGameObject{nullptr} {
-    _rootGameObject = new GameObject(this);
-}
-
-Scene::~Scene() {
-    delete _rootGameObject;
+    _rootGameObject = std::make_unique<GameObject>();
 }
 
 Scene::Scene(const Scene& other) {
-    _rootGameObject = nullptr;
+    _rootGameObject.reset();
 
     // Copy root GameObject
     // Copy constructor of GameObject will copy its children and in turn the entire scene
-    _rootGameObject = new GameObject(*other._rootGameObject);
+    _rootGameObject = std::make_unique<GameObject>(*other._rootGameObject);
 }
 
 Scene& Scene::operator=(const Scene& other) {
     if(this != &other){
         // Delete existing root GameObject
-        delete _rootGameObject;
+        _rootGameObject.reset();
 
         // Copy root GameObject
         // Copy constructor of GameObject will copy its children and in turn the entire scene
-        _rootGameObject = new GameObject(*other._rootGameObject);
+        _rootGameObject = std::make_unique<GameObject>(*other._rootGameObject);
     }
     return *this;
 }
@@ -37,11 +33,11 @@ void Scene::stopRecording(){}
 void Scene::playRecording(){}
 
 void Scene::setRootGameObject(GameObject* gameObject) {
-    _rootGameObject = gameObject;
+    _rootGameObject.reset(gameObject);
 }
 
 GameObject* Scene::getRootGameObject() {
-    return _rootGameObject;
+    return _rootGameObject.get();
 }
 
 void Scene::startScene() {
@@ -50,4 +46,28 @@ void Scene::startScene() {
 
 void Scene::updateScene() {
     _rootGameObject->onUpdate();
+}
+
+GameObject* Scene::createGameObject(GameObject& gameObject, GameObject* parent) {
+    GameObject* newGameObject{nullptr};
+
+    // Create gameObject under the given parent, if no parent is given, create new GameObject under the root GameObject
+    if(parent)
+        newGameObject = parent->createChildGameObject(gameObject);
+    else
+        newGameObject = _rootGameObject->createChildGameObject(gameObject);
+
+    return newGameObject;
+}
+
+GameObject* Scene::createGameObject(GameObject* gameObject, GameObject* parent) {
+    GameObject* newGameObject{nullptr};
+
+    // Create gameObject under the given parent, if no parent is given, create new GameObject under the root GameObject
+    if(parent)
+        newGameObject = parent->createChildGameObject(gameObject);
+    else
+        newGameObject = _rootGameObject->createChildGameObject(gameObject);
+
+    return newGameObject;
 }
