@@ -7,7 +7,13 @@
 #include "Scene/Components/BehaviourScript.h"
 
 namespace SceneTests{
-    class DummyScript : public BehaviourScript{
+    class DummyScript : public BehaviourScript{};
+
+    class DummyGameManager : public BehaviourScript{
+    public:
+        void restartLevel(){
+            Core::SceneManager::GetSceneManager()->loadScene("main");
+        }
     };
 }
 
@@ -86,10 +92,28 @@ TEST_CASE("Scene is able to load and copy more advanced Scene"){
 
     // Act
     Core::SceneManager::GetSceneManager()->loadScene("main");
-    auto loadedScene = Core::SceneManager::GetSceneManager()->getCurrentScene();
 
     // Assert
     auto* child = Core::SceneManager::GetSceneManager()->getCurrentScene()->getRootGameObject()->childAt(0)->childAt(0);
     CHECK_NE(child, nullptr);
+    CHECK_NE(go2, nullptr);
     CHECK_NE(go2, child);
+}
+
+TEST_CASE("Loading scene from a behaviour script"){
+    // Arrange
+    auto* scene = Core::SceneManager::GetSceneManager()->createScene("main");
+    auto* go = new GameObject(scene);
+    go->addComponent<SceneTests::DummyGameManager>();
+    Core::SceneManager::GetSceneManager()->loadScene("main");
+
+    // Act
+    Core::SceneManager::GetSceneManager()->getCurrentScene()->getRootGameObject()->tag = "newTag";
+    auto* gm = go->getComponent<SceneTests::DummyGameManager>();
+    gm->restartLevel();
+
+    // Assert
+    auto currentScene = Core::SceneManager::GetSceneManager()->getCurrentScene();
+    // Check if changes made in scene are now reverted
+    CHECK_EQ(currentScene->getRootGameObject()->tag, "default");
 }

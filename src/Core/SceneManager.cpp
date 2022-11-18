@@ -2,6 +2,7 @@
 // Created by Lucas on 2-11-2022.
 //
 
+#include <cstring>
 #include "SceneManager.h"
 
 namespace Core {
@@ -29,7 +30,6 @@ namespace Core {
             delete _currentScene;
             _currentScene = new Scene(*sceneIt->second);
         }
-        // TODO maybe throw exception for not finding the scene?
     }
 
     Scene* SceneManager::createScene(const std::string& sceneName) {

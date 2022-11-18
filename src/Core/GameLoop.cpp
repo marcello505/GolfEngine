@@ -54,7 +54,10 @@ void GameLoop::update() {
         Physics::getService()->update();
     }
 
-    //TODO add SceneManager code
+    // Update scene if there is an active instance
+    auto currentScene = Core::SceneManager::GetSceneManager()->getCurrentScene();
+    if(currentScene)
+        currentScene->updateScene();
 
     if(_actionMap){
         //TODO update ActionMap

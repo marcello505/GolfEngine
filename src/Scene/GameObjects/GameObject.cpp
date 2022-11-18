@@ -103,14 +103,6 @@ GameObject& GameObject::operator=(const GameObject& other){
     return *this;
 }
 
-//GameObject::GameObject(GameObject &&other) {
-//
-//}
-//
-//GameObject& GameObject::operator=(GameObject&& other){
-//
-//}
-
 bool GameObject::isActiveInWorld() const {return false;}
 bool GameObject::isActiveSelf() const {return false;}
 

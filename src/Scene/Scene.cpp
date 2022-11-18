@@ -32,17 +32,6 @@ Scene& Scene::operator=(const Scene& other) {
     return *this;
 }
 
-//Scene::Scene(Scene&& other) {
-//
-//}
-//
-//Scene& Scene::operator=(Scene&& other) {
-//    if(this != &other){
-//
-//    }
-//    return *this;
-//}
-
 void Scene::startRecording(const std::string& actionToLock){}
 void Scene::stopRecording(){}
 void Scene::playRecording(){}
