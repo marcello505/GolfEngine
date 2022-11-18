@@ -3,7 +3,6 @@
 //
 
 #include "SDLRenderService.h"
-#include "../Scene/RenderShape/TextRenderShape.h"
 #include <cmath>
 #include <iostream>
 #include <algorithm>
@@ -254,8 +253,6 @@ namespace GolfEngine::Services::Render {
         int32_t ty = 1;
         int32_t error = (tx - diameter);
 
-
-
         while (x >= y)
         {
             //  Each of the following renders an octant of the circle
@@ -380,12 +377,13 @@ namespace GolfEngine::Services::Render {
     }
 
     void SDLRenderService::renderText(TextRenderShape &renderShape) {
-        auto* font {loadText(renderShape.filePath(), renderShape.fontSize())};
+        auto* font {loadFont(renderShape.filePath(), renderShape.fontSize())};
         if(font == nullptr) {return;}
 
 
         // TODO add COLOR
-        SDL_Surface* surface = TTF_RenderText_Solid(font, renderShape.text().c_str(), {255, 255, 255});
+
+        SDL_Surface* surface = TTF_RenderText_Solid(font, renderShape.text().c_str(), {renderShape.color().r8,renderShape.color().g8,renderShape.color().b8});
         if(surface == nullptr){
             printf("Unable to load image %s, Error: %s\n", renderShape.filePath().c_str(), IMG_GetError());
             return;
@@ -399,8 +397,6 @@ namespace GolfEngine::Services::Render {
             printf("Unable to create texture from %s, Error: %s\n", renderShape.filePath().c_str(), SDL_GetError());
             return;
         }
-
-
         SDL_Rect dstRect;
         dstRect.x = renderShape.position().x;
         dstRect.y = renderShape.position().y;
@@ -408,11 +404,12 @@ namespace GolfEngine::Services::Render {
         dstRect.h = surface->h;
 
         SDL_RenderCopyEx(_renderer, texture, nullptr, &dstRect, renderShape.rotation(), nullptr, SDL_FLIP_NONE);
+
         SDL_DestroyTexture(texture);
     }
 
 
-    TTF_Font * SDLRenderService::loadText(const std::string& path, size_t fontSize) {
+    TTF_Font * SDLRenderService::loadFont(const std::string& path, size_t fontSize) {
         auto cachedFont = _cachedFonts.find(path);
         if(cachedFont != _cachedFonts.end() && cachedFont->second.first == fontSize){
             // Use existing texture
@@ -420,7 +417,7 @@ namespace GolfEngine::Services::Render {
         }
         else{
             // Load new texture
-            TTF_Font* newFont = TTF_OpenFont(path.c_str(), fontSize);
+            auto newFont = TTF_OpenFont(path.c_str(), fontSize);
             if(newFont){
                 _cachedFonts.insert({path, {fontSize, newFont}});
                 return newFont;
@@ -433,11 +430,9 @@ namespace GolfEngine::Services::Render {
         // Free all texture memory
         for(auto& fontPair : _cachedFonts){
             TTF_CloseFont(fontPair.second.second);
+
         }
     }
 
-    bool SDLRenderService::drawFont(TTF_Font *pFont) {
-        return false;
-    }
 }
 

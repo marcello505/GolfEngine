@@ -75,9 +75,7 @@ private:
     std::map<std::string, Texture*> _cachedTextures;
     std::map<std::string, std::pair<size_t , TTF_Font*>> _cachedFonts;
 
-    TTF_Font * loadText(const std::string &path, size_t fontSize);
-
-    bool drawFont(TTF_Font *pFont);
+    TTF_Font * loadFont(const std::string &path, size_t fontSize);
 
 };
 
