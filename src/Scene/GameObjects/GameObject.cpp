@@ -191,6 +191,10 @@ void GameObject::setLocalTransform(const Transform& rTransform) {
     _localTransform = rTransform;
 }
 
+void GameObject::setLocalPosition(const Vector2& rPosition) {
+    _localTransform.position = rPosition;
+}
+
 Transform GameObject::getWorldTransform() const {
     Transform result {};
 

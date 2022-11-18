@@ -91,6 +91,7 @@ public:
     /// \return const Transform reference to the local transform
     const Transform& getLocalTransform() const;
     void setLocalTransform(const Transform& rTransform);
+    void setLocalPosition(const Vector2& rPosition);
     /// Calculates the current world transform and returns it
     /// \return A Transform instance which is the current world transform
     Transform getWorldTransform() const;
