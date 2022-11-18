@@ -82,4 +82,8 @@ namespace GolfEngine::Services::Render {
         SDL_SetTextureBlendMode(_texture, blending);
     }
 
+    void Texture::setAlphaMod(Uint8 alpha) {
+        SDL_SetTextureAlphaMod(_texture, alpha);
+    }
+
 }

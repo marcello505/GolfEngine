@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.23)
 set(CMAKE_CXX_STANDARD 17)
 
 # Sources
-set(SRC_FILES RectDrawable.cpp LineDrawable.cpp SpriteDrawable.cpp)
+set(SRC_FILES RectDrawable.cpp LineDrawable.cpp SpriteDrawable.cpp CircleDrawable.cpp CircleDrawable.h)
 
 # Main Project
 add_executable(Rendering_Demo main.cpp ${SRC_FILES})
