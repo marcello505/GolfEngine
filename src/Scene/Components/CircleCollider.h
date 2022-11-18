@@ -8,10 +8,11 @@
 #include <memory>
 
 #include "Collider.h"
+#include "Scene/RenderShape/CircleRenderShape.h"
 
 class CircleCollider : public Collider{
 public:
-    explicit CircleCollider(float radius) : _radius{radius} {}
+    explicit CircleCollider(float radius) : _radius{radius}, _renderShape{Vector2{}, radius, Color{}} {}
 
     // Methods
     float getRadius() const;
@@ -31,6 +32,7 @@ private:
     bool _active {true};
     GameObject* _parent {};
     float _radius;
+    CircleRenderShape _renderShape;
 
 
 };

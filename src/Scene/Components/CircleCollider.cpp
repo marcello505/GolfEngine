@@ -39,7 +39,10 @@ Component* CircleCollider::clone() const {
 }
 
 RenderShape* CircleCollider::getRenderShape() {
-    return nullptr;
+    if(_parent != nullptr){
+        _renderShape.applyTransform(_parent->getWorldTransform());
+    }
+    return &_renderShape;
 }
 
 float CircleCollider::getRadius() const {

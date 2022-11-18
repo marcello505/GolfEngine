@@ -17,16 +17,24 @@ GameObject* createObjects(Scene* scene){
     }
 
     auto createBlock = [scene, root](const Vector2& pos){
-        auto* ballObject = new GameObject{scene, root};
-        ballObject->addComponent<BoxCollider>(Vector2{20.0f, 20.0f});
-        ballObject->addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
-        ballObject->setLocalPosition(pos);
+        auto* blockObject = new GameObject{scene, root};
+        blockObject->addComponent<BoxCollider>(Vector2{20.0f, 20.0f});
+        blockObject->addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
+        blockObject->setLocalPosition(pos);
+    };
+
+    auto createCircle = [scene, root](const Vector2& pos){
+        auto* circleObject = new GameObject{scene, root};
+        circleObject->addComponent<CircleCollider>(20.f);
+        circleObject->addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
+        circleObject->setLocalPosition(pos);
     };
 
     createBlock({300, 150});
     createBlock({320, 200});
     createBlock({340, 100});
     createBlock({312, 50});
+    createCircle({300, 0});
 
     return root;
 }
