@@ -20,6 +20,14 @@ void GameLoop::start() {
     auto previous = std::chrono::steady_clock::now();
     std::chrono::duration<GameTic, std::milli> lag {0.0f};
 
+    // Create standard actions for altering the gameplay timescale
+    _actionMap->addAction("decrease timescale");
+    _actionMap->addAction("increase timescale");
+    _actionMap->addAction("pause time");
+    _actionMap->addInputKeyToAction("decrease timescale", Key_PageUp);
+    _actionMap->addInputKeyToAction("increase timescale", Key_PageDown);
+    _actionMap->addInputKeyToAction("pause time", Key_Home);
+
     while(_running){
         auto current = std::chrono::steady_clock::now();
         auto elapsed = current - previous;
@@ -72,7 +80,7 @@ void GameLoop::render() {
 void GameLoop::useDefaultServices() {
     setAudioService(new SDLAudioService {});
 
-    setInputService(reinterpret_cast<InputService *>(new SDLInputService{_actionMap.get()}));
+    setInputService(new SDLInputService{_actionMap.get()});
 
     setRenderService(new Render::SDLRenderService {});
 

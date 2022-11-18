@@ -8,7 +8,7 @@
 class InputService {
 public:
     virtual void handleInputs() = 0;
-    bool hasRecievedQuitSignal();
+    [[nodiscard]] virtual bool hasReceivedQuitSignal() const = 0;
 };
 
 

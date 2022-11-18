@@ -14,7 +14,11 @@ namespace GameLoopTests{
             }
         }
 
+        [[nodiscard]] bool hasReceivedQuitSignal() const override{
+            return _hasReceivedQuitSignal;
+        }
         //Fields
+        bool _hasReceivedQuitSignal {false};
         int callCount {0};
         GameLoop* gameLoop {nullptr};
     private:
@@ -44,7 +48,7 @@ namespace GameLoopTests{
 
         //Unused
         void setScreenSize(int width, int height) override {}
-        virtual void removeDrawable(Drawable* drawable) override {}
+        void removeDrawable(Drawable* drawable) override {}
         void addDrawable(Drawable* drawable) override {}
         void setFullScreen(bool fullScreen) override {};
     };
