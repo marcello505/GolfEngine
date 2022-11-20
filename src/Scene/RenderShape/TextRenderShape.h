@@ -24,7 +24,6 @@ public:
     [[nodiscard]] std::string filePath() const;
     [[nodiscard]] size_t fontSize() const;
 
-    int scale();
 
 private:
     Vector2 _position;

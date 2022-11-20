@@ -44,6 +44,7 @@ void GameLoop::stop() {
 void GameLoop::processInput() {
     if(Input::hasService()){
         Input::getService()->handleInputs();
+        _running &= !Input::getService()->hasRecievedQuitSignal();
     }
 }
 
@@ -72,7 +73,7 @@ void GameLoop::render() {
 void GameLoop::useDefaultServices() {
     setAudioService(new SDLAudioService {});
 
-    setInputService(reinterpret_cast<InputService *>(new SDLInputService{_actionMap.get()}));
+    setInputService(new SDLInputService{_actionMap.get()});
     setRenderService(new Render::SDLRenderService {});
 
     setPhysicsService(new Box2DPhysicsService {});

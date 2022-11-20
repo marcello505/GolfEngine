@@ -389,6 +389,13 @@ namespace GolfEngine::Services::Render {
             return;
         }
 
+        SDL_Rect dstRect;
+        dstRect.x = renderShape.position().x;
+        dstRect.y = renderShape.position().y;
+
+        dstRect.w = surface->w;
+        dstRect.h = surface->h;
+
         // Create texture from surface
         auto texture = SDL_CreateTextureFromSurface(_renderer, surface);
         // Free surface memory
@@ -397,11 +404,6 @@ namespace GolfEngine::Services::Render {
             printf("Unable to create texture from %s, Error: %s\n", renderShape.filePath().c_str(), SDL_GetError());
             return;
         }
-        SDL_Rect dstRect;
-        dstRect.x = renderShape.position().x;
-        dstRect.y = renderShape.position().y;
-        dstRect.w = surface->w;
-        dstRect.h = surface->h;
 
         SDL_RenderCopyEx(_renderer, texture, nullptr, &dstRect, renderShape.rotation(), nullptr, SDL_FLIP_NONE);
 
