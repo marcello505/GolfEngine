@@ -32,9 +32,9 @@ void SDLAudioService::playOnChannel(int channel, const std::string &path, float 
     Mix_PlayChannel(channel, _sounds.find(path)->second, 0); // play chunk on channel, without loop
 }
 
-void SDLAudioService::preloadAudio(const char* path)
+void SDLAudioService::preloadAudio(const std::string path)
 {
-    Mix_Chunk* tmpChunk = Mix_LoadWAV(path); // load in chunk with path
+    Mix_Chunk* tmpChunk = Mix_LoadWAV(path.c_str()); // load in chunk with path
 
     if (tmpChunk != nullptr) //if chunk is made succesfully
     {
