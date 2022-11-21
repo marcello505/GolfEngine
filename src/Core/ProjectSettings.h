@@ -8,13 +8,18 @@
 #include <string>
 #include <map>
 
-class ProjectSettings {
-private:
-    std::map<std::string, std::string> settings;
-public:
-    void setSettings(const std::string& key, const std::string& value);
-    void getSettings(const std::string& key) const;
-};
+namespace GolfEngine::Core{
+    class ProjectSettings {
+    public:
+        void setSettings(const std::string& key, const std::string& value);
+        [[nodiscard]] bool hasSetting(const std::string& key) const;
+        [[nodiscard]] std::string getSetting(const std::string& key) const;
+    private:
+        std::map<std::string, std::string> _settings {};
+    };
+
+}
+
 
 
 #endif //SPC_PROJECT_PROJECTSETTINGS_H
