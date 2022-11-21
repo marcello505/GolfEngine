@@ -18,6 +18,7 @@ find_package(SDL2 REQUIRED)
 find_package(IMGUI REQUIRED)
 find_package(SDL2_MIXER REQUIRED) #Include dirs is included on target_link_libraries call
 find_package(SDL2_IMAGE REQUIRED) #Include dirs is included on target_link_libraries call
+add_subdirectory(libs/box2d-2.4.1) #Include dirs is included on target_link_libraries call
 
 # Includes
 include_directories(${SDL2_INCLUDE_DIRS})
@@ -42,8 +43,6 @@ set(SCENE_SOURCES
         src/Scene/Scene.cpp
         src/Scene/GameObjects/GameObject.cpp
         src/Scene/Components/AudioSource.cpp
-        src/Scene/Components/Component.cpp
-        src/Scene/Components/BehaviourScript.cpp
         src/Scene/Components/Drawable.cpp
         src/Scene/Components/Animator.cpp
         src/Scene/Components/ParticleSystem.cpp
@@ -53,7 +52,9 @@ set(SCENE_SOURCES
         src/Scene/RenderShape/CircleRenderShape.cpp
         src/Scene/RenderShape/SpriteRenderShape.cpp
         src/Scene/RenderShape/ParticleSystemRenderShape.cpp
-        src/Scene/GameObjects/UIObject/Button.cpp)
+        src/Scene/GameObjects/UIObject/Button.cpp
+        src/Scene/Components/RigidBody.cpp
+        src/Scene/Components/BoxCollider.cpp src/Scene/Components/CircleCollider.cpp)
 
 set(CORE_SOURCES
         src/Core/GameLoop.cpp
@@ -67,9 +68,11 @@ add_library(${PROJECT_NAME}
         ${INPUT_SOURCES}
         ${CORE_SOURCES})
 
+target_include_directories(${PROJECT_NAME} PUBLIC ./src)
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} SDL2_mixer::SDL2_mixer)
 target_link_libraries(${PROJECT_NAME} SDL2_image::SDL2_image)
+target_link_libraries(${PROJECT_NAME} box2d)
 
 # Sub Projects
 add_subdirectory(tests)
@@ -77,4 +80,4 @@ add_subdirectory(tests)
 add_subdirectory(validation/US03_InputService)
 add_subdirectory(validation/US12_AudioService)
 add_subdirectory(validation/US00_Rendering)
-
+add_subdirectory(validation/US14_PhysicsService)

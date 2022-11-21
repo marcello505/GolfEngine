@@ -9,13 +9,18 @@ set(TEST_SOURCES
         LibSDL2MixerTests.cpp
         LibSDL2Tests.cpp
         Core/GameLoopTests.cpp
-        SceneTests.cpp)
+        Services/Box2DPhysicsService.cpp)
+
+set(SCENE_TEST_SOURCES
+        Scene/SceneTests.cpp
+        Scene/GameObjectTests.cpp)
 
 
 # Main Project
 add_executable(Golf_Tests main.cpp
         ${TEST_SOURCES}
-        )
+        ${SCENE_TEST_SOURCES})
+
 target_link_libraries(Golf_Tests GolfEngine)
 target_include_directories(Golf_Tests PUBLIC ../libs/doctest)
 target_include_directories(Golf_Tests PUBLIC ../src)

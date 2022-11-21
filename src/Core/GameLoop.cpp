@@ -44,6 +44,7 @@ void GameLoop::stop() {
 void GameLoop::processInput() {
     if(Input::hasService()){
         Input::getService()->handleInputs();
+        _running &= !Input::getService()->hasRecievedQuitSignal();
     }
 }
 
@@ -51,13 +52,13 @@ void GameLoop::update() {
     time->measurePhysicsCall();
 
     if(Physics::hasService()){
-        Physics::getService()->update();
+        Physics::getService()->update(_msPerUpdate.count() / 1000.0f);
     }
 
     //TODO add SceneManager code
 
     if(_actionMap){
-        //TODO update ActionMap
+        _actionMap->update();
     }
 }
 
@@ -70,13 +71,10 @@ void GameLoop::render() {
 }
 
 void GameLoop::useDefaultServices() {
+    setInputService(new SDLInputService{_actionMap.get()});
     setAudioService(new SDLAudioService(3));
-
-    setInputService(reinterpret_cast<InputService *>(new SDLInputService{_actionMap.get()}));
-
     setRenderService(new Render::SDLRenderService {});
-
-    setPhysicsService(new Box2DPhysicsService {});
+    setPhysicsService(new Physics::Box2DPhysicsService {});
 }
 
 // SETTERS AND GETTERS
