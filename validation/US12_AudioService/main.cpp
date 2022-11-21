@@ -25,8 +25,6 @@ int main(int argc, char* argv[])
     // instantiate audioservice
     std::unique_ptr<SDLAudioService>_audioService(new SDLAudioService(3));
 
-    std::filesystem::current_path();
-
     //setup audio sources
     _audioService->preloadAudio(gunCockingPath);
     _audioService->preloadAudio(shortShotPath);
