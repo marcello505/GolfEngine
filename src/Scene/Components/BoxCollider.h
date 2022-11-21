@@ -28,6 +28,7 @@ public:
     RenderShape* getRenderShape() override;
 
 private:
+    bool _active {true};
     GameObject* _parent {};
     RectRenderShape _rectRenderShape;
     Vector2 _shapeExtents;

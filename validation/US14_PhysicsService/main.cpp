@@ -53,4 +53,7 @@ int main(int argc, char* argv[]){
     auto* root = createObjects(scene);
     root->onStart();
     gameLoop.start();
+
+    return 0;
+
 }

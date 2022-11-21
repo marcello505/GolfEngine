@@ -31,11 +31,11 @@ const Vector2& BoxCollider::getShapeExtents() const {
 }
 
 bool BoxCollider::getActive() {
-    return false;
+    return _active;
 }
 
 void BoxCollider::setActive(bool active) {
-
+    _active = active;
 }
 
 void BoxCollider::setParentGameObject(GameObject* gameObject) {
