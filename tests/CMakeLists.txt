@@ -9,6 +9,7 @@ set(TEST_SOURCES
         LibSDL2MixerTests.cpp
         LibSDL2Tests.cpp
         Core/GameLoopTests.cpp
+        libSDL2TtfTest.cpp
         Services/Box2DPhysicsService.cpp)
 
 set(SCENE_TEST_SOURCES

@@ -18,6 +18,7 @@ namespace GameLoopTests{
         //Fields
         int callCount {0};
         GameLoop* gameLoop {nullptr};
+
     private:
     };
 

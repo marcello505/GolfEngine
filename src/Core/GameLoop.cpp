@@ -71,6 +71,7 @@ void GameLoop::render() {
 }
 
 void GameLoop::useDefaultServices() {
+
     setInputService(new SDLInputService{_actionMap.get()});
     setAudioService(new SDLAudioService(3));
     setRenderService(new Render::SDLRenderService {});

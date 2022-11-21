@@ -6,6 +6,7 @@
 #include <cmath>
 #include <iostream>
 #include <algorithm>
+#include <SDL_ttf.h>
 
 namespace GolfEngine::Services::Render {
 
@@ -20,6 +21,12 @@ namespace GolfEngine::Services::Render {
         if(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) < 0)
         {
             printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
+        }
+
+        //initialize TTF support
+        if(TTF_Init() == -1){
+            printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
+
         }
 
         // Create window and renderer
@@ -40,6 +47,7 @@ namespace GolfEngine::Services::Render {
 
     SDLRenderService::~SDLRenderService() {
         clearTextureCache();
+        clearFontCache();
 
         // Close SDL window and renderer
         SDL_DestroyRenderer(_renderer);
@@ -52,6 +60,7 @@ namespace GolfEngine::Services::Render {
         _renderer = other._renderer;
         _drawables = std::move(other._drawables);
         _cachedTextures = std::move(other._cachedTextures);
+        _cachedFonts = std::move(other._cachedFonts);
         _screenSizeWidth = other._screenSizeWidth;
         _screenSizeHeight = other._screenSizeHeight;
         _fullScreen = other._fullScreen;
@@ -62,6 +71,7 @@ namespace GolfEngine::Services::Render {
             // Clear and destroy existing properties
             _drawables.clear();
             _cachedTextures.clear();
+            _cachedFonts.clear();
             SDL_DestroyRenderer(_renderer);
             SDL_DestroyWindow(_window);
 
@@ -70,6 +80,7 @@ namespace GolfEngine::Services::Render {
             _renderer = other._renderer;
             _drawables = std::move(other._drawables);
             _cachedTextures = std::move(other._cachedTextures);
+            _cachedFonts = std::move(other._cachedFonts);
             _screenSizeWidth = other._screenSizeWidth;
             _screenSizeHeight = other._screenSizeHeight;
             _fullScreen = other._fullScreen;
@@ -121,6 +132,9 @@ namespace GolfEngine::Services::Render {
                     break;
                 case RenderShapeType::CircleShape:
                     renderCircle(reinterpret_cast<CircleRenderShape &>(*renderShape));
+                    break;
+                case RenderShapeType::TextRenderShape:
+                    renderText(reinterpret_cast<TextRenderShape &>(*renderShape));
                     break;
                 case RenderShapeType::ParticleSystemShape:
                     break;
@@ -239,8 +253,6 @@ namespace GolfEngine::Services::Render {
         int32_t ty = 1;
         int32_t error = (tx - diameter);
 
-
-
         while (x >= y)
         {
             //  Each of the following renders an octant of the circle
@@ -348,7 +360,7 @@ namespace GolfEngine::Services::Render {
         else{
             // Load new texture
             auto* newTexture = new Texture();
-            if(newTexture->loadFromFile(path, *_renderer)){
+            if(newTexture->loadFromFileSprite(path, *_renderer)){
                 _cachedTextures.insert({path, newTexture});
                 return newTexture;
             }
@@ -363,4 +375,66 @@ namespace GolfEngine::Services::Render {
             delete texture.second;
         }
     }
+
+    void SDLRenderService::renderText(TextRenderShape &renderShape) {
+        auto* font {loadFont(renderShape.filePath(), renderShape.fontSize())};
+        if(font == nullptr) {return;}
+
+
+        // TODO add COLOR
+
+        SDL_Surface* surface = TTF_RenderText_Solid(font, renderShape.text().c_str(), {renderShape.color().r8,renderShape.color().g8,renderShape.color().b8});
+        if(surface == nullptr){
+            printf("Unable to load image %s, Error: %s\n", renderShape.filePath().c_str(), IMG_GetError());
+            return;
+        }
+
+        SDL_Rect dstRect;
+        dstRect.x = renderShape.position().x;
+        dstRect.y = renderShape.position().y;
+
+        dstRect.w = surface->w;
+        dstRect.h = surface->h;
+
+        // Create texture from surface
+        auto texture = SDL_CreateTextureFromSurface(_renderer, surface);
+        // Free surface memory
+        SDL_FreeSurface(surface);
+        if(texture == nullptr){
+            printf("Unable to create texture from %s, Error: %s\n", renderShape.filePath().c_str(), SDL_GetError());
+            return;
+        }
+
+        SDL_RenderCopyEx(_renderer, texture, nullptr, &dstRect, renderShape.rotation(), nullptr, SDL_FLIP_NONE);
+
+        SDL_DestroyTexture(texture);
+    }
+
+
+    TTF_Font * SDLRenderService::loadFont(const std::string& path, size_t fontSize) {
+        auto cachedFont = _cachedFonts.find(path);
+        if(cachedFont != _cachedFonts.end() && cachedFont->second.first == fontSize){
+            // Use existing texture
+            return cachedFont->second.second;
+        }
+        else{
+            // Load new texture
+            auto newFont = TTF_OpenFont(path.c_str(), fontSize);
+            if(newFont){
+                _cachedFonts.insert({path, {fontSize, newFont}});
+                return newFont;
+            }
+            return nullptr;
+        }
+    }
+
+    void SDLRenderService::clearFontCache() {
+        // Free all texture memory
+        for(auto& fontPair : _cachedFonts){
+            TTF_CloseFont(fontPair.second.second);
+
+        }
+    }
+
 }
+
