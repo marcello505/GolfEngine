@@ -19,8 +19,6 @@ namespace GameLoopTests{
         int callCount {0};
         GameLoop* gameLoop {nullptr};
 
-        //Unused
-        bool hasRecievedQuitSignal() override { return false; }
     private:
     };
 
