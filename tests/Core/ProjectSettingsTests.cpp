@@ -124,6 +124,3 @@ TEST_SUITE("ProjectSettings"){
         }
     }
 }
-
-
-#pragma clang diagnostic pop
