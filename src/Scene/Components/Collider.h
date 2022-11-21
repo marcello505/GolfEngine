@@ -5,9 +5,16 @@
 #ifndef GOLFENGINE_COLLIDER_H
 #define GOLFENGINE_COLLIDER_H
 #include "Component.h"
+#include "Drawable.h"
 
-class Collider : public Component {
+enum class ColliderShapes{
+    Circle,
+    Box
+};
 
+class Collider : public Component, public Drawable {
+public:
+    virtual ColliderShapes getColliderShape() = 0;
 };
 
 

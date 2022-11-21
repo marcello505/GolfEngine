@@ -306,6 +306,7 @@ void SDLInputService::bindKeys() {
     _inputBinds.insert(std::pair<std::string, InputKey>(")", Key_RightParen));
     _inputBinds.insert(std::pair<std::string, InputKey>("_", Key_Underscore));
 }
+
 bool SDLInputService::hasRecievedQuitSignal() {
     return _hasRecievedQuitSignal;
 }

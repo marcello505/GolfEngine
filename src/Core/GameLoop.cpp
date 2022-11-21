@@ -52,13 +52,13 @@ void GameLoop::update() {
     time->measurePhysicsCall();
 
     if(Physics::hasService()){
-        Physics::getService()->update();
+        Physics::getService()->update(_msPerUpdate.count() / 1000.0f);
     }
 
     //TODO add SceneManager code
 
     if(_actionMap){
-        //TODO update ActionMap
+        _actionMap->update();
     }
 }
 
@@ -71,12 +71,11 @@ void GameLoop::render() {
 }
 
 void GameLoop::useDefaultServices() {
-    setAudioService(new SDLAudioService {});
 
     setInputService(new SDLInputService{_actionMap.get()});
+    setAudioService(new SDLAudioService(3));
     setRenderService(new Render::SDLRenderService {});
-
-    setPhysicsService(new Box2DPhysicsService {});
+    setPhysicsService(new Physics::Box2DPhysicsService {});
 }
 
 // SETTERS AND GETTERS
@@ -85,7 +84,7 @@ void GameLoop::setFramesPerSeccond(GameTic fps) {
     _msPerUpdate = std::chrono::duration<GameTic, std::milli>{1000.f / fps};
 }
 
-void GameLoop::setAudioService(AudioService* audioService) {
+void GameLoop::setAudioService(AudioService *audioService) {
     Audio::setService(audioService);
 }
 

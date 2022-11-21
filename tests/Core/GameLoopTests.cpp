@@ -13,6 +13,7 @@ namespace GameLoopTests{
                 gameLoop->stop();
             }
         }
+        bool hasRecievedQuitSignal() override{ return false; };
 
         //Fields
         int callCount {0};
@@ -46,10 +47,10 @@ namespace GameLoopTests{
         }
 
         //Unused
-        void setScreenSize(int width, int height) override {}
-        virtual void removeDrawable(Drawable* drawable) override {}
         void addDrawable(Drawable* drawable) override {}
-        void setFullScreen(bool fullScreen) override {};
+        void removeDrawable(Drawable* drawable) override {}
+        void setScreenSize(int width, int height) override {}
+        void setFullScreen(bool fullscreen) override {}
     };
 
     class DummyPhysicsService : public PhysicsService{
@@ -62,7 +63,7 @@ namespace GameLoopTests{
         GameLoop* gameLoop {nullptr};
 
         //Methods
-        void update() override {
+        void update(GameTic timeStep) override {
             auto current = std::chrono::steady_clock::now();
             auto elapsed = current - previous;
             previous = current;
@@ -76,8 +77,16 @@ namespace GameLoopTests{
         }
 
         //Unused
-        void addRigidBody(const RigidBody& rigidBody) override {}
-        void removeRigidBody(const RigidBody& rigidBody) override {}
+        void addRigidBody(RigidBody* pRigidBody) override {}
+        void removeRigidBody(RigidBody* pRigidBody) override {}
+        void setGravity(const Vector2& vec2) override {}
+        void applyForceToCenter(RigidBody* pRigidBody, const Vector2& force) override {}
+        void setTransform(RigidBody* pRigidBody, const Transform& transform) override {}
+        void setEnabled(RigidBody* pRigidBody, bool enabled) override {}
+        void setLinearDamping(RigidBody* pRigidBody, float linearDamping) override {}
+        void setAngularDamping(RigidBody* pRigidBody, float angularDamping) override {}
+        void setFixedRotation(RigidBody* pRigidBody, bool fixedRotation) override {}
+        void setGravityScale(RigidBody* pRigidBody, float gravityScale) override {}
     };
 }
 
