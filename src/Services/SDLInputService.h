@@ -7,7 +7,7 @@
 #include "../Input/InputKey.h"
 #include <SDL.h>
 
-class SDLInputService {
+class SDLInputService : public InputService {
 private:
     ActionMap* _actionMap;
     std::map<std::string, InputKey> _inputBinds;

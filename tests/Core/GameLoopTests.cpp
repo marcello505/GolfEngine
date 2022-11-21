@@ -43,6 +43,7 @@ namespace GameLoopTests{
         }
 
         //Unused
+
         void setScreenSize(int width, int height) override {}
         virtual void removeDrawable(Drawable* drawable) override {}
         void addDrawable(Drawable* drawable) override {}
