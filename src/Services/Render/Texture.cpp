@@ -4,6 +4,8 @@
 
 #include "Texture.h"
 #include <SDL.h>
+#include <SDL_ttf.h>
+#include <iostream>
 
 namespace GolfEngine::Services::Render {
 
@@ -35,7 +37,7 @@ namespace GolfEngine::Services::Render {
         return *this;
     }
 
-    bool Texture::loadFromFile(const std::string& path, SDL_Renderer& renderer) {
+    bool Texture::loadFromFileSprite(const std::string& path, SDL_Renderer& renderer) {
         // Load surface
         SDL_Surface* surface = IMG_Load(path.c_str());
         if(surface == nullptr){

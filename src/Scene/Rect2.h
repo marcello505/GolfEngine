@@ -13,7 +13,7 @@ struct Rect2 {
     Vector2 position;
     Vector2 size;
     Rect2() : position{Vector2{}}, size{Vector2{}}{}
-    Rect2(Vector2 p, Vector2 s) : position{p}, size{s}{}
+    Rect2(const Vector2& p, const Vector2& s) : position{p}, size{s}{}
 };
 
 

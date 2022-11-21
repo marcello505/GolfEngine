@@ -38,7 +38,7 @@ void SDLInputService::handleInputs()
         }
         if (event.type==SDL_QUIT) // if close button is pressed of window
         {
-            hasRecievedQuitSignal = true; // let gameloop now to stop handling inputs
+            _hasRecievedQuitSignal = true; // let gameloop now to stop handling inputs
         }
     }
 }
@@ -305,4 +305,8 @@ void SDLInputService::bindKeys() {
     _inputBinds.insert(std::pair<std::string, InputKey>("\"", Key_QuoteDbl));
     _inputBinds.insert(std::pair<std::string, InputKey>(")", Key_RightParen));
     _inputBinds.insert(std::pair<std::string, InputKey>("_", Key_Underscore));
+}
+
+bool SDLInputService::hasRecievedQuitSignal() {
+    return _hasRecievedQuitSignal;
 }
