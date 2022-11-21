@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
     std::unique_ptr<SDLInputService>inputService(new SDLInputService(_actionMap.get()));
 
     // call input handle on loop
-    while (!(inputService->hasRecievedQuitSignal))
+    while (!(inputService->hasRecievedQuitSignal()))
     {
         inputService->handleInputs();
     }

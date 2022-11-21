@@ -11,10 +11,10 @@
 
 class TextRenderShape : public RenderShape {
 public:
-    TextRenderShape(Vector2 pos, float rotation, std::string text, size_t fontSize, Color color, std::string filePath);
+    TextRenderShape(const Vector2& pos, float rotation, const std::string& text, size_t fontSize, const Color& color, const std::string& filePath);
     RenderShapeType getType() override;
     void applyTransform(const Transform& transform) override;
-    void setText(std::string &text) ;
+    void setText(const std::string& text) ;
 
     // Getter
     [[nodiscard]] Vector2 position() const;

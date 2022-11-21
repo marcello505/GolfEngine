@@ -6,8 +6,8 @@
 
 #include <utility>
 
-TextRenderShape::TextRenderShape(Vector2 position, float rotation, std::string text, size_t fontSize , Color color, std::string filePath):
-    _position{position}, _initialPosition(position), _rotation{rotation}, _text{std::move(text)}, _fontSize{fontSize}, _color{color}, _filePath{filePath}
+TextRenderShape::TextRenderShape(const Vector2& pos, float rotation, const std::string& text, size_t fontSize , const Color& color, const std::string& filePath):
+        _position{pos}, _initialPosition(pos), _rotation{rotation}, _text{text}, _fontSize{fontSize}, _color{color}, _filePath{filePath}
 {
 }
 
@@ -15,7 +15,7 @@ RenderShapeType TextRenderShape::getType() {
     return RenderShapeType::TextRenderShape;
 }
 
-void TextRenderShape::setText(std::string &text) {
+void TextRenderShape::setText(const std::string& text) {
     _text = text;
 }
 
