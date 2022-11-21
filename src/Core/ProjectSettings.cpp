@@ -6,7 +6,9 @@
 
 namespace GolfEngine::Core{
     void ProjectSettings::setSettings(const std::string& key, const std::string& value) {
-        _settings[key] = value;
+        if(!key.empty()){
+            _settings[key] = value;
+        }
     }
 
     bool ProjectSettings::hasSetting(const std::string& key) const {
