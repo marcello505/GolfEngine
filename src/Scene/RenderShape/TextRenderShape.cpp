@@ -4,9 +4,8 @@
 
 #include "TextRenderShape.h"
 
-#include <utility>
 
-TextRenderShape::TextRenderShape(const Vector2& pos, float rotation, const std::string& text, size_t fontSize , const Color& color, const std::string& filePath):
+TextRenderShape::TextRenderShape(const Vector2& pos, float rotation, const std::string& text, size_t fontSize, const Color& color, const std::string& filePath):
         _position{pos}, _initialPosition(pos), _rotation{rotation}, _text{text}, _fontSize{fontSize}, _color{color}, _filePath{filePath}
 {
 }
