@@ -21,7 +21,7 @@ public:
     std::unique_ptr<GolfEngine::Time> time = std::make_unique<GolfEngine::Time>();
     ActionMap actionMap;
     //Getters and Setters
-    void setAudioService(AudioService* audioService);
+    void setAudioService(AudioService *audioService);
     void setInputService(InputService* inputService);
     void setRenderService(RenderService* renderService);
     void setPhysicsService(PhysicsService* physicsService);

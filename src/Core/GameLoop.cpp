@@ -71,8 +71,8 @@ void GameLoop::render() {
 }
 
 void GameLoop::useDefaultServices() {
-    setAudioService(new SDLAudioService {});
     setInputService(new SDLInputService{_actionMap.get()});
+    setAudioService(new SDLAudioService(3));
     setRenderService(new Render::SDLRenderService {});
     setPhysicsService(new Physics::Box2DPhysicsService {});
 }
@@ -83,7 +83,7 @@ void GameLoop::setFramesPerSeccond(GameTic fps) {
     _msPerUpdate = std::chrono::duration<GameTic, std::milli>{1000.f / fps};
 }
 
-void GameLoop::setAudioService(AudioService* audioService) {
+void GameLoop::setAudioService(AudioService *audioService) {
     Audio::setService(audioService);
 }
 

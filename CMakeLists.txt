@@ -78,6 +78,6 @@ target_link_libraries(${PROJECT_NAME} box2d)
 add_subdirectory(tests)
 
 add_subdirectory(validation/US03_InputService)
-
+add_subdirectory(validation/US12_AudioService)
 add_subdirectory(validation/US00_Rendering)
 add_subdirectory(validation/US14_PhysicsService)
