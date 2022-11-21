@@ -35,6 +35,7 @@ private:
     Color _color;
     Vector2 _pivotPoint;
     Vector2 _initialPivotPoint;
+    Vector2 _initialPosition;
 };
 
 
