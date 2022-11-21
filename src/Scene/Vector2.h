@@ -33,10 +33,22 @@ struct Vector2
             y - b.y
         };
     }
+    Vector2 operator+(const Vector2& b) const{
+        return{
+                x + b.x,
+                y + b.y
+        };
+    }
     Vector2 operator*(const Vector2& b) const{
         return {
             x * b.x,
             y * b.y
+        };
+    }
+    Vector2 operator/(const Vector2& b) const{
+        return {
+                x / b.x,
+                y / b.y
         };
     }
 };

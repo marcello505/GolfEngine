@@ -12,26 +12,5 @@ struct Transform {
     Vector2 scale;
     Transform() : position{Vector2(0,0)}, rotation{0}, scale{Vector2(1,1)}{}
     Transform(Vector2 p, float r, Vector2 s) : position{p}, rotation{r}, scale{s}{}
-
-    // Operator overloads
-    Transform& operator+=(const Transform& b){
-        position += b.position;
-        rotation += b.rotation;
-        scale *= b.scale;
-        return *this;
-    };
-    Transform& operator-=(const Transform& b){
-        position -= b.position;
-        rotation -= b.rotation;
-        scale *= b.scale;
-        return *this;
-    }
-    Transform operator-(const Transform& b) const{
-        return {
-            position - b.position,
-            rotation - b.rotation,
-            scale * b.scale
-        };
-    }
 };
 #endif //GOLFENGINE_TRANSFORM_H

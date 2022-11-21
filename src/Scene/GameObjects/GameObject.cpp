@@ -196,19 +196,31 @@ void GameObject::setLocalPosition(const Vector2& rPosition) {
 }
 
 Transform GameObject::getWorldTransform() const {
-    Transform result {};
+    Transform result {_localTransform};
 
     if(_parent != nullptr){
-        result += _parent->getWorldTransform();
+        auto world = _parent->getWorldTransform();
+        result.position += world.position;
+        result.rotation += world.rotation;
+        result.scale *= world.scale;
     }
-    result += _localTransform;
 
     return result;
 }
 
 void GameObject::setWorldTransform(const Transform& rTransform) {
-    Transform worldTransform = getWorldTransform();
-    Transform worldAndLocalDiff = worldTransform - getLocalTransform();
+    //Get World Offset
+    Transform worldOffset {};
+    if(_parent){
+        worldOffset = _parent->getWorldTransform();
+    }
 
-    setLocalTransform(rTransform - worldAndLocalDiff);
+    //Get new local by taking off the offset from rTransform
+    Transform localNew {};
+    {
+        localNew.position = rTransform.position - worldOffset.position;
+        localNew.rotation = rTransform.rotation - worldOffset.rotation;
+        localNew.scale = rTransform.scale / worldOffset.scale;
+    }
+    setLocalTransform(localNew);
 }
