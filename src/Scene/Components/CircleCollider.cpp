@@ -31,13 +31,13 @@ void CircleCollider::setActive(bool active) {
 }
 
 void CircleCollider::setParentGameObject(GameObject& gameObject) {
-    _gameObject = std::make_unique<std::reference_wrapper<GameObject>>(gameObject);
+    _gameObject = gameObject;
 }
 
 
 
 RenderShape* CircleCollider::getRenderShape() {
-    if(_gameObject != nullptr){
+    if(_gameObject){
         _renderShape.applyTransform(_gameObject->get().getWorldTransform());
     }
     return &_renderShape;

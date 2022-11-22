@@ -14,7 +14,7 @@ public:
     virtual void onRemove() override {}
     virtual bool getActive() override { return _active; }
     virtual void setActive(bool active) override { _active = active; }
-    void setParentGameObject(GameObject& gameObject) override { _gameObject = std::make_unique<std::reference_wrapper<GameObject>>(gameObject); }
+    void setParentGameObject(GameObject& gameObject) override { _gameObject = gameObject; }
 };
 
 

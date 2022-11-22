@@ -5,6 +5,8 @@
 #ifndef GOLFENGINE_COMPONENT_H
 #define GOLFENGINE_COMPONENT_H
 
+#include <optional>
+
 #include "../GameObjects/GameObject.h"
 
 class GameObject;
@@ -12,7 +14,7 @@ class GameObject;
 class Component {
 protected:
     bool _active;
-    std::unique_ptr<std::reference_wrapper<GameObject>> _gameObject;
+    std::optional<std::reference_wrapper<GameObject>> _gameObject;
 public:
     virtual ~Component() = default;
     virtual void onStart() = 0;

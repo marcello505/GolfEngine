@@ -39,11 +39,11 @@ void BoxCollider::setActive(bool active) {
 }
 
 void BoxCollider::setParentGameObject(GameObject& gameObject) {
-    _gameObject = std::make_unique<std::reference_wrapper<GameObject>>(gameObject);
+    _gameObject = gameObject;
 }
 
 RenderShape* BoxCollider::getRenderShape() {
-    if(_gameObject != nullptr){
+    if(_gameObject){
         _rectRenderShape.applyTransform(_gameObject->get().getWorldTransform());
     }
     return &_rectRenderShape;

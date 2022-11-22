@@ -25,15 +25,15 @@ const RigidBodyDef& RigidBody::getRigidBodyDef() const {
 
 std::vector<Collider*> RigidBody::getColliders() const {
     std::vector<Collider*> result {};
-    if(_gameObject != nullptr){
+    if(_gameObject){
         //TODO make this so that multiple instances of the same type work?
         if(_gameObject->get().hasComponent<BoxCollider>())
             result.push_back(&_gameObject->get().getComponent<BoxCollider>());
 
         if(_gameObject->get().hasComponent<CircleCollider>())
             result.push_back(&_gameObject->get().getComponent<CircleCollider>());
-    }
 
+    }
 
     return result;
 }
@@ -50,7 +50,7 @@ void RigidBody::setActive(bool active) {
 }
 
 void RigidBody::setParentGameObject(GameObject& gameObject) {
-    _gameObject = std::make_unique<std::reference_wrapper<GameObject>>(gameObject);
+    _gameObject = gameObject;
 }
 
 GameObject* RigidBody::getParentGameObject() const {
