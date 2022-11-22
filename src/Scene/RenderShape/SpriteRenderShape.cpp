@@ -7,7 +7,7 @@
 #include <utility>
 
 SpriteRenderShape::SpriteRenderShape(std::string path, Vector2 position, float rotation, Vector2 pixelScale, Rect2 imageSource, Vector2 pivotPoint, Color color)
-    : _position{position}, _path{std::move(path)}, _imageSource{imageSource}, _rotation{rotation}, _color{color},
+    : _position{position},_initialPosition{position} , _path{std::move(path)}, _imageSource{imageSource}, _rotation{rotation}, _color{color},
     _initialPixelScale{pixelScale}, _pivotPoint{pivotPoint}, _pixelScale{pixelScale}
 {
 }
@@ -17,7 +17,8 @@ RenderShapeType SpriteRenderShape::getType() {
 }
 
 void SpriteRenderShape::applyTransform(const Transform& transform) {
-    _position = transform.position;
+    _position.x = _initialPosition.x + transform.position.x;
+    _position.y = _initialPosition.y + transform.position.y;
     _rotation = transform.rotation;
     if(_initialPixelScale.x != 0)
         _pixelScale.x = (1/_initialPixelScale.x) * transform.scale.x;

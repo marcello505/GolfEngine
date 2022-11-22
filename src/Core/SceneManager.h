@@ -5,40 +5,47 @@
 #ifndef SPC_PROJECT_SCENEMANAGER_H
 #define SPC_PROJECT_SCENEMANAGER_H
 
-
-#include <vector>
+#include <map>
 #include "../Scene/Scene.h"
+
+namespace Core {
 
 class SceneManager {
 private:
-    std::vector<Scene> _scenes;
-    Scene _currentScene;
+    std::map<std::string, Scene *> _scenes;
+    Scene* _currentScene;
+
+    static SceneManager* sceneManager;
+
+    SceneManager();
+    ~SceneManager();
 public:
-    /// Sets currentScene with as copy from list _scenes
-    /// \param scene
-    void changeScene(const Scene& scene);
+    /// This method is used to get access to the scene manager instance
+    /// \return Returns the global scene manager instance
+    static SceneManager* GetSceneManager();
+
+    /// Loads new scene by setting the currentScene of a copy of the loaded scene
+    /// \param sceneName Name of scene to load
+    void loadScene(const std::string &sceneName);
 
     /// Adds scene to list of _scenes
-    /// \param scene
-    void addScene(const Scene& scene);
+    /// \param sceneName Name of the new scene
+    /// \param scene Pointer to the scene
+    Scene *createScene(const std::string &sceneName);
 
     /// Returns reference to _currentScene
     /// \return
-    Scene& getCurrentScene();
+    Scene* getCurrentScene();
 
     /// Returns vector of _scenes
     /// \return
-    std::vector<Scene> getScenes() const;
+    std::vector<Scene *> getScenes();
 
-    /// Delets SCene from _scene based on iterator
-    /// \tparam It
-    /// \param iterator
-    template <class It>
-    void deleteScene(It iterator){
-        _scenes.erase(iterator);
-    }
-
+    /// Deletes a scene from the scenes map
+    /// \param sceneName Name of the scene to be deleted
+    void deleteScene(const std::string &sceneName);
 };
 
+}
 
 #endif //SPC_PROJECT_SCENEMANAGER_H

@@ -13,7 +13,7 @@ GameTic GolfEngine::Time::getRenderDeltaTime() const {
 }
 
 void GolfEngine::Time::measurePhysicsCall() {
-    //TODO find a way to shield this
+    //TODO find a way to shield this against misuse (this should only be called by GameLoop)
     auto current = std::chrono::steady_clock::now();
     std::chrono::duration<GameTic, std::milli> elapsed = current - _previousPhysicsCall;
     _previousPhysicsCall = current;
@@ -29,7 +29,7 @@ void GolfEngine::Time::measurePhysicsCall() {
 }
 
 void GolfEngine::Time::measureRenderCall() {
-    //TODO find a way to shield this
+    //TODO find a way to shield this against misuse (this should only be called by GameLoop)
     auto current = std::chrono::steady_clock::now();
     std::chrono::duration<GameTic, std::milli> elapsed = current - _previousRenderCall;
     _previousRenderCall = current;

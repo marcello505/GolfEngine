@@ -5,6 +5,8 @@
 #ifndef SPC_PROJECT_SPRITERENDERSHAPE_H
 #define SPC_PROJECT_SPRITERENDERSHAPE_H
 
+#include <string>
+
 #include "RenderShape.h"
 #include "../Rect2.h"
 #include "../Color.h"
@@ -42,6 +44,7 @@ private:
     Color _color;
     Vector2 _initialPixelScale;
     Vector2 _pivotPoint;
+    Vector2 _initialPosition;
 };
 
 

@@ -20,7 +20,7 @@ public:
     //Fields
     std::unique_ptr<GolfEngine::Time> time = std::make_unique<GolfEngine::Time>();
     //Getters and Setters
-    void setAudioService(AudioService* audioService);
+    void setAudioService(AudioService *audioService);
     void setInputService(InputService* inputService);
     void setRenderService(RenderService* renderService);
     void setPhysicsService(PhysicsService* physicsService);
@@ -33,7 +33,6 @@ public:
     void stop();
 
 private:
-    std::unique_ptr<SceneManager> _sceneManager = std::make_unique<SceneManager>();
     std::unique_ptr<ActionMap> _actionMap = std::make_unique<ActionMap>();
     bool _running {true};
     std::chrono::duration<GameTic, std::milli> _msPerUpdate {1000.f/ 60};
