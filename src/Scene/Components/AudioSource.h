@@ -10,6 +10,7 @@
 #include "Component.h"
 
 class AudioSource : public Component{
+
 public:
     void play(bool loop);
     void stop();

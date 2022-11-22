@@ -12,10 +12,10 @@ float globalVolume = 80; // global volume
 void getInput(SDLAudioService *audioService);
 
 // asset paths
-std::string gunCockingPath = "resources/gun-cocking-01.opus";
-std::string shortShotPath = "resources/short-shot.ogg";
-std::string grenadePath = "resources/grenade.mp3";
-std::string mgsThemePath = "resources/mgs-theme.flac";
+const char* gunCockingPath = R"(..\..\..\validation\US12_AudioService\resources\gun-cocking-01.wav)";
+const char* shortShotPath = R"(..\..\..\validation\US12_AudioService\resources\short-shot.wav)";
+const char* grenadePath = R"(..\..\..\validation\US12_AudioService\resources\grenade.mp3)";
+const char* mgsThemePath = R"(..\..\..\validation\US12_AudioService\resources\mgs-theme.mp3)";
 
 int main(int argc, char* argv[])
 {
@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
     SDL_Window* window = nullptr;
 
     // instantiate audioservice
-    std::unique_ptr<SDLAudioService> _audioService = std::make_unique<SDLAudioService>(3);
+    std::unique_ptr<SDLAudioService>_audioService(new SDLAudioService(3));
 
     //setup audio sources
     _audioService->preloadAudio(gunCockingPath);
