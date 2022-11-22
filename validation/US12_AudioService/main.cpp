@@ -23,16 +23,16 @@ int main(int argc, char* argv[])
     SDL_Window* window = nullptr;
 
     // instantiate audioservice
-    std::unique_ptr<SDLAudioService> _audioService = std::make_unique<SDLAudioService>(3);
+    std::unique_ptr<SDLAudioService> _audioService = std::make_unique<SDLAudioService>();
 
     //setup audio sources
-    _audioService->preloadAudio(gunCockingPath);
-    _audioService->preloadAudio(shortShotPath);
-    _audioService->preloadAudio(grenadePath);
-    _audioService->preloadAudio(mgsThemePath);
+    _audioService->preloadSfx(gunCockingPath);
+    _audioService->preloadSfx(shortShotPath);
+    _audioService->preloadSfx(grenadePath);
+    _audioService->preloadMusic(mgsThemePath);
 
     //play music on start
-    _audioService->playOnChannel(0, mgsThemePath, 80);
+    _audioService->playMusic(mgsThemePath, 0.5f, true);
 
     // initialize video
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -50,7 +50,7 @@ int main(int argc, char* argv[])
 
     //cleanup
     SDL_DestroyWindow(window);
-    _audioService->clearAudio();
+    _audioService->clearCache();
     return 0;
 }
 
@@ -62,44 +62,41 @@ void getInput(SDLAudioService *audioService) {
         }
         else if(e.type == SDL_KEYDOWN){
             if(e.key.keysym.sym == SDLK_LEFT){ // for playing a sound
-                audioService->playOnChannel(1, gunCockingPath, 100);
+                audioService->playSfx(gunCockingPath, 1.0f);
             }
             else if(e.key.keysym.sym == SDLK_RIGHT){ // for playing a sound
-                audioService->playOnChannel(2, shortShotPath, 100);
+//                audioService->playSfx(shortShotPath, 1.0f);
+                audioService->playSfx(grenadePath, 0.5f);
             }
             else if(e.key.keysym.sym == SDLK_UP){ //for playing a sound
-                audioService->playOnChannel(3, grenadePath, 100);
+                audioService->playSfx(grenadePath, 1.0f);
             }
             else if(e.key.keysym.sym == SDLK_DOWN){ // for toggling pause / resuming of audio
-                paused = !paused;
-                if(paused)
-                {
-                    audioService->pauseAudio(0);
-                    continue;
-                }
-                audioService->resumeAudio(0);
+                audioService->toggleMusic();
             }
-            else if(e.key.keysym.sym == SDLK_KP_ENTER){ // for halting audio
-                audioService->haltAudio(0);
+            else if(e.key.keysym.sym == SDLK_MINUS){ // for setting master volume down
+                audioService->setMasterVolume(audioService->getMasterVolume() - 0.1f);
             }
-            else if(e.key.keysym.sym == SDLK_LEFTBRACKET){ // for setting volume of channel down
-                channelVolumes[2] -= 1;
-                audioService->setVolumeChannel(2,  channelVolumes[2]);
+            else if(e.key.keysym.sym == SDLK_EQUALS){ // for setting master volume up
+                audioService->setMasterVolume(audioService->getMasterVolume() + 0.1f);
             }
-            else if(e.key.keysym.sym == SDLK_RIGHTBRACKET){ // for setting volume of channel up
-                channelVolumes[2] += 1;
-                audioService->setVolumeChannel(2, channelVolumes[2]);
+            else if(e.key.keysym.sym == SDLK_9){ // for setting music volume down
+                audioService->setMusicVolume(audioService->getMusicVolume() - 0.1f);
             }
-            else if(e.key.keysym.sym == SDLK_BACKSLASH){ // for setting global volume down
-                globalVolume -= 1;
-                audioService->setGlobalVolume(globalVolume);
+            else if(e.key.keysym.sym == SDLK_0){ // for setting music volume down
+                audioService->setMusicVolume(audioService->getMusicVolume() + 0.1f);
             }
-            else if(e.key.keysym.sym == SDLK_SLASH){ // for setting global volume up
-                globalVolume += 1;
-                audioService->setGlobalVolume(globalVolume);
+            else if(e.key.keysym.sym == SDLK_7){ // for setting music volume down
+                audioService->setSfxVolume(audioService->getSfxVolume() - 0.1f);
             }
-            else if(e.key.keysym.sym == SDLK_KP_3){ // for playing sound after halt
-                audioService->playOnChannel(0, mgsThemePath, 80);
+            else if(e.key.keysym.sym == SDLK_8){ // for setting music volume down
+                audioService->setSfxVolume(audioService->getSfxVolume() + 0.1f);
+            }
+            else if(e.key.keysym.sym == SDLK_RETURN){ // for playing sound after halt
+                audioService->playMusic(mgsThemePath, 1.0f, false);
+            }
+            else if(e.key.keysym.sym == SDLK_BACKSPACE){ // for halting audio
+                audioService->stopMusic();
             }
         }
     }

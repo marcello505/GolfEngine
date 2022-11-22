@@ -4,13 +4,13 @@
 
 #include "SDLAudioService.h"
 #include <iostream>
+#include <sstream>
 
-SDLAudioService::SDLAudioService(int amountOfChannels)
+SDLAudioService::SDLAudioService()
 {
-    _amountOfChannels = amountOfChannels;
-    int frequency = 48000; //frequency, set to 48000 as mentioned in https://wiki.libsdl.org/SDL_mixer/Mix_OpenAudioDevice as a reasonable default.
-    Uint16 audio_format = AUDIO_F32SYS ; //format
-    int audio_channels = _amountOfChannels; //channels for use
+    int frequency = MIX_DEFAULT_FREQUENCY;
+    Uint16 audio_format = AUDIO_S16SYS;
+    int audio_channels = MIX_DEFAULT_CHANNELS; //channels for use
     int chunk_size = 2048; //chunksize
 
     if (Mix_OpenAudio(frequency, audio_format, audio_channels, chunk_size) != 0) //Open the default audio device for playback
@@ -19,74 +19,180 @@ SDLAudioService::SDLAudioService(int amountOfChannels)
         exit(-1);
     }
 
+    //Set all _sfxFragmentsVolume to a default of 1.0f
+    for(int i = 0; i < _sfxFragmentsVolume.max_size(); ++i){
+        _sfxFragmentsVolume[i] = 1.0f;
+    }
 }
 
-void SDLAudioService::playOnChannel(int channel, const std::string &path, float volume)
+void SDLAudioService::playSfx(const std::string& path, float volume) {
+    //Play sfx
+    Mix_Chunk* chunk = getChunk(path);
+    int channelNr = Mix_PlayChannel(-1, chunk, 0);
+
+    if(channelNr != -1){
+        _sfxFragmentsVolume[channelNr] = volume;
+        updateSfxVolume(channelNr);
+    }
+}
+
+void SDLAudioService::playMusic(const std::string& path, float volume, bool loop) {
+    Mix_Music* music = getMusic(path);
+    _musicFragmentVolume = clampFloat01(volume);
+
+    Mix_PlayMusic(music, loop ? -1 : 0);
+    updateMusicVolume();
+}
+
+
+void SDLAudioService::pauseMusic() {
+    Mix_PauseMusic();
+}
+
+void SDLAudioService::resumeMusic() {
+    Mix_ResumeMusic();
+}
+
+void SDLAudioService::stopMusic() {
+    Mix_HaltMusic();
+}
+
+void SDLAudioService::stopSfx() {
+    Mix_HaltChannel(-1);
+}
+
+float SDLAudioService::getMasterVolume() {
+    return _masterVolume;
+}
+
+float SDLAudioService::getMusicVolume() {
+    return _musicVolume;
+}
+
+float SDLAudioService::getSfxVolume() {
+    return _sfxVolume;
+}
+
+float SDLAudioService::clampFloat01(float value) {
+    if(value < 0.0f) value = 0.0f;
+    if(value > 1.0f) value = 1.0f;
+    return value;
+}
+
+void SDLAudioService::setMasterVolume(float volume)
 {
-    if (!(_sounds.count(path)) > 0 && channelExists(channel)) //check if chunk and sound exist
-    {
-        std::cout << "Sound or channel doesnt exist.\n";
+    _masterVolume = clampFloat01(volume);
+    updateMusicVolume();
+    updateSfxVolume();
+}
+
+void SDLAudioService::setMusicVolume(float volume) {
+    _musicVolume = clampFloat01(volume);
+    updateMusicVolume();
+}
+
+void SDLAudioService::setSfxVolume(float volume) {
+    _sfxVolume = clampFloat01(volume);
+    updateSfxVolume();
+}
+
+void SDLAudioService::preloadSfx(const std::string& path) {
+    if(hasCachedChunk(path)){
+        //Already loaded, thus return.
         return;
     }
-    Mix_VolumeChunk(_sounds.find(path)->second, volume); // set volume of chunk
-    Mix_PlayChannel(channel, _sounds.find(path)->second, 0); // play chunk on channel, without loop
-}
 
-void SDLAudioService::preloadAudio(const std::string path)
-{
-    Mix_Chunk* tmpChunk = Mix_LoadWAV(path.c_str()); // load in chunk with path
-
-    if (tmpChunk != nullptr) //if chunk is made succesfully
-    {
-        _sounds.insert(std::pair<std::string, Mix_Chunk*>(path, tmpChunk));  // insert chunk into list
-        std::cout << " Sound is Ready, path: " << path << '\n';
+    Mix_Chunk* chunk = Mix_LoadWAV(path.c_str());
+    if(chunk){
+        _cachedChunks[path] = chunk;
     }
-    else
-    {
-        std::cout << "Couldn't init audio: " << Mix_GetError() << '\n';
+    else{
+        std::stringstream errMessage {};
+        errMessage << "Couldn't load Sfx: " << Mix_GetError();
+        throw std::runtime_error(errMessage.str());
     }
 }
 
-void SDLAudioService::resumeAudio(int channel)
-{
-    if(channelExists(channel)){ // if channel exists
-        Mix_Resume(channel); // resume audio
+void SDLAudioService::preloadMusic(const std::string& path) {
+    if(hasCachedMusic(path)){
+        //Already loaded, thus return.
+        return;
+    }
+
+    Mix_Music* music = Mix_LoadMUS(path.c_str());
+    if(music){
+        _cachedMusic[path] = music;
+    }
+    else{
+        std::stringstream errMessage {};
+        errMessage << "Couldn't load music: " << Mix_GetError();
+        throw std::runtime_error(errMessage.str());
     }
 }
 
-void SDLAudioService::pauseAudio(int channel)
-{
-    if(channelExists(channel)) { // if channel exists
-        Mix_Pause(channel); // pause audio
+void SDLAudioService::clearCache() {
+    for(auto& item : _cachedChunks){
+        Mix_FreeChunk(item.second);
+    }
+    _cachedChunks.clear();
+
+    for(auto& item : _cachedMusic){
+        Mix_FreeMusic(item.second);
+    }
+    _cachedMusic.clear();
+}
+
+bool SDLAudioService::isMusicPlaying() {
+    return Mix_PlayingMusic() == 1;
+}
+
+bool SDLAudioService::isMusicPaused() {
+    return Mix_PausedMusic() == 1;
+}
+
+bool SDLAudioService::hasCachedChunk(const std::string& path) {
+    return _cachedChunks.find(path) != _cachedChunks.end();
+}
+
+bool SDLAudioService::hasCachedMusic(const std::string& path) {
+    return _cachedMusic.find(path) != _cachedMusic.end();
+}
+
+Mix_Chunk* SDLAudioService::getChunk(const std::string& path) {
+    if(!hasCachedChunk(path)){
+        //Not cached
+        preloadSfx(path);
+    }
+    return _cachedChunks[path];
+}
+
+Mix_Music* SDLAudioService::getMusic(const std::string& path) {
+    if(!hasCachedMusic(path)){
+        //Not cached
+        preloadMusic(path);
+    }
+    return _cachedMusic[path];
+}
+
+void SDLAudioService::toggleMusic() {
+    if(isMusicPaused()){
+        resumeMusic();
+    }
+    else{
+        pauseMusic();
     }
 }
 
-void SDLAudioService::haltAudio(int channel)
-{
-    if(channelExists(channel)) { // if channel exists
-        Mix_HaltChannel(channel); // halt audio
+void SDLAudioService::updateMusicVolume(){
+    Mix_VolumeMusic(128 * _masterVolume * _musicVolume * _musicFragmentVolume);
+}
+
+void SDLAudioService::updateSfxVolume(int channel) {
+    Mix_Volume(channel, 128 * _masterVolume * _sfxVolume * _sfxFragmentsVolume[channel]);
+}
+
+void SDLAudioService::updateSfxVolume() {
+    for(int i = 0; i < _sfxFragmentsVolume.max_size(); i++){
+        updateSfxVolume(i);
     }
-}
-
-void SDLAudioService::setVolumeChannel(int channel, float volume)
-{
-    if(channelExists(channel)) // if channel exists
-    {
-        Mix_Volume(channel, volume); // set volume of channel
-    }
-}
-
-void SDLAudioService::setGlobalVolume(float volume)
-{
-    Mix_Volume(-1, volume); // set global volume
-}
-
-void SDLAudioService::clearAudio()
-{
-    _sounds.clear(); // clear audiolist
-}
-
-bool SDLAudioService::channelExists(int channel)
-{
-    return channel > -1 && channel < _amountOfChannels; // channel is in range between 0 and amount of channels
 }

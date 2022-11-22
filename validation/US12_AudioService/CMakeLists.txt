@@ -11,7 +11,7 @@ add_custom_target(POC_US12_AudioService_Deps ALL
         COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_SOURCE_DIR}/resources ${CMAKE_CURRENT_BINARY_DIR}/resources)
 
 # Main Project
-add_executable(AudioService_PoC main.cpp)
-target_link_libraries(AudioService_PoC GolfEngine)
-target_include_directories(AudioService_PoC PUBLIC ../../src)
-add_dependencies(AudioService_PoC POC_US12_AudioService_Deps)
+add_executable(POC_US12_AudioService main.cpp)
+target_link_libraries(POC_US12_AudioService GolfEngine)
+target_include_directories(POC_US12_AudioService PUBLIC ../../src)
+add_dependencies(POC_US12_AudioService POC_US12_AudioService_Deps)
