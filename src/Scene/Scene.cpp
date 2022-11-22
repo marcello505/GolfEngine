@@ -1,54 +1,32 @@
 //
-// Created by marce on 02/11/2022.
+// Created by conner on 11/21/2022.
 //
 
 #include "Scene.h"
+#include "GameObjects/GameObject.h"
 
-Scene::Scene() : _rootGameObject{nullptr} {
-    _rootGameObject = new GameObject(this);
+Scene::Scene() {
+    _gameObjects.push_back(std::make_unique<GameObject>());
+    _rootGameObject = std::make_unique<std::reference_wrapper<GameObject>>(*_gameObjects.back());
 }
 
-Scene::~Scene() {
-    delete _rootGameObject;
+void Scene::startScene() {
+    for(auto& go : _gameObjects)
+        if(go->getActive())
+            go->onStart();
 }
 
-Scene::Scene(const Scene& other) {
-    _rootGameObject = nullptr;
-
-    // Copy root GameObject
-    // Copy constructor of GameObject will copy its children and in turn the entire scene
-    _rootGameObject = new GameObject(*other._rootGameObject);
+void Scene::updateScene() {
+    for(auto& go : _gameObjects)
+        if(go->getActive())
+            go->onUpdate();
 }
-
-Scene& Scene::operator=(const Scene& other) {
-    if(this != &other){
-        // Delete existing root GameObject
-        delete _rootGameObject;
-
-        // Copy root GameObject
-        // Copy constructor of GameObject will copy its children and in turn the entire scene
-        _rootGameObject = new GameObject(*other._rootGameObject);
-    }
-    return *this;
-}
-
 
 void Scene::startRecording(const std::string& actionToLock){}
 void Scene::stopRecording(){}
 void Scene::playRecording(){}
 
-void Scene::setRootGameObject(GameObject* gameObject) {
-    _rootGameObject = gameObject;
+GameObject& Scene::getRootGameObject() const{
+    return _rootGameObject->get();
 }
 
-GameObject* Scene::getRootGameObject() {
-    return _rootGameObject;
-}
-
-void Scene::startScene() {
-    _rootGameObject->onStart();
-}
-
-void Scene::updateScene() {
-    _rootGameObject->onUpdate();
-}

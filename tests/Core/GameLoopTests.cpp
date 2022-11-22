@@ -49,10 +49,10 @@ namespace GameLoopTests{
         }
 
         //Unused
-        void addDrawable(Drawable* drawable) override {}
-        void removeDrawable(Drawable* drawable) override {}
         void setScreenSize(int width, int height) override {}
-        void setFullScreen(bool fullscreen) override {}
+        void removeDrawable(Drawable* drawable) override {}
+        void addDrawable(Drawable* drawable) override {}
+        void setFullScreen(bool fullScreen) override {};
     };
 
     class DummyPhysicsService : public PhysicsService{
