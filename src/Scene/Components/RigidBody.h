@@ -11,6 +11,7 @@
 #include "RigidBodyTypes.h"
 #include "Collider.h"
 #include "Component.h"
+#include <optional>
 
 /// This contains all the initial values of the RigidBody.
 /// If you want to adjust any of these properties during runtime,
@@ -38,8 +39,7 @@ public:
     void onRemove() override;
     bool getActive() override;
     void setActive(bool active) override;
-    void setParentGameObject(GameObject* gameObject) override;
-    Component* clone() const override;
+    void setParentGameObject(GameObject& gameObject) override;
 
     //Getters
     const RigidBodyDef& getRigidBodyDef() const;
@@ -55,7 +55,6 @@ public:
     void setGravityScale(float gravityScale);
 private:
     bool _active {true};
-    GameObject* _parent {};
     RigidBodyDef _rigidBodyDef;
 };
 

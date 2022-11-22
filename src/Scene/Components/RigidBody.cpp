@@ -25,15 +25,15 @@ const RigidBodyDef& RigidBody::getRigidBodyDef() const {
 
 std::vector<Collider*> RigidBody::getColliders() const {
     std::vector<Collider*> result {};
-    if(_parent != nullptr){
+    if(_gameObject){
         //TODO make this so that multiple instances of the same type work?
-        auto* pBoxCollider = _parent->getComponent<BoxCollider>();
-        auto* pCircleCollider = _parent->getComponent<CircleCollider>();
+        if(_gameObject->get().hasComponent<BoxCollider>())
+            result.push_back(&_gameObject->get().getComponent<BoxCollider>());
 
-        if(pBoxCollider != nullptr) result.push_back(pBoxCollider);
-        if(pCircleCollider != nullptr) result.push_back(pCircleCollider);
+        if(_gameObject->get().hasComponent<CircleCollider>())
+            result.push_back(&_gameObject->get().getComponent<CircleCollider>());
+
     }
-
 
     return result;
 }
@@ -49,16 +49,16 @@ void RigidBody::setActive(bool active) {
     }
 }
 
-void RigidBody::setParentGameObject(GameObject* gameObject) {
-    _parent = gameObject;
-}
-
-Component* RigidBody::clone() const {
-    return new RigidBody{*this};
+void RigidBody::setParentGameObject(GameObject& gameObject) {
+    _gameObject = gameObject;
 }
 
 GameObject* RigidBody::getParentGameObject() const {
-    return _parent;
+    // TODO doe dit op een manier waar geen pointers gebruikt worden.
+    if(_gameObject)
+        return &_gameObject->get();
+    else
+        return nullptr;
 }
 
 void RigidBody::applyForceToCenter(const Vector2& force) {

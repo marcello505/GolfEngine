@@ -1,28 +1,28 @@
 //
-// Created by marce on 02/11/2022.
+// Created by conner on 11/21/2022.
 //
 
 #ifndef GOLFENGINE_GAMEOBJECT_H
 #define GOLFENGINE_GAMEOBJECT_H
 
+#include <memory>
+#include <optional>
 #include <string>
 #include <vector>
 #include "../Transform.h"
 #include "../Components/Component.h"
-#include "../Scene.h"
 #include <algorithm>
+#include <stdexcept>
 
 // Forward declaration
-class Scene;
 class Component;
 
 class GameObject {
-private:
+protected:
     bool _active;
-    Scene* _scene;
-    GameObject* _parent {};
-    std::vector<GameObject*> _children;
-    std::vector<Component*>* _components;
+    std::unique_ptr<std::reference_wrapper<GameObject>> _parent;
+    std::vector<std::reference_wrapper<GameObject>> _children;
+    std::vector<std::unique_ptr<Component>> _components;
     Transform _localTransform {};
 public:
     std::string name;
@@ -32,48 +32,70 @@ public:
 
 public:
     /// GameObject constructor
-    /// \param scene The scene the GameObject belongs to
-    /// \param parent The parent of the GameObject (when nullptr, root GameObject of scene will become partner)
     /// \param name The name of the GameObject (nullptr is results in "")
     /// \param tag The tag of the GameObject (nullptr results in "default")
-    explicit GameObject(Scene* scene, GameObject* parent = nullptr, const char* name = nullptr, const char* tag = nullptr);
+    GameObject(const char* name = nullptr, const char* tag = nullptr);
     ~GameObject();
-    explicit GameObject(const GameObject& other);
-    GameObject& operator=(const GameObject& other);
-    explicit GameObject(GameObject&& other) = delete;
-    GameObject& operator=(GameObject&& other) = delete;
 
     /// Function creates a new Component for the GameObject
     /// \tparam C Component to create
     /// \tparam Args Arguments needed for constructor of C
     /// \return A reference to newly created component
     template<typename C, typename ... Args>
-    C* addComponent(Args... args) {
-        auto* newComp = _components->emplace_back(new C(std::forward<Args>(args)...));
-        newComp->setParentGameObject(this);
-        return reinterpret_cast<C*>(newComp);
+    C& addComponent(Args... args) {
+        C& newComp = reinterpret_cast<C&>(*_components.emplace_back(std::make_unique<C>(args...)));
+        newComp.setParentGameObject(*this);
+        return newComp;
     };
 
     /// Function retrieves a reference to a component of type C
     /// \tparam C Component to retrieve
     /// \return A reference to the found component, or nullptr when component is not found
     template<typename C>
-    C* getComponent() const {
-        if(!_components->empty()){
-            for(auto* comp : *_components){
+    C& getComponent() const {
+        if(!_components.empty()){
+            for(auto& comp : _components){
                 // Try to cast to desired component
-                auto castedComp = dynamic_cast<C*>(comp);
+                auto* castedComp = dynamic_cast<C*>(comp.get());
                 // Return if cast was successful
                 if(castedComp)
-                    return castedComp;
+                    return reinterpret_cast<C&>(*comp.get());
             }
         }
-        return nullptr;
+        throw std::runtime_error("No component found of given type in " + name);
     };
 
     /// Removes component from GameObject
-    /// \param component a reference to the component that needs to be removed
-    void removeComponent(Component& component);
+    /// \tparam C Component to remove
+    template<typename C>
+    void removeComponent(){
+        if(!_components.empty()){
+            for(auto comp = _components.begin(); comp < _components.end(); comp++){
+                // Try to cast to desired component
+                auto* castedComp = dynamic_cast<C*>((*comp).get());
+                // Return if cast was successful
+                if(castedComp)
+                    _components.erase(comp);
+            }
+        }
+    }
+
+    /// Checks if the GameObject has a component of type C
+    /// \tparam C The type of component to check
+    /// \return true if component is present in GameObject
+    template<typename C>
+    bool hasComponent(){
+        if(!_components.empty()){
+            for(auto& comp : _components){
+                // Try to cast to desired component
+                auto* castedComp = dynamic_cast<C*>(comp.get());
+                // Return if cast was successful
+                if(castedComp)
+                    return true;
+            }
+        }
+        return false;
+    }
 
     [[nodiscard]] bool isActiveInWorld() const;
     [[nodiscard]] bool isActiveSelf() const;
@@ -82,10 +104,11 @@ public:
     void onStart();
     void onUpdate();
 
-    void addChild(GameObject* gameObject);
-    std::vector<GameObject*>& children();
-    GameObject* childAt(int index);
+    std::vector<std::reference_wrapper<GameObject>>& children();
+    GameObject& childAt(int index);
     [[nodiscard]] GameObject& parent() const;
+    void setParent(GameObject& parent);
+    void addChild(GameObject &object);
 
     /// Return the local transform
     /// \return const Transform reference to the local transform

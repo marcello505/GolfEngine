@@ -1,36 +1,46 @@
 //
-// Created by marce on 02/11/2022.
+// Created by conner on 11/21/2022.
 //
 
 #ifndef GOLFENGINE_SCENE_H
 #define GOLFENGINE_SCENE_H
-#include <string>
-#include <vector>
-#include "GameObjects/GameObject.h"
 
-// Forward declaration
-class GameObject;
+#include <string>
+#include "GameObjects/GameObject.h"
+#include <optional>
 
 class Scene {
-private:
-    GameObject* _rootGameObject;
+protected:
+    std::vector<std::unique_ptr<GameObject>> _gameObjects;
+    std::unique_ptr<std::reference_wrapper<GameObject>> _rootGameObject;
 public:
-   Scene();
-   ~Scene();
-   Scene(const Scene& other);
-   Scene& operator=(const Scene& other);
-   explicit Scene(Scene&& other) = delete;
-   Scene& operator=(Scene&& other) = delete;
+    Scene();
 
-   void startRecording(const std::string& actionToLock);
-   void stopRecording();
-   void playRecording();
+    GameObject& getRootGameObject() const;
 
-   void startScene();
-   void updateScene();
+    virtual void startRecording(const std::string& actionToLock);
+    virtual void stopRecording();
+    virtual void playRecording();
 
-   void setRootGameObject(GameObject* gameObject);
-   GameObject* getRootGameObject();
+    virtual void startScene();
+    virtual void updateScene();
+
+    /// Creates a new GameObject
+    /// \tparam GO Type of GameObject to be created
+    /// \param parent The parent of the GameObject
+    /// \return A reference to the newly created GameObject
+    template<typename GO>
+    GO& createNewGameObject(GameObject& parent){
+        _gameObjects.emplace_back(std::make_unique<GO>());
+        GO& newGO = reinterpret_cast<GO&>(*_gameObjects.back());
+        newGO.setParent(parent);
+        parent.addChild(newGO);
+        return newGO;
+    }
+    template<typename GO>
+    GO& createNewGameObject(){
+        return createNewGameObject<GO>(_rootGameObject->get());
+    }
 };
 
 
