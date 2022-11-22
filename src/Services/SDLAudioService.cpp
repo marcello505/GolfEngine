@@ -8,10 +8,10 @@
 SDLAudioService::SDLAudioService(int amountOfChannels)
 {
     _amountOfChannels = amountOfChannels;
-    int frequency = 22050; //frequency
-    Uint16 audio_format = AUDIO_S16SYS ; //format
+    int frequency = 48000; //frequency, set to 48000 as mentioned in https://wiki.libsdl.org/SDL_mixer/Mix_OpenAudioDevice as a reasonable default.
+    Uint16 audio_format = AUDIO_F32SYS ; //format
     int audio_channels = _amountOfChannels; //channels for use
-    int chunk_size = 4096; //chunksize
+    int chunk_size = 2048; //chunksize
 
     if (Mix_OpenAudio(frequency, audio_format, audio_channels, chunk_size) != 0) //Open the default audio device for playback
     {
