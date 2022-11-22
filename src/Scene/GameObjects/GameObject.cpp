@@ -89,7 +89,7 @@ Transform GameObject::getWorldTransform() const {
     Transform result {_localTransform};
 
     if(_parent != nullptr){
-        auto world = _parent->getWorldTransform();
+        auto world = _parent->get().getWorldTransform();
         result.position += world.position;
         result.rotation += world.rotation;
         result.scale *= world.scale;
@@ -102,7 +102,7 @@ void GameObject::setWorldTransform(const Transform& rTransform) {
     //Get World Offset
     Transform worldOffset {};
     if(_parent){
-        worldOffset = _parent->getWorldTransform();
+        worldOffset = _parent->get().getWorldTransform();
     }
 
     //Get new local by taking off the offset from rTransform

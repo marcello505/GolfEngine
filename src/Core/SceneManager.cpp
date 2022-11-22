@@ -39,4 +39,8 @@ namespace GolfEngine {
     bool SceneManager::hasCurrentScene() {
         return _currentScene != nullptr;
     }
+
+    void SceneManager::clearScenes() {
+        _scenes.erase(_scenes.begin(), _scenes.end());
+    }
 }

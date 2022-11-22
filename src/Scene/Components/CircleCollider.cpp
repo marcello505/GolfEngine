@@ -30,17 +30,15 @@ void CircleCollider::setActive(bool active) {
     _active = active;
 }
 
-void CircleCollider::setParentGameObject(GameObject* gameObject) {
-    _parent = gameObject;
+void CircleCollider::setParentGameObject(GameObject& gameObject) {
+    _gameObject = std::make_unique<std::reference_wrapper<GameObject>>(gameObject);
 }
 
-Component* CircleCollider::clone() const {
-    return nullptr;
-}
+
 
 RenderShape* CircleCollider::getRenderShape() {
-    if(_parent != nullptr){
-        _renderShape.applyTransform(_parent->getWorldTransform());
+    if(_gameObject != nullptr){
+        _renderShape.applyTransform(_gameObject->get().getWorldTransform());
     }
     return &_renderShape;
 }

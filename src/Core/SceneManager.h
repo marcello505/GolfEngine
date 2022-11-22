@@ -44,7 +44,12 @@ public:
     /// \return
     Scene& getCurrentScene();
 
+    /// Checks if there is an active scene
+    /// \return true if a scene is active
     bool hasCurrentScene();
+
+    /// Clears the scenes map by deleting factories
+    void clearScenes();
 
     /// Adds a scene to the scene list
     /// \param sceneName Name of the scene

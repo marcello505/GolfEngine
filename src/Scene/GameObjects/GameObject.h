@@ -56,7 +56,7 @@ public:
         if(!_components.empty()){
             for(auto& comp : _components){
                 // Try to cast to desired component
-                auto* castedComp = reinterpret_cast<C*>(comp.get());
+                auto* castedComp = dynamic_cast<C*>(comp.get());
                 // Return if cast was successful
                 if(castedComp)
                     return reinterpret_cast<C&>(*comp.get());
@@ -72,7 +72,7 @@ public:
         if(!_components.empty()){
             for(auto comp = _components.begin(); comp < _components.end(); comp++){
                 // Try to cast to desired component
-                auto* castedComp = reinterpret_cast<C*>((*comp).get());
+                auto* castedComp = dynamic_cast<C*>((*comp).get());
                 // Return if cast was successful
                 if(castedComp)
                     _components.erase(comp);
@@ -88,7 +88,7 @@ public:
         if(!_components.empty()){
             for(auto& comp : _components){
                 // Try to cast to desired component
-                auto* castedComp = reinterpret_cast<C*>(comp.get());
+                auto* castedComp = dynamic_cast<C*>(comp.get());
                 // Return if cast was successful
                 if(castedComp)
                     return true;
