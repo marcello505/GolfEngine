@@ -46,10 +46,6 @@ public:
 
     bool hasCurrentScene();
 
-    /// Deletes a scene from the scenes map
-    /// \param sceneName Name of the scene to be deleted
-    void deleteScene(const std::string &sceneName);
-
     /// Adds a scene to the scene list
     /// \param sceneName Name of the scene
     /// \param newScene Pointer reference to the scene object

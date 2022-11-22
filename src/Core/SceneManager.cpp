@@ -36,12 +36,6 @@ namespace GolfEngine {
         return *_currentScene;
     }
 
-    void SceneManager::deleteScene(const std::string& sceneName) {
-        auto sceneIt = _scenes.find(sceneName);
-        if (sceneIt != _scenes.end())
-            _scenes.erase(sceneIt);
-    }
-
     bool SceneManager::hasCurrentScene() {
         return _currentScene != nullptr;
     }
