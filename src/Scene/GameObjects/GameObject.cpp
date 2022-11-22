@@ -72,3 +72,45 @@ void GameObject::setParent(GameObject& parent) {
 void GameObject::addChild(GameObject& child) {
     _children.emplace_back(child);
 }
+
+const Transform& GameObject::getLocalTransform() const {
+    return _localTransform;
+}
+
+void GameObject::setLocalTransform(const Transform& rTransform) {
+    _localTransform = rTransform;
+}
+
+void GameObject::setLocalPosition(const Vector2& rPosition) {
+    _localTransform.position = rPosition;
+}
+
+Transform GameObject::getWorldTransform() const {
+    Transform result {_localTransform};
+
+    if(_parent != nullptr){
+        auto world = _parent->getWorldTransform();
+        result.position += world.position;
+        result.rotation += world.rotation;
+        result.scale *= world.scale;
+    }
+
+    return result;
+}
+
+void GameObject::setWorldTransform(const Transform& rTransform) {
+    //Get World Offset
+    Transform worldOffset {};
+    if(_parent){
+        worldOffset = _parent->getWorldTransform();
+    }
+
+    //Get new local by taking off the offset from rTransform
+    Transform localNew {};
+    {
+        localNew.position = rTransform.position - worldOffset.position;
+        localNew.rotation = rTransform.rotation - worldOffset.rotation;
+        localNew.scale = rTransform.scale / worldOffset.scale;
+    }
+    setLocalTransform(localNew);
+}

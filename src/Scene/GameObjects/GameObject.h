@@ -9,6 +9,7 @@
 #include <optional>
 #include <string>
 #include <vector>
+#include "../Transform.h"
 #include "../Components/Component.h"
 #include <algorithm>
 #include <stdexcept>
@@ -22,6 +23,7 @@ protected:
     std::unique_ptr<std::reference_wrapper<GameObject>> _parent;
     std::vector<std::reference_wrapper<GameObject>> _children;
     std::vector<std::unique_ptr<Component>> _components;
+    Transform _localTransform {};
 public:
     std::string name;
     std::string tag;
@@ -107,6 +109,19 @@ public:
     [[nodiscard]] GameObject& parent() const;
     void setParent(GameObject& parent);
     void addChild(GameObject &object);
+
+    /// Return the local transform
+    /// \return const Transform reference to the local transform
+    const Transform& getLocalTransform() const;
+    void setLocalTransform(const Transform& rTransform);
+    void setLocalPosition(const Vector2& rPosition);
+    /// Calculates the current world transform and returns it
+    /// \return A Transform instance which is the current world transform
+    Transform getWorldTransform() const;
+
+    /// Sets the current local transform so that it matches the given world transform
+    /// \param rTransform the world transform that should be set
+    void setWorldTransform(const Transform& rTransform);
 };
 
 

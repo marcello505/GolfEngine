@@ -5,7 +5,7 @@
 #include "RectRenderShape.h"
 
 RectRenderShape::RectRenderShape(Rect2 rect, float rotation, Vector2 pivotPoint, Color color)
-    : _rect{rect}, _rotation{rotation}, _color{color}, _initialSize{rect.size}, _pivotPoint{pivotPoint}, _initialPivotPoint{pivotPoint}
+    : _rect{rect}, _initialPosition{rect.position}, _rotation{rotation}, _color{color}, _initialSize{rect.size}, _pivotPoint{pivotPoint}, _initialPivotPoint{pivotPoint}
 {
 }
 
@@ -26,7 +26,8 @@ Color RectRenderShape::color() const {
 }
 
 void RectRenderShape::applyTransform(const Transform& transform) {
-    _rect.position = transform.position;
+    _rect.position.x = _initialPosition.x + transform.position.x;
+    _rect.position.y = _initialPosition.y + transform.position.y;
     _rotation = transform.rotation;
     _rect.size.x = _initialSize.x * transform.scale.x;
     _rect.size.y = _initialSize.y * transform.scale.y;
