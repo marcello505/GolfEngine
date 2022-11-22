@@ -6,115 +6,57 @@
 #include "Core/SceneManager.h"
 #include "Scene/Components/BehaviourScript.h"
 
-namespace SceneTests{
-    class DummyScript : public BehaviourScript{};
 
-    class DummyGameManager : public BehaviourScript{
+namespace SceneTests{
+    class DummyScript : public BehaviourScript{
+    private:
+        int count = 0;
     public:
-        void restartLevel(){
-            Core::SceneManager::GetSceneManager()->loadScene("main");
+        void onStart() override{
+            count = 1;
+        }
+        [[nodiscard]] int getCount() const {return count;}
+    };
+
+    class PlayerDummy : public GameObject{
+    public:
+        explicit PlayerDummy(const char* name = nullptr, const char* tag = nullptr)
+        : GameObject(name, tag) {
+            auto& c = addComponent<DummyScript>();
+        }
+    };
+
+    class MainSceneFactory : public ISceneFactory{
+        void build(Scene& scene) const override{
+            auto& go = scene.createNewGameObject<PlayerDummy>();
         }
     };
 }
 
-TEST_CASE("SceneManger is able to add Scene"){
-    //Arrange
-    //Act
-    Core::SceneManager::GetSceneManager()->createScene("main");
-
-    //Assert
-    CHECK_EQ(1,Core::SceneManager::GetSceneManager()->getScenes().size());
-
-    // Cleanup
-    Core::SceneManager::GetSceneManager()->deleteScene("main");
-}
-
-TEST_CASE("SceneManger is able to change Scene"){
-    //Arrange
-    auto* sm = Core::SceneManager::GetSceneManager();
-
-    Core::SceneManager::GetSceneManager()->createScene("main");
-    auto prevScene = Core::SceneManager::GetSceneManager()->getCurrentScene();
-
-    //Act
-    Core::SceneManager::GetSceneManager()->loadScene("main");
-    auto currentScene = Core::SceneManager::GetSceneManager()->getCurrentScene();
-
-    //Assert
-    CHECK_NE(prevScene, currentScene);
-
-    // Cleanup
-    Core::SceneManager::GetSceneManager()->deleteScene("main");
-}
-
-TEST_CASE("SceneManger is able to delete Scene"){
-    //Arrange
-    Core::SceneManager::GetSceneManager()->createScene("main");
-    int beginSize = Core::SceneManager::GetSceneManager()->getScenes().size();
-
-    //Act
-    Core::SceneManager::GetSceneManager()->deleteScene("main");
-
-    //Assert
-    CHECK_EQ(0,Core::SceneManager::GetSceneManager()->getScenes().size());
-    CHECK_EQ(1,beginSize);
-
-    // Cleanup
-    Core::SceneManager::GetSceneManager()->deleteScene("main");
-}
-
-TEST_CASE("Scene is able to change root"){
-    //Arrange
-    auto* scene = new Scene();
-    auto* go = new GameObject();
-
-   go->name = "test";
-   go->tag = "testTag";
-
-   //Act
-   scene->setRootGameObject(go);
-
-   //Assert
-    CHECK_EQ(scene->getRootGameObject()->name, "test");
-    CHECK_EQ(scene->getRootGameObject()->tag, "testTag");
-
-    // Cleanup
-    delete scene;
-}
-
-TEST_CASE("Scene is able to load and copy more advanced Scene"){
+TEST_CASE("Loading a scene"){
     // Arrange
-    auto* scene = Core::SceneManager::GetSceneManager()->createScene("main");
-    auto* go1 = scene->createGameObject(new GameObject{});
-    go1->addComponent<BehaviourScript>();
-    go1->addComponent<SceneTests::DummyScript>();
-    auto* go2 = scene->createGameObject(new GameObject{}, go1);
-    go2->addComponent<SceneTests::DummyScript>();
+    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneTests::MainSceneFactory>("main");
+    auto& prevScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
 
     // Act
-    Core::SceneManager::GetSceneManager()->loadScene("main");
+    GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    auto& currentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
 
     // Assert
-    auto* child = Core::SceneManager::GetSceneManager()->getCurrentScene()->getRootGameObject()->childAt(0)->childAt(0);
-    CHECK_NE(child, nullptr);
-    CHECK_NE(go2, nullptr);
-    CHECK_NE(go2, child);
+    CHECK_NE(&currentScene, &prevScene);
 }
 
-TEST_CASE("Loading scene from a behaviour script"){
+TEST_CASE("Reloading/Resetting a scene"){
     // Arrange
-    auto* scene = Core::SceneManager::GetSceneManager()->createScene("main");
-    auto* go = scene->createGameObject(new GameObject{});
-    go->addComponent<SceneTests::DummyGameManager>();
-    Core::SceneManager::GetSceneManager()->loadScene("main");
+    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneTests::MainSceneFactory>("main");
+    GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    auto& prevScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
+
 
     // Act
-    Core::SceneManager::GetSceneManager()->getCurrentScene()->getRootGameObject()->tag = "newTag";
-    auto* gm = go->getComponent<SceneTests::DummyGameManager>();
-    gm->restartLevel();
+    GolfEngine::SceneManager::GetSceneManager().loadScene();
+    auto& currentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
 
     // Assert
-    auto currentScene = Core::SceneManager::GetSceneManager()->getCurrentScene();
-    // Check if changes made in scene are now reverted
-    CHECK_EQ(currentScene->getRootGameObject()->tag, "default");
+    CHECK_NE(&currentScene, &prevScene);
 }

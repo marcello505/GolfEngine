@@ -2,51 +2,38 @@
 // Created by Lucas on 2-11-2022.
 //
 
-#include <cstring>
 #include "SceneManager.h"
 
-namespace Core {
-    SceneManager* SceneManager::sceneManager = nullptr;
+namespace GolfEngine {
+    std::unique_ptr<SceneManager> SceneManager::sceneManager = nullptr;
 
-    SceneManager::SceneManager() : _currentScene{nullptr}, _scenes{}{
+    SceneManager::SceneManager() : _currentScene{nullptr} {
     }
 
-    SceneManager::~SceneManager() {
-        delete _currentScene;
-
-        for(auto& scene : _scenes)
-            delete scene.second;
-    }
-
-    SceneManager* SceneManager::GetSceneManager() {
+    SceneManager& SceneManager::GetSceneManager() {
         if(sceneManager == nullptr)
-            sceneManager = new SceneManager();
-        return sceneManager;
+            sceneManager.reset(new SceneManager());
+        return *sceneManager;
     }
 
     void SceneManager::loadScene(const std::string& sceneName) {
-        auto sceneIt = _scenes.find(sceneName);
-        if (sceneIt != _scenes.end()){
-            delete _currentScene;
-            _currentScene = new Scene(*sceneIt->second);
+        std::_Rb_tree_iterator<std::pair<const std::basic_string<char>, std::unique_ptr<ISceneFactory>>> sceneFactory;
+        // If empty string is passed, reload last loaded scene
+        if(sceneName.empty())
+            sceneFactory = _scenes.find(_lastScene);
+        else
+            sceneFactory = _scenes.find(sceneName);
+
+        if (sceneFactory != _scenes.end()){
+            _lastScene = sceneName;
+            _currentScene = std::make_unique<Scene>();
+            sceneFactory->second->build(*_currentScene);
+            _currentScene->startScene();
         }
     }
 
-    Scene* SceneManager::createScene(const std::string& sceneName) {
-        auto newScene = new Scene{};
-        _scenes.insert({sceneName, newScene});
-        return newScene;
-    }
-
-    Scene* SceneManager::getCurrentScene() {
-        return _currentScene;
-    }
-
-    std::vector<Scene*> SceneManager::getScenes() {
-        std::vector<Scene *> scenes;
-        for (auto &scene: _scenes)
-            scenes.push_back(scene.second);
-        return std::move(scenes);
+    Scene& SceneManager::getCurrentScene() {
+        return *_currentScene;
     }
 
     void SceneManager::deleteScene(const std::string& sceneName) {
@@ -55,4 +42,7 @@ namespace Core {
             _scenes.erase(sceneIt);
     }
 
+    bool SceneManager::hasCurrentScene() {
+        return _currentScene != nullptr;
+    }
 }

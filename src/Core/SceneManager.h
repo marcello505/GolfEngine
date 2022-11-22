@@ -7,43 +7,56 @@
 
 #include <map>
 #include "../Scene/Scene.h"
+#include <memory>
+#include "../Scene/ISceneFactory.h"
 
-namespace Core {
+class ISceneFactory;
+
+namespace GolfEngine {
 
 class SceneManager {
 private:
-    std::map<std::string, Scene *> _scenes;
-    Scene* _currentScene;
+    std::map<std::string, std::unique_ptr<ISceneFactory>> _scenes;
+    std::unique_ptr<Scene> _currentScene;
+    std::string _lastScene;
 
-    static SceneManager* sceneManager;
+    static std::unique_ptr<SceneManager> sceneManager;
 
     SceneManager();
-    ~SceneManager();
 public:
     /// This method is used to get access to the scene manager instance
     /// \return Returns the global scene manager instance
-    static SceneManager* GetSceneManager();
+    static SceneManager& GetSceneManager();
 
     /// Loads new scene by setting the currentScene of a copy of the loaded scene
-    /// \param sceneName Name of scene to load
-    void loadScene(const std::string &sceneName);
+    /// \param sceneName Name of scene to load, if empty, current scene will be reloaded
+    void loadScene(const std::string &sceneName = "");
 
-    /// Adds scene to list of _scenes
-    /// \param sceneName Name of the new scene
-    /// \param scene Pointer to the scene
-    Scene *createScene(const std::string &sceneName);
+    /// Adds a Scene Factory to the SceneManager, which can create new scenes on command using the loadScene method
+    /// \tparam SF Scene Factory type
+    /// \param sceneName Name of the scene this factory creates
+    template<typename SF>
+    void addSceneFactory(const std::string& sceneName){
+        _scenes.insert(std::make_pair(sceneName, std::make_unique<SF>()));
+    }
 
     /// Returns reference to _currentScene
     /// \return
-    Scene* getCurrentScene();
+    Scene& getCurrentScene();
 
-    /// Returns vector of _scenes
-    /// \return
-    std::vector<Scene *> getScenes();
+    bool hasCurrentScene();
 
     /// Deletes a scene from the scenes map
     /// \param sceneName Name of the scene to be deleted
     void deleteScene(const std::string &sceneName);
+
+    /// Adds a scene to the scene list
+    /// \param sceneName Name of the scene
+    /// \param newScene Pointer reference to the scene object
+    template<typename S>
+    void addScene(const std::string& sceneName) {
+        _scenes.insert({sceneName, std::make_unique<S>()});
+    }
 };
 
 }

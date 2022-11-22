@@ -54,10 +54,9 @@ void GameLoop::update() {
         Physics::getService()->update();
     }
 
-    // Update scene if there is an active instance
-    auto currentScene = Core::SceneManager::GetSceneManager()->getCurrentScene();
-    if(currentScene)
-        currentScene->updateScene();
+    // Update scene
+    if(GolfEngine::SceneManager::GetSceneManager().hasCurrentScene())
+        GolfEngine::SceneManager::GetSceneManager().getCurrentScene().updateScene();
 
     if(_actionMap){
         //TODO update ActionMap
