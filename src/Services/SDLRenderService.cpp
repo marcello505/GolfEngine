@@ -52,7 +52,6 @@ namespace GolfEngine::Services::Render {
 
         //Makes alpha blending possible(used for opacity)
         SDL_SetRenderDrawBlendMode(_renderer.get(), SDL_BLENDMODE_BLEND);
-
     }
 
     void SDLRenderService::addDrawable(Drawable& drawable) {

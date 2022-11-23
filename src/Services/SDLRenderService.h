@@ -64,7 +64,6 @@ private:
 
     Texture& loadSprite(const std::string& path);
     void renderSprite(SpriteRenderShape &renderShape);
-    void clearFontCache();
 
     int _screenSizeWidth;
     int _screenSizeHeight;
@@ -76,7 +75,6 @@ private:
     std::map<std::string, std::pair<size_t , std::unique_ptr<TTF_Font, void(*)(TTF_Font*)>>> _cachedFonts;
 
     TTF_Font& loadFont(const std::string &path, size_t fontSize);
-
 };
 
 }
