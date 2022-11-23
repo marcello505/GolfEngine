@@ -44,7 +44,7 @@ void GameLoop::stop() {
 void GameLoop::processInput() {
     if(Input::hasService()){
         Input::getService()->handleInputs();
-        _running &= !Input::getService()->hasRecievedQuitSignal();
+        _running &= !Input::getService()->hasReceivedQuitSignal();
     }
 }
 

@@ -4,6 +4,9 @@
 
 #include "Time.h"
 
+// Setting default timescale as 1.0
+GameTic GolfEngine::Time::_timeScale {1.0f};
+
 GameTic GolfEngine::Time::getPhysicsDeltaTime() const {
     return _physicsDeltaTime;
 }
@@ -52,7 +55,7 @@ GameTic GolfEngine::Time::getRenderFps() const {
     return _fpsRender;
 }
 
-GameTic GolfEngine::Time::getTimeScale() const {
+GameTic GolfEngine::Time::getTimeScale() {
     return _timeScale;
 }
 
