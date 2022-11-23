@@ -56,13 +56,16 @@ set(SCENE_SOURCES
         src/Scene/RenderShape/TextRenderShape.cpp
         src/Scene/GameObjects/UIObject/Button.cpp
         src/Scene/Components/RigidBody.cpp
-        src/Scene/Components/BoxCollider.cpp src/Scene/Components/CircleCollider.cpp
+        src/Scene/Components/BoxCollider.cpp
+        src/Scene/Components/CircleCollider.cpp
         src/Scene/Components/SpriteComponent.cpp)
 
 set(CORE_SOURCES
         src/Core/GameLoop.cpp
         src/Core/SceneManager.cpp
-        src/Core/ProjectSettings.cpp src/Core/Time.cpp src/Scene/RenderShape/TextRenderShape.cpp src/Scene/RenderShape/TextRenderShape.h)
+        src/Core/ProjectSettings.cpp
+        src/Core/Time.cpp
+        src/Scene/RenderShape/TextRenderShape.cpp)
 
 # Main Project
 add_library(${PROJECT_NAME}
