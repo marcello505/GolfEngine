@@ -33,7 +33,7 @@ public:
     void setParentGameObject(GameObject &gameObject) override;
 
     // Drawable override
-    RenderShape * getRenderShape() override;
+    RenderShape& getRenderShape() override;
 
     // Getters
     [[nodiscard]] std::string path() const;

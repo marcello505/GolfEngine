@@ -12,7 +12,7 @@ SpriteComponent::SpriteComponent(const std::string &path, Vector2 pixelScale, Re
 }
 
 void SpriteComponent::onStart() {
-    GolfEngine::Services::Render::getService()->addDrawable(this);
+    GolfEngine::Services::Render::getService()->addDrawable(*this);
 }
 
 void SpriteComponent::onUpdate() {
@@ -21,7 +21,7 @@ void SpriteComponent::onUpdate() {
 void SpriteComponent::onRemove() {
     auto renderService = GolfEngine::Services::Render::getService();
     if(renderService)
-        renderService->removeDrawable(this);
+        renderService->removeDrawable(*this);
 }
 
 bool SpriteComponent::getActive() {
@@ -43,11 +43,11 @@ void SpriteComponent::setParentGameObject(GameObject& gameObject) {
     _gameObject = gameObject;
 }
 
-RenderShape* SpriteComponent::getRenderShape() {
+RenderShape& SpriteComponent::getRenderShape() {
     if(_gameObject){
         _renderShape.applyTransform(_gameObject->get().getWorldTransform());
     }
-    return &_renderShape;
+    return _renderShape;
 }
 
 std::string SpriteComponent::path() const {
