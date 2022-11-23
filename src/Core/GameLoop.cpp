@@ -17,6 +17,9 @@
 using namespace GolfEngine::Services;
 
 void GameLoop::start() {
+    //Initialize services
+    if(Audio::hasService()) Audio::getService()->init();
+
     auto previous = std::chrono::steady_clock::now();
     std::chrono::duration<GameTic, std::milli> lag {0.0f};
 
@@ -35,6 +38,9 @@ void GameLoop::start() {
 
         render();
     }
+
+    //Free services
+    if(Audio::hasService()) Audio::getService()->free();
 }
 
 void GameLoop::stop() {

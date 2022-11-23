@@ -24,6 +24,7 @@ int main(int argc, char* argv[])
 
     // instantiate audioservice
     std::unique_ptr<SDLAudioService> _audioService = std::make_unique<SDLAudioService>();
+    _audioService->init();
 
     //setup audio sources
     _audioService->preloadSfx(gunCockingPath);
@@ -50,7 +51,8 @@ int main(int argc, char* argv[])
 
     //cleanup
     SDL_DestroyWindow(window);
-    _audioService->clearCache();
+    _audioService->free();
+
     return 0;
 }
 

@@ -13,7 +13,13 @@
 
 class SDLAudioService : public AudioService {
 public:
-    SDLAudioService(); //constructor
+    //Life Cycles
+    /// Initializes the audio device, automatically called by GameLoop
+    void init() override;
+    /// Closes the audio device and clears cache, automatically called by GameLoop
+    void free() override;
+
+    // Audio Controls
     void playSfx(const std::string& path, float volume, bool loop) override;
     void playMusic(const std::string& path, float volume, bool loop) override;
     void pauseMusic() override;

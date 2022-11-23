@@ -26,6 +26,8 @@ namespace AudioSourceTests{
         }
 
         //Overridden methods
+        void init() override {}
+        void free() override {}
         void playSfx(const std::string& path, float volume, bool loop) override {calledPlaySfx = true;}
         void playMusic(const std::string& path, float volume, bool loop) override {calledPlayMusic = true;}
         void pauseMusic() override {}

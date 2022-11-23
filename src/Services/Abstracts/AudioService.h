@@ -9,6 +9,10 @@
 
 class AudioService{
 public:
+    // LifeCycles
+    virtual void init() = 0;
+    virtual void free() = 0;
+
     // Audio Controls Methods
     virtual void playSfx(const std::string& path, float volume, bool loop) = 0;
     virtual void playMusic(const std::string& path, float volume, bool loop) = 0;

@@ -6,25 +6,6 @@
 #include <iostream>
 #include <sstream>
 
-SDLAudioService::SDLAudioService()
-{
-    int frequency = MIX_DEFAULT_FREQUENCY;
-    Uint16 audio_format = AUDIO_S16SYS;
-    int audio_channels = MIX_DEFAULT_CHANNELS; //channels for use
-    int chunk_size = 2048; //chunksize
-
-    if (Mix_OpenAudio(frequency, audio_format, audio_channels, chunk_size) != 0) //Open the default audio device for playback
-    {
-        std::cout << "Couldn't init audio: %s", Mix_GetError();
-        exit(-1);
-    }
-
-    //Set all _sfxFragmentsVolume to a default of 1.0f
-    for(int i = 0; i < _sfxFragmentsVolume.max_size(); ++i){
-        _sfxFragmentsVolume[i] = 1.0f;
-    }
-}
-
 void SDLAudioService::playSfx(const std::string& path, float volume, bool loop) {
     //Play sfx
     Mix_Chunk* chunk = getChunk(path);
@@ -209,4 +190,27 @@ void SDLAudioService::stopSfx(const std::string& path) {
             Mix_HaltChannel(i);
         }
     }
+}
+
+void SDLAudioService::init() {
+    int frequency = MIX_DEFAULT_FREQUENCY;
+    Uint16 audio_format = AUDIO_S16SYS;
+    int audio_channels = MIX_DEFAULT_CHANNELS; //channels for use
+    int chunk_size = 2048; //chunksize
+
+    if (Mix_OpenAudio(frequency, audio_format, audio_channels, chunk_size) != 0) //Open the default audio device for playback
+    {
+        std::cout << "Couldn't init audio: %s", Mix_GetError();
+        exit(-1);
+    }
+
+    //Set all _sfxFragmentsVolume to a default of 1.0f
+    for(int i = 0; i < _sfxFragmentsVolume.max_size(); ++i){
+        _sfxFragmentsVolume[i] = 1.0f;
+    }
+}
+
+void SDLAudioService::free() {
+    clearCache();
+    Mix_CloseAudio();
 }
