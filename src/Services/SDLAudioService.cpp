@@ -25,10 +25,10 @@ SDLAudioService::SDLAudioService()
     }
 }
 
-void SDLAudioService::playSfx(const std::string& path, float volume) {
+void SDLAudioService::playSfx(const std::string& path, float volume, bool loop) {
     //Play sfx
     Mix_Chunk* chunk = getChunk(path);
-    int channelNr = Mix_PlayChannel(-1, chunk, 0);
+    int channelNr = Mix_PlayChannel(-1, chunk, loop ? -1 : 0);
 
     if(channelNr != -1){
         _sfxFragmentsVolume[channelNr] = volume;
@@ -194,5 +194,19 @@ void SDLAudioService::updateSfxVolume(int channel) {
 void SDLAudioService::updateSfxVolume() {
     for(int i = 0; i < _sfxFragmentsVolume.max_size(); i++){
         updateSfxVolume(i);
+    }
+}
+
+void SDLAudioService::stopSfx(const std::string& path) {
+    if(!hasCachedChunk(path)){
+        //Sfx isn't loaded, thus nothing to stop.
+        return;
+    }
+
+    Mix_Chunk* chunk = getChunk(path);
+    for(int i = 0; i < MIX_CHANNELS; i++){
+        if(Mix_GetChunk(i) == chunk){
+            Mix_HaltChannel(i);
+        }
     }
 }

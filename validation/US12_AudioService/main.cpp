@@ -12,8 +12,7 @@ float globalVolume = 80; // global volume
 void getInput(SDLAudioService *audioService);
 
 // asset paths
-//TODO opus support wordt niet standaard ondersteund door SDL2_Mixer, dit verist extra build opties. Verwijder Opus files, of maak een windows build waar dit wel wordt ondersteund.
-std::string gunCockingPath = "resources/gun-cocking-01.opus";
+std::string gunCockingPath = "resources/gun-cocking-01.wav";
 std::string shortShotPath = "resources/short-shot.ogg";
 std::string grenadePath = "resources/grenade.mp3";
 std::string mgsThemePath = "resources/mgs-theme.flac";
@@ -63,14 +62,28 @@ void getInput(SDLAudioService *audioService) {
         }
         else if(e.type == SDL_KEYDOWN){
             if(e.key.keysym.sym == SDLK_LEFT){ // for playing a sound
-                audioService->playSfx(gunCockingPath, 1.0f);
+                if(e.key.keysym.mod & KMOD_SHIFT){
+                    audioService->stopSfx(gunCockingPath);
+                }
+                else{
+                    audioService->playSfx(gunCockingPath, 1.0f, false);
+                }
             }
             else if(e.key.keysym.sym == SDLK_RIGHT){ // for playing a sound
-//                audioService->playSfx(shortShotPath, 1.0f);
-                audioService->playSfx(grenadePath, 0.5f);
+                if(e.key.keysym.mod & KMOD_SHIFT){
+                    audioService->stopSfx(shortShotPath);
+                }
+                else{
+                    audioService->playSfx(shortShotPath, 1.0f, false);
+                }
             }
             else if(e.key.keysym.sym == SDLK_UP){ //for playing a sound
-                audioService->playSfx(grenadePath, 1.0f);
+                if(e.key.keysym.mod & KMOD_SHIFT){
+                    audioService->stopSfx(grenadePath);
+                }
+                else{
+                    audioService->playSfx(grenadePath, 1.0f, false);
+                }
             }
             else if(e.key.keysym.sym == SDLK_DOWN){ // for toggling pause / resuming of audio
                 audioService->toggleMusic();

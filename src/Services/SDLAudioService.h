@@ -14,7 +14,7 @@
 class SDLAudioService : public AudioService {
 public:
     SDLAudioService(); //constructor
-    void playSfx(const std::string& path, float volume) override;
+    void playSfx(const std::string& path, float volume, bool loop) override;
     void playMusic(const std::string& path, float volume, bool loop) override;
     void pauseMusic() override;
     void resumeMusic() override;
@@ -42,6 +42,8 @@ public:
     bool isMusicPlaying() override;
     bool isMusicPaused() override;
     void toggleMusic() override;
+
+    void stopSfx(const std::string& path) override;
 
 private:
     //Fields

@@ -10,13 +10,14 @@
 class AudioService{
 public:
     // Audio Controls Methods
-    virtual void playSfx(const std::string& path, float volume) = 0;
+    virtual void playSfx(const std::string& path, float volume, bool loop) = 0;
     virtual void playMusic(const std::string& path, float volume, bool loop) = 0;
     virtual void pauseMusic() = 0;
     virtual void resumeMusic() = 0;
     virtual void toggleMusic() = 0;
     virtual void stopMusic() = 0;
     virtual void stopSfx() = 0;
+    virtual void stopSfx(const std::string& path) = 0;
 
     // Volume Methods
     virtual float getMasterVolume() = 0;
