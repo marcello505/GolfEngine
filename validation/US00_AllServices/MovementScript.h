@@ -6,7 +6,11 @@
 #define GOLFENGINE_MOVEMENTSCRIPT_H
 
 
-class MovementScript {
+#include "Scene/Components/BehaviourScript.h"
+
+class MovementScript : public BehaviourScript{
+    public:
+        virtual void onUpdate() override;
 
 };
 

@@ -10,7 +10,7 @@
 class BehaviourScript : public Component {
 public:
     virtual void onStart() override {}
-    virtual void onUpdate() override {}
+    virtual void onUpdate() override {_gameObject->get().name = "Testing if this method is called";  };
     virtual void onRemove() override {}
     virtual bool getActive() override { return _active; }
     virtual void setActive(bool active) override { _active = active; }

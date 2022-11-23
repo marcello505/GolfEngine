@@ -6,8 +6,7 @@
 #include "Services/Singletons/InputSingleton.h"
 #include "Services/SDLInputService.h"
 #include "Scene/Components/BoxCollider.h"
-#include "SpriteDrawable.h"
-#include "Scene/Components/Sprite.h"
+#include "SceneFactory.h"
 
 /*TODO
  * 1. Make getters/setters for actionMap so you dont always need to create new actionmap, but can just use predefined actionmap from engine
@@ -18,48 +17,18 @@
 
 const std::string mgsThemePath = R"(..\..\..\validation\US00_AllServices\res\mgs-theme.mp3)";
 
-GameObject* createObjects(Scene* scene){
-    auto* root = new GameObject{scene};
-
-    //Ground
-    {
-        auto* groundObject = new GameObject{scene, root};
-        groundObject->addComponent<BoxCollider>(Vector2{300.0f, 20.0f});
-        groundObject->addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::StaticBody});
-        groundObject->setLocalPosition({320, 450});
-    }
-
-    //Box
-    {
-        auto* groundObject = new GameObject{scene, root};
-        groundObject->addComponent<BoxCollider>(Vector2{20.0f, 20.0f});
-        groundObject->addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
-        groundObject->setLocalPosition({300, 150});
-    }
-
-    //Ground
-    {
-        auto* groundObject = new GameObject{scene, root};
-        groundObject->addComponent<BoxCollider>(Vector2{300.0f, 20.0f});
-        groundObject->addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::StaticBody});
-        groundObject->setLocalPosition({320, 450});
-    }
-
-
-    return root;
-}
-
-
 
 int main(int argc, char* argv[]){
 
     GameLoop gameLoop {};
     gameLoop.useDefaultServices();
-    auto x = ActionMap::getActionMap();
 
     ActionMap::getActionMap()->addAction("Reload");
     ActionMap::getActionMap()->addInputKeyToAction("Reload", Key_R);
-    auto y = ActionMap::getActionMap();
+
+    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
+    GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+
 
     //gets all services
     auto rs = GolfEngine::Services::Render::getService();
@@ -70,14 +39,9 @@ int main(int argc, char* argv[]){
     ps->setGravity(Vector2(0,5));
 
     as->preloadAudio(mgsThemePath);
-    as->playOnChannel(0, mgsThemePath, 50);
+    as->playOnChannel(0, mgsThemePath, 30);
 
 
-
-
-    auto* scene = new Scene{};
-    auto* root = createObjects(scene);
-    root->onStart();
 
     gameLoop.start();
 
