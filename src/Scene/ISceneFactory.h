@@ -5,6 +5,7 @@
 #ifndef GOLFENGINE_ISCENEFACTORY_H
 #define GOLFENGINE_ISCENEFACTORY_H
 
+#include "Scene.h"
 
 class ISceneFactory {
 public:

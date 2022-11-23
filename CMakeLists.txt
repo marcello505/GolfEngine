@@ -45,7 +45,6 @@ set(SCENE_SOURCES
         src/Scene/Scene.cpp
         src/Scene/GameObjects/GameObject.cpp
         src/Scene/Components/AudioSource.cpp
-        src/Scene/Components/Drawable.cpp
         src/Scene/Components/Animator.cpp
         src/Scene/Components/ParticleSystem.cpp
         src/Scene/Components/Pathfinding.cpp
@@ -57,7 +56,8 @@ set(SCENE_SOURCES
         src/Scene/RenderShape/TextRenderShape.cpp
         src/Scene/GameObjects/UIObject/Button.cpp
         src/Scene/Components/RigidBody.cpp
-        src/Scene/Components/BoxCollider.cpp src/Scene/Components/CircleCollider.cpp)
+        src/Scene/Components/BoxCollider.cpp src/Scene/Components/CircleCollider.cpp
+        src/Scene/Components/SpriteComponent.cpp)
 
 set(CORE_SOURCES
         src/Core/GameLoop.cpp
@@ -81,6 +81,7 @@ target_link_libraries(${PROJECT_NAME} box2d)
 # Sub Projects
 add_subdirectory(tests)
 
+add_subdirectory(validation/US09_Animations)
 add_subdirectory(validation/US03_InputService)
 add_subdirectory(validation/US12_AudioService)
 add_subdirectory(validation/US00_Rendering)
