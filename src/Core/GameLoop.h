@@ -19,7 +19,6 @@ class GameLoop {
 public:
     //Fields
     std::unique_ptr<GolfEngine::Time> time = std::make_unique<GolfEngine::Time>();
-    ActionMap actionMap;
     //Getters and Setters
     void setAudioService(AudioService *audioService);
     void setInputService(InputService* inputService);
@@ -34,7 +33,7 @@ public:
     void stop();
 
 private:
-    std::unique_ptr<ActionMap> _actionMap = std::make_unique<ActionMap>();
+//    std::unique_ptr<ActionMap> _actionMap = std::make_unique<ActionMap>();
     bool _running {true};
     std::chrono::duration<GameTic, std::milli> _msPerUpdate {1000.f/ 60};
 

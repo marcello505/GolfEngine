@@ -6,7 +6,10 @@
 int main(int argc, char* argv[])
 {
     SDL_Window* window = nullptr;
-    std::unique_ptr<ActionMap> _actionMap = std::make_unique<ActionMap>();
+    std::unique_ptr<SDLInputService>inputService(new SDLInputService());
+
+
+    auto _actionMap = ActionMap::getActionMap();
 
     // creating actions
     _actionMap->addAction("Reload");
@@ -39,8 +42,6 @@ int main(int argc, char* argv[])
     // create SDL window
     window = SDL_CreateWindow("C++ SDL2 Window", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
 
-    // create input service
-    std::unique_ptr<SDLInputService>inputService(new SDLInputService(_actionMap.get()));
 
     // call input handle on loop
     while (!(inputService->hasRecievedQuitSignal()))

@@ -29,7 +29,7 @@ GameObject* createObjects(Scene* scene){
         groundObject->setLocalPosition({320, 450});
     }
 
-    //Ground
+    //Box
     {
         auto* groundObject = new GameObject{scene, root};
         groundObject->addComponent<BoxCollider>(Vector2{20.0f, 20.0f});
@@ -37,24 +37,29 @@ GameObject* createObjects(Scene* scene){
         groundObject->setLocalPosition({300, 150});
     }
 
+    //Ground
+    {
+        auto* groundObject = new GameObject{scene, root};
+        groundObject->addComponent<BoxCollider>(Vector2{300.0f, 20.0f});
+        groundObject->addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::StaticBody});
+        groundObject->setLocalPosition({320, 450});
+    }
+
+
     return root;
 }
 
 
 
 int main(int argc, char* argv[]){
-    std::unique_ptr<ActionMap> _actionMap = std::make_unique<ActionMap>();
-    _actionMap->addAction("Reload");
-
-    // binding actions to keys
-    _actionMap->addInputKeyToAction("Reload", Key_R);
-    auto inputService = new SDLInputService(_actionMap.get());
 
     GameLoop gameLoop {};
     gameLoop.useDefaultServices();
-    gameLoop.setInputService(inputService);
+    auto x = ActionMap::getActionMap();
 
-
+    ActionMap::getActionMap()->addAction("Reload");
+    ActionMap::getActionMap()->addInputKeyToAction("Reload", Key_R);
+    auto y = ActionMap::getActionMap();
 
     //gets all services
     auto rs = GolfEngine::Services::Render::getService();

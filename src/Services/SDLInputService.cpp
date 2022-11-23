@@ -3,9 +3,9 @@
 #include <SDL.h>
 
 
-SDLInputService::SDLInputService(ActionMap* actionMap)
+SDLInputService::SDLInputService()
 {
-    _actionMap = actionMap; // actionMap the service will use as reference
+    _actionMap = ActionMap::getActionMap(); // actionMap the service will use as reference
     bindKeys(); // bind all the SDL keynames with our InputKey enum values
 }
 

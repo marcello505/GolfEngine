@@ -15,7 +15,7 @@ private:
     void handleMouseEvent(SDL_Event event, bool pressed);
     bool _hasRecievedQuitSignal {};
 public:
-    SDLInputService(ActionMap* actionMap);
+    SDLInputService();
     void handleInputs() override;
 
     bool hasRecievedQuitSignal() override;

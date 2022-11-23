@@ -13,6 +13,7 @@
 #include "../Services/Singletons/AudioSingleton.h"
 #include "../Services/Singletons/RenderSingleton.h"
 #include "../Services/Singletons/InputSingleton.h"
+#include "../Input/ActionMap.h"
 
 using namespace GolfEngine::Services;
 
@@ -57,8 +58,8 @@ void GameLoop::update() {
 
     //TODO add SceneManager code
 
-    if(_actionMap){
-        _actionMap->update();
+    if(ActionMap::getActionMap()){
+        ActionMap::getActionMap()->update();
     }
 }
 
@@ -72,7 +73,7 @@ void GameLoop::render() {
 
 void GameLoop::useDefaultServices() {
 
-    setInputService(new SDLInputService{_actionMap.get()});
+    setInputService(new SDLInputService());
     setAudioService(new SDLAudioService(3));
     setRenderService(new Render::SDLRenderService {});
     setPhysicsService(new Physics::Box2DPhysicsService {});
