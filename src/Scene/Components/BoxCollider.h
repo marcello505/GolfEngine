@@ -19,17 +19,15 @@ public:
     void onStart() override;
     void onUpdate() override;
     void onRemove() override;
-    Component* clone() const override;
     bool getActive() override;
     void setActive(bool active) override;
-    void setParentGameObject(GameObject* gameObject) override;
+    void setParentGameObject(GameObject& gameObject) override;
 
     //Drawable overrides
     RenderShape* getRenderShape() override;
 
 private:
     bool _active {true};
-    GameObject* _parent {};
     RectRenderShape _rectRenderShape;
     Vector2 _shapeExtents;
 };

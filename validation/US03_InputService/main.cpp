@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 
 
     // call input handle on loop
-    while (!(inputService->hasRecievedQuitSignal()))
+    while (!(inputService->hasReceivedQuitSignal()))
     {
         inputService->handleInputs();
     }

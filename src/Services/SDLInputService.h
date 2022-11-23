@@ -13,12 +13,12 @@ private:
     std::map<std::string, InputKey> _inputBinds;
     void bindKeys();
     void handleMouseEvent(SDL_Event event, bool pressed);
-    bool _hasRecievedQuitSignal {};
+    bool _hasReceivedQuitSignal {};
 public:
     SDLInputService();
     void handleInputs() override;
 
-    bool hasRecievedQuitSignal() override;
+    bool hasReceivedQuitSignal() const override;
 
 };
 

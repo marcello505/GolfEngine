@@ -35,6 +35,11 @@ public:
     [[nodiscard]] Rect2 imageSource() const;
     [[nodiscard]] Color color() const;
     [[nodiscard]] Vector2 pivotPoint() const;
+
+    void setPath(const std::string& path);
+    void setImageSource(Rect2 imageSource);
+    void setColor(Color color);
+
 private:
     Vector2 _position;
     Vector2 _pixelScale;
