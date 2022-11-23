@@ -12,6 +12,7 @@ float globalVolume = 80; // global volume
 void getInput(SDLAudioService *audioService);
 
 // asset paths
+//TODO opus support wordt niet standaard ondersteund door SDL2_Mixer, dit verist extra build opties. Verwijder Opus files, of maak een windows build waar dit wel wordt ondersteund.
 std::string gunCockingPath = "resources/gun-cocking-01.opus";
 std::string shortShotPath = "resources/short-shot.ogg";
 std::string grenadePath = "resources/grenade.mp3";
