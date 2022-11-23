@@ -4,16 +4,16 @@
 
 #include "TextDrawable.h"
 
-TextDrawable::TextDrawable(Vector2 pos, Transform transform, std::string text, size_t fontSize, Color color, std::string filePath, GameLoop& gl) : _transform{transform} , _gameLoop{gl} {
-    _renderShape = std::make_unique<TextRenderShape>(pos, transform.rotation, text, fontSize, color, filePath);
+TextDrawable::TextDrawable(Vector2 pos, Transform transform, std::string text, size_t fontSize, Color color, std::string filePath, GameLoop& gl) : _transform{transform} , _gameLoop{gl},
+    _renderShape{TextRenderShape(pos, transform.rotation, text, fontSize, color, filePath)}{
 }
 
-RenderShape *TextDrawable::getRenderShape() {
-    _renderShape->applyTransform(_transform);
+RenderShape& TextDrawable::getRenderShape() {
+    _renderShape.applyTransform(_transform);
     std::string fps =   std::to_string(_gameLoop.time->getRenderFps());
-    _renderShape->setText(fps);
+    _renderShape.setText(fps);
 
-    return _renderShape.get();
+    return _renderShape;
 }
 
 void TextDrawable::rotate(float amount) {
@@ -26,7 +26,7 @@ void TextDrawable::move(int x, int y) {
 }
 
 void TextDrawable::setText(std::string text) {
-    _renderShape->setText(text);
+    _renderShape.setText(text);
 
 }
 

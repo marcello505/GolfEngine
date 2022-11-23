@@ -24,7 +24,7 @@ public:
     void setParentGameObject(GameObject& gameObject) override;
 
     //Drawable overrides
-    RenderShape* getRenderShape() override;
+    RenderShape& getRenderShape() override;
 
 private:
     bool _active {true};
