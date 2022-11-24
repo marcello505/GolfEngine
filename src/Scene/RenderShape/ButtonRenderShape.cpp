@@ -5,8 +5,8 @@
 #include "ButtonRenderShape.h"
 
 ButtonRenderShape::ButtonRenderShape(RectRenderShape* rectRenderShape, TextRenderShape* textRenderShape) {
-    _rectRenderShape = std::unique_ptr<RectRenderShape>{rectRenderShape};
-    _textRenderShape = std::unique_ptr<TextRenderShape>{textRenderShape};
+    _rectRenderShape = std::shared_ptr<RectRenderShape>{rectRenderShape};
+    _textRenderShape = std::shared_ptr<TextRenderShape>{textRenderShape};
 }
 
 RenderShapeType ButtonRenderShape::getType() {
