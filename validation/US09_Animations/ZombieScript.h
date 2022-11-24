@@ -6,11 +6,17 @@
 #define GOLFENGINE_ZOMBIESCRIPT_H
 
 #include "Scene/Components/BehaviourScript.h"
-#include "Core/GameLoop.h"
+#include "Scene/Components/Animator.h"
+#include "Core/Time.h"
 
 class ZombieScript : public BehaviourScript{
-    void onUpdate() override{
-    }
+public:
+    void onStart() override;
+
+    void onUpdate() override;
+private:
+    float timePassed = 0;
+    std::optional<std::reference_wrapper<Animator>> animator;
 };
 
 #endif //GOLFENGINE_ZOMBIESCRIPT_H

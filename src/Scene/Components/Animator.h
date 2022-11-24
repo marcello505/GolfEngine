@@ -18,7 +18,7 @@ public:
     void addAnimation(const std::string& animationName, const Animation& animation);
     void addAnimation(const std::string& name, int beginCell, int endCell, float playSpeed = 1.0f);
     void addReturnTransition(const std::string& from, const std::string& to);
-    void play(const std::string& animation, bool looping);
+    void play(const std::string& animation, bool looping = false);
     void stop();
 
     // Component overrides

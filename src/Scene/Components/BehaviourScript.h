@@ -9,6 +9,7 @@
 
 class BehaviourScript : public Component {
 public:
+    ~BehaviourScript() override = default;
     virtual void onStart() override {}
     virtual void onUpdate() override {}
     virtual void onRemove() override {}
