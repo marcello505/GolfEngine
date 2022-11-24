@@ -23,8 +23,18 @@ int main(int argc, char* argv[]){
     GameLoop gameLoop {};
     gameLoop.useDefaultServices();
 
-    ActionMap::getActionMap()->addAction("Reload");
-    ActionMap::getActionMap()->addInputKeyToAction("Reload", Key_R);
+    ActionMap::getActionMap()->addAction("Left");
+    ActionMap::getActionMap()->addAction("Right");
+    ActionMap::getActionMap()->addAction("Up");
+    ActionMap::getActionMap()->addAction("Down");
+    ActionMap::getActionMap()->addAction("Jump");
+
+    ActionMap::getActionMap()->addInputKeyToAction("Left", Key_Left);
+    ActionMap::getActionMap()->addInputKeyToAction("Right", Key_Right);
+    ActionMap::getActionMap()->addInputKeyToAction("Up", Key_Up);
+    ActionMap::getActionMap()->addInputKeyToAction("Down", Key_Down);
+    ActionMap::getActionMap()->addInputKeyToAction("Jump", Key_Space);
+
 
     GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
     GolfEngine::SceneManager::GetSceneManager().loadScene("main");
