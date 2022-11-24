@@ -45,6 +45,7 @@ public:
     C& addComponent(Args... args) {
         C& newComp = reinterpret_cast<C&>(*_components.emplace_back(std::make_unique<C>(args...)));
         newComp.setParentGameObject(*this);
+        newComp.setActive(true);
         return newComp;
     };
 

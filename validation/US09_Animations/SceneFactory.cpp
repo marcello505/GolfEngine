@@ -4,9 +4,16 @@
 
 #include "SceneFactory.h"
 #include "Scene/Components/SpriteComponent.h"
+#include "Scene/Components/Animator.h"
 
 void SceneFactory::build(Scene& scene) const {
-    auto& go = scene.createNewGameObject<GameObject>();
-    go.addComponent<SpriteComponent>(R"(..\..\..\validation\US09_Animations\res\player.png)");
-    go.setWorldTransform(Transform(Vector2(200,200), 0, Vector2(0.5f,0.5f)));
+    auto& player = scene.createNewGameObject<GameObject>();
+    player.addComponent<SpriteComponent>(R"(..\..\..\validation\US09_Animations\res\player.png)");
+    player.setWorldTransform(Transform(Vector2(200,200), 0, Vector2(0.5f,0.5f)));
+
+    auto& enemy = scene.createNewGameObject<GameObject>();
+    auto& animator = enemy.addComponent<Animator>(R"(..\..\..\validation\US09_Animations\res\zombie_spritesheet.png)", 7, 7, Vector2(239, 221));
+    animator.addAnimation("attack", 0, 8, 10.0f);
+    animator.play("attack", true);
+    enemy.setWorldTransform(Transform(Vector2(400, 200), 0, Vector2(0.1f, 0.1f)));
 }

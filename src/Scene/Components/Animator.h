@@ -1,5 +1,5 @@
 //
-// Created by jaaps on 02/11/2022.
+// Created by conner on 02/11/2022.
 //
 
 #ifndef GOLFENGINE_ANIMATOR_H
@@ -10,14 +10,41 @@
 #include <map>
 #include "Animation.h"
 #include "Component.h"
+#include "SpriteComponent.h"
 
 class Animator : public Component {
 public:
+    Animator(std::string spriteSheetPath, int spriteSheetRows, int spriteSheetCols, Vector2 spriteSheetCellSize);
+    void addAnimation(const std::string& animationName, const Animation& animation);
+    void addAnimation(const std::string& name, int beginCell, int endCell, float playSpeed = 1.0f);
+    void addTransition(const std::string& transitionName, const std::string& from, const std::string& to, bool finishAnimation);
     void play(const std::string& animation, bool looping);
     void stop();
+
+    // Component overrides
+    void onStart() override;
+    void onUpdate() override;
+    void onRemove() override;
+    bool getActive() override;
+    void setActive(bool active) override;
+    void setParentGameObject(GameObject& gameObject) override;
 private:
+    void finishAnimation();
+
+private:
+    std::string _spriteSheetPath;
+    int _rows;
+    int _cols;
+    Vector2 _cellSize;
+
     std::map<std::string, Animation> _animations;
+    std::optional<std::reference_wrapper<SpriteComponent>> _spriteComponent;
+    std::optional<std::reference_wrapper<Animation>> _currentAnimation;
     int _fps;
+    bool _looping;
+
+    int _countedFrames;
+    int _currentCell;
 };
 
 
