@@ -13,7 +13,7 @@ Animator::Animator(std::string spriteSheetPath, int spriteSheetRows, int spriteS
 }
 
 void Animator::addAnimation(const std::string& name, int beginCell, int endCell, float playSpeed) {
-    Animation newAnimation {playSpeed, beginCell, endCell};
+    Animation newAnimation {name, playSpeed, beginCell, endCell};
     _animations.insert({name, newAnimation});
 }
 
@@ -77,7 +77,17 @@ void Animator::finishAnimation() {
     if(_looping)
         _currentCell = _currentAnimation->get().beginCell;
     else{
-        _currentCell--;
-        stop();
+        auto returnAnim = _returnTransitions.find(_currentAnimation->get().name);
+        if(returnAnim != _returnTransitions.end()){
+            play(returnAnim->second, true);
+        }
+        else{
+            _currentCell--;
+            stop();
+        }
     }
+}
+
+void Animator::addReturnTransition(const std::string& from, const std::string& to) {
+    _returnTransitions.insert({from, to});
 }

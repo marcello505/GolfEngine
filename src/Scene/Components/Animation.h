@@ -10,6 +10,7 @@
 #include "Scene/Vector2.h"
 
 struct Animation {
+    std::string name;
     float playSpeed;
     int beginCell;
     int endCell;

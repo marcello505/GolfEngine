@@ -17,7 +17,7 @@ public:
     Animator(std::string spriteSheetPath, int spriteSheetRows, int spriteSheetCols, Vector2 spriteSheetCellSize);
     void addAnimation(const std::string& animationName, const Animation& animation);
     void addAnimation(const std::string& name, int beginCell, int endCell, float playSpeed = 1.0f);
-    void addTransition(const std::string& transitionName, const std::string& from, const std::string& to, bool finishAnimation);
+    void addReturnTransition(const std::string& from, const std::string& to);
     void play(const std::string& animation, bool looping);
     void stop();
 
@@ -38,6 +38,7 @@ private:
     Vector2 _cellSize;
 
     std::map<std::string, Animation> _animations;
+    std::map<std::string, std::string> _returnTransitions;
     std::optional<std::reference_wrapper<SpriteComponent>> _spriteComponent;
     std::optional<std::reference_wrapper<Animation>> _currentAnimation;
     int _fps;

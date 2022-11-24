@@ -5,6 +5,7 @@
 #include "SceneFactory.h"
 #include "Scene/Components/SpriteComponent.h"
 #include "Scene/Components/Animator.h"
+#include "ZombieScript.h"
 
 void SceneFactory::build(Scene& scene) const {
     auto& player = scene.createNewGameObject<GameObject>();
@@ -14,6 +15,8 @@ void SceneFactory::build(Scene& scene) const {
     auto& enemy = scene.createNewGameObject<GameObject>();
     auto& animator = enemy.addComponent<Animator>(R"(..\..\..\validation\US09_Animations\res\zombie_spritesheet.png)", 7, 7, Vector2(239, 221));
     animator.addAnimation("attack", 0, 8, 10.0f);
-    animator.play("attack", true);
+    animator.addAnimation("idle", 9, 25, 15.0f);
+    animator.addReturnTransition("attack", "idle");
+    animator.play("idle", true);
     enemy.setWorldTransform(Transform(Vector2(400, 200), 0, Vector2(0.1f, 0.1f)));
 }
