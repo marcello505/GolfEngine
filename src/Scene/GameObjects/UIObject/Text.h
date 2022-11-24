@@ -9,16 +9,17 @@
 #include <string>
 #include "Alignment.h"
 #include "UIObject.h"
+#include <Scene/RenderShape/TextRenderShape.h>
 #include "../../Color.h"
+#include <memory>
 
 class Text : public UIObject {
-private:
-    std::string _text;
-    std::string _font;
-    int _size;
-    Alignment _alignment;
-    Color _color;
+public:
+    Text(Vector2 pos, float rotation, std::string text, size_t fontSize, Color color, std::string filePath, Alignment alignment);
+    RenderShape* getRenderShape() override;
 
+    Alignment _alignment;
+    std::unique_ptr<TextRenderShape> _renderShape;
 };
 
 
