@@ -8,10 +8,11 @@
 #include "Scene/Components/Drawable.h"
 
 class UIObject : public Drawable {
-private:
+public:
 
     float _width;
     float _height;
+    Vector2 _position;
 };
 
 
