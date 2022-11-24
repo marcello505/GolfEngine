@@ -8,10 +8,10 @@
 
 #include <string>
 #include "Alignment.h"
-
+#include "UIObject.h"
 #include "../../Color.h"
 
-class Text {
+class Text : public UIObject {
 private:
     std::string _text;
     std::string _font;

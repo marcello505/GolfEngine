@@ -11,11 +11,7 @@ int main(int argc, char* argv[]){
 
     gameLoop.useDefaultServices();
 
-
-
-
    auto rs = GolfEngine::Services::Render::getService();
-
 
     std::string fps =   std::to_string(gameLoop.time->getRenderFps());
 

@@ -5,9 +5,11 @@
 #ifndef GOLFENGINE_UIOBJECT_H
 #define GOLFENGINE_UIOBJECT_H
 #include "../GameObject.h"
+#include "Scene/Components/Drawable.h"
 
-class UIObject : public GameObject {
+class UIObject : public Drawable {
 private:
+
     float _width;
     float _height;
 };

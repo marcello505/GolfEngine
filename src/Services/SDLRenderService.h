@@ -15,6 +15,7 @@
 #include "../Scene/RenderShape/LineRenderShape.h"
 #include "../Scene/RenderShape/SpriteRenderShape.h"
 #include "../Scene/RenderShape/CircleRenderShape.h"
+#include "../Scene/RenderShape/ButtonRenderShape.h"
 #include "Render/Texture.h"
 #include "../Scene/RenderShape/TextRenderShape.h"
 
@@ -60,6 +61,7 @@ private:
     void renderLine(LineRenderShape &renderShape);
     void renderText(TextRenderShape &renderShape);
     void renderCircle(CircleRenderShape &renderShape);
+    void renderButton(ButtonRenderShape &renderShape);
 
     Texture* loadSprite(const std::string& path);
     void renderSprite(SpriteRenderShape &renderShape);

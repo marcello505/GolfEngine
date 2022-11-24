@@ -3,6 +3,7 @@
 //
 
 #include "SDLRenderService.h"
+#include "Scene/RenderShape/ButtonRenderShape.h"
 #include <cmath>
 #include <iostream>
 #include <algorithm>
@@ -120,6 +121,7 @@ namespace GolfEngine::Services::Render {
         // Loop through all registered drawables
         for (auto drawable: _drawables) {
             auto *renderShape = drawable->getRenderShape();
+
             switch (renderShape->getType()) {
                 case RenderShapeType::RectShape:
                     renderRect(reinterpret_cast<RectRenderShape &>(*renderShape));
@@ -138,6 +140,10 @@ namespace GolfEngine::Services::Render {
                     break;
                 case RenderShapeType::ParticleSystemShape:
                     break;
+                case RenderShapeType::ButtonRenderShape:
+                    renderButton(reinterpret_cast<ButtonRenderShape &>(*renderShape));
+                    break;
+
             }
         }
 
@@ -168,6 +174,102 @@ namespace GolfEngine::Services::Render {
 
     bool SDLRenderService::fullScreen() const {
         return _fullScreen;
+    }
+
+    void SDLRenderService::renderButton(ButtonRenderShape &renderShape) {
+        // Set color
+        SDL_SetRenderDrawColor(_renderer, renderShape._rectRenderShape->color().r8,
+                               renderShape._rectRenderShape->color().g8, renderShape._rectRenderShape->color().b8, renderShape._rectRenderShape->color().a);
+
+        float xPivot;
+        float yPivot;
+
+        // Set Rect center to the origin (0,0), with center of rect as pivot point
+        if(renderShape._rectRenderShape->pivotPoint().x == 0 && renderShape._rectRenderShape->pivotPoint().y == 0){
+            xPivot = renderShape._rectRenderShape->rect().size.x / 2;
+            yPivot = renderShape._rectRenderShape->rect().size.y / 2;
+        }
+            // Set Rect center to the origin (0,0), with custom pivot point
+        else{
+            xPivot = renderShape._rectRenderShape->pivotPoint().x;
+            yPivot = renderShape._rectRenderShape->pivotPoint().y;
+        }
+
+        float xOrigin = renderShape._rectRenderShape->rect().position.x + xPivot;
+        float yOrigin = renderShape._rectRenderShape->rect().position.y + yPivot;
+        std::vector<std::pair<float, float>> points;
+        points.emplace_back(renderShape._rectRenderShape->rect().position.x - xOrigin,
+                            renderShape._rectRenderShape->rect().position.y - yOrigin);
+        points.emplace_back(renderShape._rectRenderShape->rect().position.x + renderShape._rectRenderShape->rect().size.x - xOrigin,
+                            renderShape._rectRenderShape->rect().position.y - yOrigin);
+        points.emplace_back(renderShape._rectRenderShape->rect().position.x - xOrigin,
+                            renderShape._rectRenderShape->rect().position.y + renderShape._rectRenderShape->rect().size.y - yOrigin);
+        points.emplace_back(renderShape._rectRenderShape->rect().position.x + renderShape._rectRenderShape->rect().size.x - xOrigin,
+                            renderShape._rectRenderShape->rect().position.y + renderShape._rectRenderShape->rect().size.y - yOrigin);
+
+        //Convert degrees to rads
+        float radians {(float) (renderShape._rectRenderShape->rotation() * (M_PI / 180.0f))};
+
+        // Calculate new points with the use of a rotation matrix
+        for (auto &point: points) {
+            float tempX = point.first, tempY = point.second;
+            point.first = tempX * std::cos(radians) - tempY * std::sin(radians);
+            point.second = tempX * std::sin(radians) + tempY * std::cos(radians);
+        }
+
+        // Translate rect back to original position and set center point to pivot point
+        for (auto &point: points) {
+            point.first += xOrigin - xPivot;
+            point.second += yOrigin - yPivot;
+        }
+
+        // Draw the lines to make the rectangle
+        //First to second
+        SDL_RenderDrawLine(_renderer, (int) points.at(0).first, (int) points.at(0).second, (int) points.at(1).first,
+                           (int) points.at(1).second);
+        //First to third
+        SDL_RenderDrawLine(_renderer, (int) points.at(0).first, (int) points.at(0).second, (int) points.at(2).first,
+                           (int) points.at(2).second);
+        //Second to Last
+        SDL_RenderDrawLine(_renderer, (int) points.at(1).first, (int) points.at(1).second, (int) points.at(3).first,
+                           (int) points.at(3).second);
+        //Third to Last
+        SDL_RenderDrawLine(_renderer, (int) points.at(2).first, (int) points.at(2).second, (int) points.at(3).first,
+                           (int) points.at(3).second);
+        auto* font {loadFont(renderShape._textRenderShape->filePath(), renderShape._textRenderShape->fontSize())};
+        if(font == nullptr) {return;}
+
+
+        // TODO add COLOR
+
+        SDL_Surface* surface = TTF_RenderText_Solid(font, renderShape._textRenderShape->text().c_str(),
+                                                    {renderShape._textRenderShape->color().r8,
+                                                     renderShape._textRenderShape->color().g8,
+                                                     renderShape._textRenderShape->color().b8});
+        if(surface == nullptr){
+            printf("Unable to load image %s, Error: %s\n", renderShape._textRenderShape->filePath().c_str(), IMG_GetError());
+            return;
+        }
+
+        SDL_Rect dstRect;
+        dstRect.x = renderShape._textRenderShape->position().x;
+        dstRect.y = renderShape._textRenderShape->position().y;
+
+        dstRect.w = surface->w;
+        dstRect.h = surface->h;
+
+        // Create texture from surface
+        auto texture = SDL_CreateTextureFromSurface(_renderer, surface);
+        // Free surface memory
+        SDL_FreeSurface(surface);
+        if(texture == nullptr){
+            printf("Unable to create texture from %s, Error: %s\n", renderShape._textRenderShape->filePath().c_str(), SDL_GetError());
+            return;
+        }
+
+        SDL_RenderCopyEx(_renderer, texture, nullptr, &dstRect, renderShape._textRenderShape->rotation(), nullptr, SDL_FLIP_NONE);
+
+        SDL_DestroyTexture(texture);
     }
 
     void SDLRenderService::renderRect(RectRenderShape &renderShape) {
@@ -435,6 +537,7 @@ namespace GolfEngine::Services::Render {
 
         }
     }
+
 
 }
 
