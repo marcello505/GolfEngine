@@ -15,10 +15,7 @@ Animator::Animator(std::string spriteSheetPath, int spriteSheetRows, int spriteS
 void Animator::addAnimation(const std::string& name, int beginCell, int endCell, float playSpeed) {
     Animation newAnimation {name, playSpeed, beginCell, endCell};
     _animations.insert({name, newAnimation});
-}
-
-void Animator::addAnimation(const std::string& animationName, const Animation& animation) {
-    _animations.insert({animationName, animation});
+    _currentAnimation = newAnimation;
 }
 
 void Animator::onStart() {
@@ -61,6 +58,8 @@ void Animator::setParentGameObject(GameObject& gameObject) {
 }
 
 void Animator::play(const std::string& animation, bool looping) {
+    if(animation == _currentAnimation->get().name) {return;}
+
     auto anim = _animations.find(animation);
     if(anim != _animations.end()){
         _currentAnimation = anim->second;
