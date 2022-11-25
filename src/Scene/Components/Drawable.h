@@ -8,11 +8,8 @@
 #include "Scene/GameObjects/GameObject.h"
 
 class Drawable {
-private:
-
 public:
     virtual RenderShape* getRenderShape() = 0;
-
 };
 
 

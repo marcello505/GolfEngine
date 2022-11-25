@@ -55,7 +55,6 @@ ActionMap* ActionMap::actionMap = nullptr;
         if (_actions.count(action) > 0 && _actions.find(action)->second.justInput)
         {
     /*        throw "Just pressed " + _actions.find(action)->second.name;*/
-//            std::cout << "Just pressed " << _actions.find(action)->second.name << std::endl;;
             return true;
         }
 
@@ -78,7 +77,6 @@ ActionMap* ActionMap::actionMap = nullptr;
 
         if (_actions.count(action) > 0  && _actions.find(action)->second.pressed)
         {
-//            std::cout << "Pressed " << _actions.find(action)->second.name << std::endl;;
             return true;
         }
 
@@ -90,7 +88,6 @@ ActionMap* ActionMap::actionMap = nullptr;
     {
         if (_actions.count(action) > 0  && !_actions.find(action)->second.pressed)
         {
-//            std::cout << "Released " << _actions.find(action)->second.name << std::endl;
             return true;
         }
 
@@ -100,7 +97,6 @@ ActionMap* ActionMap::actionMap = nullptr;
     // get position of mouse
     Vector2 ActionMap::getMousePosition() const
     {
-//        std::cout << "Mouse cursor is at " << mousePosition.x << ", " << mousePosition.y << std::endl;
         return mousePosition;
     }
 
