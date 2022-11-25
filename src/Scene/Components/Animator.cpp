@@ -4,8 +4,6 @@
 
 #include "Animator.h"
 
-#include <utility>
-
 Animator::Animator(std::string spriteSheetPath, int spriteSheetRows, int spriteSheetCols, Vector2 spriteSheetCellSize)
     : _spriteSheetPath{std::move(spriteSheetPath)}, _rows{spriteSheetRows}, _cols{spriteSheetCols}, _cellSize{spriteSheetCellSize}, _fps{60},
     _looping{false}, _countedFrames{0}, _currentCell{0} {

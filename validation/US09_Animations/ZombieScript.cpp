@@ -15,4 +15,3 @@ void ZombieScript::onUpdate() {
         animator->get().play("attack");
     }
 }
-

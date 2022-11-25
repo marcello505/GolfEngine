@@ -6,7 +6,6 @@
 #include "Scene/Components/SpriteComponent.h"
 #include "Scene/Components/Animator.h"
 #include "ZombieScript.h"
-#include "Scene/Components/BoxCollider.h"
 
 void SceneFactory::build(Scene& scene) const {
     auto& player = scene.createNewGameObject<GameObject>();
