@@ -32,7 +32,11 @@ public:
     /// \param to Animation to which to after the from animation has finished
     void addReturnTransition(const std::string& from, const std::string& to);
 
+    /// Plays an animation
+    /// \param animation Name of the animation to play
+    /// \param looping Loop the animation
     void play(const std::string& animation, bool looping = false);
+
     void stop();
 
     // Component overrides
