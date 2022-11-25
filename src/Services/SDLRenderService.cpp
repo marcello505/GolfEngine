@@ -7,11 +7,12 @@
 #include <iostream>
 #include <algorithm>
 #include <SDL_ttf.h>
+#include <optional>
 
 namespace GolfEngine::Services::Render {
 
     SDLRenderService::SDLRenderService()
-            : _screenSizeHeight{480}, _screenSizeWidth{640}, _window{nullptr}, _renderer{nullptr}, _fullScreen{false} {
+            : _screenSizeHeight{480}, _screenSizeWidth{640}, _window{nullptr, nullptr}, _renderer{nullptr, nullptr}, _fullScreen{false} {
         // Init SDL
         if (SDL_Init(SDL_INIT_VIDEO) < 0) {
             std::cerr << "Error: " << SDL_GetError() << std::endl;
@@ -29,132 +30,82 @@ namespace GolfEngine::Services::Render {
 
         }
 
+        SDL_Window* window;
+        SDL_Renderer* renderer;
+
         // Create window and renderer
-        if (SDL_CreateWindowAndRenderer(_screenSizeWidth, _screenSizeHeight, 0, &_window, &_renderer) < 0) {
+        if (SDL_CreateWindowAndRenderer(_screenSizeWidth, _screenSizeHeight, 0, &window, &renderer) < 0) {
             std::cerr << "Error: " << SDL_GetError() << std::endl;
         }
 
+        // Wrap window and renderer in a unique pointer
+        std::unique_ptr<SDL_Window, void(*)(SDL_Window*)> window_wrapper (window, SDL_DestroyWindow);
+        _window = std::move(window_wrapper);
+        std::unique_ptr<SDL_Renderer, void(*)(SDL_Renderer*)> renderer_wrapper (renderer, SDL_DestroyRenderer);
+        _renderer = std::move(renderer_wrapper);
+
         // Set some basic window properties
-        SDL_SetWindowTitle(_window, "Hello World");
+        SDL_SetWindowTitle(_window.get(), "Hello World");
         SDL_ShowCursor(1); // 0 is disable cursor, 1 is enable
         SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY,
                     "2"); // Increases quality with the scaling of textures, 0 nothing, 1 linear filtering, 2 anisotropic filtering
 
         //Makes alpha blending possible(used for opacity)
-        SDL_SetRenderDrawBlendMode(_renderer, SDL_BLENDMODE_BLEND);
-
+        SDL_SetRenderDrawBlendMode(_renderer.get(), SDL_BLENDMODE_BLEND);
     }
 
-    SDLRenderService::~SDLRenderService() {
-        clearTextureCache();
-        clearFontCache();
-
-        // Close SDL window and renderer
-        SDL_DestroyRenderer(_renderer);
-        SDL_DestroyWindow(_window);
+    void SDLRenderService::addDrawable(Drawable& drawable) {
+        _drawables.emplace_back(std::ref(drawable));
     }
 
-    SDLRenderService::SDLRenderService(SDLRenderService &&other) noexcept {
-        // Steal properties
-        _window = other._window;
-        _renderer = other._renderer;
-        _drawables = std::move(other._drawables);
-        _cachedTextures = std::move(other._cachedTextures);
-        _cachedFonts = std::move(other._cachedFonts);
-        _screenSizeWidth = other._screenSizeWidth;
-        _screenSizeHeight = other._screenSizeHeight;
-        _fullScreen = other._fullScreen;
-    }
-
-    SDLRenderService &SDLRenderService::operator=(SDLRenderService &&other) noexcept {
-        if (this != &other) {
-            // Clear and destroy existing properties
-            _drawables.clear();
-            _cachedTextures.clear();
-            _cachedFonts.clear();
-            SDL_DestroyRenderer(_renderer);
-            SDL_DestroyWindow(_window);
-
-            // Steal properties
-            _window = other._window;
-            _renderer = other._renderer;
-            _drawables = std::move(other._drawables);
-            _cachedTextures = std::move(other._cachedTextures);
-            _cachedFonts = std::move(other._cachedFonts);
-            _screenSizeWidth = other._screenSizeWidth;
-            _screenSizeHeight = other._screenSizeHeight;
-            _fullScreen = other._fullScreen;
-
-            // Reset pointers of other
-            other._window = nullptr;
-            other._renderer = nullptr;
-        }
-        return *this;
-    }
-
-    void SDLRenderService::addDrawable(Drawable *drawable) {
-        // Check for valid drawable
-        if (drawable == nullptr)
-            return;
-
-        _drawables.push_back(drawable);
-    }
-
-    void SDLRenderService::removeDrawable(Drawable *drawable) {
-        // Check for valid drawable
-        if (drawable == nullptr)
-            return;
-
-        // Find the iterator with the given drawable
-        auto foundIterator = std::find(_drawables.begin(), _drawables.end(), drawable);
-        // If drawable is present in the list, remove it from the list
-        if (foundIterator != _drawables.end()) {
-            _drawables.erase(foundIterator);
-        }
+    void SDLRenderService::removeDrawable(Drawable& drawable) {
+        _drawables.erase(std::find_if(_drawables.begin(), _drawables.end(), [&](const std::reference_wrapper<Drawable> &d) {
+            return &d.get() == &drawable;
+        }));
     }
 
     void SDLRenderService::render() {
         // Clear screen
-        SDL_RenderClear(_renderer);
+        SDL_RenderClear(_renderer.get());
 
         // Loop through all registered drawables
         for (auto drawable: _drawables) {
-            auto *renderShape = drawable->getRenderShape();
-            switch (renderShape->getType()) {
+            auto& renderShape = drawable.get().getRenderShape();
+            switch (renderShape.getType()) {
                 case RenderShapeType::RectShape:
-                    renderRect(reinterpret_cast<RectRenderShape &>(*renderShape));
+                    renderRect(dynamic_cast<RectRenderShape&>(renderShape));
                     break;
                 case RenderShapeType::LineShape:
-                    renderLine(reinterpret_cast<LineRenderShape &>(*renderShape));
+                    renderLine(dynamic_cast<LineRenderShape&>(renderShape));
                     break;
                 case RenderShapeType::SpriteShape:
-                    renderSprite(reinterpret_cast<SpriteRenderShape &>(*renderShape));
+                    renderSprite(dynamic_cast<SpriteRenderShape&>(renderShape));
                     break;
                 case RenderShapeType::CircleShape:
-                    renderCircle(reinterpret_cast<CircleRenderShape &>(*renderShape));
+                    renderCircle(dynamic_cast<CircleRenderShape&>(renderShape));
                     break;
                 case RenderShapeType::TextRenderShape:
-                    renderText(reinterpret_cast<TextRenderShape &>(*renderShape));
+                    renderText(dynamic_cast<TextRenderShape&>(renderShape));
                     break;
                 case RenderShapeType::ParticleSystemShape:
                     break;
             }
         }
 
-        SDL_SetRenderDrawColor(_renderer, 50, 50, 50, 255);
+        SDL_SetRenderDrawColor(_renderer.get(), 50, 50, 50, 255);
 
         // Displays all the updates made in the back buffer
-        SDL_RenderPresent(_renderer);
+        SDL_RenderPresent(_renderer.get());
     }
 
     void SDLRenderService::setScreenSize(int width, int height) {
-        SDL_SetWindowSize(_window, width, height);
+        SDL_SetWindowSize(_window.get(), width, height);
     }
 
     void SDLRenderService::setFullScreen(bool fullScreen) {
         // Set window flags fullscreen or 0 for no fullscreen
         if (_fullScreen != fullScreen)
-            SDL_SetWindowFullscreen(_window, fullScreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
+            SDL_SetWindowFullscreen(_window.get(), fullScreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
         _fullScreen = fullScreen;
     }
 
@@ -170,9 +121,9 @@ namespace GolfEngine::Services::Render {
         return _fullScreen;
     }
 
-    void SDLRenderService::renderRect(RectRenderShape &renderShape) {
+    void SDLRenderService::renderRect(RectRenderShape& renderShape) {
         // Set color
-        SDL_SetRenderDrawColor(_renderer, renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, renderShape.color().a);
+        SDL_SetRenderDrawColor(_renderer.get(), renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, renderShape.color().a);
 
         float xPivot;
         float yPivot;
@@ -218,32 +169,32 @@ namespace GolfEngine::Services::Render {
 
         // Draw the lines to make the rectangle
         //First to second
-        SDL_RenderDrawLine(_renderer, (int) points.at(0).first, (int) points.at(0).second, (int) points.at(1).first,
+        SDL_RenderDrawLine(_renderer.get(), (int) points.at(0).first, (int) points.at(0).second, (int) points.at(1).first,
                            (int) points.at(1).second);
         //First to third
-        SDL_RenderDrawLine(_renderer, (int) points.at(0).first, (int) points.at(0).second, (int) points.at(2).first,
+        SDL_RenderDrawLine(_renderer.get(), (int) points.at(0).first, (int) points.at(0).second, (int) points.at(2).first,
                            (int) points.at(2).second);
         //Second to Last
-        SDL_RenderDrawLine(_renderer, (int) points.at(1).first, (int) points.at(1).second, (int) points.at(3).first,
+        SDL_RenderDrawLine(_renderer.get(), (int) points.at(1).first, (int) points.at(1).second, (int) points.at(3).first,
                            (int) points.at(3).second);
         //Third to Last
-        SDL_RenderDrawLine(_renderer, (int) points.at(2).first, (int) points.at(2).second, (int) points.at(3).first,
+        SDL_RenderDrawLine(_renderer.get(), (int) points.at(2).first, (int) points.at(2).second, (int) points.at(3).first,
                            (int) points.at(3).second);
     }
 
-    void SDLRenderService::renderLine(LineRenderShape &renderShape) {
+    void SDLRenderService::renderLine(LineRenderShape& renderShape) {
         // Set color
-        SDL_SetRenderDrawColor(_renderer, renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, renderShape.color().a);
+        SDL_SetRenderDrawColor(_renderer.get(), renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, renderShape.color().a);
 
         // Draw Line
-        SDL_RenderDrawLineF(_renderer,
+        SDL_RenderDrawLineF(_renderer.get(),
                             renderShape.positionA().x, renderShape.positionA().y,
                             renderShape.positionB().x, renderShape.positionB().y);
     }
 
-    void SDLRenderService::renderCircle(CircleRenderShape &renderShape) {
+    void SDLRenderService::renderCircle(CircleRenderShape& renderShape) {
         // Set color
-        SDL_SetRenderDrawColor(_renderer, renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, renderShape.color().a);
+        SDL_SetRenderDrawColor(_renderer.get(), renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, renderShape.color().a);
 
         const int32_t diameter = (abs(renderShape.radius()) * 2);
 
@@ -256,14 +207,14 @@ namespace GolfEngine::Services::Render {
         while (x >= y)
         {
             //  Each of the following renders an octant of the circle
-            SDL_RenderDrawPoint(_renderer, renderShape.position().x + x, renderShape.position().y + y);
-            SDL_RenderDrawPoint(_renderer, renderShape.position().x + x, renderShape.position().y - y);
-            SDL_RenderDrawPoint(_renderer, renderShape.position().x - x, renderShape.position().y - y);
-            SDL_RenderDrawPoint(_renderer, renderShape.position().x - x, renderShape.position().y + y);
-            SDL_RenderDrawPoint(_renderer, renderShape.position().x + y, renderShape.position().y - x);
-            SDL_RenderDrawPoint(_renderer, renderShape.position().x + y, renderShape.position().y + x);
-            SDL_RenderDrawPoint(_renderer, renderShape.position().x - y, renderShape.position().y - x);
-            SDL_RenderDrawPoint(_renderer, renderShape.position().x - y, renderShape.position().y + x);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + x, renderShape.position().y + y);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + x, renderShape.position().y - y);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - x, renderShape.position().y - y);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - x, renderShape.position().y + y);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + y, renderShape.position().y - x);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + y, renderShape.position().y + x);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - y, renderShape.position().y - x);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - y, renderShape.position().y + x);
 
             if (error <= 0)
             {
@@ -281,42 +232,50 @@ namespace GolfEngine::Services::Render {
         }
     }
 
-
     void SDLRenderService::renderSprite(SpriteRenderShape& renderShape) {
-        // Load sprite
-        auto* texture {loadSprite(renderShape.path())};
-        if(texture == nullptr) {return;}
+        // Try to load sprite with given path
+        std::optional<std::reference_wrapper<Texture>> t;
+        try {
+            t = loadSprite(renderShape.path());
+        }
+        catch(std::exception& e){
+            std::cout << "Error: " << e.what() << std::endl;
+            return;
+        }
+
+        // Get direct reference to texture for easy access
+        auto& texture {t->get()};
 
         // Set color and blend mode
-        texture->setColor(renderShape.color());
-        texture->setAlphaMod(renderShape.color().a);
+        texture.setColor(renderShape.color());
+        texture.setAlphaMod(renderShape.color().a);
 
         // Calculate desired width and height of sprite
-        float dstWidth {(texture->width() * abs(renderShape.pixelScale().x))};
-        float dstHeight {(texture->height() * abs(renderShape.pixelScale().y))};
+        float dstWidth{(texture.width() * abs(renderShape.pixelScale().x))};
+        float dstHeight{(texture.height() * abs(renderShape.pixelScale().y))};
 
         // Determine pivot point
         SDL_Point pivotPoint;
         // Set pivot point to center if no pivot point has been set
-        if(renderShape.pivotPoint().x == 0 && renderShape.pivotPoint().y == 0)
-            pivotPoint = {(int)(dstWidth / 2), (int)(dstHeight / 2)};
-        else{
+        if (renderShape.pivotPoint().x == 0 && renderShape.pivotPoint().y == 0)
+            pivotPoint = {(int) (dstWidth / 2), (int) (dstHeight / 2)};
+        else {
             // Mirror the x and y of the pivot point if scale is negative
             float pivotX;
             float pivotY;
-            if(renderShape.pixelScale().x < 0)
-                pivotX = (1 - (renderShape.pivotPoint().x / texture->width())) * texture->width();
+            if (renderShape.pixelScale().x < 0)
+                pivotX = (1 - (renderShape.pivotPoint().x / texture.width())) * texture.width();
             else
                 pivotX = renderShape.pivotPoint().x;
 
-            if(renderShape.pixelScale().y < 0)
-                pivotY = (1 - (renderShape.pivotPoint().y / texture->height())) * texture->height();
+            if (renderShape.pixelScale().y < 0)
+                pivotY = (1 - (renderShape.pivotPoint().y / texture.height())) * texture.height();
             else
-                pivotY= renderShape.pivotPoint().y;
+                pivotY = renderShape.pivotPoint().y;
 
             // Set pivot point
-            pivotPoint = {(int)(pivotX * abs(renderShape.pixelScale().x)),
-                          (int)(pivotY * abs(renderShape.pixelScale().y))};
+            pivotPoint = {(int) (pivotX * abs(renderShape.pixelScale().x)),
+                          (int) (pivotY * abs(renderShape.pixelScale().y))};
         }
 
         // Creating destination rect
@@ -328,9 +287,9 @@ namespace GolfEngine::Services::Render {
 
         // Convert Rect2 to SDL_Rect only if there is a given size, else just use the full size by giving a nullptr
         SDL_Rect srcRect;
-        bool useFullSize {true};
-        auto imageSource {renderShape.imageSource()};
-        if(imageSource.size.x != 0 && imageSource.size.y != 0){
+        bool useFullSize{true};
+        auto imageSource{renderShape.imageSource()};
+        if (imageSource.size.x != 0 && imageSource.size.y != 0) {
             useFullSize = false;
             srcRect.x = imageSource.position.x;
             srcRect.y = imageSource.position.y;
@@ -340,50 +299,49 @@ namespace GolfEngine::Services::Render {
 
         // Flip sprite if scale is a negative value
         SDL_RendererFlip flip = SDL_FLIP_NONE;
-        if(renderShape.pixelScale().x < 0)
-            flip = (SDL_RendererFlip)(flip | (SDL_FLIP_HORIZONTAL));
-        if(renderShape.pixelScale().y < 0)
-            flip = (SDL_RendererFlip)(flip | (SDL_FLIP_VERTICAL));
+        if (renderShape.pixelScale().x < 0)
+            flip = (SDL_RendererFlip) (flip | (SDL_FLIP_HORIZONTAL));
+        if (renderShape.pixelScale().y < 0)
+            flip = (SDL_RendererFlip) (flip | (SDL_FLIP_VERTICAL));
 
 
         // Render sprite
-        SDL_RenderCopyEx(_renderer, texture->texture(), useFullSize? nullptr : &srcRect, &dstRect,
+        SDL_RenderCopyEx(_renderer.get(), texture.texture(), useFullSize ? nullptr : &srcRect, &dstRect,
                          renderShape.rotation(), &pivotPoint, flip);
+
     }
 
-    Texture* SDLRenderService::loadSprite(const std::string& path) {
+    Texture& SDLRenderService::loadSprite(const std::string& path) {
         auto cachedTexture = _cachedTextures.find(path);
         if(cachedTexture != _cachedTextures.end()){
             // Use existing texture
-            return cachedTexture->second;
+            return *cachedTexture->second;
         }
         else{
-            // Load new texture
-            auto* newTexture = new Texture();
+            std::unique_ptr<Texture> newTexture {std::make_unique<Texture>()};
             if(newTexture->loadFromFileSprite(path, *_renderer)){
-                _cachedTextures.insert({path, newTexture});
-                return newTexture;
+                auto ref = _cachedTextures.insert({path, std::move(newTexture)});
+                return *ref.first->second;
             }
-            return nullptr;
         }
+        throw std::runtime_error("Could not find/load sprite with path: " + path);
     }
 
-    void SDLRenderService::clearTextureCache() {
-        // Free all texture memory
-        for(auto& texture : _cachedTextures){
-            texture.second->free();
-            delete texture.second;
+    void SDLRenderService::renderText(TextRenderShape& renderShape) {
+        std::optional<std::reference_wrapper<TTF_Font>> f;
+        try{
+            f = loadFont(renderShape.filePath(), renderShape.fontSize());
+        } catch(std::exception& e){
+            std::cout << "Error: " << e.what() << std::endl;
+            return;
         }
-    }
 
-    void SDLRenderService::renderText(TextRenderShape &renderShape) {
-        auto* font {loadFont(renderShape.filePath(), renderShape.fontSize())};
-        if(font == nullptr) {return;}
-
+        // Get direct reference to texture for easy access
+        auto& font {f->get()};
 
         // TODO add COLOR
 
-        SDL_Surface* surface = TTF_RenderText_Solid(font, renderShape.text().c_str(), {renderShape.color().r8,renderShape.color().g8,renderShape.color().b8});
+        SDL_Surface* surface = TTF_RenderText_Solid(&font, renderShape.text().c_str(), {renderShape.color().r8,renderShape.color().g8,renderShape.color().b8});
         if(surface == nullptr){
             printf("Unable to load image %s, Error: %s\n", renderShape.filePath().c_str(), IMG_GetError());
             return;
@@ -397,7 +355,7 @@ namespace GolfEngine::Services::Render {
         dstRect.h = surface->h;
 
         // Create texture from surface
-        auto texture = SDL_CreateTextureFromSurface(_renderer, surface);
+        auto texture = SDL_CreateTextureFromSurface(_renderer.get(), surface);
         // Free surface memory
         SDL_FreeSurface(surface);
         if(texture == nullptr){
@@ -405,36 +363,27 @@ namespace GolfEngine::Services::Render {
             return;
         }
 
-        SDL_RenderCopyEx(_renderer, texture, nullptr, &dstRect, renderShape.rotation(), nullptr, SDL_FLIP_NONE);
+        SDL_RenderCopyEx(_renderer.get(), texture, nullptr, &dstRect, renderShape.rotation(), nullptr, SDL_FLIP_NONE);
 
         SDL_DestroyTexture(texture);
     }
-
-
-    TTF_Font * SDLRenderService::loadFont(const std::string& path, size_t fontSize) {
+    
+    TTF_Font& SDLRenderService::loadFont(const std::string& path, size_t fontSize) {
         auto cachedFont = _cachedFonts.find(path);
         if(cachedFont != _cachedFonts.end() && cachedFont->second.first == fontSize){
             // Use existing texture
-            return cachedFont->second.second;
+            return *cachedFont->second.second;
         }
         else{
-            // Load new texture
+            // Load new font
             auto newFont = TTF_OpenFont(path.c_str(), fontSize);
             if(newFont){
-                _cachedFonts.insert({path, {fontSize, newFont}});
-                return newFont;
+                std::unique_ptr<TTF_Font, void(*)(TTF_Font*)> font_wrapper {newFont, TTF_CloseFont};
+                auto ref = _cachedFonts.insert({path, std::pair<size_t, std::unique_ptr<TTF_Font, void(*)(TTF_Font*)>>(fontSize, std::move(font_wrapper))});
+                return *ref.first->second.second;
             }
-            return nullptr;
         }
+        throw std::runtime_error("Could not find/load font with path: " + path);
     }
-
-    void SDLRenderService::clearFontCache() {
-        // Free all texture memory
-        for(auto& fontPair : _cachedFonts){
-            TTF_CloseFont(fontPair.second.second);
-
-        }
-    }
-
 }
 

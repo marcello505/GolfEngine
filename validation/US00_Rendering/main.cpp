@@ -44,10 +44,10 @@ int main(int argc, char* argv[]){
                                 Color(255,0,0, 50),
                                 Transform(Vector2(200,200), 0, Vector2(1,1)));
 
-    rs->addDrawable(circle);
-    rs->addDrawable(rect);
+    rs->addDrawable(*circle);
+    rs->addDrawable(*rect);
     //rs->addDrawable(rect2);
-    rs->addDrawable(sprite);
+    rs->addDrawable(*sprite);
     while(running){
         input();
         rs->render();

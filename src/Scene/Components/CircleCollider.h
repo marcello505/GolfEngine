@@ -25,7 +25,7 @@ public:
     bool getActive() override;
     void setActive(bool active) override;
     void setParentGameObject(GameObject& gameObject) override;
-    RenderShape* getRenderShape() override;
+    RenderShape& getRenderShape() override;
 
 private:
     bool _active {true};
