@@ -27,13 +27,11 @@ int main(int argc, char* argv[]){
     ActionMap::getActionMap()->addAction("Right");
     ActionMap::getActionMap()->addAction("Up");
     ActionMap::getActionMap()->addAction("Down");
-    ActionMap::getActionMap()->addAction("Jump");
 
     ActionMap::getActionMap()->addInputKeyToAction("Left", Key_Left);
     ActionMap::getActionMap()->addInputKeyToAction("Right", Key_Right);
     ActionMap::getActionMap()->addInputKeyToAction("Up", Key_Up);
     ActionMap::getActionMap()->addInputKeyToAction("Down", Key_Down);
-    ActionMap::getActionMap()->addInputKeyToAction("Jump", Key_Space);
 
 
     GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
@@ -46,10 +44,10 @@ int main(int argc, char* argv[]){
     auto as = GolfEngine::Services::Audio::getService();
     auto is = GolfEngine::Services::Input::getService();
 
-    ps->setGravity(Vector2(0,5));
 
     as->preloadAudio(mgsThemePath);
-    as->playOnChannel(0, mgsThemePath, 30);
+    as->setVolumeChannel(0,100);
+    as->playOnChannel(0, mgsThemePath, 5);
 
 
 

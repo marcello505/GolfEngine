@@ -164,7 +164,8 @@ namespace GolfEngine::Services::Physics{
     void Box2DPhysicsService::setTransform(RigidBody* pRigidBody, const Transform& transform) {
         auto body = getB2Body(pRigidBody);
         if(body){
-            b2Vec2 b2Position {transform.position.x, transform.position.y};
+            // TODO check if this needs to be divided by PhysicsSpaceToWorldSpace
+            b2Vec2 b2Position {transform.position.x / PhysicsSpaceToWorldSpace, transform.position.y / PhysicsSpaceToWorldSpace};
             float angle = deg2Rad(transform.rotation);
             body.value()->SetTransform(b2Position, angle);
         }
