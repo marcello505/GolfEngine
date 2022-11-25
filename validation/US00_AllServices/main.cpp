@@ -38,11 +38,8 @@ int main(int argc, char* argv[]){
     GolfEngine::SceneManager::GetSceneManager().loadScene("main");
 
 
-    //gets all services
-    auto rs = GolfEngine::Services::Render::getService();
-    auto ps = GolfEngine::Services::Physics::getService();
+    //gets AudioService services
     auto as = GolfEngine::Services::Audio::getService();
-    auto is = GolfEngine::Services::Input::getService();
 
 
     as->preloadAudio(mgsThemePath);
