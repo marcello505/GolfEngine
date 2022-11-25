@@ -9,8 +9,8 @@
 
 class RenderService{
 public:
-    virtual void addDrawable(Drawable* drawable) = 0;
-    virtual void removeDrawable(Drawable* drawable) = 0;
+    virtual void addDrawable(Drawable& drawable) = 0;
+    virtual void removeDrawable(Drawable& drawable) = 0;
     virtual void render() = 0;
     virtual void setScreenSize(int width, int height) = 0;
     virtual void setFullScreen(bool fullScreen) = 0;

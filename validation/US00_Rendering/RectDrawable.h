@@ -13,11 +13,11 @@
 class RectDrawable : public Drawable {
 public:
     RectDrawable(Rect2 rect, Transform transform, Vector2 pivotPoint = Vector2(), Color color = Color(255,255,255));
-    RenderShape* getRenderShape() override;
+    RenderShape& getRenderShape() override;
     void rotate(float amount);
     void scale(float amount);
 private:
-    std::unique_ptr<RectRenderShape> _renderShape;
+    RectRenderShape _renderShape;
     Transform _transform;
 };
 

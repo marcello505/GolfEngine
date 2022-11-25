@@ -13,9 +13,9 @@
 class LineDrawable : public Drawable {
 public:
     LineDrawable(Vector2 posA, Vector2 posB, Color color);
-    RenderShape* getRenderShape() override;
+    RenderShape& getRenderShape() override;
 private:
-    std::unique_ptr<LineRenderShape> _renderShape;
+    LineRenderShape _renderShape;
     Transform _transform;
 };
 

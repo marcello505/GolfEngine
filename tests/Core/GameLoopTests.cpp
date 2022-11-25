@@ -49,8 +49,8 @@ namespace GameLoopTests{
 
         //Unused
         void setScreenSize(int width, int height) override {}
-        void removeDrawable(Drawable* drawable) override {}
-        void addDrawable(Drawable* drawable) override {}
+        void removeDrawable(Drawable& drawable) override {}
+        void addDrawable(Drawable& drawable) override {}
         void setFullScreen(bool fullScreen) override {};
     };
 

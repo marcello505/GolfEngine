@@ -4,13 +4,13 @@
 
 #include "SpriteDrawable.h"
 
-SpriteDrawable::SpriteDrawable(const std::string& path,Vector2 position ,Vector2 pixelScale, Rect2 imageSource, Transform transform, Vector2 pivotPoint, Color color) : _transform{transform} {
-    _renderShape = std::make_unique<SpriteRenderShape>(path, position, transform.rotation, pixelScale, imageSource, pivotPoint, color);
+SpriteDrawable::SpriteDrawable(const std::string& path,Vector2 position ,Vector2 pixelScale, Rect2 imageSource, Transform transform, Vector2 pivotPoint, Color color) : _transform{transform},
+    _renderShape{SpriteRenderShape(path, position, transform.rotation, pixelScale, imageSource, pivotPoint, color)}{
 }
 
-RenderShape* SpriteDrawable::getRenderShape() {
-    _renderShape->applyTransform(_transform);
-    return _renderShape.get();
+RenderShape& SpriteDrawable::getRenderShape() {
+    _renderShape.applyTransform(_transform);
+    return _renderShape;
 }
 
 void SpriteDrawable::rotate(float amount) {
