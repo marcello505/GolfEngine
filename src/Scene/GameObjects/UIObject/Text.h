@@ -18,10 +18,10 @@ public:
     Text(Vector2 pos, float rotation, std::string text, size_t fontSize, Color color, std::string filePath,
          Alignment alignment);
 
-    RenderShape* getRenderShape() override;
+    RenderShape& getRenderShape() override;
 
     Alignment _alignment;
-    std::unique_ptr<TextRenderShape> _renderShape;
+    TextRenderShape _renderShape;
 };
 
 

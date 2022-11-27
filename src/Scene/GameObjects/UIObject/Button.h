@@ -14,17 +14,18 @@
 class Button : public UIObject{
 
 public:
-    Button(int width, int height, Vector2 position, bool interactable, Text* text);
+    Button(int width, int height, Vector2 position, bool interactable, Text *text,
+           ButtonRenderShape buttonRenderShape);
 
     [[nodiscard]] bool interactable() const;
-    RenderShape* getRenderShape() override;
+    RenderShape& getRenderShape() override;
     void onClick();
 
     std::unique_ptr<Text> _text;
 private:
     bool _interactable;
     void setShape();
-    std::unique_ptr<ButtonRenderShape> _buttonRenderShape;
+    ButtonRenderShape _buttonRenderShape;
 };
 
 

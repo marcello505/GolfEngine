@@ -12,7 +12,8 @@
     return false;
 }
 
-Button::Button(int width, int height, Vector2 position, bool interactable, Text* text) {
+Button::Button(int width, int height, Vector2 position, bool interactable, Text *text,
+               ButtonRenderShape buttonRenderShape) : _buttonRenderShape(std::move(buttonRenderShape)) {
     _width = width;
     _height = height;
     _position = position;
@@ -21,8 +22,8 @@ Button::Button(int width, int height, Vector2 position, bool interactable, Text*
     setShape();
 }
 
-RenderShape *Button::getRenderShape() {
-    return _buttonRenderShape.get();
+RenderShape& Button::getRenderShape() {
+    return _buttonRenderShape;
 }
 
 
@@ -35,12 +36,12 @@ void Button::setShape() {
 
 
     // setup text position relative to the container
-    _text->_renderShape->setPosition(Vector2(renderShape->rect().position.x - _text->_renderShape->fontSize() * 2,
-                                             renderShape->rect().position.y - _text->_renderShape->fontSize() * 0.5));
+    _text->_renderShape.setPosition(Vector2(renderShape->rect().position.x - _text->_renderShape.fontSize() * 2,
+                                             renderShape->rect().position.y - _text->_renderShape.fontSize() * 0.5));
 
     // setup render shape
-    auto* renderButton = new ButtonRenderShape(renderShape, _text->_renderShape.get());
-    _buttonRenderShape = std::make_unique<ButtonRenderShape>(renderButton->_rectRenderShape.get(),
+    auto* renderButton = new ButtonRenderShape(renderShape, &_text->_renderShape);
+    _buttonRenderShape = *new ButtonRenderShape(renderButton->_rectRenderShape.get(),
                                                              renderButton->_textRenderShape.get());
 }
 

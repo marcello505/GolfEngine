@@ -92,7 +92,7 @@ namespace GolfEngine::Services::Render {
                 case RenderShapeType::ParticleSystemShape:
                     break;
                 case RenderShapeType::ButtonRenderShape:
-                    renderButton(reinterpret_cast<ButtonRenderShape &>(*renderShape));
+                    renderButton(dynamic_cast<ButtonRenderShape&>(renderShape));
                     break;
 
             }

@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
                          R"(..\..\..\validation\US08_RenderUIObject\resources\Rubik-VariableFont_wght.ttf)",
                          Alignment::Center );
     //setup button
-    auto btn = new Button(100,  60, Vector2(50,30), true, text);
+    auto btn = new Button(100, 60, Vector2(50, 30), true, text, ButtonRenderShape(nullptr, nullptr));
 
     //setup text
     auto scoreText = new Text(Vector2(480,10), 0, "score: 237",
@@ -27,8 +27,8 @@ int main(int argc, char* argv[])
                          Alignment::Center );
 
     //add drawables to renderservice
-    rs->addDrawable(btn);
-    rs->addDrawable(scoreText);
+    rs->addDrawable(*btn);
+    rs->addDrawable(*scoreText);
 
     //start gameloop
     gameLoop.start();
