@@ -27,16 +27,18 @@ RenderShape *Button::getRenderShape() {
 
 
 void Button::setShape() {
+    // setup container of button
     auto* renderShape  = new RectRenderShape(Rect2(_position, Vector2(_width, _height)),
                                              0,
                                              Vector2(0, 0),
                                              Color(255,255,255,255));
 
 
-
+    // setup text position relative to the container
     _text->_renderShape->setPosition(Vector2(renderShape->rect().position.x - _text->_renderShape->fontSize() * 2,
                                              renderShape->rect().position.y - _text->_renderShape->fontSize() * 0.5));
 
+    // setup render shape
     auto* renderButton = new ButtonRenderShape(renderShape, _text->_renderShape.get());
     _buttonRenderShape = std::make_unique<ButtonRenderShape>(renderButton->_rectRenderShape.get(),
                                                              renderButton->_textRenderShape.get());

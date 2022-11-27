@@ -53,7 +53,6 @@ void SDLInputService::handleMouseEvent(SDL_Event event, bool pressed) {
     SDL_PumpEvents();  // make sure we have the latest mouse state.
     buttons = SDL_GetMouseState(&x, &y);
     _actionMap->setMousePosition(x, y); //set current mouse pos
-    _actionMap->getMousePosition();
 
     switch(event.button.button){
         case 1: // left mouse button
@@ -66,7 +65,6 @@ void SDLInputService::handleMouseEvent(SDL_Event event, bool pressed) {
             _actionMap->setInputKeyPressed(Mouse_Right, pressed); // handle action for this button
             break;
         default: // when no button is pressed but mouse moved
-            std::cout << "not clicking \n";
             break;
     }
 
