@@ -8,7 +8,7 @@
 void BoxCollider::onStart() {
     //TODO make it so that this only happens if debug is on
     if(GolfEngine::Services::Render::hasService()){
-        GolfEngine::Services::Render::getService()->addDrawable(this);
+        GolfEngine::Services::Render::getService()->addDrawable(*this);
     }
 }
 
@@ -18,7 +18,7 @@ void BoxCollider::onUpdate() {
 
 void BoxCollider::onRemove() {
     if(GolfEngine::Services::Render::hasService()){
-        GolfEngine::Services::Render::getService()->removeDrawable(this);
+        GolfEngine::Services::Render::getService()->removeDrawable(*this);
     }
 }
 
@@ -38,17 +38,13 @@ void BoxCollider::setActive(bool active) {
     _active = active;
 }
 
-void BoxCollider::setParentGameObject(GameObject* gameObject) {
-    _parent = gameObject;
+void BoxCollider::setParentGameObject(GameObject& gameObject) {
+    _gameObject = gameObject;
 }
 
-Component* BoxCollider::clone() const {
-    return nullptr;
-}
-
-RenderShape* BoxCollider::getRenderShape() {
-    if(_parent != nullptr){
-        _rectRenderShape.applyTransform(_parent->getWorldTransform());
+RenderShape& BoxCollider::getRenderShape() {
+    if(_gameObject){
+        _rectRenderShape.applyTransform(_gameObject->get().getWorldTransform());
     }
-    return &_rectRenderShape;
+    return _rectRenderShape;
 }

@@ -3,69 +3,93 @@
 //
 
 #include <../doctest/doctest.h>
-#include "Scene/Scene.h"
+#include "Core/SceneManager.h"
 #include "Scene/Components/BehaviourScript.h"
 
 namespace GameObjectTests{
-    class Counter : public BehaviourScript{
-    private:
-        int _count = 0;
+    class DummyScript : public BehaviourScript{
     public:
-        void onStart() override {
-            _count = 0;
+        void reloadScene(){
+            GolfEngine::SceneManager::GetSceneManager().loadScene();
         }
-        void onUpdate() override {
-            _count++;
-        }
-        [[nodiscard]] int getCount() const {return _count;}
     };
+
+    class PlayerDummy : public GameObject{
+    public:
+        explicit PlayerDummy(const char* name = nullptr, const char* tag = nullptr)
+                : GameObject(name, tag) {
+            auto& c = addComponent<DummyScript>();
+        }
+    };
+
+    class MainSceneFactory : public ISceneFactory{
+        void build(Scene& scene) const override{
+            auto& go = scene.createNewGameObject<PlayerDummy>();
+        }
+    };
+
 }
 
-TEST_CASE("Component creation on GameObject"){
-    // Arrange
-    Scene* scene {new Scene{}};
-    GameObject* go {new GameObject{scene}};
+TEST_CASE("Getting a component"){
+    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<GameObjectTests::MainSceneFactory>("main");
+    GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    auto& currentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
 
     // Act
-    go->addComponent<BehaviourScript>();
-
     // Assert
-    auto script {go->getComponent<BehaviourScript>()};
-    CHECK_NE(script, nullptr);
-
-    // Cleanup
-    delete scene;
+    CHECK_NOTHROW(currentScene.getRootGameObject().childAt(0).getComponent<GameObjectTests::DummyScript>());
 }
 
-TEST_CASE("Component removal on GameObject"){
+TEST_CASE("Adding a component"){
     // Arrange
-    Scene* scene{new Scene{}};
-    GameObject* go{new GameObject{scene}};
+    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<GameObjectTests::MainSceneFactory>("main");
+    GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    auto& currentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
+    auto& go = currentScene.getRootGameObject();
 
     // Act
-    go->addComponent<BehaviourScript>();
-    go->removeComponent(*go->getComponent<BehaviourScript>());
+    go.addComponent<GameObjectTests::DummyScript>();
 
     // Assert
-    CHECK_EQ(go->getComponent<BehaviourScript>(), nullptr);
-
-    // Cleanup
-    delete scene;
+    CHECK_NOTHROW(go.getComponent<GameObjectTests::DummyScript>());
 }
 
-TEST_CASE("Custom behavior script on GameObject"){
+TEST_CASE("Removing a component"){
     // Arrange
-    Scene* scene{new Scene{}};
-    GameObject* go{new GameObject{scene}};
-    go->addComponent<GameObjectTests::Counter>();
+    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<GameObjectTests::MainSceneFactory>("main");
+    GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    auto& currentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
+    auto& go = currentScene.getRootGameObject().childAt(0);
 
     // Act
-    scene->startScene();
-    scene->updateScene();
+    go.removeComponent<GameObjectTests::DummyScript>();
 
     // Assert
-    CHECK_EQ(go->getComponent<GameObjectTests::Counter>()->getCount(), 1);
+    CHECK_THROWS(go.getComponent<GameObjectTests::DummyScript>());
+}
 
-    // Cleanup
-    delete scene;
+TEST_CASE("Reloading a scene using a custom behaviour script"){
+    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<GameObjectTests::MainSceneFactory>("main");
+    GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    auto& prevCurrentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
+
+    // Act
+    auto& script = prevCurrentScene.getRootGameObject().childAt(0).getComponent<GameObjectTests::DummyScript>();
+    script.reloadScene();
+    auto& currentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
+
+    // Assert
+    CHECK_NE(&currentScene, &prevCurrentScene);
+}
+
+TEST_CASE("Check if GameObject has a certain Component"){
+    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<GameObjectTests::MainSceneFactory>("main");
+    GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    auto& currentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
+
+    // Act
+    auto result = currentScene.getRootGameObject().childAt(0).hasComponent<GameObjectTests::DummyScript>();
+
+    // Assert
+    CHECK_EQ(result, true);
 }

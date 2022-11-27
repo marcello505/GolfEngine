@@ -44,7 +44,7 @@ void GameLoop::stop() {
 void GameLoop::processInput() {
     if(Input::hasService()){
         Input::getService()->handleInputs();
-        _running &= !Input::getService()->hasRecievedQuitSignal();
+        _running &= !Input::getService()->hasReceivedQuitSignal();
     }
 }
 
@@ -55,7 +55,9 @@ void GameLoop::update() {
         Physics::getService()->update(_msPerUpdate.count() / 1000.0f);
     }
 
-    //TODO add SceneManager code
+    // Update scene
+    if(GolfEngine::SceneManager::GetSceneManager().hasCurrentScene())
+        GolfEngine::SceneManager::GetSceneManager().getCurrentScene().updateScene();
 
     if(_actionMap){
         _actionMap->update();

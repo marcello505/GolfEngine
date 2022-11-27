@@ -24,13 +24,11 @@ public:
     void onRemove() override;
     bool getActive() override;
     void setActive(bool active) override;
-    void setParentGameObject(GameObject* gameObject) override;
-    Component* clone() const override;
-    RenderShape* getRenderShape() override;
+    void setParentGameObject(GameObject& gameObject) override;
+    RenderShape& getRenderShape() override;
 
 private:
     bool _active {true};
-    GameObject* _parent {};
     float _radius;
     CircleRenderShape _renderShape;
 

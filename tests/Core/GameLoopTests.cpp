@@ -13,9 +13,12 @@ namespace GameLoopTests{
                 gameLoop->stop();
             }
         }
-        bool hasRecievedQuitSignal() override{ return false; };
 
+        [[nodiscard]] bool hasReceivedQuitSignal() const override{
+            return _hasReceivedQuitSignal;
+        }
         //Fields
+        bool _hasReceivedQuitSignal {false};
         int callCount {0};
         GameLoop* gameLoop {nullptr};
 
@@ -45,10 +48,10 @@ namespace GameLoopTests{
         }
 
         //Unused
-        void addDrawable(Drawable* drawable) override {}
-        void removeDrawable(Drawable* drawable) override {}
         void setScreenSize(int width, int height) override {}
-        void setFullScreen(bool fullscreen) override {}
+        void removeDrawable(Drawable& drawable) override {}
+        void addDrawable(Drawable& drawable) override {}
+        void setFullScreen(bool fullScreen) override {};
     };
 
     class DummyPhysicsService : public PhysicsService{
@@ -160,5 +163,73 @@ TEST_CASE("GameLoop.start() calls dummy PhysicsService"){
     }
 
     //Clean up (needs to be done because otherwise the service will interfere with other tests)
+    gameLoop.setPhysicsService(nullptr);
+}
+
+TEST_CASE("Setting timescale"){
+    // Arrange
+    GameLoop gameLoop {};
+    auto* dummyService = new GameLoopTests::DummyPhysicsService {};
+    gameLoop.setFramesPerSeccond(60.f);
+    dummyService->gameLoop = &gameLoop;
+    gameLoop.setPhysicsService(dummyService);
+
+    // Act
+    GolfEngine::Time::setTimeScale(0.5f);
+    gameLoop.start();
+
+    // Assert
+    SUBCASE("Physics FPS is around 30 fps with 0.5 timescale"){
+        // Since this is based on system performance we allow a small margin of error
+        CHECK_GE(gameLoop.time->getPhysicsFps(), 29);
+        CHECK_LE(gameLoop.time->getPhysicsFps(), 32);
+    }
+
+    //Clean up (needs to be done because otherwise the service will interfere with other tests)
+    gameLoop.setPhysicsService(nullptr);
+
+    // Arrange
+    gameLoop  = GameLoop{};
+    dummyService = new GameLoopTests::DummyPhysicsService {};
+    gameLoop.setFramesPerSeccond(60.f);
+    dummyService->gameLoop = &gameLoop;
+    gameLoop.setPhysicsService(dummyService);
+
+    // Act
+    GolfEngine::Time::setTimeScale(2.0f);
+    gameLoop.start();
+
+    // Assert
+    SUBCASE("Physics FPS is around 120 fps with 2 timescale"){
+        // Since this is based on system performance we allow a small margin of error
+        CHECK_GE(gameLoop.time->getPhysicsFps(), 119);
+        CHECK_LE(gameLoop.time->getPhysicsFps(), 121);
+    }
+
+    //Clean up (needs to be done because otherwise the service will interfere with other tests)
+    gameLoop.setPhysicsService(nullptr);
+
+    // Arrange
+    gameLoop  = GameLoop{};
+    dummyService = new GameLoopTests::DummyPhysicsService {};
+    auto* dummyRenderService = new GameLoopTests::DummyRenderService {};
+    gameLoop.setFramesPerSeccond(60.f);
+    dummyRenderService->gameLoop = &gameLoop;
+    dummyService->gameLoop = &gameLoop;
+    gameLoop.setRenderService(dummyRenderService);
+    gameLoop.setPhysicsService(dummyService);
+
+    // Act
+    GolfEngine::Time::setTimeScale(0.0f);
+    gameLoop.start();
+
+    // Assert
+    SUBCASE("Physics FPS is 0 fps with a timescale of 0.0"){
+        CHECK_EQ(gameLoop.time->getPhysicsFps(), 0);
+        CHECK_GT(gameLoop.time->getRenderFps(), 0);
+    }
+
+    //Clean up (needs to be done because otherwise the service will interfere with other tests)
+    gameLoop.setRenderService(nullptr);
     gameLoop.setPhysicsService(nullptr);
 }

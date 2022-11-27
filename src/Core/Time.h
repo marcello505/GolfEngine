@@ -17,9 +17,9 @@ namespace GolfEngine{
         GameTic getRenderFps() const;
         GameTic getPhysicsFps() const;
         GameTic getRenderDeltaTime() const;
-        GameTic getPhysicsDeltaTime() const;
-        GameTic getTimeScale() const;
-        void setTimeScale(GameTic timeScale);
+        static GameTic getPhysicsDeltaTime();
+        static GameTic getTimeScale();
+        static void setTimeScale(GameTic timeScale);
 
         void measureRenderCall();
         void measurePhysicsCall();
@@ -32,14 +32,13 @@ namespace GolfEngine{
         std::chrono::steady_clock::time_point _previousPhysicsCall = std::chrono::steady_clock::now();
         std::chrono::duration<GameTic, std::milli> _physicsFpsCounter {0.f};
         GameTic _renderDeltaTime {};
-        GameTic _physicsDeltaTime {};
+        static GameTic _physicsDeltaTime;
         int _physicsCalls {0};
         int _renderCalls {0};
         GameTic _fpsPhysics {0};
         GameTic _fpsRender {0};
-        GameTic _timeScale {1.0f};
+        static GameTic _timeScale;
     };
-
 }
 
 

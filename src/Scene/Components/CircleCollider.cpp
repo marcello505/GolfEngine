@@ -8,7 +8,7 @@ ColliderShapes CircleCollider::getColliderShape() {
 void CircleCollider::onStart() {
     //TODO make it so that this only happens if debug is on
     if(GolfEngine::Services::Render::hasService()){
-        GolfEngine::Services::Render::getService()->addDrawable(this);
+        GolfEngine::Services::Render::getService()->addDrawable(*this);
     }
 }
 
@@ -18,7 +18,7 @@ void CircleCollider::onUpdate() {
 
 void CircleCollider::onRemove() {
     if(GolfEngine::Services::Render::hasService()){
-        GolfEngine::Services::Render::getService()->removeDrawable(this);
+        GolfEngine::Services::Render::getService()->removeDrawable(*this);
     }
 }
 
@@ -30,19 +30,17 @@ void CircleCollider::setActive(bool active) {
     _active = active;
 }
 
-void CircleCollider::setParentGameObject(GameObject* gameObject) {
-    _parent = gameObject;
+void CircleCollider::setParentGameObject(GameObject& gameObject) {
+    _gameObject = gameObject;
 }
 
-Component* CircleCollider::clone() const {
-    return nullptr;
-}
 
-RenderShape* CircleCollider::getRenderShape() {
-    if(_parent != nullptr){
-        _renderShape.applyTransform(_parent->getWorldTransform());
+
+RenderShape& CircleCollider::getRenderShape() {
+    if(_gameObject){
+        _renderShape.applyTransform(_gameObject->get().getWorldTransform());
     }
-    return &_renderShape;
+    return _renderShape;
 }
 
 float CircleCollider::getRadius() const {

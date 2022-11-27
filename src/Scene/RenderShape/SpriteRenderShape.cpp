@@ -53,3 +53,15 @@ Vector2 SpriteRenderShape::position() const {
 Vector2 SpriteRenderShape::pixelScale() const {
     return _pixelScale;
 }
+
+void SpriteRenderShape::setPath(const std::string& path) {
+    _path = path;
+}
+
+void SpriteRenderShape::setImageSource(Rect2 imageSource) {
+    _imageSource = imageSource;
+}
+
+void SpriteRenderShape::setColor(Color color) {
+    _color = color;
+}

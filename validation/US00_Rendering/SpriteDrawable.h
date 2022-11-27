@@ -12,11 +12,11 @@
 class SpriteDrawable : public Drawable{
 public:
     SpriteDrawable(const std::string& path, Vector2 position, Vector2 pixelScale, Rect2 imageSource, Transform transform, Vector2 pivotPoint = Vector2(), Color color = Color());
-    RenderShape* getRenderShape() override;
+    RenderShape& getRenderShape() override;
     void rotate(float amount);
     void scale(float amount);
 private:
-    std::unique_ptr<SpriteRenderShape> _renderShape;
+    SpriteRenderShape _renderShape;
     Transform _transform;
 };
 

@@ -15,14 +15,14 @@
 class TextDrawable : public Drawable {
 public:
     TextDrawable(Vector2 pos, Transform transform ,std::string text, size_t fontSize, Color color,  std::string filePath, GameLoop& gl);
-    RenderShape* getRenderShape() override;
+    RenderShape& getRenderShape() override;
 
     void setText(std::string text);
 
     void rotate(float amount);
     void move(int x, int y);
 private:
-    std::unique_ptr<TextRenderShape> _renderShape;
+    TextRenderShape _renderShape;
     Transform _transform;
 
     GameLoop &_gameLoop;
