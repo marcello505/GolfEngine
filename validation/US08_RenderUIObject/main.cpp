@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
                          R"(..\..\..\validation\US08_RenderUIObject\resources\Rubik-VariableFont_wght.ttf)",
                          Alignment::Center );
 
-    auto btn = new Button(200, 100, Vector2(300,300), true, text);
+    auto btn = new Button(100,  60, Vector2(50,30), true, text);
 
 
     auto scoreText = new Text(Vector2(480,10), 0, "score: 237",

@@ -36,6 +36,10 @@ void SDLInputService::handleInputs()
         {
             SDLInputService::handleMouseEvent(event, false); // handle mouse event
         }
+        if (event.type == SDL_MOUSEMOTION) // if mouse button is released
+        {
+            SDLInputService::handleMouseEvent(event, false); // handle mouse event
+        }
         if (event.type==SDL_QUIT) // if close button is pressed of window
         {
             _hasRecievedQuitSignal = true; // let gameloop now to stop handling inputs
@@ -61,7 +65,8 @@ void SDLInputService::handleMouseEvent(SDL_Event event, bool pressed) {
         case 3: // right mouse button
             _actionMap->setInputKeyPressed(Mouse_Right, pressed); // handle action for this button
             break;
-        default:
+        default: // when no button is pressed but mouse moved
+            std::cout << "not clicking \n";
             break;
     }
 

@@ -15,7 +15,9 @@
 
 class Text : public UIObject {
 public:
-    Text(Vector2 pos, float rotation, std::string text, size_t fontSize, Color color, std::string filePath, Alignment alignment);
+    Text(Vector2 pos, float rotation, std::string text, size_t fontSize, Color color, std::string filePath,
+         Alignment alignment);
+
     RenderShape* getRenderShape() override;
 
     Alignment _alignment;
