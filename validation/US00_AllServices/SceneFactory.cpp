@@ -16,7 +16,7 @@ void SceneFactory::build(Scene& scene) const {
 
     //PLayer Sprite
     auto& go = scene.createNewGameObject<GameObject>();
-    go.addComponent<SpriteComponent>(R"(..\..\..\validation\US09_Animations\res\player.png)");
+    go.addComponent<SpriteComponent>("res/player.png");
     go.getComponent<SpriteComponent>().setColor(Color(255,255,255,80 ));
 
     go.setWorldTransform(Transform(Vector2(200,200), 0, Vector2(1,1)));

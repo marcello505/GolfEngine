@@ -15,7 +15,7 @@
  */
 
 
-const std::string mgsThemePath = R"(..\..\..\validation\US00_AllServices\res\mgs-theme.mp3)";
+const std::string mgsThemePath = "res/mgs-theme.mp3";
 
 
 int main(int argc, char* argv[]){
@@ -42,9 +42,8 @@ int main(int argc, char* argv[]){
     auto as = GolfEngine::Services::Audio::getService();
 
 
-    as->preloadAudio(mgsThemePath);
-    as->setVolumeChannel(0,100);
-    as->playOnChannel(0, mgsThemePath, 5);
+    as->init();
+    as->playMusic(mgsThemePath, 1.0f, false);
 
 
 
