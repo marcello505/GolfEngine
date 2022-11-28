@@ -51,10 +51,8 @@ ActionMap* ActionMap::actionMap = nullptr;
     // check if action is just pressed (important for gameloop)
     bool ActionMap::isJustPressed(const std::string& action) const
     {
-
-        if (_actions.count(action) > 0 && _actions.find(action)->second.justInput)
+        if (_actions.count(action) > 0 && _actions.find(action)->second.justInput && _actions.find(action)->second.pressed)
         {
-    /*        throw "Just pressed " + _actions.find(action)->second.name;*/
             return true;
         }
 
