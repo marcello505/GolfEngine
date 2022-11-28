@@ -3,6 +3,7 @@
 //
 
 #include "SDLRenderService.h"
+#include "Scene/RenderShape/ButtonRenderShape.h"
 #include <cmath>
 #include <iostream>
 #include <algorithm>
@@ -70,6 +71,7 @@ namespace GolfEngine::Services::Render {
 
         // Loop through all registered drawables
         for (auto drawable: _drawables) {
+
             auto& renderShape = drawable.get().getRenderShape();
             switch (renderShape.getType()) {
                 case RenderShapeType::RectShape:
@@ -89,6 +91,10 @@ namespace GolfEngine::Services::Render {
                     break;
                 case RenderShapeType::ParticleSystemShape:
                     break;
+                case RenderShapeType::ButtonRenderShape:
+                    renderButton(dynamic_cast<ButtonRenderShape&>(renderShape));
+                    break;
+
             }
         }
 
@@ -119,6 +125,12 @@ namespace GolfEngine::Services::Render {
 
     bool SDLRenderService::fullScreen() const {
         return _fullScreen;
+    }
+
+
+    void SDLRenderService::renderButton(ButtonRenderShape &renderShape) {
+        renderRect(*renderShape._rectRenderShape);
+        renderText(*renderShape._textRenderShape);
     }
 
     void SDLRenderService::renderRect(RectRenderShape& renderShape) {
@@ -385,5 +397,6 @@ namespace GolfEngine::Services::Render {
         }
         throw std::runtime_error("Could not find/load font with path: " + path);
     }
+
 }
 

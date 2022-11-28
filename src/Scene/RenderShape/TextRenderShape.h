@@ -16,6 +16,7 @@ public:
     RenderShapeType getType() override;
     void applyTransform(const Transform& transform) override;
     void setText(const std::string& text);
+    void setPosition(Vector2 pos);
 
     // Getter
     [[nodiscard]] Vector2 position() const;

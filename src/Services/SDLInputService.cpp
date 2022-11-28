@@ -3,9 +3,9 @@
 #include <SDL.h>
 
 
-SDLInputService::SDLInputService(ActionMap* actionMap) : _hasReceivedQuitSignal{false}
+SDLInputService::SDLInputService(): _hasReceivedQuitSignal{false}
 {
-    _actionMap = actionMap; // actionMap the service will use as reference
+    _actionMap = ActionMap::getActionMap(); // actionMap the service will use as reference
     bindKeys(); // bind all the SDL keynames with our InputKey enum values
 }
 
@@ -36,6 +36,10 @@ void SDLInputService::handleInputs()
         {
             SDLInputService::handleMouseEvent(event, false); // handle mouse event
         }
+        if (event.type == SDL_MOUSEMOTION) // if mouse button is released
+        {
+            SDLInputService::handleMouseEvent(event, false); // handle mouse event
+        }
         if (event.type==SDL_QUIT) // if close button is pressed of window
         {
             _hasReceivedQuitSignal = true; // let gameloop now to stop handling inputs
@@ -49,7 +53,6 @@ void SDLInputService::handleMouseEvent(SDL_Event event, bool pressed) {
     SDL_PumpEvents();  // make sure we have the latest mouse state.
     buttons = SDL_GetMouseState(&x, &y);
     _actionMap->setMousePosition(x, y); //set current mouse pos
-    _actionMap->getMousePosition();
 
     switch(event.button.button){
         case 1: // left mouse button
@@ -61,7 +64,7 @@ void SDLInputService::handleMouseEvent(SDL_Event event, bool pressed) {
         case 3: // right mouse button
             _actionMap->setInputKeyPressed(Mouse_Right, pressed); // handle action for this button
             break;
-        default:
+        default: // when no button is pressed but mouse moved
             break;
     }
 

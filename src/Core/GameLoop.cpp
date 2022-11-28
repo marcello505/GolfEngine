@@ -13,10 +13,14 @@
 #include "../Services/Singletons/AudioSingleton.h"
 #include "../Services/Singletons/RenderSingleton.h"
 #include "../Services/Singletons/InputSingleton.h"
+#include "../Input/ActionMap.h"
 
 using namespace GolfEngine::Services;
 
 void GameLoop::start() {
+    //Initialize services
+    if(Audio::hasService()) Audio::getService()->init();
+
     auto previous = std::chrono::steady_clock::now();
     std::chrono::duration<GameTic, std::milli> lag {0.0f};
 
@@ -35,6 +39,9 @@ void GameLoop::start() {
 
         render();
     }
+
+    //Free services
+    if(Audio::hasService()) Audio::getService()->free();
 }
 
 void GameLoop::stop() {
@@ -59,8 +66,8 @@ void GameLoop::update() {
     if(GolfEngine::SceneManager::GetSceneManager().hasCurrentScene())
         GolfEngine::SceneManager::GetSceneManager().getCurrentScene().updateScene();
 
-    if(_actionMap){
-        _actionMap->update();
+    if(ActionMap::getActionMap()){
+        ActionMap::getActionMap()->update();
     }
 }
 
@@ -74,8 +81,8 @@ void GameLoop::render() {
 
 void GameLoop::useDefaultServices() {
 
-    setInputService(new SDLInputService{_actionMap.get()});
-    setAudioService(new SDLAudioService(3));
+    setInputService(new SDLInputService());
+    setAudioService(new SDLAudioService());
     setRenderService(new Render::SDLRenderService {});
     setPhysicsService(new Physics::Box2DPhysicsService {});
 }
