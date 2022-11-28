@@ -6,45 +6,73 @@
 #include "Services/Singletons/RenderSingleton.h"
 #include "Services/Singletons/PhysicsSingleton.h"
 
+//Duration is time until one particle goes away
+// pps = how many particles to render every second if looping == true
+
 ParticleSystem::ParticleSystem(const std::string &spritePath, int particlesPerSecond, float duration, Vector2 pixelScale):
-_spritePath{spritePath}, _particlesPerSecond{particlesPerSecond}, _duration{duration},
-_renderShape(spritePath, Vector2(), 0, pixelScale, Rect2(), Vector2() , Color())
+_spritePath{spritePath}, _particlesPerSecond{particlesPerSecond}, _duration{duration}, _pixelScale{pixelScale}, _countedFrames{0}
 {
 }
 void ParticleSystem::play(bool looping) {
+    _looping = looping;
+    particles.push_back(std::make_unique<Particle>(_spritePath, _pixelScale));
+
+
     auto renderService = GolfEngine::Services::Render::getService();
     if(renderService)
-        renderService->addDrawable(*this);
+        renderService->addDrawable(*particles.at(particles.size()-1));
+
 }
+
 void ParticleSystem::stop() {
-    auto renderService = GolfEngine::Services::Render::getService();
-    if(renderService)
-        renderService->removeDrawable(*this);
+    _looping = false;
 }
 
 void ParticleSystem::onStart() {
     if(_gameObject){
-        _renderShape.applyTransform(_gameObject->get().getWorldTransform());
+        for (auto& particle : particles) {
+            auto t = _gameObject->get().getWorldTransform();
+            particle->getRenderShape().applyTransform(t);
+        }
     }
 }
 
 void ParticleSystem::onUpdate() {
     _countedFrames ++;
-    _counterFromesForParticles ++;
-    if(_countedFrames > 60 * _duration) {
-        _countedFrames = 0;
-        stop();
-    }else if(_counterFromesForParticles > 60/_particlesPerSecond){
-       auto  t = Transform(_renderShape.position(), _renderShape.rotation(), _renderShape.pixelScale());
-
-
-       t.position.x += 10;
-       t.scale = {1,1};
-        _renderShape.applyTransform(t);
-        _counterFromesForParticles = 0;
+    for (auto& particle : particles) {
+        particle->lifeTime++;
     }
 
+    auto it = std::find_if(particles.begin(), particles.end(),[this](auto& p){return p->lifeTime > 60 * _duration; });
+    if(it != particles.end()){
+        auto renderService = GolfEngine::Services::Render::getService();
+        if(renderService)
+            renderService->removeDrawable(*(*it));
+        particles.erase(it);
+    }
 
+     if(_countedFrames > 60/_particlesPerSecond){
+        if(_looping){
+            particles.push_back(std::make_unique<Particle>(_spritePath, _pixelScale));
+            auto& particle = particles.at(particles.size() - 1);
+            particle->getSpriteRenderShape().applyTransform(_gameObject->get().getWorldTransform());
+            auto renderService = GolfEngine::Services::Render::getService();
+            if(renderService){
+                renderService->addDrawable(*particle);
+            }
+
+
+        }
+        for (auto& particle : particles) {
+            auto  t = Transform(particle->getSpriteRenderShape().position(), particle->getSpriteRenderShape().rotation(), particle->getSpriteRenderShape().pixelScale());
+            t.position.x += 10;
+            t.scale = {1,1};
+            particle->getSpriteRenderShape().applyTransform(t);
+        }
+
+
+        _countedFrames = 0;
+    }
 
 }
 
@@ -64,9 +92,7 @@ void ParticleSystem::setParentGameObject(GameObject &gameObject) {
     _gameObject = gameObject;
 }
 
-RenderShape& ParticleSystem::getRenderShape() {
-    return _renderShape;
-}
+
 
 
 

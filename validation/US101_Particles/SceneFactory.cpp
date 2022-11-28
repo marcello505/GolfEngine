@@ -8,7 +8,7 @@
 
 void SceneFactory::build(Scene& scene) const {
     auto& go = scene.createNewGameObject<GameObject>();
-    go.addComponent<ParticleSystem>(R"(..\..\..\validation\US101_Particles\res\smoke.png)", 5,5, Vector2(5,5));
+    go.addComponent<ParticleSystem>(R"(..\..\..\validation\US101_Particles\res\smoke.png)", 1,2, Vector2(30,30));
     go.getComponent<ParticleSystem>().play(true);
-    go.setWorldTransform(Transform(Vector2(200,200), 0, Vector2(0.5f,0.5f)));
+    go.setWorldTransform(Transform(Vector2(200,200), 0, Vector2(1,1)));
 }

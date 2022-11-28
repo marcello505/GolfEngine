@@ -8,16 +8,15 @@
 #include "Component.h"
 #include "Drawable.h"
 #include "SpriteComponent.h"
+#include "Scene/Particle.h"
 
 
-class ParticleSystem : public Component, public Drawable{
+class ParticleSystem : public Component{
 public:
     ParticleSystem(const std::string &spritePath, int particlesPerSecond, float duration, Vector2 pixelScale);
 
     void play(bool looping);
     void stop();
-    // Drawable override
-    RenderShape& getRenderShape() override;
 
 
     // Component overrides
@@ -33,11 +32,10 @@ private:
     int _particlesPerSecond;
     float _duration;
     std::string _spritePath;
-
+    Vector2 _pixelScale;
     int _countedFrames;
-    int _counterFromesForParticles;
+    std::vector<std::unique_ptr<Particle>> particles {};
 
-    SpriteRenderShape _renderShape;
 };
 
 

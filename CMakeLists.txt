@@ -58,14 +58,14 @@ set(SCENE_SOURCES
         src/Scene/Components/RigidBody.cpp
         src/Scene/Components/BoxCollider.cpp
         src/Scene/Components/CircleCollider.cpp
-        src/Scene/Components/SpriteComponent.cpp)
+        src/Scene/Components/SpriteComponent.cpp
+        src/Scene/Particle.cpp)
 
 set(CORE_SOURCES
         src/Core/GameLoop.cpp
         src/Core/SceneManager.cpp
         src/Core/ProjectSettings.cpp
-        src/Core/Time.cpp
-        src/Scene/RenderShape/TextRenderShape.cpp)
+        src/Core/Time.cpp)
 
 # Main Project
 add_library(${PROJECT_NAME}
