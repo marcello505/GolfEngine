@@ -33,7 +33,6 @@ public:
     void stop();
 
 private:
-    std::unique_ptr<ActionMap> _actionMap = std::make_unique<ActionMap>();
     bool _running {true};
     std::chrono::duration<GameTic, std::milli> _msPerUpdate {1000.f/ 60};
 
