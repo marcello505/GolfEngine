@@ -15,7 +15,8 @@ set(TEST_SOURCES
 
 set(SCENE_TEST_SOURCES
         Scene/SceneTests.cpp
-        Scene/GameObjectTests.cpp)
+        Scene/GameObjectTests.cpp
+        Scene/Components/AudioSourceTests.cpp)
 
 
 # Main Project
