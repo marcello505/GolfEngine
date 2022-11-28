@@ -5,6 +5,7 @@
 #ifndef GOLFENGINE_PARTICLESYSTEM_H
 #define GOLFENGINE_PARTICLESYSTEM_H
 
+#include <random>
 #include "Component.h"
 #include "Drawable.h"
 #include "SpriteComponent.h"
@@ -27,6 +28,11 @@ public:
     void setActive(bool active) override;
     void setParentGameObject(GameObject& gameObject) override;
 
+//    setters
+    void setVelocity(float velocity);
+    void setDirection(Vector2 direction);
+
+
 private:
     bool _looping;
     int _particlesPerSecond;
@@ -36,6 +42,12 @@ private:
     int _countedFrames;
     std::vector<std::unique_ptr<Particle>> particles {};
 
+    Vector2 _direction {1,0};
+    float _velocity {1.0};
+    int _spread {0};
+
+
+    std::unique_ptr<std::default_random_engine> _randomEngine;
 };
 
 
