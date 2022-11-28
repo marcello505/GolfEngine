@@ -6,24 +6,72 @@
 #define SPC_PROJECT_SDLAUDIOSERVICE_H
 
 #include "Abstracts/AudioService.h"
+
 #include <SDL_mixer.h>
 #include <map>
-#include <SDL.h>
+#include <array>
+
 class SDLAudioService : public AudioService {
 public:
-    SDLAudioService(int amountOfChannels); //constructor
-    void playOnChannel(int channel, const std::string& path, float volume) override; //play on channel with volume
-    void preloadAudio(const std::string path) override; // setup audio
-    void resumeAudio(int channel) override; // resume paused audio
-    void pauseAudio(int channel) override; // pause audio
-    void haltAudio(int channel) override; // stop audio
-    void setVolumeChannel(int channel, float volume) override; // set volume of channel
-    void setGlobalVolume(float volume) override; // set global volume (all channels)
-    void clearAudio() override; // clear audiolist
+    //Life Cycles
+    /// Initializes the audio device, automatically called by GameLoop
+    void init() override;
+    /// Closes the audio device and clears cache, automatically called by GameLoop
+    void free() override;
+
+    // Audio Controls
+    void playSfx(const std::string& path, float volume, bool loop) override;
+    void playMusic(const std::string& path, float volume, bool loop) override;
+    void pauseMusic() override;
+    void resumeMusic() override;
+    void stopMusic() override;
+    void stopSfx() override;
+
+    // Volume
+    float getMasterVolume() override;
+    float getMusicVolume() override;
+    float getSfxVolume() override;
+    /// Sets the _musicVolume field and updates the current volume of Music.
+    /// \param volume a value between 0.0 and 1.0, used as a factor to calculate volume.
+    void setMusicVolume(float volume) override;
+    /// Sets the _sfxVolume field and updates the current volume of Sound effects.
+    /// \param volume a value between 0.0 and 1.0, used as a factor to calculate volume.
+    void setSfxVolume(float volume) override;
+    /// Sets the _masterVolume field and updates the current volume of all audio.
+    /// \param volume a value between 0.0 and 1.0, used as a factor to calculate volume.
+    void setMasterVolume(float volume) override;
+    /// Loads in the audio file as a sound effect, automatically called for play methods when neccesary.
+    /// \param path path to the audio file.
+    void preloadSfx(const std::string& path) override;
+    /// Loads in the audio file as music, automatically called for play methods when neccesary.
+    /// \param path path to the audio file.
+    void preloadMusic(const std::string& path) override;
+    void clearCache() override;
+    bool isMusicPlaying() override;
+    bool isMusicPaused() override;
+    void toggleMusic() override;
+
+    void stopSfx(const std::string& path) override;
+
 private:
-    bool channelExists(int channel); // check if channel exists
-    int _amountOfChannels; // local variable for the amount of channels
-    std::map<std::string, Mix_Chunk*> _sounds; // audiolist
+    //Fields
+    float _masterVolume {1.0f};
+    float _musicVolume {1.0f};
+    float _musicFragmentVolume {1.0f};
+    float _sfxVolume {1.0f};
+    std::array<float, 8> _sfxFragmentsVolume {};
+    std::map<std::string, Mix_Chunk*> _cachedChunks {};
+    std::map<std::string, Mix_Music*> _cachedMusic {};
+
+    //Methods
+    void updateMusicVolume();
+    void updateSfxVolume(int channel);
+    void updateSfxVolume();
+    Mix_Chunk* getChunk(const std::string& path);
+    Mix_Music* getMusic(const std::string& path);
+    bool hasCachedChunk(const std::string& path);
+    bool hasCachedMusic(const std::string& path);
+    float clampFloat01(float value);
 };
 
 

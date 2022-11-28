@@ -52,9 +52,11 @@ set(SCENE_SOURCES
         src/Scene/RenderShape/RectRenderShape.cpp
         src/Scene/RenderShape/CircleRenderShape.cpp
         src/Scene/RenderShape/SpriteRenderShape.cpp
+        src/Scene/RenderShape/ButtonRenderShape.cpp
         src/Scene/RenderShape/ParticleSystemRenderShape.cpp
         src/Scene/RenderShape/TextRenderShape.cpp
         src/Scene/GameObjects/UIObject/Button.cpp
+        src/Scene/GameObjects/UIObject/Text.cpp
         src/Scene/Components/RigidBody.cpp
         src/Scene/Components/BoxCollider.cpp
         src/Scene/Components/CircleCollider.cpp
@@ -89,5 +91,6 @@ add_subdirectory(validation/US03_InputService)
 add_subdirectory(validation/US12_AudioService)
 add_subdirectory(validation/US00_Rendering)
 add_subdirectory(validation/US04_RenderFPS)
+add_subdirectory(validation/US08_RenderUIObject)
 add_subdirectory(validation/US14_PhysicsService)
 add_subdirectory(validation/US00_AllServices)

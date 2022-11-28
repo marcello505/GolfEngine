@@ -16,14 +16,14 @@ public:
 
     CircleDrawable(Vector2 pos, float radius, Color color, Transform transform);
 
-    RenderShape* getRenderShape() override;
+    RenderShape& getRenderShape() override;
 
     void scale(float scale);
 
     void move(int x, int y);
 
 private:
-    std::unique_ptr<CircleRenderShape> _renderShape;
+    CircleRenderShape _renderShape;
     Transform _transform;
 
 };

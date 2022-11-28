@@ -11,15 +11,11 @@ int main(int argc, char* argv[]){
 
     gameLoop.useDefaultServices();
 
-
-
-
    auto rs = GolfEngine::Services::Render::getService();
-
 
     std::string fps =   std::to_string(gameLoop.time->getRenderFps());
 
-    auto* text = new TextDrawable(Vector2(100,50),
+    auto text = TextDrawable(Vector2(100,50),
                                  Transform(Vector2(0,0), 0,Vector2(1,1)  ),  fps, 36 ,Color(), R"(..\..\..\validation\US04_RenderFPS\files\roman.ttf)", gameLoop );
 
     rs->addDrawable(text);

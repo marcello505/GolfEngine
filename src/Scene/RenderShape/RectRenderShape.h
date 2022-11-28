@@ -15,7 +15,7 @@ public:
     /// \param rotation Angle of rectangle in degrees
     /// \param pivotPoint Custom pivot point relative to the size given in rect parameter (size/2 = center)
     /// \param color Color used to draw the rectangle
-    explicit RectRenderShape(Rect2 rect, float rotation = 0, Vector2 pivotPoint = Vector2(), Color color = Color(255,255,255));
+    explicit RectRenderShape(Rect2 rect, float rotation = 0, Vector2 pivotPoint = Vector2(), Color color = Color(255, 255, 255));
 
     RenderShapeType getType() override;
 

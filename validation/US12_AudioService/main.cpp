@@ -4,18 +4,20 @@
 #include <vector>
 #include "Services/SDLAudioService.h"
 #include <filesystem>
+#include "Scene/Components/AudioSource.h"
+#define GOLFENGINE_SINGLETON_PRIVATE
+#include "Services/Singletons/AudioSingleton.h"
 
 bool running = true; // outer loop input
 bool paused = false; // for pause/resume toggle
 std::vector<float> channelVolumes {50, 50, 50, 50}; // storage for channel volumes
 float globalVolume = 80; // global volume
-void getInput(SDLAudioService *audioService);
 
 // asset paths
-const char* gunCockingPath = R"(..\..\..\validation\US12_AudioService\resources\gun-cocking-01.wav)";
-const char* shortShotPath = R"(..\..\..\validation\US12_AudioService\resources\short-shot.wav)";
-const char* grenadePath = R"(..\..\..\validation\US12_AudioService\resources\grenade.mp3)";
-const char* mgsThemePath = R"(..\..\..\validation\US12_AudioService\resources\mgs-theme.mp3)";
+std::string gunCockingPath = "resources/gun-cocking-01.wav";
+std::string shortShotPath = "resources/short-shot.ogg";
+std::string grenadePath = "resources/grenade.mp3";
+std::string mgsThemePath = "resources/mgs-theme.flac";
 
 int main(int argc, char* argv[])
 {
@@ -23,16 +25,24 @@ int main(int argc, char* argv[])
     SDL_Window* window = nullptr;
 
     // instantiate audioservice
-    std::unique_ptr<SDLAudioService>_audioService(new SDLAudioService(3));
+    GolfEngine::Services::Audio::setService(new SDLAudioService{});
+    auto* _audioService = GolfEngine::Services::Audio::getService();
+
+    _audioService->init();
 
     //setup audio sources
-    _audioService->preloadAudio(gunCockingPath);
-    _audioService->preloadAudio(shortShotPath);
-    _audioService->preloadAudio(grenadePath);
-    _audioService->preloadAudio(mgsThemePath);
+    GolfEngine::Scene::Components::AudioSource gunCockingSound {gunCockingPath, false};
+    GolfEngine::Scene::Components::AudioSource shortShotSound {shortShotPath, false};
+    GolfEngine::Scene::Components::AudioSource grenadeSound {grenadePath, false};
+    GolfEngine::Scene::Components::AudioSource mgsThemeSound {mgsThemePath, true};
+
+    gunCockingSound.onStart();
+    shortShotSound.onStart();
+    grenadeSound.onStart();
+    mgsThemeSound.onStart();
 
     //play music on start
-    _audioService->playOnChannel(0, mgsThemePath, 80);
+    mgsThemeSound.play(true);
 
     // initialize video
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -45,63 +55,71 @@ int main(int argc, char* argv[])
     // create SDL window
     window = SDL_CreateWindow("C++ SDL2 Window", 100, 100, 640, 480, SDL_WINDOW_SHOWN);
     while(running) {
-        getInput(_audioService.get());
+        SDL_Event e;
+        while(SDL_PollEvent(&e)) { //catch input events
+            if(e.type == SDL_QUIT) { // for closing window
+                running = false;
+            }
+            else if(e.type == SDL_KEYDOWN){
+                if(e.key.keysym.sym == SDLK_LEFT){ // for playing a sound
+                    if(e.key.keysym.mod & KMOD_SHIFT){
+                        gunCockingSound.stop();
+                    }
+                    else{
+                        gunCockingSound.play();
+                    }
+                }
+                else if(e.key.keysym.sym == SDLK_RIGHT){ // for playing a sound
+                    if(e.key.keysym.mod & KMOD_SHIFT){
+                        shortShotSound.stop();
+                    }
+                    else{
+                        shortShotSound.play();
+                    }
+                }
+                else if(e.key.keysym.sym == SDLK_UP){ //for playing a sound
+                    if(e.key.keysym.mod & KMOD_SHIFT){
+                        grenadeSound.stop();
+                    }
+                    else{
+                        grenadeSound.play();
+                    }
+                }
+                else if(e.key.keysym.sym == SDLK_DOWN){ // for toggling pause / resuming of audio
+                    _audioService->toggleMusic();
+                }
+                else if(e.key.keysym.sym == SDLK_MINUS){ // for setting master volume down
+                    _audioService->setMasterVolume(_audioService->getMasterVolume() - 0.1f);
+                }
+                else if(e.key.keysym.sym == SDLK_EQUALS){ // for setting master volume up
+                    _audioService->setMasterVolume(_audioService->getMasterVolume() + 0.1f);
+                }
+                else if(e.key.keysym.sym == SDLK_9){ // for setting music volume down
+                    _audioService->setMusicVolume(_audioService->getMusicVolume() - 0.1f);
+                }
+                else if(e.key.keysym.sym == SDLK_0){ // for setting music volume down
+                    _audioService->setMusicVolume(_audioService->getMusicVolume() + 0.1f);
+                }
+                else if(e.key.keysym.sym == SDLK_7){ // for setting music volume down
+                    _audioService->setSfxVolume(_audioService->getSfxVolume() - 0.1f);
+                }
+                else if(e.key.keysym.sym == SDLK_8){ // for setting music volume down
+                    _audioService->setSfxVolume(_audioService->getSfxVolume() + 0.1f);
+                }
+                else if(e.key.keysym.sym == SDLK_RETURN){ // for playing sound after halt
+                    mgsThemeSound.play(true);
+                }
+                else if(e.key.keysym.sym == SDLK_BACKSPACE){ // for halting audio
+                    mgsThemeSound.stop();
+                }
+            }
+        }
     }
 
     //cleanup
     SDL_DestroyWindow(window);
-    _audioService->clearAudio();
-    return 0;
-}
+    _audioService->free();
 
-void getInput(SDLAudioService *audioService) {
-    SDL_Event e;
-    while(SDL_PollEvent(&e)) { //catch input events
-        if(e.type == SDL_QUIT) { // for closing window
-            running = false;
-        }
-        else if(e.type == SDL_KEYDOWN){
-            if(e.key.keysym.sym == SDLK_LEFT){ // for playing a sound
-                audioService->playOnChannel(1, gunCockingPath, 100);
-            }
-            else if(e.key.keysym.sym == SDLK_RIGHT){ // for playing a sound
-                audioService->playOnChannel(2, shortShotPath, 100);
-            }
-            else if(e.key.keysym.sym == SDLK_UP){ //for playing a sound
-                audioService->playOnChannel(3, grenadePath, 100);
-            }
-            else if(e.key.keysym.sym == SDLK_DOWN){ // for toggling pause / resuming of audio
-                paused = !paused;
-                if(paused)
-                {
-                    audioService->pauseAudio(0);
-                    continue;
-                }
-                audioService->resumeAudio(0);
-            }
-            else if(e.key.keysym.sym == SDLK_KP_ENTER){ // for halting audio
-                audioService->haltAudio(0);
-            }
-            else if(e.key.keysym.sym == SDLK_LEFTBRACKET){ // for setting volume of channel down
-                channelVolumes[2] -= 1;
-                audioService->setVolumeChannel(2,  channelVolumes[2]);
-            }
-            else if(e.key.keysym.sym == SDLK_RIGHTBRACKET){ // for setting volume of channel up
-                channelVolumes[2] += 1;
-                audioService->setVolumeChannel(2, channelVolumes[2]);
-            }
-            else if(e.key.keysym.sym == SDLK_BACKSLASH){ // for setting global volume down
-                globalVolume -= 1;
-                audioService->setGlobalVolume(globalVolume);
-            }
-            else if(e.key.keysym.sym == SDLK_SLASH){ // for setting global volume up
-                globalVolume += 1;
-                audioService->setGlobalVolume(globalVolume);
-            }
-            else if(e.key.keysym.sym == SDLK_KP_3){ // for playing sound after halt
-                audioService->playOnChannel(0, mgsThemePath, 80);
-            }
-        }
-    }
+    return 0;
 }
 

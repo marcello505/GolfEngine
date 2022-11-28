@@ -9,12 +9,14 @@
 #include <SDL.h>
 #include <map>
 #include <vector>
+#include <memory>
 #include <string>
 #include <SDL_ttf.h>
 #include "../Scene/RenderShape/RectRenderShape.h"
 #include "../Scene/RenderShape/LineRenderShape.h"
 #include "../Scene/RenderShape/SpriteRenderShape.h"
 #include "../Scene/RenderShape/CircleRenderShape.h"
+#include "../Scene/RenderShape/ButtonRenderShape.h"
 #include "Render/Texture.h"
 #include "../Scene/RenderShape/TextRenderShape.h"
 
@@ -33,11 +35,11 @@ public:
 
     /// Adds a drawable to the list of registered drawables
     /// \param drawable to be added
-    void addDrawable(Drawable *drawable) override;
+    void addDrawable(Drawable& drawable) override;
 
     /// Removes a drawable from the list of registered drawables
     /// \param drawable to be removed
-    void removeDrawable(Drawable *drawable) override;
+    void removeDrawable(Drawable& drawable) override;
 
     /// Renders all drawables in registered drawable list
     void render() override;
@@ -60,23 +62,21 @@ private:
     void renderLine(LineRenderShape &renderShape);
     void renderText(TextRenderShape &renderShape);
     void renderCircle(CircleRenderShape &renderShape);
+    void renderButton(ButtonRenderShape &renderShape);
 
-    Texture* loadSprite(const std::string& path);
+    Texture& loadSprite(const std::string& path);
     void renderSprite(SpriteRenderShape &renderShape);
-    void clearTextureCache();
-    void clearFontCache();
 
     int _screenSizeWidth;
     int _screenSizeHeight;
     bool _fullScreen;
-    SDL_Window *_window;
-    SDL_Renderer *_renderer;
-    std::vector<Drawable *> _drawables;
-    std::map<std::string, Texture*> _cachedTextures;
-    std::map<std::string, std::pair<size_t , TTF_Font*>> _cachedFonts;
+    std::unique_ptr<SDL_Window, void(*)(SDL_Window*)> _window;
+    std::unique_ptr<SDL_Renderer, void(*)(SDL_Renderer*)> _renderer;
+    std::vector<std::reference_wrapper<Drawable>> _drawables;
+    std::map<std::string, std::unique_ptr<Texture>> _cachedTextures;
+    std::map<std::string, std::pair<size_t , std::unique_ptr<TTF_Font, void(*)(TTF_Font*)>>> _cachedFonts;
 
-    TTF_Font * loadFont(const std::string &path, size_t fontSize);
-
+    TTF_Font& loadFont(const std::string &path, size_t fontSize);
 };
 
 }

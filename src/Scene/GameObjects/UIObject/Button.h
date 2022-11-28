@@ -6,11 +6,25 @@
 #define GOLFENGINE_BUTTON_H
 
 #include "UIObject.h"
+#include "Scene/RenderShape/ButtonRenderShape.h"
+#include "Text.h"
+#include <memory>
+
 
 class Button : public UIObject{
+
 public:
-    bool interactable() const;
+    Button(int width, int height, Vector2 position, bool interactable, Text *text);
+
+    [[nodiscard]] bool interactable() const;
+    RenderShape& getRenderShape() override;
     void onClick();
+
+    std::unique_ptr<Text> _text;
+private:
+    bool _interactable;
+    void setShape();
+    std::unique_ptr<ButtonRenderShape> _buttonRenderShape {};
 };
 
 
