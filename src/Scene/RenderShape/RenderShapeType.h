@@ -11,7 +11,8 @@ enum class RenderShapeType {
     RectShape,
     SpriteShape,
     ParticleSystemShape,
-    TextRenderShape
+    TextRenderShape,
+    ButtonRenderShape
 };
 
 #endif //SPC_PROJECT_RENDERSHAPETYPE_H

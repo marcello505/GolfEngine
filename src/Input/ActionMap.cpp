@@ -86,7 +86,6 @@ bool ActionMap::isReleased(const std::string& action) const
 // get position of mouse
 Vector2 ActionMap::getMousePosition() const
 {
-    std::cout << "Mouse cursor is at " << mousePosition.x << ", " << mousePosition.y << std::endl;
     return mousePosition;
 }
 

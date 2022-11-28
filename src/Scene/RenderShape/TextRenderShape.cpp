@@ -48,4 +48,9 @@ std::string TextRenderShape::filePath() const {
     return _filePath;
 }
 
+void TextRenderShape::setPosition(Vector2 pos) {
+    _position = pos;
+}
+
+
 
