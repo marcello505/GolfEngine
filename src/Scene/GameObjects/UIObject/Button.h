@@ -14,8 +14,7 @@
 class Button : public UIObject{
 
 public:
-    Button(int width, int height, Vector2 position, bool interactable, Text *text,
-           ButtonRenderShape buttonRenderShape);
+    Button(int width, int height, Vector2 position, bool interactable, Text *text);
 
     [[nodiscard]] bool interactable() const;
     RenderShape& getRenderShape() override;
@@ -25,7 +24,7 @@ public:
 private:
     bool _interactable;
     void setShape();
-    ButtonRenderShape _buttonRenderShape;
+    std::unique_ptr<ButtonRenderShape> _buttonRenderShape {};
 };
 
 
