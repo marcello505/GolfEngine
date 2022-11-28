@@ -15,8 +15,8 @@ public:
 
     RenderShapeType getType() override;
     void applyTransform(const Transform& transform) override;
-    std::shared_ptr<RectRenderShape> _rectRenderShape;
-    std::shared_ptr<TextRenderShape> _textRenderShape;
+    std::unique_ptr<RectRenderShape> _rectRenderShape {};
+    std::unique_ptr<TextRenderShape> _textRenderShape {};
 private:
 };
 
