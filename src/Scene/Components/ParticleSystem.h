@@ -34,6 +34,7 @@ public:
     void setDirection(Vector2 direction);
     void setSpread(Vector2 spread);
     void setFade(bool fade);
+    void setRotationsPerSecond(float rotationsPerSecond);
 
 
 private:
@@ -60,10 +61,12 @@ private:
     Vector2 _spread {0,0};
     bool _fade {false};
     bool _looping {false};
+    float _rotationsPerSecond {0};
 
 
     std::unique_ptr<std::default_random_engine> _randomEngine;
 
+    int _fps;
 };
 
 

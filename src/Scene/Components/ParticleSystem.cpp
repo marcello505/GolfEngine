@@ -12,7 +12,7 @@
 // pps = how many particles to render every second if looping == true
 
 ParticleSystem::ParticleSystem(const std::string &spritePath, int particlesPerSecond, float duration, Vector2 pixelScale, Vector2 position, float rotation, Color color):
-_position{position}, _rotation{rotation}, _color{color},
+_position{position}, _rotation{rotation}, _color{color}, _fps{60},
 _spritePath{spritePath}, _particlesPerSecond{particlesPerSecond}, _duration{duration}, _pixelScale{pixelScale}
 {
     //TODO if random is used at more places then create global RandomEngine that can be re-used in every class.
@@ -71,7 +71,7 @@ void ParticleSystem::onUpdate() {
     }
 
     //checks if any particle->lifteime is longer then duration then auto removes this particle
-    auto it = std::find_if(particles.begin(), particles.end(),[this](auto& p){return p->lifeTime > 60 * _duration; });
+    auto it = std::find_if(particles.begin(), particles.end(),[this](auto& p){return p->lifeTime > _fps * _duration; });
     if(it != particles.end()){
         auto renderService = GolfEngine::Services::Render::getService();
         if(renderService)
@@ -80,7 +80,7 @@ void ParticleSystem::onUpdate() {
     }
 
     // creates a new particle
-     if(_looping && _countedFrames > 60/_particlesPerSecond){
+     if(_looping && _countedFrames > _fps/_particlesPerSecond){
          auto& particle = addParticle();
 
 
@@ -108,10 +108,17 @@ void ParticleSystem::onUpdate() {
             auto c = particle->getSpriteRenderShape().color();
 
             //Calculation to calculate how far the opacity should be decreased to be at zero when particles ends.
-            int downStep = c.a / (( 60 * _duration) - particle->lifeTime);
+            int downStep = c.a / (( _fps * _duration) - particle->lifeTime);
             c.a -= downStep;
             particle->getSpriteRenderShape().setColor(c);
         }
+        if(_rotationsPerSecond != 0){
+            auto rotateByDegrees = 360 / (_fps / _rotationsPerSecond);
+            t.rotation += rotateByDegrees;
+
+        }
+
+
         t.scale = {1,1};
         particle->getSpriteRenderShape().applyTransform(t);
 
@@ -147,5 +154,10 @@ void ParticleSystem::setSpread(Vector2 spread) {
 }
 void ParticleSystem::setFade(bool fade) {
     _fade = fade;
+
+}
+
+void ParticleSystem::setRotationsPerSecond(float rotationsPerSecond) {
+    _rotationsPerSecond = rotationsPerSecond;
 
 }
