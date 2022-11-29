@@ -10,7 +10,7 @@
 
 class Particle : public Drawable {
 public:
-    Particle(std::string path, Vector2 pixelScale);
+    Particle(std::string path, float rotation, Vector2 pixelScale, Color color);
 
 
     // Drawable override
@@ -19,7 +19,7 @@ public:
     SpriteRenderShape &getSpriteRenderShape();
 
     //getters
-    float getRadian();
+    float getRadian() const;
 
     //setters
     void setRadian(float radian);

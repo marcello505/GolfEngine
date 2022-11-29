@@ -12,7 +12,7 @@
 
 void SceneFactory::build(Scene& scene) const {
     auto& go = scene.createNewGameObject<GameObject>();
-    go.addComponent<ParticleSystem>(R"(..\..\..\validation\US101_Particles\res\smoke.png)", 50,5, Vector2(30,30));
+    go.addComponent<ParticleSystem>(R"(..\..\..\validation\US101_Particles\res\player.png)", 5,5, Vector2(5,5),Vector2(100,100), 160, Color(255,10,10, 200));
     go.addComponent<ParticleScript>();
 
 

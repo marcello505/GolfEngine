@@ -14,7 +14,8 @@
 
 class ParticleSystem : public Component{
 public:
-    ParticleSystem(const std::string &spritePath, int particlesPerSecond, float duration, Vector2 pixelScale);
+    ParticleSystem(const std::string &spritePath, int particlesPerSecond, float duration, Vector2 pixelScale = Vector2(),
+                   Vector2 position = Vector2(), float rotation = 0, Color color = Color());
 
     void play(bool looping);
     void stop();
@@ -36,21 +37,33 @@ public:
 
 
 private:
-    bool _looping;
+    Particle& addParticle();
+
+
+    std::vector<std::unique_ptr<Particle>> particles {};
+
+
     int _particlesPerSecond;
     float _duration;
     std::string _spritePath;
     Vector2 _pixelScale;
-    int _countedFrames;
-    std::vector<std::unique_ptr<Particle>> particles {};
+
+    float _rotation;
+    Vector2 _position;
+    Color _color;
+
+
+    int _countedFrames {0};
 
     Vector2 _direction {1,0};
     float _velocity {1.0};
     Vector2 _spread {0,0};
     bool _fade {false};
+    bool _looping {false};
 
 
     std::unique_ptr<std::default_random_engine> _randomEngine;
+
 };
 
 

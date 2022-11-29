@@ -4,8 +4,8 @@
 
 #include "Particle.h"
 
-Particle::Particle(std::string path, Vector2 pixelScale) : lifeTime{0},
-_renderShape(path, Vector2(0,0), 0, pixelScale, Rect2(), Vector2() , Color())
+Particle::Particle(std::string path, float rotation, Vector2 pixelScale, Color color) : lifeTime{0},
+_renderShape(path, Vector2(), rotation, pixelScale, Rect2(), Vector2() , color)
 {
 }
 
@@ -21,7 +21,7 @@ void Particle::setRadian(float radian) {
     _radian = radian;
 }
 
-float Particle::getRadian() {
+float Particle::getRadian() const {
     return _radian;
 }
 

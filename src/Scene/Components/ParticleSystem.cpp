@@ -11,23 +11,47 @@
 //Duration is time until one particle goes away
 // pps = how many particles to render every second if looping == true
 
-ParticleSystem::ParticleSystem(const std::string &spritePath, int particlesPerSecond, float duration, Vector2 pixelScale):
-_spritePath{spritePath}, _particlesPerSecond{particlesPerSecond}, _duration{duration}, _pixelScale{pixelScale}, _countedFrames{0}
+ParticleSystem::ParticleSystem(const std::string &spritePath, int particlesPerSecond, float duration, Vector2 pixelScale, Vector2 position, float rotation, Color color):
+_position{position}, _rotation{rotation}, _color{color},
+_spritePath{spritePath}, _particlesPerSecond{particlesPerSecond}, _duration{duration}, _pixelScale{pixelScale}
 {
     //TODO if random is used at more places then create global RandomEngine that can be re-used in every class.
      std::random_device device;
     _randomEngine = std::make_unique<std::default_random_engine> (device());
 
 }
+
+Particle& ParticleSystem::addParticle(){
+    particles.push_back(std::make_unique<Particle>(_spritePath,_rotation, _pixelScale, _color));
+    auto& particle = particles.at(particles.size() - 1);
+    auto transform = _gameObject->get().getWorldTransform();
+    transform.rotation += _rotation;
+
+    transform.position.x += _position.x;
+    transform.position.y += _position.y;
+
+    particle->getSpriteRenderShape().applyTransform(transform);
+    if(_spread.y != 0){
+        std::uniform_int_distribution<int> dist {abs(_spread.x), abs(_spread.y)};
+
+        int degree = dist(*_randomEngine);
+        particle.get()->setRadian((M_PI * degree) / 180);
+
+    }
+
+    return *particle;
+
+
+}
+
 void ParticleSystem::play(bool looping) {
     _looping = looping;
 
-    particles.push_back(std::make_unique<Particle>(_spritePath, _pixelScale));
-    auto& particle = particles.at(particles.size() - 1);
-    particle->getSpriteRenderShape().applyTransform(_gameObject->get().getWorldTransform());
+    auto& particle = addParticle();
+
     auto renderService = GolfEngine::Services::Render::getService();
     if(renderService)
-        renderService->addDrawable(*particle);
+        renderService->addDrawable(particle);
 
 }
 
@@ -57,21 +81,12 @@ void ParticleSystem::onUpdate() {
 
     // creates a new particle
      if(_looping && _countedFrames > 60/_particlesPerSecond){
-            particles.push_back(std::make_unique<Particle>(_spritePath, _pixelScale));
-            auto& particle = particles.at(particles.size() - 1);
-            particle->getSpriteRenderShape().applyTransform(_gameObject->get().getWorldTransform());
-            if(_spread.y != 0){
-                std::uniform_int_distribution<int> dist {abs(_spread.x), abs(_spread.y)};
-
-                int degree = dist(*_randomEngine);
-                particle.get()->setRadian((M_PI * degree) / 180);
-
-            }
+         auto& particle = addParticle();
 
 
-            auto renderService = GolfEngine::Services::Render::getService();
+         auto renderService = GolfEngine::Services::Render::getService();
             if(renderService)
-                renderService->addDrawable(*particle);
+                renderService->addDrawable(particle);
 
             _countedFrames = 0;
 
@@ -93,8 +108,8 @@ void ParticleSystem::onUpdate() {
             auto c = particle->getSpriteRenderShape().color();
 
             //Calculation to calculate how far the opacity should be decreased to be at zero when particles ends.
-            int downstep = c.a / (( 60 * _duration) -particle->lifeTime);
-            c.a -= downstep;
+            int downStep = c.a / (( 60 * _duration) - particle->lifeTime);
+            c.a -= downStep;
             particle->getSpriteRenderShape().setColor(c);
         }
         t.scale = {1,1};
