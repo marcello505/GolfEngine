@@ -88,6 +88,7 @@ namespace GameLoopTests{
         void setAngularDamping(RigidBody* pRigidBody, float angularDamping) override {}
         void setFixedRotation(RigidBody* pRigidBody, bool fixedRotation) override {}
         void setGravityScale(RigidBody* pRigidBody, float gravityScale) override {}
+        Vector2 getLinearVelocity(RigidBody* pBody) override { return {};}
     };
 }
 

@@ -2,23 +2,13 @@
 // Created by conner on 11/2/2022.
 //
 
-#include <cmath>
+#include "Utilities/Math.h"
 #include "Box2DPhysicsService.h"
 #include "Scene/Components/BoxCollider.h"
 #include "Scene/Components/CircleCollider.h"
 
 
 namespace GolfEngine::Services::Physics{
-    // Degrees to Radians
-    float deg2Rad(float deg){
-        return deg * M_PI / 180.0f;
-    }
-
-    // Radians to Degrees
-    float rad2Deg(float rad){
-        return 180.0f * rad / M_PI;
-    }
-
     void Box2DPhysicsService::addRigidBody(RigidBody* pRigidBody) {
         // * Error Handling *
         // Check for nullptr
@@ -57,7 +47,7 @@ namespace GolfEngine::Services::Physics{
             if(parentGameObject != nullptr){
                 worldTransform = parentGameObject->getWorldTransform();
                 bodyDef.position = {worldTransform.position.x / PhysicsSpaceToWorldSpace, worldTransform.position.y / PhysicsSpaceToWorldSpace};
-                bodyDef.angle = deg2Rad(worldTransform.rotation);
+                bodyDef.angle = Utilities::Math::deg2Rad(worldTransform.rotation);
             }
             //bodyDef.position = pRigidBody->getPosition()
             pBody = _world.CreateBody(&bodyDef);
@@ -124,7 +114,7 @@ namespace GolfEngine::Services::Physics{
                 //Update position and rotation
                 if(parent != nullptr){
                     auto& position = body->GetPosition();
-                    float rotation = rad2Deg(body->GetAngle());
+                    float rotation = Utilities::Math::rad2Deg(body->GetAngle());
                     parent->setWorldTransform({
                         {position.x * PhysicsSpaceToWorldSpace, position.y * PhysicsSpaceToWorldSpace},
                         rotation,
@@ -166,7 +156,7 @@ namespace GolfEngine::Services::Physics{
         if(body){
             // TODO check if this needs to be divided by PhysicsSpaceToWorldSpace
             b2Vec2 b2Position {transform.position.x / PhysicsSpaceToWorldSpace, transform.position.y / PhysicsSpaceToWorldSpace};
-            float angle = deg2Rad(transform.rotation);
+            float angle = Utilities::Math::deg2Rad(transform.rotation);
             body.value()->SetTransform(b2Position, angle);
         }
     }

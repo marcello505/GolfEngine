@@ -8,6 +8,7 @@
 #include <Scene/Components/BehaviourScript.h>
 #include <Scene/Components/RigidBody.h>
 #include <Scene/Components/AudioSource.h>
+#include <Scene/Components/SpriteComponent.h>
 #include <Input/ActionMap.h>
 
 class PlayerMovementScript : public BehaviourScript {
@@ -17,6 +18,7 @@ public:
 
     float playerSpeed {1.0f};
 private:
+    SpriteComponent* _sprite {};
     RigidBody* _rb {};
     ActionMap* _actionMap {};
     GolfEngine::Scene::Components::AudioSource* _gunShotAudio {};

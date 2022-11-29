@@ -7,6 +7,7 @@
 #define GOLFENGINE_VECTOR2_H
 
 #include <cmath>
+#include "Utilities/Math.h"
 
 struct Vector2
 {
@@ -22,7 +23,7 @@ struct Vector2
 
     /// Return the magnitude of the vector as a float.
     /// \return magnitude
-    float magnitude() const{
+    [[nodiscard]] float magnitude() const{
         // Info over formula's:
         // https://www.khanacademy.org/computing/computer-programming/programming-natural-simulations/programming-vectors/a/vector-magnitude-normalization
         return sqrtf(x * x + y * y);
@@ -30,7 +31,7 @@ struct Vector2
 
     /// Calculated a normalized vector using the current values and return it.
     /// \return A copy of the Vector with normalized fields
-    Vector2 normalized() const{
+    [[nodiscard]] Vector2 normalized() const{
         // Info over formula's:
         // https://www.khanacademy.org/computing/computer-programming/programming-natural-simulations/programming-vectors/a/vector-magnitude-normalization
         Vector2 result {x, y};
@@ -41,6 +42,28 @@ struct Vector2
         }
 
         return result;
+    }
+
+    /// Returns a normalized vector from the current vector towards the given vector.
+    /// Essentially does b - this, which is then normalized.
+    /// \param b The point which should be calculated
+    /// \return A normalized vector pointing towards b from the position of a
+    [[nodiscard]] Vector2 directionTo(const Vector2& b) const{
+        return (b - *this).normalized();
+    }
+
+    /// Returns the angle from this vector to the given vector in radians
+    /// \param b The other vector
+    /// \return Angle in radians
+    [[nodiscard]] float angleToRadians(const Vector2& b) const{
+        return GolfEngine::Utilities::Math::atan2(directionTo(b));
+    }
+
+    /// Returns the angle from this vector to the given vector in degrees
+    /// \param b The other vector
+    /// \return Angle in degrees
+    [[nodiscard]] float angleToDegrees(const Vector2& b) const{
+        return GolfEngine::Utilities::Math::rad2Deg(angleToRadians(b));
     }
 
     //Operator Overloads
