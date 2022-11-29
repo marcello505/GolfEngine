@@ -16,3 +16,12 @@ RenderShape& Particle::getRenderShape() {
 SpriteRenderShape& Particle::getSpriteRenderShape() {
     return _renderShape;
 }
+
+void Particle::setRadian(float radian) {
+    _radian = radian;
+}
+
+float Particle::getRadian() {
+    return _radian;
+}
+

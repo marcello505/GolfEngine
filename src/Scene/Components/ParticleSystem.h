@@ -31,6 +31,8 @@ public:
 //    setters
     void setVelocity(float velocity);
     void setDirection(Vector2 direction);
+    void setSpread(Vector2 spread);
+    void setFade(bool fade);
 
 
 private:
@@ -44,7 +46,8 @@ private:
 
     Vector2 _direction {1,0};
     float _velocity {1.0};
-    int _spread {0};
+    Vector2 _spread {0,0};
+    bool _fade {false};
 
 
     std::unique_ptr<std::default_random_engine> _randomEngine;

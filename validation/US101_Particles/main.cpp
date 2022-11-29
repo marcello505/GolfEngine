@@ -20,8 +20,8 @@ int main(int argc, char* argv[]){
     ActionMap::getActionMap()->addAction("Start");
     ActionMap::getActionMap()->addInputKeyToAction("Start", Key_P);
 
-    auto x  = GolfEngine::Services::Physics::getService();
-    x->setGravity(Vector2(0,0.3f));
+//    auto x  = GolfEngine::Services::Physics::getService();
+//    x->setGravity(Vector2(0,0.3f));
 
     gameLoop.start();
     return 0;

@@ -12,15 +12,24 @@ class Particle : public Drawable {
 public:
     Particle(std::string path, Vector2 pixelScale);
 
+
     // Drawable override
     RenderShape& getRenderShape() override;
 
     SpriteRenderShape &getSpriteRenderShape();
 
-    int lifeTime;
+    //getters
+    float getRadian();
+
+    //setters
+    void setRadian(float radian);
+
+    int lifeTime {0};
+
 
 private:
     SpriteRenderShape _renderShape;
+    float _radian {0};
 
 };
 #endif //GOLFENGINE_PARTICLE_H
