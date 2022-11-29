@@ -33,8 +33,10 @@ namespace GolfEngine::Services::Physics{
         void update(GameTic timeStep) override;
         void setGravity(const Vector2& vec2) override;
 
+        // RigidBody specific methods - Getters
+        Vector2 getLinearVelocity(RigidBody* pBody) override;
 
-        // RigidBody specific methods
+        // RigidBody specific methods - Setters
         void applyForceToCenter(RigidBody* pRigidBody, const Vector2& force) override;
         void setTransform(RigidBody* pRigidBody, const Transform& transform) override;
         void setEnabled(RigidBody* pRigidBody, bool enabled) override;

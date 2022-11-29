@@ -46,7 +46,10 @@ public:
     std::vector<Collider*> getColliders() const;
     GameObject* getParentGameObject() const;
 
-    //Pass Through methods
+    //Pass Through methods - Getters
+    Vector2 getLinearVelocity();
+
+    //Pass Through methods - Setters
     void applyForceToCenter(const Vector2& force);
     void setTransform(const Transform& transform);
     void setLinearDamping(float linearDamping);

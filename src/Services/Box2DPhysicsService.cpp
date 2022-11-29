@@ -221,5 +221,17 @@ namespace GolfEngine::Services::Physics{
             body.value()->SetGravityScale(gravityScale);
         }
     }
+
+    Vector2 Box2DPhysicsService::getLinearVelocity(RigidBody* pBody) {
+        auto body = getB2Body(pBody);
+        if(body){
+            b2Vec2 vel = body.value()->GetLinearVelocity();
+            return {
+                vel.x,
+                vel.y
+            };
+        }
+        return {};
+    }
 }
 

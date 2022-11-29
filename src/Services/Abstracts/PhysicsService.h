@@ -16,7 +16,10 @@ public:
     virtual void update(GameTic timeStep) = 0;
     virtual void setGravity(const Vector2& vec2) = 0;
 
-    //RigidBody specific methods
+    //RigidBody specific methods - Getters
+    virtual Vector2 getLinearVelocity(RigidBody* pBody) = 0;
+
+    //RigidBody specific methods - Setters
     virtual void applyForceToCenter(RigidBody* pRigidBody, const Vector2& force) = 0;
     virtual void setTransform(RigidBody* pRigidBody, const Transform& transform) = 0;
     virtual void setEnabled(RigidBody* pRigidBody, bool enabled) = 0;
@@ -24,6 +27,7 @@ public:
     virtual void setAngularDamping(RigidBody* pRigidBody, float angularDamping) = 0;
     virtual void setFixedRotation(RigidBody* pRigidBody, bool fixedRotation) = 0;
     virtual void setGravityScale(RigidBody* pRigidBody, float gravityScale) = 0;
+
 };
 
 

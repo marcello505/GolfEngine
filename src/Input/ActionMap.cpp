@@ -116,21 +116,19 @@ ActionMap* ActionMap::actionMap = nullptr;
             if (pressed) { // if we press
                 for (const auto& action : _inputKeys.find(inputKey)->second)
                 {
-                    if (!_actions.find(action.name)->second.pressed) // set justInput to true if wasnt pressed already
-                    {
+                    if (!_actions.find(action.name)->second.pressed){ // set justInput to true if wasnt pressed already
                         _actions.find(action.name)->second.justInput = true;
-                        isJustPressed(action.name);
-                        isPressed(action.name);
                     }
                     _actions.find(action.name)->second.pressed = true; // set pressed to true
-                    isPressed(action.name);
                 }
                 return;
             }
             for (const auto& action : _inputKeys.find(inputKey)->second) // if we release
             {
+                if(_actions.find(action.name)->second.pressed){ // set justInput to true if wasn't released already
+                    _actions.find(action.name)->second.justInput = true;
+                }
                 _actions.find(action.name)->second.pressed = false; // set pressed to false (released)
-                isReleased(action.name);
             }
             return;
         }
