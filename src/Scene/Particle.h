@@ -10,7 +10,7 @@
 
 class Particle : public Drawable {
 public:
-    Particle(std::string path, float rotation, Vector2 pixelScale, Color color);
+    Particle(std::string path, float velocity, float rotation, Vector2 pixelScale, Color color);
 
 
     // Drawable override
@@ -20,9 +20,11 @@ public:
 
     //getters
     float getRadian() const;
+    float getVelocity() const;
 
     //setters
     void setRadian(float radian);
+    void setVelocity(float velocity);
 
     int lifeTime {0};
 
@@ -30,6 +32,7 @@ public:
 private:
     SpriteRenderShape _renderShape;
     float _radian {0};
+    float _velocity{1};
 
 };
 #endif //GOLFENGINE_PARTICLE_H

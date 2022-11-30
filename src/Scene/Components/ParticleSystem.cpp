@@ -22,8 +22,9 @@ _spritePath{spritePath}, _particlesPerSecond{particlesPerSecond}, _duration{dura
 }
 
 Particle& ParticleSystem::addParticle(){
-    particles.push_back(std::make_unique<Particle>(_spritePath,_rotation, _pixelScale, _color));
+    particles.push_back(std::make_unique<Particle>(_spritePath,_velocity,_rotation, _pixelScale, _color));
     auto& particle = particles.at(particles.size() - 1);
+
     auto transform = _gameObject->get().getWorldTransform();
     transform.rotation += _rotation;
 
@@ -36,6 +37,14 @@ Particle& ParticleSystem::addParticle(){
 
         int degree = dist(*_randomEngine);
         particle.get()->setRadian((M_PI * degree) / 180);
+
+    }
+
+
+    if(_randomVelocity.x != 0 || _randomVelocity.y != 0){
+        std::uniform_real_distribution<float> dist {_randomVelocity.x, _randomVelocity.y};
+        float velocity = dist(*_randomEngine);
+        particle->setVelocity(velocity);
 
     }
 
@@ -82,8 +91,6 @@ void ParticleSystem::onUpdate() {
     // creates a new particle
      if(_looping && _countedFrames > _fps/_particlesPerSecond){
          auto& particle = addParticle();
-
-
          auto renderService = GolfEngine::Services::Render::getService();
             if(renderService)
                 renderService->addDrawable(particle);
@@ -96,12 +103,12 @@ void ParticleSystem::onUpdate() {
     for (auto& particle : particles) {
         auto  t = Transform(particle->getSpriteRenderShape().position(), particle->getSpriteRenderShape().rotation(), particle->getSpriteRenderShape().pixelScale());
         if(particle->getRadian() != 0){
-            t.position.x += std::cos(particle->getRadian()) * _velocity;
-            t.position.y += std::sin(particle->getRadian()) * _velocity;
+            t.position.x += std::cos(particle->getRadian()) * particle->getVelocity();
+            t.position.y += std::sin(particle->getRadian()) * particle->getVelocity();;
         }
         else {
-            t.position.x += _direction.x * _velocity;
-            t.position.y += _direction.y * _velocity;
+            t.position.x += _direction.x * particle->getVelocity();;
+            t.position.y += _direction.y * particle->getVelocity();;
         }
         if(_fade){
             //gets color value
@@ -159,5 +166,9 @@ void ParticleSystem::setFade(bool fade) {
 
 void ParticleSystem::setRotationsPerSecond(float rotationsPerSecond) {
     _rotationsPerSecond = rotationsPerSecond;
+
+}
+void ParticleSystem::setRandomVelocity(Vector2 randomVelocity) {
+    _randomVelocity = randomVelocity;
 
 }

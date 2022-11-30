@@ -16,10 +16,10 @@ void SceneFactory::build(Scene& scene) const {
     go.addComponent<ParticleScript>();
 
 
-    go.getComponent<ParticleSystem>().setDirection({0,-1});
-    go.getComponent<ParticleSystem>().setSpread({180,360});
+    go.getComponent<ParticleSystem>().setSpread({0,360});
     go.getComponent<ParticleSystem>().setFade(true);
-    go.getComponent<ParticleSystem>().setRotationsPerSecond(10);
+    go.getComponent<ParticleSystem>().setRotationsPerSecond(2);
+    go.getComponent<ParticleSystem>().setRandomVelocity({0.5,2});
 
 
     go.setWorldTransform(Transform(Vector2(200,200), 0, Vector2(1,1)));
