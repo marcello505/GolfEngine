@@ -19,7 +19,6 @@ public:
          Alignment alignment);
 
     RenderShape& getRenderShape() override;
-
     Alignment _alignment;
     TextRenderShape _renderShape;
 };

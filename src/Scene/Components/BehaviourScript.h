@@ -16,6 +16,8 @@ public:
     virtual bool getActive() override { return _active; }
     virtual void setActive(bool active) override { _active = active; }
     void setParentGameObject(GameObject& gameObject) override { _gameObject = gameObject; }
+    template<typename C>
+    C& getParentGameObject() {return reinterpret_cast<C&>(_gameObject->get()); }
 };
 
 

@@ -103,7 +103,8 @@ public:
     [[nodiscard]] bool getActive() const;
     void setActive(bool active);
     void onStart();
-    void onUpdate();
+
+    virtual void onUpdate();
 
     std::vector<std::reference_wrapper<GameObject>>& children();
     GameObject& childAt(int index);

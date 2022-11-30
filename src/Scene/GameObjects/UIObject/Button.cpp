@@ -3,14 +3,14 @@
 //
 
 #include "Button.h"
+#include "Services/Singletons/RenderSingleton.h"
+#include "Input/ActionMap.h"
 
 #include <utility>
 #include <Scene/GameObjects/UIObject/Alignment.h>
+#include <iostream>
 
 
-[[maybe_unused]] bool Button::interactable() const {
-    return false;
-}
 
 Button::Button(int width, int height, Vector2 position, bool interactable, Text *text) {
     _width = width;
@@ -22,9 +22,12 @@ Button::Button(int width, int height, Vector2 position, bool interactable, Text 
 }
 
 RenderShape& Button::getRenderShape() {
-    return *_buttonRenderShape.get();
+    return *_buttonRenderShape;
 }
 
+void Button::onClick() {
+     _buttonRenderShape->_textRenderShape->setText("Clicked!");
+}
 
 void Button::setShape() {
     // setup container of button
@@ -42,8 +45,11 @@ void Button::setShape() {
     _buttonRenderShape = std::make_unique<ButtonRenderShape>(renderShape, &_text->_renderShape);
 }
 
-void Button::onClick() {
 
+bool Button::interactable() const {
+    return _interactable;
 }
+
+
 
 

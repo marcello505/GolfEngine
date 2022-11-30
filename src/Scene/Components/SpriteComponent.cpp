@@ -2,6 +2,7 @@
 // Created by conner on 11/23/2022.
 //
 
+#include <iostream>
 #include "SpriteComponent.h"
 #include "../../Services/Singletons/RenderSingleton.h"
 
@@ -16,6 +17,7 @@ void SpriteComponent::onStart() {
 }
 
 void SpriteComponent::onUpdate() {
+    std::cout << "hey";
 }
 
 void SpriteComponent::onRemove() {
