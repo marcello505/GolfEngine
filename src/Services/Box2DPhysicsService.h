@@ -20,7 +20,7 @@ namespace GolfEngine::Services::Physics{
     class Box2DPhysicsService :  public PhysicsService {
     public:
         // Constructors
-        Box2DPhysicsService(int velIterations, int posIterations) : _velocityIterations{velIterations}, _positionIterations{posIterations} {}
+        Box2DPhysicsService(int velIterations, int posIterations);
         explicit Box2DPhysicsService() : Box2DPhysicsService(DefaultVelocityIterations, DefaultPositionIterations) {}
 
         // Methods
@@ -46,6 +46,8 @@ namespace GolfEngine::Services::Physics{
         // Methods for testing
         int getBodyCount() const;
         int getFixtureCount() const;
+
+        std::optional<std::reference_wrapper<RigidBody>> getRigidBodyWithB2Body(b2Body& body);
     private:
         // Fields
         /// Start the box2d world with (0.0, 0.0) gravity

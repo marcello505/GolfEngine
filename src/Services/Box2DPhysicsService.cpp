@@ -6,9 +6,12 @@
 #include "Box2DPhysicsService.h"
 #include "Scene/Components/BoxCollider.h"
 #include "Scene/Components/CircleCollider.h"
+#include "Physics/CollisionListener.h"
 
 
 namespace GolfEngine::Services::Physics{
+
+
     // Degrees to Radians
     float deg2Rad(float deg){
         return deg * M_PI / 180.0f;
@@ -17,6 +20,12 @@ namespace GolfEngine::Services::Physics{
     // Radians to Degrees
     float rad2Deg(float rad){
         return 180.0f * rad / M_PI;
+    }
+
+
+    Box2DPhysicsService::Box2DPhysicsService(int velIterations, int posIterations)
+            : _velocityIterations{velIterations}, _positionIterations{posIterations} {
+        _world.SetContactListener(new CollisionListener{*this});
     }
 
     void Box2DPhysicsService::addRigidBody(RigidBody* pRigidBody) {
@@ -221,5 +230,19 @@ namespace GolfEngine::Services::Physics{
             body.value()->SetGravityScale(gravityScale);
         }
     }
+
+    std::optional<std::reference_wrapper<RigidBody>> Box2DPhysicsService::getRigidBodyWithB2Body(b2Body& body) {
+        auto result = std::find_if(_rigidBodies.begin(), _rigidBodies.end(), [&](const std::pair<RigidBody*, b2Body*>& pair){
+           return pair.second == &body;
+        });
+
+        // Return if a rigid body has been found
+        if(result != _rigidBodies.end()){
+            return *result->first;
+        }
+
+        return std::nullopt;
+    }
+
 }
 

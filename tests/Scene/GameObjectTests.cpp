@@ -9,6 +9,7 @@
 namespace GameObjectTests{
     class DummyScript : public BehaviourScript{
     public:
+        void onStart() override {}
         void reloadScene(){
             GolfEngine::SceneManager::GetSceneManager().loadScene();
         }
@@ -92,4 +93,17 @@ TEST_CASE("Check if GameObject has a certain Component"){
 
     // Assert
     CHECK_EQ(result, true);
+}
+
+TEST_CASE("Getting list of BehaviourScript components"){
+    // Arrange
+    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<GameObjectTests::MainSceneFactory>("main");
+    GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    auto& currentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
+
+    // Act
+    auto list = currentScene.getRootGameObject().childAt(0).getComponents<BehaviourScript>();
+
+    // Assert
+    CHECK_EQ(list.size(), 1);
 }

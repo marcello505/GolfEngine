@@ -39,7 +39,8 @@ set(SERVICES_SOURCES
         src/Services/Singletons/AudioSingleton.cpp
         src/Services/Singletons/RenderSingleton.cpp
         src/Services/Singletons/InputSingleton.cpp
-        src/Services/Render/Texture.cpp)
+        src/Services/Render/Texture.cpp
+        src/Services/Physics/CollisionListener.cpp)
 
 set(SCENE_SOURCES
         src/Scene/Scene.cpp
@@ -94,3 +95,4 @@ add_subdirectory(validation/US04_RenderFPS)
 add_subdirectory(validation/US08_RenderUIObject)
 add_subdirectory(validation/US14_PhysicsService)
 add_subdirectory(validation/US00_AllServices)
+add_subdirectory(validation/US14_CollisionLogic)
