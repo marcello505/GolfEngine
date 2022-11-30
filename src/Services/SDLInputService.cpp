@@ -18,6 +18,7 @@ void SDLInputService::handleInputs()
     {
         if (event.type == SDL_KEYDOWN) // if key is pressed
         {
+            //TODO ignore repeat events using https://stackoverflow.com/questions/22156815/how-to-disable-key-repeat-in-sdl2
             auto key = _inputBinds.find(SDL_GetKeyName(event.key.keysym.sym))->second; // get key
             _actionMap->setInputKeyPressed(key, true); // handle action for this key
         }
@@ -30,6 +31,7 @@ void SDLInputService::handleInputs()
 
         if (event.type == SDL_MOUSEBUTTONDOWN) // if mouse button is pressed
         {
+            //TODO ignore repeat events using https://stackoverflow.com/questions/22156815/how-to-disable-key-repeat-in-sdl2
             SDLInputService::handleMouseEvent(event, true); // handle mouse event
         }
         if (event.type == SDL_MOUSEBUTTONUP) // if mouse button is released
