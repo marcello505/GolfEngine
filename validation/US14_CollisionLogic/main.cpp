@@ -9,8 +9,18 @@
 #include "Services/Box2DPhysicsService.h"
 
 class PlayerScript : public BehaviourScript{
-    void onCollisionEnter(RigidBody &other) override{
+    void onUpdate() override{
+        if(ActionMap::getActionMap()->isJustPressed("jump")){
+            _gameObject->get().getComponent<RigidBody>().applyForceToCenter({0,-50});
+        }
+    }
+
+    void onCollisionEnter(RigidBody& other) override{
         _gameObject->get().getComponent<BoxCollider>().setColor(Color{255,0,0,255});
+    }
+
+    void onCollisionExit(RigidBody& other) override{
+        _gameObject->get().getComponent<BoxCollider>().setColor(Color{255,255,255,255});
     }
 };
 
@@ -35,6 +45,9 @@ int main(int argc, char* argv[]){
     GameLoop gameLoop {};
     gameLoop.useDefaultServices();
     gameLoop.setPhysicsService(physicsService);
+
+    ActionMap::getActionMap()->addAction("jump");
+    ActionMap::getActionMap()->addInputKeyToAction("jump", Key_Space);
 
     GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
     GolfEngine::SceneManager::GetSceneManager().loadScene("main");
