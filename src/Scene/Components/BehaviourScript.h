@@ -19,6 +19,8 @@ public:
     void setParentGameObject(GameObject& gameObject) override { _gameObject = gameObject; }
     virtual void onCollisionEnter(RigidBody& other) {}
     virtual void onCollisionExit(RigidBody& other) {}
+    virtual void onAreaEnter(RigidBody& other) {}
+    virtual void onAreaExit(RigidBody& other) {}
 };
 
 

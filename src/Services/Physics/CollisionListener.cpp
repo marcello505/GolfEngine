@@ -10,39 +10,73 @@ namespace GolfEngine::Services::Physics {
     }
 
     void CollisionListener::BeginContact(b2Contact* contact) {
-        auto rbA = _physicsService.getRigidBodyWithB2Body(*contact->GetFixtureA()->GetBody());
-        auto rbB = _physicsService.getRigidBodyWithB2Body(*contact->GetFixtureB()->GetBody());
+        auto rbA {_physicsService.getRigidBodyWithB2Body(*contact->GetFixtureA()->GetBody())};
+        auto rbB {_physicsService.getRigidBodyWithB2Body(*contact->GetFixtureB()->GetBody())};
 
         if(rbA && rbB){
-            auto gameObjectA = rbA->get().getParentGameObject();
-            auto scriptsA = gameObjectA->getComponents<BehaviourScript>();
-            for(auto& script : scriptsA){
-                script.get().onCollisionEnter(*rbB);
-            }
+            // Get all attached script components from Object A and B
+            auto gameObjectA {rbA->get().getParentGameObject()};
+            auto scriptsA {gameObjectA->getComponents<BehaviourScript>()};
+            auto gameObjectB {rbB->get().getParentGameObject()};
+            auto scriptsB {gameObjectB->getComponents<BehaviourScript>()};
 
-            auto gameObjectB = rbB->get().getParentGameObject();
-            auto scriptsB = gameObjectB->getComponents<BehaviourScript>();
-            for(auto& script : scriptsB){
-                script.get().onCollisionEnter(*rbA);
+            // Check if one of the two rigidbodies is an areabody type
+            bool isArea {contact->GetFixtureA()->IsSensor() || contact->GetFixtureB()->IsSensor()};
+
+            // Call area or collision methods on all attached scripts
+            if(isArea){
+                for(auto& script : scriptsA){
+                    script.get().onAreaEnter(*rbB);
+                }
+
+                for(auto& script : scriptsB){
+                    script.get().onAreaEnter(*rbA);
+                }
+            }
+            else {
+                for(auto& script : scriptsA){
+                    script.get().onCollisionEnter(*rbB);
+                }
+
+                for(auto& script : scriptsB){
+                    script.get().onCollisionEnter(*rbA);
+                }
             }
         }
     }
 
     void CollisionListener::EndContact(b2Contact* contact) {
-        auto rbA = _physicsService.getRigidBodyWithB2Body(*contact->GetFixtureA()->GetBody());
-        auto rbB = _physicsService.getRigidBodyWithB2Body(*contact->GetFixtureB()->GetBody());
+        auto rbA {_physicsService.getRigidBodyWithB2Body(*contact->GetFixtureA()->GetBody())};
+        auto rbB {_physicsService.getRigidBodyWithB2Body(*contact->GetFixtureB()->GetBody())};
 
         if(rbA && rbB){
-            auto gameObjectA = rbA->get().getParentGameObject();
-            auto scriptsA = gameObjectA->getComponents<BehaviourScript>();
-            for(auto& script : scriptsA){
-                script.get().onCollisionExit(*rbB);
-            }
+            // Get all attached script components from Object A and B
+            auto gameObjectA {rbA->get().getParentGameObject()};
+            auto scriptsA {gameObjectA->getComponents<BehaviourScript>()};
+            auto gameObjectB {rbB->get().getParentGameObject()};
+            auto scriptsB {gameObjectB->getComponents<BehaviourScript>()};
 
-            auto gameObjectB = rbB->get().getParentGameObject();
-            auto scriptsB = gameObjectB->getComponents<BehaviourScript>();
-            for(auto& script : scriptsB){
-                script.get().onCollisionExit(*rbA);
+            // Check if one of the two rigidbodies is an areabody type
+            bool isArea {contact->GetFixtureA()->IsSensor() || contact->GetFixtureB()->IsSensor()};
+
+            // Call area or collision methods on all attached scripts
+            if(isArea){
+                for(auto& script : scriptsA){
+                    script.get().onAreaExit(*rbB);
+                }
+
+                for(auto& script : scriptsB){
+                    script.get().onAreaExit(*rbA);
+                }
+            }
+            else {
+                for(auto& script : scriptsA){
+                    script.get().onCollisionExit(*rbB);
+                }
+
+                for(auto& script : scriptsB){
+                    script.get().onCollisionExit(*rbA);
+                }
             }
         }
     }

@@ -13,6 +13,13 @@ class PlayerScript : public BehaviourScript{
         if(ActionMap::getActionMap()->isJustPressed("jump")){
             _gameObject->get().getComponent<RigidBody>().applyForceToCenter({0,-50});
         }
+
+        if(ActionMap::getActionMap()->isPressed("left")){
+            _gameObject->get().getComponent<RigidBody>().applyForceToCenter({-0.5f,0});
+        }
+        else if (ActionMap::getActionMap()->isPressed("right")){
+            _gameObject->get().getComponent<RigidBody>().applyForceToCenter({0.5f,0});
+        }
     }
 
     void onCollisionEnter(RigidBody& other) override{
@@ -20,6 +27,24 @@ class PlayerScript : public BehaviourScript{
     }
 
     void onCollisionExit(RigidBody& other) override{
+        _gameObject->get().getComponent<BoxCollider>().setColor(Color{255,255,255,255});
+    }
+
+    void onAreaEnter(RigidBody &other) override{
+        _gameObject->get().getComponent<BoxCollider>().setColor(Color{0,0,255,255});
+    }
+
+    void onAreaExit(RigidBody &other) override{
+        _gameObject->get().getComponent<BoxCollider>().setColor(Color{255,255,255,255});
+    }
+};
+
+class BoxAreaScript : public BehaviourScript{
+    void onAreaEnter(RigidBody &other) override{
+        _gameObject->get().getComponent<BoxCollider>().setColor(Color{0,255,0,255});
+    }
+
+    void onAreaExit(RigidBody &other) override{
         _gameObject->get().getComponent<BoxCollider>().setColor(Color{255,255,255,255});
     }
 };
@@ -36,6 +61,12 @@ class SceneFactory : public ISceneFactory{
         blockObject.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
         blockObject.addComponent<PlayerScript>();
         blockObject.setLocalPosition({300, 150});
+
+        auto& areaObject = scene.createNewGameObject<GameObject>();
+        areaObject.addComponent<BoxCollider>(Vector2{60.0f, 60.0f});
+        areaObject.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::AreaBody});
+        areaObject.addComponent<BoxAreaScript>();
+        areaObject.setLocalPosition({100, 150});
     }
 };
 
@@ -48,6 +79,10 @@ int main(int argc, char* argv[]){
 
     ActionMap::getActionMap()->addAction("jump");
     ActionMap::getActionMap()->addInputKeyToAction("jump", Key_Space);
+    ActionMap::getActionMap()->addAction("left");
+    ActionMap::getActionMap()->addInputKeyToAction("left", Key_Left);
+    ActionMap::getActionMap()->addAction("right");
+    ActionMap::getActionMap()->addInputKeyToAction("right", Key_Right);
 
     GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
     GolfEngine::SceneManager::GetSceneManager().loadScene("main");

@@ -48,7 +48,7 @@ namespace GolfEngine::Services::Physics{
                     bodyDef.type = b2_dynamicBody;
                     break;
                 case RigidBodyTypes::AreaBody:
-                    //TODO figure out how to handle AreaBodies
+                    bodyDef.type = b2_kinematicBody;
                     break;
                 case RigidBodyTypes::KinematicBody:
                     bodyDef.type = b2_kinematicBody;
@@ -79,6 +79,9 @@ namespace GolfEngine::Services::Physics{
             fixtureDef.friction = rigidDef.friction;
             fixtureDef.restitution = rigidDef.restitution;
             fixtureDef.density = rigidDef.density;
+
+            if(rigidDef.bodyType == RigidBodyTypes::AreaBody)
+                fixtureDef.isSensor = true;
 
             b2PolygonShape box {};
             b2CircleShape circle {};
