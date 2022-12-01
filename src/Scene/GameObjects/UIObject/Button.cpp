@@ -9,7 +9,8 @@
 #include <utility>
 #include <Scene/GameObjects/UIObject/Alignment.h>
 #include <iostream>
-
+#include <SDL_surface.h>
+#include <SDL_ttf.h>
 
 
 Button::Button(int width, int height, Vector2 position, bool interactable, Text *text) {
@@ -26,7 +27,7 @@ RenderShape& Button::getRenderShape() {
 }
 
 void Button::onClick() {
-     _buttonRenderShape->_textRenderShape->setText("Clicked!");
+    _buttonRenderShape->_textRenderShape->setText("Clicked!");
 }
 
 void Button::setShape() {
@@ -36,13 +37,9 @@ void Button::setShape() {
                                              Vector2(0, 0),
                                              Color(255,255,255,255));
 
-
-    // setup text position relative to the container
-    _text->_renderShape.setPosition(Vector2(renderShape->rect().position.x - _text->_renderShape.fontSize() * 2,
-                                             renderShape->rect().position.y - _text->_renderShape.fontSize() * 0.5));
-
     // setup render shape
     _buttonRenderShape = std::make_unique<ButtonRenderShape>(renderShape, &_text->_renderShape);
+    GolfEngine::Services::Render::getService()->addDrawable(*this);
 }
 
 

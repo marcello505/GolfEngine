@@ -7,6 +7,6 @@ set(CMAKE_CXX_STANDARD 17)
 set(SRC_FILES)
 
 # Main Project
-add_executable(RenderUIObject_PoC SceneFactory.cpp ButtonClickScript.cpp main.cpp)
+add_executable(RenderUIObject_PoC UIScene.cpp ButtonClickScript.cpp main.cpp)
 target_link_libraries(RenderUIObject_PoC GolfEngine)
 target_include_directories(RenderUIObject_PoC PUBLIC ../../src)

@@ -1,21 +1,19 @@
 #include <Core/GameLoop.h>
-#include "SceneFactory.h"
+#include "UIScene.h"
 #include <Services/SDLRenderService.h>
-#include <Services/Singletons/RenderSingleton.h>
-
-
-#include <iostream>
-
 
 int main(int argc, char* argv[])
 {
-    //initialize gameloop and renderservice
+    //initialize gameloop
     GameLoop gameLoop {};
     gameLoop.useDefaultServices();
 
+    //setup left mouse action
     ActionMap::getActionMap()->addAction("ClickButton");
     ActionMap::getActionMap()->addInputKeyToAction("ClickButton", Mouse_Left);
-    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
+
+    //setup scene
+    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<UIScene>("main");
     GolfEngine::SceneManager::GetSceneManager().loadScene("main");
 
     //start gameloop
