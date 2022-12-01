@@ -6,6 +6,7 @@
 #include "Scene/Components/RigidBody.h"
 #include "../gameobjects/Player.h"
 #include "../gameobjects/Wall.h"
+#include "../gameobjects/Projectile.h"
 
 void PlayerTestScene::build(Scene& scene) const {
     auto& root = scene.createNewGameObject<GameObject>();
@@ -24,4 +25,6 @@ void PlayerTestScene::build(Scene& scene) const {
 
     auto& player = scene.createNewGameObject<Player>(root);
     player.setLocalPosition({200.f, 200.f});
+
+    scene.createNewGameObject<Projectile>().setLocalPosition({100.0f, 100.0f});
 }
