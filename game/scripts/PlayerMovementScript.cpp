@@ -10,6 +10,9 @@ void PlayerMovementScript::onStart() {
     _rb = &_gameObject.value().get().getComponent<RigidBody>();
     _actionMap = ActionMap::getActionMap();
     _gunShotAudio = &_gameObject.value().get().getComponent<GolfEngine::Scene::Components::AudioSource>();
+
+    if(_gameObject.value().get().hasComponent<Animator>())
+        _animator = &_gameObject.value().get().getComponent<Animator>();
 }
 
 void PlayerMovementScript::onUpdate() {
@@ -31,6 +34,13 @@ void PlayerMovementScript::onUpdate() {
         }
 
         _rb->applyForceToCenter(inputDirection.normalized() * playerSpeed);
+
+        if(_animator){
+            if(inputDirection.magnitude() > 0.9f)
+                _animator->play("walk", true);
+            else
+                _animator->play("idle", true);
+        }
     }
 
     //Point to mouse logic
@@ -42,6 +52,9 @@ void PlayerMovementScript::onUpdate() {
     //Handle shooting
     if(_actionMap->isJustPressed("playerShoot")){
         _gunShotAudio->play();
+
+        if(_animator)
+            _animator->play("shoot");
 
         auto projectile = _projectilePool->getProjectile();
         if(projectile){

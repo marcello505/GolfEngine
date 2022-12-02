@@ -11,7 +11,7 @@
 
 class PlayerObject : public GameObject {
 public:
-    PlayerObject(ProjectilePoolScript* projectilePoolScript);
+    PlayerObject(ProjectilePoolScript* projectilePoolScript, bool useAnimator);
 
 };
 

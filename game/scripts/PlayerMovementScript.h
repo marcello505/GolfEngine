@@ -12,6 +12,7 @@
 #include <Input/ActionMap.h>
 
 #include "../scripts/ProjectilePoolScript.h"
+#include "Scene/Components/Animator.h"
 
 class PlayerMovementScript : public BehaviourScript {
 public:
@@ -24,6 +25,7 @@ private:
     SpriteComponent* _sprite {};
     RigidBody* _rb {};
     ActionMap* _actionMap {};
+    Animator* _animator {};
     ProjectilePoolScript* _projectilePool {};
     GolfEngine::Scene::Components::AudioSource* _gunShotAudio {};
 };

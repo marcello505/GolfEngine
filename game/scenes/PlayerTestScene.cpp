@@ -26,6 +26,6 @@ void PlayerTestScene::build(Scene& scene) const {
 
     auto& projectilePool = scene.createNewGameObject<ProjectilePoolObject>(root, &scene, 20);
 
-    auto& player = scene.createNewGameObject<PlayerObject>(root, &projectilePool.getComponent<ProjectilePoolScript>());
+    auto& player = scene.createNewGameObject<PlayerObject>(root, &projectilePool.getComponent<ProjectilePoolScript>(), false);
     player.setLocalPosition({200.f, 200.f});
 }
