@@ -35,7 +35,7 @@ void Animator::onUpdate() {
             if(_currentCell > _currentAnimation->get().endCell)
                 finishAnimation();
             _spriteComponent->get().setImageSource(Rect2(Vector2{(_currentCell % _cols) * _cellSize.x,
-                                                                 (int)floorf((float)_currentCell / (float)_rows) * _cellSize.y},
+                                                                 (int)floorf((float)_currentCell / (float)_cols) * _cellSize.y},
                                                                     _cellSize));
         }
     }

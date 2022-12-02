@@ -13,6 +13,7 @@ void PlayerMovementScript::onStart() {
 
     if(_gameObject.value().get().hasComponent<Animator>())
         _animator = &_gameObject.value().get().getComponent<Animator>();
+        _animator->play("idle", true);
 }
 
 void PlayerMovementScript::onUpdate() {
@@ -34,34 +35,26 @@ void PlayerMovementScript::onUpdate() {
         }
 
         _rb->applyForceToCenter(inputDirection.normalized() * playerSpeed);
-
-        if(_animator){
-            if(inputDirection.magnitude() > 0.9f)
-                _animator->play("walk", true);
-            else
-                _animator->play("idle", true);
-        }
     }
 
     //Point to mouse logic
     {
         float angleToMouse = _gameObject->get().getWorldTransform().position.angleToDegrees(_actionMap->getMousePosition());
-        _sprite->setRotation(angleToMouse + 90.0f); //angle to mouse + offset
+        _sprite->setRotation(angleToMouse); //angle to mouse + offset
     }
 
     //Handle shooting
     if(_actionMap->isJustPressed("playerShoot")){
         _gunShotAudio->play();
 
-        if(_animator)
-            _animator->play("shoot");
+        _animator->play("shoot");
 
         auto projectile = _projectilePool->getProjectile();
         if(projectile){
             Transform projectileTransform {_gameObject->get().getWorldTransform()};
             projectileTransform.rotation = _gameObject->get().getWorldTransform().position.angleToDegrees(_actionMap->getMousePosition());
             auto directionToMouse = _gameObject->get().getWorldTransform().position.directionTo(_actionMap->getMousePosition());
-            projectileTransform.position += directionToMouse * 20.0f;
+            projectileTransform.position += directionToMouse * 30.0f;
 
             projectile.value().get().shoot(projectileTransform, directionToMouse);
         }
