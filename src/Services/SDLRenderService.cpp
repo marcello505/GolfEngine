@@ -132,6 +132,7 @@ namespace GolfEngine::Services::Render {
         renderRect(*renderShape._rectRenderShape);
 
         std::optional<std::reference_wrapper<TTF_Font>> f;
+
         try{
             f = loadFont(renderShape._textRenderShape->filePath(), renderShape._textRenderShape->fontSize());
         } catch(std::exception& e){
@@ -141,6 +142,7 @@ namespace GolfEngine::Services::Render {
 
         // Get direct reference to texture for easy access
         auto& font {f->get()};
+
         SDL_Surface* surface = TTF_RenderText_Solid(&font, renderShape._textRenderShape->text().c_str(),
                                                     {renderShape._textRenderShape->color().r8,
                                                      renderShape._textRenderShape->color().g8,
@@ -154,7 +156,15 @@ namespace GolfEngine::Services::Render {
 
         SDL_Rect dstRect;
         // center text to button container
-        dstRect.x = renderShape._rectRenderShape->rect().position.x  - (surface->w / 2.0);
+        if(renderShape._textAlign == Alignment::Left){
+            dstRect.x = renderShape._rectRenderShape->rect().position.x  - (surface->w);
+        } else if(renderShape._textAlign == Alignment::Center){
+            dstRect.x = renderShape._rectRenderShape->rect().position.x  - (surface->w / 2.0);
+        } else{
+            dstRect.x = renderShape._rectRenderShape->rect().position.x  - (surface->w / 4.0);
+        }
+
+
         dstRect.y = renderShape._rectRenderShape->rect().position.y - (surface->h / 2.0);
 
         dstRect.w = surface->w;
