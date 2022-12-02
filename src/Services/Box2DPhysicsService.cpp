@@ -6,7 +6,7 @@
 #include "Box2DPhysicsService.h"
 #include "Scene/Components/BoxCollider.h"
 #include "Scene/Components/CircleCollider.h"
-#include "Physics/CollisionListener.h"
+#include "Physics/Box2DCollisionListener.h"
 
 
 namespace GolfEngine::Services::Physics{
@@ -25,7 +25,7 @@ namespace GolfEngine::Services::Physics{
 
     Box2DPhysicsService::Box2DPhysicsService(int velIterations, int posIterations)
             : _velocityIterations{velIterations}, _positionIterations{posIterations} {
-        _world.SetContactListener(new CollisionListener{*this});
+        _world.SetContactListener(new Box2DCollisionListener{*this});
     }
 
     void Box2DPhysicsService::addRigidBody(RigidBody* pRigidBody) {

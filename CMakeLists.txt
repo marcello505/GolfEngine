@@ -40,7 +40,7 @@ set(SERVICES_SOURCES
         src/Services/Singletons/RenderSingleton.cpp
         src/Services/Singletons/InputSingleton.cpp
         src/Services/Render/Texture.cpp
-        src/Services/Physics/CollisionListener.cpp)
+        src/Services/Physics/Box2DCollisionListener.cpp)
 
 set(SCENE_SOURCES
         src/Scene/Scene.cpp

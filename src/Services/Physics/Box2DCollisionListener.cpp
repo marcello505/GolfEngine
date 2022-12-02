@@ -2,14 +2,14 @@
 // Created by conner on 11/29/2022.
 //
 
-#include "CollisionListener.h"
+#include "Box2DCollisionListener.h"
 #include "../../Scene/Components/BehaviourScript.h"
 
 namespace GolfEngine::Services::Physics {
-    CollisionListener::CollisionListener(Box2DPhysicsService& box2DPhysicsService) : _physicsService{box2DPhysicsService} {
+    Box2DCollisionListener::Box2DCollisionListener(Box2DPhysicsService& box2DPhysicsService) : _physicsService{box2DPhysicsService} {
     }
 
-    void CollisionListener::BeginContact(b2Contact* contact) {
+    void Box2DCollisionListener::BeginContact(b2Contact* contact) {
         auto rbA {_physicsService.getRigidBodyWithB2Body(*contact->GetFixtureA()->GetBody())};
         auto rbB {_physicsService.getRigidBodyWithB2Body(*contact->GetFixtureB()->GetBody())};
 
@@ -45,7 +45,7 @@ namespace GolfEngine::Services::Physics {
         }
     }
 
-    void CollisionListener::EndContact(b2Contact* contact) {
+    void Box2DCollisionListener::EndContact(b2Contact* contact) {
         auto rbA {_physicsService.getRigidBodyWithB2Body(*contact->GetFixtureA()->GetBody())};
         auto rbB {_physicsService.getRigidBodyWithB2Body(*contact->GetFixtureB()->GetBody())};
 

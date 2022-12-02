@@ -2,16 +2,16 @@
 // Created by conner on 11/29/2022.
 //
 
-#ifndef GOLFENGINE_COLLISIONLISTENER_H
-#define GOLFENGINE_COLLISIONLISTENER_H
+#ifndef GOLFENGINE_BOX2DCOLLISIONLISTENER_H
+#define GOLFENGINE_BOX2DCOLLISIONLISTENER_H
 
 #include <box2d/box2d.h>
 #include "../Box2DPhysicsService.h"
 
 namespace GolfEngine::Services::Physics {
-    class CollisionListener : public b2ContactListener {
+    class Box2DCollisionListener : public b2ContactListener {
     public:
-        explicit CollisionListener(Box2DPhysicsService& box2DPhysicsService);
+        explicit Box2DCollisionListener(Box2DPhysicsService& box2DPhysicsService);
 
         // b2ContactListener overrides
         void BeginContact(b2Contact *contact) override;
@@ -22,4 +22,4 @@ namespace GolfEngine::Services::Physics {
 
 }
 
-#endif //GOLFENGINE_COLLISIONLISTENER_H
+#endif //GOLFENGINE_BOX2DCOLLISIONLISTENER_H
