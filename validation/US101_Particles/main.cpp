@@ -14,14 +14,13 @@ int main(int argc, char* argv[]){
     GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
     GolfEngine::SceneManager::GetSceneManager().loadScene("main");
 
+    // Press Space to Stop Paritcles
     ActionMap::getActionMap()->addAction("Stop");
     ActionMap::getActionMap()->addInputKeyToAction("Stop", Key_Space);
 
+    // Press P to start Paritcles
     ActionMap::getActionMap()->addAction("Start");
     ActionMap::getActionMap()->addInputKeyToAction("Start", Key_P);
-
-//    auto x  = GolfEngine::Services::Physics::getService();
-//    x->setGravity(Vector2(0,0.3f));
 
     gameLoop.start();
     return 0;

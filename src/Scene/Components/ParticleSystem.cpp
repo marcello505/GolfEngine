@@ -8,12 +8,9 @@
 #include "Services/Singletons/RenderSingleton.h"
 #include "Services/Singletons/PhysicsSingleton.h"
 
-//Duration is time until one particle goes away
-// pps = how many particles to render every second if looping == true
-
-ParticleSystem::ParticleSystem(const std::string &spritePath, int particlesPerSecond, float duration, Vector2 pixelScale, Vector2 position, float rotation, Color color):
-_position{position}, _rotation{rotation}, _color{color}, _fps{60},
-_spritePath{spritePath}, _particlesPerSecond{particlesPerSecond}, _duration{duration}, _pixelScale{pixelScale}
+ParticleSystem::ParticleSystem(const std::string &spritePath, int particlesPerSecond, float lifeTime, Vector2 pixelScale, Vector2 position, float rotation, Color color):
+_position{position}, _rotation{rotation}, _color{color},
+_spritePath{spritePath}, _particlesPerSecond{particlesPerSecond}, _lifeTime{lifeTime}, _pixelScale{pixelScale}
 {
     //TODO if random is used at more places then create global RandomEngine that can be re-used in every class.
      std::random_device device;
@@ -80,7 +77,7 @@ void ParticleSystem::onUpdate() {
     }
 
     //checks if any particle->lifteime is longer then duration then auto removes this particle
-    auto it = std::find_if(particles.begin(), particles.end(),[this](auto& p){return p->lifeTime > _fps * _duration; });
+    auto it = std::find_if(particles.begin(), particles.end(),[this](auto& p){return p->lifeTime > _fps * _lifeTime; });
     if(it != particles.end()){
         auto renderService = GolfEngine::Services::Render::getService();
         if(renderService)
@@ -115,7 +112,7 @@ void ParticleSystem::onUpdate() {
             auto c = particle->getSpriteRenderShape().color();
 
             //Calculation to calculate how far the opacity should be decreased to be at zero when particles ends.
-            int downStep = c.a / (( _fps * _duration) - particle->lifeTime);
+            int downStep = c.a / (( _fps * _lifeTime) - particle->lifeTime);
             c.a -= downStep;
             particle->getSpriteRenderShape().setColor(c);
         }

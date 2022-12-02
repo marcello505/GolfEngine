@@ -68,32 +68,32 @@ private:
     ///List of all particles
     std::vector<std::unique_ptr<Particle>> particles {};
 
+    std::unique_ptr<std::default_random_engine> _randomEngine;
+
+    bool _fade {false};
+    bool _looping {false};
 
     int _particlesPerSecond;
-    float _duration;
+    float _lifeTime;
+
     std::string _spritePath;
     Vector2 _pixelScale;
-
     float _rotation;
     Vector2 _position;
     Color _color;
 
 
     int _countedFrames {0};
+    int _fps{60};
+
 
     Vector2 _direction {1,0};
     float _velocity {1.0};
     Vector2 _spread {0,0};
-    bool _fade {false};
-    bool _looping {false};
+
     Vector2 _randomVelocity {0,0};
     float _rotationsPerSecond {0};
 
-
-
-    std::unique_ptr<std::default_random_engine> _randomEngine;
-
-    int _fps;
 };
 
 
