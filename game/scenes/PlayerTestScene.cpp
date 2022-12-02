@@ -4,9 +4,10 @@
 
 #include "PlayerTestScene.h"
 #include "Scene/Components/RigidBody.h"
-#include "../gameobjects/Player.h"
+#include "../gameobjects/PlayerObject.h"
 #include "../gameobjects/Wall.h"
 #include "../gameobjects/Projectile.h"
+#include "../gameobjects/ProjectilePoolObject.h"
 
 void PlayerTestScene::build(Scene& scene) const {
     auto& root = scene.createNewGameObject<GameObject>();
@@ -23,8 +24,8 @@ void PlayerTestScene::build(Scene& scene) const {
         scene.createNewGameObject<Wall>(root, Vector2{640.0f, 360.0f}, Vector2{12.5, 125.0f});
     }
 
-    auto& player = scene.createNewGameObject<Player>(root);
-    player.setLocalPosition({200.f, 200.f});
+    auto& projectilePool = scene.createNewGameObject<ProjectilePoolObject>(root, &scene, 20);
 
-    scene.createNewGameObject<Projectile>().setLocalPosition({100.0f, 100.0f});
+    auto& player = scene.createNewGameObject<PlayerObject>(root, &projectilePool.getComponent<ProjectilePoolScript>());
+    player.setLocalPosition({200.f, 200.f});
 }

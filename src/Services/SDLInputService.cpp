@@ -52,7 +52,6 @@ void SDLInputService::handleInputs()
 void SDLInputService::handleMouseEvent(SDL_Event event, bool pressed) {
     int x, y;
     Uint32 buttons;
-    SDL_PumpEvents();  // make sure we have the latest mouse state.
     buttons = SDL_GetMouseState(&x, &y);
     _actionMap->setMousePosition(x, y); //set current mouse pos
 

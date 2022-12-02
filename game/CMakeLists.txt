@@ -6,8 +6,8 @@ set(CMAKE_CXX_STANDARD 17)
 # Sources
 set(SCRIPT_SOURCES scripts/PlayerMovementScript.cpp scripts/ProjectilePoolScript.cpp scripts/ProjectileScript.cpp)
 set(GAMEOBJECTS_SOURCES
-        gameobjects/Player.cpp
-        gameobjects/Wall.cpp gameobjects/Projectile.cpp gameobjects/Projectile.h)
+        gameobjects/PlayerObject.cpp
+        gameobjects/Wall.cpp gameobjects/Projectile.cpp gameobjects/Projectile.h gameobjects/ProjectilePoolObject.cpp gameobjects/ProjectilePoolObject.h)
 set(SCENE_SOURCES scenes/PlayerTestScene.cpp)
 
 # Resource files

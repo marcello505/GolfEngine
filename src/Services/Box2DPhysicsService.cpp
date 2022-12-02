@@ -223,5 +223,14 @@ namespace GolfEngine::Services::Physics{
         }
         return {};
     }
+
+    void Box2DPhysicsService::setLinearVelocity(RigidBody* pRigidBody, const Vector2& velocity) {
+        auto body = getB2Body(pRigidBody);
+        if(body){
+            b2Vec2 vel = {velocity.x, velocity.y};
+            body.value()->SetLinearVelocity(vel);
+        }
+
+    }
 }
 

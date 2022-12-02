@@ -11,8 +11,11 @@
 #include <Scene/Components/SpriteComponent.h>
 #include <Input/ActionMap.h>
 
+#include "../scripts/ProjectilePoolScript.h"
+
 class PlayerMovementScript : public BehaviourScript {
 public:
+    explicit PlayerMovementScript(ProjectilePoolScript* projectilePoolScript) : _projectilePool{projectilePoolScript} {}
     void onStart() override;
     void onUpdate() override;
 
@@ -21,6 +24,7 @@ private:
     SpriteComponent* _sprite {};
     RigidBody* _rb {};
     ActionMap* _actionMap {};
+    ProjectilePoolScript* _projectilePool {};
     GolfEngine::Scene::Components::AudioSource* _gunShotAudio {};
 };
 

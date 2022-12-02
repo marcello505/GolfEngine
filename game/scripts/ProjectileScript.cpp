@@ -6,16 +6,22 @@
 
 void ProjectileScript::onStart() {
     _rigidBody = &_gameObject.value().get().getComponent<RigidBody>();
+    _gameObject.value().get().setActive(false);
 }
 
 void ProjectileScript::onUpdate() {
-    _rigidBody->applyForceToCenter({10.0f, 0.0f});
-    if(_ttl < 5.0f){
+    if(_ticksToLive < 30){
+        _rigidBody->setLinearVelocity(_dir * 20.0f);
+        _ticksToLive++;
+    }
+    else{
+        _gameObject->get().setActive(false);
     }
 }
 
-void ProjectileScript::shoot(const Transform& transform) {
-    _rigidBody->setActive(true);
+void ProjectileScript::shoot(const Transform& transform, const Vector2& direction) {
+    _dir = direction.normalized();
+    _gameObject->get().setActive(true);
     _rigidBody->setTransform(transform);
-    _ttl = 0.0f;
+    _ticksToLive = 0;
 }

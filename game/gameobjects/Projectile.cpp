@@ -4,11 +4,11 @@
 
 #include "Projectile.h"
 #include "Scene/Components/RigidBody.h"
-#include "Scene/Components/BoxCollider.h"
 #include "../scripts/ProjectileScript.h"
+#include "Scene/Components/CircleCollider.h"
 
 Projectile::Projectile() {
-    addComponent<BoxCollider>(Vector2{7.5f, 7.5f});
+    addComponent<CircleCollider>(5.0f);
     addComponent<RigidBody>();
     addComponent<ProjectileScript>();
 }

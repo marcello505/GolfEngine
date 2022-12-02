@@ -8,14 +8,18 @@
 #include <Scene/Components/BehaviourScript.h>
 #include "Scene/Components/RigidBody.h"
 
+
 class ProjectileScript : public BehaviourScript {
 public:
     void onStart() override;
     void onUpdate() override;
 
-    void shoot(const Transform& transform);
+    void shoot(const Transform& transform, const Vector2& direction);
 
 private:
+    Vector2 _dir {};
+
+    int _ticksToLive{};
     float _ttl {};
     RigidBody* _rigidBody {};
 

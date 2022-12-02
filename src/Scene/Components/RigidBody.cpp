@@ -104,3 +104,10 @@ Vector2 RigidBody::getLinearVelocity() {
 
     return {};
 }
+
+void RigidBody::setLinearVelocity(const Vector2& velocity) {
+    if(GolfEngine::Services::Physics::hasService()){
+        GolfEngine::Services::Physics::getService()->setLinearVelocity(this, velocity);
+    }
+}
+

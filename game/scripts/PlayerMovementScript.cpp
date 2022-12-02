@@ -39,8 +39,18 @@ void PlayerMovementScript::onUpdate() {
         _sprite->setRotation(angleToMouse + 90.0f); //angle to mouse + offset
     }
 
-    //Audio
+    //Handle shooting
     if(_actionMap->isJustPressed("playerShoot")){
         _gunShotAudio->play();
+
+        auto projectile = _projectilePool->getProjectile();
+        if(projectile){
+            Transform projectileTransform {_gameObject->get().getWorldTransform()};
+            projectileTransform.rotation = _gameObject->get().getWorldTransform().position.angleToDegrees(_actionMap->getMousePosition());
+            auto directionToMouse = _gameObject->get().getWorldTransform().position.directionTo(_actionMap->getMousePosition());
+            projectileTransform.position += directionToMouse * 20.0f;
+
+            projectile.value().get().shoot(projectileTransform, directionToMouse);
+        }
     }
 }

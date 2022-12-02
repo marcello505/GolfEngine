@@ -44,6 +44,7 @@ namespace GolfEngine::Services::Physics{
         void setAngularDamping(RigidBody* pRigidBody, float angularDamping) override;
         void setFixedRotation(RigidBody* pRigidBody, bool fixedRotation) override;
         void setGravityScale(RigidBody* pRigidBody, float gravityScale) override;
+        void setLinearVelocity(RigidBody* pRigidBody, const Vector2& velocity) override;
 
         // Methods for testing
         int getBodyCount() const;

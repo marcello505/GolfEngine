@@ -27,6 +27,7 @@ public:
     virtual void setAngularDamping(RigidBody* pRigidBody, float angularDamping) = 0;
     virtual void setFixedRotation(RigidBody* pRigidBody, bool fixedRotation) = 0;
     virtual void setGravityScale(RigidBody* pRigidBody, float gravityScale) = 0;
+    virtual void setLinearVelocity(RigidBody* pRigidBody, const Vector2& velocity) = 0;
 
 };
 
