@@ -23,5 +23,6 @@ void ProjectileScript::shoot(const Transform& transform, const Vector2& directio
     _dir = direction.normalized();
     _gameObject->get().setActive(true);
     _rigidBody->setTransform(transform);
+    _rigidBody->setLinearVelocity(Vector2{});
     _ticksToLive = 0;
 }
