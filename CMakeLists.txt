@@ -60,14 +60,14 @@ set(SCENE_SOURCES
         src/Scene/Components/RigidBody.cpp
         src/Scene/Components/BoxCollider.cpp
         src/Scene/Components/CircleCollider.cpp
-        src/Scene/Components/SpriteComponent.cpp)
+        src/Scene/Components/SpriteComponent.cpp
+        src/Scene/Particle.cpp)
 
 set(CORE_SOURCES
         src/Core/GameLoop.cpp
         src/Core/SceneManager.cpp
         src/Core/ProjectSettings.cpp
-        src/Core/Time.cpp
-        src/Scene/RenderShape/TextRenderShape.cpp)
+        src/Core/Time.cpp)
 
 # Main Project
 add_library(${PROJECT_NAME}
@@ -93,4 +93,5 @@ add_subdirectory(validation/US00_Rendering)
 add_subdirectory(validation/US04_RenderFPS)
 add_subdirectory(validation/US08_RenderUIObject)
 add_subdirectory(validation/US14_PhysicsService)
+add_subdirectory(validation/US101_Particles)
 add_subdirectory(validation/US00_AllServices)

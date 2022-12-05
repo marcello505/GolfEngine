@@ -8,13 +8,6 @@
 #include "Scene/Components/BoxCollider.h"
 #include "SceneFactory.h"
 
-/*TODO
- * 1. Make getters/setters for actionMap so you dont always need to create new actionmap, but can just use predefined actionmap from engine
- *
- *
- */
-
-
 const std::string mgsThemePath = "res/mgs-theme.mp3";
 
 
