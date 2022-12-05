@@ -6,11 +6,11 @@
 #include "Projectile.h"
 #include "../scripts/ProjectilePoolScript.h"
 
-ProjectilePoolObject::ProjectilePoolObject(Scene* scene, int capacity) {
+ProjectilePoolObject::ProjectilePoolObject(Scene& scene, int capacity) {
     addComponent<ProjectilePoolScript>();
 
     GameObject& parent = *this;
     for(int i = 0; i < capacity; ++i){
-        scene->createNewGameObject<Projectile>(parent);
+        scene.createNewGameObject<Projectile>(parent);
     }
 }

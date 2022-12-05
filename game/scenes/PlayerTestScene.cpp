@@ -24,7 +24,7 @@ void PlayerTestScene::build(Scene& scene) const {
         scene.createNewGameObject<Wall>(root, Vector2{640.0f, 360.0f}, Vector2{12.5, 125.0f});
     }
 
-    auto& projectilePool = scene.createNewGameObject<ProjectilePoolObject>(root, &scene, 20);
+    auto& projectilePool = scene.createNewGameObject<ProjectilePoolObject>(root, std::ref(scene), 20);
 
     auto& player = scene.createNewGameObject<PlayerObject>(root, &projectilePool.getComponent<ProjectilePoolScript>());
     player.setLocalPosition({200.f, 200.f});

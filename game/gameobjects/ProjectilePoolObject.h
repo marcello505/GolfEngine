@@ -10,7 +10,7 @@
 
 class ProjectilePoolObject : public GameObject {
 public:
-    explicit ProjectilePoolObject(Scene* scene, int capacity);
+    explicit ProjectilePoolObject(Scene& scene, int capacity);
 };
 
 
