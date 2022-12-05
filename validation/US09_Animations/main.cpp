@@ -10,7 +10,7 @@ int main(int argc, char* argv[]){
     GameLoop gameLoop{};
     gameLoop.useDefaultServices();
 
-    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<UIScene>("main");
+    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
     GolfEngine::SceneManager::GetSceneManager().loadScene("main");
 
     gameLoop.start();

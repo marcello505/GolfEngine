@@ -5,7 +5,7 @@
 #include "Scene/Components/BoxCollider.h"
 #include "Scene/Components/CircleCollider.h"
 
-class UIScene : public ISceneFactory{
+class SceneFactory : public ISceneFactory{
     void build(Scene &scene) const override{
         auto& groundObject = scene.createNewGameObject<GameObject>();
         groundObject.addComponent<BoxCollider>(Vector2{300.0f, 20.0f});
@@ -42,7 +42,7 @@ int main(int argc, char* argv[]){
     gameLoop.setPhysicsService(physicsService);
     gameLoop.setAudioService(nullptr); // Don't need audio for this test
 
-    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<UIScene>("main");
+    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
     GolfEngine::SceneManager::GetSceneManager().loadScene("main");
 
     gameLoop.start();

@@ -8,9 +8,6 @@
 
 #include <utility>
 #include <Scene/GameObjects/UIObject/Alignment.h>
-#include <iostream>
-#include <SDL_surface.h>
-#include <SDL_ttf.h>
 
 
 Button::Button(int width, int height, Vector2 position, bool interactable, Text *text) {

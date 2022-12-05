@@ -10,7 +10,7 @@
 #include "Scene/Components/BehaviourScript.h"
 #include "MovementScript.h"
 
-void UIScene::build(Scene& scene) const {
+void SceneFactory::build(Scene& scene) const {
 
 
 

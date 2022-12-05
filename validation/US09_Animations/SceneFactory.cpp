@@ -7,7 +7,7 @@
 #include "Scene/Components/Animator.h"
 #include "ZombieScript.h"
 
-void UIScene::build(Scene& scene) const {
+void SceneFactory::build(Scene& scene) const {
     auto& player = scene.createNewGameObject<GameObject>();
     player.addComponent<SpriteComponent>(R"(..\..\..\validation\US09_Animations\res\player.png)");
     player.setWorldTransform(Transform(Vector2(200,200), 0, Vector2(0.5f,0.5f)));

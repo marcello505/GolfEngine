@@ -33,7 +33,7 @@ int main(int argc, char* argv[]){
     ActionMap::getActionMap()->addInputKeyToAction("Up", Key_Up);
     ActionMap::getActionMap()->addInputKeyToAction("Down", Key_Down);
 
-    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<UIScene>("main");
+    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
     GolfEngine::SceneManager::GetSceneManager().loadScene("main");
 
     //gets AudioService services
