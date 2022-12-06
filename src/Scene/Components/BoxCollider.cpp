@@ -52,3 +52,12 @@ RenderShape& BoxCollider::getRenderShape() {
 void BoxCollider::setColor(Color color) {
     _rectRenderShape.setColor(color);
 }
+
+std::unique_ptr<ISnapshot> BoxCollider::saveSnapshot() {
+    //Empty implementation on purpose
+    return {};
+}
+
+void BoxCollider::loadSnapshot(const ISnapshot& rawSnapshot) {
+    //Empty implementation on purpose
+}

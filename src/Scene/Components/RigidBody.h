@@ -29,7 +29,7 @@ struct RigidBodyDef{
 };
 
 
-class RigidBody : public Component, public IPersistable {
+class RigidBody : public Component {
 public:
     explicit RigidBody(const RigidBodyDef& rigidBodyDef) : _rigidBodyDef{rigidBodyDef} {}
     RigidBody() : RigidBody(RigidBodyDef{}) {}

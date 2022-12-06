@@ -36,8 +36,8 @@ void Scene::updateScene() {
         _saveStateCalled = false;
 
         _savedState.clear();
-        for(auto& go : _gameObjects){
-            _savedState.push_back(go->saveSnapshot());
+        for(int i = 0; i < _gameObjects.size(); ++i){
+            _savedState.push_back(_gameObjects[i]->saveSnapshot());
         }
     }
 }

@@ -122,13 +122,9 @@ std::unique_ptr<ISnapshot> GameObject::saveSnapshot() {
     result->active = _active;
     result->recordable = recordable;
 
-    for(auto item = _components.begin(); item != _components.end(); ++item){
-        //TODO implement getting snapshots of its components here
-    }
-
-    //TODO remove the following when getting snapshots of all components works
-    if(hasComponent<RigidBody>()){
-        result->componentSnapshots.push_back(getComponent<RigidBody>().saveSnapshot());
+    //Save snapshots of components
+    for(int i = 0; i < _components.size(); ++i){
+        result->componentSnapshots.push_back(_components[i]->saveSnapshot());
     }
 
     return result;
@@ -141,9 +137,9 @@ void GameObject::loadSnapshot(const ISnapshot& rawSnapshot) {
     setActive(snapshot.active);
     recordable = snapshot.recordable;
 
-    //TODO remove the following when loading snapshots for all components works
-    if(hasComponent<RigidBody>()){
-        getComponent<RigidBody>().loadSnapshot(*snapshot.componentSnapshots.front());
+    //Load snapshots of components
+    for(int i = 0; i < snapshot.componentSnapshots.size(); ++i){
+        _components[i]->loadSnapshot(*snapshot.componentSnapshots[i]);
     }
 }
 

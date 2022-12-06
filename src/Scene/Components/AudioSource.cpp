@@ -64,5 +64,17 @@ namespace GolfEngine::Scene::Components{
         _parent = gameObject;
     }
 
+    std::unique_ptr<ISnapshot> AudioSource::saveSnapshot() {
+        auto result = std::make_unique<Snapshot>();
+        result->volume = volume;
+        return result;
+    }
+
+    void AudioSource::loadSnapshot(const ISnapshot& rawSnapshot) {
+        auto& snapshot = (Snapshot&)rawSnapshot;
+
+        volume = snapshot.volume;
+    }
+
 }
 

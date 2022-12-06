@@ -13,8 +13,7 @@
 class GameObject;
 
 //TODO uncomment the following line, after all the components have IPersistable implementations
-//class Component : public IPersistable{
-class Component{
+class Component : public IPersistable{
 protected:
     bool _active;
     std::optional<std::reference_wrapper<GameObject>> _gameObject;
