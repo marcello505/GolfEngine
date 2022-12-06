@@ -24,6 +24,12 @@ int main(){
     actionMap->addAction("playerShoot");
     actionMap->addInputKeyToAction("playerShoot", InputKey::Mouse_Left);
 
+    //Set up state saving controls
+    actionMap->addAction("saveState");
+    actionMap->addInputKeyToAction("saveState", InputKey::Key_PageUp);
+    actionMap->addAction("loadState");
+    actionMap->addInputKeyToAction("loadState", InputKey::Key_PageDown);
+
     //Scene initialization
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
     sceneManager.addScene<PlayerTestScene>("playerTest");

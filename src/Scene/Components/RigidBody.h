@@ -5,13 +5,14 @@
 #ifndef GOLFENGINE_RIGIDBODY_H
 #define GOLFENGINE_RIGIDBODY_H
 
+#include <optional>
+#include <vector>
 
 #include "../Vector2.h"
-#include <vector>
 #include "RigidBodyTypes.h"
 #include "Collider.h"
 #include "Component.h"
-#include <optional>
+#include "../IPersistable.h"
 
 /// This contains all the initial values of the RigidBody.
 /// If you want to adjust any of these properties during runtime,
@@ -28,7 +29,7 @@ struct RigidBodyDef{
 };
 
 
-class RigidBody : public Component {
+class RigidBody : public Component, public IPersistable {
 public:
     explicit RigidBody(const RigidBodyDef& rigidBodyDef) : _rigidBodyDef{rigidBodyDef} {}
     RigidBody() : RigidBody(RigidBodyDef{}) {}
@@ -40,6 +41,9 @@ public:
     bool getActive() override;
     void setActive(bool active) override;
     void setParentGameObject(GameObject& gameObject) override;
+    std::unique_ptr<ISnapshot> saveSnapshot() override;
+    void loadSnapshot(const ISnapshot& rawSnapshot) override;
+
 
     //Getters
     const RigidBodyDef& getRigidBodyDef() const;
@@ -57,9 +61,16 @@ public:
     void setFixedRotation(bool fixedRotation);
     void setGravityScale(float gravityScale);
     void setLinearVelocity(const Vector2& velocity);
+
 private:
     bool _active {true};
     RigidBodyDef _rigidBodyDef;
+
+    //Snapshot
+    struct Snapshot : public ISnapshot{
+        Vector2 linearVelocity {};
+        bool active {};
+    };
 };
 
 

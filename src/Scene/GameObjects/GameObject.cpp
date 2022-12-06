@@ -3,6 +3,7 @@
 //
 
 #include "GameObject.h"
+#include "Scene/Components/RigidBody.h"
 
 GameObject::GameObject(const char* name, const char* tag) :_active{true}, layer{0}, recordable{false},
     name{name? name : ""}, tag{tag? tag : "default"}{
@@ -114,3 +115,36 @@ void GameObject::setWorldTransform(const Transform& rTransform) {
     }
     setLocalTransform(localNew);
 }
+
+std::unique_ptr<ISnapshot> GameObject::saveSnapshot() {
+    auto result = std::make_unique<Snapshot>();
+    result->localTransform = _localTransform;
+    result->active = _active;
+    result->recordable = recordable;
+
+    for(auto item = _components.begin(); item != _components.end(); ++item){
+        //TODO implement getting snapshots of its components here
+    }
+
+    //TODO remove the following when getting snapshots of all components works
+    if(hasComponent<RigidBody>()){
+        result->componentSnapshots.push_back(getComponent<RigidBody>().saveSnapshot());
+    }
+
+    return result;
+}
+
+void GameObject::loadSnapshot(const ISnapshot& rawSnapshot) {
+    auto& snapshot = (Snapshot&)rawSnapshot;
+
+    _localTransform = snapshot.localTransform;
+    setActive(snapshot.active);
+    recordable = snapshot.recordable;
+
+    //TODO remove the following when loading snapshots for all components works
+    if(hasComponent<RigidBody>()){
+        getComponent<RigidBody>().loadSnapshot(*snapshot.componentSnapshots.front());
+    }
+}
+
+

@@ -6,13 +6,20 @@
 #define GOLFENGINE_SCENE_H
 
 #include <string>
-#include "GameObjects/GameObject.h"
 #include <optional>
+#include <vector>
+
+#include "GameObjects/GameObject.h"
 
 class Scene {
 protected:
     std::vector<std::unique_ptr<GameObject>> _gameObjects;
     std::unique_ptr<std::reference_wrapper<GameObject>> _rootGameObject;
+
+    //State saving methods
+    std::vector<std::unique_ptr<ISnapshot>> _savedState {};
+    bool _saveStateCalled {false};
+    bool _loadStateCalled {false};
 public:
     Scene();
 
@@ -21,6 +28,11 @@ public:
     virtual void startRecording(const std::string& actionToLock);
     virtual void stopRecording();
     virtual void playRecording();
+
+    /// A deferred call to save the current state, the actual saving of the state is done in `updateScene()` after the update
+    virtual void saveState();
+    /// A deferred call to load the current state, the actual loading of the state is done in `updateScene()` before the update
+    virtual void loadState();
 
     virtual void startScene();
     virtual void updateScene();

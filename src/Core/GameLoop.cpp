@@ -92,7 +92,8 @@ void GameLoop::setAudioService(AudioService *audioService) {
         Audio::getService()->free();
     }
 
-    audioService->init();
+    if(audioService)
+        audioService->init();
     Audio::setService(audioService);
 }
 

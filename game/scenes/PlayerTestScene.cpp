@@ -8,9 +8,11 @@
 #include "../gameobjects/Wall.h"
 #include "../gameobjects/Projectile.h"
 #include "../gameobjects/ProjectilePoolObject.h"
+#include "../scripts/SaveStateScript.h"
 
 void PlayerTestScene::build(Scene& scene) const {
     auto& root = scene.createNewGameObject<GameObject>();
+    root.addComponent<SaveStateScript>();
 
     //Walls
     {
