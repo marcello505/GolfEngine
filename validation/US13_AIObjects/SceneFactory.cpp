@@ -11,6 +11,9 @@
 #include <Scene/GameObjects/UIObject/Text.h>
 #include <map>
 
+static const int _nodeDistance = 20;
+
+
 void SceneFactory::build(Scene& scene) const {
 
     //PLayer Sprite
@@ -20,10 +23,10 @@ void SceneFactory::build(Scene& scene) const {
     std::vector<Collider*> colliders;
 
     auto& go = scene.createNewGameObject<GameObject>();
-    go.setWorldTransform(Transform(Vector2(200,200),0,Vector2(1,1)));
+    go.setWorldTransform(Transform(Vector2(50,10 ),0,Vector2(1,1)));
 
     go.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::StaticBody});
-    go.addComponent<BoxCollider>(Vector2(50,100));
+    go.addComponent<BoxCollider>(Vector2(10,10));
     colliders.emplace_back(&go.getComponent<BoxCollider>());
 
     std::map<int, Text> nodes;
@@ -33,8 +36,8 @@ void SceneFactory::build(Scene& scene) const {
 
     int height = 460;
     int width = 620;
-    int widthNodeDistance = 30;
-    int heightNodeDistance = 30;
+    int widthNodeDistance = _nodeDistance;
+    int heightNodeDistance = 0;
     int nodeCounter = 0;
 
     while (heightNodeDistance < height){
@@ -50,18 +53,18 @@ void SceneFactory::build(Scene& scene) const {
                 nodeIds.push_back(nodeCounter);
             }
 
-            widthNodeDistance += 30;
+            widthNodeDistance += _nodeDistance;
             nodeCounter++;
         }
-        widthNodeDistance = 30;
-        heightNodeDistance += 30;
+        widthNodeDistance = _nodeDistance;
+        heightNodeDistance += _nodeDistance;
     }
 
     for ( const auto& outerNode : nodes){
         for ( const auto& innerNode : nodes){
             if(outerNode.first != innerNode.first) {
-                if (std::abs(outerNode.second._position.x - innerNode.second._position.x) <= 30 &&
-                    std::abs(outerNode.second._position.y - innerNode.second._position.y) <= 30) {
+                if (std::abs(outerNode.second._position.x - innerNode.second._position.x) <= _nodeDistance &&
+                    std::abs(outerNode.second._position.y - innerNode.second._position.y) <= _nodeDistance) {
                     edges.emplace_back(outerNode.first, innerNode.first);
                 }
             }
@@ -73,13 +76,20 @@ void SceneFactory::build(Scene& scene) const {
 
 
 bool SceneFactory::isValidSpot(Vector2 pos, std::vector<Collider *> colliders) const {
+    auto* rs = GolfEngine::Services::Render::getService();
+
     for(auto& collider : colliders){
         if(collider->getRenderShape().getType() == RenderShapeType::RectShape){
             auto* rect = (RectRenderShape *) &collider->getRenderShape();
-            if(pos.x >= rect->rect().position.x - (rect->rect().size.x / 2) &&
-            pos.x <= rect->rect().size.x  + (rect->rect().position.x / 2)
-               && pos.y >= rect->rect().position.y - (rect->rect().size.y / 2) &&
-               pos.y <= rect->rect().size.y + (rect->rect().position.y / 2) ){
+            auto LX = rect->rect().position.x - rect->rect().size.x /2;
+            auto RX = rect->rect().position.x + rect->rect().size.x/2;
+            auto LY = rect->rect().position.y - rect->rect().size.y/2;
+            auto RY =  rect->rect().position.y + rect->rect().size.y /2;
+            if( pos.x >=  LX &&
+                pos.x <=  RX &&
+                pos.y >= LY &&
+                pos.y <= RY)
+            {
                 return false;
             }
         }

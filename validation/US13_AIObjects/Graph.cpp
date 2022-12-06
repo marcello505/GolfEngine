@@ -4,7 +4,7 @@
 
 #include "Graph.h"
 
-Graph::Graph(std::vector<int> nodes, std::vector<std::pair<int,int>> edges) {
+Graph::Graph(const std::vector<int>& nodes, std::vector<std::pair<int,int>> edges) {
 
     for (auto node : nodes){
         AddNode(node);
