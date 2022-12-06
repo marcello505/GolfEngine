@@ -4,7 +4,7 @@
 
 #include "Graph.h"
 
-Graph::Graph(std::vector<int> nodes, std::map<int, int> edges) {
+Graph::Graph(std::vector<int> nodes, std::vector<std::pair<int,int>> edges) {
 
     for (auto node : nodes){
         AddNode(node);
@@ -22,7 +22,6 @@ void Graph::AddEdge(std::pair<int, int> edge){
     if (nodeList.count(edge.first) > 0 && nodeList.count(edge.second) > 0)
     {
         nodeList[edge.first].push_back(edge.second);
-        nodeList[edge.second].push_back(edge.first);
     }
 }
 

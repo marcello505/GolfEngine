@@ -5,10 +5,10 @@ set(CMAKE_CXX_STANDARD 17)
 
 
 # Sources
-set(SRC_FILES)
+set(SRC_FILES main.cpp Graph.cpp SceneFactory.cpp)
 
 
 # Main Project
-add_executable(RenderAIObject_PoC main.cpp)
+add_executable(RenderAIObject_PoC ${SRC_FILES})
 target_link_libraries(RenderAIObject_PoC GolfEngine)
 target_include_directories(RenderAIObject_PoC PUBLIC ../../src)

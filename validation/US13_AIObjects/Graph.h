@@ -10,7 +10,7 @@
 
 class Graph {
 public:
-    Graph(std::vector<int> vertices, std::map<int, int> edges);
+    Graph(std::vector<int> vertices, std::vector<std::pair<int,int>> edges);
     std::map<int, std::vector<int>> nodeList;
 private:
     void AddNode(int node);
