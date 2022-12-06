@@ -9,7 +9,7 @@
 class SceneFactory : public ISceneFactory {
     void build(Scene& scene) const override{
         auto& go = scene.createNewGameObject<GameObject>();
-        go.addComponent<TiledComponent>();
+        go.addComponent<TiledComponent>(R"(..\..\..\validation\US00_TileMap\res\map.tmx)", R"(..\..\..\validation\US00_TileMap\res\Hotline-Miami-TileSet.tsx)");
     }
 };
 

@@ -3,8 +3,17 @@
 //
 
 #include "TiledComponent.h"
+#include "Services/Singletons/TileMapParserSingleton.h"
+#include "Services/Singletons/RenderSingleton.h"
 
-void TiledComponent::onStart() {}
+TiledComponent::TiledComponent(const std::string& mapPath, const std::string& tileSetPath)
+: _renderShape{GolfEngine::Services::TileMapParser::getService().loadMap(mapPath, tileSetPath)} {
+    auto image = _renderShape.imagePath();
+}
+
+void TiledComponent::onStart() {
+    GolfEngine::Services::Render::getService()->addDrawable(*this);
+}
 
 void TiledComponent::onUpdate() {}
 
@@ -20,4 +29,11 @@ void TiledComponent::setActive(bool active) {
 
 void TiledComponent::setParentGameObject(GameObject& gameObject) {
     _gameObject = gameObject;
+}
+
+RenderShape& TiledComponent::getRenderShape() {
+    if(_gameObject){
+        _renderShape.applyTransform(_gameObject->get().getWorldTransform());
+    }
+    return _renderShape;
 }
