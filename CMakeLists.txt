@@ -69,12 +69,16 @@ set(CORE_SOURCES
         src/Core/ProjectSettings.cpp
         src/Core/Time.cpp)
 
+set(UTILITIES_SOURCES
+        src/Utilities/Math.cpp)
+
 # Main Project
 add_library(${PROJECT_NAME}
         ${SCENE_SOURCES}
         ${SERVICES_SOURCES}
         ${INPUT_SOURCES}
-        ${CORE_SOURCES})
+        ${CORE_SOURCES}
+        ${UTILITIES_SOURCES})
 
 target_include_directories(${PROJECT_NAME} PUBLIC ./src)
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
@@ -85,6 +89,7 @@ target_link_libraries(${PROJECT_NAME} box2d)
 
 # Sub Projects
 add_subdirectory(tests)
+add_subdirectory(game)
 
 add_subdirectory(validation/US09_Animations)
 add_subdirectory(validation/US03_InputService)

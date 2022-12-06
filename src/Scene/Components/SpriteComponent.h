@@ -39,16 +39,19 @@ public:
     [[nodiscard]] std::string path() const;
     [[nodiscard]] Rect2 imageSource() const;
     [[nodiscard]] Color color() const;
+    [[nodiscard]] float getRotation() const;
 
     // Setters
     void setPath(const std::string& path);
     void setImageSource(Rect2 imageSource);
     void setColor(Color color);
+    void setRotation(float degrees);
 
 private:
     SpriteRenderShape _renderShape;
     int _sortingLayer;
     int _orderInLayer;
+    float _rotation {};
 };
 
 
