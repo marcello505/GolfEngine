@@ -29,17 +29,17 @@ public:
     /// \tparam GO Type of GameObject to be created
     /// \param parent The parent of the GameObject
     /// \return A reference to the newly created GameObject
-    template<typename GO>
-    GO& createNewGameObject(GameObject& parent){
-        _gameObjects.emplace_back(std::make_unique<GO>());
+    template<typename GO, typename ... Args>
+    GO& createNewGameObject(GameObject& parent, Args ... args){
+        _gameObjects.emplace_back(std::make_unique<GO>(args...));
         GO& newGO = reinterpret_cast<GO&>(*_gameObjects.back());
         newGO.setParent(parent);
         parent.addChild(newGO);
         return newGO;
     }
-    template<typename GO>
-    GO& createNewGameObject(){
-        return createNewGameObject<GO>(_rootGameObject->get());
+    template<typename GO, typename ... Args>
+    GO& createNewGameObject(Args ... args){
+        return createNewGameObject<GO>(_rootGameObject->get(), std::forward<Args>(args)...);
     }
 };
 

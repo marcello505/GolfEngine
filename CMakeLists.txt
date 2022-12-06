@@ -61,21 +61,25 @@ set(SCENE_SOURCES
         src/Scene/Components/RigidBody.cpp
         src/Scene/Components/BoxCollider.cpp
         src/Scene/Components/CircleCollider.cpp
-        src/Scene/Components/SpriteComponent.cpp)
+        src/Scene/Components/SpriteComponent.cpp
+        src/Scene/Particle.cpp)
 
 set(CORE_SOURCES
         src/Core/GameLoop.cpp
         src/Core/SceneManager.cpp
         src/Core/ProjectSettings.cpp
-        src/Core/Time.cpp
-        src/Scene/RenderShape/TextRenderShape.cpp)
+        src/Core/Time.cpp)
+
+set(UTILITIES_SOURCES
+        src/Utilities/Math.cpp)
 
 # Main Project
 add_library(${PROJECT_NAME}
         ${SCENE_SOURCES}
         ${SERVICES_SOURCES}
         ${INPUT_SOURCES}
-        ${CORE_SOURCES})
+        ${CORE_SOURCES}
+        ${UTILITIES_SOURCES})
 
 target_include_directories(${PROJECT_NAME} PUBLIC ./src)
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES})
@@ -86,6 +90,7 @@ target_link_libraries(${PROJECT_NAME} box2d)
 
 # Sub Projects
 add_subdirectory(tests)
+add_subdirectory(game)
 
 add_subdirectory(validation/US09_Animations)
 add_subdirectory(validation/US03_InputService)
@@ -94,5 +99,6 @@ add_subdirectory(validation/US00_Rendering)
 add_subdirectory(validation/US04_RenderFPS)
 add_subdirectory(validation/US08_RenderUIObject)
 add_subdirectory(validation/US14_PhysicsService)
+add_subdirectory(validation/US101_Particles)
 add_subdirectory(validation/US00_AllServices)
 add_subdirectory(validation/US14_CollisionLogic)

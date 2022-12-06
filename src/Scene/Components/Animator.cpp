@@ -2,6 +2,8 @@
 // Created by conner on 02/11/2022.
 //
 
+#include <cmath>
+
 #include "Animator.h"
 
 Animator::Animator(std::string spriteSheetPath, int spriteSheetRows, int spriteSheetCols, Vector2 spriteSheetCellSize)
@@ -32,8 +34,8 @@ void Animator::onUpdate() {
             _currentCell++;
             if(_currentCell > _currentAnimation->get().endCell)
                 finishAnimation();
-            _spriteComponent->get().setImageSource(Rect2(Vector2((_currentCell % _cols) * _cellSize.x,
-                                                                 ((int)(_currentCell / _rows)) * _cellSize.y),
+            _spriteComponent->get().setImageSource(Rect2(Vector2{(_currentCell % _cols) * _cellSize.x,
+                                                                 (int)floorf((float)_currentCell / (float)_cols) * _cellSize.y},
                                                                     _cellSize));
         }
     }
