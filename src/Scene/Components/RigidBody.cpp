@@ -111,19 +111,35 @@ void RigidBody::setLinearVelocity(const Vector2& velocity) {
     }
 }
 
+void RigidBody::setAngularVelocity(float omega) {
+    if(GolfEngine::Services::Physics::hasService()){
+        GolfEngine::Services::Physics::getService()->setAngularVelocity(this, omega);
+    }
+}
+
+float RigidBody::getAngularVelocity() {
+    if(GolfEngine::Services::Physics::hasService()){
+        return GolfEngine::Services::Physics::getService()->getAngularVelocity(this);
+    }
+}
+
 std::unique_ptr<ISnapshot> RigidBody::saveSnapshot() {
     auto result = std::make_unique<Snapshot>();
-    result->linearVelocity = getLinearVelocity();
     result->active = _active;
+    result->angularVelocity = getAngularVelocity();
+    result->linearVelocity = getLinearVelocity();
     return result;
 }
 
 void RigidBody::loadSnapshot(const ISnapshot& rawSnapshot) {
     auto& snapshot = (Snapshot&)rawSnapshot;
 
-    setActive(snapshot.active);
-    setLinearVelocity(snapshot.linearVelocity);
     //At this point, the parent game object should have its transform set
     if(_gameObject) setTransform(_gameObject->get().getWorldTransform());
+
+    setActive(snapshot.active);
+    setAngularVelocity(snapshot.angularVelocity);
+    setLinearVelocity(snapshot.linearVelocity);
 }
+
 

@@ -35,6 +35,7 @@ namespace GolfEngine::Services::Physics{
 
         // RigidBody specific methods - Getters
         Vector2 getLinearVelocity(RigidBody* pBody) override;
+        float getAngularVelocity(RigidBody* pBody) override;
 
         // RigidBody specific methods - Setters
         void applyForceToCenter(RigidBody* pRigidBody, const Vector2& force) override;
@@ -45,6 +46,7 @@ namespace GolfEngine::Services::Physics{
         void setFixedRotation(RigidBody* pRigidBody, bool fixedRotation) override;
         void setGravityScale(RigidBody* pRigidBody, float gravityScale) override;
         void setLinearVelocity(RigidBody* pRigidBody, const Vector2& velocity) override;
+        void setAngularVelocity(RigidBody* pRigidBody, float omega) override;
 
         // Methods for testing
         int getBodyCount() const;

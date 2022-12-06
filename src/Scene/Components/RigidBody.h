@@ -52,6 +52,7 @@ public:
 
     //Pass Through methods - Getters
     Vector2 getLinearVelocity();
+    float getAngularVelocity();
 
     //Pass Through methods - Setters
     void applyForceToCenter(const Vector2& force);
@@ -61,6 +62,7 @@ public:
     void setFixedRotation(bool fixedRotation);
     void setGravityScale(float gravityScale);
     void setLinearVelocity(const Vector2& velocity);
+    void setAngularVelocity(float omega);
 
 private:
     bool _active {true};
@@ -69,6 +71,7 @@ private:
     //Snapshot
     struct Snapshot : public ISnapshot{
         Vector2 linearVelocity {};
+        float angularVelocity {};
         bool active {};
     };
 };

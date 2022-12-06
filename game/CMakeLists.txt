@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(SCRIPT_SOURCES scripts/PlayerMovementScript.cpp scripts/ProjectilePoolScript.cpp scripts/ProjectileScript.cpp scripts/SaveStateScript.cpp scripts/SaveStateScript.h)
 set(GAMEOBJECTS_SOURCES
         gameobjects/PlayerObject.cpp
-        gameobjects/Wall.cpp gameobjects/Projectile.cpp gameobjects/Projectile.h gameobjects/ProjectilePoolObject.cpp gameobjects/ProjectilePoolObject.h)
+        gameobjects/Wall.cpp gameobjects/Projectile.cpp gameobjects/Projectile.h gameobjects/ProjectilePoolObject.cpp gameobjects/ProjectilePoolObject.h gameobjects/TestBlock.cpp gameobjects/TestBlock.h)
 set(SCENE_SOURCES scenes/PlayerTestScene.cpp)
 
 # Resource files

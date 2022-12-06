@@ -265,5 +265,21 @@ namespace GolfEngine::Services::Physics{
         }
 
     }
+
+    float Box2DPhysicsService::getAngularVelocity(RigidBody* pBody) {
+        auto body = getB2Body(pBody);
+        if(body){
+            return body.value()->GetAngularVelocity();
+        }
+    }
+
+    void Box2DPhysicsService::setAngularVelocity(RigidBody* pRigidBody, float omega) {
+        auto body = getB2Body(pRigidBody);
+        if(body){
+            body.value()->SetAngularVelocity(omega);
+        }
+
+    }
+
 }
 
