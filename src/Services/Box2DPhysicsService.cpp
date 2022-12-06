@@ -6,9 +6,25 @@
 #include "Box2DPhysicsService.h"
 #include "Scene/Components/BoxCollider.h"
 #include "Scene/Components/CircleCollider.h"
+#include "Physics/Box2DCollisionListener.h"
 
 
 namespace GolfEngine::Services::Physics{
+    // Degrees to Radians
+    float deg2Rad(float deg){
+        return deg * M_PI / 180.0f;
+    }
+
+    // Radians to Degrees
+    float rad2Deg(float rad){
+        return 180.0f * rad / M_PI;
+    }
+    
+    Box2DPhysicsService::Box2DPhysicsService(int velIterations, int posIterations)
+            : _velocityIterations{velIterations}, _positionIterations{posIterations} {
+        _world.SetContactListener(new Box2DCollisionListener{*this});
+    }
+
     void Box2DPhysicsService::addRigidBody(RigidBody* pRigidBody) {
         // * Error Handling *
         // Check for nullptr
@@ -29,7 +45,7 @@ namespace GolfEngine::Services::Physics{
                     bodyDef.type = b2_dynamicBody;
                     break;
                 case RigidBodyTypes::AreaBody:
-                    //TODO figure out how to handle AreaBodies
+                    bodyDef.type = b2_kinematicBody;
                     break;
                 case RigidBodyTypes::KinematicBody:
                     bodyDef.type = b2_kinematicBody;
@@ -60,6 +76,9 @@ namespace GolfEngine::Services::Physics{
             fixtureDef.friction = rigidDef.friction;
             fixtureDef.restitution = rigidDef.restitution;
             fixtureDef.density = rigidDef.density;
+
+            if(rigidDef.bodyType == RigidBodyTypes::AreaBody)
+                fixtureDef.isSensor = true;
 
             b2PolygonShape box {};
             b2CircleShape circle {};
@@ -211,6 +230,20 @@ namespace GolfEngine::Services::Physics{
             body.value()->SetGravityScale(gravityScale);
         }
     }
+
+    std::optional<std::reference_wrapper<RigidBody>> Box2DPhysicsService::getRigidBodyWithB2Body(b2Body& body) {
+        auto result = std::find_if(_rigidBodies.begin(), _rigidBodies.end(), [&](const std::pair<RigidBody*, b2Body*>& pair){
+           return pair.second == &body;
+        });
+
+        // Return if a rigid body has been found
+        if(result != _rigidBodies.end()){
+            return *result->first;
+        }
+
+        return std::nullopt;
+    }
+
 
     Vector2 Box2DPhysicsService::getLinearVelocity(RigidBody* pBody) {
         auto body = getB2Body(pBody);
