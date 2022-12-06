@@ -271,6 +271,9 @@ namespace GolfEngine::Services::Physics{
         if(body){
             return body.value()->GetAngularVelocity();
         }
+        else{
+            return 0;
+        }
     }
 
     void Box2DPhysicsService::setAngularVelocity(RigidBody* pRigidBody, float omega) {
@@ -278,7 +281,6 @@ namespace GolfEngine::Services::Physics{
         if(body){
             body.value()->SetAngularVelocity(omega);
         }
-
     }
 
 }
