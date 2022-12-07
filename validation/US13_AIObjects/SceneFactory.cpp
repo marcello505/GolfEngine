@@ -26,8 +26,17 @@ void SceneFactory::build(Scene& scene) const {
     go.setWorldTransform(Transform(Vector2(250,210 ),0,Vector2(1,1)));
 
     go.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::StaticBody});
+
     go.addComponent<BoxCollider>(Vector2(100,100));
+
+    auto& go2 = scene.createNewGameObject<GameObject>();
+    go2.setWorldTransform(Transform(Vector2(500,350 ),0,Vector2(1,1)));
+
+    go2.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::StaticBody});
+    go2.addComponent<BoxCollider>(Vector2(50,100));
+
     colliders.emplace_back(&go.getComponent<BoxCollider>());
+    colliders.emplace_back(&go2.getComponent<BoxCollider>());
 
     std::map<int, Text> nodes;
     std::vector<int> nodeIds;
