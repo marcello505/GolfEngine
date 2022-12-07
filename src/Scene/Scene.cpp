@@ -4,6 +4,7 @@
 
 #include "Scene.h"
 #include "GameObjects/GameObject.h"
+#include "Input/ActionMap.h"
 
 Scene::Scene() {
     _gameObjects.push_back(std::make_unique<GameObject>());
@@ -26,6 +27,7 @@ void Scene::updateScene() {
         }
     }
 
+
     //Update scene
     for(auto& go : _gameObjects)
         if(go->getActive())
@@ -35,16 +37,28 @@ void Scene::updateScene() {
     if(_saveStateCalled){
         _saveStateCalled = false;
 
-        _savedState.clear();
-        for(int i = 0; i < _gameObjects.size(); ++i){
-            _savedState.push_back(_gameObjects[i]->saveSnapshot());
-        }
+        saveCurrentState(std::ref(_savedState));
+    }
+
+    //Save Recording starting state
+    if(_saveReplayState){
+        _saveReplayState = false;
+
+        saveCurrentState(std::ref(_replay.value().startingState));
     }
 }
 
-void Scene::startRecording(const std::string& actionToLock){}
-void Scene::stopRecording(){}
-void Scene::playRecording(){}
+void Scene::startRecordingReplay(const std::vector<std::string>& actionsToLock){
+    _isRecordingReplay = true;
+    _saveReplayState = true;
+    _replay = Replay{};
+    _replay.value().lockedActions = actionsToLock;
+}
+
+void Scene::stopRecordingReplay(){
+    _isRecordingReplay = false;
+}
+void Scene::playReplay(){}
 
 GameObject& Scene::getRootGameObject() const{
     return _rootGameObject->get();
@@ -56,5 +70,27 @@ void Scene::saveState() {
 
 void Scene::loadState() {
     _loadStateCalled = true;
+}
+
+void Scene::saveCurrentState(std::vector<std::unique_ptr<ISnapshot>>& list) {
+    list.clear();
+    for(int i = 0; i < _gameObjects.size(); ++i){
+        list.push_back(_gameObjects[i]->saveSnapshot());
+    }
+}
+
+void Scene::updateReplay() {
+    //Record inputs for recording
+    if(_isRecordingReplay){
+        auto& actionMap = *ActionMap::getActionMap();
+        std::vector<bool> actionsSnapshots {};
+
+        for(auto& actionToLock : _replay.value().lockedActions){
+            actionsSnapshots.emplace_back(actionMap.isPressed(actionToLock));
+        }
+
+        _replay.value().inputs.push_back(actionsSnapshots);
+    }
+
 }
 

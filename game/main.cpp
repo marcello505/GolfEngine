@@ -30,6 +30,14 @@ int main(){
     actionMap->addAction("loadState");
     actionMap->addInputKeyToAction("loadState", InputKey::Key_PageDown);
 
+    //Set up recording controls
+    actionMap->addAction("startRecordingReplay");
+    actionMap->addInputKeyToAction("startRecordingReplay", InputKey::Key_I);
+    actionMap->addAction("stopRecordingReplay");
+    actionMap->addInputKeyToAction("stopRecordingReplay", InputKey::Key_O);
+    actionMap->addAction("playReplay");
+    actionMap->addInputKeyToAction("playReplay", InputKey::Key_P);
+
     //Scene initialization
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
     sceneManager.addScene<PlayerTestScene>("playerTest");

@@ -9,25 +9,33 @@
 #include <optional>
 #include <vector>
 
+#include "Replay.h"
 #include "GameObjects/GameObject.h"
 
 class Scene {
+private:
+    void saveCurrentState(std::vector<std::unique_ptr<ISnapshot>>& list);
 protected:
     std::vector<std::unique_ptr<GameObject>> _gameObjects;
     std::unique_ptr<std::reference_wrapper<GameObject>> _rootGameObject;
 
-    //State saving methods
+    //State saving fields
     std::vector<std::unique_ptr<ISnapshot>> _savedState {};
     bool _saveStateCalled {false};
     bool _loadStateCalled {false};
+
+    //Recording fields
+    bool _isRecordingReplay {false};
+    bool _saveReplayState {false};
+    std::optional<Replay> _replay {};
 public:
     Scene();
 
     GameObject& getRootGameObject() const;
 
-    virtual void startRecording(const std::string& actionToLock);
-    virtual void stopRecording();
-    virtual void playRecording();
+    virtual void startRecordingReplay(const std::vector<std::string>& actionsToLock);
+    virtual void stopRecordingReplay();
+    virtual void playReplay();
 
     /// A deferred call to save the current state, the actual saving of the state is done in `updateScene()` after the update
     virtual void saveState();
@@ -35,6 +43,10 @@ public:
     virtual void loadState();
 
     virtual void startScene();
+
+    /// Executes all the steps needed to handle recordings, wether it is playing a recording or making one.
+    /// Should be executed before `updateScene()`
+    void updateReplay();
     virtual void updateScene();
 
     /// Creates a new GameObject
