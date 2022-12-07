@@ -8,6 +8,10 @@
 #include "Scene/Components/BoxCollider.h"
 #include "Scene/RenderShape/CircleRenderShape.h"
 #include "Services/SDLRenderService.h"
+#include "Services/Abstracts/PathfindingService.h"
+#include "Services/Singletons/PathfindingSingleton.h"
+#include "Scene/Node.h"
+#include "Scene/Graph.h"
 #include <Services/Singletons/RenderSingleton.h>
 #include <Scene/GameObjects/UIObject/Text.h>
 #include <map>
@@ -38,7 +42,10 @@ void SceneFactory::build(Scene& scene) const {
     colliders.emplace_back(&go.getComponent<BoxCollider>());
     colliders.emplace_back(&go2.getComponent<BoxCollider>());
 
-    std::map<int, Text> nodes;
+    std::map<int, Text*> drawables;
+
+    std::vector<Node> nodeList;
+
     std::vector<int> nodeIds;
     std::vector<std::pair<int,int>> edges;
 
@@ -52,14 +59,19 @@ void SceneFactory::build(Scene& scene) const {
     while (heightNodeDistance < height){
         while(widthNodeDistance < width){
             if(isValidSpot(Vector2(widthNodeDistance, heightNodeDistance),colliders)){
-                auto node = new Text(Vector2(widthNodeDistance,heightNodeDistance), 0, "o",
+
+
+                auto* text = new Text(Vector2(widthNodeDistance,heightNodeDistance), 0, "o",
                                      15, Color(),
                                      R"(../../../validation/US08_RenderUIObject/resources/Rubik-VariableFont_wght.ttf)",
                                      Alignment::Center );
-                rs->addDrawable(*node);
-
-                nodes.insert(std::make_pair(nodeCounter, *node));
+                rs->addDrawable(*text);
+                drawables.insert(std::make_pair(nodeCounter, text));
                 nodeIds.push_back(nodeCounter);
+
+                auto node = Node(nodeCounter,Vector2(widthNodeDistance, heightNodeDistance));
+                nodeList.emplace_back(node);
+
             }
 
             widthNodeDistance += _nodeDistance;
@@ -69,18 +81,28 @@ void SceneFactory::build(Scene& scene) const {
         heightNodeDistance += _nodeDistance;
     }
 
-    for ( const auto& outerNode : nodes){
-        for ( const auto& innerNode : nodes){
-            if(outerNode.first != innerNode.first) {
-                if (std::abs(outerNode.second._position.x - innerNode.second._position.x) <= _nodeDistance &&
-                    std::abs(outerNode.second._position.y - innerNode.second._position.y) <= _nodeDistance) {
-                    edges.emplace_back(outerNode.first, innerNode.first);
+    for ( auto& outerNode : nodeList){
+        for ( auto& innerNode : nodeList){
+            if(outerNode.id != innerNode.id) {
+                if (std::abs(outerNode.position.x - innerNode.position.x) <= _nodeDistance &&
+                    std::abs(outerNode.position.y - innerNode.position.y) <= _nodeDistance) {
+                    outerNode.edges.emplace_back(innerNode.id);
+//                    edges.emplace_back(innerNode);
                 }
             }
         }
     }
 
-    auto graph = new Graph(nodeIds, edges);
+    auto graph = new Graph(nodeList);
+
+    PathfindingService* ps = GolfEngine::Services::Pathfinding::getService();
+   auto path =  ps->findPath(graph->nodes[0],graph->nodes[18], *graph);
+
+    for (auto node : path) {
+        drawables.at(node.id)->_renderShape.setText("-");
+    }
+
+
 }
 
 

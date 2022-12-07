@@ -88,7 +88,6 @@ void GameLoop::useDefaultServices() {
     setRenderService(new Render::SDLRenderService {});
     setPhysicsService(new Physics::Box2DPhysicsService {});
     setPathfindingService(new Pathfinding::AStarPathfindingService {});
-    Pathfinding::getService()->findPath();
 
 }
 
