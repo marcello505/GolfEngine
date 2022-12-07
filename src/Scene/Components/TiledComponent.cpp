@@ -6,18 +6,23 @@
 #include "Services/Singletons/TileMapParserSingleton.h"
 #include "Services/Singletons/RenderSingleton.h"
 
-TiledComponent::TiledComponent(const std::string& mapPath, const std::string& tileSetPath)
+TiledComponent::TiledComponent(const std::string& mapPath, const std::string& tileSetPath, Vector2 pixelScale)
 : _renderShape{GolfEngine::Services::TileMapParser::getService().loadMap(mapPath, tileSetPath)} {
-    auto image = _renderShape.imagePath();
+    _renderShape.setPixelScale(pixelScale);
+    // TODO create collider gameObjects
 }
 
 void TiledComponent::onStart() {
-    GolfEngine::Services::Render::getService()->addDrawable(*this);
+    if(GolfEngine::Services::Render::hasService())
+        GolfEngine::Services::Render::getService()->addDrawable(*this);
 }
 
 void TiledComponent::onUpdate() {}
 
-void TiledComponent::onRemove() {}
+void TiledComponent::onRemove() {
+    if(GolfEngine::Services::Render::hasService())
+        GolfEngine::Services::Render::getService()->removeDrawable(*this);
+}
 
 bool TiledComponent::getActive() {
     return _active;

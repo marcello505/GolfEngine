@@ -11,7 +11,7 @@
 
 class TiledComponent : public Component, public Drawable {
 public:
-    TiledComponent(const std::string& mapPath, const std::string& tileSetPath);
+    TiledComponent(const std::string& mapPath, const std::string& tileSetPath, Vector2 pixelScale = Vector2{1,1});
 
     // Component overrides
     void onStart() override;
