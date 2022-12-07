@@ -8,9 +8,20 @@
 #include <map>
 #include <vector>
 #include "Scene/Graph.h"
+#include "Scene/Components/Pathfinding.h"
 
 class PathfindingService {
 public:
-    virtual std::vector<Node> findPath(const Node& start, const Node& target,const Graph& graph) = 0;
+    virtual std::vector<Node> findPath(Node& start, Node& target, Graph& graph) = 0;
+
+    virtual void addPathfinding(Pathfinding& pathfinding) = 0;
+
+    virtual void removePathfinding(Pathfinding& pathfinding)= 0;
+
+    virtual void findPathEveryTick() = 0;
+
+
 };
+
+
 #endif //GOLFENGINE_PATHFINDINGSERVICE_H

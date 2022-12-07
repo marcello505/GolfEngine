@@ -9,14 +9,24 @@
 #include <vector>
 #include "./Vector2.h"
 
+enum class NodeTags {
+    None,
+    Visited,
+    Path
+
+};
 struct Node{
-    Node(int id, Vector2 position) : id{id}, position{position},visited{false}, tag{"none"}{}
+    Node(int id, Vector2 position, int weight = 1) : id{id}, position{position}, weight{weight}, tag{NodeTags::None}{}
 
     int id;
     Vector2 position;
-    bool visited;
-    std::string tag;
+    NodeTags tag;
+    int weight;
 
     std::vector<int> edges {};
 };
+
+
+
+
 #endif //GOLFENGINE_NODE_H

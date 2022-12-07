@@ -22,7 +22,7 @@ public:
     /// Applies a transform to the RenderShape properties
     /// \param transform Transform to be applied
     void applyTransform(const Transform& transform) override;
-
+    void setColor(Color color);
     // Getters
     [[nodiscard]] Rect2 rect() const;
     [[nodiscard]] float rotation() const;

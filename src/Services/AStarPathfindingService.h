@@ -18,13 +18,18 @@ namespace GolfEngine::Services::Pathfinding{
 
     class AStarPathfindingService : public PathfindingService {
     private:
+        std::vector<std::reference_wrapper<class Pathfinding>> _pathfindingComponents ;
 
     public:
         AStarPathfindingService();
-        std::vector<Node> findPath(const Node& start, const Node& target,const Graph& graph) override;
+        std::vector<Node> findPath(Node& start, Node& target,Graph& graph) override;
+        void addPathfinding(class Pathfinding& pathfinding) override;
 
+        void removePathfinding(class Pathfinding& pathfinding) override;
 
         int calculateHeuristic(Node n, Node target);
+
+        void findPathEveryTick() override;
     };
 
     struct heuristicValues {

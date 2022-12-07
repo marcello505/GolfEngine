@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 
 # Sources
-set(SRC_FILES main.cpp Graph.cpp SceneFactory.cpp)
+set(SRC_FILES main.cpp SceneFactory.cpp CreateGraph.cpp CreateGraph.h ../US00_Rendering/RectDrawable.cpp)
 
 
 # Main Project

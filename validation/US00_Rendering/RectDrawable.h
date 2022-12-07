@@ -16,9 +16,12 @@ public:
     RenderShape& getRenderShape() override;
     void rotate(float amount);
     void scale(float amount);
+    void setColor(Color color);
+
 private:
     RectRenderShape _renderShape;
     Transform _transform;
+
 };
 
 

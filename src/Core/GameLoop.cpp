@@ -40,6 +40,7 @@ void GameLoop::start() {
         }
 
         render();
+        findPaths();
     }
 
     //Free services
@@ -80,16 +81,22 @@ void GameLoop::render() {
         Render::getService()->render();
     }
 }
-
+void GameLoop::findPaths() {
+    if(GolfEngine::Services::Pathfinding::hasService()){
+        GolfEngine::Services::Pathfinding::getService()->findPathEveryTick();
+    }
+}
 void GameLoop::useDefaultServices() {
 
     setInputService(new SDLInputService());
     setAudioService(new SDLAudioService());
     setRenderService(new Render::SDLRenderService {});
     setPhysicsService(new Physics::Box2DPhysicsService {});
-    setPathfindingService(new Pathfinding::AStarPathfindingService {});
+    setPathfindingService(new GolfEngine::Services::Pathfinding::AStarPathfindingService {});
 
 }
+
+
 
 // SETTERS AND GETTERS
 
