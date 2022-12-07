@@ -7,6 +7,7 @@
 #include "Graph.h"
 #include "Scene/Components/BoxCollider.h"
 #include "Scene/RenderShape/CircleRenderShape.h"
+#include "Services/SDLRenderService.h"
 #include <Services/Singletons/RenderSingleton.h>
 #include <Scene/GameObjects/UIObject/Text.h>
 #include <map>
@@ -17,16 +18,15 @@ static const int _nodeDistance = 20;
 void SceneFactory::build(Scene& scene) const {
 
     //PLayer Sprite
-
     auto* rs = GolfEngine::Services::Render::getService();
 
     std::vector<Collider*> colliders;
 
     auto& go = scene.createNewGameObject<GameObject>();
-    go.setWorldTransform(Transform(Vector2(50,10 ),0,Vector2(1,1)));
+    go.setWorldTransform(Transform(Vector2(250,210 ),0,Vector2(1,1)));
 
     go.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::StaticBody});
-    go.addComponent<BoxCollider>(Vector2(10,10));
+    go.addComponent<BoxCollider>(Vector2(100,100));
     colliders.emplace_back(&go.getComponent<BoxCollider>());
 
     std::map<int, Text> nodes;
@@ -34,9 +34,9 @@ void SceneFactory::build(Scene& scene) const {
     std::vector<std::pair<int,int>> edges;
 
 
-    int height = 460;
-    int width = 620;
-    int widthNodeDistance = _nodeDistance;
+    int height = rs->screenSizeHeight();
+    int width = rs->screenSizeWidth();
+    int widthNodeDistance = 0;
     int heightNodeDistance = 0;
     int nodeCounter = 0;
 
@@ -56,7 +56,7 @@ void SceneFactory::build(Scene& scene) const {
             widthNodeDistance += _nodeDistance;
             nodeCounter++;
         }
-        widthNodeDistance = _nodeDistance;
+        widthNodeDistance = 0;
         heightNodeDistance += _nodeDistance;
     }
 
