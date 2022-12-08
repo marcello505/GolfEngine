@@ -14,6 +14,8 @@
 #include "Scene/Components/CircleCollider.h"
 #include "Scene/Components/SpriteComponent.h"
 #include "Scene/Components/Pathfinding.h"
+#include "DrawPathScript.h"
+#include "MovementScript.h"
 #include <Services/Singletons/RenderSingleton.h>
 #include <Scene/GameObjects/UIObject/Text.h>
 #include <map>
@@ -45,6 +47,18 @@ void SceneFactory::build(Scene& scene) const {
     player.setWorldTransform(Transform(Vector2(500,190), 0, Vector2(1,1)));
     player.addComponent<BoxCollider>(Vector2(10,10));
     player.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
+    player.addComponent<MovementScript>();
+
+
+//    auto& player = scene.createNewGameObject<GameObject>();
+//    go.addComponent<SpriteComponent>("res/player.png");
+//    go.getComponent<SpriteComponent>().setColor(Color(255,255,255,255 ));
+//    go.setWorldTransform(Transform(Vector2(200,200), 0, Vector2(1,1)));
+//    go.addComponent<BoxCollider>(Vector2(50,100));
+//    go.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
+//    go.addComponent<MovementScript>();
+
+
     CreateGraph cp = CreateGraph(colliders, 20);
 
     auto graph = cp.createGraph();
@@ -56,23 +70,8 @@ void SceneFactory::build(Scene& scene) const {
     enemy.addComponent<BoxCollider>(Vector2(10,10));
     enemy.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
     enemy.addComponent<Pathfinding>(&player, graph);
+    enemy.addComponent<DrawPathScript>();
 
-    for (const auto& visited :  graph->nodes ) {
-        if(visited.tag == NodeTags::Visited){
-            graph->drawables.at(visited.id)->setColor(Color(0,0,255));
-        }
-    }
-    // Display weigted nodes
-    graph->drawables.at(graph->nodes[131].id)->setColor(Color(255,0,0));
-    graph->drawables.at(graph->nodes[100].id)->setColor(Color(255,0,0));
-    graph->drawables.at(graph->nodes[69].id)->setColor(Color(255,0,0));
-    graph->drawables.at(graph->nodes[38].id)->setColor(Color(255,0,0));
-    graph->drawables.at(graph->nodes[7].id)->setColor(Color(255,0,0));
-
-
-    for (const auto& node : enemy.getComponent<Pathfinding>().getPath()) {
-        graph->drawables.at(node.id)->setColor(Color(0,255,0));
-    }
 
 
     //add colliders to collider list
