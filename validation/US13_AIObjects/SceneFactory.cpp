@@ -42,7 +42,7 @@ void SceneFactory::build(Scene& scene) const {
     auto& player = scene.createNewGameObject<GameObject>();
     player.addComponent<SpriteComponent>(R"(..\..\..\validation\US09_Animations\res\player.png)",Vector2(5,5) );
     player.getComponent<SpriteComponent>().setColor(Color(255,255,255,255 ));
-    player.setWorldTransform(Transform(Vector2(400,80), 0, Vector2(1,1)));
+    player.setWorldTransform(Transform(Vector2(400,380), 0, Vector2(1,1)));
     player.addComponent<BoxCollider>(Vector2(10,10));
     player.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
     CreateGraph cp = CreateGraph(colliders, 20);

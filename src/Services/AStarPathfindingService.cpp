@@ -5,6 +5,8 @@
 #include <vector>
 #include <valarray>
 #include "AStarPathfindingService.h"
+#include "Services/Singletons/PathfindingSingleton.h"
+
 namespace GolfEngine::Services::Pathfinding {
     AStarPathfindingService::AStarPathfindingService()  {
 
@@ -13,11 +15,12 @@ namespace GolfEngine::Services::Pathfinding {
     void AStarPathfindingService::findPathEveryTick(){
         for (auto& pathfindingComponent : _pathfindingComponents) {
             if(pathfindingComponent.get().countedFrames > 119){
-                auto& startNode = pathfindingComponent.get().covertPosToNode(pathfindingComponent.get().getParentGameObjectPosition());
-                auto& targetnode = pathfindingComponent.get().covertPosToNode(pathfindingComponent.get().getTargetPosition());
+                auto startNode = pathfindingComponent.get().covertPosToNode(pathfindingComponent.get().getParentGameObjectPosition());
+                auto targetnode = pathfindingComponent.get().covertPosToNode(pathfindingComponent.get().getTargetPosition());
                 auto graph = pathfindingComponent.get().getGraph();
 
                 auto path = findPath(startNode,targetnode, *graph);
+                pathfindingComponent.get().navigateToPosition();
             }
 
         }
@@ -64,7 +67,23 @@ namespace GolfEngine::Services::Pathfinding {
                    parent.tag = NodeTags::Path;
                }
                path.pop_back();
+               //Display Visited
+               for (const auto& visited :  graph.nodes ) {
+                   if(visited.tag == NodeTags::Visited){
+                       graph.drawables.at(visited.id)->setColor(Color(0,0,255));
+                   }
+               }
+               // Display weigted nodes
+               graph.drawables.at(graph.nodes[131].id)->setColor(Color(255,0,0));
+               graph.drawables.at(graph.nodes[100].id)->setColor(Color(255,0,0));
+               graph.drawables.at(graph.nodes[69].id)->setColor(Color(255,0,0));
+               graph.drawables.at(graph.nodes[38].id)->setColor(Color(255,0,0));
+               graph.drawables.at(graph.nodes[7].id)->setColor(Color(255,0,0));
 
+
+               for (const auto& node : path) {
+                   graph.drawables.at(node.id)->setColor(Color(0,255,0));
+               }
                return path;
            }
 
@@ -92,6 +111,10 @@ namespace GolfEngine::Services::Pathfinding {
             }
         }
         return {};
+
+    }
+
+    void AStarPathfindingService::displayPath(Graph& graph){
 
     }
 

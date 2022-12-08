@@ -3,34 +3,53 @@
 //
 
 #include "Pathfinding.h"
+
+#include <utility>
 #include "Services/Abstracts/PathfindingService.h"
 #include "Services/Singletons/PathfindingSingleton.h"
-Pathfinding::Pathfinding(GameObject *target, std::shared_ptr<Graph> graph) : _target{*target}, _graph{graph} {
+
+Pathfinding::Pathfinding(GameObject *target, std::shared_ptr<Graph> graph) : _target{*target}, _graph{std::move(graph)} {
 
 }
 
 void Pathfinding::navigateToPosition() {
-    PathfindingService *ps = GolfEngine::Services::Pathfinding::getService();
+
 
 }
 
 Node& Pathfinding::covertPosToNode(Vector2 position){
     //TODO get max flaot
-    Vector2 smalllest = {99999.0, 99999.0};
-    Node& smalllestNode = _graph->nodes[0];
+    Vector2 smallest = {99999.0, 99999.0};
+    int smallestNodeId = _graph->nodes[0].id;
     for (auto& node : _graph->nodes) {
-        auto xDiff = std::abs(smalllest.x-node.position.x);
-        auto yDiff = std::abs(smalllest.y-node.position.y);
-        if( xDiff < smalllest.x && yDiff < smalllest.y ){
-            smalllest.x = xDiff;
-            smalllest.y = yDiff;
-            smalllestNode = node;
+        auto xDiff = getBiggestNumber(position.x, node.position.x) -
+                getSmallestNumber(position.x, node.position.x);
+        auto yDiff = getBiggestNumber(position.y, node.position.y) -
+                     getSmallestNumber(position.y, node.position.y);
+        if( xDiff < smallest.x && yDiff < smallest.y ){
+            smallest.x = xDiff;
+            smallest.y = yDiff;
+            smallestNodeId = node.id;
         }
     }
-    return smalllestNode;
+    return _graph->nodes[smallestNodeId];
 }
 
+int Pathfinding::getSmallestNumber(int first, int second){
+        if(first < second){
+            return first;
+        }
+        return second;
 
+}
+
+int Pathfinding::getBiggestNumber(int first, int second){
+    if(first > second){
+        return first;
+    }
+    return second;
+
+}
 
 void Pathfinding::onStart() {
     GolfEngine::Services::Pathfinding::getService()->addPathfinding(*this);
@@ -45,6 +64,7 @@ void Pathfinding::onUpdate() {
 }
 
 void Pathfinding::onRemove() {
+
     GolfEngine::Services::Pathfinding::getService()->removePathfinding(*this);
 
 }

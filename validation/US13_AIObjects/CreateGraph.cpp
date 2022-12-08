@@ -16,7 +16,7 @@
 #include "../US00_Rendering/RectDrawable.h"
 
 
-CreateGraph::CreateGraph(std::vector<Collider *> colliders, int nodeDistance): _nodeDistance{nodeDistance}, colliders{colliders} {
+CreateGraph::CreateGraph(std::vector<Collider *> colliders, int nodeDistance): _nodeDistance{nodeDistance}, colliders{std::move(colliders)} {
 }
 
 
@@ -82,29 +82,8 @@ std::shared_ptr<Graph> CreateGraph::createGraph(){
     nodeList[131].weight = 500;
 
     auto graph = std::make_shared<Graph>(nodeList);
+    graph->drawables = drawables;
 
-    PathfindingService* ps = GolfEngine::Services::Pathfinding::getService();
-
-    auto path =  ps->findPath(graph->nodes[0],graph->nodes[270], *graph);
-
-    //Display Visited
-    for (const auto& visited :  graph->nodes ) {
-            if(visited.tag == NodeTags::Visited){
-               drawables.at(visited.id)->setColor(Color(0,0,255));
-            }
-    }
-    // Display weigted nodes
-    drawables.at(nodeList[131].id)->setColor(Color(255,0,0));
-    drawables.at(nodeList[100].id)->setColor(Color(255,0,0));
-    drawables.at(nodeList[69].id)->setColor(Color(255,0,0));
-    drawables.at(nodeList[38].id)->setColor(Color(255,0,0));
-    drawables.at(nodeList[7].id)->setColor(Color(255,0,0));
-
-
-
-    for (const auto& node : path) {
-        drawables.at(node.id)->setColor(Color(0,255,0));
-    }
     return graph;
 
 }

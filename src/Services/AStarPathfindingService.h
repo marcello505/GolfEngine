@@ -19,7 +19,7 @@ namespace GolfEngine::Services::Pathfinding{
     class AStarPathfindingService : public PathfindingService {
     private:
         std::vector<std::reference_wrapper<class Pathfinding>> _pathfindingComponents ;
-
+        static void displayPath(Graph& graph);
     public:
         AStarPathfindingService();
         std::vector<Node> findPath(Node& start, Node& target,Graph& graph) override;

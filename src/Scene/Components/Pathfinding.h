@@ -37,6 +37,8 @@ public:
 private:
     GameObject& _target;
     std::shared_ptr<Graph> _graph;
+    int getSmallestNumber(int first, int second);
+    int getBiggestNumber(int first, int second);
 
 };
 
