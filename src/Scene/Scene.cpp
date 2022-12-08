@@ -2,11 +2,12 @@
 // Created by conner on 11/21/2022.
 //
 
-#include <iostream>
-
 #include "Scene.h"
 #include "GameObjects/GameObject.h"
 #include "Input/ActionMap.h"
+
+//Add a max replay length so it doesn't keep growing. 36000 frames = 10 minutes
+#define MAX_REPLAY_LENGTH 36000
 
 Scene::Scene() {
     _gameObjects.push_back(std::make_unique<GameObject>());
@@ -81,6 +82,11 @@ void Scene::updateReplay() {
             }
 
             _replay.inputs.push_back(actionsSnapshots);
+
+            //Stop recording if recorded inputs exceeds MAX_REPLAY_LENGTH
+            if(_replay.inputs.size() >= MAX_REPLAY_LENGTH){
+                stopReplay();
+            }
             break;
         }
 
@@ -93,10 +99,9 @@ void Scene::updateReplay() {
 
         //Load inputs from replay
         case ReplayState::Playing:{
-            std::cout << "Playing frame: " << _replayFrame << std::endl;
             //Check if at the end of the replay
             if(_replayFrame >= _replay.inputs.size()){
-                _replayState = ReplayState::Idle;
+                stopReplay();
                 break;
             }
 
@@ -119,6 +124,17 @@ void Scene::updateReplay() {
         }
         case ReplayState::Idle:
             break;
+    }
+
+}
+
+void Scene::stopReplay() {
+    _replayState = ReplayState::Idle;
+
+    //Reset inputs
+    auto& actionMap = *ActionMap::getActionMap();
+    for(auto& actionToLock : _replay.lockedActions){
+        actionMap.setActionPressed(actionToLock, false, false);
     }
 
 }

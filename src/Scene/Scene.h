@@ -40,6 +40,7 @@ public:
     void startRecordingReplay(const std::vector<std::string>& actionsToLock, bool recordMouse = false);
     void stopRecordingReplay();
     void playReplay();
+    void stopReplay();
 
     virtual void startScene();
 
