@@ -38,22 +38,21 @@ void SDLInputService::handleInputs()
         }
         if (event.type == SDL_MOUSEMOTION) // if mouse button is released
         {
-            SDLInputService::handleMouseEvent(event, false); // handle mouse event
+            //Don't do anything during mouse motion
         }
         if (event.type==SDL_QUIT) // if close button is pressed of window
         {
             _hasReceivedQuitSignal = true; // let gameloop now to stop handling inputs
         }
     }
+
+    //Update mouse position
+    int mouseX, mouseY;
+    SDL_GetMouseState(&mouseX, &mouseY);
+    _actionMap->setMousePosition(mouseX, mouseY); //set current mouse pos
 }
 
 void SDLInputService::handleMouseEvent(SDL_Event event, bool pressed) {
-    int x, y;
-    Uint32 buttons;
-    SDL_PumpEvents();  // make sure we have the latest mouse state.
-    buttons = SDL_GetMouseState(&x, &y);
-    _actionMap->setMousePosition(x, y); //set current mouse pos
-
     switch(event.button.button){
         case 1: // left mouse button
             _actionMap->setInputKeyPressed(Mouse_Left, pressed); // handle action for this button

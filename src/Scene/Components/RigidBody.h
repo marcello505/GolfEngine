@@ -46,13 +46,17 @@ public:
     std::vector<Collider*> getColliders() const;
     GameObject* getParentGameObject() const;
 
-    //Pass Through methods
+    //Pass Through methods - Getters
+    Vector2 getLinearVelocity();
+
+    //Pass Through methods - Setters
     void applyForceToCenter(const Vector2& force);
     void setTransform(const Transform& transform);
     void setLinearDamping(float linearDamping);
     void setAngularDamping(float angularDamping);
     void setFixedRotation(bool fixedRotation);
     void setGravityScale(float gravityScale);
+    void setLinearVelocity(const Vector2& velocity);
 private:
     bool _active {true};
     RigidBodyDef _rigidBodyDef;

@@ -26,6 +26,7 @@ public:
     //Drawable overrides
     RenderShape& getRenderShape() override;
 
+    void setColor(Color color);
 private:
     bool _active {true};
     RectRenderShape _rectRenderShape;

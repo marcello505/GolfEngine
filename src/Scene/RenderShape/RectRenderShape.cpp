@@ -38,3 +38,7 @@ void RectRenderShape::applyTransform(const Transform& transform) {
 Vector2 RectRenderShape::pivotPoint() const {
     return _pivotPoint;
 }
+
+void RectRenderShape::setColor(Color color) {
+    _color = color;
+}
