@@ -19,12 +19,16 @@ void SaveStateScript::onUpdate() {
                 "playerLeft",
                 "playerRight",
                 "playerUp",
-                "playerDown"
+                "playerDown",
+                "playerShoot"
             };
-            currentScene.startRecordingReplay(actionsToLock);
+            currentScene.startRecordingReplay(actionsToLock, true);
         }
         if(_actionMap->isJustPressed("stopRecordingReplay")){
             currentScene.stopRecordingReplay();
+        }
+        if(_actionMap->isJustPressed("playReplay")){
+            currentScene.playReplay();
         }
     }
 }

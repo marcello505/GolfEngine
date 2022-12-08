@@ -2,6 +2,8 @@
 // Created by conner on 11/21/2022.
 //
 
+#include <iostream>
+
 #include "Scene.h"
 #include "GameObjects/GameObject.h"
 #include "Input/ActionMap.h"
@@ -39,26 +41,22 @@ void Scene::updateScene() {
 
         saveCurrentState(std::ref(_savedState));
     }
-
-    //Save Recording starting state
-    if(_saveReplayState){
-        _saveReplayState = false;
-
-        saveCurrentState(std::ref(_replay.value().startingState));
-    }
 }
 
-void Scene::startRecordingReplay(const std::vector<std::string>& actionsToLock){
-    _isRecordingReplay = true;
-    _saveReplayState = true;
+void Scene::startRecordingReplay(const std::vector<std::string>& actionsToLock, bool recordMouse) {
+    _replayState = ReplayState::InitializeRecording;
     _replay = Replay{};
-    _replay.value().lockedActions = actionsToLock;
+    _replay.lockedActions = actionsToLock;
+    //If recordMouse is true, initialize the list
+    if(recordMouse) _replay.mousePositions = std::vector<std::pair<int, int>>{};
 }
 
 void Scene::stopRecordingReplay(){
-    _isRecordingReplay = false;
+    _replayState = ReplayState::Idle;
 }
-void Scene::playReplay(){}
+void Scene::playReplay(){
+    _replayState = ReplayState::InitializePlaying;
+}
 
 GameObject& Scene::getRootGameObject() const{
     return _rootGameObject->get();
@@ -79,18 +77,75 @@ void Scene::saveCurrentState(std::vector<std::unique_ptr<ISnapshot>>& list) {
     }
 }
 
-void Scene::updateReplay() {
-    //Record inputs for recording
-    if(_isRecordingReplay){
-        auto& actionMap = *ActionMap::getActionMap();
-        std::vector<bool> actionsSnapshots {};
+void Scene::loadCurrentState(std::vector<std::unique_ptr<ISnapshot>>& list) {
+    for(int i = 0; i < list.size(); ++i){
+        _gameObjects[i]->loadSnapshot(*list[i]);
+    }
+}
 
-        for(auto& actionToLock : _replay.value().lockedActions){
-            actionsSnapshots.emplace_back(actionMap.isPressed(actionToLock));
+void Scene::updateReplay() {
+    switch(_replayState){
+        //Save current state in replay
+        case ReplayState::InitializeRecording:{
+            _replayState = ReplayState::Recording;
+            saveCurrentState(std::ref(_replay.startingState));
         }
 
-        _replay.value().inputs.push_back(actionsSnapshots);
+        //Record inputs for replay
+        case ReplayState::Recording:{
+            auto& actionMap = *ActionMap::getActionMap();
+            std::vector<std::pair<bool, bool>> actionsSnapshots {};
+
+            for(auto& actionToLock : _replay.lockedActions){
+                actionsSnapshots.emplace_back(actionMap.isPressed(actionToLock), actionMap.isJustPressed(actionToLock));
+            }
+
+            if(_replay.mousePositions){
+                auto mousePosition = actionMap.getMousePosition();
+                _replay.mousePositions.value().emplace_back(mousePosition.x, mousePosition.y);
+            }
+
+            _replay.inputs.push_back(actionsSnapshots);
+            break;
+        }
+
+        //Load state from replay
+        case ReplayState::InitializePlaying:{
+            _replayState = ReplayState::Playing;
+            loadCurrentState(std::ref(_replay.startingState));
+            _replayFrame = 0;
+        }
+
+        //Load inputs from replay
+        case ReplayState::Playing:{
+            std::cout << "Playing frame: " << _replayFrame << std::endl;
+            //Check if at the end of the replay
+            if(_replayFrame >= _replay.inputs.size()){
+                _replayState = ReplayState::Idle;
+                break;
+            }
+
+            auto& actionMap = *ActionMap::getActionMap();
+
+            //Get inputs of the current frame and then set them
+            auto& inputs = _replay.inputs[_replayFrame];
+            for(int i = 0; i < inputs.size(); ++i){
+                actionMap.setActionPressed(_replay.lockedActions[i], inputs[i].first, inputs[i].second);
+            }
+
+            if(_replay.mousePositions){
+                auto& mousePos = _replay.mousePositions->at(_replayFrame);
+                actionMap.setMousePosition(mousePos.first, mousePos.second);
+            }
+
+            //Increase replayFrame
+            _replayFrame++;
+            break;
+        }
+        case ReplayState::Idle:
+            break;
     }
 
 }
+
 

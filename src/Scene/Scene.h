@@ -14,7 +14,16 @@
 
 class Scene {
 private:
+    enum class ReplayState{
+        Idle,
+        InitializeRecording,
+        Recording,
+        InitializePlaying,
+        Playing
+    };
+
     void saveCurrentState(std::vector<std::unique_ptr<ISnapshot>>& list);
+    void loadCurrentState(std::vector<std::unique_ptr<ISnapshot>>& list);
 protected:
     std::vector<std::unique_ptr<GameObject>> _gameObjects;
     std::unique_ptr<std::reference_wrapper<GameObject>> _rootGameObject;
@@ -25,17 +34,17 @@ protected:
     bool _loadStateCalled {false};
 
     //Recording fields
-    bool _isRecordingReplay {false};
-    bool _saveReplayState {false};
-    std::optional<Replay> _replay {};
+    ReplayState _replayState {ReplayState::Idle};
+    Replay _replay {};
+    int _replayFrame {};
 public:
     Scene();
 
     GameObject& getRootGameObject() const;
 
-    virtual void startRecordingReplay(const std::vector<std::string>& actionsToLock);
-    virtual void stopRecordingReplay();
-    virtual void playReplay();
+    void startRecordingReplay(const std::vector<std::string>& actionsToLock, bool recordMouse = false);
+    void stopRecordingReplay();
+    void playReplay();
 
     /// A deferred call to save the current state, the actual saving of the state is done in `updateScene()` after the update
     virtual void saveState();

@@ -13,8 +13,9 @@
 
 struct Replay {
     std::vector<std::unique_ptr<ISnapshot>> startingState {};
-    std::vector<std::vector<bool>> inputs {};
+    std::vector<std::vector<std::pair<bool, bool>>> inputs {};
     std::vector<std::string> lockedActions {};
+    std::optional<std::vector<std::pair<int, int>>> mousePositions {};
 };
 
 
