@@ -5,7 +5,7 @@
 #include "Pathfinding.h"
 #include "Services/Abstracts/PathfindingService.h"
 #include "Services/Singletons/PathfindingSingleton.h"
-Pathfinding::Pathfinding(GameObject *target, Graph &graph) : _target{*target}, _graph{graph} {
+Pathfinding::Pathfinding(GameObject *target, std::shared_ptr<Graph> graph) : _target{*target}, _graph{graph} {
 
 }
 
@@ -17,9 +17,8 @@ void Pathfinding::navigateToPosition() {
 Node& Pathfinding::covertPosToNode(Vector2 position){
     //TODO get max flaot
     Vector2 smalllest = {99999.0, 99999.0};
-    Node& smalllestNode = _graph.nodes[0];
-
-    for (auto& node : _graph.nodes) {
+    Node& smalllestNode = _graph->nodes[0];
+    for (auto& node : _graph->nodes) {
         auto xDiff = std::abs(smalllest.x-node.position.x);
         auto yDiff = std::abs(smalllest.y-node.position.y);
         if( xDiff < smalllest.x && yDiff < smalllest.y ){
@@ -74,7 +73,7 @@ Vector2 Pathfinding::getTargetPosition() {
     return _target.getWorldTransform().position;
 }
 
-Graph &Pathfinding::getGraph() {
+std::shared_ptr<Graph> Pathfinding::getGraph() {
     return _graph;
 }
 

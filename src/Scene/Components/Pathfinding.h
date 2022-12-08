@@ -13,7 +13,7 @@
 
 class Pathfinding : public Component{
 public:
-    Pathfinding(GameObject *target, Graph& graph );
+    Pathfinding(GameObject *target, std::shared_ptr<Graph> graph );
 
     // Overrides
     void onStart() override;
@@ -32,11 +32,11 @@ public:
     Vector2 getTargetPosition();
     Vector2 getParentGameObjectPosition() const;
 
-    Graph &getGraph();
+    std::shared_ptr<Graph> getGraph();
 
 private:
     GameObject& _target;
-    Graph &_graph;
+    std::shared_ptr<Graph> _graph;
 
 };
 

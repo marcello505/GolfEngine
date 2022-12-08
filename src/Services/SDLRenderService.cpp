@@ -351,7 +351,6 @@ namespace GolfEngine::Services::Render {
         // Get direct reference to texture for easy access
         auto& font {f->get()};
 
-        // TODO add COLOR
 
         SDL_Surface* surface = TTF_RenderText_Solid(&font, renderShape.text().c_str(), {renderShape.color().r8,renderShape.color().g8,renderShape.color().b8});
         if(surface == nullptr){

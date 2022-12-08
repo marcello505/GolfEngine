@@ -17,7 +17,7 @@ public:
     CreateGraph(std::vector<Collider *> colliders, int nodeDistance);
 
 
-    Graph& createGraph();
+    std::shared_ptr<Graph> createGraph();
 
     int _nodeDistance;
     std::vector<Collider *> colliders;

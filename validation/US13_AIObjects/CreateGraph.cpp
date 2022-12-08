@@ -20,7 +20,7 @@ CreateGraph::CreateGraph(std::vector<Collider *> colliders, int nodeDistance): _
 }
 
 
-Graph& CreateGraph::createGraph(){
+std::shared_ptr<Graph> CreateGraph::createGraph(){
     auto* rs = GolfEngine::Services::Render::getService();
 
     std::map<int, RectDrawable*> drawables;
@@ -81,7 +81,7 @@ Graph& CreateGraph::createGraph(){
     nodeList[100].weight = 500;
     nodeList[131].weight = 500;
 
-    auto graph = new Graph(nodeList);
+    auto graph = std::make_shared<Graph>(nodeList);
 
     PathfindingService* ps = GolfEngine::Services::Pathfinding::getService();
 
@@ -105,7 +105,7 @@ Graph& CreateGraph::createGraph(){
     for (const auto& node : path) {
         drawables.at(node.id)->setColor(Color(0,255,0));
     }
-    return *graph;
+    return graph;
 
 }
 

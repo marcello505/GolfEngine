@@ -47,7 +47,7 @@ void SceneFactory::build(Scene& scene) const {
     player.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
     CreateGraph cp = CreateGraph(colliders, 20);
 
-    auto& graph = cp.createGraph();
+    auto graph = cp.createGraph();
     auto& enemy = scene.createNewGameObject<GameObject>();
 
     enemy.addComponent<SpriteComponent>(R"(..\..\..\validation\US09_Animations\res\player.png)",Vector2(5,5) );

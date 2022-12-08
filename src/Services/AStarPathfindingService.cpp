@@ -15,9 +15,9 @@ namespace GolfEngine::Services::Pathfinding {
             if(pathfindingComponent.get().countedFrames > 119){
                 auto& startNode = pathfindingComponent.get().covertPosToNode(pathfindingComponent.get().getParentGameObjectPosition());
                 auto& targetnode = pathfindingComponent.get().covertPosToNode(pathfindingComponent.get().getTargetPosition());
-                auto& graph = pathfindingComponent.get().getGraph();
+                auto graph = pathfindingComponent.get().getGraph();
 
-                auto path = findPath(startNode,targetnode, graph);
+                auto path = findPath(startNode,targetnode, *graph);
             }
 
         }
