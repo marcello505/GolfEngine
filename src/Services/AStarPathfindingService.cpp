@@ -18,9 +18,7 @@ namespace GolfEngine::Services::Pathfinding {
                 auto startNode = pathfindingComponent.get().covertPosToNode(pathfindingComponent.get().getParentGameObjectPosition());
                 auto targetnode = pathfindingComponent.get().covertPosToNode(pathfindingComponent.get().getTargetPosition());
                 auto graph = pathfindingComponent.get().getGraph();
-
-                auto path = findPath(startNode,targetnode, *graph);
-                pathfindingComponent.get().navigateToPosition();
+                pathfindingComponent.get().setPath(findPath(startNode,targetnode, *graph));
             }
 
         }
@@ -68,22 +66,6 @@ namespace GolfEngine::Services::Pathfinding {
                }
                path.pop_back();
                //Display Visited
-               for (const auto& visited :  graph.nodes ) {
-                   if(visited.tag == NodeTags::Visited){
-                       graph.drawables.at(visited.id)->setColor(Color(0,0,255));
-                   }
-               }
-               // Display weigted nodes
-               graph.drawables.at(graph.nodes[131].id)->setColor(Color(255,0,0));
-               graph.drawables.at(graph.nodes[100].id)->setColor(Color(255,0,0));
-               graph.drawables.at(graph.nodes[69].id)->setColor(Color(255,0,0));
-               graph.drawables.at(graph.nodes[38].id)->setColor(Color(255,0,0));
-               graph.drawables.at(graph.nodes[7].id)->setColor(Color(255,0,0));
-
-
-               for (const auto& node : path) {
-                   graph.drawables.at(node.id)->setColor(Color(0,255,0));
-               }
                return path;
            }
 

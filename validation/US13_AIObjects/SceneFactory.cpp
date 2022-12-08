@@ -42,7 +42,7 @@ void SceneFactory::build(Scene& scene) const {
     auto& player = scene.createNewGameObject<GameObject>();
     player.addComponent<SpriteComponent>(R"(..\..\..\validation\US09_Animations\res\player.png)",Vector2(5,5) );
     player.getComponent<SpriteComponent>().setColor(Color(255,255,255,255 ));
-    player.setWorldTransform(Transform(Vector2(400,380), 0, Vector2(1,1)));
+    player.setWorldTransform(Transform(Vector2(500,190), 0, Vector2(1,1)));
     player.addComponent<BoxCollider>(Vector2(10,10));
     player.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
     CreateGraph cp = CreateGraph(colliders, 20);
@@ -56,6 +56,24 @@ void SceneFactory::build(Scene& scene) const {
     enemy.addComponent<BoxCollider>(Vector2(10,10));
     enemy.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
     enemy.addComponent<Pathfinding>(&player, graph);
+
+    for (const auto& visited :  graph->nodes ) {
+        if(visited.tag == NodeTags::Visited){
+            graph->drawables.at(visited.id)->setColor(Color(0,0,255));
+        }
+    }
+    // Display weigted nodes
+    graph->drawables.at(graph->nodes[131].id)->setColor(Color(255,0,0));
+    graph->drawables.at(graph->nodes[100].id)->setColor(Color(255,0,0));
+    graph->drawables.at(graph->nodes[69].id)->setColor(Color(255,0,0));
+    graph->drawables.at(graph->nodes[38].id)->setColor(Color(255,0,0));
+    graph->drawables.at(graph->nodes[7].id)->setColor(Color(255,0,0));
+
+
+    for (const auto& node : enemy.getComponent<Pathfinding>().getPath()) {
+        graph->drawables.at(node.id)->setColor(Color(0,255,0));
+    }
+
 
     //add colliders to collider list
 

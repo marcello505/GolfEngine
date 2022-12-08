@@ -5,11 +5,11 @@
 #include "Pathfinding.h"
 
 #include <utility>
+#include <valarray>
 #include "Services/Abstracts/PathfindingService.h"
 #include "Services/Singletons/PathfindingSingleton.h"
 
 Pathfinding::Pathfinding(GameObject *target, std::shared_ptr<Graph> graph) : _target{*target}, _graph{std::move(graph)} {
-
 }
 
 void Pathfinding::navigateToPosition() {
@@ -18,21 +18,18 @@ void Pathfinding::navigateToPosition() {
 }
 
 Node& Pathfinding::covertPosToNode(Vector2 position){
-    //TODO get max flaot
-    Vector2 smallest = {99999.0, 99999.0};
-    int smallestNodeId = _graph->nodes[0].id;
-    for (auto& node : _graph->nodes) {
-        auto xDiff = getBiggestNumber(position.x, node.position.x) -
-                getSmallestNumber(position.x, node.position.x);
-        auto yDiff = getBiggestNumber(position.y, node.position.y) -
-                     getSmallestNumber(position.y, node.position.y);
-        if( xDiff < smallest.x && yDiff < smallest.y ){
-            smallest.x = xDiff;
-            smallest.y = yDiff;
-            smallestNodeId = node.id;
-        }
-    }
-    return _graph->nodes[smallestNodeId];
+    const auto dist = [position](const auto& p){
+        // Change the following to your needs
+        return std::pow((p.position.x - position.x), 2) + std::pow((p.position.y - position.y), 2);
+    };
+
+    const auto& closest = std::min_element(_graph->nodes.cbegin(), _graph->nodes.cend(),
+                                          [&dist](const auto& p1, const auto& p2)
+                                          { return dist(p1) < dist(p2); });
+
+    auto& node = *(closest);
+
+    return const_cast<Node &>(node);
 }
 
 int Pathfinding::getSmallestNumber(int first, int second){
@@ -53,6 +50,7 @@ int Pathfinding::getBiggestNumber(int first, int second){
 
 void Pathfinding::onStart() {
     GolfEngine::Services::Pathfinding::getService()->addPathfinding(*this);
+    countedFrames = 120;
 
 }
 
@@ -95,6 +93,14 @@ Vector2 Pathfinding::getTargetPosition() {
 
 std::shared_ptr<Graph> Pathfinding::getGraph() {
     return _graph;
+}
+
+void Pathfinding::setPath(std::vector<Node> path) {
+    _path = path;
+}
+
+std::vector<Node> Pathfinding::getPath() {
+    return _path;
 }
 
 
