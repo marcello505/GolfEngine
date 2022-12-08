@@ -29,7 +29,7 @@ public:
 class SceneFactory : public ISceneFactory {
     void build(Scene& scene) const override{
         auto& map = scene.createNewGameObject<GameObject>();
-        auto& mapComp = map.addComponent<TiledComponent>(R"(..\..\..\validation\US00_TileMap\res\map.tmx)", Vector2(2,2));
+        auto& mapComp = map.addComponent<TiledComponent>(R"(res\map.tmx)", Vector2(2,2));
         mapComp.initColliders();
         auto& go = scene.createNewGameObject<GameObject>();
         go.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
