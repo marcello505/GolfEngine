@@ -10,7 +10,7 @@
 
 class TileMapParserService {
 public:
-    virtual TileMapRenderShape loadMap(const std::string& mapPath, const std::string& tileSetPath) = 0;
+    virtual TileMapRenderShape loadMap(const std::string& mapPath) = 0;
 };
 
 #endif //GOLFENGINE_TILEMAPPARSERSERVICE_H

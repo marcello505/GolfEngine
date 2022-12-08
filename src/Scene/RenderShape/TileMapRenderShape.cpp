@@ -7,7 +7,7 @@
 #include <utility>
 
 TileMapRenderShape::TileMapRenderShape(const std::string& imagePath, TileSet_t tileSet, Map_t map)
-    : _imagePath{imagePath}, _tileSet(tileSet), _position{0,0}, _map{std::move(map)}{
+    : _imagePath{imagePath}, _tileSet(std::move(tileSet)), _position{0,0}, _map{std::move(map)}{
 }
 
 void TileMapRenderShape::applyTransform(const Transform &transform) {
@@ -38,7 +38,7 @@ const Vector2 &TileMapRenderShape::position() const {
 }
 
 void TileMapRenderShape::setPixelScale(Vector2 scale) {
-    _baseScale = scale;
+    _baseScale = _scale = scale;
 }
 
 const Vector2 &TileMapRenderShape::scale() const {

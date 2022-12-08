@@ -11,13 +11,12 @@
 
 // Struct that contains info about the TileSet used by a TileMap
 typedef struct TileSet{
+    std::vector<int> colliderTiles;
     int tileWidth;
     int tileHeight;
     int columns;
     int imageWidth;
     int imageHeight;
-    TileSet(int tileW, int tileH, int cols, int imageW, int imageH) :tileWidth{tileW},
-    tileHeight{tileH}, columns{cols}, imageWidth{imageW}, imageHeight{imageH} {}
 } TileSet_t;
 
 typedef struct Map{

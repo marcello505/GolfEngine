@@ -11,7 +11,10 @@
 
 class TiledComponent : public Component, public Drawable {
 public:
-    TiledComponent(const std::string& mapPath, const std::string& tileSetPath, Vector2 pixelScale = Vector2{1,1});
+    /// A component that loads and renders a tile map created in Tiled
+    /// \param mapPath Path to the map (.tmx) file
+    /// \param pixelScale Base scale used to up/down-scale the tiles
+    explicit TiledComponent(const std::string& mapPath, Vector2 pixelScale = Vector2{1,1});
 
     // Component overrides
     void onStart() override;
@@ -23,6 +26,9 @@ public:
 
     // Drawable overrides
     RenderShape& getRenderShape() override;
+
+    /// Creates GameObjects with a BoxCollider for each tile with a collider property
+    void initColliders();
 private:
     TileMapRenderShape _renderShape;
 };

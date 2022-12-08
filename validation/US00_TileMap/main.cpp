@@ -6,38 +6,36 @@
 #include <SDL.h>
 #include "Scene/Components/TiledComponent.h"
 #include "Scene/Components/BehaviourScript.h"
+#include "Scene/Components/BoxCollider.h"
 
 class MoveScript : public BehaviourScript {
 public:
     void onUpdate() override{
         if(ActionMap::getActionMap()->isPressed("left")){
-            auto transform = _gameObject->get().getLocalTransform();
-            transform.position.x += 2;
-            _gameObject->get().setLocalTransform(transform);
+            _gameObject->get().getComponent<RigidBody>().applyForceToCenter(Vector2{-0.2f, 0});
         }
         if(ActionMap::getActionMap()->isPressed("right")){
-            auto transform = _gameObject->get().getLocalTransform();
-            transform.position.x -= 2;
-            _gameObject->get().setLocalTransform(transform);
+            _gameObject->get().getComponent<RigidBody>().applyForceToCenter(Vector2{0.2f, 0});
         }
         if(ActionMap::getActionMap()->isPressed("up")){
-            auto transform = _gameObject->get().getLocalTransform();
-            transform.position.y += 2;
-            _gameObject->get().setLocalTransform(transform);
+            _gameObject->get().getComponent<RigidBody>().applyForceToCenter(Vector2{0, -0.2f});
         }
         if(ActionMap::getActionMap()->isPressed("down")){
-            auto transform = _gameObject->get().getLocalTransform();
-            transform.position.y -= 2;
-            _gameObject->get().setLocalTransform(transform);
+            _gameObject->get().getComponent<RigidBody>().applyForceToCenter(Vector2{0, 0.2f});
         }
     }
 };
 
 class SceneFactory : public ISceneFactory {
     void build(Scene& scene) const override{
+        auto& map = scene.createNewGameObject<GameObject>();
+        auto& mapComp = map.addComponent<TiledComponent>(R"(..\..\..\validation\US00_TileMap\res\map.tmx)", Vector2(2,2));
+        mapComp.initColliders();
         auto& go = scene.createNewGameObject<GameObject>();
-        go.addComponent<TiledComponent>(R"(..\..\..\validation\US00_TileMap\res\map.tmx)", R"(..\..\..\validation\US00_TileMap\res\Hotline-Miami-TileSet.tsx)", Vector2(4,4));
+        go.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
+        go.addComponent<BoxCollider>(Vector2{10, 10});
         go.addComponent<MoveScript>();
+        go.setLocalPosition(Vector2{200, 200});
     }
 };
 
