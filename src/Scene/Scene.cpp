@@ -20,27 +20,10 @@ void Scene::startScene() {
 }
 
 void Scene::updateScene() {
-    //Load state (if requested)
-    if(_loadStateCalled){
-        _loadStateCalled = false;
-
-        for(int i = 0; i < _savedState.size(); ++i){
-            _gameObjects[i]->loadSnapshot(*_savedState[i]);
-        }
-    }
-
-
     //Update scene
     for(auto& go : _gameObjects)
         if(go->getActive())
             go->onUpdate();
-
-    //Save state (if requested)
-    if(_saveStateCalled){
-        _saveStateCalled = false;
-
-        saveCurrentState(std::ref(_savedState));
-    }
 }
 
 void Scene::startRecordingReplay(const std::vector<std::string>& actionsToLock, bool recordMouse) {
@@ -60,14 +43,6 @@ void Scene::playReplay(){
 
 GameObject& Scene::getRootGameObject() const{
     return _rootGameObject->get();
-}
-
-void Scene::saveState() {
-    _saveStateCalled = true;
-}
-
-void Scene::loadState() {
-    _loadStateCalled = true;
 }
 
 void Scene::saveCurrentState(std::vector<std::unique_ptr<ISnapshot>>& list) {

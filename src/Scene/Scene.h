@@ -28,11 +28,6 @@ protected:
     std::vector<std::unique_ptr<GameObject>> _gameObjects;
     std::unique_ptr<std::reference_wrapper<GameObject>> _rootGameObject;
 
-    //State saving fields
-    std::vector<std::unique_ptr<ISnapshot>> _savedState {};
-    bool _saveStateCalled {false};
-    bool _loadStateCalled {false};
-
     //Recording fields
     ReplayState _replayState {ReplayState::Idle};
     Replay _replay {};
@@ -45,11 +40,6 @@ public:
     void startRecordingReplay(const std::vector<std::string>& actionsToLock, bool recordMouse = false);
     void stopRecordingReplay();
     void playReplay();
-
-    /// A deferred call to save the current state, the actual saving of the state is done in `updateScene()` after the update
-    virtual void saveState();
-    /// A deferred call to load the current state, the actual loading of the state is done in `updateScene()` before the update
-    virtual void loadState();
 
     virtual void startScene();
 
