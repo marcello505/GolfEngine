@@ -22,15 +22,25 @@ public:
     bool getActive() override;
     void setActive(bool active) override;
     void setParentGameObject(GameObject& gameObject) override;
+    /// sets path for this component
+    /// \param path vector with nodes
     void setPath(const std::vector<Node>& path);
+
+    /// return the path this component has to target
+    /// \return vector of nodes in path
     std::vector<Node> getPath();
     void setTarget(GameObject &gameObject);
 
 
+    /// Return the gameobject this component is navigating to
+    /// \return Target gameobject
     Vector2 getTargetPosition();
+    /// Return position of parent
+    /// \return Vector with positin of parent
     Vector2 getParentGameObjectPosition() const;
 
-
+    /// Checks if counted frames is bigger than duration
+    /// \return true if new path needs to be calculated
     bool needsNewPath();
 
 
