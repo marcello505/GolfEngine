@@ -20,6 +20,12 @@ public:
 
     virtual void findPathEveryTick() = 0;
 
+    virtual void createGraph() = 0;
+
+    virtual std::shared_ptr<Graph> getGraph() = 0;
+
+    virtual void setNodeDistance(int nodeDistance) = 0;
+
 
 };
 

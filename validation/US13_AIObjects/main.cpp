@@ -27,6 +27,7 @@ int main(int argc, char* argv[])
     ActionMap::getActionMap()->addInputKeyToAction("Down", Key_Down);
 
 
+
     GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
     GolfEngine::SceneManager::GetSceneManager().loadScene("main");
 

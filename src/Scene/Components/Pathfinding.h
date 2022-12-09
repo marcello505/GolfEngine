@@ -13,7 +13,7 @@
 
 class Pathfinding : public Component{
 public:
-    Pathfinding(GameObject *target, std::shared_ptr<Graph> graph );
+    Pathfinding(GameObject *target, float recalculatePathTime = 1.0 );
 
     // Overrides
     void onStart() override;
@@ -26,18 +26,22 @@ public:
     std::vector<Node> getPath();
     void setTarget(GameObject &gameObject);
 
-    int countedFrames {0};
 
-    Node& covertPosToNode(Vector2 position);
     Vector2 getTargetPosition();
     Vector2 getParentGameObjectPosition() const;
 
-    std::shared_ptr<Graph> getGraph();
+
+    bool needsNewPath();
+
 
 private:
+    int _countedFrames {0};
+
     GameObject& _target;
-    std::shared_ptr<Graph> _graph;
     std::vector<Node> _path;
+    int _fps;
+    float _recalculatePathTime;
+
 };
 
 

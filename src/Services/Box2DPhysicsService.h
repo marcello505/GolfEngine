@@ -43,6 +43,8 @@ namespace GolfEngine::Services::Physics{
         void setFixedRotation(RigidBody* pRigidBody, bool fixedRotation) override;
         void setGravityScale(RigidBody* pRigidBody, float gravityScale) override;
 
+        std::vector<Collider*> getStaticColliders() override;
+
         // Methods for testing
         int getBodyCount() const;
         int getFixtureCount() const;

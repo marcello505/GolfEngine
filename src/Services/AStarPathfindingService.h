@@ -6,6 +6,7 @@
 #define GOLFENGINE_ASTARPATHFINDINGSERVICE_H
 
 #include "Abstracts/PathfindingService.h"
+#include "Scene/Components/Collider.h"
 #include <limits>
 #include <queue>
 #include <functional>
@@ -20,6 +21,9 @@ namespace GolfEngine::Services::Pathfinding{
     private:
         std::vector<std::reference_wrapper<class Pathfinding>> _pathfindingComponents ;
         static void displayPath(Graph& graph);
+        std::shared_ptr<Graph> _graph;
+        int _nodeDistance {20};
+
     public:
         AStarPathfindingService();
         std::vector<Node> findPath(Node& start, Node& target,Graph& graph) override;
@@ -27,9 +31,18 @@ namespace GolfEngine::Services::Pathfinding{
 
         void removePathfinding(class Pathfinding& pathfinding) override;
 
-        int calculateHeuristic(Node n, Node target);
+        int calculateHeuristic(const Node& n, const Node& target);
 
         void findPathEveryTick() override;
+
+        void createGraph() override;
+        std::shared_ptr<Graph> getGraph() override;
+
+        bool isValidSpot(Vector2 pos) const;
+
+        Node &covertPosToNode(Vector2 position);
+
+        void setNodeDistance(int nodeDistance) override;
     };
 
     struct heuristicValues {

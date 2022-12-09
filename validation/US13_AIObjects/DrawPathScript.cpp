@@ -3,14 +3,16 @@
 //
 
 #include "DrawPathScript.h"
+#include "Services/Singletons/PathfindingSingleton.h"
 
 void DrawPathScript::onStart() {
     pathfinding = _gameObject->get().getComponent<Pathfinding>();
 }
 
 void DrawPathScript::onUpdate() {
+
     if(!pathfinding->get().getPath().empty()){
-        auto graph = pathfinding->get().getGraph();
+        auto graph = GolfEngine::Services::Pathfinding::getService()->getGraph();
 
         for (const auto& nodes : graph->nodes ) {
             if(nodes.tag == NodeTags::Visited){
@@ -23,13 +25,5 @@ void DrawPathScript::onUpdate() {
         for (const auto& node : pathfinding->get().getPath()) {
             graph->drawables.at(node.id)->setColor(Color(0,255,0));
         }
-
-        // Display weigted nodes
-        graph->drawables.at(graph->nodes[131].id)->setColor(Color(255,0,0));
-        graph->drawables.at(graph->nodes[100].id)->setColor(Color(255,0,0));
-        graph->drawables.at(graph->nodes[69].id)->setColor(Color(255,0,0));
-        graph->drawables.at(graph->nodes[38].id)->setColor(Color(255,0,0));
-        graph->drawables.at(graph->nodes[7].id)->setColor(Color(255,0,0));
-
     }
 }

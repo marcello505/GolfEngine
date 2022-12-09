@@ -221,5 +221,19 @@ namespace GolfEngine::Services::Physics{
             body.value()->SetGravityScale(gravityScale);
         }
     }
+
+    std::vector<Collider*> Box2DPhysicsService::getStaticColliders() {
+        std::vector<Collider*> colliders;
+        for (auto rb : _rigidBodies) {
+            if(rb.first->getRigidBodyDef().bodyType == RigidBodyTypes::StaticBody) {
+                for (auto collider: rb.first->getColliders()) {
+                    colliders.emplace_back(collider);
+                };
+            }
+
+        }
+        return colliders;
+
+    }
 }
 

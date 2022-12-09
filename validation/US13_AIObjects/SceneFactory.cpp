@@ -10,7 +10,6 @@
 #include "Services/Singletons/PathfindingSingleton.h"
 #include "Scene/Node.h"
 #include "Scene/Graph.h"
-#include "CreateGraph.h"
 #include "Scene/Components/CircleCollider.h"
 #include "Scene/Components/SpriteComponent.h"
 #include "Scene/Components/Pathfinding.h"
@@ -49,9 +48,7 @@ void SceneFactory::build(Scene& scene) const {
     player.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
     player.addComponent<MovementScript>();
 
-    CreateGraph cp = CreateGraph(colliders, 20);
 
-    auto graph = cp.createGraph();
     auto& enemy = scene.createNewGameObject<GameObject>();
 
     enemy.addComponent<SpriteComponent>(R"(..\..\..\validation\US09_Animations\res\player.png)",Vector2(5,5) );
@@ -59,7 +56,7 @@ void SceneFactory::build(Scene& scene) const {
     enemy.setWorldTransform(Transform(Vector2(100,100), 0, Vector2(1,1)));
     enemy.addComponent<BoxCollider>(Vector2(10,10));
     enemy.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
-    enemy.addComponent<Pathfinding>(&player, graph);
+    enemy.addComponent<Pathfinding>(&player,0.1);
     enemy.addComponent<DrawPathScript>();
 
 

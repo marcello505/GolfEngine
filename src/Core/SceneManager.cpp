@@ -3,6 +3,7 @@
 //
 
 #include "SceneManager.h"
+#include "Services/Singletons/PathfindingSingleton.h"
 
 namespace GolfEngine {
     std::unique_ptr<SceneManager> SceneManager::sceneManager = nullptr;
@@ -29,6 +30,9 @@ namespace GolfEngine {
             _currentScene = std::make_unique<Scene>();
             sceneFactory->second->build(*_currentScene);
             _currentScene->startScene();
+
+            auto* ps = GolfEngine::Services::Pathfinding::getService();
+            ps->createGraph();
         }
     }
 
