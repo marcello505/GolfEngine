@@ -121,6 +121,7 @@ float RigidBody::getAngularVelocity() {
     if(GolfEngine::Services::Physics::hasService()){
         return GolfEngine::Services::Physics::getService()->getAngularVelocity(this);
     }
+    return 0.0f;
 }
 
 std::unique_ptr<ISnapshot> RigidBody::saveSnapshot() {

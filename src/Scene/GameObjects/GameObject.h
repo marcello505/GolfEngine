@@ -25,7 +25,6 @@ private:
         bool active {};
         Transform localTransform {};
         std::vector<std::unique_ptr<ISnapshot>> componentSnapshots {};
-        bool recordable {};
     };
 protected:
     bool _active;
@@ -33,17 +32,17 @@ protected:
     std::vector<std::reference_wrapper<GameObject>> _children;
     std::vector<std::unique_ptr<Component>> _components;
     Transform _localTransform {};
+    const bool _recordable;
 public:
     std::string name;
     std::string tag;
     std::uint32_t layer;
-    bool recordable;
 
 public:
     /// GameObject constructor
     /// \param name The name of the GameObject (nullptr is results in "")
     /// \param tag The tag of the GameObject (nullptr results in "default")
-    GameObject(const char* name = nullptr, const char* tag = nullptr);
+    GameObject(const char* name = nullptr, const char* tag = nullptr, bool recordable = true);
     ~GameObject();
 
     /// Function creates a new Component for the GameObject
@@ -152,6 +151,7 @@ public:
     //IPersistable methods
     std::unique_ptr<ISnapshot> saveSnapshot() override;
     void loadSnapshot(const ISnapshot& rawSnapshot) override;
+    bool isRecordable() const;
 };
 
 

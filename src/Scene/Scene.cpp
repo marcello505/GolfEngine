@@ -49,13 +49,15 @@ GameObject& Scene::getRootGameObject() const{
 void Scene::saveCurrentState(std::vector<std::unique_ptr<ISnapshot>>& list) {
     list.clear();
     for(int i = 0; i < _gameObjects.size(); ++i){
-        list.push_back(_gameObjects[i]->saveSnapshot());
+        if(_gameObjects[i]->isRecordable())
+            list.push_back(_gameObjects[i]->saveSnapshot());
     }
 }
 
 void Scene::loadCurrentState(std::vector<std::unique_ptr<ISnapshot>>& list) {
     for(int i = 0; i < list.size(); ++i){
-        _gameObjects[i]->loadSnapshot(*list[i]);
+        if(_gameObjects[i]->isRecordable())
+            _gameObjects[i]->loadSnapshot(*list[i]);
     }
 }
 
