@@ -99,10 +99,6 @@ namespace GolfEngine::Services::Pathfinding {
 
     }
 
-    void AStarPathfindingService::displayPath(Graph& graph){
-
-    }
-
     int AStarPathfindingService::calculateHeuristic(const Node& start, const Node& target) {
         int x = start.position.x - target.position.x;
         int y = start.position.y - target.position.y;
@@ -182,9 +178,8 @@ namespace GolfEngine::Services::Pathfinding {
         }
 
 
-        auto graph = std::make_shared<Graph>(nodeList);
-        graph->drawables = drawables;
-        _graph = graph;
+       _graph = std::make_unique<Graph>(nodeList);
+        _graph->drawables = drawables;
 
     }
 
@@ -237,8 +232,8 @@ namespace GolfEngine::Services::Pathfinding {
         return const_cast<Node &>(node);
     }
 
-    std::shared_ptr<Graph> AStarPathfindingService::getGraph() {
-        return _graph;
+    Graph& AStarPathfindingService::getGraph() {
+        return *_graph;
     }
 
     void AStarPathfindingService::setNodeDistance(int nodeDistance) {

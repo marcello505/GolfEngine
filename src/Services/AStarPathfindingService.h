@@ -21,7 +21,7 @@ namespace GolfEngine::Services::Pathfinding{
     private:
         std::vector<std::reference_wrapper<class Pathfinding>> _pathfindingComponents ;
         static void displayPath(Graph& graph);
-        std::shared_ptr<Graph> _graph;
+        std::unique_ptr<Graph> _graph;
         int _nodeDistance {20};
 
     public:
@@ -36,7 +36,7 @@ namespace GolfEngine::Services::Pathfinding{
         void findPathEveryTick() override;
 
         void createGraph() override;
-        std::shared_ptr<Graph> getGraph() override;
+        Graph& getGraph() override;
 
         bool isValidSpot(Vector2 pos) const;
 

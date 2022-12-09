@@ -14,16 +14,16 @@ void DrawPathScript::onUpdate() {
     if(!pathfinding->get().getPath().empty()){
         auto graph = GolfEngine::Services::Pathfinding::getService()->getGraph();
 
-        for (const auto& nodes : graph->nodes ) {
+        for (const auto& nodes : graph.nodes ) {
             if(nodes.tag == NodeTags::Visited){
-                graph->drawables.at(nodes.id)->setColor(Color(0,0,255));
+                graph.drawables.at(nodes.id)->setColor(Color(0,0,255));
             }
         }
 
 
 
         for (const auto& node : pathfinding->get().getPath()) {
-            graph->drawables.at(node.id)->setColor(Color(0,255,0));
+            graph.drawables.at(node.id)->setColor(Color(0,255,0));
         }
     }
 }
