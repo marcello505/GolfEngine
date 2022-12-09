@@ -62,7 +62,8 @@ set(SCENE_SOURCES
         src/Scene/Components/BoxCollider.cpp
         src/Scene/Components/CircleCollider.cpp
         src/Scene/Components/SpriteComponent.cpp
-        src/Scene/Particle.cpp)
+        src/Scene/Particle.cpp
+        src/Scene/GameObjects/Camera.cpp)
 
 set(CORE_SOURCES
         src/Core/GameLoop.cpp
@@ -102,3 +103,4 @@ add_subdirectory(validation/US14_PhysicsService)
 add_subdirectory(validation/US101_Particles)
 add_subdirectory(validation/US00_AllServices)
 add_subdirectory(validation/US14_CollisionLogic)
+add_subdirectory(validation/US00_Camera)

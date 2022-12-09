@@ -20,15 +20,13 @@ namespace GolfEngine::Services::Render {
         }
 
         //Initialize PNG AND JPG loading
-        if(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) < 0)
-        {
+        if(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) < 0) {
             printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
         }
 
         //initialize TTF support
         if(TTF_Init() == -1){
             printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
-
         }
 
         SDL_Window* window;
@@ -94,11 +92,16 @@ namespace GolfEngine::Services::Render {
                 case RenderShapeType::ButtonRenderShape:
                     renderButton(dynamic_cast<ButtonRenderShape&>(renderShape));
                     break;
-
             }
         }
 
-        SDL_SetRenderDrawColor(_renderer.get(), 50, 50, 50, 255);
+        // Set the background color
+        if(_mainCamera){
+            Color bgColor {_mainCamera->get().backgroundColor()};
+            SDL_SetRenderDrawColor(_renderer.get(), bgColor.r8, bgColor.g8, bgColor.b8, bgColor.a);
+        }
+        else
+            SDL_SetRenderDrawColor(_renderer.get(), 50, 50, 50, 255);
 
         // Displays all the updates made in the back buffer
         SDL_RenderPresent(_renderer.get());
@@ -398,5 +401,15 @@ namespace GolfEngine::Services::Render {
         throw std::runtime_error("Could not find/load font with path: " + path);
     }
 
+    std::optional<std::reference_wrapper<Camera>> SDLRenderService::getMainCamera() const {
+        if(_mainCamera)
+            return _mainCamera;
+        else
+            return std::nullopt;
+    }
+
+    void SDLRenderService::setMainCamera(Camera &camera) {
+        _mainCamera = camera;
+    }
 }
 
