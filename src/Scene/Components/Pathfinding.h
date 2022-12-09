@@ -22,9 +22,8 @@ public:
     bool getActive() override;
     void setActive(bool active) override;
     void setParentGameObject(GameObject& gameObject) override;
-    void setPath( std::vector<Node> path);
+    void setPath(const std::vector<Node>& path);
     std::vector<Node> getPath();
-    void navigateToPosition();
     void setTarget(GameObject &gameObject);
 
     int countedFrames {0};
@@ -38,8 +37,6 @@ public:
 private:
     GameObject& _target;
     std::shared_ptr<Graph> _graph;
-    int getSmallestNumber(int first, int second);
-    int getBiggestNumber(int first, int second);
     std::vector<Node> _path;
 };
 

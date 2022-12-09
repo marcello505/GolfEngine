@@ -49,16 +49,6 @@ void SceneFactory::build(Scene& scene) const {
     player.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
     player.addComponent<MovementScript>();
 
-
-//    auto& player = scene.createNewGameObject<GameObject>();
-//    go.addComponent<SpriteComponent>("res/player.png");
-//    go.getComponent<SpriteComponent>().setColor(Color(255,255,255,255 ));
-//    go.setWorldTransform(Transform(Vector2(200,200), 0, Vector2(1,1)));
-//    go.addComponent<BoxCollider>(Vector2(50,100));
-//    go.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
-//    go.addComponent<MovementScript>();
-
-
     CreateGraph cp = CreateGraph(colliders, 20);
 
     auto graph = cp.createGraph();
