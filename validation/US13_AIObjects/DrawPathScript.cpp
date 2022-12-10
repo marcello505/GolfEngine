@@ -4,12 +4,16 @@
 
 #include "DrawPathScript.h"
 #include "Services/Singletons/PathfindingSingleton.h"
+#include "Scene/Components/RigidBody.h"
 
 void DrawPathScript::onStart() {
     pathfinding = _gameObject->get().getComponent<Pathfinding>();
 }
 
 void DrawPathScript::onUpdate() {
+auto direction = pathfinding->get().getNewDirection();
+auto rb = &_gameObject.value().get().getComponent<RigidBody>();
+
 
     if(!pathfinding->get().getPath().empty()){
         auto graph = GolfEngine::Services::Pathfinding::getService()->getGraph();

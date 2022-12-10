@@ -30,7 +30,7 @@ public:
     /// \return vector of nodes in path
     std::vector<Node> getPath();
     void setTarget(GameObject &gameObject);
-
+    Vector2 getNewDirection();
 
     /// Return the gameobject this component is navigating to
     /// \return Target gameobject
@@ -46,7 +46,6 @@ public:
 
 private:
     int _countedFrames {0};
-
     GameObject& _target;
     std::vector<Node> _path;
     int _fps;

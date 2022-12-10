@@ -24,6 +24,8 @@ public:
 
     virtual Graph& getGraph() = 0;
 
+    virtual Node& covertPosToNode(Vector2 position) = 0;
+
     virtual void setNodeDistance(int nodeDistance) = 0;
 
 
