@@ -29,7 +29,6 @@ public:
     [[nodiscard]] Color color() const;
     [[nodiscard]] Vector2 pivotPoint() const;
 
-    void setColor(Color color);
 private:
     Rect2 _rect;
     Vector2 _initialSize;

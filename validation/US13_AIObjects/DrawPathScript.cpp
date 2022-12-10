@@ -13,7 +13,7 @@ void DrawPathScript::onStart() {
 void DrawPathScript::onUpdate() {
 auto direction = pathfinding->get().getNewDirection();
 auto rb = &_gameObject.value().get().getComponent<RigidBody>();
-
+    rb->applyForceToCenter(direction.normalized() * 0.01);
 
     if(!pathfinding->get().getPath().empty()){
         auto graph = GolfEngine::Services::Pathfinding::getService()->getGraph();

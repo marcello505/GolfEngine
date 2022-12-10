@@ -25,9 +25,9 @@ void Pathfinding::onUpdate() {
 }
 
 void Pathfinding::onRemove() {
-
+if( GolfEngine::Services::Pathfinding::getService()){
     GolfEngine::Services::Pathfinding::getService()->removePathfinding(*this);
-
+}
 }
 
 bool Pathfinding::getActive() {
@@ -53,9 +53,6 @@ Vector2 Pathfinding::getTargetPosition() {
 void Pathfinding::setPath(const std::vector<Node>& path) {
     _path = path;
     std::reverse(_path.begin(), _path.end());
-    _gameObject->get().setWorldTransform(Transform(Vector2(_path[0].position.x,
-                                                           _path[0].position.y), 0, Vector2(1,1)));
-    getNewDirection();
 }
 
 std::vector<Node> Pathfinding::getPath() {
@@ -96,22 +93,22 @@ Vector2 Pathfinding::getNewDirection()
     }
 
     //set new direction
-    if(nextPos.x < currentNode.position.x && nextPos.y == currentNode.position.y){ // left
-        newDir = Vector2(-1, 0);
-    }else if(nextPos.x > currentNode.position.x && nextPos.y == currentNode.position.y){ // right
-        newDir = Vector2(1, 0);
-    }else if(nextPos.y < currentNode.position.y && nextPos.x == currentNode.position.x){ // up
-        newDir = Vector2(0, -1);
-    }else if(nextPos.y > currentNode.position.y && nextPos.x == currentNode.position.x){ // down
-        newDir = Vector2(0, 1);
-    }else if(nextPos.x < currentNode.position.x && nextPos.y < currentNode.position.y){ // leftUp
-        newDir = Vector2(-1, -1);
-    }else if(nextPos.x < currentNode.position.x && nextPos.y > currentNode.position.y){ // leftDown
-        newDir = Vector2(-1, 1);
-    }else if(nextPos.x > currentNode.position.x && nextPos.y < currentNode.position.y){ // rightUp
-        newDir = Vector2(1, -1);
-    }else if(nextPos.x > currentNode.position.x && nextPos.y > currentNode.position.y){ // rightDown
-        newDir = Vector2(1, 1);
+    if(nextPos.x < getParentGameObjectPosition().x && nextPos.y == getParentGameObjectPosition().y){ // left
+        newDir = Vector2(-1.0f, 0.0f);
+    }else if(nextPos.x > getParentGameObjectPosition().x && nextPos.y == getParentGameObjectPosition().y){ // right
+        newDir = Vector2(1.0f, 0.0f);
+    }else if(nextPos.y < getParentGameObjectPosition().y && nextPos.x == getParentGameObjectPosition().x){ // up
+        newDir = Vector2(0.0f, -1.0f);
+    }else if(nextPos.y > getParentGameObjectPosition().y && nextPos.x == getParentGameObjectPosition().x){ // down
+        newDir = Vector2(0.0f, 1.0f);
+    }else if(nextPos.x < getParentGameObjectPosition().x && nextPos.y < getParentGameObjectPosition().y){ // leftUp
+        newDir = Vector2(-1.0f, -1.0f);
+    }else if(nextPos.x < getParentGameObjectPosition().x && nextPos.y > getParentGameObjectPosition().y){ // leftDown
+        newDir = Vector2(-1.0f, 1.0f);
+    }else if(nextPos.x > getParentGameObjectPosition().x && nextPos.y < getParentGameObjectPosition().y){ // rightUp
+        newDir = Vector2(1.0f, -1.0f);
+    }else if(nextPos.x > getParentGameObjectPosition().x && nextPos.y > getParentGameObjectPosition().y){ // rightDown
+        newDir = Vector2(1.0f, 1.0f);
     }
 
     return newDir;
