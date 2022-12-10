@@ -96,3 +96,18 @@ void RigidBody::setGravityScale(float gravityScale) {
         GolfEngine::Services::Physics::getService()->setGravityScale(this, gravityScale);
     }
 }
+
+Vector2 RigidBody::getLinearVelocity() {
+    if(GolfEngine::Services::Physics::hasService()){
+        return GolfEngine::Services::Physics::getService()->getLinearVelocity(this);
+    }
+
+    return {};
+}
+
+void RigidBody::setLinearVelocity(const Vector2& velocity) {
+    if(GolfEngine::Services::Physics::hasService()){
+        GolfEngine::Services::Physics::getService()->setLinearVelocity(this, velocity);
+    }
+}
+

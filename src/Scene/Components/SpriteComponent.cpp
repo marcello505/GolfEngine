@@ -45,7 +45,9 @@ void SpriteComponent::setParentGameObject(GameObject& gameObject) {
 
 RenderShape& SpriteComponent::getRenderShape() {
     if(_gameObject){
-        _renderShape.applyTransform(_gameObject->get().getWorldTransform());
+        auto transform = _gameObject->get().getWorldTransform();
+        transform.rotation += _rotation; //Offset with own rotation
+        _renderShape.applyTransform(transform);
     }
     return _renderShape;
 }
@@ -72,4 +74,12 @@ void SpriteComponent::setImageSource(Rect2 imageSource) {
 
 void SpriteComponent::setColor(Color color) {
     _renderShape.setColor(color);
+}
+
+void SpriteComponent::setRotation(float degrees) {
+    _rotation = degrees;
+}
+
+float SpriteComponent::getRotation() const {
+    return _rotation;
 }

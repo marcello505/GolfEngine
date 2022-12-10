@@ -48,3 +48,7 @@ RenderShape& BoxCollider::getRenderShape() {
     }
     return _rectRenderShape;
 }
+
+void BoxCollider::setColor(Color color) {
+    _rectRenderShape.setColor(color);
+}

@@ -19,6 +19,7 @@
 using namespace GolfEngine::Services;
 
 void GameLoop::start() {
+
     //Initialize services
     if(Audio::hasService()) Audio::getService()->init();
 
@@ -42,9 +43,6 @@ void GameLoop::start() {
         render();
         findPaths();
     }
-
-    //Free services
-    if(Audio::hasService()) Audio::getService()->free();
 }
 
 void GameLoop::stop() {
@@ -105,6 +103,11 @@ void GameLoop::setFramesPerSeccond(GameTic fps) {
 }
 
 void GameLoop::setAudioService(AudioService *audioService) {
+    if(Audio::hasService()){
+        Audio::getService()->free();
+    }
+
+    audioService->init();
     Audio::setService(audioService);
 }
 
