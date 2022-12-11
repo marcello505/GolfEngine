@@ -67,7 +67,7 @@ namespace GolfEngine::Services::TileMapParser {
         }
 
         // Parse TileSet file
-        std::string tileSetPath = R"(res\)";
+        std::string tileSetPath = "res/";
         tileSetPath += tileSetFileName;
         std::string tileSetFile = readFile(tileSetPath);
         xmlResult = doc.load_string(tileSetFile.c_str());
@@ -76,7 +76,7 @@ namespace GolfEngine::Services::TileMapParser {
             throw std::runtime_error("Unable to parse tile set file content to XML, from path: " + tileSetPath);
 
         // Tile set temp variables
-        std::string tileSetImage = R"(res\)";
+        std::string tileSetImage = "res/";
         int tileSetWidth, tileSetHeight, tileSetColumns, imageWidth, imageHeight;
         std::vector<int> colliderTiles {};
 
