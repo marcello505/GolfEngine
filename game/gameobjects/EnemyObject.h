@@ -7,11 +7,12 @@
 
 
 #include "Scene/GameObjects/GameObject.h"
+#include "PlayerObject.h"
 
 class EnemyObject : public GameObject{
 
 public:
-    EnemyObject();
+    EnemyObject(GameObject *target);
 };
 
 

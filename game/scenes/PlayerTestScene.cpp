@@ -23,21 +23,23 @@ void PlayerTestScene::build(Scene& scene) const {
         scene.createNewGameObject<Wall>(root, Vector2{1267.5f, 360.0f}, Vector2{12.5, 360.0f});
 
         //Inside borders
-        scene.createNewGameObject<Wall>(root, Vector2{640.0f, 360.0f}, Vector2{12.5, 125.0f});
+        scene.createNewGameObject<Wall>(root, Vector2{640.0f, 340.0f}, Vector2{12.5, 300.0f});
     }
 
     auto& projectilePool = scene.createNewGameObject<ProjectilePoolObject>(root, std::ref(scene), 20);
 
-    auto& player = scene.createNewGameObject<PlayerObject>(root, &projectilePool.getComponent<ProjectilePoolScript>());
+    GameObject& player = scene.createNewGameObject<PlayerObject>(root, &projectilePool.getComponent<ProjectilePoolScript>());
     player.setLocalPosition({200.f, 200.f});
 
-    auto& enemy = scene.createNewGameObject<EnemyObject>(root);
+
+
+    auto& enemy = scene.createNewGameObject<EnemyObject>(root, &player);
     enemy.setLocalPosition({400.f, 400.f});
-    auto& enemy1 = scene.createNewGameObject<EnemyObject>(root);
-    enemy1.setLocalPosition({450.f, 400.f});
-    auto& enemy2 = scene.createNewGameObject<EnemyObject>(root);
-    enemy2.setLocalPosition({100.f, 400.f});
-    auto& enemy3 = scene.createNewGameObject<EnemyObject>(root);
+    auto& enemy1 = scene.createNewGameObject<EnemyObject>(root, &player);
+    enemy1.setLocalPosition({750.f, 400.f});
+    auto& enemy2 = scene.createNewGameObject<EnemyObject>(root, &player);
+    enemy2.setLocalPosition({800.f, 100.f});
+    auto& enemy3 = scene.createNewGameObject<EnemyObject>(root, &player);
     enemy3.setLocalPosition({400.f, 150.f});
 
 

@@ -92,7 +92,7 @@ void GameLoop::useDefaultServices() {
     setAudioService(new SDLAudioService());
     setRenderService(new Render::SDLRenderService {});
     setPhysicsService(new Physics::Box2DPhysicsService {});
-    setTileMapParserService(new TileMapParser::PugiXMLTileMapParserService{};
+    setTileMapParserService(new TileMapParser::PugiXMLTileMapParserService{});
     setPathfindingService(new GolfEngine::Services::Pathfinding::AStarPathfindingService {});
 }
 

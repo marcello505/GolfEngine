@@ -9,8 +9,9 @@
 #include "Scene/Components/Animator.h"
 #include "../scripts/EnemyMovementScript.h"
 #include "Scene/Components/AudioSource.h"
+#include "Scene/Components/Pathfinding.h"
 
-EnemyObject::EnemyObject() {
+EnemyObject::EnemyObject(GameObject *target) {
     addComponent<BoxCollider>(Vector2{12.5f, 12.5f});
 
 //
@@ -19,12 +20,14 @@ EnemyObject::EnemyObject() {
     animator.addAnimation("idle", 9, 25, 15.0f);
     animator.addAnimation("moving", 26, 42, 15.0f);
     animator.addReturnTransition("attack", "idle");
-    animator.play("idle", false);
+    animator.play("idle", true);
 //
     RigidBodyDef rbDef {};
     rbDef.fixedRotation = true;
     rbDef.linearDamping = 5.0f;
     addComponent<RigidBody>(rbDef);
     addComponent<GolfEngine::Scene::Components::AudioSource>("res/audio/Zombie-Sound.ogg", false);
-    addComponent<EnemyMovementScript>();
+    addComponent<Pathfinding>(target);
+    addComponent<EnemyMovementScript>(target);
+
 }

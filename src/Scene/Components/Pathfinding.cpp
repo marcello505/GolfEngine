@@ -10,7 +10,7 @@
 #include "Services/Singletons/PathfindingSingleton.h"
 #include "Services/Singletons/RenderSingleton.h"
 
-Pathfinding::Pathfinding(GameObject *target, float recalculatePathTime) : _target{*target}, _fps{60},_recalculatePathTime{recalculatePathTime}  {
+Pathfinding::Pathfinding(GameObject *target, float recalculatePathTime) : _target{*target}, _fps{60}, _recalculatePathTime{recalculatePathTime}  {
 }
 
 
@@ -146,6 +146,7 @@ void Pathfinding::displayGraph(bool displayPath, bool displayVisited) {
 
 
     for (const auto& node : graph.nodes ) {
+
         graph.drawables.at(node.id)->setColor(Color(255,255,255));
         if(displayVisited && node.tag == NodeTags::Visited){
             graph.drawables.at(node.id)->setColor(Color(0,0,255));

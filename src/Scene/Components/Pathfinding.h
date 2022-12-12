@@ -13,7 +13,7 @@
 
 class Pathfinding : public Component{
 public:
-    Pathfinding(GameObject *target, float recalculatePathTime = 1.0 );
+    Pathfinding(GameObject *target, float recalculatePathTime = 0.1 );
 
     // Overrides
     void onStart() override;
