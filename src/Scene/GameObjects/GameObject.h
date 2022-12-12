@@ -43,7 +43,7 @@ public:
     /// \return A reference to newly created component
     template<typename C, typename ... Args>
     C& addComponent(Args... args) {
-        C& newComp = reinterpret_cast<C&>(*_components.emplace_back(std::make_unique<C>(args...)));
+        C& newComp = dynamic_cast<C&>(*_components.emplace_back(std::make_unique<C>(args...)));
         newComp.setParentGameObject(*this);
         newComp.setActive(true);
         return newComp;
@@ -56,11 +56,12 @@ public:
     C& getComponent() const {
         if(!_components.empty()){
             for(auto& comp : _components){
+//                 auto temp = dynamic_cast<typeof(comp.get())>(*comp);
                 // Try to cast to desired component
                 auto* castedComp = dynamic_cast<C*>(comp.get());
                 // Return if cast was successful
                 if(castedComp)
-                    return reinterpret_cast<C&>(*comp.get());
+                    return dynamic_cast<C&>(*comp);
             }
         }
         throw std::runtime_error("No component found of given type in " + name);
@@ -96,6 +97,21 @@ public:
             }
         }
         return false;
+    }
+
+    template<typename C>
+    std::vector<std::reference_wrapper<C>> getComponents(){
+        std::vector<std::reference_wrapper<C>> components{};
+        if(!_components.empty()){
+            for(auto& comp : _components){
+                // Try to cast to desired component
+                auto* castedComp = dynamic_cast<C*>(comp.get());
+                // Add to list if cast was successful
+                if(castedComp)
+                    components.push_back(dynamic_cast<C&>(*comp));
+            }
+        }
+        return std::move(components);
     }
 
     [[nodiscard]] bool isActiveInWorld() const;

@@ -37,9 +37,9 @@ public:
         parent.addChild(newGO);
         return newGO;
     }
-    template<typename GO>
-    GO& createNewGameObject(){
-        return createNewGameObject<GO>(_rootGameObject->get());
+    template<typename GO, typename ... Args>
+    GO& createNewGameObject(Args ... args){
+        return createNewGameObject<GO>(_rootGameObject->get(), std::forward<Args>(args)...);
     }
 };
 

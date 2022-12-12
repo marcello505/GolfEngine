@@ -2,10 +2,11 @@
 // Created by conner on 11/2/2022.
 //
 
-#include <cmath>
+#include "Utilities/Math.h"
 #include "Box2DPhysicsService.h"
 #include "Scene/Components/BoxCollider.h"
 #include "Scene/Components/CircleCollider.h"
+#include "Physics/Box2DCollisionListener.h"
 
 
 namespace GolfEngine::Services::Physics{
@@ -17,6 +18,11 @@ namespace GolfEngine::Services::Physics{
     // Radians to Degrees
     float rad2Deg(float rad){
         return 180.0f * rad / M_PI;
+    }
+    
+    Box2DPhysicsService::Box2DPhysicsService(int velIterations, int posIterations)
+            : _velocityIterations{velIterations}, _positionIterations{posIterations} {
+        _world.SetContactListener(new Box2DCollisionListener{*this});
     }
 
     void Box2DPhysicsService::addRigidBody(RigidBody* pRigidBody) {
@@ -39,7 +45,7 @@ namespace GolfEngine::Services::Physics{
                     bodyDef.type = b2_dynamicBody;
                     break;
                 case RigidBodyTypes::AreaBody:
-                    //TODO figure out how to handle AreaBodies
+                    bodyDef.type = b2_kinematicBody;
                     break;
                 case RigidBodyTypes::KinematicBody:
                     bodyDef.type = b2_kinematicBody;
@@ -57,7 +63,7 @@ namespace GolfEngine::Services::Physics{
             if(parentGameObject != nullptr){
                 worldTransform = parentGameObject->getWorldTransform();
                 bodyDef.position = {worldTransform.position.x / PhysicsSpaceToWorldSpace, worldTransform.position.y / PhysicsSpaceToWorldSpace};
-                bodyDef.angle = deg2Rad(worldTransform.rotation);
+                bodyDef.angle = Utilities::Math::deg2Rad(worldTransform.rotation);
             }
             //bodyDef.position = pRigidBody->getPosition()
             pBody = _world.CreateBody(&bodyDef);
@@ -70,6 +76,9 @@ namespace GolfEngine::Services::Physics{
             fixtureDef.friction = rigidDef.friction;
             fixtureDef.restitution = rigidDef.restitution;
             fixtureDef.density = rigidDef.density;
+
+            if(rigidDef.bodyType == RigidBodyTypes::AreaBody)
+                fixtureDef.isSensor = true;
 
             b2PolygonShape box {};
             b2CircleShape circle {};
@@ -124,7 +133,7 @@ namespace GolfEngine::Services::Physics{
                 //Update position and rotation
                 if(parent != nullptr){
                     auto& position = body->GetPosition();
-                    float rotation = rad2Deg(body->GetAngle());
+                    float rotation = Utilities::Math::rad2Deg(body->GetAngle());
                     parent->setWorldTransform({
                         {position.x * PhysicsSpaceToWorldSpace, position.y * PhysicsSpaceToWorldSpace},
                         rotation,
@@ -166,7 +175,7 @@ namespace GolfEngine::Services::Physics{
         if(body){
             // TODO check if this needs to be divided by PhysicsSpaceToWorldSpace
             b2Vec2 b2Position {transform.position.x / PhysicsSpaceToWorldSpace, transform.position.y / PhysicsSpaceToWorldSpace};
-            float angle = deg2Rad(transform.rotation);
+            float angle = Utilities::Math::deg2Rad(transform.rotation);
             body.value()->SetTransform(b2Position, angle);
         }
     }
@@ -220,6 +229,41 @@ namespace GolfEngine::Services::Physics{
         if(body){
             body.value()->SetGravityScale(gravityScale);
         }
+    }
+
+    std::optional<std::reference_wrapper<RigidBody>> Box2DPhysicsService::getRigidBodyWithB2Body(b2Body& body) {
+        auto result = std::find_if(_rigidBodies.begin(), _rigidBodies.end(), [&](const std::pair<RigidBody*, b2Body*>& pair){
+           return pair.second == &body;
+        });
+
+        // Return if a rigid body has been found
+        if(result != _rigidBodies.end()){
+            return *result->first;
+        }
+
+        return std::nullopt;
+    }
+
+
+    Vector2 Box2DPhysicsService::getLinearVelocity(RigidBody* pBody) {
+        auto body = getB2Body(pBody);
+        if(body){
+            b2Vec2 vel = body.value()->GetLinearVelocity();
+            return {
+                vel.x,
+                vel.y
+            };
+        }
+        return {};
+    }
+
+    void Box2DPhysicsService::setLinearVelocity(RigidBody* pRigidBody, const Vector2& velocity) {
+        auto body = getB2Body(pRigidBody);
+        if(body){
+            b2Vec2 vel = {velocity.x, velocity.y};
+            body.value()->SetLinearVelocity(vel);
+        }
+
     }
 }
 

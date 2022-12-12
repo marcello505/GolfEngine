@@ -8,19 +8,18 @@
 #include "../Services/SDLInputService.h"
 #include "../Services/SDLRenderService.h"
 #include "../Services/Box2DPhysicsService.h"
+#include "../Services/PugiXMLTileMapParserService.h"
 #define GOLFENGINE_SINGLETON_PRIVATE //Grants access to the "private" methods of singletons
 #include "../Services/Singletons/PhysicsSingleton.h"
 #include "../Services/Singletons/AudioSingleton.h"
 #include "../Services/Singletons/RenderSingleton.h"
 #include "../Services/Singletons/InputSingleton.h"
+#include "../Services/Singletons/TileMapParserSingleton.h"
 #include "../Input/ActionMap.h"
 
 using namespace GolfEngine::Services;
 
 void GameLoop::start() {
-    //Initialize services
-    if(Audio::hasService()) Audio::getService()->init();
-
     auto previous = std::chrono::steady_clock::now();
     std::chrono::duration<GameTic, std::milli> lag {0.0f};
 
@@ -39,9 +38,6 @@ void GameLoop::start() {
 
         render();
     }
-
-    //Free services
-    if(Audio::hasService()) Audio::getService()->free();
 }
 
 void GameLoop::stop() {
@@ -80,11 +76,11 @@ void GameLoop::render() {
 }
 
 void GameLoop::useDefaultServices() {
-
     setInputService(new SDLInputService());
     setAudioService(new SDLAudioService());
     setRenderService(new Render::SDLRenderService {});
     setPhysicsService(new Physics::Box2DPhysicsService {});
+    setTileMapParserService(new TileMapParser::PugiXMLTileMapParserService{});
 }
 
 // SETTERS AND GETTERS
@@ -94,6 +90,11 @@ void GameLoop::setFramesPerSeccond(GameTic fps) {
 }
 
 void GameLoop::setAudioService(AudioService *audioService) {
+    if(Audio::hasService()){
+        Audio::getService()->free();
+    }
+
+    audioService->init();
     Audio::setService(audioService);
 }
 
@@ -108,6 +109,10 @@ void GameLoop::setRenderService(RenderService* renderService) {
 
 void GameLoop::setPhysicsService(PhysicsService* physicsService) {
     Physics::setService(physicsService);
+}
+
+void GameLoop::setTileMapParserService(TileMapParserService* tileMapParserService) {
+    TileMapParser::setService(tileMapParserService);
 }
 
 bool GameLoop::isGameRunning() const {

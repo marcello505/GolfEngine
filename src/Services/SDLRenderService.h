@@ -19,6 +19,7 @@
 #include "../Scene/RenderShape/ButtonRenderShape.h"
 #include "Render/Texture.h"
 #include "../Scene/RenderShape/TextRenderShape.h"
+#include "../Scene/RenderShape/TileMapRenderShape.h"
 
 namespace GolfEngine::Services::Render {
 
@@ -63,6 +64,7 @@ private:
     void renderText(TextRenderShape &renderShape);
     void renderCircle(CircleRenderShape &renderShape);
     void renderButton(ButtonRenderShape &renderShape);
+    void renderTileMap(TileMapRenderShape &renderShape);
 
     Texture& loadSprite(const std::string& path);
     void renderSprite(SpriteRenderShape &renderShape);

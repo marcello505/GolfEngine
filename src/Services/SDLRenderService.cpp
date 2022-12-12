@@ -49,7 +49,7 @@ namespace GolfEngine::Services::Render {
         SDL_SetWindowTitle(_window.get(), "Hello World");
         SDL_ShowCursor(1); // 0 is disable cursor, 1 is enable
         SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY,
-                    "2"); // Increases quality with the scaling of textures, 0 nothing, 1 linear filtering, 2 anisotropic filtering
+                    "0"); // Increases quality with the scaling of textures, 0 nothing, 1 linear filtering, 2 anisotropic filtering
 
         //Makes alpha blending possible(used for opacity)
         SDL_SetRenderDrawBlendMode(_renderer.get(), SDL_BLENDMODE_BLEND);
@@ -94,7 +94,9 @@ namespace GolfEngine::Services::Render {
                 case RenderShapeType::ButtonRenderShape:
                     renderButton(dynamic_cast<ButtonRenderShape&>(renderShape));
                     break;
-
+                case RenderShapeType::TileMapRenderShape:
+                    renderTileMap(dynamic_cast<TileMapRenderShape&>(renderShape));
+                    break;
             }
         }
 
@@ -454,5 +456,42 @@ namespace GolfEngine::Services::Render {
         throw std::runtime_error("Could not find/load font with path: " + path);
     }
 
-}
+    void SDLRenderService::renderTileMap(TileMapRenderShape& renderShape) {
+        // Try to load tile set with given path
+        std::optional<std::reference_wrapper<Texture>> t;
+        try {
+            t = loadSprite(renderShape.imagePath());
+        }
+        catch(std::exception& e){
+            std::cout << "Error: " << e.what() << std::endl;
+            return;
+        }
 
+        // Get direct reference to texture for easy access
+        auto& texture {t->get()};
+
+        SDL_Rect srcRect, dstRect;
+        srcRect.w = renderShape.tileSet().tileWidth;
+        srcRect.h = renderShape.tileSet().tileHeight;
+        dstRect.w = renderShape.map().tileWidth * renderShape.scale().x;
+        dstRect.h = renderShape.map().tileHeight * renderShape.scale().y;
+
+        uint8_t rowIndex = 0;
+        auto& map = renderShape.map().map;
+        int tileSetColumns = renderShape.tileSet().columns;
+        int mapColumns = renderShape.map().columns;
+        for(auto& row : map){
+            uint8_t column = 0;
+            for(auto& tile : row){
+                if(tile == 0) {column++; continue;}
+                srcRect.x = ((tile-1) % tileSetColumns) * srcRect.w;
+                srcRect.y = ((tile-1) / tileSetColumns) * srcRect.h;
+                dstRect.x = ((column % mapColumns) * dstRect.w) + renderShape.position().x;
+                dstRect.y = (rowIndex * dstRect.h) + renderShape.position().y;
+                SDL_RenderCopy(_renderer.get(), texture.texture(), &srcRect, &dstRect);
+                column++;
+            }
+            rowIndex++;
+        }
+    }
+}

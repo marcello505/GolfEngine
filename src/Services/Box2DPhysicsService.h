@@ -20,7 +20,7 @@ namespace GolfEngine::Services::Physics{
     class Box2DPhysicsService :  public PhysicsService {
     public:
         // Constructors
-        Box2DPhysicsService(int velIterations, int posIterations) : _velocityIterations{velIterations}, _positionIterations{posIterations} {}
+        Box2DPhysicsService(int velIterations, int posIterations);
         explicit Box2DPhysicsService() : Box2DPhysicsService(DefaultVelocityIterations, DefaultPositionIterations) {}
 
         // Methods
@@ -33,8 +33,10 @@ namespace GolfEngine::Services::Physics{
         void update(GameTic timeStep) override;
         void setGravity(const Vector2& vec2) override;
 
+        // RigidBody specific methods - Getters
+        Vector2 getLinearVelocity(RigidBody* pBody) override;
 
-        // RigidBody specific methods
+        // RigidBody specific methods - Setters
         void applyForceToCenter(RigidBody* pRigidBody, const Vector2& force) override;
         void setTransform(RigidBody* pRigidBody, const Transform& transform) override;
         void setEnabled(RigidBody* pRigidBody, bool enabled) override;
@@ -42,10 +44,13 @@ namespace GolfEngine::Services::Physics{
         void setAngularDamping(RigidBody* pRigidBody, float angularDamping) override;
         void setFixedRotation(RigidBody* pRigidBody, bool fixedRotation) override;
         void setGravityScale(RigidBody* pRigidBody, float gravityScale) override;
+        void setLinearVelocity(RigidBody* pRigidBody, const Vector2& velocity) override;
 
         // Methods for testing
         int getBodyCount() const;
         int getFixtureCount() const;
+
+        std::optional<std::reference_wrapper<RigidBody>> getRigidBodyWithB2Body(b2Body& body);
     private:
         // Fields
         /// Start the box2d world with (0.0, 0.0) gravity
