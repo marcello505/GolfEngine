@@ -67,6 +67,14 @@ namespace GolfEngine::Services::Render {
         // Clear screen
         SDL_RenderClear(_renderer.get());
 
+        if(_mainCamera){
+            camOffset.x = _mainCamera->get().getWorldTransform().position.x - (int)(_screenSizeWidth/2);
+            camOffset.y = _mainCamera->get().getWorldTransform().position.y - (int)(_screenSizeHeight/2);
+        }
+        else {
+            camOffset.x = camOffset.y = 0;
+        }
+
         // Loop through all registered drawables
         for (auto drawable: _drawables) {
 
@@ -176,10 +184,12 @@ namespace GolfEngine::Services::Render {
             point.second = tempX * std::sin(radians) + tempY * std::cos(radians);
         }
 
-        // Translate rect back to original position and set center point to pivot point
+        // Translate rect back to original position and set center point to pivot point and add cam offset
         for (auto &point: points) {
             point.first += xOrigin - xPivot;
             point.second += yOrigin - yPivot;
+            point.first -= camOffset.x;
+            point.second -= camOffset.y;
         }
 
         // Draw the lines to make the rectangle
@@ -203,8 +213,8 @@ namespace GolfEngine::Services::Render {
 
         // Draw Line
         SDL_RenderDrawLineF(_renderer.get(),
-                            renderShape.positionA().x, renderShape.positionA().y,
-                            renderShape.positionB().x, renderShape.positionB().y);
+                            renderShape.positionA().x - camOffset.x, renderShape.positionA().y - camOffset.y,
+                            renderShape.positionB().x - camOffset.x, renderShape.positionB().y - camOffset.y);
     }
 
     void SDLRenderService::renderCircle(CircleRenderShape& renderShape) {
@@ -222,15 +232,14 @@ namespace GolfEngine::Services::Render {
         while (x >= y)
         {
             //  Each of the following renders an octant of the circle
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + x, renderShape.position().y + y);
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + x, renderShape.position().y - y);
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - x, renderShape.position().y - y);
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - x, renderShape.position().y + y);
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + y, renderShape.position().y - x);
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + y, renderShape.position().y + x);
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - y, renderShape.position().y - x);
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - y, renderShape.position().y + x);
-
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + x - camOffset.x, renderShape.position().y + y - camOffset.y);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + x - camOffset.x, renderShape.position().y - y - camOffset.y);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - x - camOffset.x, renderShape.position().y - y - camOffset.y);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - x - camOffset.x, renderShape.position().y + y - camOffset.y);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + y - camOffset.x, renderShape.position().y - x - camOffset.y);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + y - camOffset.x, renderShape.position().y + x - camOffset.y);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - y - camOffset.x, renderShape.position().y - x - camOffset.y);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - y - camOffset.x, renderShape.position().y + x - camOffset.y);
             if (error <= 0)
             {
                 ++y;
@@ -295,8 +304,8 @@ namespace GolfEngine::Services::Render {
 
         // Creating destination rect
         SDL_Rect dstRect;
-        dstRect.x = renderShape.position().x - pivotPoint.x;
-        dstRect.y = renderShape.position().y - pivotPoint.y;
+        dstRect.x = renderShape.position().x - pivotPoint.x - camOffset.x;
+        dstRect.y = renderShape.position().y - pivotPoint.y - camOffset.y;
         dstRect.w = dstWidth;
         dstRect.h = dstHeight;
 
