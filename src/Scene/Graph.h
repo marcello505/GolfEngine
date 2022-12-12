@@ -8,7 +8,7 @@
 #include <utility>
 #include <vector>
 #include "./Node.h"
-#include "../../validation/US00_Rendering/RectDrawable.h"
+#include "PathDrawable.h"
 #include <map>
 
 struct Graph {
@@ -16,7 +16,7 @@ struct Graph {
 
     }
     std::vector<Node> nodes;
-    std::map<int, RectDrawable*> drawables;
+    std::map<int, PathDrawable*> drawables;
 
 };
 

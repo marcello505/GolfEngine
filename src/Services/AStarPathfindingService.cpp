@@ -34,6 +34,7 @@ namespace GolfEngine::Services::Pathfinding {
         std::map<int, heuristicValues> weights;
         for (auto &node : graph.nodes) {
             weights[node.id] = {};
+            node.tag = NodeTags::None;
         }
 
         node_priority_queue priority_list(
@@ -127,7 +128,7 @@ namespace GolfEngine::Services::Pathfinding {
 
     void AStarPathfindingService::createGraph(){
         auto* rs = GolfEngine::Services::Render::getService();
-        std::map<int, RectDrawable*> drawables;
+        std::map<int, PathDrawable*> drawables;
 
         std::vector<Node> nodeList;
 
@@ -144,10 +145,8 @@ namespace GolfEngine::Services::Pathfinding {
         while (heightNodeDistance < height){
             while(widthNodeDistance < width){
                 if(isValidSpot(Vector2(widthNodeDistance, heightNodeDistance))){
-                    auto* rect = new RectDrawable(Rect2(Vector2(widthNodeDistance,heightNodeDistance), Vector2(5,5)),
-                                                  Transform(Vector2(0,0), 0, Vector2(1,1)),
-                                                  Vector2(),
-                                                  Color());
+                    auto* rect = new PathDrawable(Rect2(Vector2(widthNodeDistance,heightNodeDistance), Vector2(5,5)),
+                                                                                                    Color());
 
 
                     rs->addDrawable(*rect);
@@ -190,13 +189,13 @@ namespace GolfEngine::Services::Pathfinding {
 
         for(auto& collider : colliders){
             if(collider->getRenderShape().getType() == RenderShapeType::RectShape){
-                //TODO 10 is statics number should be calculated using nodeDistance
+                //TODO add var to use as margin
 
                 auto* rect = (RectRenderShape *) &collider->getRenderShape();
-                auto LX = rect->rect().position.x - (rect->rect().size.x /2) - _nodeDistance/2;
-                auto RX = rect->rect().position.x + (rect->rect().size.x/2 ) + _nodeDistance/2;
-                auto LY = rect->rect().position.y - (rect->rect().size.y/2) - _nodeDistance/2;
-                auto RY =  rect->rect().position.y + (rect->rect().size.y /2) + _nodeDistance/2;
+                auto LX = rect->rect().position.x - (rect->rect().size.x /2) - rectMargin ;
+                auto RX = rect->rect().position.x + (rect->rect().size.x/2 )+ rectMargin;
+                auto LY = rect->rect().position.y - (rect->rect().size.y/2) - rectMargin;
+                auto RY =  rect->rect().position.y + (rect->rect().size.y /2) + rectMargin;
                 if( pos.x >=  LX &&
                     pos.x <=  RX &&
                     pos.y >= LY &&
@@ -240,6 +239,13 @@ namespace GolfEngine::Services::Pathfinding {
         _nodeDistance = nodeDistance;
 
     }
+
+    void AStarPathfindingService::setMarginAroundRectColliders(int margin) {
+        rectMargin = margin;
+
+    }
+
+
 
 
 }

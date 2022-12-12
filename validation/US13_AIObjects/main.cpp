@@ -27,6 +27,9 @@ int main(int argc, char* argv[])
     ActionMap::getActionMap()->addInputKeyToAction("Down", Key_Down);
 
 
+    //Creates margin around all recColliders
+    if(GolfEngine::Services::Pathfinding::hasService())
+        GolfEngine::Services::Pathfinding::getService()->setMarginAroundRectColliders(10);
 
     GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
     GolfEngine::SceneManager::GetSceneManager().loadScene("main");

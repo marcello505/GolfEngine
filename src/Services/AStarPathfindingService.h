@@ -21,9 +21,11 @@ namespace GolfEngine::Services::Pathfinding{
     class AStarPathfindingService : public PathfindingService {
     private:
         std::vector<std::reference_wrapper<class Pathfinding>> _pathfindingComponents ;
-        static void displayPath(Graph& graph);
         std::unique_ptr<Graph> _graph;
         int _nodeDistance {20};
+        int rectMargin{0};
+
+
 
     public:
         AStarPathfindingService();
@@ -68,7 +70,17 @@ namespace GolfEngine::Services::Pathfinding{
         /// \return Returns node closest to given position
         Node &covertPosToNode(Vector2 position);
 
+
+
+
+        /// Determines the distance between all nodes in graph
+        /// \param nodeDistance distance between each node
         void setNodeDistance(int nodeDistance) override;
+
+        /// Creates a margin around al rect colliders to avoid objects getting stuck
+        /// \param margin the margin around the rectangles.
+        void setMarginAroundRectColliders(int margin) override;
+
     };
 
     struct heuristicValues {

@@ -50,9 +50,7 @@ void SceneFactory::build(Scene& scene) const {
 
 
     auto& enemy = scene.createNewGameObject<GameObject>();
-
     enemy.addComponent<SpriteComponent>(R"(..\..\..\validation\US09_Animations\res\player.png)",Vector2(5,5) );
-    enemy.getComponent<SpriteComponent>().setColor(Color(255,255,255,255 ));
     enemy.setWorldTransform(Transform(Vector2(100,100), 0, Vector2(1,1)));
     enemy.addComponent<BoxCollider>(Vector2(10,10));
     auto def = RigidBodyDef{RigidBodyTypes::DynamicBody};

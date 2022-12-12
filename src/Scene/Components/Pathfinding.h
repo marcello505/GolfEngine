@@ -34,6 +34,12 @@ public:
     /// \return returns vector with direction to target
     Vector2 getNewDirection();
 
+
+    /// Display the Graph in rects
+    /// \param displayPath if true path is colored green
+    /// \param displayVisited if true all visited nodes are colored blue
+    void displayGraph(bool displayPath, bool displayVisited);
+
     /// Return the gameobject this component is navigating to
     /// \return Target gameobject
     Vector2 getTargetPosition();

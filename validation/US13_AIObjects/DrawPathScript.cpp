@@ -11,25 +11,11 @@ void DrawPathScript::onStart() {
 }
 
 void DrawPathScript::onUpdate() {
-auto direction = pathfinding->get().getNewDirection();
-
-
+    auto direction = pathfinding->get().getNewDirection();
     auto rb = &_gameObject.value().get().getComponent<RigidBody>();
     rb->applyForceToCenter(direction * 0.05);
 
     if(!pathfinding->get().getPath().empty()){
-        auto graph = GolfEngine::Services::Pathfinding::getService()->getGraph();
-
-        for (const auto& nodes : graph.nodes ) {
-            if(nodes.tag == NodeTags::Visited){
-                graph.drawables.at(nodes.id)->setColor(Color(0,0,255));
-            }
-        }
-
-
-
-        for (const auto& node : pathfinding->get().getPath()) {
-            graph.drawables.at(node.id)->setColor(Color(0,255,0));
-        }
+        pathfinding->get().displayGraph(true, true);
     }
 }

@@ -28,6 +28,9 @@ public:
 
     virtual void setNodeDistance(int nodeDistance) = 0;
 
+    virtual void setMarginAroundRectColliders(int margin) = 0;
+
+
 
 };
 

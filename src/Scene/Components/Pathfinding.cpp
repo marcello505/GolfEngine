@@ -114,6 +114,23 @@ Vector2 Pathfinding::getNewDirection()
     return newDir.normalized();
 }
 
+void Pathfinding::displayGraph(bool displayPath, bool displayVisited) {
+    if(GolfEngine::Services::Pathfinding::hasService()){
+    auto& graph = GolfEngine::Services::Pathfinding::getService()->getGraph();
+
+    for (const auto& node : graph.nodes ) {
+        graph.drawables.at(node.id)->setColor(Color(255,255,255));
+        if(node.tag == NodeTags::Visited){
+            graph.drawables.at(node.id)->setColor(Color(0,0,255));
+        }
+    }
+
+    for (const auto& node : getPath()) {
+        graph.drawables.at(node.id)->setColor(Color(0,255,0));
+    }
+
+}}
+
 
 
 

@@ -65,7 +65,8 @@ set(SCENE_SOURCES
         src/Scene/Components/BoxCollider.cpp
         src/Scene/Components/CircleCollider.cpp
         src/Scene/Components/SpriteComponent.cpp
-        src/Scene/Particle.cpp)
+        src/Scene/Particle.cpp
+        src/Scene/PathDrawable.cpp)
 
 set(CORE_SOURCES
         src/Core/GameLoop.cpp
