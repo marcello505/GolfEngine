@@ -3,6 +3,8 @@
 //
 
 #include "EnemyMovementScript.h"
+#include "Services/Singletons/PhysicsSingleton.h"
+
 EnemyMovementScript::EnemyMovementScript(GameObject* target) : _target{*target}  {
 
 }
@@ -23,7 +25,13 @@ void EnemyMovementScript::onUpdate() {
 bool EnemyMovementScript::checkIftargetIsInSight() {
     auto pos =  _gameObject->get().getWorldTransform().position;
     auto targetPos =  _target.getWorldTransform().position;
-    
+    if(GolfEngine::Services::Physics::hasService()){
+      auto colliders =  GolfEngine::Services::Physics::getService()->getStaticColliders();
+
+      
+
+    }
+
 
 }
 
