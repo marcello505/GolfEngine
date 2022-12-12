@@ -30,6 +30,8 @@ public:
     /// \return vector of nodes in path
     std::vector<Node> getPath();
     void setTarget(GameObject &gameObject);
+    /// calculates vector displaying direction to target
+    /// \return returns vector with direction to target
     Vector2 getNewDirection();
 
     /// Return the gameobject this component is navigating to

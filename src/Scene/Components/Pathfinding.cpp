@@ -111,7 +111,7 @@ Vector2 Pathfinding::getNewDirection()
         newDir = Vector2(1.0f, 1.0f);
     }
 
-    return newDir;
+    return newDir.normalized();
 }
 
 

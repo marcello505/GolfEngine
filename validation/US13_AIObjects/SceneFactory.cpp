@@ -55,7 +55,10 @@ void SceneFactory::build(Scene& scene) const {
     enemy.getComponent<SpriteComponent>().setColor(Color(255,255,255,255 ));
     enemy.setWorldTransform(Transform(Vector2(100,100), 0, Vector2(1,1)));
     enemy.addComponent<BoxCollider>(Vector2(10,10));
-    enemy.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
+    auto def = RigidBodyDef{RigidBodyTypes::DynamicBody};
+    def.linearDamping = 0.9;
+    def.fixedRotation = true;
+    enemy.addComponent<RigidBody>(def);
     enemy.addComponent<Pathfinding>(&player,0.1);
     enemy.addComponent<DrawPathScript>();
 
