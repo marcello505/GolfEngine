@@ -55,8 +55,8 @@ public:
     void setFullScreen(bool fullScreen) override;
 
     // Getters
-    [[nodiscard]] int screenSizeWidth() const;
-    [[nodiscard]] int screenSizeHeight() const;
+    [[nodiscard]] int screenSizeWidth() const override;
+    [[nodiscard]] int screenSizeHeight() const override;
     [[nodiscard]] bool fullScreen() const;
 private:
     void renderRect(RectRenderShape &renderShape);

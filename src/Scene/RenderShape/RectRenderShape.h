@@ -22,14 +22,13 @@ public:
     /// Applies a transform to the RenderShape properties
     /// \param transform Transform to be applied
     void applyTransform(const Transform& transform) override;
-
+    void setColor(Color color);
     // Getters
     [[nodiscard]] Rect2 rect() const;
     [[nodiscard]] float rotation() const;
     [[nodiscard]] Color color() const;
     [[nodiscard]] Vector2 pivotPoint() const;
 
-    void setColor(Color color);
 private:
     Rect2 _rect;
     Vector2 _initialSize;

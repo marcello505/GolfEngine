@@ -9,6 +9,7 @@
 #include "../Services/SDLRenderService.h"
 #include "../Services/Box2DPhysicsService.h"
 #include "../Services/PugiXMLTileMapParserService.h"
+#include "../Services/AStarPathfindingService.h"
 #define GOLFENGINE_SINGLETON_PRIVATE //Grants access to the "private" methods of singletons
 #include "../Services/Singletons/PhysicsSingleton.h"
 #include "../Services/Singletons/AudioSingleton.h"
@@ -16,10 +17,16 @@
 #include "../Services/Singletons/InputSingleton.h"
 #include "../Services/Singletons/TileMapParserSingleton.h"
 #include "../Input/ActionMap.h"
+#include "../Services/Singletons/PathfindingSingleton.h"
 
 using namespace GolfEngine::Services;
 
 void GameLoop::start() {
+
+    //Initialize services
+    if(Audio::hasService()) Audio::getService()->init();
+
+
     auto previous = std::chrono::steady_clock::now();
     std::chrono::duration<GameTic, std::milli> lag {0.0f};
 
@@ -37,6 +44,7 @@ void GameLoop::start() {
         }
 
         render();
+        findPaths();
     }
 }
 
@@ -74,14 +82,21 @@ void GameLoop::render() {
         Render::getService()->render();
     }
 }
-
+void GameLoop::findPaths() {
+    if(GolfEngine::Services::Pathfinding::hasService()){
+        GolfEngine::Services::Pathfinding::getService()->findPathEveryTick();
+    }
+}
 void GameLoop::useDefaultServices() {
     setInputService(new SDLInputService());
     setAudioService(new SDLAudioService());
     setRenderService(new Render::SDLRenderService {});
     setPhysicsService(new Physics::Box2DPhysicsService {});
-    setTileMapParserService(new TileMapParser::PugiXMLTileMapParserService{});
+    setTileMapParserService(new TileMapParser::PugiXMLTileMapParserService{};
+    setPathfindingService(new GolfEngine::Services::Pathfinding::AStarPathfindingService {});
 }
+
+
 
 // SETTERS AND GETTERS
 
@@ -117,4 +132,8 @@ void GameLoop::setTileMapParserService(TileMapParserService* tileMapParserServic
 
 bool GameLoop::isGameRunning() const {
     return _running;
+}
+
+void GameLoop::setPathfindingService(PathfindingService *pathfindingService) {
+    Pathfinding::setService(pathfindingService);
 }
