@@ -16,6 +16,6 @@ void DrawPathScript::onUpdate() {
     rb->applyForceToCenter(direction * 0.05);
 
     if(!pathfinding->get().getPath().empty()){
-        pathfinding->get().displayGraph(true, true);
+        pathfinding->get().displayGraph(true, false);
     }
 }

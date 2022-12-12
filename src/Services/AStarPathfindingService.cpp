@@ -149,7 +149,6 @@ namespace GolfEngine::Services::Pathfinding {
                                                                                                     Color());
 
 
-                    rs->addDrawable(*rect);
                     drawables.insert(std::make_pair(nodeCounter, rect));
                     nodeIds.push_back(nodeCounter);
 

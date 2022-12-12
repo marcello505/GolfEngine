@@ -8,6 +8,7 @@
 #include <valarray>
 #include "Services/Abstracts/PathfindingService.h"
 #include "Services/Singletons/PathfindingSingleton.h"
+#include "Services/Singletons/RenderSingleton.h"
 
 Pathfinding::Pathfinding(GameObject *target, float recalculatePathTime) : _target{*target}, _fps{60},_recalculatePathTime{recalculatePathTime}  {
 }
@@ -25,9 +26,24 @@ void Pathfinding::onUpdate() {
 }
 
 void Pathfinding::onRemove() {
-if( GolfEngine::Services::Pathfinding::getService()){
-    GolfEngine::Services::Pathfinding::getService()->removePathfinding(*this);
-}
+    if( GolfEngine::Services::Pathfinding::getService()){
+        GolfEngine::Services::Pathfinding::getService()->removePathfinding(*this);
+    }
+
+    if(pathIsRegistered){
+        if(GolfEngine::Services::Pathfinding::hasService()){
+            auto& graph = GolfEngine::Services::Pathfinding::getService()->getGraph();
+
+            if(GolfEngine::Services::Render::hasService()){
+                auto* rs = GolfEngine::Services::Render::getService();
+                for (const auto& drawable : graph.drawables ) {
+                    rs->addDrawable(*drawable.second);
+                }
+                pathIsRegistered = false;
+            }
+        }
+    }
+
 }
 
 bool Pathfinding::getActive() {
@@ -116,17 +132,29 @@ Vector2 Pathfinding::getNewDirection()
 
 void Pathfinding::displayGraph(bool displayPath, bool displayVisited) {
     if(GolfEngine::Services::Pathfinding::hasService()){
-    auto& graph = GolfEngine::Services::Pathfinding::getService()->getGraph();
+        auto& graph = GolfEngine::Services::Pathfinding::getService()->getGraph();
 
-    for (const auto& node : graph.nodes ) {
-        graph.drawables.at(node.id)->setColor(Color(255,255,255));
-        if(node.tag == NodeTags::Visited){
-            graph.drawables.at(node.id)->setColor(Color(0,0,255));
+    if(!pathIsRegistered){
+        if(GolfEngine::Services::Render::hasService()){
+            auto* rs = GolfEngine::Services::Render::getService();
+            for (const auto& drawable : graph.drawables ) {
+                rs->addDrawable(*drawable.second);
+            }
+            pathIsRegistered = true;
         }
     }
 
-    for (const auto& node : getPath()) {
-        graph.drawables.at(node.id)->setColor(Color(0,255,0));
+
+    for (const auto& node : graph.nodes ) {
+        graph.drawables.at(node.id)->setColor(Color(255,255,255));
+        if(displayVisited && node.tag == NodeTags::Visited){
+            graph.drawables.at(node.id)->setColor(Color(0,0,255));
+        }
+    }
+    if(displayPath){
+        for (const auto& node : getPath()) {
+            graph.drawables.at(node.id)->setColor(Color(0,255,0));
+        }
     }
 
 }}

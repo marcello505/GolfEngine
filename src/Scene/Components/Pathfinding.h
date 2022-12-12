@@ -59,6 +59,7 @@ private:
     int _fps;
     float _recalculatePathTime;
 
+    bool pathIsRegistered {false};
 };
 
 
