@@ -14,7 +14,7 @@ public:
     /// \param aspectWidth width of the camera display
     /// \param aspectHeight height of the camera display
     /// \param backgroundColor color used on the background where no sprites are present
-    Camera(float aspectWidth, float aspectHeight, Color backgroundColor = Color{50, 50, 50, 255});
+    Camera(float aspectWidth, float aspectHeight, float zoom = 1.0f, Color backgroundColor = Color{50, 50, 50, 255});
 
     /// Sets the main camera in the render service
     /// \param camera reference to the camera to be set
@@ -24,14 +24,20 @@ public:
     /// \return reference to current main camera
     static std::optional<std::reference_wrapper<Camera>> getMainCamera();
 
+    /// Sets the zoom factor of the camera
+    /// \param zoom Amount of zoom in percent. (1.0f is a standard zoom of 100%)
+    void setZoom(float zoom);
+
     // Getters
     [[nodiscard]] float aspectWidth() const;
     [[nodiscard]] float aspectHeight() const;
     [[nodiscard]] Color backgroundColor() const;
+    [[nodiscard]] float zoom() const;
 private:
     Color _backgroundColor;
     float _aspectWidth;
     float _aspectHeight;
+    float _zoom;
 };
 
 

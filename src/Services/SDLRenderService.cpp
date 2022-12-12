@@ -68,11 +68,17 @@ namespace GolfEngine::Services::Render {
         SDL_RenderClear(_renderer.get());
 
         if(_mainCamera){
-            camOffset.x = _mainCamera->get().getWorldTransform().position.x - (int)(_screenSizeWidth/2);
-            camOffset.y = _mainCamera->get().getWorldTransform().position.y - (int)(_screenSizeHeight/2);
+            // Main OffSet (to center the camera) = Camera position - screen width / 2
+            // Zoom Offset (move objects left and up based on the zoom) = screen width - (screen width / camera zoom) / 2
+            camOffset.x = _mainCamera->get().getWorldTransform().position.x - (int)(_screenSizeWidth/2);// - ((_screenSizeWidth - (_screenSizeWidth / _mainCamera->get().zoom())) / 2);
+            camOffset.y = _mainCamera->get().getWorldTransform().position.y - (int)(_screenSizeHeight/2);// - ((_screenSizeHeight - (_screenSizeHeight / _mainCamera->get().zoom())) / 2);
+            zoomScale.x = zoomScale.y = _mainCamera->get().zoom();
+//            std::cout << "distance: " << (_screenSizeHeight / _mainCamera->get().zoom()) << std::endl;
+            std::cout << "zoom Offset: " << ((_screenSizeWidth - (_screenSizeWidth / _mainCamera->get().zoom())) / 2) << std::endl;
         }
         else {
             camOffset.x = camOffset.y = 0;
+            zoomScale.x = zoomScale.y = 1.0f;
         }
 
         // Loop through all registered drawables
@@ -167,12 +173,12 @@ namespace GolfEngine::Services::Render {
         std::vector<std::pair<float, float>> points;
         points.emplace_back(renderShape.rect().position.x - xOrigin,
                             renderShape.rect().position.y - yOrigin);
-        points.emplace_back(renderShape.rect().position.x + renderShape.rect().size.x - xOrigin,
+        points.emplace_back(renderShape.rect().position.x + (renderShape.rect().size.x * zoomScale.x) - xOrigin,
                             renderShape.rect().position.y - yOrigin);
         points.emplace_back(renderShape.rect().position.x - xOrigin,
-                            renderShape.rect().position.y + renderShape.rect().size.y - yOrigin);
-        points.emplace_back(renderShape.rect().position.x + renderShape.rect().size.x - xOrigin,
-                            renderShape.rect().position.y + renderShape.rect().size.y - yOrigin);
+                            renderShape.rect().position.y + (renderShape.rect().size.y * zoomScale.y) - yOrigin);
+        points.emplace_back(renderShape.rect().position.x + (renderShape.rect().size.x * zoomScale.x) - xOrigin,
+                            renderShape.rect().position.y + (renderShape.rect().size.y * zoomScale.y) - yOrigin);
 
         //Convert degrees to rads
         float radians {(float) (renderShape.rotation() * (M_PI / 180.0f))};
@@ -306,8 +312,8 @@ namespace GolfEngine::Services::Render {
         SDL_Rect dstRect;
         dstRect.x = renderShape.position().x - pivotPoint.x - camOffset.x;
         dstRect.y = renderShape.position().y - pivotPoint.y - camOffset.y;
-        dstRect.w = dstWidth;
-        dstRect.h = dstHeight;
+        dstRect.w = dstWidth * zoomScale.x;
+        dstRect.h = dstHeight * zoomScale.y;
 
         // Convert Rect2 to SDL_Rect only if there is a given size, else just use the full size by giving a nullptr
         SDL_Rect srcRect;

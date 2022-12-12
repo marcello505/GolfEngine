@@ -5,8 +5,8 @@
 #include "Camera.h"
 #include "Services/Singletons/RenderSingleton.h"
 
-Camera::Camera(float aspectWidth, float aspectHeight, Color backgroundColor) : _aspectWidth{aspectWidth}, _aspectHeight{aspectHeight},
-                                                                               _backgroundColor{backgroundColor}{
+Camera::Camera(float aspectWidth, float aspectHeight, float zoom, Color backgroundColor) : _aspectWidth{aspectWidth}, _aspectHeight{aspectHeight},
+                                                                               _zoom{zoom}, _backgroundColor{backgroundColor}{
     // If this is the first camera created in the scene set it as main camera by default
     if(GolfEngine::Services::Render::hasService())
         if(!GolfEngine::Services::Render::getService()->getMainCamera())
@@ -35,4 +35,12 @@ float Camera::aspectHeight() const {
 
 Color Camera::backgroundColor() const {
     return _backgroundColor;
+}
+
+float Camera::zoom() const {
+    return _zoom;
+}
+
+void Camera::setZoom(float zoom) {
+    _zoom = zoom;
 }

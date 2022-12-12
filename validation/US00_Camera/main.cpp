@@ -34,6 +34,10 @@ public:
             else
                 Camera::setMainCamera(*cam1);
         }
+        if(ActionMap::getActionMap()->isJustPressed("zoomIn"))
+            Camera::getMainCamera()->get().setZoom(Camera::getMainCamera()->get().zoom() + 0.1f);
+        if(ActionMap::getActionMap()->isJustPressed("zoomOut"))
+            Camera::getMainCamera()->get().setZoom(Camera::getMainCamera()->get().zoom() - 0.1f);
     }
 };
 
@@ -42,6 +46,7 @@ class SceneFactory : public ISceneFactory{
         auto& go = scene.createNewGameObject<GameObject>();
         go.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
         go.addComponent<BoxCollider>(Vector2{25, 25});
+        go.addComponent<SpriteComponent>(R"(..\..\..\validation\US00_Rendering\res\player.png)", Vector2{2,2}, Rect2());
         go.setLocalTransform(Transform{Vector2{50, 50}, 0, Vector2{1,1}});
 
         auto& wall = scene.createNewGameObject<GameObject>();
@@ -49,9 +54,9 @@ class SceneFactory : public ISceneFactory{
         wall.addComponent<BoxCollider>(Vector2{300, 50});
         wall.setLocalTransform(Transform{Vector2{200, 300}, 0, Vector2{1,1}});
 
-        auto& sprite = scene.createNewGameObject<GameObject>();
-        sprite.addComponent<SpriteComponent>(R"(..\..\..\validation\US00_Rendering\res\player.png)", Vector2{2,2});
-        sprite.setLocalTransform(Transform{Vector2{400, 100}, 0, Vector2{1,1}});
+//        auto& sprite = scene.createNewGameObject<GameObject>();
+//        sprite.addComponent<SpriteComponent>(R"(..\..\..\validation\US00_Rendering\res\player.png)", Vector2{2,2});
+//        sprite.setLocalTransform(Transform{Vector2{400, 100}, 0, Vector2{1,1}});
 
         auto& cam = scene.createNewGameObject<Camera>(go, 640.0f, 480.0f);
 
@@ -76,6 +81,10 @@ int main(int argc, char* argv[]){
     ActionMap::getActionMap()->addInputKeyToAction("down", Key_Down);
     ActionMap::getActionMap()->addAction("switchCam");
     ActionMap::getActionMap()->addInputKeyToAction("switchCam", Key_Space);
+    ActionMap::getActionMap()->addAction("zoomIn");
+    ActionMap::getActionMap()->addInputKeyToAction("zoomIn", Key_RightBracket);
+    ActionMap::getActionMap()->addAction("zoomOut");
+    ActionMap::getActionMap()->addInputKeyToAction("zoomOut", Key_LeftBracket);
 
     GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
     GolfEngine::SceneManager::GetSceneManager().loadScene("main");
