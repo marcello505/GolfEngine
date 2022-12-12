@@ -8,11 +8,13 @@
 #include <memory>
 
 class ISnapshot{
-
+    virtual ~ISnapshot() = default;
 };
 
 class IPersistable{
 public:
+    virtual ~IPersistable() = default;
+
     virtual std::unique_ptr<ISnapshot> saveSnapshot() = 0;
     virtual void loadSnapshot(const ISnapshot& rawSnapshot) = 0;
 };
