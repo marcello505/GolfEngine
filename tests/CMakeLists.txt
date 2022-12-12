@@ -19,7 +19,7 @@ set(SCENE_TEST_SOURCES
         Scene/Components/AudioSourceTests.cpp)
 
 set(UTILITIES_TEST_SOURCES
-        Utilities/Random.cpp)
+        Utilities/RandomTests.cpp)
 
 # Main Project
 add_executable(Golf_Tests main.cpp
