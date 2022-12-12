@@ -3,6 +3,8 @@
 //
 
 #include "ParticleSystem.h"
+#include "Utilities/Math.h"
+#include "Utilities/Random.h"
 
 #include <cmath>
 #include "Services/Singletons/RenderSingleton.h"
@@ -12,10 +14,6 @@ ParticleSystem::ParticleSystem(const std::string &spritePath, int particlesPerSe
 _position{position}, _rotation{rotation}, _color{color},
 _spritePath{spritePath}, _particlesPerSecond{particlesPerSecond}, _lifeTime{lifeTime}, _pixelScale{pixelScale}
 {
-    //TODO if random is used at more places then create global RandomEngine that can be re-used in every class.
-     std::random_device device;
-    _randomEngine = std::make_unique<std::default_random_engine> (device());
-
 }
 
 Particle& ParticleSystem::addParticle(){
@@ -30,19 +28,14 @@ Particle& ParticleSystem::addParticle(){
 
     particle->getSpriteRenderShape().applyTransform(transform);
     if(_spread.y != 0){
-        std::uniform_int_distribution<int> dist {abs(_spread.x), abs(_spread.y)};
-
-        int degree = dist(*_randomEngine);
-        particle.get()->setRadian((M_PI * degree) / 180);
-
+        float degree = GolfEngine::Utilities::Random::getRealRange(std::abs(_spread.x), std::abs(_spread.y));
+        particle.get()->setRadian(GolfEngine::Utilities::Math::deg2Rad(degree));
     }
 
 
     if(_randomVelocity.x != 0 || _randomVelocity.y != 0){
-        std::uniform_real_distribution<float> dist {_randomVelocity.x, _randomVelocity.y};
-        float velocity = dist(*_randomEngine);
+        float velocity = GolfEngine::Utilities::Random::getRealRange(_randomVelocity.x, _randomVelocity.y);
         particle->setVelocity(velocity);
-
     }
 
     return *particle;

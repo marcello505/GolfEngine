@@ -68,8 +68,6 @@ private:
     ///List of all particles
     std::vector<std::unique_ptr<Particle>> particles {};
 
-    std::unique_ptr<std::default_random_engine> _randomEngine;
-
     bool _fade {false};
     bool _looping {false};
 
