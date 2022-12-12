@@ -8,7 +8,6 @@
 #include <memory>
 
 class ISnapshot{
-    virtual ~ISnapshot() = default;
 };
 
 class IPersistable{
