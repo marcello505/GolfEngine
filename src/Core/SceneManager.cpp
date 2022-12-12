@@ -31,8 +31,9 @@ namespace GolfEngine {
             sceneFactory->second->build(*_currentScene);
             _currentScene->startScene();
 
-            auto* ps = GolfEngine::Services::Pathfinding::getService();
-            ps->createGraph();
+            if(GolfEngine::Services::Pathfinding::hasService()){
+                GolfEngine::Services::Pathfinding::getService()->createGraph();
+            }
         }
     }
 
