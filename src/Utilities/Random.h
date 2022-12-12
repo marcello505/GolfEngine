@@ -42,7 +42,7 @@ namespace GolfEngine::Utilities {
         /// \param s the new seed.
         static void setSeed(std::default_random_engine::result_type s);
         /// Set the seed of the RandomEngine to a random one by using the RandomDevice class.
-        static void setRandomSeed();
+        static std::random_device::result_type setRandomSeed();
     private:
         static std::default_random_engine randomEngine;
     };

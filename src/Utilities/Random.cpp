@@ -10,8 +10,10 @@ namespace GolfEngine::Utilities {
         randomEngine.seed(s);
     }
 
-    void Random::setRandomSeed() {
-        randomEngine.seed(std::random_device()());
+    std::random_device::result_type Random::setRandomSeed() {
+        auto seed = std::random_device()();
+        randomEngine.seed(seed);
+        return seed;
     }
 
     bool Random::getBool() {
