@@ -1,17 +1,17 @@
 //
-// Created by Lucas on 23-11-2022.
+// Created by olafv on 12/12/2022.
 //
 
-#ifndef GOLFENGINE_MOVEMENTSCRIPT_H
-#define GOLFENGINE_MOVEMENTSCRIPT_H
+#ifndef GOLFENGINE_BUTTONCLICKSCRIPT_H
+#define GOLFENGINE_BUTTONCLICKSCRIPT_H
 
 
 #include "Scene/Components/BehaviourScript.h"
 
 class ButtonClickScript : public BehaviourScript{
-    public:
-        virtual void onUpdate() override;
+public:
+    virtual void onUpdate() override;
 };
 
 
-#endif //GOLFENGINE_MOVEMENTSCRIPT_H
+#endif //GOLFENGINE_BUTTONCLICKSCRIPT_H

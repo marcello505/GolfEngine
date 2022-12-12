@@ -24,7 +24,7 @@ RenderShape& Button::getRenderShape() {
 }
 
 void Button::onClick() {
-    _buttonRenderShape->_textRenderShape->setText("Clicked!");
+    _isClicked = true;
 }
 
 void Button::setShape() {
@@ -43,6 +43,34 @@ void Button::setShape() {
 
 bool Button::interactable() const {
     return _interactable;
+}
+
+void Button::onUpdate() {
+
+    _isClicked = false;
+
+    if( ActionMap::getActionMap()->isJustPressed("ClickButton")) { // if ClickButton action is just pressed,
+        // which is bound to left-click
+
+        //get range of button area to check if we clicked there
+        std::pair<int, int> buttonXRange(_position.x,_position.x + _width );
+        std::pair<int, int> buttonYRange(_position.y,_position.y + _height );
+
+        auto mousePos = ActionMap::getActionMap()->getMousePosition(); // get mouse pos
+        mousePos.x += 50; // surplus mouserange with visual range
+        mousePos.y += 30;
+
+        if( mousePos.x >= buttonXRange.first && mousePos.x <= buttonXRange.second &&
+            mousePos.y >= buttonYRange.first &&mousePos.y <= buttonYRange.second){ // if mousepos is in buttonarea
+            onClick();
+        }
+    }
+
+    GameObject::onUpdate();
+}
+
+bool Button::isClicked() {
+    return _isClicked;
 }
 
 

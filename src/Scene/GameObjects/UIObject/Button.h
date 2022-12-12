@@ -18,10 +18,12 @@ public:
 
     bool interactable() const;
     RenderShape& getRenderShape() override;
+    void onUpdate() override;
     void onClick();
-
+    bool isClicked();
     std::unique_ptr<Text> _text;
 private:
+    bool _isClicked;
     bool _interactable;
     void setShape();
     std::unique_ptr<ButtonRenderShape> _buttonRenderShape {};
