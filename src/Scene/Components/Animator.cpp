@@ -6,8 +6,8 @@
 
 #include "Animator.h"
 
-Animator::Animator(std::string spriteSheetPath, int spriteSheetRows, int spriteSheetCols, Vector2 spriteSheetCellSize)
-    : _spriteSheetPath{std::move(spriteSheetPath)}, _rows{spriteSheetRows}, _cols{spriteSheetCols}, _cellSize{spriteSheetCellSize}, _fps{60},
+Animator::Animator(std::string spriteSheetPath, int spriteSheetRows, int spriteSheetCols, Vector2 spriteSheetCellSize, Vector2 pixelScale)
+    : _spriteSheetPath{std::move(spriteSheetPath)}, _rows{spriteSheetRows}, _cols{spriteSheetCols}, _cellSize{spriteSheetCellSize}, _pixelScale{pixelScale} ,_fps{60},
     _looping{false}, _countedFrames{0}, _currentCell{0} {
 
 }
@@ -23,7 +23,7 @@ void Animator::onStart() {
     if(_gameObject->get().hasComponent<SpriteComponent>())
         _spriteComponent = _gameObject->get().getComponent<SpriteComponent>();
     else
-        _spriteComponent = _gameObject->get().addComponent<SpriteComponent>(_spriteSheetPath, Vector2(1,1), Rect2(Vector2(0,0), _cellSize));
+        _spriteComponent = _gameObject->get().addComponent<SpriteComponent>(_spriteSheetPath, _pixelScale, Rect2(Vector2(0,0), _cellSize));
 }
 
 void Animator::onUpdate() {

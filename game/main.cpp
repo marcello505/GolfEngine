@@ -5,9 +5,9 @@
 
 // Game includes
 #include "scenes/PlayerTestScene.h"
+#include <SDL.h>
 
-
-int main(){
+int main(int argc, char* argv[]){
     GameLoop gameLoop {};
     gameLoop.useDefaultServices();
 
@@ -33,4 +33,5 @@ int main(){
     GolfEngine::Services::Render::getService()->setScreenSize(1280, 720);
 
     gameLoop.start();
+    return 0;
 }

@@ -8,6 +8,8 @@
 #include "../gameobjects/Wall.h"
 #include "../gameobjects/Projectile.h"
 #include "../gameobjects/ProjectilePoolObject.h"
+#include "../gameobjects/EnemyObject.h"
+#include "Scene/Components/Animator.h"
 
 void PlayerTestScene::build(Scene& scene) const {
     auto& root = scene.createNewGameObject<GameObject>();
@@ -28,4 +30,17 @@ void PlayerTestScene::build(Scene& scene) const {
 
     auto& player = scene.createNewGameObject<PlayerObject>(root, &projectilePool.getComponent<ProjectilePoolScript>());
     player.setLocalPosition({200.f, 200.f});
+
+    auto& enemy = scene.createNewGameObject<EnemyObject>(root);
+    enemy.setLocalPosition({400.f, 400.f});
+    auto& enemy1 = scene.createNewGameObject<EnemyObject>(root);
+    enemy1.setLocalPosition({450.f, 400.f});
+    auto& enemy2 = scene.createNewGameObject<EnemyObject>(root);
+    enemy2.setLocalPosition({100.f, 400.f});
+    auto& enemy3 = scene.createNewGameObject<EnemyObject>(root);
+    enemy3.setLocalPosition({400.f, 150.f});
+
+
+
+
 }
