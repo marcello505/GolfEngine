@@ -1,6 +1,6 @@
 #include <doctest.h>
 
-#include "Core/ProjectSettings.h"
+#include "Core/Settings.h"
 
 // Macro's
 #define NULL_KEY "null"
@@ -10,13 +10,13 @@
 #define BOOLS_KEY "bools"
 #define XML_KEY "xml"
 
-TEST_SUITE("ProjectSettings"){
+TEST_SUITE("Settings"){
     //Single instance
-    auto& projectSettings = GolfEngine::Core::ProjectSettings::getInstance();
+    auto& projectSettings = GolfEngine::Core::Settings::getInstance();
 
     TEST_CASE("Is a singleton"){
-        auto& i1 = GolfEngine::Core::ProjectSettings::getInstance();
-        auto& i2 = GolfEngine::Core::ProjectSettings::getInstance();
+        auto& i1 = GolfEngine::Core::Settings::getInstance();
+        auto& i2 = GolfEngine::Core::Settings::getInstance();
 
         CHECK_EQ(&i1, &i2);
     }

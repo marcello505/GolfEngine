@@ -7,7 +7,7 @@
 #include <pugixml.hpp>
 #include <sstream>
 
-#include "ProjectSettings.h"
+#include "Settings.h"
 
 //XMl keys
 #define XML_ATTR_STRING "string"
@@ -17,23 +17,23 @@
 
 namespace GolfEngine::Core{
 
-    bool ProjectSettings::hasString(const std::string& key) const {
+    bool Settings::hasString(const std::string& key) const {
         return _strings.find(key) != _strings.end();
     }
 
-    bool ProjectSettings::hasInteger(const std::string& key) const {
+    bool Settings::hasInteger(const std::string& key) const {
         return _integers.find(key) != _integers.end();
     }
 
-    bool ProjectSettings::hasFloat(const std::string& key) const {
+    bool Settings::hasFloat(const std::string& key) const {
         return _floats.find(key) != _floats.end();
     }
 
-    bool ProjectSettings::hasBool(const std::string& key) const {
+    bool Settings::hasBool(const std::string& key) const {
         return _bools.find(key) != _bools.end();
     }
 
-    ProjectSettingsTypes ProjectSettings::getType(const std::string& key) const {
+    ProjectSettingsTypes Settings::getType(const std::string& key) const {
         if(hasString(key)){
             return ProjectSettingsTypes::String;
         }
@@ -51,7 +51,7 @@ namespace GolfEngine::Core{
         }
     }
 
-    const std::string& ProjectSettings::getString(const std::string& key) const {
+    const std::string& Settings::getString(const std::string& key) const {
         if(hasString(key)){
             return _strings.at(key);
         }
@@ -60,7 +60,7 @@ namespace GolfEngine::Core{
         }
     }
 
-    int ProjectSettings::getInteger(const std::string& key) const {
+    int Settings::getInteger(const std::string& key) const {
         if(hasInteger(key)){
             return _integers.at(key);
         }
@@ -69,7 +69,7 @@ namespace GolfEngine::Core{
         }
     }
 
-    float ProjectSettings::getFloat(const std::string& key) const {
+    float Settings::getFloat(const std::string& key) const {
         if(hasFloat(key)){
             return _floats.at(key);
         }
@@ -78,7 +78,7 @@ namespace GolfEngine::Core{
         }
     }
 
-    bool ProjectSettings::getBool(const std::string& key) const {
+    bool Settings::getBool(const std::string& key) const {
         if(hasBool(key)){
             return _bools.at(key);
         }
@@ -87,42 +87,42 @@ namespace GolfEngine::Core{
         }
     }
 
-    void ProjectSettings::setInteger(const std::string& key, int value) {
+    void Settings::setInteger(const std::string& key, int value) {
         if(!key.empty()){
             eraseKey(key);
             _integers[key] = value;
         }
     }
 
-    void ProjectSettings::setBool(const std::string& key, bool value) {
+    void Settings::setBool(const std::string& key, bool value) {
         if(!key.empty()){
             eraseKey(key);
             _bools[key] = value;
         }
     }
 
-    void ProjectSettings::setString(const std::string& key, const std::string& value) {
+    void Settings::setString(const std::string& key, const std::string& value) {
         if(!key.empty()){
             eraseKey(key);
             _strings[key] = value;
         }
     }
 
-    void ProjectSettings::setFloat(const std::string& key, float value) {
+    void Settings::setFloat(const std::string& key, float value) {
         if(!key.empty()){
             eraseKey(key);
             _floats[key] = value;
         }
     }
 
-    void ProjectSettings::eraseKey(const std::string& key) {
+    void Settings::eraseKey(const std::string& key) {
         _strings.erase(key);
         _floats.erase(key);
         _bools.erase(key);
         _integers.erase(key);
     }
 
-    std::string ProjectSettings::toXml() const {
+    std::string Settings::toXml() const {
         pugi::xml_document doc {};
 
         //Insert strings
@@ -158,10 +158,10 @@ namespace GolfEngine::Core{
         return resultStream.str();
     }
 
-    void ProjectSettings::fromXml(const std::string& xml){
+    void Settings::fromXml(const std::string& xml){
         pugi::xml_document doc {};
         if(!doc.load_string(xml.c_str())){
-            throw std::runtime_error("ProjectSettings::fromXml() cannot parse the given string to XML");
+            throw std::runtime_error("Settings::fromXml() cannot parse the given string to XML");
         }
 
         //Read and set contents

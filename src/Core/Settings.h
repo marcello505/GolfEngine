@@ -19,20 +19,20 @@ namespace GolfEngine::Core{
         Null
     };
 
-    /// The ProjectSettings class is a singleton that contains any settings for
+    /// The Settings class is a singleton that contains any settings for
     /// the current game. Unlike GameObjects, this data persists in-between scenes.
     /// Every setter will overwrite the previously set value, even if the type is different.
-    class ProjectSettings {
+    class Settings {
     public:
         //Singleton method
-        static ProjectSettings& getInstance(){
-            static ProjectSettings settings {};
+        static Settings& getInstance(){
+            static Settings settings {};
             return settings;
         }
 
         //Deleted methods
-        ProjectSettings(ProjectSettings const&) = delete;
-        void operator=(ProjectSettings const&) = delete;
+        Settings(Settings const&) = delete;
+        void operator=(Settings const&) = delete;
 
         //Setters
         void setInteger(SETTINGS_KEY_PARAMETER key, int value);
@@ -58,7 +58,7 @@ namespace GolfEngine::Core{
         [[nodiscard]] std::string toXml() const;
         void fromXml(const std::string& xml);
     private:
-        ProjectSettings() = default;
+        Settings() = default;
 
         std::map<std::string, std::string> _strings {};
         std::map<std::string, int> _integers {};
