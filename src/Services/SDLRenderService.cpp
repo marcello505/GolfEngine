@@ -107,6 +107,8 @@ namespace GolfEngine::Services::Render {
     }
 
     void SDLRenderService::setScreenSize(int width, int height) {
+        _screenSizeWidth = width;
+        _screenSizeHeight = height;
         SDL_SetWindowSize(_window.get(), width, height);
     }
 

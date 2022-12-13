@@ -8,6 +8,7 @@
 
 // Game includes
 #include "scenes/PlayerTestScene.h"
+#include "scenes/MainMenuScene.h"
 
 
 int main(int argc, char* argv[]){
@@ -35,13 +36,15 @@ int main(int argc, char* argv[]){
     actionMap->addAction("playReplay");
     actionMap->addInputKeyToAction("playReplay", InputKey::Key_P);
 
-    //Scene initialization
-    auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
-    sceneManager.addScene<PlayerTestScene>("playerTest");
-    sceneManager.loadScene("playerTest");
-
     //Render initialization
     GolfEngine::Services::Render::getService()->setScreenSize(1280, 720);
+
+    //Scene initialization
+    auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
+    sceneManager.addScene<MainMenuScene>("menuTest");
+    sceneManager.loadScene("menuTest");
+
+
 
     gameLoop.start();
     return 0;

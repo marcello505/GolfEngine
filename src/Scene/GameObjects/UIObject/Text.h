@@ -17,10 +17,12 @@ class Text : public UIObject {
 public:
     Text(Vector2 pos, float rotation, std::string text, size_t fontSize, Color color, std::string filePath,
          Alignment alignment, bool isButtonPart);
+    ~Text() override;
 
     RenderShape& getRenderShape() override;
     Alignment _alignment;
     TextRenderShape _renderShape;
+
 };
 
 

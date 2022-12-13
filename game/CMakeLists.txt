@@ -8,7 +8,7 @@ set(SCRIPT_SOURCES scripts/PlayerMovementScript.cpp scripts/ProjectilePoolScript
 set(GAMEOBJECTS_SOURCES
         gameobjects/PlayerObject.cpp
         gameobjects/Wall.cpp gameobjects/Projectile.cpp gameobjects/Projectile.h gameobjects/ProjectilePoolObject.cpp gameobjects/ProjectilePoolObject.h gameobjects/TestBlock.cpp gameobjects/TestBlock.h)
-set(SCENE_SOURCES scenes/PlayerTestScene.cpp)
+set(SCENE_SOURCES scenes/PlayerTestScene.cpp scenes/MainMenuScene.cpp)
 
 # Resource files
 add_custom_target(Game_Resources ALL

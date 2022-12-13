@@ -7,14 +7,19 @@
 
 #include "../../Scene/Components/Drawable.h"
 
-class RenderService{
+class RenderService {
 public:
-    virtual void addDrawable(Drawable& drawable) = 0;
-    virtual void removeDrawable(Drawable& drawable) = 0;
+    virtual void addDrawable(Drawable &drawable) = 0;
+
+    virtual void removeDrawable(Drawable &drawable) = 0;
+
     virtual void render() = 0;
+
     virtual void setScreenSize(int width, int height) = 0;
+
     virtual void setFullScreen(bool fullScreen) = 0;
+
+    [[nodiscard]] virtual int screenSizeHeight() const = 0;
+    [[nodiscard]] virtual int screenSizeWidth() const = 0;
 };
-
-
 #endif //SPC_PROJECT_RENDERSERVICE_H
