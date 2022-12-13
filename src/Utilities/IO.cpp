@@ -40,7 +40,7 @@ namespace GolfEngine::Utilities {
         return std::filesystem::exists(path);
     }
 
-    void IO::saveProjectSettings(const std::string& relativePath, const Core::Settings& projectSettings) {
+    void IO::saveSettings(const std::string& relativePath, const Core::Settings& projectSettings) {
         auto path = userDataPath(relativePath);
 
         std::ofstream file {path};
@@ -49,7 +49,7 @@ namespace GolfEngine::Utilities {
         file.close();
     }
 
-    Core::Settings IO::loadProjectSettings(const std::string& relativePath) {
+    Core::Settings IO::loadSettings(const std::string& relativePath) {
         Core::Settings result {};
         auto path = userDataPath(relativePath);
 
@@ -63,7 +63,7 @@ namespace GolfEngine::Utilities {
             }
         }
         else
-            throw std::runtime_error("Unable to open/load file: " + path.string() + "in IO::saveProjectSettings");
+            throw std::runtime_error("Unable to open/load file: " + path.string() + "in IO::saveSettings");
 
         result.fromXml(fileContent);
         return result;

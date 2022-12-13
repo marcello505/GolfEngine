@@ -42,8 +42,8 @@ namespace GolfEngine::Utilities {
         /// \param relativePath path to the file relative to the resource folder
         /// \return True if file exists, otherwise false
         static bool userDataFileExists(const std::string& relativePath);
-        static void saveProjectSettings(const std::string& relativePath, const Core::Settings& projectSettings);
-        static Core::Settings loadProjectSettings(const std::string& relativePath);
+        static void saveSettings(const std::string& relativePath, const Core::Settings& projectSettings);
+        static Core::Settings loadSettings(const std::string& relativePath);
 
     private:
         static std::filesystem::path _convertStringToPath(const std::string& pathString);
