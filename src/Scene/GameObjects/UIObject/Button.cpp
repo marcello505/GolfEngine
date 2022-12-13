@@ -10,12 +10,13 @@
 #include <Scene/GameObjects/UIObject/Alignment.h>
 
 
-Button::Button(int width, int height, Vector2 position, bool interactable, Text *text) {
+Button::Button(int width, int height, Vector2 position, bool interactable, Text *text, std::string onClickActionName) {
     _width = width;
     _height = height;
     _position = position;
     _interactable = interactable;
     _text = text;
+    _onClickActionName =onClickActionName;
     setShape();
 }
 
@@ -55,7 +56,7 @@ void Button::onUpdate() {
 
     _isClicked = false;
 
-    if( ActionMap::getActionMap()->isJustPressed("ClickButton")) { // if ClickButton action is just pressed,
+    if( ActionMap::getActionMap()->isJustPressed(_onClickActionName)) { // if ClickButton action is just pressed,
         // which is bound to left-click
 
         //get range of button area to check if we clicked there

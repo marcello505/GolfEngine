@@ -14,7 +14,7 @@
 class Button : public UIObject{
 
 public:
-    explicit Button(int width, int height, Vector2 position, bool interactable, Text *text);
+    explicit Button(int width, int height, Vector2 position, bool interactable, Text *text, std::string onClickActionName);
     ~Button() override;
 
     bool interactable() const;
@@ -26,6 +26,7 @@ public:
 private:
     bool _isClicked;
     bool _interactable;
+    std::string _onClickActionName;
     void setShape();
     std::unique_ptr<ButtonRenderShape> _buttonRenderShape {};
 };

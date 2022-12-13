@@ -36,15 +36,19 @@ int main(int argc, char* argv[]){
     actionMap->addAction("playReplay");
     actionMap->addInputKeyToAction("playReplay", InputKey::Key_P);
 
+    ActionMap::getActionMap()->addAction("clickButton");
+    ActionMap::getActionMap()->addInputKeyToAction("clickButton", Mouse_Left);
+
     //Render initialization
     GolfEngine::Services::Render::getService()->setScreenSize(1280, 720);
 
     //Scene initialization
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
+    sceneManager.addScene<PlayerTestScene>("playerTest");
     sceneManager.addScene<MainMenuScene>("menuTest");
+
     sceneManager.loadScene("menuTest");
-
-
+    sceneManager.loadScene("playerTest");
 
     gameLoop.start();
     return 0;

@@ -12,6 +12,6 @@ void ZombieScript::onUpdate() {
     timePassed += GolfEngine::Time::getPhysicsDeltaTime();
     if(timePassed > 3.0f){
         timePassed = 0;
-        animator->get().play("attack");
+        animator->get().play("moving");
     }
 }

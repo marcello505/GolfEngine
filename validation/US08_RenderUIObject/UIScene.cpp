@@ -24,8 +24,8 @@ void UIScene::build(Scene& scene) const
 
     //create gameobject for button
     auto& root = scene.createNewGameObject<GameObject>();
-    auto& GOButton = scene.createNewGameObject<Button>(root, 100, 60, Vector2(50, 30), true, text);
-    auto& GOButton2 = scene.createNewGameObject<Button>(root, 100, 60, Vector2(200, 30), true, text2);
+    auto& GOButton = scene.createNewGameObject<Button>(root, 100, 60, Vector2(50, 30), true, text, "ClickButton");
+    auto& GOButton2 = scene.createNewGameObject<Button>(root, 100, 60, Vector2(200, 30), true, text2,  "ClickButton");
 
     //bind click logic to button via behavior script
     ButtonClickScript script;
