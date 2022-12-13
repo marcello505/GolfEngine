@@ -16,7 +16,7 @@ void EnemyMovementScript::onUpdate() {
     if(chasing) {
         auto direction = pathfinding->get().getNewDirection();
         auto rb = &_gameObject.value().get().getComponent<RigidBody>();
-        rb->applyForceToCenter(direction * 0.5);
+        rb->applyLocalForceToCenter(direction * 0.5);
     } else{
         chasing = checkIftargetIsInSight();
     }

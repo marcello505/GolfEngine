@@ -160,7 +160,13 @@ void Pathfinding::displayGraph(bool displayPath, bool displayVisited) {
 
 }}
 
+std::unique_ptr<ISnapshot> Pathfinding::saveSnapshot() {
+    return {};
+}
 
+void Pathfinding::loadSnapshot(const ISnapshot& rawSnapshot) {
+    //Explicitly do nothing
+}
 
 
 
