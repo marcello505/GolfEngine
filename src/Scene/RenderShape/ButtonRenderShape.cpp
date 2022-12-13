@@ -4,9 +4,11 @@
 
 #include "ButtonRenderShape.h"
 
-ButtonRenderShape::ButtonRenderShape(RectRenderShape* rectRenderShape, TextRenderShape* textRenderShape){
+ButtonRenderShape::ButtonRenderShape(RectRenderShape* rectRenderShape, TextRenderShape* textRenderShape,
+                                     Alignment textAlign){
     _rectRenderShape.reset(rectRenderShape);
     _textRenderShape.reset(textRenderShape);
+    _textAlign = textAlign;
 }
 
 RenderShapeType ButtonRenderShape::getType() {

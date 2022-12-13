@@ -11,14 +11,14 @@
 class PlayerScript : public BehaviourScript{
     void onUpdate() override{
         if(ActionMap::getActionMap()->isJustPressed("jump")){
-            _gameObject->get().getComponent<RigidBody>().applyForceToCenter({0,-50});
+            _gameObject->get().getComponent<RigidBody>().applyWorldForceToCenter({0, -50});
         }
 
         if(ActionMap::getActionMap()->isPressed("left")){
-            _gameObject->get().getComponent<RigidBody>().applyForceToCenter({-0.5f,0});
+            _gameObject->get().getComponent<RigidBody>().applyWorldForceToCenter({-0.5f, 0});
         }
         else if (ActionMap::getActionMap()->isPressed("right")){
-            _gameObject->get().getComponent<RigidBody>().applyForceToCenter({0.5f,0});
+            _gameObject->get().getComponent<RigidBody>().applyWorldForceToCenter({0.5f, 0});
         }
     }
 

@@ -3,14 +3,12 @@
 //
 
 #include "Button.h"
+#include "Services/Singletons/RenderSingleton.h"
+#include "Input/ActionMap.h"
 
 #include <utility>
 #include <Scene/GameObjects/UIObject/Alignment.h>
 
-
-[[maybe_unused]] bool Button::interactable() const {
-    return false;
-}
 
 Button::Button(int width, int height, Vector2 position, bool interactable, Text *text) {
     _width = width;
@@ -22,9 +20,12 @@ Button::Button(int width, int height, Vector2 position, bool interactable, Text 
 }
 
 RenderShape& Button::getRenderShape() {
-    return *_buttonRenderShape.get();
+    return *_buttonRenderShape;
 }
 
+void Button::onClick() {
+    _isClicked = true;
+}
 
 void Button::setShape() {
     // setup container of button
@@ -33,17 +34,51 @@ void Button::setShape() {
                                              Vector2(0, 0),
                                              Color(255,255,255,255));
 
-
-    // setup text position relative to the container
-    _text->_renderShape.setPosition(Vector2(renderShape->rect().position.x - _text->_renderShape.fontSize() * 2,
-                                             renderShape->rect().position.y - _text->_renderShape.fontSize() * 0.5));
-
     // setup render shape
-    _buttonRenderShape = std::make_unique<ButtonRenderShape>(renderShape, &_text->_renderShape);
+    _buttonRenderShape = std::make_unique<ButtonRenderShape>(renderShape, &_text->_renderShape,
+                                                             *&_text->_alignment);
+    if(GolfEngine::Services::Render::hasService())
+        GolfEngine::Services::Render::getService()->addDrawable(*this);
 }
 
-void Button::onClick() {
-
+Button::~Button() {
+    if(GolfEngine::Services::Render::hasService())
+        GolfEngine::Services::Render::getService()->removeDrawable(*this);
 }
+
+
+bool Button::interactable() const {
+    return _interactable;
+}
+
+void Button::onUpdate() {
+
+    _isClicked = false;
+
+    if( ActionMap::getActionMap()->isJustPressed("ClickButton")) { // if ClickButton action is just pressed,
+        // which is bound to left-click
+
+        //get range of button area to check if we clicked there
+        std::pair<int, int> buttonXRange(_position.x,_position.x + _width );
+        std::pair<int, int> buttonYRange(_position.y,_position.y + _height );
+
+        auto mousePos = ActionMap::getActionMap()->getMousePosition(); // get mouse pos
+        mousePos.x += 50; // surplus mouserange with visual range
+        mousePos.y += 30;
+
+        if( mousePos.x >= buttonXRange.first && mousePos.x <= buttonXRange.second &&
+            mousePos.y >= buttonYRange.first &&mousePos.y <= buttonYRange.second){ // if mousepos is in buttonarea
+            onClick();
+        }
+    }
+
+    GameObject::onUpdate();
+}
+
+bool Button::isClicked() {
+    return _isClicked;
+}
+
+
 
 

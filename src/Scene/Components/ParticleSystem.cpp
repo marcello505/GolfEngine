@@ -169,3 +169,13 @@ void ParticleSystem::setRandomVelocity(Vector2 randomVelocity) {
     _randomVelocity = randomVelocity;
 
 }
+
+std::unique_ptr<ISnapshot> ParticleSystem::saveSnapshot() {
+    //TODO should this class saved in a snapshot?
+    //Empty on purpose
+    return {};
+}
+
+void ParticleSystem::loadSnapshot(const ISnapshot& rawSnapshot) {
+    //Empty on purpose
+}

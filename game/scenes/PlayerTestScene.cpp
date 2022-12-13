@@ -10,9 +10,12 @@
 #include "../gameobjects/ProjectilePoolObject.h"
 #include "../gameobjects/EnemyObject.h"
 #include "Scene/Components/Animator.h"
+#include "../scripts/SaveStateScript.h"
+#include "../gameobjects/TestBlock.h"
 
 void PlayerTestScene::build(Scene& scene) const {
     auto& root = scene.createNewGameObject<GameObject>();
+    root.addComponent<SaveStateScript>();
 
     //Walls
     {
@@ -24,6 +27,14 @@ void PlayerTestScene::build(Scene& scene) const {
 
         //Inside borders
         scene.createNewGameObject<Wall>(root, Vector2{640.0f, 340.0f}, Vector2{12.5, 300.0f});
+    }
+
+    //Objects
+    {
+        scene.createNewGameObject<TestBlock>(root, Vector2{200.0f, 500.0f});
+        scene.createNewGameObject<TestBlock>(root, Vector2{100.0f, 250.0f});
+        scene.createNewGameObject<TestBlock>(root, Vector2{312.0f, 346.0f});
+
     }
 
     auto& projectilePool = scene.createNewGameObject<ProjectilePoolObject>(root, std::ref(scene), 20);

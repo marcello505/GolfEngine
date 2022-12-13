@@ -90,3 +90,22 @@ void Animator::finishAnimation() {
 void Animator::addReturnTransition(const std::string& from, const std::string& to) {
     _returnTransitions.insert({from, to});
 }
+
+std::unique_ptr<ISnapshot> Animator::saveSnapshot() {
+    auto result = std::make_unique<Snapshot>();
+
+    result->looping = _looping;
+    result->currentCell = _currentCell;
+    result->countedFrames = _countedFrames;
+    result->currentAnimation = _currentAnimation;
+    return result;
+}
+
+void Animator::loadSnapshot(const ISnapshot& rawSnapshot) {
+    auto& snapshot = (Snapshot&)rawSnapshot;
+
+    _looping = snapshot.looping;
+    _currentCell = snapshot.currentCell;
+    _countedFrames = snapshot.countedFrames;
+    _currentAnimation = snapshot.currentAnimation;
+}

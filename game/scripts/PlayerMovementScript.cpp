@@ -2,7 +2,6 @@
 // Created by marcello on 11/29/22.
 //
 
-#include <iostream>
 #include "PlayerMovementScript.h"
 
 void PlayerMovementScript::onStart() {
@@ -34,7 +33,7 @@ void PlayerMovementScript::onUpdate() {
             inputDirection.y += 1.0f;
         }
 
-        _rb->applyForceToCenter(inputDirection.normalized() * playerSpeed);
+        _rb->applyWorldForceToCenter(inputDirection.normalized() * playerSpeed);
     }
 
     //Point to mouse logic

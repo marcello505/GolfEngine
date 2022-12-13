@@ -3,9 +3,13 @@
 #include "Core/GameLoop.h"
 #include "Services/Singletons/RenderSingleton.h"
 
+//TODO find something to fix this
+#include <SDL.h>
+
 // Game includes
 #include "scenes/PlayerTestScene.h"
 #include <SDL.h>
+
 
 int main(int argc, char* argv[]){
     GameLoop gameLoop {};
@@ -25,6 +29,14 @@ int main(int argc, char* argv[]){
     actionMap->addInputKeyToAction("playerDown", InputKey::Key_S);
     actionMap->addAction("playerShoot");
     actionMap->addInputKeyToAction("playerShoot", InputKey::Mouse_Left);
+
+    //Set up recording controls
+    actionMap->addAction("startRecordingReplay");
+    actionMap->addInputKeyToAction("startRecordingReplay", InputKey::Key_I);
+    actionMap->addAction("stopRecordingReplay");
+    actionMap->addInputKeyToAction("stopRecordingReplay", InputKey::Key_O);
+    actionMap->addAction("playReplay");
+    actionMap->addInputKeyToAction("playReplay", InputKey::Key_P);
 
     //Scene initialization
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
