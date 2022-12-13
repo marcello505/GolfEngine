@@ -21,6 +21,8 @@ public:
     virtual void onCollisionExit(RigidBody& other) {}
     virtual void onAreaEnter(RigidBody& other) {}
     virtual void onAreaExit(RigidBody& other) {}
+    std::unique_ptr<ISnapshot> saveSnapshot() override { return {};}
+    void loadSnapshot(const ISnapshot& rawSnapshot) override {}
 };
 
 

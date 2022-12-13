@@ -13,7 +13,7 @@ public:
     //TODO make the _rectRenderShape initialisation more natural
     explicit BoxCollider(const Vector2& vec2) : _shapeExtents{vec2}, _rectRenderShape{{{}, {vec2.x * 2, vec2.y * 2}}} {};
     ColliderShapes getColliderShape() override;
-    const Vector2& getShapeExtents() const;
+    [[nodiscard]] const Vector2& getShapeExtents() const;
 
     // Component overrides
     void onStart() override;
@@ -23,14 +23,19 @@ public:
     void setActive(bool active) override;
     void setParentGameObject(GameObject& gameObject) override;
 
+    std::unique_ptr<ISnapshot> saveSnapshot() override;
+
+    void loadSnapshot(const ISnapshot& rawSnapshot) override;
+
     //Drawable overrides
     RenderShape& getRenderShape() override;
 
     void setColor(Color color);
+
 private:
     bool _active {true};
     RectRenderShape _rectRenderShape;
-    Vector2 _shapeExtents;
+    const Vector2 _shapeExtents;
 };
 
 

@@ -9,32 +9,40 @@
 #include <optional>
 #include <string>
 #include <vector>
-#include "../Transform.h"
-#include "../Components/Component.h"
 #include <algorithm>
 #include <stdexcept>
+
+#include "../Transform.h"
+#include "../Components/Component.h"
+#include "../IPersistable.h"
 
 // Forward declaration
 class Component;
 
-class GameObject {
+class GameObject : public IPersistable{
+private:
+    struct Snapshot : public ISnapshot{
+        bool active {};
+        Transform localTransform {};
+        std::vector<std::unique_ptr<ISnapshot>> componentSnapshots {};
+    };
 protected:
     bool _active;
     std::unique_ptr<std::reference_wrapper<GameObject>> _parent;
     std::vector<std::reference_wrapper<GameObject>> _children;
     std::vector<std::unique_ptr<Component>> _components;
     Transform _localTransform {};
+    const bool _recordable;
 public:
     std::string name;
     std::string tag;
     std::uint32_t layer;
-    bool recordable;
 
 public:
     /// GameObject constructor
     /// \param name The name of the GameObject (nullptr is results in "")
     /// \param tag The tag of the GameObject (nullptr results in "default")
-    GameObject(const char* name = nullptr, const char* tag = nullptr);
+    GameObject(const char* name = nullptr, const char* tag = nullptr, bool recordable = true);
     ~GameObject();
 
     /// Function creates a new Component for the GameObject
@@ -139,6 +147,11 @@ public:
     /// Sets the current local transform so that it matches the given world transform
     /// \param rTransform the world transform that should be set
     void setWorldTransform(const Transform& rTransform);
+
+    //IPersistable methods
+    std::unique_ptr<ISnapshot> saveSnapshot() override;
+    void loadSnapshot(const ISnapshot& rawSnapshot) override;
+    bool isRecordable() const;
 };
 
 
