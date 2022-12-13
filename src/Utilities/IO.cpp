@@ -40,12 +40,16 @@ namespace GolfEngine::Utilities {
         return std::filesystem::exists(path);
     }
 
-    void IO::saveSettings(const std::string& relativePath, const Core::Settings& projectSettings) {
+    void IO::deleteUserDataFile(const std::string& relativePath) {
+        std::filesystem::remove(userDataPath(relativePath));
+    }
+
+    void IO::saveSettings(const std::string& relativePath, const Core::Settings& settings) {
         auto path = userDataPath(relativePath);
 
         std::ofstream file {path};
 
-        file << projectSettings.toXml();
+        file << settings.toXml();
         file.close();
     }
 

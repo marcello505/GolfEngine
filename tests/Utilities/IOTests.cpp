@@ -1,8 +1,41 @@
 #include <doctest.h>
+#include <fstream>
 
 #include "Utilities/IO.h"
 
+using GolfEngine::Utilities::IO;
+
 TEST_SUITE("IO"){
+    TEST_CASE("deleteResourceFile() deletes a file that was just created"){
+        //Arrange
+        auto path = GolfEngine::Utilities::IO::resourcePath("test.txt");
+        std::ofstream fileStream {path};
+
+        //Act
+        fileStream << "Hello World!" << std::endl;
+        fileStream.close();
+
+        //Assert
+        CHECK(IO::resourceFileExists(path));
+        IO::deleteResourceFile(path);
+        CHECK_FALSE(IO::resourceFileExists(path));
+    }
+
+    TEST_CASE("deleteUserDataFile() deletes a file that was just created"){
+        //Arrange
+        auto path = GolfEngine::Utilities::IO::userDataPath("test.txt");
+        std::ofstream fileStream {path};
+
+        //Act
+        fileStream << "Hello World!" << std::endl;
+        fileStream.close();
+
+        //Assert
+        CHECK(IO::userDataFileExists(path));
+        IO::deleteUserDataFile(path);
+        CHECK_FALSE(IO::userDataFileExists(path));
+    }
+
     TEST_CASE("loadSettings() correctly loads in XML saved by saveSettings()"){
         //Arrange
         GolfEngine::Core::Settings settings {};

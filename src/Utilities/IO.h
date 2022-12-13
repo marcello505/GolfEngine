@@ -27,7 +27,7 @@ namespace GolfEngine::Utilities {
         /// \return True if file exists, otherwise false
         static bool resourceFileExists(const std::string& relativePath);
         /// Delete the file from the resource directory
-        /// \param relativePath
+        /// \param relativePath path to the file relative to the resource folder
         static void deleteResourceFile(const std::string& relativePath);
 
         //Userdata Files
@@ -42,7 +42,16 @@ namespace GolfEngine::Utilities {
         /// \param relativePath path to the file relative to the resource folder
         /// \return True if file exists, otherwise false
         static bool userDataFileExists(const std::string& relativePath);
-        static void saveSettings(const std::string& relativePath, const Core::Settings& projectSettings);
+        /// Delete the file from the user data directory
+        /// \param relativePath path to the file relative to the user data folder
+        static void deleteUserDataFile(const std::string& relativePath);
+        /// Save a Setting class as an XML file to the userdata folder
+        /// \param relativePath path to save the Settings in, relative to the user data folder
+        /// \param settings settings object to save to an XML file
+        static void saveSettings(const std::string& relativePath, const Core::Settings& settings);
+        /// Load a XML file into a Setting class and return it
+        /// \param relativePath path to the XML file, relative to the user data folder
+        /// \return Settings instance created from the XML file
         static Core::Settings loadSettings(const std::string& relativePath);
 
     private:
