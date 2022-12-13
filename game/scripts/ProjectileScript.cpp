@@ -26,3 +26,17 @@ void ProjectileScript::shoot(const Transform& transform, const Vector2& directio
     _rigidBody->setLinearVelocity(Vector2{});
     _ticksToLive = 0;
 }
+
+std::unique_ptr<ISnapshot> ProjectileScript::saveSnapshot() {
+    auto result = std::make_unique<Snapshot>();
+    result->dir = _dir;
+    result->ticksToLive = _ticksToLive;
+    return result;
+}
+
+void ProjectileScript::loadSnapshot(const ISnapshot& rawSnapshot) {
+    auto& snapshot = (Snapshot&)rawSnapshot;
+
+    _dir = snapshot.dir;
+    _ticksToLive = snapshot.ticksToLive;
+}

@@ -90,6 +90,8 @@ namespace GameLoopTests{
         void setGravityScale(RigidBody* pRigidBody, float gravityScale) override {}
         Vector2 getLinearVelocity(RigidBody* pBody) override { return {};}
         void setLinearVelocity(RigidBody* pRigidBody, const Vector2& velocity) override {}
+        float getAngularVelocity(RigidBody* pBody) override {return 0;}
+        void setAngularVelocity(RigidBody* pRigidBody, float omega) override {}
     };
 }
 

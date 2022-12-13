@@ -18,6 +18,7 @@ public:
 
     //RigidBody specific methods - Getters
     virtual Vector2 getLinearVelocity(RigidBody* pBody) = 0;
+    virtual float getAngularVelocity(RigidBody* pBody) = 0;
 
     //RigidBody specific methods - Setters
     virtual void applyForceToCenter(RigidBody* pRigidBody, const Vector2& force) = 0;
@@ -28,6 +29,7 @@ public:
     virtual void setFixedRotation(RigidBody* pRigidBody, bool fixedRotation) = 0;
     virtual void setGravityScale(RigidBody* pRigidBody, float gravityScale) = 0;
     virtual void setLinearVelocity(RigidBody* pRigidBody, const Vector2& velocity) = 0;
+    virtual void setAngularVelocity(RigidBody* pRigidBody, float omega) = 0;
 
 };
 
