@@ -4,10 +4,10 @@ cmake_minimum_required(VERSION 3.23)
 set(CMAKE_CXX_STANDARD 17)
 
 # Sources
-set(SCRIPT_SOURCES scripts/PlayerMovementScript.cpp scripts/ProjectilePoolScript.cpp scripts/ProjectileScript.cpp)
+set(SCRIPT_SOURCES scripts/PlayerMovementScript.cpp scripts/ProjectilePoolScript.cpp scripts/ProjectileScript.cpp scripts/PlayerShootScript.cpp scripts/PlayerCollisionScript.cpp scripts/GameManagerScript.cpp)
 set(GAMEOBJECTS_SOURCES
         gameobjects/PlayerObject.cpp
-        gameobjects/Wall.cpp gameobjects/Projectile.cpp gameobjects/Projectile.h gameobjects/ProjectilePoolObject.cpp gameobjects/ProjectilePoolObject.h)
+        gameobjects/Wall.cpp gameobjects/Projectile.cpp gameobjects/ProjectilePoolObject.cpp )
 set(SCENE_SOURCES scenes/PlayerTestScene.cpp)
 
 # Resource files

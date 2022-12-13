@@ -44,9 +44,11 @@ bool RigidBody::getActive() {
 
 void RigidBody::setActive(bool active) {
     _active = active;
-    if(GolfEngine::Services::Physics::hasService()){
-        GolfEngine::Services::Physics::getService()->setEnabled(this, active);
-    }
+//    if(!active)
+//        _flaggedForDisable = true;
+//    if(GolfEngine::Services::Physics::hasService()){
+//        GolfEngine::Services::Physics::getService()->setEnabled(this, active);
+//    }
 }
 
 void RigidBody::setParentGameObject(GameObject& gameObject) {
@@ -109,5 +111,9 @@ void RigidBody::setLinearVelocity(const Vector2& velocity) {
     if(GolfEngine::Services::Physics::hasService()){
         GolfEngine::Services::Physics::getService()->setLinearVelocity(this, velocity);
     }
+}
+
+bool RigidBody::isFlaggedForDisabled() const {
+    return _flaggedForDisable;
 }
 

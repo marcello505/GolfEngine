@@ -27,7 +27,13 @@ bool CircleCollider::getActive() {
 }
 
 void CircleCollider::setActive(bool active) {
+    if(_active == active) return;
+
     _active = active;
+    if(active)
+        onStart();
+    else
+        onRemove();
 }
 
 void CircleCollider::setParentGameObject(GameObject& gameObject) {

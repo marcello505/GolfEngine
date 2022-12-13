@@ -265,5 +265,12 @@ namespace GolfEngine::Services::Physics{
         }
 
     }
+
+    void Box2DPhysicsService::disableFlaggedRigidBodies() {
+        for(auto rb : _rigidBodies){
+            if(rb.first->isFlaggedForDisabled())
+                setEnabled(rb.first, false);
+        }
+    }
 }
 

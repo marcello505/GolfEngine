@@ -2,6 +2,7 @@
 // Created by marcello on 12/1/22.
 //
 
+#include <iostream>
 #include "ProjectileScript.h"
 
 void ProjectileScript::onStart() {
@@ -11,10 +12,12 @@ void ProjectileScript::onStart() {
 
 void ProjectileScript::onUpdate() {
     if(_ticksToLive < 30){
-        _rigidBody->setLinearVelocity(_dir * 20.0f);
+        _rigidBody->setLinearVelocity(_dir * _bulletSpeed);
         _ticksToLive++;
     }
-    else{
+    else {
+        _gameObject->get().setLocalPosition({0,0});
+        _rigidBody->setTransform(_gameObject->get().getWorldTransform());
         _gameObject->get().setActive(false);
     }
 }
@@ -25,4 +28,15 @@ void ProjectileScript::shoot(const Transform& transform, const Vector2& directio
     _rigidBody->setTransform(transform);
     _rigidBody->setLinearVelocity(Vector2{});
     _ticksToLive = 0;
+}
+
+void ProjectileScript::onCollisionEnter(RigidBody& other) {
+    if(other.getParentGameObject()->tag == "enemy")
+    {
+        // TODO kill the enemy
+    }
+
+    if(_ticksToLive < 30){
+        _ticksToLive = 31;
+    }
 }

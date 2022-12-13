@@ -2,12 +2,13 @@
 // Engine includes
 #include "Core/GameLoop.h"
 #include "Services/Singletons/RenderSingleton.h"
+#include <SDL.h>
 
 // Game includes
 #include "scenes/PlayerTestScene.h"
 
 
-int main(){
+int main(int argc, char* argv[]){
     GameLoop gameLoop {};
     gameLoop.useDefaultServices();
 
@@ -23,6 +24,10 @@ int main(){
     actionMap->addInputKeyToAction("playerDown", InputKey::Key_S);
     actionMap->addAction("playerShoot");
     actionMap->addInputKeyToAction("playerShoot", InputKey::Mouse_Left);
+    actionMap->addAction("playerReload");
+    actionMap->addInputKeyToAction("playerReload", InputKey::Key_R);
+    actionMap->addAction("restart");
+    actionMap->addInputKeyToAction("restart", InputKey::Key_Return);
 
     //Scene initialization
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
@@ -33,4 +38,6 @@ int main(){
     GolfEngine::Services::Render::getService()->setScreenSize(1280, 720);
 
     gameLoop.start();
+
+    return 0;
 }

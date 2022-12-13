@@ -35,7 +35,13 @@ bool BoxCollider::getActive() {
 }
 
 void BoxCollider::setActive(bool active) {
+    if(_active == active) return;
+
     _active = active;
+    if(active)
+        onStart();
+    else
+        onRemove();
 }
 
 void BoxCollider::setParentGameObject(GameObject& gameObject) {

@@ -46,6 +46,8 @@ namespace GolfEngine::Services::Physics{
         void setGravityScale(RigidBody* pRigidBody, float gravityScale) override;
         void setLinearVelocity(RigidBody* pRigidBody, const Vector2& velocity) override;
 
+        void disableFlaggedRigidBodies() override;
+
         // Methods for testing
         int getBodyCount() const;
         int getFixtureCount() const;

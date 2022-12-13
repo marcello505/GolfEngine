@@ -57,8 +57,11 @@ public:
     void setFixedRotation(bool fixedRotation);
     void setGravityScale(float gravityScale);
     void setLinearVelocity(const Vector2& velocity);
+
+    bool isFlaggedForDisabled() const;
 private:
     bool _active {true};
+    bool _flaggedForDisable {false};
     RigidBodyDef _rigidBodyDef;
 };
 

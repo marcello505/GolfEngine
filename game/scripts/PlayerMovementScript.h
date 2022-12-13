@@ -16,18 +16,17 @@
 
 class PlayerMovementScript : public BehaviourScript {
 public:
-    explicit PlayerMovementScript(ProjectilePoolScript* projectilePoolScript) : _projectilePool{projectilePoolScript} {}
     void onStart() override;
     void onUpdate() override;
 
-    float playerSpeed {1.0f};
+    float playerSpeed {4.0f};
 private:
     SpriteComponent* _sprite {};
     RigidBody* _rb {};
     ActionMap* _actionMap {};
     Animator* _animator {};
-    ProjectilePoolScript* _projectilePool {};
-    GolfEngine::Scene::Components::AudioSource* _gunShotAudio {};
+
+    float rotationOffset {5.0f};
 };
 
 

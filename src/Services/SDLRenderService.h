@@ -42,6 +42,8 @@ public:
     /// \param drawable to be removed
     void removeDrawable(Drawable& drawable) override;
 
+    bool isRegistered(Drawable &drawable) override;
+
     /// Renders all drawables in registered drawable list
     void render() override;
 
