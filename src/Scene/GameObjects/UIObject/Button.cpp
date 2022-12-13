@@ -15,7 +15,7 @@ Button::Button(int width, int height, Vector2 position, bool interactable, Text 
     _height = height;
     _position = position;
     _interactable = interactable;
-    _text = std::unique_ptr<Text>{text};
+    _text = text;
     setShape();
 }
 
