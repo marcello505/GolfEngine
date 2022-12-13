@@ -26,6 +26,8 @@ struct RigidBodyDef{
     float friction {0.2f};
     float restitution {0.0f};
     float density {1.0f};
+    /// Setting this to true give more accurate collision behavior at the cost of more processing power
+    bool intensiveCollisions {false};
 };
 
 
@@ -55,7 +57,8 @@ public:
     float getAngularVelocity();
 
     //Pass Through methods - Setters
-    void applyForceToCenter(const Vector2& force);
+    void applyLocalForceToCenter(const Vector2& force);
+    void applyWorldForceToCenter(const Vector2& force);
     void setTransform(const Transform& transform);
     void setLinearDamping(float linearDamping);
     void setAngularDamping(float angularDamping);
