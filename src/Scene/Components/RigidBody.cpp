@@ -61,9 +61,15 @@ GameObject* RigidBody::getParentGameObject() const {
         return nullptr;
 }
 
-void RigidBody::applyForceToCenter(const Vector2& force) {
+void RigidBody::applyLocalForceToCenter(const Vector2& force) {
     if(GolfEngine::Services::Physics::hasService()){
-        GolfEngine::Services::Physics::getService()->applyForceToCenter(this, force);
+        GolfEngine::Services::Physics::getService()->applyLocalForceToCenter(this, force);
+    }
+}
+
+void RigidBody::applyWorldForceToCenter(const Vector2& force) {
+    if(GolfEngine::Services::Physics::hasService()){
+        GolfEngine::Services::Physics::getService()->applyWorldForceToCenter(this, force);
     }
 }
 
@@ -142,5 +148,6 @@ void RigidBody::loadSnapshot(const ISnapshot& rawSnapshot) {
     setAngularVelocity(snapshot.angularVelocity);
     setLinearVelocity(snapshot.linearVelocity);
 }
+
 
 

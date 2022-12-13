@@ -33,7 +33,7 @@ void PlayerMovementScript::onUpdate() {
             inputDirection.y += 1.0f;
         }
 
-        _rb->applyForceToCenter(inputDirection.normalized() * playerSpeed);
+        _rb->applyWorldForceToCenter(inputDirection.normalized() * playerSpeed);
     }
 
     //Point to mouse logic
