@@ -23,7 +23,7 @@ EnemyObject::EnemyObject(GameObject *target) {
     animator.play("idle", true);
 //
     RigidBodyDef rbDef {};
-    rbDef.fixedRotation = true;
+ //   rbDef.fixedRotation = true;
     rbDef.linearDamping = 5.0f;
     addComponent<RigidBody>(rbDef);
     addComponent<GolfEngine::Scene::Components::AudioSource>("res/audio/Zombie-Sound.ogg", false);

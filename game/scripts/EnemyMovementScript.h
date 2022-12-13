@@ -15,10 +15,11 @@ public:
     void onStart() override;
 
     void onUpdate() override;
+    void rotateEnemy();
 private:
     float timePassed = 0;
     std::optional<std::reference_wrapper<Pathfinding>> pathfinding;
-    bool chasing;
+    bool chasing {false};
     GameObject& _target;
 
     bool checkIftargetIsInSight();

@@ -13,10 +13,11 @@ void EnemyMovementScript::onStart() {
 }
 
 void EnemyMovementScript::onUpdate() {
-    if(chasing) {
+    rotateEnemy();
+    if(true) {
         auto direction = pathfinding->get().getNewDirection();
         auto rb = &_gameObject.value().get().getComponent<RigidBody>();
-        rb->applyLocalForceToCenter(direction * 0.5);
+        rb->applyWorldForceToCenter(direction * 0.5);
     } else{
         chasing = checkIftargetIsInSight();
     }
@@ -26,13 +27,18 @@ bool EnemyMovementScript::checkIftargetIsInSight() {
     auto pos =  _gameObject->get().getWorldTransform().position;
     auto targetPos =  _target.getWorldTransform().position;
     if(GolfEngine::Services::Physics::hasService()){
-      auto colliders =  GolfEngine::Services::Physics::getService()->getStaticColliders();
+      auto ps =  GolfEngine::Services::Physics::getService();
+      ps->raycastWorld(&_gameObject->get().getComponent<RigidBody>(), &_target.getComponent<RigidBody>());
 
-      
 
     }
+    return false;
+}
 
+void EnemyMovementScript::rotateEnemy() {
 
+    float angleToMouse = _gameObject->get().getWorldTransform().position.angleToDegrees(_target.getWorldTransform().position);
+    _gameObject->get().setLocalRotation(angleToMouse);
 }
 
 

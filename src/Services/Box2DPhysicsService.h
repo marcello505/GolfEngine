@@ -17,6 +17,10 @@
 #define DefaultPositionIterations 3
 
 namespace GolfEngine::Services::Physics{
+    class rayCastCallback : public b2RayCastCallback{
+        float ReportFixture(b2Fixture *fixture, const b2Vec2 &point, const b2Vec2 &normal, float fraction) override;
+    };
+
     class Box2DPhysicsService :  public PhysicsService {
     public:
         // Constructors
@@ -36,6 +40,7 @@ namespace GolfEngine::Services::Physics{
         // RigidBody specific methods - Getters
         Vector2 getLinearVelocity(RigidBody* pBody) override;
         float getAngularVelocity(RigidBody* pBody) override;
+        bool raycastWorld(RigidBody* start, RigidBody* target) override;
 
         // RigidBody specific methods - Setters
         void applyLocalForceToCenter(RigidBody* pRigidBody, const Vector2& force) override;
