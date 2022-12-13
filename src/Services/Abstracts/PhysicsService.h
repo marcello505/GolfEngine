@@ -21,7 +21,8 @@ public:
     virtual float getAngularVelocity(RigidBody* pBody) = 0;
 
     //RigidBody specific methods - Setters
-    virtual void applyForceToCenter(RigidBody* pRigidBody, const Vector2& force) = 0;
+    virtual void applyLocalForceToCenter(RigidBody* pRigidBody, const Vector2& force) = 0;
+    virtual void applyWorldForceToCenter(RigidBody* pRigidBody, const Vector2& force) = 0;
     virtual void setTransform(RigidBody* pRigidBody, const Transform& transform) = 0;
     virtual void setEnabled(RigidBody* pRigidBody, bool enabled) = 0;
     virtual void setLinearDamping(RigidBody* pRigidBody, float linearDamping) = 0;

@@ -55,7 +55,8 @@ public:
     float getAngularVelocity();
 
     //Pass Through methods - Setters
-    void applyForceToCenter(const Vector2& force);
+    void applyLocalForceToCenter(const Vector2& force);
+    void applyWorldForceToCenter(const Vector2& force);
     void setTransform(const Transform& transform);
     void setLinearDamping(float linearDamping);
     void setAngularDamping(float angularDamping);

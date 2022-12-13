@@ -38,7 +38,8 @@ namespace GolfEngine::Services::Physics{
         float getAngularVelocity(RigidBody* pBody) override;
 
         // RigidBody specific methods - Setters
-        void applyForceToCenter(RigidBody* pRigidBody, const Vector2& force) override;
+        void applyLocalForceToCenter(RigidBody* pRigidBody, const Vector2& force) override;
+        void applyWorldForceToCenter(RigidBody* pRigidBody, const Vector2& force) override;
         void setTransform(RigidBody* pRigidBody, const Transform& transform) override;
         void setEnabled(RigidBody* pRigidBody, bool enabled) override;
         void setLinearDamping(RigidBody* pRigidBody, float linearDamping) override;
