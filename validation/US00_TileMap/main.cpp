@@ -12,16 +12,16 @@ class MoveScript : public BehaviourScript {
 public:
     void onUpdate() override{
         if(ActionMap::getActionMap()->isPressed("left")){
-            _gameObject->get().getComponent<RigidBody>().applyForceToCenter(Vector2{-0.2f, 0});
+            _gameObject->get().getComponent<RigidBody>().applyWorldForceToCenter(Vector2{-0.2f, 0});
         }
         if(ActionMap::getActionMap()->isPressed("right")){
-            _gameObject->get().getComponent<RigidBody>().applyForceToCenter(Vector2{0.2f, 0});
+            _gameObject->get().getComponent<RigidBody>().applyWorldForceToCenter(Vector2{0.2f, 0});
         }
         if(ActionMap::getActionMap()->isPressed("up")){
-            _gameObject->get().getComponent<RigidBody>().applyForceToCenter(Vector2{0, -0.2f});
+            _gameObject->get().getComponent<RigidBody>().applyWorldForceToCenter(Vector2{0, -0.2f});
         }
         if(ActionMap::getActionMap()->isPressed("down")){
-            _gameObject->get().getComponent<RigidBody>().applyForceToCenter(Vector2{0, 0.2f});
+            _gameObject->get().getComponent<RigidBody>().applyWorldForceToCenter(Vector2{0, 0.2f});
         }
     }
 };

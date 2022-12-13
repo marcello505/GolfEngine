@@ -52,3 +52,12 @@ RenderShape& CircleCollider::getRenderShape() {
 float CircleCollider::getRadius() const {
     return _radius;
 }
+
+std::unique_ptr<ISnapshot> CircleCollider::saveSnapshot() {
+    //Empty on purpose
+    return {};
+}
+
+void CircleCollider::loadSnapshot(const ISnapshot& rawSnapshot) {
+    //Empty on purpose
+}

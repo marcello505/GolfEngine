@@ -11,7 +11,9 @@
 Projectile::Projectile() {
     tag = "projectile";
     addComponent<CircleCollider>(7.0f);
-    addComponent<RigidBody>();
+    RigidBodyDef def {};
+    def.intensiveCollisions = true;
+    addComponent<RigidBody>(def);
     addComponent<SpriteComponent>(R"(res/sprites/bullet.png)", Vector2{1.75f,1.75f});
     addComponent<ProjectileScript>();
 }

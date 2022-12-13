@@ -71,3 +71,11 @@ void TiledComponent::initColliders() {
         rowIndex++;
     }
 }
+
+std::unique_ptr<ISnapshot> TiledComponent::saveSnapshot() {
+    return {};
+}
+
+void TiledComponent::loadSnapshot(const ISnapshot& rawSnapshot) {
+    //Explicitly do nothing
+}

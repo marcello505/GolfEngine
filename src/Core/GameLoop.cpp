@@ -60,8 +60,11 @@ void GameLoop::update() {
     }
 
     // Update scene
-    if(GolfEngine::SceneManager::GetSceneManager().hasCurrentScene())
-        GolfEngine::SceneManager::GetSceneManager().getCurrentScene().updateScene();
+    if(GolfEngine::SceneManager::GetSceneManager().hasCurrentScene()){
+        auto& currentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
+        currentScene.updateReplay();
+        currentScene.updateScene();
+    }
 
     if(ActionMap::getActionMap()){
         ActionMap::getActionMap()->update();
@@ -95,7 +98,8 @@ void GameLoop::setAudioService(AudioService *audioService) {
         Audio::getService()->free();
     }
 
-    audioService->init();
+    if(audioService)
+        audioService->init();
     Audio::setService(audioService);
 }
 

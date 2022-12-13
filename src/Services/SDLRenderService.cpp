@@ -132,7 +132,61 @@ namespace GolfEngine::Services::Render {
 
     void SDLRenderService::renderButton(ButtonRenderShape &renderShape) {
         renderRect(*renderShape._rectRenderShape);
-        renderText(*renderShape._textRenderShape);
+
+        std::optional<std::reference_wrapper<TTF_Font>> f;
+
+        try{
+            f = loadFont(renderShape._textRenderShape->filePath(), renderShape._textRenderShape->fontSize());
+        } catch(std::exception& e){
+            std::cout << "Error: " << e.what() << std::endl;
+            return;
+        }
+
+        // Get direct reference to texture for easy access
+        auto& font {f->get()};
+
+        SDL_Surface* surface = TTF_RenderText_Solid(&font, renderShape._textRenderShape->text().c_str(),
+                                                    {renderShape._textRenderShape->color().r8,
+                                                     renderShape._textRenderShape->color().g8,
+                                                     renderShape._textRenderShape->color().b8});
+
+        if(surface == nullptr){
+            printf("Unable to load image %s, Error: %s\n",
+                   renderShape._textRenderShape->filePath().c_str(), IMG_GetError());
+            return;
+        }
+
+        SDL_Rect dstRect;
+        // center text to button container
+        if(renderShape._textAlign == Alignment::Left){
+            dstRect.x = renderShape._rectRenderShape->rect().position.x  - (surface->w);
+        } else if(renderShape._textAlign == Alignment::Center){
+            dstRect.x = renderShape._rectRenderShape->rect().position.x  - (surface->w / 2.0);
+        } else{
+            dstRect.x = renderShape._rectRenderShape->rect().position.x  - (surface->w / 4.0);
+        }
+
+
+        dstRect.y = renderShape._rectRenderShape->rect().position.y - (surface->h / 2.0);
+
+        dstRect.w = surface->w;
+        dstRect.h = surface->h;
+
+        // Create texture from surface
+        auto texture = SDL_CreateTextureFromSurface(_renderer.get(), surface);
+        // Free surface memory
+        SDL_FreeSurface(surface);
+        if(texture == nullptr){
+            printf("Unable to create texture from %s, Error: %s\n",
+                   renderShape._textRenderShape->filePath().c_str(), SDL_GetError());
+            return;
+        }
+
+        SDL_RenderCopyEx(_renderer.get(), texture, nullptr, &dstRect,
+                         renderShape._textRenderShape->rotation(), nullptr, SDL_FLIP_NONE);
+
+        SDL_DestroyTexture(texture);
+
     }
 
     void SDLRenderService::renderRect(RectRenderShape& renderShape) {
@@ -194,6 +248,8 @@ namespace GolfEngine::Services::Render {
         //Third to Last
         SDL_RenderDrawLine(_renderer.get(), (int) points.at(2).first, (int) points.at(2).second, (int) points.at(3).first,
                            (int) points.at(3).second);
+
+
     }
 
     void SDLRenderService::renderLine(LineRenderShape& renderShape) {

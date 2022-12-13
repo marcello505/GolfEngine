@@ -8,10 +8,15 @@
 #include "../gameobjects/Wall.h"
 #include "../gameobjects/Projectile.h"
 #include "../gameobjects/ProjectilePoolObject.h"
+#include "../scripts/SaveStateScript.h"
+#include "../gameobjects/TestBlock.h"
 #include "Scene/Components/SpriteComponent.h"
 #include "Scene/Components/BoxCollider.h"
 
 void PlayerTestScene::build(Scene& scene) const {
+    auto& root = scene.createNewGameObject<GameObject>();
+    root.addComponent<SaveStateScript>();
+
     //Walls
     {
         //Borders
@@ -24,7 +29,15 @@ void PlayerTestScene::build(Scene& scene) const {
         scene.createNewGameObject<Wall>(Vector2{640.0f, 360.0f}, Vector2{12.5, 125.0f});
     }
 
-    auto& projectilePool = scene.createNewGameObject<ProjectilePoolObject>(std::ref(scene), 20);
+    //Objects
+    {
+        scene.createNewGameObject<TestBlock>(Vector2{200.0f, 500.0f});
+        scene.createNewGameObject<TestBlock>(Vector2{100.0f, 250.0f});
+        scene.createNewGameObject<TestBlock>(Vector2{312.0f, 346.0f});
+
+    }
+
+    auto& projectilePool = scene.createNewGameObject<ProjectilePoolObject>(root, std::ref(scene), 20);
 
     auto& player = scene.createNewGameObject<PlayerObject>(&projectilePool.getComponent<ProjectilePoolScript>());
     player.setLocalPosition({200.f, 200.f});

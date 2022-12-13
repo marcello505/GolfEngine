@@ -58,6 +58,7 @@ namespace GolfEngine::Services::Physics{
             bodyDef.angularDamping = rigidDef.angularDamping;
             bodyDef.fixedRotation = rigidDef.fixedRotation;
             bodyDef.gravityScale = rigidDef.gravityScale;
+            bodyDef.bullet = rigidDef.intensiveCollisions;
 
             GameObject* parentGameObject = pRigidBody->getParentGameObject();
             if(parentGameObject != nullptr){
@@ -162,11 +163,18 @@ namespace GolfEngine::Services::Physics{
         return _world.GetBodyCount();
     }
 
-    void Box2DPhysicsService::applyForceToCenter(RigidBody* pRigidBody, const Vector2& force) {
+    void Box2DPhysicsService::applyLocalForceToCenter(RigidBody* pRigidBody, const Vector2& force) {
         auto body = getB2Body(pRigidBody);
         if(body){
             b2Vec2 b2Force = body.value()->GetWorldVector(b2Vec2{force.x, force.y});
             body.value()->ApplyForceToCenter(b2Force, true);
+        }
+    }
+
+    void Box2DPhysicsService::applyWorldForceToCenter(RigidBody* pRigidBody, const Vector2& force) {
+        auto body = getB2Body(pRigidBody);
+        if(body){
+            body.value()->ApplyForceToCenter(b2Vec2{force.x, force.y}, true);
         }
     }
 
@@ -266,11 +274,23 @@ namespace GolfEngine::Services::Physics{
 
     }
 
-    void Box2DPhysicsService::disableFlaggedRigidBodies() {
-        for(auto rb : _rigidBodies){
-            if(rb.first->isFlaggedForDisabled())
-                setEnabled(rb.first, false);
+    float Box2DPhysicsService::getAngularVelocity(RigidBody* pBody) {
+        auto body = getB2Body(pBody);
+        if(body){
+            return body.value()->GetAngularVelocity();
+        }
+        else{
+            return 0;
         }
     }
+
+    void Box2DPhysicsService::setAngularVelocity(RigidBody* pRigidBody, float omega) {
+        auto body = getB2Body(pRigidBody);
+        if(body){
+            body.value()->SetAngularVelocity(omega);
+        }
+    }
+
+
 }
 

@@ -7,9 +7,9 @@
 #include <string>
 class Action {
 public:
-    std::string name;
-    bool pressed;
-    bool justInput;
+    std::string name {};
+    bool pressed {};
+    bool justInput {};
 };
 #endif //GOLFENGINE_ACTION_H
 

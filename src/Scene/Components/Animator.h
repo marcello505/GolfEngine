@@ -46,24 +46,33 @@ public:
     bool getActive() override;
     void setActive(bool active) override;
     void setParentGameObject(GameObject& gameObject) override;
+    std::unique_ptr<ISnapshot> saveSnapshot() override;
+    void loadSnapshot(const ISnapshot& rawSnapshot) override;
 private:
     void finishAnimation();
 
 private:
-    std::string _spriteSheetPath;
-    int _rows;
-    int _cols;
-    Vector2 _cellSize;
+    const std::string _spriteSheetPath;
+    const int _rows;
+    const int _cols;
+    const Vector2 _cellSize;
 
     std::map<std::string, Animation> _animations;
     std::map<std::string, std::string> _returnTransitions;
     std::optional<std::reference_wrapper<SpriteComponent>> _spriteComponent;
     std::optional<std::reference_wrapper<Animation>> _currentAnimation;
-    int _fps;
-    bool _looping;
+    const int _fps;
 
+    bool _looping;
     int _countedFrames;
     int _currentCell;
+
+    struct Snapshot : public ISnapshot{
+        bool looping;
+        int countedFrames;
+        int currentCell;
+        std::optional<std::reference_wrapper<Animation>> currentAnimation;
+    };
 };
 
 
