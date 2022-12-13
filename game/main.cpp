@@ -5,6 +5,7 @@
 
 // Game includes
 #include "scenes/PlayerTestScene.h"
+#include "scenes/SaveGameTestScene.h"
 
 
 int main(){
@@ -24,9 +25,16 @@ int main(){
     actionMap->addAction("playerShoot");
     actionMap->addInputKeyToAction("playerShoot", InputKey::Mouse_Left);
 
+    // Save Game actions
+    actionMap->addAction("saveGame");
+    actionMap->addInputKeyToAction("saveGame", InputKey::Key_K);
+    actionMap->addAction("loadGame");
+    actionMap->addInputKeyToAction("loadGame", InputKey::Key_L);
+
     //Scene initialization
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
     sceneManager.addScene<PlayerTestScene>("playerTest");
+    sceneManager.addScene<SaveGameTestScene>("saveGameTest");
     sceneManager.loadScene("playerTest");
 
     //Render initialization
