@@ -8,6 +8,8 @@
 #include <filesystem>
 #include <string>
 
+#include "Core/ProjectSettings.h"
+
 namespace GolfEngine::Utilities {
 
     class IO {
@@ -28,9 +30,24 @@ namespace GolfEngine::Utilities {
         /// \param relativePath
         static void deleteResourceFile(const std::string& relativePath);
 
+        //Userdata Files
+        /// Get the path to the user data file using the relativePath
+        /// \param relativePath path to the file relative to the user data folder
+        /// \return Absolute path to the file
+        static std::filesystem::path userDataPath(const std::string& relativePath);
+        /// Get the path to the user data folder
+        /// \return Absolute path to the resource folder
+        static std::filesystem::path userDataPath();
+        /// Check if resource file exists
+        /// \param relativePath path to the file relative to the resource folder
+        /// \return True if file exists, otherwise false
+        static bool userDataFileExists(const std::string& relativePath);
+        static void saveProjectSettings(const std::string& relativePath, const Core::ProjectSettings& projectSettings);
+
     private:
         static std::filesystem::path _convertStringToPath(const std::string& pathString);
         static std::filesystem::path _getResoucesFolder();
+        static std::filesystem::path _getUserDataFolder();
 
     };
 } // Utilities
