@@ -20,7 +20,6 @@ int main(int argc, char* argv[]){
 
     rs->addDrawable(text);
 
-
     gameLoop.start();
 
     return 0;

@@ -7,7 +7,7 @@
 #include "../GameObject.h"
 #include "Scene/Components/Drawable.h"
 
-class UIObject : public Drawable {
+class UIObject :  public GameObject, public Drawable {
 public:
 
     float _width;

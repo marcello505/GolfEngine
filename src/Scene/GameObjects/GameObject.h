@@ -43,7 +43,7 @@ public:
     /// \param name The name of the GameObject (nullptr is results in "")
     /// \param tag The tag of the GameObject (nullptr results in "default")
     GameObject(const char* name = nullptr, const char* tag = nullptr, bool recordable = true);
-    ~GameObject();
+    ~GameObject() override;
 
     /// Function creates a new Component for the GameObject
     /// \tparam C Component to create
@@ -127,7 +127,8 @@ public:
     [[nodiscard]] bool getActive() const;
     void setActive(bool active);
     void onStart();
-    void onUpdate();
+
+    virtual void onUpdate();
 
     std::vector<std::reference_wrapper<GameObject>>& children();
     GameObject& childAt(int index);
