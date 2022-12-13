@@ -5,6 +5,6 @@
 TEST_SUITE("IO"){
     TEST_CASE("Test"){
 
-        CHECK_FALSE(GolfEngine::Utilities::IO::resourceFileExists("randomFile"));
+        CHECK_THROWS(GolfEngine::Utilities::IO::resourceFileExists("randomFile"));
     }
 }
