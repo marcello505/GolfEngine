@@ -15,6 +15,7 @@ class Button : public UIObject{
 
 public:
     explicit Button(int width, int height, Vector2 position, bool interactable, Text *text);
+    ~Button() override;
 
     bool interactable() const;
     RenderShape& getRenderShape() override;

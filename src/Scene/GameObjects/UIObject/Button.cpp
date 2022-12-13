@@ -37,7 +37,13 @@ void Button::setShape() {
     // setup render shape
     _buttonRenderShape = std::make_unique<ButtonRenderShape>(renderShape, &_text->_renderShape,
                                                              *&_text->_alignment);
-    GolfEngine::Services::Render::getService()->addDrawable(*this);
+    if(GolfEngine::Services::Render::hasService())
+        GolfEngine::Services::Render::getService()->addDrawable(*this);
+}
+
+Button::~Button() {
+    if(GolfEngine::Services::Render::hasService())
+        GolfEngine::Services::Render::getService()->removeDrawable(*this);
 }
 
 

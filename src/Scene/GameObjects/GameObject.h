@@ -43,7 +43,7 @@ public:
     /// \param name The name of the GameObject (nullptr is results in "")
     /// \param tag The tag of the GameObject (nullptr results in "default")
     GameObject(const char* name = nullptr, const char* tag = nullptr, bool recordable = true);
-    ~GameObject();
+    ~GameObject() override;
 
     /// Function creates a new Component for the GameObject
     /// \tparam C Component to create
