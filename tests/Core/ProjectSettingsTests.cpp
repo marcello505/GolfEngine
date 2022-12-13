@@ -8,6 +8,7 @@
 #define INTEGERS_KEY "integer"
 #define FLOATS_KEY "float"
 #define BOOLS_KEY "bools"
+#define XML_KEY "xml"
 
 TEST_SUITE("ProjectSettings"){
     //Single instance
@@ -121,6 +122,26 @@ TEST_SUITE("ProjectSettings"){
         SUBCASE("getType() returns Bool"){
             projectSettings.setBool(BOOLS_KEY, true);
             CHECK_EQ(projectSettings.getType(BOOLS_KEY), GolfEngine::Core::ProjectSettingsTypes::Boolean);
+        }
+    }
+
+    TEST_CASE("Serialization"){
+        SUBCASE("fromXml() sucessfully loads former state"){
+            //Arrange
+            projectSettings.setBool(XML_KEY, true);
+
+            //Act
+            auto xmlResult = projectSettings.toXml();
+
+            //Assert
+            CHECK(projectSettings.getBool(XML_KEY));
+            projectSettings.setBool(XML_KEY, false);
+            CHECK_FALSE(projectSettings.getBool(XML_KEY));
+            projectSettings.fromXml(xmlResult);
+            CHECK(projectSettings.getBool(XML_KEY));
+        }
+        SUBCASE("fromXml() throws on invalid XML"){
+            CHECK_THROWS(projectSettings.fromXml("INVALID XML STRING"));
         }
     }
 }

@@ -55,8 +55,8 @@ namespace GolfEngine::Core{
         [[nodiscard]] bool hasBool(SETTINGS_KEY_PARAMETER key) const;
 
         //Serializing methods
-        std::string toJson() const;
-        void fromJson(const std::string& json) const;
+        [[nodiscard]] std::string toXml() const;
+        void fromXml(const std::string& xml);
     private:
         ProjectSettings() = default;
 
