@@ -22,6 +22,19 @@ namespace GolfEngine::Utilities {
         return std::filesystem::exists(path);
     }
 
+    void IO::deleteResourceFile(const std::string& relativePath) {
+        std::filesystem::remove(resourcePath(relativePath));
+    }
+
+    //================
+    //Private methods
+    std::filesystem::path IO::_convertStringToPath(const std::string& pathString) {
+        std::string result {pathString};
+
+        std::replace(result.begin(), result.end(), '\\', '/');
+        return std::filesystem::path{result};
+    }
+
     std::filesystem::path IO::_getResoucesFolder(){
         std::filesystem::path result {RESOURCES_FOLDER};
         if(!std::filesystem::exists(result)){
@@ -37,14 +50,5 @@ namespace GolfEngine::Utilities {
 
         return result;
     }
-
-    std::filesystem::path IO::_convertStringToPath(const std::string& pathString) {
-        std::string result {pathString};
-
-        std::replace(result.begin(), result.end(), '\\', '/');
-        return std::filesystem::path{result};
-    }
-
-
 
 } // Utilities

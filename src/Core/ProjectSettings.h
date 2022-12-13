@@ -53,6 +53,10 @@ namespace GolfEngine::Core{
         [[nodiscard]] bool hasInteger(SETTINGS_KEY_PARAMETER key) const;
         [[nodiscard]] bool hasFloat(SETTINGS_KEY_PARAMETER key) const;
         [[nodiscard]] bool hasBool(SETTINGS_KEY_PARAMETER key) const;
+
+        //Serializing methods
+        std::string toJson() const;
+        void fromJson(const std::string& json) const;
     private:
         ProjectSettings() = default;
 

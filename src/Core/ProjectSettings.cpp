@@ -4,6 +4,7 @@
 
 #include <exception>
 #include <stdexcept>
+#include <json/json.h>
 
 #include "ProjectSettings.h"
 
@@ -112,5 +113,8 @@ namespace GolfEngine::Core{
         _floats.erase(key);
         _bools.erase(key);
         _integers.erase(key);
+    }
+
+    std::string ProjectSettings::toJson() const {
     }
 }

@@ -78,7 +78,8 @@ set(CORE_SOURCES
         src/Core/Time.cpp)
 
 set(UTILITIES_SOURCES
-        src/Utilities/Math.cpp src/Utilities/IO.cpp src/Utilities/IO.h)
+        src/Utilities/Math.cpp
+        src/Utilities/IO.cpp)
 
 # Main Project
 add_library(${PROJECT_NAME}

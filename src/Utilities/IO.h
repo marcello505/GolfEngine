@@ -24,6 +24,9 @@ namespace GolfEngine::Utilities {
         /// \param relativePath path to the file relative to the resource folder
         /// \return True if file exists, otherwise false
         static bool resourceFileExists(const std::string& relativePath);
+        /// Delete the file from the resource directory
+        /// \param relativePath
+        static void deleteResourceFile(const std::string& relativePath);
 
     private:
         static std::filesystem::path _convertStringToPath(const std::string& pathString);
