@@ -26,6 +26,8 @@ struct RigidBodyDef{
     float friction {0.2f};
     float restitution {0.0f};
     float density {1.0f};
+    /// Setting this to true give more accurate collision behavior at the cost of more processing power
+    bool intensiveCollisions {false};
 };
 
 

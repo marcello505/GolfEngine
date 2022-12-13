@@ -58,6 +58,7 @@ namespace GolfEngine::Services::Physics{
             bodyDef.angularDamping = rigidDef.angularDamping;
             bodyDef.fixedRotation = rigidDef.fixedRotation;
             bodyDef.gravityScale = rigidDef.gravityScale;
+            bodyDef.bullet = rigidDef.intensiveCollisions;
 
             GameObject* parentGameObject = pRigidBody->getParentGameObject();
             if(parentGameObject != nullptr){
