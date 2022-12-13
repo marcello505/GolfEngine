@@ -12,4 +12,4 @@ class SceneFactory : public ISceneFactory{
 };
 
 
-#endif //GOLFENGINE_UISCENE_H
+#endif //GOLFENGINE_SCENEFACTORY_H
