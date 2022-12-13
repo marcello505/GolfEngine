@@ -74,7 +74,7 @@ set(SCENE_SOURCES
 set(CORE_SOURCES
         src/Core/GameLoop.cpp
         src/Core/SceneManager.cpp
-        src/Core/ProjectSettings.cpp
+        src/Core/Settings.cpp
         src/Core/Time.cpp)
 
 set(UTILITIES_SOURCES

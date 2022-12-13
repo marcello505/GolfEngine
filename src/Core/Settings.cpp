@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <pugixml.hpp>
 #include <sstream>
+#include <memory>
 
 #include "Settings.h"
 
@@ -16,7 +17,7 @@
 #define XML_ATTR_BOOL "bool"
 
 namespace GolfEngine::Core{
-
+    //Settings implementations
     bool Settings::hasString(const std::string& key) const {
         return _strings.find(key) != _strings.end();
     }
@@ -33,21 +34,21 @@ namespace GolfEngine::Core{
         return _bools.find(key) != _bools.end();
     }
 
-    ProjectSettingsTypes Settings::getType(const std::string& key) const {
+    SettingsTypes Settings::getType(const std::string& key) const {
         if(hasString(key)){
-            return ProjectSettingsTypes::String;
+            return SettingsTypes::String;
         }
         else if(hasInteger(key)){
-            return ProjectSettingsTypes::Integer;
+            return SettingsTypes::Integer;
         }
         else if(hasFloat(key)){
-            return ProjectSettingsTypes::Float;
+            return SettingsTypes::Float;
         }
         else if(hasBool(key)){
-            return ProjectSettingsTypes::Boolean;
+            return SettingsTypes::Boolean;
         }
         else{
-            return ProjectSettingsTypes::Null;
+            return SettingsTypes::Null;
         }
     }
 
@@ -183,5 +184,12 @@ namespace GolfEngine::Core{
                 setFloat(key, value.as_float());
             }
         }
+    }
+
+    //ProjectSettings
+    std::unique_ptr<Settings> _projectSettings = std::make_unique<Settings>();
+
+    Settings& getProjectSettings() {
+        return *_projectSettings;
     }
 }

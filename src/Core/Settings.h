@@ -11,7 +11,7 @@
 #define SETTINGS_KEY_PARAMETER const std::string&
 
 namespace GolfEngine::Core{
-    enum class ProjectSettingsTypes{
+    enum class SettingsTypes{
         String,
         Integer,
         Float,
@@ -19,20 +19,10 @@ namespace GolfEngine::Core{
         Null
     };
 
-    /// The Settings class is a singleton that contains any settings for
-    /// the current game. Unlike GameObjects, this data persists in-between scenes.
+    /// The Settings class is that contains any settings for the current game.
     /// Every setter will overwrite the previously set value, even if the type is different.
     class Settings {
     public:
-        //Singleton method
-        static Settings& getInstance(){
-            static Settings settings {};
-            return settings;
-        }
-
-        //Deleted methods
-        Settings(Settings const&) = delete;
-        void operator=(Settings const&) = delete;
 
         //Setters
         void setInteger(SETTINGS_KEY_PARAMETER key, int value);
@@ -42,7 +32,7 @@ namespace GolfEngine::Core{
         void eraseKey(SETTINGS_KEY_PARAMETER key);
 
         //Getters
-        [[nodiscard]] ProjectSettingsTypes getType(SETTINGS_KEY_PARAMETER key) const;
+        [[nodiscard]] SettingsTypes getType(SETTINGS_KEY_PARAMETER key) const;
         [[nodiscard]] const std::string& getString(SETTINGS_KEY_PARAMETER key) const;
         [[nodiscard]] int getInteger(SETTINGS_KEY_PARAMETER key) const;
         [[nodiscard]] float getFloat(SETTINGS_KEY_PARAMETER key) const;
@@ -58,16 +48,17 @@ namespace GolfEngine::Core{
         [[nodiscard]] std::string toXml() const;
         void fromXml(const std::string& xml);
     private:
-        Settings() = default;
-
         std::map<std::string, std::string> _strings {};
         std::map<std::string, int> _integers {};
         std::map<std::string, float> _floats {};
         std::map<std::string, bool> _bools {};
     };
 
+
+    // Global ProjectSettings
+    /// Returns a reference to the global instance of Settings.
+    /// \return A reference to the project-wide Settings instance.
+    Settings& getProjectSettings();
 }
-
-
 
 #endif //SPC_PROJECT_PROJECTSETTINGS_H
