@@ -26,7 +26,7 @@ void PlayerTestScene::build(Scene& scene) const {
         scene.createNewGameObject<Wall>(root, Vector2{1267.5f, 360.0f}, Vector2{12.5, 360.0f});
 
         //Inside borders
-        scene.createNewGameObject<Wall>(root, Vector2{640.0f, 340.0f}, Vector2{12.5, 300.0f});
+        scene.createNewGameObject<Wall>(root, Vector2{640.0f, 340.0f}, Vector2{12.5, 280.0f});
     }
 
     //Objects
@@ -42,18 +42,23 @@ void PlayerTestScene::build(Scene& scene) const {
     GameObject& player = scene.createNewGameObject<PlayerObject>(root, &projectilePool.getComponent<ProjectilePoolScript>());
     player.setLocalPosition({200.f, 200.f});
 
-
-
-    auto& enemy = scene.createNewGameObject<EnemyObject>(root, &player);
-    enemy.setLocalPosition({400.f, 400.f});
     auto& enemy1 = scene.createNewGameObject<EnemyObject>(root, &player);
-    enemy1.setLocalPosition({750.f, 400.f});
+    enemy1.setLocalPosition({700.f, 400.f});
+    enemy1.originalTransform = Transform({700.f, 400.f}, 0, {1,1});
+    enemy1.addPatrolPoint({700.f, 400.f});
+    enemy1.addPatrolPoint({800,400});
+    enemy1.addPatrolPoint({800,500});
+    enemy1.addPatrolPoint({700,500});
+
     auto& enemy2 = scene.createNewGameObject<EnemyObject>(root, &player);
     enemy2.setLocalPosition({800.f, 100.f});
+    enemy2.addPatrolPoint({800.f, 400.f});
+    enemy2.addPatrolPoint({700.f, 50.f});
+    enemy2.addPatrolPoint({700.f, 400.f});
+
     auto& enemy3 = scene.createNewGameObject<EnemyObject>(root, &player);
-    enemy3.setLocalPosition({400.f, 150.f});
-
-
-
+   enemy3.setLocalPosition({400.f, 150.f});
+   auto& enemy4 = scene.createNewGameObject<EnemyObject>(root, &player);
+   enemy4.setLocalPosition({850.f, 150.f});
 
 }

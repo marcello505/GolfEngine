@@ -17,8 +17,16 @@
 #define DefaultPositionIterations 3
 
 namespace GolfEngine::Services::Physics{
-    class rayCastCallback : public b2RayCastCallback{
+    class RaysCastCallback : public b2RayCastCallback
+    {
+    public:
+        RaysCastCallback() : m_fixture{nullptr} {
+        }
         float ReportFixture(b2Fixture *fixture, const b2Vec2 &point, const b2Vec2 &normal, float fraction) override;
+        b2Fixture* m_fixture;
+        b2Vec2 m_point;
+        b2Vec2 m_normal;
+        float m_fraction;
     };
 
     class Box2DPhysicsService :  public PhysicsService {

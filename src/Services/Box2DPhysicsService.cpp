@@ -307,21 +307,28 @@ namespace GolfEngine::Services::Physics{
 
 
     bool Box2DPhysicsService::raycastWorld(RigidBody* start, RigidBody* target) {
-        auto bvec = b2Vec2(start->getParentGameObject()->getWorldTransform().position.x,start->getParentGameObject()->getWorldTransform().position.y);
-        auto bvec2 = b2Vec2(target->getParentGameObject()->getWorldTransform().position.x,target->getParentGameObject()->getWorldTransform().position.y);
+        auto bvec = b2Vec2(start->getParentGameObject()->getWorldTransform().position.x / PhysicsSpaceToWorldSpace,start->getParentGameObject()->getWorldTransform().position.y / PhysicsSpaceToWorldSpace);
+        auto bvec2 = b2Vec2(target->getParentGameObject()->getWorldTransform().position.x / PhysicsSpaceToWorldSpace,target->getParentGameObject()->getWorldTransform().position.y / PhysicsSpaceToWorldSpace);
 
-
-
-        rayCastCallback callback;
+        RaysCastCallback callback;
         _world.RayCast(&callback,bvec,bvec2);
+
+        if (callback.m_fixture) {
+            if (callback.m_fixture->GetBody() == getB2Body(target)) {
+                return true;
+            }
+        }
 
         return false;
     }
 
     float
-    rayCastCallback::ReportFixture(b2Fixture *fixture, const b2Vec2 &point, const b2Vec2 &normal, float fraction) {
-        auto x= 0;
-        return 1;
+    RaysCastCallback::ReportFixture(b2Fixture *fixture, const b2Vec2 &point, const b2Vec2 &normal, float fraction) {
+        m_fixture = fixture;
+        m_point = point;
+        m_normal = normal;
+        m_fraction = fraction;
+        return fraction;
     }
 }
 

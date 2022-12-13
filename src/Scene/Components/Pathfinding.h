@@ -32,7 +32,9 @@ public:
     void setTarget(GameObject &gameObject);
     /// calculates vector displaying direction to target
     /// \return returns vector with direction to target
-    Vector2 getNewDirection();
+    Vector2 getPathDirection();
+
+    Vector2 getDirection(Vector2 target);
 
 
     /// Display the Graph in rects

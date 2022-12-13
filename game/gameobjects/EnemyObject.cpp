@@ -11,7 +11,7 @@
 #include "Scene/Components/AudioSource.h"
 #include "Scene/Components/Pathfinding.h"
 
-EnemyObject::EnemyObject(GameObject *target) {
+EnemyObject::EnemyObject(GameObject *target){
     addComponent<BoxCollider>(Vector2{12.5f, 12.5f});
 
 //
@@ -23,11 +23,14 @@ EnemyObject::EnemyObject(GameObject *target) {
     animator.play("idle", true);
 //
     RigidBodyDef rbDef {};
- //   rbDef.fixedRotation = true;
     rbDef.linearDamping = 5.0f;
     addComponent<RigidBody>(rbDef);
     addComponent<GolfEngine::Scene::Components::AudioSource>("res/audio/Zombie-Sound.ogg", false);
     addComponent<Pathfinding>(target);
     addComponent<EnemyMovementScript>(target);
 
+}
+
+void EnemyObject::addPatrolPoint(Vector2 point) {
+    patrolPoints.emplace_back(point);
 }

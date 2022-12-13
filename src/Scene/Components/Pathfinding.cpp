@@ -87,7 +87,7 @@ bool Pathfinding::needsNewPath() {
     return false;
 }
 
-Vector2 Pathfinding::getNewDirection()
+Vector2 Pathfinding::getPathDirection()
 {
     Vector2 newDir;
     Vector2 nextPos;
@@ -108,26 +108,7 @@ Vector2 Pathfinding::getNewDirection()
         nodeCounter ++;
     }
 
-    //set new direction
-    if(nextPos.x < getParentGameObjectPosition().x && nextPos.y == getParentGameObjectPosition().y){ // left
-        newDir = Vector2(-1.0f, 0.0f);
-    }else if(nextPos.x > getParentGameObjectPosition().x && nextPos.y == getParentGameObjectPosition().y){ // right
-        newDir = Vector2(1.0f, 0.0f);
-    }else if(nextPos.y < getParentGameObjectPosition().y && nextPos.x == getParentGameObjectPosition().x){ // up
-        newDir = Vector2(0.0f, -1.0f);
-    }else if(nextPos.y > getParentGameObjectPosition().y && nextPos.x == getParentGameObjectPosition().x){ // down
-        newDir = Vector2(0.0f, 1.0f);
-    }else if(nextPos.x < getParentGameObjectPosition().x && nextPos.y < getParentGameObjectPosition().y){ // leftUp
-        newDir = Vector2(-1.0f, -1.0f);
-    }else if(nextPos.x < getParentGameObjectPosition().x && nextPos.y > getParentGameObjectPosition().y){ // leftDown
-        newDir = Vector2(-1.0f, 1.0f);
-    }else if(nextPos.x > getParentGameObjectPosition().x && nextPos.y < getParentGameObjectPosition().y){ // rightUp
-        newDir = Vector2(1.0f, -1.0f);
-    }else if(nextPos.x > getParentGameObjectPosition().x && nextPos.y > getParentGameObjectPosition().y){ // rightDown
-        newDir = Vector2(1.0f, 1.0f);
-    }
-
-    return newDir.normalized();
+    return getDirection(nextPos);
 }
 
 void Pathfinding::displayGraph(bool displayPath, bool displayVisited) {
@@ -166,6 +147,31 @@ std::unique_ptr<ISnapshot> Pathfinding::saveSnapshot() {
 
 void Pathfinding::loadSnapshot(const ISnapshot& rawSnapshot) {
     //Explicitly do nothing
+}
+
+Vector2 Pathfinding::getDirection(Vector2 target) {
+    Vector2 newDir;
+
+    //set new direction
+    if(target.x < getParentGameObjectPosition().x && target.y == getParentGameObjectPosition().y){ // left
+        newDir = Vector2(-1.0f, 0.0f);
+    }else if(target.x > getParentGameObjectPosition().x && target.y == getParentGameObjectPosition().y){ // right
+        newDir = Vector2(1.0f, 0.0f);
+    }else if(target.y < getParentGameObjectPosition().y && target.x == getParentGameObjectPosition().x){ // up
+        newDir = Vector2(0.0f, -1.0f);
+    }else if(target.y > getParentGameObjectPosition().y && target.x == getParentGameObjectPosition().x){ // down
+        newDir = Vector2(0.0f, 1.0f);
+    }else if(target.x < getParentGameObjectPosition().x && target.y < getParentGameObjectPosition().y){ // leftUp
+        newDir = Vector2(-1.0f, -1.0f);
+    }else if(target.x < getParentGameObjectPosition().x && target.y > getParentGameObjectPosition().y){ // leftDown
+        newDir = Vector2(-1.0f, 1.0f);
+    }else if(target.x > getParentGameObjectPosition().x && target.y < getParentGameObjectPosition().y){ // rightUp
+        newDir = Vector2(1.0f, -1.0f);
+    }else if(target.x > getParentGameObjectPosition().x && target.y > getParentGameObjectPosition().y){ // rightDown
+        newDir = Vector2(1.0f, 1.0f);
+    }
+
+    return newDir.normalized();;
 }
 
 

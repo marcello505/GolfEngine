@@ -13,6 +13,10 @@ class EnemyObject : public GameObject{
 
 public:
     EnemyObject(GameObject *target);
+    void addPatrolPoint(Vector2 point);
+
+    std::vector<Vector2> patrolPoints;
+    Transform originalTransform {};
 };
 
 
