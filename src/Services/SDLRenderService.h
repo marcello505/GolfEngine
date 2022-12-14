@@ -27,7 +27,7 @@ class SDLRenderService : public RenderService {
 public:
     SDLRenderService();
     ~SDLRenderService();
-
+    bool isRegistered(Drawable &drawable) override;
     // RAII
     SDLRenderService(SDLRenderService &sdlRenderService) = delete;
     SDLRenderService &operator=(SDLRenderService *other) = delete;

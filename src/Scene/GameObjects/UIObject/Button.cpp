@@ -56,21 +56,25 @@ void Button::onUpdate() {
 
     _isClicked = false;
 
-    if( ActionMap::getActionMap()->isJustPressed(_onClickActionName)) { // if ClickButton action is just pressed,
-        // which is bound to left-click
+    std::pair<int, int> buttonXRange(_position.x - (_width / 2),_position.x - (_width / 2) + _width );
+    std::pair<int, int> buttonYRange(_position.y - (_height / 2),_position.y - (_height / 2) + _height );
 
-        //get range of button area to check if we clicked there
-        std::pair<int, int> buttonXRange(_position.x,_position.x + _width );
-        std::pair<int, int> buttonYRange(_position.y,_position.y + _height );
 
-        auto mousePos = ActionMap::getActionMap()->getMousePosition(); // get mouse pos
-        mousePos.x += 50; // surplus mouserange with visual range
-        mousePos.y += 30;
+    //get range of button area to check if we clicked there
 
-        if( mousePos.x >= buttonXRange.first && mousePos.x <= buttonXRange.second &&
-            mousePos.y >= buttonYRange.first &&mousePos.y <= buttonYRange.second){ // if mousepos is in buttonarea
+    auto mousePos = ActionMap::getActionMap()->getMousePosition(); // get mouse pos
+
+    if( mousePos.x >= buttonXRange.first && mousePos.x <= buttonXRange.second &&
+        mousePos.y >= buttonYRange.first &&mousePos.y <= buttonYRange.second){ // if mousepos is in buttonarea
+
+        _buttonRenderShape->_rectRenderShape->setColor(Color(255, 0, 0));
+
+        if( ActionMap::getActionMap()->isJustPressed(_onClickActionName)) { // if ClickButton action is just pressed,
+            // which is bound to left-click
             onClick();
         }
+    }else{
+        _buttonRenderShape->_rectRenderShape->setColor(Color(255,255,255,255 ));
     }
 
     GameObject::onUpdate();

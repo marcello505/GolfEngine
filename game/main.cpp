@@ -44,11 +44,11 @@ int main(int argc, char* argv[]){
 
     //Scene initialization
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
-    sceneManager.addScene<PlayerTestScene>("playerTest");
-    sceneManager.addScene<MainMenuScene>("menuTest");
+    sceneManager.addSceneFactory<PlayerTestScene>("playerTest");
+    sceneManager.addSceneFactory<MainMenuScene>("menuTest");
 
     sceneManager.loadScene("menuTest");
-    sceneManager.loadScene("playerTest");
+/*    sceneManager.loadScene("playerTest");*/
 
     gameLoop.start();
     return 0;

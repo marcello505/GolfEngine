@@ -12,9 +12,10 @@ SpriteComponent::SpriteComponent(const std::string &path, Vector2 pixelScale, Re
 }
 
 void SpriteComponent::onStart() {
-    GolfEngine::Services::Render::getService()->addDrawable(*this);
+    if(GolfEngine::Services::Render::hasService())
+        if(!GolfEngine::Services::Render::getService()->isRegistered(*this))
+            GolfEngine::Services::Render::getService()->addDrawable(*this);
 }
-
 void SpriteComponent::onUpdate() {
 }
 

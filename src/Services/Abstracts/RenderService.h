@@ -19,6 +19,8 @@ public:
 
     virtual void setFullScreen(bool fullScreen) = 0;
 
+    virtual bool isRegistered(Drawable& drawable) = 0;
+
     [[nodiscard]] virtual int screenSizeHeight() const = 0;
     [[nodiscard]] virtual int screenSizeWidth() const = 0;
 };

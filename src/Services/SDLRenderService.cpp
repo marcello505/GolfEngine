@@ -131,6 +131,14 @@ namespace GolfEngine::Services::Render {
         return _fullScreen;
     }
 
+    bool SDLRenderService::isRegistered(Drawable& drawable) {
+        auto result = std::find_if(_drawables.begin(), _drawables.end(), [&](const std::reference_wrapper<Drawable> &d) {
+            return &d.get() == &drawable;
+        });
+        if(result != _drawables.end())
+            return true;
+        return false;
+    }
 
     void SDLRenderService::renderButton(ButtonRenderShape &renderShape) {
         renderRect(*renderShape._rectRenderShape);

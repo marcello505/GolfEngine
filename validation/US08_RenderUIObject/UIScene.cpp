@@ -21,11 +21,11 @@ void UIScene::build(Scene& scene) const
                          R"(../../../validation/US08_RenderUIObject/resources/Rubik-VariableFont_wght.ttf)",
                          Alignment::Center, true);
 
-
+    auto* rs = GolfEngine::Services::Render::getService();
     //create gameobject for button
     auto& root = scene.createNewGameObject<GameObject>();
-    auto& GOButton = scene.createNewGameObject<Button>(root, 100, 60, Vector2(50, 30), true, text, "ClickButton");
-    auto& GOButton2 = scene.createNewGameObject<Button>(root, 100, 60, Vector2(200, 30), true, text2,  "ClickButton");
+    auto& GOButton = scene.createNewGameObject<Button>(root, 200, 100, Vector2(rs->screenSizeWidth() / 2.0, 30), true, text, "ClickButton");
+    auto& GOButton2 = scene.createNewGameObject<Button>(root, 200, 100, Vector2(300, rs->screenSizeHeight() / 2.0), true, text2,  "ClickButton");
 
     //bind click logic to button via behavior script
     ButtonClickScript script;
