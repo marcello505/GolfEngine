@@ -56,7 +56,6 @@ void GameLoop::update() {
 
     if(Physics::hasService()){
         Physics::getService()->update(_msPerUpdate.count() / 1000.0f);
-        Physics::getService()->disableFlaggedRigidBodies();
     }
 
     // Update scene

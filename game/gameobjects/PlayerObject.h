@@ -12,7 +12,6 @@
 class PlayerObject : public GameObject {
 public:
     explicit PlayerObject(ProjectilePoolScript* projectilePoolScript);
-
 };
 
 

@@ -12,6 +12,7 @@ public:
     void restartLevel();
     void tryFinishLevel();
 private:
+    void onStart() override;
     void onUpdate() override;
     void finishLevel();
 };

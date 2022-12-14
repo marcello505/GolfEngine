@@ -4,11 +4,11 @@
 
 #include "GameManagerScript.h"
 #include "Input/ActionMap.h"
+#include "Core/SceneManager.h"
 #include <iostream>
 
 void GameManagerScript::restartLevel() {
-    // TODO restart level by loading begin state
-    std::cout << "restart level" << std::endl;
+    GolfEngine::SceneManager::GetSceneManager().getCurrentScene().loadCurrentSceneState(1);
 }
 
 void GameManagerScript::tryFinishLevel() {
@@ -21,7 +21,12 @@ void GameManagerScript::finishLevel() {
     std::cout << "finish" << std::endl;
 }
 
+void GameManagerScript::onStart() {
+    GolfEngine::SceneManager::GetSceneManager().getCurrentScene().saveCurrentSceneState(1);
+}
+
 void GameManagerScript::onUpdate() {
     if(ActionMap::getActionMap()->isJustPressed("restart"))
         restartLevel();
 }
+

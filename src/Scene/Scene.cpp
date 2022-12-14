@@ -141,4 +141,20 @@ void Scene::stopReplay() {
 
 }
 
+void Scene::saveCurrentSceneState(int slot) {
+    auto savedState = _saveStates.find(slot);
+    if(savedState != _saveStates.end()){
+        _saveStates.erase(savedState);
+    }
 
+    std::vector<std::unique_ptr<ISnapshot>> currentState{};
+    saveCurrentState(currentState);
+    _saveStates.insert({slot, std::move(currentState)});
+}
+
+void Scene::loadCurrentSceneState(int slot) {
+    auto savedState = _saveStates.find(slot);
+    if(savedState != _saveStates.end()){
+        loadCurrentState(savedState->second);
+    }
+}

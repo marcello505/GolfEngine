@@ -24,6 +24,8 @@ private:
 
     void saveCurrentState(std::vector<std::unique_ptr<ISnapshot>>& list);
     void loadCurrentState(std::vector<std::unique_ptr<ISnapshot>>& list);
+
+    std::map<int, std::vector<std::unique_ptr<ISnapshot>>> _saveStates;
 protected:
     std::vector<std::unique_ptr<GameObject>> _gameObjects;
     std::unique_ptr<std::reference_wrapper<GameObject>> _rootGameObject;
@@ -41,6 +43,9 @@ public:
     void stopRecordingReplay();
     void playReplay();
     void stopReplay();
+
+    void saveCurrentSceneState(int slot);
+    void loadCurrentSceneState(int slot);
 
     virtual void startScene();
 

@@ -49,8 +49,6 @@ namespace GolfEngine::Services::Physics{
         void setLinearVelocity(RigidBody* pRigidBody, const Vector2& velocity) override;
         void setAngularVelocity(RigidBody* pRigidBody, float omega) override;
 
-        void disableFlaggedRigidBodies() override;
-
         // Methods for testing
         int getBodyCount() const;
         int getFixtureCount() const;

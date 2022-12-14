@@ -30,7 +30,7 @@ int main(int argc, char* argv[]){
     actionMap->addAction("playerReload");
     actionMap->addInputKeyToAction("playerReload", InputKey::Key_R);
     actionMap->addAction("restart");
-    actionMap->addInputKeyToAction("restart", InputKey::Key_Return);
+    actionMap->addInputKeyToAction("restart", InputKey::Key_L);
 
     //Set up recording controls
     actionMap->addAction("startRecordingReplay");
