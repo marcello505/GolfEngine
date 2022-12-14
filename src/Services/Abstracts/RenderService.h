@@ -23,5 +23,7 @@ public:
 
     [[nodiscard]] virtual int screenSizeHeight() const = 0;
     [[nodiscard]] virtual int screenSizeWidth() const = 0;
+    [[nodiscard]] virtual bool fullScreen() const = 0;
+
 };
 #endif //SPC_PROJECT_RENDERSERVICE_H

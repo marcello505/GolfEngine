@@ -6,6 +6,9 @@
 #include "Services/Singletons/RenderSingleton.h"
 #include "Scene/Components/SpriteComponent.h"
 #include "../scripts/StartGameButtonScript.h"
+#include "../scripts/SelectLevelButtonScript.h"
+#include "../scripts/SettingsButtonScript.h"
+#include "../scripts/ExitButtonScript.h"
 
 void MainMenuScene::build(Scene& scene) const {
 
@@ -13,7 +16,8 @@ void MainMenuScene::build(Scene& scene) const {
     auto* rs = GolfEngine::Services::Render::getService();
     auto& root = scene.createNewGameObject<GameObject>();
 
-    auto& TitleText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 4.0, 50),
+    auto& TitleText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 27,
+                                                                    rs->screenSizeHeight() / 100 * 8),
                                                       0, "Zombie Slayer",70, Color(),
                                                    R"(../../game/res/fonts/ZenDots-Regular.ttf)",
                                                    Alignment::Center, false);
@@ -25,48 +29,54 @@ void MainMenuScene::build(Scene& scene) const {
                                                                       "Start game", 20, Color(),
                                                                       R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
                                                                       , Alignment::Center);
-     StartGameButtonScript script;
-     script.setParentGameObject(startGameButton);
-     startGameButton.addComponent<StartGameButtonScript>(script);
-
-
+     StartGameButtonScript startGameScript;
+     startGameScript.setParentGameObject(startGameButton);
+     startGameButton.addComponent<StartGameButtonScript>(startGameScript);
 
      auto& selectLevelButton = scene.createNewGameObject<Button>(root,200, 100,
                                                                Vector2(rs->screenSizeWidth() / 2.0,
                                                                        rs->screenSizeHeight() / 2.0),true,
                                                                  "clickButton", Vector2(0, 0), 0,
-                                                                 "Start game", 20, Color(),
+                                                                 "Select level", 20, Color(),
                                                                  R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)",
                                                                  Alignment::Center);
+    SelectLevelButtonScript selectLevelScript;
+    selectLevelScript.setParentGameObject(selectLevelButton);
+    selectLevelButton.addComponent<SelectLevelButtonScript>(selectLevelScript);
 
 
-/*
      auto& settingsButton = scene.createNewGameObject<Button>(root,200, 100,
                                                                  Vector2(rs->screenSizeWidth() / 2.0,
                                                                          rs->screenSizeHeight() / 1.5),true,
                                                               "clickButton", Vector2(0, 0), 0,
-                                                              "Start game", 20, Color(),
+                                                              "Settings", 20, Color(),
                                                               R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
                                                               ,Alignment::Center);
-
-
+    SettingsButtonScript settingsScript;
+    settingsScript.setParentGameObject(settingsButton);
+    settingsButton.addComponent<SettingsButtonScript>(settingsScript);
 
      auto& exitButton = scene.createNewGameObject<Button>(root,200, 100,
                                                                  Vector2(rs->screenSizeWidth() / 2.0,
                                                                          rs->screenSizeHeight() / 1.2),true,
                                                           "clickButton", Vector2(0, 0), 0,
-                                                          "Start game", 20, Color(),
+                                                          "Exit", 20, Color(),
                                                           R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
-                                                          ,Alignment::Center);*/
+                                                          ,Alignment::Center);
 
-/*    auto& go = scene.createNewGameObject<GameObject>();
-    go.addComponent<SpriteComponent>("res/sprites/soldier.png");
-    go.setWorldTransform(Transform(Vector2(rs->screenSizeWidth() / 4.6,rs->screenSizeHeight() / 2.0),
+    ExitButtonScript exitScript;
+    settingsScript.setParentGameObject(exitButton);
+    exitButton.addComponent<ExitButtonScript>(exitScript);
+
+
+    auto& soldier = scene.createNewGameObject<GameObject>();
+    soldier.addComponent<SpriteComponent>("res/sprites/soldier.png");
+    soldier.setWorldTransform(Transform(Vector2(rs->screenSizeWidth() / 4.6,rs->screenSizeHeight() / 2.0),
                                    0, Vector2(1,1)));
 
-    auto& go2 = scene.createNewGameObject<GameObject>();
-    go2.addComponent<SpriteComponent>("res/sprites/zombiehand.png");
-    go2.setWorldTransform(Transform(Vector2(rs->screenSizeWidth() / 1.2,rs->screenSizeHeight() / 2.0),
-                                   0, Vector2(1,1)));*/
+    auto& zombieHand = scene.createNewGameObject<GameObject>();
+    zombieHand.addComponent<SpriteComponent>("res/sprites/zombiehand.png");
+    zombieHand.setWorldTransform(Transform(Vector2(rs->screenSizeWidth() / 1.2,rs->screenSizeHeight() / 2.0),
+                                   0, Vector2(1,1)));
 
 }

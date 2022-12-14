@@ -9,6 +9,9 @@
 // Game includes
 #include "scenes/PlayerTestScene.h"
 #include "scenes/MainMenuScene.h"
+#include "scenes/SelectLevelScene.h"
+#include "scenes/SettingsScene.h"
+#include "Scene/Components/AudioSource.h"
 
 
 int main(int argc, char* argv[]){
@@ -42,13 +45,21 @@ int main(int argc, char* argv[]){
     //Render initialization
     GolfEngine::Services::Render::getService()->setScreenSize(1280, 720);
 
+    //Audio initialisation
+    GolfEngine::Scene::Components::AudioSource mgsThemeSound {R"(../../game/res/audio/mgs-theme.flac)", true};
+/*
+    mgsThemeSound.play(true);
+*/
+
+
     //Scene initialization
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
     sceneManager.addSceneFactory<PlayerTestScene>("playerTest");
-    sceneManager.addSceneFactory<MainMenuScene>("menuTest");
+    sceneManager.addSceneFactory<MainMenuScene>("mainMenu");
+    sceneManager.addSceneFactory<SelectLevelScene>("selectLevel");
+    sceneManager.addSceneFactory<SettingsScene>("settings");
 
-    sceneManager.loadScene("menuTest");
-/*    sceneManager.loadScene("playerTest");*/
+    sceneManager.loadScene("mainMenu");
 
     gameLoop.start();
     return 0;
