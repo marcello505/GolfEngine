@@ -31,18 +31,24 @@ namespace GolfEngine::Scene::Components{
         bool getActive() override;
         void setActive(bool active) override;
         void setParentGameObject(GameObject& gameObject) override;
+        std::unique_ptr<ISnapshot> saveSnapshot() override;
+        void loadSnapshot(const ISnapshot& rawSnapshot) override;
+
 
         //======
         //Fields
         float volume {1.0f};
-
     private:
         std::optional<std::reference_wrapper<GameObject>> _parent {};
         bool _active {true};
-        std::string _audioPath {};
-        bool _isMusic {};
-        bool _playOnAwake {};
-        bool _loopOnAwake {};
+        const std::string _audioPath {};
+        const bool _isMusic {};
+        const bool _playOnAwake {};
+        const bool _loopOnAwake {};
+
+        struct Snapshot : ISnapshot{
+            float volume {};
+        };
     };
 
 }

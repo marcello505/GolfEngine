@@ -8,13 +8,15 @@ set(SCRIPT_SOURCES
         scripts/PlayerMovementScript.cpp
         scripts/ProjectilePoolScript.cpp
         scripts/ProjectileScript.cpp
+        scripts/SaveStateScript.cpp
         scripts/SaveGameTestScript.cpp)
 
 set(GAMEOBJECTS_SOURCES
         gameobjects/PlayerObject.cpp
         gameobjects/Wall.cpp
         gameobjects/Projectile.cpp
-        gameobjects/ProjectilePoolObject.cpp)
+        gameobjects/ProjectilePoolObject.cpp
+        gameobjects/TestBlock.cpp)
 
 set(SCENE_SOURCES
         scenes/PlayerTestScene.cpp

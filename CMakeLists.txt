@@ -79,7 +79,8 @@ set(CORE_SOURCES
 
 set(UTILITIES_SOURCES
         src/Utilities/Math.cpp
-        src/Utilities/IO.cpp)
+        src/Utilities/IO.cpp
+        src/Utilities/Random.cpp)
 
 # Main Project
 add_library(${PROJECT_NAME}

@@ -63,7 +63,7 @@ TEST_CASE("RigidBody.addForceToCenter() causes movement"){
     //Assert
     CHECK_EQ(gameObject.getWorldTransform().position.x, 0);
     CHECK_EQ(gameObject.getWorldTransform().position.y, 0);
-    rigidBody.applyForceToCenter({10000.f, 10000.f});
+    rigidBody.applyWorldForceToCenter({10000.f, 10000.f});
     box2DPhysicsService->update(1.0f);
     CHECK_GT(gameObject.getWorldTransform().position.x, 10);
     CHECK_GT(gameObject.getWorldTransform().position.y, 10);

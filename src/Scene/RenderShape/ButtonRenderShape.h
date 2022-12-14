@@ -8,11 +8,12 @@
 #include "TextRenderShape.h"
 #include <memory>
 #include "RenderShape.h"
+#include "Scene/GameObjects/UIObject/Alignment.h"
 
 class ButtonRenderShape : public RenderShape{
 public:
-    ButtonRenderShape(RectRenderShape* rectRenderShape, TextRenderShape* textRenderShape);
-
+    ButtonRenderShape(RectRenderShape* rectRenderShape, TextRenderShape* textRenderShape, Alignment alignment);
+    Alignment _textAlign;
     RenderShapeType getType() override;
     void applyTransform(const Transform& transform) override;
     std::unique_ptr<RectRenderShape> _rectRenderShape {};

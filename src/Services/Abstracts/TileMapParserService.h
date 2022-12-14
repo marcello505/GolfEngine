@@ -11,6 +11,9 @@
 class TileMapParserService {
 public:
     virtual TileMapRenderShape loadMap(const std::string& mapPath) = 0;
+
+    // Virtual Destructors
+    virtual ~TileMapParserService() = default;
 };
 
 #endif //GOLFENGINE_TILEMAPPARSERSERVICE_H
