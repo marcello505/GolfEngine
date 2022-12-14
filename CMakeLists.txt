@@ -13,10 +13,12 @@ if(WIN32)
     set(SDL2_TTF_DIR libs/sdl2_ttf/cmake)
 endif()
 set(IMGUI_DIR libs/imgui/cmake)
+set(PUGIXML_DIR libs/pugixml/cmake)
 
 # Packages
 find_package(SDL2 REQUIRED)
 find_package(IMGUI REQUIRED)
+find_package(PUGIXML)
 find_package(SDL2_MIXER REQUIRED) #Include dirs is included on target_link_libraries call
 find_package(SDL2_IMAGE REQUIRED) #Include dirs is included on target_link_libraries call
 find_package(SDL2_TTF REQUIRED) #Include dirs is included on target_link_libraries call
@@ -25,6 +27,7 @@ add_subdirectory(libs/box2d-2.4.1) #Include dirs is included on target_link_libr
 # Includes
 include_directories(${SDL2_INCLUDE_DIRS})
 include_directories(${IMGUI_INCLUDE_DIRS})
+include_directories(${PUGIXML_INCLUDE_DIRS})
 
 #Source Files
 set(INPUT_SOURCES
@@ -40,7 +43,9 @@ set(SERVICES_SOURCES
         src/Services/Singletons/RenderSingleton.cpp
         src/Services/Singletons/InputSingleton.cpp
         src/Services/Render/Texture.cpp
-        src/Services/Physics/Box2DCollisionListener.cpp)
+        src/Services/Physics/Box2DCollisionListener.cpp
+        src/Services/PugiXMLTileMapParserService.cpp
+        src/Services/Singletons/TileMapParserSingleton.cpp)
 
 set(SCENE_SOURCES
         src/Scene/Scene.cpp
@@ -63,6 +68,8 @@ set(SCENE_SOURCES
         src/Scene/Components/CircleCollider.cpp
         src/Scene/Components/SpriteComponent.cpp
         src/Scene/Particle.cpp
+        src/Scene/Components/TiledComponent.cpp
+        src/Scene/RenderShape/TileMapRenderShape.cpp
         src/Scene/GameObjects/Camera.cpp)
 
 set(CORE_SOURCES
@@ -72,7 +79,8 @@ set(CORE_SOURCES
         src/Core/Time.cpp)
 
 set(UTILITIES_SOURCES
-        src/Utilities/Math.cpp)
+        src/Utilities/Math.cpp
+        src/Utilities/Random.cpp)
 
 # Main Project
 add_library(${PROJECT_NAME}
@@ -88,6 +96,7 @@ target_link_libraries(${PROJECT_NAME} SDL2_mixer::SDL2_mixer)
 target_link_libraries(${PROJECT_NAME} SDL2_image::SDL2_image)
 target_link_libraries(${PROJECT_NAME} SDL2_ttf::SDL2_ttf)
 target_link_libraries(${PROJECT_NAME} box2d)
+target_link_libraries(${PROJECT_NAME} PUGIXML)
 
 # Sub Projects
 add_subdirectory(tests)
@@ -103,4 +112,5 @@ add_subdirectory(validation/US14_PhysicsService)
 add_subdirectory(validation/US101_Particles)
 add_subdirectory(validation/US00_AllServices)
 add_subdirectory(validation/US14_CollisionLogic)
+add_subdirectory(validation/US00_TileMap)
 add_subdirectory(validation/US00_Camera)

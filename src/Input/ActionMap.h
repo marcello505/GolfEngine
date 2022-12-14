@@ -35,5 +35,11 @@
         void setMousePosition(int x, int y);
         ActionMap();
         void setInputKeyPressed(InputKey inputKey, bool pressed);
+
+        /// Primarily used by Replays to directly set the inputs
+        /// \param action name of the action
+        /// \param pressed value to set action.pressed to
+        /// \param justInput value to set action.justInput to
+        void setActionPressed(const std::string& action, bool pressed, bool justInput);
     };
 #endif //GOLFENGINE_ACTIONMAP_H
