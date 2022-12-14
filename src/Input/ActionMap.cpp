@@ -143,3 +143,10 @@ ActionMap* ActionMap::actionMap = nullptr;
         }
     }
 
+void ActionMap::setActionPressed(const std::string& action, bool pressed, bool justInput) {
+    if(_actions.find(action) != _actions.end()){
+        _actions[action].pressed = pressed;
+        _actions[action].justInput = justInput;
+    }
+}
+

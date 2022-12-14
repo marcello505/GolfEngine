@@ -33,6 +33,10 @@ public:
     void setActive(bool active) override;
     void setParentGameObject(GameObject& gameObject) override;
 
+    std::unique_ptr<ISnapshot> saveSnapshot() override;
+
+    void loadSnapshot(const ISnapshot& rawSnapshot) override;
+
 //    setters
     /// Sets the velocity of all particles, only works if randomVelocity is {0,0}
     /// \param velocity velocity that all particles will have
@@ -67,9 +71,6 @@ private:
 
     ///List of all particles
     std::vector<std::unique_ptr<Particle>> particles {};
-
-    std::unique_ptr<std::default_random_engine> _randomEngine;
-
     bool _fade {false};
     bool _looping {false};
 
