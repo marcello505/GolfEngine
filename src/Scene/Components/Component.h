@@ -7,11 +7,13 @@
 
 #include <optional>
 
+#include "../IPersistable.h"
 #include "../GameObjects/GameObject.h"
 
 class GameObject;
 
-class Component {
+//TODO uncomment the following line, after all the components have IPersistable implementations
+class Component : public IPersistable{
 protected:
     bool _active;
     std::optional<std::reference_wrapper<GameObject>> _gameObject;

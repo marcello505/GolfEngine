@@ -16,7 +16,8 @@ set(TEST_SOURCES
 set(SCENE_TEST_SOURCES
         Scene/SceneTests.cpp
         Scene/GameObjectTests.cpp
-        Scene/Components/AudioSourceTests.cpp)
+        Scene/Components/AudioSourceTests.cpp
+        Scene/PersistableTests.cpp)
 
 set(UTILITIES_TEST_SOURCES
         Utilities/RandomTests.cpp)

@@ -29,6 +29,11 @@ public:
 
     /// Creates GameObjects with a BoxCollider for each tile with a collider property
     void initColliders();
+
+    // Snapshot methods for IPersistable
+    std::unique_ptr<ISnapshot> saveSnapshot() override;
+    void loadSnapshot(const ISnapshot& rawSnapshot) override;
+
 private:
     TileMapRenderShape _renderShape;
 };

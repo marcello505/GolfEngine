@@ -31,6 +31,8 @@ public:
     bool getActive() override;
     void setActive(bool active) override;
     void setParentGameObject(GameObject &gameObject) override;
+    std::unique_ptr<ISnapshot> saveSnapshot() override;
+    void loadSnapshot(const ISnapshot& rawSnapshot) override;
 
     // Drawable override
     RenderShape& getRenderShape() override;
@@ -52,6 +54,13 @@ private:
     int _sortingLayer;
     int _orderInLayer;
     float _rotation {};
+
+    struct Snapshot : public ISnapshot{
+        float rotation {};
+        std::string path {};
+        Rect2 imageSource {};
+        Color color {};
+    };
 };
 
 
