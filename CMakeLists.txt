@@ -78,7 +78,8 @@ set(CORE_SOURCES
         src/Core/Time.cpp)
 
 set(UTILITIES_SOURCES
-        src/Utilities/Math.cpp)
+        src/Utilities/Math.cpp
+        src/Utilities/Random.cpp)
 
 # Main Project
 add_library(${PROJECT_NAME}
