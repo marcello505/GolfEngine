@@ -15,6 +15,7 @@ public:
     /// Applies a transform to the RenderShape properties
     /// \param transform Transform to be applied
     virtual void applyTransform(const Transform& transform) = 0;
+    virtual ~RenderShape() = default;
 };
 
 

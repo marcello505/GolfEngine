@@ -26,7 +26,6 @@ namespace GolfEngine::Services::Render {
 class SDLRenderService : public RenderService {
 public:
     SDLRenderService();
-    ~SDLRenderService();
 
     // RAII
     SDLRenderService(SDLRenderService &sdlRenderService) = delete;
