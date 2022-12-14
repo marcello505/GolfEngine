@@ -41,3 +41,16 @@ void PlayerShootScript::reloadWeapon() {
     // TODO add some kind of reload timer
     _currentAmmo = _maxAmmo;
 }
+
+std::unique_ptr<ISnapshot> PlayerShootScript::saveSnapshot() {
+    auto snapshot = std::make_unique<SnapShot>();
+    snapshot->active = _active;
+    snapshot->currentAmmo = _currentAmmo;
+    return std::move(snapshot);
+}
+
+void PlayerShootScript::loadSnapshot(const ISnapshot &rawSnapshot) {
+    auto& snapshot = (SnapShot&)rawSnapshot;
+    BehaviourScript::setActive(snapshot.active);
+    _currentAmmo = snapshot.currentAmmo;
+}

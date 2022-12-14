@@ -11,11 +11,18 @@
 #include "Scene/Components/AudioSource.h"
 
 class PlayerShootScript : public BehaviourScript {
+private:
+    struct SnapShot : public ISnapshot{
+        bool active {};
+        int currentAmmo{};
+    };
 public:
     explicit PlayerShootScript(ProjectilePoolScript* projectilePoolScript, int maxAmmo) : _projectilePool{projectilePoolScript}, _maxAmmo{maxAmmo}, _currentAmmo{maxAmmo} {}
     void onStart() override;
     void onUpdate() override;
 
+    std::unique_ptr<ISnapshot> saveSnapshot() override;
+    void loadSnapshot(const ISnapshot &rawSnapshot) override;
 private:
     void reloadWeapon();
 

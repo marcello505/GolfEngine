@@ -41,3 +41,14 @@ void PlayerMovementScript::onUpdate() {
         _sprite->setRotation(angleToMouse); //angle to mouse + offset
     }
 }
+
+std::unique_ptr<ISnapshot> PlayerMovementScript::saveSnapshot() {
+    auto snapshot = std::make_unique<Snapshot>();
+    snapshot->active = _active;
+    return std::move(snapshot);
+}
+
+void PlayerMovementScript::loadSnapshot(const ISnapshot &rawSnapshot) {
+    auto& snapshot = (Snapshot&)rawSnapshot;
+    BehaviourScript::setActive(snapshot.active);
+}

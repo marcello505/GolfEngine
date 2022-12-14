@@ -15,9 +15,16 @@
 #include "Scene/Components/Animator.h"
 
 class PlayerMovementScript : public BehaviourScript {
+private:
+    struct Snapshot : public ISnapshot{
+        bool active {};
+    };
 public:
     void onStart() override;
     void onUpdate() override;
+
+    std::unique_ptr<ISnapshot> saveSnapshot() override;
+    void loadSnapshot(const ISnapshot &rawSnapshot) override;
 
     float playerSpeed {4.0f};
 private:

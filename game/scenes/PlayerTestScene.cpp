@@ -42,9 +42,15 @@ void PlayerTestScene::build(Scene& scene) const {
     auto& player = scene.createNewGameObject<PlayerObject>(&projectilePool.getComponent<ProjectilePoolScript>());
     player.setLocalPosition({200.f, 200.f});
 
-    auto& testArea = scene.createNewGameObject<GameObject>();
-    testArea.addComponent<BoxCollider>(Vector2{50.0f, 50.0f});
-    testArea.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::AreaBody});
-    testArea.tag = "finish";
-    testArea.setLocalPosition({1000.0f, 100.0f});
+    auto& testFinishArea = scene.createNewGameObject<GameObject>();
+    testFinishArea.addComponent<BoxCollider>(Vector2{50.0f, 50.0f});
+    testFinishArea.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::AreaBody});
+    testFinishArea.tag = "finish";
+    testFinishArea.setLocalPosition({1000.0f, 100.0f});
+
+    auto& testEnemyCollision = scene.createNewGameObject<GameObject>();
+    testEnemyCollision.addComponent<BoxCollider>(Vector2{25.0f, 25.0f});
+    testEnemyCollision.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
+    testEnemyCollision.tag = "enemy";
+    testEnemyCollision.setLocalPosition({1000.0f, 500.0f});
 }

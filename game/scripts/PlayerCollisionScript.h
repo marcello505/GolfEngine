@@ -8,6 +8,7 @@
 #include "Scene/Components/BehaviourScript.h"
 #include "GameManagerScript.h"
 #include "PlayerMovementScript.h"
+#include "PlayerShootScript.h"
 
 class PlayerCollisionScript : public BehaviourScript {
     void onStart() override;
@@ -16,6 +17,7 @@ class PlayerCollisionScript : public BehaviourScript {
 private:
     GameManagerScript* _gameManager;
     PlayerMovementScript* _playerMovement;
+    PlayerShootScript* _playerShoot;
 };
 
 
