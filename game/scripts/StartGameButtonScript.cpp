@@ -15,8 +15,7 @@ void StartGameButtonScript::onUpdate() {
     auto& btn = getParentGameObject<Button>();
 
     if(btn.isClicked()){
-        btn._text->_renderShape.setText("Clicked!");
-/*        sceneManager.loadScene("playerTest");*/
+        sceneManager.loadScene("playerTest");
     }
 }
 

@@ -10,13 +10,21 @@
 #include <Scene/GameObjects/UIObject/Alignment.h>
 
 
-Button::Button(int width, int height, Vector2 position, bool interactable, Text *text, std::string onClickActionName) {
+Button::Button(int width, int height, Vector2 position, bool interactable, std::string onClickActionName,
+               Vector2 textPosition,  float textRotation, std::string textValue, size_t textFontSize, Color textColor,
+               std::string textFilePath, Alignment textAlignment) {
     _width = width;
     _height = height;
     _position = position;
     _interactable = interactable;
-    _text = text;
-    _onClickActionName =onClickActionName;
+    _text.position = textPosition;
+    _text.value = std::move(textValue);
+    _text.rotation = textRotation;
+    _text.fontSize = textFontSize;
+    _text.color = textColor;
+    _text.filePath = std::move(textFilePath);
+    _text.alignment = textAlignment;
+    _onClickActionName = std::move(onClickActionName);
     setShape();
 }
 
@@ -30,14 +38,17 @@ void Button::onClick() {
 
 void Button::setShape() {
     // setup container of button
-    auto* renderShape  = new RectRenderShape(Rect2(_position, Vector2(_width, _height)),
+    auto* rectRenderShape  = new RectRenderShape(Rect2(_position, Vector2(_width, _height)),
                                              0,
                                              Vector2(0, 0),
                                              Color(255,255,255,255));
 
+    auto* textRenderShape  = new TextRenderShape(_text.position, _text.rotation, _text.value,
+                                                 _text.fontSize,_text.color, _text.filePath);
+
     // setup render shape
-    _buttonRenderShape = std::make_unique<ButtonRenderShape>(renderShape, &_text->_renderShape,
-                                                             *&_text->_alignment);
+    _buttonRenderShape = std::make_unique<ButtonRenderShape>(rectRenderShape, textRenderShape,
+                                                             _text.alignment);
     if(GolfEngine::Services::Render::hasService())
         GolfEngine::Services::Render::getService()->addDrawable(*this);
 }
@@ -66,15 +77,10 @@ void Button::onUpdate() {
 
     if( mousePos.x >= buttonXRange.first && mousePos.x <= buttonXRange.second &&
         mousePos.y >= buttonYRange.first &&mousePos.y <= buttonYRange.second){ // if mousepos is in buttonarea
-
-        _buttonRenderShape->_rectRenderShape->setColor(Color(255, 0, 0));
-
         if( ActionMap::getActionMap()->isJustPressed(_onClickActionName)) { // if ClickButton action is just pressed,
             // which is bound to left-click
             onClick();
         }
-    }else{
-        _buttonRenderShape->_rectRenderShape->setColor(Color(255,255,255,255 ));
     }
 
     GameObject::onUpdate();

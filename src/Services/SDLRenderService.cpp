@@ -173,7 +173,7 @@ namespace GolfEngine::Services::Render {
         } else if(renderShape._textAlign == Alignment::Center){
             dstRect.x = renderShape._rectRenderShape->rect().position.x  - (surface->w / 2.0);
         } else{
-            dstRect.x = renderShape._rectRenderShape->rect().position.x  - (surface->w / 4.0);
+            dstRect.x = renderShape._rectRenderShape->rect().position.x - (surface->w / 4.0);
         }
 
 

@@ -14,7 +14,9 @@
 class Button : public UIObject{
 
 public:
-    explicit Button(int width, int height, Vector2 position, bool interactable, Text *text, std::string onClickActionName);
+    explicit Button(int width, int height, Vector2 position, bool interactable, std::string onClickActionName,
+                    Vector2 textPosition, float textRotation, std::string textValue, size_t textFontSize, Color textColor,
+                    std::string textFilePath, Alignment textAlignment);
     ~Button() override;
 
     bool interactable() const;
@@ -22,7 +24,15 @@ public:
     void onUpdate() override;
     void onClick();
     bool isClicked();
-    Text* _text;
+    struct {
+        Vector2 position;
+        float rotation;
+        std::string value;
+        size_t fontSize;
+        Color color;
+        std::string filePath;
+        Alignment alignment;
+    } _text;
 private:
     bool _isClicked;
     bool _interactable;
