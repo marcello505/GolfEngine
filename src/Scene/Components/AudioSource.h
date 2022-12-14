@@ -7,24 +7,34 @@
 
 #include <optional>
 #include <string>
+#include <map>
 
 #include "Component.h"
 
 namespace GolfEngine::Scene::Components{
     class AudioSource : public Component{
     public:
-        AudioSource(const std::string& audioPath, bool isMusic, bool playOnAwake = false, bool loopOnAwake = false) :
+        explicit AudioSource(bool isMusic, bool playOnAwake = false, bool loopOnAwake = false) :
         _isMusic{isMusic},
         _playOnAwake{playOnAwake},
-        _loopOnAwake{loopOnAwake},
-        _audioPath{audioPath} {}
+        _loopOnAwake{loopOnAwake} {}
 
         //=======
         //Methods
-        /// play() will call the corresponding play call for the group this AudioSource belongs to.
-        void play(bool looping = false);
-        /// stop() will eiter stop the sound effect or the music depending on which group the AudioSource belongs to.
-        void stop();
+        /// Will play the sound effect or music with the corresponding name
+        /// \param sound name of sound to be played
+        /// \param looping loop the sound
+        void play(const std::string& sound, bool looping = false);
+
+        /// Will stop the playing sound effect or music with the corresponding name
+        /// \param sound name of the sound to be stopped
+        void stop(const std::string& sound);
+
+        /// Will add a sound to this AudioSource component, so it can be played in the future
+        /// \param sound name of the sound to be added
+        /// \param path path to the sound file
+        void addSound(const std::string& sound, const std::string& path);
+
         void onStart() override;
         void onUpdate() override;
         void onRemove() override;
@@ -41,10 +51,11 @@ namespace GolfEngine::Scene::Components{
     private:
         std::optional<std::reference_wrapper<GameObject>> _parent {};
         bool _active {true};
-        const std::string _audioPath {};
         const bool _isMusic {};
         const bool _playOnAwake {};
         const bool _loopOnAwake {};
+
+        std::map<std::string, std::string> _sounds {};
 
         struct Snapshot : ISnapshot{
             float volume {};

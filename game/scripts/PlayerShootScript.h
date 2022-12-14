@@ -29,10 +29,13 @@ private:
 private:
     Animator* _animator {};
     ProjectilePoolScript* _projectilePool {};
-    GolfEngine::Scene::Components::AudioSource* _gunShotAudio {};
+    GolfEngine::Scene::Components::AudioSource* _audioSource {};
 
     int _currentAmmo;
     int _maxAmmo;
+    bool _reloading {false};
+    float _reloadTime {1.0f};
+    float _timePassedReloading {0.0f};
 };
 
 

@@ -4,9 +4,10 @@
 
 #include "PlayerShootScript.h"
 #include "Input/ActionMap.h"
+#include "Core/Time.h"
 
 void PlayerShootScript::onStart() {
-    _gunShotAudio = &_gameObject.value().get().getComponent<GolfEngine::Scene::Components::AudioSource>();
+    _audioSource = &_gameObject.value().get().getComponent<GolfEngine::Scene::Components::AudioSource>();
 
     if (_gameObject.value().get().hasComponent<Animator>())
         _animator = &_gameObject.value().get().getComponent<Animator>();
@@ -15,10 +16,10 @@ void PlayerShootScript::onStart() {
 void PlayerShootScript::onUpdate() {
     //Handle shooting
     if(ActionMap::getActionMap()->isJustPressed("playerShoot")){
-        if(_currentAmmo > 0){
+        if(_currentAmmo > 0 && !_reloading){
             _currentAmmo--;
 
-            _gunShotAudio->play();
+            _audioSource->play("shoot");
             _animator->play("shoot");
 
             auto projectile = _projectilePool->getProjectile();
@@ -32,14 +33,26 @@ void PlayerShootScript::onUpdate() {
             }
         }
     }
+
+    // Handle reloading
     if(ActionMap::getActionMap()->isJustPressed("playerReload")){
         reloadWeapon();
+    }
+    if(_reloading){
+        _timePassedReloading += GolfEngine::Time::getPhysicsDeltaTime();
+        if(_timePassedReloading >= _reloadTime){
+            _timePassedReloading = 0.0f;
+            _reloading = false;
+        }
     }
 }
 
 void PlayerShootScript::reloadWeapon() {
-    // TODO add some kind of reload timer
-    _currentAmmo = _maxAmmo;
+    if(!_reloading){
+        _reloading = true;
+        _audioSource->play("reload");
+        _currentAmmo = _maxAmmo;
+    }
 }
 
 std::unique_ptr<ISnapshot> PlayerShootScript::saveSnapshot() {

@@ -5,11 +5,6 @@
 #include "PlayerObject.h"
 
 #include <Scene/Components/BoxCollider.h>
-#include <Scene/Components/AudioSource.h>
-#include <Scene/Components/SpriteComponent.h>
-
-#include "../scripts/PlayerMovementScript.h"
-#include "../scripts/PlayerShootScript.h"
 #include "../scripts/GameManagerScript.h"
 #include "../scripts/PlayerCollisionScript.h"
 
@@ -30,9 +25,12 @@ PlayerObject::PlayerObject(ProjectilePoolScript* projectilePoolScript) {
     animator.addReturnTransition("shoot", "idle");
 
     addComponent<RigidBody>(rbDef);
-    &addComponent<PlayerMovementScript>();
-    &addComponent<PlayerShootScript>(projectilePoolScript, 10);
-    addComponent<GolfEngine::Scene::Components::AudioSource>("res/audio/short-shot.ogg", false);
+    addComponent<PlayerMovementScript>();
+    addComponent<PlayerShootScript>(projectilePoolScript, 10);
     addComponent<PlayerCollisionScript>();
     addComponent<GameManagerScript>();
+
+    auto& audioSource = addComponent<GolfEngine::Scene::Components::AudioSource>(false);
+    audioSource.addSound("shoot", "res/audio/short-shot.ogg");
+    audioSource.addSound("reload", "res/audio/gun-reload.wav");
 }
