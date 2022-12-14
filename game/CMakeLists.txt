@@ -9,7 +9,8 @@ set(SCRIPT_SOURCES
         scripts/ProjectilePoolScript.cpp
         scripts/ProjectileScript.cpp
         scripts/SaveStateScript.cpp
-        scripts/SaveGameTestScript.cpp)
+        scripts/SaveGameTestScripts/SaveGameTestScript.cpp
+        scripts/SaveGameTestScripts/ShotCounterScript.cpp)
 
 set(GAMEOBJECTS_SOURCES
         gameobjects/PlayerObject.cpp

@@ -19,6 +19,7 @@ void SaveGameTestScript::onUpdate() {
         save.setFloat("player_rotation", playerTransform.rotation);
         save.setFloat("player_scale_x", playerTransform.scale.x);
         save.setFloat("player_scale_y", playerTransform.scale.y);
+        save.setInteger("shotsFired", _shotCounterScript->shotsFired);
         GolfEngine::Utilities::IO::saveSettings(SAVE_GAME_PATH, save);
     }
     else if(actionMap.isJustPressed("loadGame")){
@@ -31,6 +32,8 @@ void SaveGameTestScript::onUpdate() {
             playerTransform.scale.x = save.getFloat("player_scale_x");
             playerTransform.scale.y = save.getFloat("player_scale_y");
             _player->setTransform(playerTransform);
+            _shotCounterScript->shotsFired = save.getInteger("shotsFired");
+            _shotCounterScript->updateText();
         }
     }
 }

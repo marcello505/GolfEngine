@@ -7,7 +7,9 @@
 #include "../gameobjects/PlayerObject.h"
 #include "../gameobjects/Wall.h"
 #include "../gameobjects/ProjectilePoolObject.h"
-#include "../scripts/SaveGameTestScript.h"
+#include "../scripts/SaveGameTestScripts/SaveGameTestScript.h"
+#include "Scene/GameObjects/UIObject/Text.h"
+#include "../scripts/SaveGameTestScripts/ShotCounterScript.h"
 
 void SaveGameTestScene::build(Scene& scene) const {
     auto& root = scene.createNewGameObject<GameObject>();
@@ -29,6 +31,13 @@ void SaveGameTestScene::build(Scene& scene) const {
     auto& player = scene.createNewGameObject<PlayerObject>(root, &projectilePool.getComponent<ProjectilePoolScript>());
     player.setLocalPosition({200.f, 200.f});
 
+    auto& shotCounterObject = scene.createNewGameObject<Text>(root, Vector2(0, 0), 0, "Shots Fired: 0",
+                                                              20, Color(),
+                                                              "res/fonts/Rubik-VariableFont_wght.ttf",
+                                                              Alignment::Center, false);
+    auto& shotCounterScript = shotCounterObject.addComponent<ShotCounterScript>(&shotCounterObject);
+
     auto& saveGameObject = scene.createNewGameObject<GameObject>(root);
-    saveGameObject.addComponent<SaveGameTestScript>(&player.getComponent<RigidBody>());
+    saveGameObject.addComponent<SaveGameTestScript>(&player.getComponent<RigidBody>(), &shotCounterScript);
+
 }

@@ -46,7 +46,7 @@ int main(int argc, char* argv[]){
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
     sceneManager.addScene<PlayerTestScene>("playerTest");
     sceneManager.addScene<SaveGameTestScene>("saveGameTest");
-    sceneManager.loadScene("playerTest");
+    sceneManager.loadScene("saveGameTest");
 
     //Render initialization
     GolfEngine::Services::Render::getService()->setScreenSize(1280, 720);
