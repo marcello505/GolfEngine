@@ -499,8 +499,8 @@ namespace GolfEngine::Services::Render {
                 if(tile == 0) {column++; continue;}
                 srcRect.x = ((tile-1) % tileSetColumns) * srcRect.w;
                 srcRect.y = ((tile-1) / tileSetColumns) * srcRect.h;
-                dstRect.x = ((column % mapColumns) * dstRect.w) + renderShape.position().x;
-                dstRect.y = (rowIndex * dstRect.h) + renderShape.position().y;
+                dstRect.x = ((column % mapColumns) * dstRect.w) + renderShape.position().x - camOffset.x;
+                dstRect.y = (rowIndex * dstRect.h) + renderShape.position().y - camOffset.y;
                 SDL_RenderCopy(_renderer.get(), texture.texture(), &srcRect, &dstRect);
                 column++;
             }

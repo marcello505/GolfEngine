@@ -8,6 +8,7 @@
 #include "Scene/Components/BoxCollider.h"
 #include "Scene/Components/CircleCollider.h"
 #include "Scene/Components/SpriteComponent.h"
+#include "Scene/Components/TiledComponent.h"
 
 class MoveScript : public BehaviourScript{
     Camera* cam1, *cam2;
@@ -17,16 +18,16 @@ public:
     }
     void onUpdate() override{
         if(ActionMap::getActionMap()->isPressed("left")){
-            _gameObject->get().getComponent<RigidBody>().applyForceToCenter(Vector2{-2,0});
+            _gameObject->get().getComponent<RigidBody>().applyWorldForceToCenter(Vector2{-2,0});
         }
         if(ActionMap::getActionMap()->isPressed("right")){
-            _gameObject->get().getComponent<RigidBody>().applyForceToCenter(Vector2{2,0});
+            _gameObject->get().getComponent<RigidBody>().applyWorldForceToCenter(Vector2{2,0});
         }
         if(ActionMap::getActionMap()->isPressed("up")){
-            _gameObject->get().getComponent<RigidBody>().applyForceToCenter(Vector2{0,-2});
+            _gameObject->get().getComponent<RigidBody>().applyWorldForceToCenter(Vector2{0,-2});
         }
         if(ActionMap::getActionMap()->isPressed("down")){
-            _gameObject->get().getComponent<RigidBody>().applyForceToCenter(Vector2{0,2});
+            _gameObject->get().getComponent<RigidBody>().applyWorldForceToCenter(Vector2{0,2});
         }
         if(ActionMap::getActionMap()->isJustPressed("switchCam")){
             if(&Camera::getMainCamera()->get() == cam1)
@@ -39,15 +40,19 @@ public:
 
 class SceneFactory : public ISceneFactory{
     void build(Scene &scene) const override{
+        auto& map = scene.createNewGameObject<GameObject>();
+        auto& mapComp = map.addComponent<TiledComponent>(R"(res/map.tmx)", Vector2{2,2});
+        mapComp.initColliders();
+
         auto& go = scene.createNewGameObject<GameObject>();
         go.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
-        go.addComponent<BoxCollider>(Vector2{25, 25});
+        go.addComponent<BoxCollider>(Vector2{12.5f, 12.5f});
         go.setLocalTransform(Transform{Vector2{50, 50}, 0, Vector2{1,1}});
 
-        auto& wall = scene.createNewGameObject<GameObject>();
-        wall.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::StaticBody});
-        wall.addComponent<BoxCollider>(Vector2{300, 50});
-        wall.setLocalTransform(Transform{Vector2{200, 300}, 0, Vector2{1,1}});
+//        auto& wall = scene.createNewGameObject<GameObject>();
+//        wall.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::StaticBody});
+//        wall.addComponent<BoxCollider>(Vector2{300, 50});
+//        wall.setLocalTransform(Transform{Vector2{200, 300}, 0, Vector2{1,1}});
 
         auto& sprite = scene.createNewGameObject<GameObject>();
         sprite.addComponent<SpriteComponent>(R"(..\..\..\validation\US00_Rendering\res\player.png)", Vector2{2,2});
