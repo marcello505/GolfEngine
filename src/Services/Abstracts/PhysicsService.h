@@ -31,6 +31,9 @@ public:
     virtual void setGravityScale(RigidBody* pRigidBody, float gravityScale) = 0;
     virtual void setLinearVelocity(RigidBody* pRigidBody, const Vector2& velocity) = 0;
     virtual void setAngularVelocity(RigidBody* pRigidBody, float omega) = 0;
+
+    // Virtual Destructors
+    virtual ~PhysicsService() = default;
 };
 
 

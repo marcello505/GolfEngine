@@ -15,6 +15,9 @@ public:
     virtual void render() = 0;
     virtual void setScreenSize(int width, int height) = 0;
     virtual void setFullScreen(bool fullScreen) = 0;
+
+    // Virtual Destructors
+    virtual ~RenderService() = default;
 };
 
 

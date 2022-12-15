@@ -19,11 +19,14 @@ set(SCENE_TEST_SOURCES
         Scene/Components/AudioSourceTests.cpp
         Scene/PersistableTests.cpp)
 
+set(UTILITIES_TEST_SOURCES
+        Utilities/RandomTests.cpp)
 
 # Main Project
 add_executable(Golf_Tests main.cpp
         ${TEST_SOURCES}
-        ${SCENE_TEST_SOURCES})
+        ${SCENE_TEST_SOURCES}
+        ${UTILITIES_TEST_SOURCES})
 
 target_link_libraries(Golf_Tests GolfEngine)
 target_include_directories(Golf_Tests PUBLIC ../libs/doctest)
