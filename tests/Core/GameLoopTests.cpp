@@ -52,6 +52,8 @@ namespace GameLoopTests{
         void removeDrawable(Drawable& drawable) override {}
         void addDrawable(Drawable& drawable) override {}
         void setFullScreen(bool fullScreen) override {};
+        std::optional<std::reference_wrapper<Camera>> getMainCamera() const override { return {};}
+        void setMainCamera(Camera& camera) override {}
     };
 
     class DummyPhysicsService : public PhysicsService{
@@ -81,7 +83,7 @@ namespace GameLoopTests{
         void addRigidBody(RigidBody* pRigidBody) override {}
         void removeRigidBody(RigidBody* pRigidBody) override {}
         void setGravity(const Vector2& vec2) override {}
-        void applyForceToCenter(RigidBody* pRigidBody, const Vector2& force) override {}
+        void applyWorldForceToCenter(RigidBody* pRigidBody, const Vector2& force) override {}
         void setTransform(RigidBody* pRigidBody, const Transform& transform) override {}
         void setEnabled(RigidBody* pRigidBody, bool enabled) override {}
         void setLinearDamping(RigidBody* pRigidBody, float linearDamping) override {}
@@ -90,6 +92,9 @@ namespace GameLoopTests{
         void setGravityScale(RigidBody* pRigidBody, float gravityScale) override {}
         Vector2 getLinearVelocity(RigidBody* pBody) override { return {};}
         void setLinearVelocity(RigidBody* pRigidBody, const Vector2& velocity) override {}
+        float getAngularVelocity(RigidBody* pBody) override {return 0;}
+        void setAngularVelocity(RigidBody* pRigidBody, float omega) override {}
+        void applyLocalForceToCenter(RigidBody* pRigidBody, const Vector2& force) override {}
     };
 }
 

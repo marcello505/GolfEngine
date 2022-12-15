@@ -13,7 +13,7 @@ void DrawPathScript::onStart() {
 void DrawPathScript::onUpdate() {
     auto direction = pathfinding->get().getNewDirection();
     auto rb = &_gameObject.value().get().getComponent<RigidBody>();
-    rb->applyForceToCenter(direction * 0.05);
+    rb->applyWorldForceToCenter(direction * 0.05);
 
     if(!pathfinding->get().getPath().empty()){
         pathfinding->get().displayGraph(true, false);

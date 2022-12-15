@@ -83,3 +83,21 @@ void SpriteComponent::setRotation(float degrees) {
 float SpriteComponent::getRotation() const {
     return _rotation;
 }
+
+std::unique_ptr<ISnapshot> SpriteComponent::saveSnapshot() {
+    auto result = std::make_unique<Snapshot>();
+    result->rotation = getRotation();
+    result->path = path();
+    result->color = color();
+    result->imageSource = imageSource();
+    return result;
+}
+
+void SpriteComponent::loadSnapshot(const ISnapshot& rawSnapshot) {
+    auto& snapshot = (Snapshot&)rawSnapshot;
+
+    setRotation(snapshot.rotation);
+    setImageSource(snapshot.imageSource);
+    setPath(snapshot.path);
+    setColor(snapshot.color);
+}

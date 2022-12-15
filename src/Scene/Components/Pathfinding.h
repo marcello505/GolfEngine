@@ -51,7 +51,9 @@ public:
     /// \return true if new path needs to be calculated
     bool needsNewPath();
 
-
+    // Snapshot methods for IPersistable
+    std::unique_ptr<ISnapshot> saveSnapshot() override;
+    void loadSnapshot(const ISnapshot& rawSnapshot) override;
 private:
     int _countedFrames {0};
     GameObject& _target;

@@ -6,23 +6,47 @@
 #define GOLFENGINE_SCENE_H
 
 #include <string>
-#include "GameObjects/GameObject.h"
 #include <optional>
+#include <vector>
+
+#include "Replay.h"
+#include "GameObjects/GameObject.h"
 
 class Scene {
+private:
+    enum class ReplayState{
+        Idle,
+        InitializeRecording,
+        Recording,
+        InitializePlaying,
+        Playing
+    };
+
+    void saveCurrentState(std::vector<std::unique_ptr<ISnapshot>>& list);
+    void loadCurrentState(std::vector<std::unique_ptr<ISnapshot>>& list);
 protected:
     std::vector<std::unique_ptr<GameObject>> _gameObjects;
     std::unique_ptr<std::reference_wrapper<GameObject>> _rootGameObject;
+
+    //Recording fields
+    ReplayState _replayState {ReplayState::Idle};
+    Replay _replay {};
+    int _replayFrame {};
 public:
     Scene();
 
     GameObject& getRootGameObject() const;
 
-    virtual void startRecording(const std::string& actionToLock);
-    virtual void stopRecording();
-    virtual void playRecording();
+    void startRecordingReplay(const std::vector<std::string>& actionsToLock, bool recordMouse = false);
+    void stopRecordingReplay();
+    void playReplay();
+    void stopReplay();
 
     virtual void startScene();
+
+    /// Executes all the steps needed to handle recordings, wether it is playing a recording or making one.
+    /// Should be executed before `updateScene()`
+    void updateReplay();
     virtual void updateScene();
 
     /// Creates a new GameObject

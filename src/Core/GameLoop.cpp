@@ -8,6 +8,7 @@
 #include "../Services/SDLInputService.h"
 #include "../Services/SDLRenderService.h"
 #include "../Services/Box2DPhysicsService.h"
+#include "../Services/PugiXMLTileMapParserService.h"
 #include "../Services/AStarPathfindingService.h"
 #define GOLFENGINE_SINGLETON_PRIVATE //Grants access to the "private" methods of singletons
 #include "../Services/Singletons/PhysicsSingleton.h"
@@ -15,6 +16,8 @@
 #include "../Services/Singletons/RenderSingleton.h"
 #include "../Services/Singletons/InputSingleton.h"
 #include "../Services/Singletons/PathfindingSingleton.h"
+#include "../Services/Singletons/TileMapParserSingleton.h"
+#include "../Input/ActionMap.h"
 
 using namespace GolfEngine::Services;
 
@@ -64,8 +67,11 @@ void GameLoop::update() {
     }
 
     // Update scene
-    if(GolfEngine::SceneManager::GetSceneManager().hasCurrentScene())
-        GolfEngine::SceneManager::GetSceneManager().getCurrentScene().updateScene();
+    if(GolfEngine::SceneManager::GetSceneManager().hasCurrentScene()){
+        auto& currentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
+        currentScene.updateReplay();
+        currentScene.updateScene();
+    }
 
     if(ActionMap::getActionMap()){
         ActionMap::getActionMap()->update();
@@ -85,13 +91,12 @@ void GameLoop::findPaths() {
     }
 }
 void GameLoop::useDefaultServices() {
-
     setInputService(new SDLInputService());
     setAudioService(new SDLAudioService());
     setRenderService(new Render::SDLRenderService {});
     setPhysicsService(new Physics::Box2DPhysicsService {});
+    setTileMapParserService(new TileMapParser::PugiXMLTileMapParserService{});
     setPathfindingService(new GolfEngine::Services::Pathfinding::AStarPathfindingService {});
-
 }
 
 
@@ -107,7 +112,8 @@ void GameLoop::setAudioService(AudioService *audioService) {
         Audio::getService()->free();
     }
 
-    audioService->init();
+    if(audioService)
+        audioService->init();
     Audio::setService(audioService);
 }
 
@@ -122,6 +128,10 @@ void GameLoop::setRenderService(RenderService* renderService) {
 
 void GameLoop::setPhysicsService(PhysicsService* physicsService) {
     Physics::setService(physicsService);
+}
+
+void GameLoop::setTileMapParserService(TileMapParserService* tileMapParserService) {
+    TileMapParser::setService(tileMapParserService);
 }
 
 bool GameLoop::isGameRunning() const {

@@ -26,10 +26,12 @@ public:
     void setActive(bool active) override;
     void setParentGameObject(GameObject& gameObject) override;
     RenderShape& getRenderShape() override;
+    std::unique_ptr<ISnapshot> saveSnapshot() override;
+    void loadSnapshot(const ISnapshot& rawSnapshot) override;
 
 private:
     bool _active {true};
-    float _radius;
+    const float _radius;
     CircleRenderShape _renderShape;
 
 

@@ -9,6 +9,9 @@
 
 Projectile::Projectile() {
     addComponent<CircleCollider>(5.0f);
-    addComponent<RigidBody>();
+
+    RigidBodyDef def {};
+    def.intensiveCollisions = true;
+    addComponent<RigidBody>(def);
     addComponent<ProjectileScript>();
 }

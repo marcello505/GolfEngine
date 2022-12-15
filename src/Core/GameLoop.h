@@ -11,6 +11,7 @@
 #include "../Services/Abstracts/InputService.h"
 #include "../Services/Abstracts/RenderService.h"
 #include "../Services/Abstracts/PhysicsService.h"
+#include "../Services/Abstracts/TileMapParserService.h"
 #include "../Services/Abstracts/PathfindingService.h"
 #include "SceneManager.h"
 #include "../Input/ActionMap.h"
@@ -25,6 +26,7 @@ public:
     void setInputService(InputService* inputService);
     void setRenderService(RenderService* renderService);
     void setPhysicsService(PhysicsService* physicsService);
+    void setTileMapParserService(TileMapParserService* tileMapParserService);
     void setPathfindingService(PathfindingService* pathfindingService);
     void setFramesPerSeccond(GameTic fps);
     [[nodiscard]] bool isGameRunning() const;

@@ -62,6 +62,14 @@ Vector2 Pathfinding::getParentGameObjectPosition() const  {
     return _gameObject->get().getWorldTransform().position;
 }
 
+std::unique_ptr<ISnapshot> Pathfinding::saveSnapshot() {
+    return {};
+}
+
+void Pathfinding::loadSnapshot(const ISnapshot& rawSnapshot) {
+    //Explicitly do nothing
+}
+
 Vector2 Pathfinding::getTargetPosition() {
     return _target.getWorldTransform().position;
 }

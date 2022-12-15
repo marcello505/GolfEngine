@@ -9,6 +9,9 @@ class InputService {
 public:
     virtual void handleInputs() = 0;
     virtual bool hasReceivedQuitSignal() const = 0;
+
+    // Virtual Destructors
+    virtual ~InputService() = default;
 };
 
 
