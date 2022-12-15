@@ -6,12 +6,11 @@
 #include "Scene/Components/RigidBody.h"
 #include "../gameobjects/PlayerObject.h"
 #include "../gameobjects/Wall.h"
-#include "../gameobjects/Projectile.h"
 #include "../gameobjects/ProjectilePoolObject.h"
 #include "../scripts/SaveStateScript.h"
 #include "../gameobjects/TestBlock.h"
-#include "Scene/Components/SpriteComponent.h"
 #include "Scene/Components/BoxCollider.h"
+#include "../gameobjects/GameManager.h"
 
 void PlayerTestScene::build(Scene& scene) const {
     auto& root = scene.createNewGameObject<GameObject>();
@@ -53,4 +52,6 @@ void PlayerTestScene::build(Scene& scene) const {
     testEnemyCollision.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
     testEnemyCollision.tag = "enemy";
     testEnemyCollision.setLocalPosition({1000.0f, 500.0f});
+
+    scene.createNewGameObject<GameManager>();
 }

@@ -158,3 +158,20 @@ void Scene::loadCurrentSceneState(int slot) {
         loadCurrentState(savedState->second);
     }
 }
+
+GameObject& Scene::getGameObjectWithTag(const std::string& tag) const{
+    for(auto& go : _gameObjects){
+        if(go->tag == tag)
+            return *go;
+    }
+    throw std::runtime_error("No GameObject found with tag: " + tag);
+}
+
+std::vector<std::reference_wrapper<GameObject>> Scene::getGameObjectsWithTag(const std::string &tag) {
+    std::vector<std::reference_wrapper<GameObject>> foundGameObjects;
+    for(auto& go : _gameObjects){
+        if(go->tag == tag)
+            foundGameObjects.emplace_back(*go);
+    }
+    return foundGameObjects;
+}

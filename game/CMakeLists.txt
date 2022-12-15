@@ -16,8 +16,14 @@ scripts/GameManagerScript.cpp)
 
 set(GAMEOBJECTS_SOURCES
         gameobjects/PlayerObject.cpp
-        gameobjects/Wall.cpp gameobjects/Projectile.cpp gameobjects/ProjectilePoolObject.cpp gameobjects/TestBlock.cpp)
-set(SCENE_SOURCES scenes/PlayerTestScene.cpp)
+        gameobjects/Wall.cpp
+        gameobjects/Projectile.cpp
+        gameobjects/ProjectilePoolObject.cpp
+        gameobjects/TestBlock.cpp
+        gameobjects/GameManager.cpp)
+
+set(SCENE_SOURCES
+        scenes/PlayerTestScene.cpp)
 
 # Resource files
 add_custom_target(Game_Resources ALL

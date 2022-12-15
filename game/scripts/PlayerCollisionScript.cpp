@@ -4,11 +4,17 @@
 
 #include "PlayerCollisionScript.h"
 #include <iostream>
+#include "Core/SceneManager.h"
 
 void PlayerCollisionScript::onStart() {
-    _gameManager = &_gameObject->get().getComponent<GameManagerScript>();
-    _playerMovement = &_gameObject->get().getComponent<PlayerMovementScript>();
-    _playerShoot = &_gameObject->get().getComponent<PlayerShootScript>();
+//    auto& gm = GolfEngine::SceneManager::GetSceneManager().getCurrentScene().getGameObjectWithTag("GameManager");
+//    _gameManager = &gm.getComponent<GameManagerScript>();
+
+    if(_gameObject->get().hasComponent<PlayerMovementScript>())
+        _playerMovement = &_gameObject->get().getComponent<PlayerMovementScript>();
+
+    if(_gameObject->get().hasComponent<PlayerShootScript>())
+        _playerShoot = &_gameObject->get().getComponent<PlayerShootScript>();
 }
 
 void PlayerCollisionScript::onCollisionEnter(RigidBody &other) {

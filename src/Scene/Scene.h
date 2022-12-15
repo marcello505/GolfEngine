@@ -54,6 +54,16 @@ public:
     void updateReplay();
     virtual void updateScene();
 
+    /// Retrieves a gameObject with the corresponding tag
+    /// \param tag to be searched with
+    /// \return a reference to a gameObject
+    GameObject& getGameObjectWithTag(const std::string& tag) const;
+
+    /// Retrieves a list of gameObjects with the corresponding tag
+    /// \param tag to be searched with
+    /// \return List of gameObjects reference_wrappers
+    std::vector<std::reference_wrapper<GameObject>> getGameObjectsWithTag(const std::string& tag);
+
     /// Creates a new GameObject
     /// \tparam GO Type of GameObject to be created
     /// \param parent The parent of the GameObject
