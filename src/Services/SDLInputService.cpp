@@ -9,6 +9,20 @@ SDLInputService::SDLInputService(): _hasReceivedQuitSignal{false}
     bindKeys(); // bind all the SDL keynames with our InputKey enum values
 }
 
+InputKey SDLInputService::getKeyPressed()
+{
+    SDL_Event event;
+
+    while (SDL_PollEvent(&event)) //check for pollevents
+    {
+        if (event.type == SDL_KEYDOWN) // if key is pressed
+        {
+            setKeyPressed(true);
+            return _inputBinds.find(SDL_GetKeyName(event.key.keysym.sym))->second; // get key
+        }
+    }
+}
+
 // handle input via SDL
 void SDLInputService::handleInputs()
 {
@@ -311,4 +325,12 @@ void SDLInputService::bindKeys() {
 
 bool SDLInputService::hasReceivedQuitSignal() const{
     return _hasReceivedQuitSignal;
+}
+
+bool SDLInputService::pressedKey() const{
+    return _pressedKey;
+}
+
+void SDLInputService::setKeyPressed(bool pressed) {
+    _pressedKey = pressed;
 }

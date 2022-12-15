@@ -16,7 +16,7 @@ void MainMenuScene::build(Scene& scene) const {
     auto* rs = GolfEngine::Services::Render::getService();
     auto& root = scene.createNewGameObject<GameObject>();
 
-    auto& TitleText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 27,
+    auto& TitleText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 34,
                                                                     rs->screenSizeHeight() / 100 * 8),
                                                       0, "Zombie Slayer",70, Color(),
                                                    R"(../../game/res/fonts/ZenDots-Regular.ttf)",

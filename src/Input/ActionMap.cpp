@@ -3,6 +3,7 @@
 
 #include "ActionMap.h"
 #include <iostream>
+#include <algorithm>
 
 ActionMap* ActionMap::actionMap = nullptr;
 
@@ -42,6 +43,16 @@ ActionMap* ActionMap::actionMap = nullptr;
     // bind action to input
     void ActionMap::addInputKeyToAction(const std::string& action, InputKey inputKey)
     {
+/*        for (auto &_actionList : _inputKeys){
+            for (auto &_action : _actionList.second){
+                if(_action.name == action){
+                    _actionList.second.erase(std::find_if(_actionList.second.begin(), _actionList.second.end(), [&](const Action &d) {
+                        return &d == &_action;
+                    }));
+                }
+            }
+        }*/
+
         if (_inputKeys.count(inputKey) > 0 && _actions.find(action) != _actions.end()) // if key and action exist
         {
             _inputKeys.find(inputKey)->second.push_back(_actions.find(action)->second);
@@ -143,10 +154,11 @@ ActionMap* ActionMap::actionMap = nullptr;
         }
     }
 
+
+
 void ActionMap::setActionPressed(const std::string& action, bool pressed, bool justInput) {
     if(_actions.find(action) != _actions.end()){
         _actions[action].pressed = pressed;
         _actions[action].justInput = justInput;
     }
 }
-

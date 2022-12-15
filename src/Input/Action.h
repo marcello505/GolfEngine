@@ -8,8 +8,13 @@
 class Action {
 public:
     std::string name {};
+    std::string keyRefString;
     bool pressed {};
     bool justInput {};
+/*    bool operator==(const Action& other) const
+    {
+        return (name == other.name);
+    }*/
 };
 #endif //GOLFENGINE_ACTION_H
 

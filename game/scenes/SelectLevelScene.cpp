@@ -17,11 +17,11 @@ void SelectLevelScene::build(Scene& scene) const {
     BackButtonScript backScript;
 
     auto& backButton = scene.createNewGameObject<Button>(root, 150, 70,
-                                                                  Vector2(100,90) ,true,
-                                                                  "clickButton", Vector2(rs->screenSizeWidth() /
-                                                                                         100 * 3,
-                                                                                         rs->screenSizeHeight() /
-                                                                                         100 * 9.0), 0,
+                                                                  Vector2(rs->screenSizeWidth() /
+                                                                          100.0 * 12.0,
+                                                                          rs->screenSizeHeight() /
+                                                                            100.0 * 12.0), 0,
+                                                                  "clickButton", Vector2(0,0 ), true,
                                                                   "Back", 20, Color(),
                                                                   R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)",
                                                                   Alignment::Center);
@@ -29,8 +29,8 @@ void SelectLevelScene::build(Scene& scene) const {
     backButton.addComponent<BackButtonScript>(backScript);
 
 
-    auto& TitleText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 3.5,
-                                                                    rs->screenSizeHeight() / 100 * 8),
+    auto& TitleText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100.0 * 35.0,
+                                                                    rs->screenSizeHeight() / 100.0 * 8.0),
                                                       0, "Select Level",70, Color(),
                                                       R"(../../game/res/fonts/ZenDots-Regular.ttf)",
                                                       Alignment::Center, false);

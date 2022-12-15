@@ -5,10 +5,15 @@
 #ifndef SPC_PROJECT_INPUTSERVICE_H
 #define SPC_PROJECT_INPUTSERVICE_H
 
+#include "Input/InputKey.h"
+
 class InputService {
 public:
     virtual void handleInputs() = 0;
     virtual bool hasReceivedQuitSignal() const = 0;
+    virtual bool pressedKey() const = 0;
+    virtual void setKeyPressed(bool pressed) = 0;
+    virtual InputKey getKeyPressed() = 0;
 };
 
 

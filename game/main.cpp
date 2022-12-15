@@ -12,6 +12,7 @@
 #include "scenes/SelectLevelScene.h"
 #include "scenes/SettingsScene.h"
 #include "Scene/Components/AudioSource.h"
+#include "scenes/KeyConfigScene.h"
 
 
 int main(int argc, char* argv[]){
@@ -43,13 +44,11 @@ int main(int argc, char* argv[]){
     ActionMap::getActionMap()->addInputKeyToAction("clickButton", Mouse_Left);
 
     //Render initialization
-    GolfEngine::Services::Render::getService()->setScreenSize(1280, 720);
+    GolfEngine::Services::Render::getService()->setScreenSize(1920, 1080);
 
     //Audio initialisation
     GolfEngine::Scene::Components::AudioSource mgsThemeSound {R"(../../game/res/audio/mgs-theme.flac)", true};
-/*
-    mgsThemeSound.play(true);
-*/
+/*    mgsThemeSound.play(true);*/
 
 
     //Scene initialization
@@ -58,6 +57,7 @@ int main(int argc, char* argv[]){
     sceneManager.addSceneFactory<MainMenuScene>("mainMenu");
     sceneManager.addSceneFactory<SelectLevelScene>("selectLevel");
     sceneManager.addSceneFactory<SettingsScene>("settings");
+    sceneManager.addSceneFactory<KeyConfigScene>("keyConfig");
 
     sceneManager.loadScene("mainMenu");
 
