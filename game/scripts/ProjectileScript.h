@@ -13,6 +13,7 @@ class ProjectileScript : public BehaviourScript {
 public:
     void onStart() override;
     void onUpdate() override;
+    void onCollisionEnter(RigidBody& other) override;
 
     void shoot(const Transform& transform, const Vector2& direction);
 
@@ -22,6 +23,7 @@ public:
 
 private:
     Vector2 _dir {};
+    float _bulletSpeed {25.0f};
 
     int _ticksToLive{};
     RigidBody* _rigidBody {};

@@ -31,10 +31,14 @@ int main(int argc, char* argv[])
     _audioService->init();
 
     //setup audio sources
-    GolfEngine::Scene::Components::AudioSource gunCockingSound {gunCockingPath, false};
-    GolfEngine::Scene::Components::AudioSource shortShotSound {shortShotPath, false};
-    GolfEngine::Scene::Components::AudioSource grenadeSound {grenadePath, false};
-    GolfEngine::Scene::Components::AudioSource mgsThemeSound {mgsThemePath, true};
+    GolfEngine::Scene::Components::AudioSource gunCockingSound {false};
+    gunCockingSound.addSound("gunCocking", gunCockingPath);
+    GolfEngine::Scene::Components::AudioSource shortShotSound {false};
+    shortShotSound.addSound("shortShot", shortShotPath);
+    GolfEngine::Scene::Components::AudioSource grenadeSound {false};
+    grenadeSound.addSound("grenade", grenadePath);
+    GolfEngine::Scene::Components::AudioSource mgsThemeSound {true};
+    mgsThemeSound.addSound("mgsTheme", mgsThemePath);
 
     gunCockingSound.onStart();
     shortShotSound.onStart();
@@ -42,7 +46,7 @@ int main(int argc, char* argv[])
     mgsThemeSound.onStart();
 
     //play music on start
-    mgsThemeSound.play(true);
+    mgsThemeSound.play("mgsTheme", true);
 
     // initialize video
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -63,26 +67,26 @@ int main(int argc, char* argv[])
             else if(e.type == SDL_KEYDOWN){
                 if(e.key.keysym.sym == SDLK_LEFT){ // for playing a sound
                     if(e.key.keysym.mod & KMOD_SHIFT){
-                        gunCockingSound.stop();
+                        gunCockingSound.stop("gunCocking");
                     }
                     else{
-                        gunCockingSound.play();
+                        gunCockingSound.play("gunCocking");
                     }
                 }
                 else if(e.key.keysym.sym == SDLK_RIGHT){ // for playing a sound
                     if(e.key.keysym.mod & KMOD_SHIFT){
-                        shortShotSound.stop();
+                        shortShotSound.stop("shortShot");
                     }
                     else{
-                        shortShotSound.play();
+                        shortShotSound.play("shortShot");
                     }
                 }
                 else if(e.key.keysym.sym == SDLK_UP){ //for playing a sound
                     if(e.key.keysym.mod & KMOD_SHIFT){
-                        grenadeSound.stop();
+                        grenadeSound.stop("grenade");
                     }
                     else{
-                        grenadeSound.play();
+                        grenadeSound.play("grenade");
                     }
                 }
                 else if(e.key.keysym.sym == SDLK_DOWN){ // for toggling pause / resuming of audio
@@ -107,10 +111,10 @@ int main(int argc, char* argv[])
                     _audioService->setSfxVolume(_audioService->getSfxVolume() + 0.1f);
                 }
                 else if(e.key.keysym.sym == SDLK_RETURN){ // for playing sound after halt
-                    mgsThemeSound.play(true);
+                    mgsThemeSound.play("mgsTheme", true);
                 }
                 else if(e.key.keysym.sym == SDLK_BACKSPACE){ // for halting audio
-                    mgsThemeSound.stop();
+                    mgsThemeSound.stop("mgsTheme");
                 }
             }
         }
