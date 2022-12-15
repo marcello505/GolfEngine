@@ -20,6 +20,7 @@
 #include "Render/Texture.h"
 #include "../Scene/RenderShape/TextRenderShape.h"
 #include "../Scene/RenderShape/TileMapRenderShape.h"
+#include "Scene/GameObjects/Camera.h"
 
 namespace GolfEngine::Services::Render {
 
@@ -57,6 +58,8 @@ public:
     [[nodiscard]] int screenSizeWidth() const;
     [[nodiscard]] int screenSizeHeight() const;
     [[nodiscard]] bool fullScreen() const;
+    [[nodiscard]] std::optional<std::reference_wrapper<Camera>> getMainCamera() const override;
+    void setMainCamera(Camera& camera) override;
 private:
     void renderRect(RectRenderShape &renderShape);
     void renderLine(LineRenderShape &renderShape);
@@ -67,6 +70,7 @@ private:
 
     Texture& loadSprite(const std::string& path);
     void renderSprite(SpriteRenderShape &renderShape);
+    TTF_Font& loadFont(const std::string &path, size_t fontSize);
 
     int _screenSizeWidth;
     int _screenSizeHeight;
@@ -76,8 +80,8 @@ private:
     std::vector<std::reference_wrapper<Drawable>> _drawables;
     std::map<std::string, std::unique_ptr<Texture>> _cachedTextures;
     std::map<std::string, std::pair<size_t , std::unique_ptr<TTF_Font, void(*)(TTF_Font*)>>> _cachedFonts;
-
-    TTF_Font& loadFont(const std::string &path, size_t fontSize);
+    std::optional<std::reference_wrapper<Camera>> _mainCamera;
+    Vector2 camOffset;
 };
 
 }

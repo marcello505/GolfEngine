@@ -6,8 +6,10 @@
 #define SPC_PROJECT_SCENEMANAGER_H
 
 #include <map>
-#include "../Scene/Scene.h"
 #include <memory>
+#include <optional>
+
+#include "../Scene/Scene.h"
 #include "../Scene/ISceneFactory.h"
 
 class ISceneFactory;
@@ -20,6 +22,9 @@ private:
     std::unique_ptr<Scene> _currentScene;
     std::string _lastScene;
 
+    // If this has a value, then the next call to updateSceneManager() will change the scene to the string given
+    std::optional<std::string> _nextScene {};
+
     static std::unique_ptr<SceneManager> sceneManager;
 
     SceneManager();
@@ -28,7 +33,8 @@ public:
     /// \return Returns the global scene manager instance
     static SceneManager& GetSceneManager();
 
-    /// Loads new scene by setting the currentScene of a copy of the loaded scene
+    /// A deferred call to load  a new scene by setting the currentScene of a copy of the loaded scene
+    /// The actual loading happens on the next updateSceneManager() call
     /// \param sceneName Name of scene to load, if empty, current scene will be reloaded
     void loadScene(const std::string &sceneName = "");
 
@@ -39,6 +45,10 @@ public:
     void addSceneFactory(const std::string& sceneName){
         _scenes.insert(std::make_pair(sceneName, std::make_unique<SF>()));
     }
+
+    /// Update the scene manager if needed, should be called by the GameLoop before updating the current scene.
+    /// For now the only update action is loading in a new scene if _nextScene has a value
+    void updateSceneManager();
 
     /// Returns reference to _currentScene
     /// \return
