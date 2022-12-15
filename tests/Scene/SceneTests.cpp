@@ -40,6 +40,7 @@ TEST_CASE("Loading a scene"){
 
     // Act
     GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    GolfEngine::SceneManager::GetSceneManager().updateSceneManager();
     auto& currentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
 
     // Assert
@@ -55,6 +56,7 @@ TEST_CASE("Reloading/Resetting a scene"){
 
     // Act
     GolfEngine::SceneManager::GetSceneManager().loadScene();
+    GolfEngine::SceneManager::GetSceneManager().updateSceneManager();
     auto& currentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
 
     // Assert

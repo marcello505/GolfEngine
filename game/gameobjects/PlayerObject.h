@@ -8,11 +8,12 @@
 
 #include "../scripts/ProjectilePoolScript.h"
 #include "Scene/GameObjects/GameObject.h"
+#include "../scripts/PlayerMovementScript.h"
+#include "../scripts/PlayerShootScript.h"
 
 class PlayerObject : public GameObject {
 public:
     explicit PlayerObject(ProjectilePoolScript* projectilePoolScript);
-
 };
 
 

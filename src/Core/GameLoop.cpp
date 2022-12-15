@@ -65,8 +65,10 @@ void GameLoop::update() {
     }
 
     // Update scene
-    if(GolfEngine::SceneManager::GetSceneManager().hasCurrentScene()){
-        auto& currentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
+    auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
+    sceneManager.updateSceneManager();
+    if(sceneManager.hasCurrentScene()){
+        auto& currentScene = sceneManager.getCurrentScene();
         currentScene.updateReplay();
         currentScene.updateScene();
     }

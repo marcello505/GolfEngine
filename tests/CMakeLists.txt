@@ -20,6 +20,7 @@ set(SCENE_TEST_SOURCES
         Scene/PersistableTests.cpp)
 
 set(UTILITIES_TEST_SOURCES
+        Utilities/IOTests.cpp
         Utilities/RandomTests.cpp)
 
 # Main Project
