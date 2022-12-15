@@ -11,6 +11,7 @@
 #include "../gameobjects/TestBlock.h"
 #include "Scene/Components/BoxCollider.h"
 #include "../gameobjects/GameManager.h"
+#include "Scene/GameObjects/Camera.h"
 
 void PlayerTestScene::build(Scene& scene) const {
     auto& root = scene.createNewGameObject<GameObject>();
@@ -40,6 +41,7 @@ void PlayerTestScene::build(Scene& scene) const {
 
     auto& player = scene.createNewGameObject<PlayerObject>(&projectilePool.getComponent<ProjectilePoolScript>());
     player.setLocalPosition({200.f, 200.f});
+    scene.createNewGameObject<Camera>((GameObject&)player);
 
     auto& testFinishArea = scene.createNewGameObject<GameObject>();
     testFinishArea.addComponent<BoxCollider>(Vector2{50.0f, 50.0f});

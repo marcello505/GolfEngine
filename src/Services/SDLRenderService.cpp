@@ -119,6 +119,8 @@ namespace GolfEngine::Services::Render {
     }
 
     void SDLRenderService::setScreenSize(int width, int height) {
+        _screenSizeWidth = width;
+        _screenSizeHeight = height;
         SDL_SetWindowSize(_window.get(), width, height);
     }
 
@@ -532,5 +534,20 @@ namespace GolfEngine::Services::Render {
         if(result != _drawables.end())
             return true;
         return false;
+    }
+
+    int SDLRenderService::getScreenSizeWidth() const {
+        return _screenSizeWidth;
+    }
+
+    int SDLRenderService::getScreenSizeHeight() const {
+        return _screenSizeHeight;
+    }
+
+    Vector2 SDLRenderService::getCameraOffset() const {
+        if(_mainCamera)
+            return camOffset;
+
+        throw std::runtime_error("Camera offset requested without an active camera in the scene.");
     }
 }

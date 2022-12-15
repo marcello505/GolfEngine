@@ -2,6 +2,7 @@
 // Created by conner on 12/13/2022.
 //
 
+#include "Scene/GameObjects/Camera.h"
 #include "PlayerShootScript.h"
 #include "Input/ActionMap.h"
 #include "Core/Time.h"
@@ -25,8 +26,9 @@ void PlayerShootScript::onUpdate() {
             auto projectile = _projectilePool->getProjectile();
             if(projectile){
                 Transform projectileTransform {_gameObject->get().getWorldTransform()};
-                projectileTransform.rotation = _gameObject->get().getWorldTransform().position.angleToDegrees(ActionMap::getActionMap()->getMousePosition());
-                auto directionToMouse = _gameObject->get().getWorldTransform().position.directionTo(ActionMap::getActionMap()->getMousePosition());
+                auto mouseWorldSpace {Camera::screenToWorldSpace(ActionMap::getActionMap()->getMousePosition())};
+                projectileTransform.rotation = _gameObject->get().getWorldTransform().position.angleToDegrees(mouseWorldSpace);
+                auto directionToMouse = _gameObject->get().getWorldTransform().position.directionTo(mouseWorldSpace);
                 projectileTransform.position += directionToMouse * 80.0f;
 
                 projectile.value().get().shoot(projectileTransform, directionToMouse);

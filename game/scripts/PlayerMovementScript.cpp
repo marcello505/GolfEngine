@@ -2,6 +2,8 @@
 // Created by marcello on 11/29/22.
 //
 
+#include "Scene/GameObjects/Camera.h"
+#include <iostream>
 #include "PlayerMovementScript.h"
 
 void PlayerMovementScript::onStart() {
@@ -37,7 +39,11 @@ void PlayerMovementScript::onUpdate() {
 
     //Point to mouse logic
     {
-        float angleToMouse = _gameObject->get().getWorldTransform().position.angleToDegrees(_actionMap->getMousePosition()) - rotationOffset;
+//        std::cout << _gameObject->get().getWorldTransform().position.x << " " << _gameObject->get().getWorldTransform().position.y << std::endl;
+//        Vector2 mousePos = _actionMap->getMousePosition();
+//        std::cout << mousePos.x << " " << mousePos.y << std::endl;
+
+        float angleToMouse = _gameObject->get().getWorldTransform().position.angleToDegrees(Camera::screenToWorldSpace(_actionMap->getMousePosition())) - rotationOffset;
         _sprite->setRotation(angleToMouse); //angle to mouse + offset
     }
 }
