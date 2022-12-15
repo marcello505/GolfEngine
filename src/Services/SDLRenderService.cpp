@@ -517,4 +517,8 @@ namespace GolfEngine::Services::Render {
     void SDLRenderService::setMainCamera(Camera &camera) {
         _mainCamera = camera;
     }
+
+    void SDLRenderService::setWindowTitle(const std::string& title) {
+        SDL_SetWindowTitle(_window.get(), title.c_str());
+    }
 }

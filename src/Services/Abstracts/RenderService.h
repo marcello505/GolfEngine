@@ -10,6 +10,7 @@
 
 class RenderService{
 public:
+    virtual void setWindowTitle(const std::string& title) = 0;
     virtual void addDrawable(Drawable& drawable) = 0;
     virtual void removeDrawable(Drawable& drawable) = 0;
     virtual void render() = 0;
