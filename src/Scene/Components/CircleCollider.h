@@ -31,6 +31,7 @@ public:
 
 private:
     bool _active {true};
+    bool _isBeingRendered {false};
     const float _radius;
     CircleRenderShape _renderShape;
 
