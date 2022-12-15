@@ -10,6 +10,8 @@
 #include "../scripts/SaveGameTestScripts/SaveGameTestScript.h"
 #include "Scene/GameObjects/UIObject/Text.h"
 #include "../scripts/SaveGameTestScripts/ShotCounterScript.h"
+#include "../gameobjects/GameManager.h"
+#include "Scene/GameObjects/Camera.h"
 
 void SaveGameTestScene::build(Scene& scene) const {
     auto& root = scene.createNewGameObject<GameObject>();
@@ -30,6 +32,9 @@ void SaveGameTestScene::build(Scene& scene) const {
 
     auto& player = scene.createNewGameObject<PlayerObject>(root, &projectilePool.getComponent<ProjectilePoolScript>());
     player.setLocalPosition({200.f, 200.f});
+    scene.createNewGameObject<Camera>((GameObject&)player);
+
+    scene.createNewGameObject<GameManager>();
 
     auto& shotCounterObject = scene.createNewGameObject<Text>(root, Vector2(0, 0), 0, "Shots Fired: 0",
                                                               20, Color(),

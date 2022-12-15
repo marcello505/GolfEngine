@@ -43,6 +43,7 @@ TEST_CASE("RigidBody adds all colliders to the physics simulation"){
     GolfEngine::SceneManager::GetSceneManager().clearScenes();
     GolfEngine::SceneManager::GetSceneManager().addSceneFactory<Box2DPysicstest::SceneFactory>("main");
     GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    GolfEngine::SceneManager::GetSceneManager().updateSceneManager();
     //Act
     //Arrange
     CHECK_EQ(box2DPhysicsService->getFixtureCount(), 2); //Added 2 Colliders and 1 RigidBody, thus the fixture count should be 2
@@ -55,6 +56,7 @@ TEST_CASE("RigidBody.addForceToCenter() causes movement"){
     GolfEngine::SceneManager::GetSceneManager().clearScenes();
     GolfEngine::SceneManager::GetSceneManager().addSceneFactory<Box2DPysicstest::SceneFactory>("main");
     GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    GolfEngine::SceneManager::GetSceneManager().updateSceneManager();
 
     //Act
     auto& gameObject = GolfEngine::SceneManager::GetSceneManager().getCurrentScene().getRootGameObject().childAt(0);

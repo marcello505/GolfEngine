@@ -42,6 +42,8 @@ public:
     /// \param drawable to be removed
     void removeDrawable(Drawable& drawable) override;
 
+    bool isRegistered(Drawable &drawable) override;
+
     /// Renders all drawables in registered drawable list
     void render() override;
 
@@ -54,7 +56,7 @@ public:
     /// \param fullScreen true is fullscreen
     void setFullScreen(bool fullScreen) override;
 
-    // Getters
+    // Getters, setters
     [[nodiscard]] int screenSizeWidth() const;
     [[nodiscard]] int screenSizeHeight() const;
     [[nodiscard]] bool fullScreen() const;
@@ -62,6 +64,7 @@ public:
     void setMainCamera(Camera& camera) override;
     [[nodiscard]] int getScreenSizeWidth() const override;
     [[nodiscard]] int getScreenSizeHeight() const override;
+    [[nodiscard]] Vector2 getCameraOffset() const override;
 private:
     void renderRect(RectRenderShape &renderShape);
     void renderLine(LineRenderShape &renderShape);

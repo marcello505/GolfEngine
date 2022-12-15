@@ -8,6 +8,7 @@
 
 ProjectilePoolObject::ProjectilePoolObject(Scene& scene, int capacity) {
     addComponent<ProjectilePoolScript>();
+    setLocalPosition({-1000,-1000});
 
     GameObject& parent = *this;
     for(int i = 0; i < capacity; ++i){

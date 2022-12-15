@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.23)
 set(CMAKE_CXX_STANDARD 17)
 
 # Sources
+
 set(SCRIPT_SOURCES
         scripts/PlayerMovementScript.cpp
         scripts/ProjectilePoolScript.cpp
@@ -11,14 +12,18 @@ set(SCRIPT_SOURCES
         scripts/SaveStateScript.cpp
         scripts/SaveGameTestScripts/SaveGameTestScript.cpp
         scripts/SaveGameTestScripts/ShotCounterScript.cpp
+        scripts/PlayerShootScript.cpp
+        scripts/PlayerCollisionScript.cpp
+        scripts/GameManagerScript.cpp
         scripts/HUDScript.cpp)
 
 set(GAMEOBJECTS_SOURCES
-        gameobjects/PlayerObject.cpp
+        gameobjects/PlayerObject.cpp     
         gameobjects/Wall.cpp
         gameobjects/Projectile.cpp
         gameobjects/ProjectilePoolObject.cpp
         gameobjects/TestBlock.cpp
+        gameobjects/GameManager.cpp
         gameobjects/HUD.cpp)
 
 set(SCENE_SOURCES
