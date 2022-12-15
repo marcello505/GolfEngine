@@ -39,10 +39,6 @@ void PlayerMovementScript::onUpdate() {
 
     //Point to mouse logic
     {
-//        std::cout << _gameObject->get().getWorldTransform().position.x << " " << _gameObject->get().getWorldTransform().position.y << std::endl;
-//        Vector2 mousePos = _actionMap->getMousePosition();
-//        std::cout << mousePos.x << " " << mousePos.y << std::endl;
-
         float angleToMouse = _gameObject->get().getWorldTransform().position.angleToDegrees(Camera::screenToWorldSpace(_actionMap->getMousePosition())) - rotationOffset;
         _sprite->setRotation(angleToMouse); //angle to mouse + offset
     }

@@ -41,6 +41,7 @@ void PlayerTestScene::build(Scene& scene) const {
 
     auto& player = scene.createNewGameObject<PlayerObject>(&projectilePool.getComponent<ProjectilePoolScript>());
     player.setLocalPosition({200.f, 200.f});
+    // Add camera to player
     scene.createNewGameObject<Camera>((GameObject&)player);
 
     auto& testFinishArea = scene.createNewGameObject<GameObject>();
