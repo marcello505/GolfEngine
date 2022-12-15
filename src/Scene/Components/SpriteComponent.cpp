@@ -21,7 +21,7 @@ void SpriteComponent::onUpdate() {
 }
 
 void SpriteComponent::onRemove() {
-    if(GolfEngine::Services::Render::hasService())
+    if(GolfEngine::Services::Render::hasService() && GolfEngine::Services::Render::getService()->isRegistered(*this))
         GolfEngine::Services::Render::getService()->removeDrawable(*this);
 }
 
