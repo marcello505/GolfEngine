@@ -34,7 +34,6 @@ public:
 
 private:
     bool _active {true};
-    bool _isBeingRendered {false};
     RectRenderShape _rectRenderShape;
     const Vector2 _shapeExtents;
 };

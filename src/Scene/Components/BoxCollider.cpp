@@ -9,8 +9,10 @@
 void BoxCollider::onStart() {
     //Register to Render Service if the PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS key is true in ProjectSettings
     auto& projSett = GolfEngine::Core::getProjectSettings();
-    if(projSett.hasBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS) && projSett.getBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS) && GolfEngine::Services::Render::hasService()){
-        _isBeingRendered = true;
+    if(projSett.hasBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS) &&
+    projSett.getBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS) &&
+    GolfEngine::Services::Render::hasService() &&
+    !GolfEngine::Services::Render::getService()->isRegistered(*this)){
         GolfEngine::Services::Render::getService()->addDrawable(*this);
     }
 }
@@ -20,7 +22,7 @@ void BoxCollider::onUpdate() {
 }
 
 void BoxCollider::onRemove() {
-    if(GolfEngine::Services::Render::hasService() && _isBeingRendered){
+    if(GolfEngine::Services::Render::hasService() && GolfEngine::Services::Render::getService()->isRegistered(*this)){
         GolfEngine::Services::Render::getService()->removeDrawable(*this);
     }
 }

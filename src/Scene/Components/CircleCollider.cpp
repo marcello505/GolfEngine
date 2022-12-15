@@ -9,8 +9,10 @@ ColliderShapes CircleCollider::getColliderShape() {
 void CircleCollider::onStart() {
     //Register to Render Service if the PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS key is true in ProjectSettings
     auto& projectSettings = GolfEngine::Core::getProjectSettings();
-    if(projectSettings.hasBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS) && projectSettings.getBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS) && GolfEngine::Services::Render::hasService()){
-        _isBeingRendered = true;
+    if(projectSettings.hasBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS) &&
+    projectSettings.getBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS) &&
+    GolfEngine::Services::Render::hasService() &&
+    !GolfEngine::Services::Render::getService()->isRegistered(*this)){
         GolfEngine::Services::Render::getService()->addDrawable(*this);
     }
 }
@@ -20,7 +22,7 @@ void CircleCollider::onUpdate() {
 }
 
 void CircleCollider::onRemove() {
-    if(GolfEngine::Services::Render::hasService() && _isBeingRendered){
+    if(GolfEngine::Services::Render::hasService() && GolfEngine::Services::Render::getService()->isRegistered(*this)){
         GolfEngine::Services::Render::getService()->removeDrawable(*this);
     }
 }
