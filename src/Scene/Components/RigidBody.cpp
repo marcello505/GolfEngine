@@ -44,11 +44,9 @@ bool RigidBody::getActive() {
 
 void RigidBody::setActive(bool active) {
     _active = active;
-//    if(!active)
-//        _flaggedForDisable = true;
-//    if(GolfEngine::Services::Physics::hasService()){
-//        GolfEngine::Services::Physics::getService()->setEnabled(this, active);
-//    }
+    if(GolfEngine::Services::Physics::hasService()){
+        GolfEngine::Services::Physics::getService()->setEnabled(this, active);
+    }
 }
 
 void RigidBody::setParentGameObject(GameObject& gameObject) {

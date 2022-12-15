@@ -69,7 +69,6 @@ public:
 
 private:
     bool _active {true};
-    bool _flaggedForDisable {false};
     RigidBodyDef _rigidBodyDef;
 
     //Snapshot
