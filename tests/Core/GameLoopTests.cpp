@@ -52,6 +52,8 @@ namespace GameLoopTests{
         void removeDrawable(Drawable& drawable) override {}
         void addDrawable(Drawable& drawable) override {}
         void setFullScreen(bool fullScreen) override {};
+        std::optional<std::reference_wrapper<Camera>> getMainCamera() const override { return {};}
+        void setMainCamera(Camera& camera) override {}
     };
 
     class DummyPhysicsService : public PhysicsService{

@@ -55,7 +55,7 @@ class SceneFactory : public ISceneFactory{
 //        wall.setLocalTransform(Transform{Vector2{200, 300}, 0, Vector2{1,1}});
 
         auto& sprite = scene.createNewGameObject<GameObject>();
-        sprite.addComponent<SpriteComponent>(R"(..\..\..\validation\US00_Rendering\res\player.png)", Vector2{2,2});
+        sprite.addComponent<SpriteComponent>("res/player.png", Vector2{2,2});
         sprite.setLocalTransform(Transform{Vector2{400, 100}, 0, Vector2{1,1}});
 
         auto& cam = scene.createNewGameObject<Camera>(go, 640.0f, 480.0f);
