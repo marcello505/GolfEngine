@@ -107,10 +107,10 @@ namespace GolfEngine::Services::TileMapParser {
         }
 
         // Create and return TileMapRenderShape
-        return std::move(TileMapRenderShape{tileSetImage, TileSet_t{colliderTiles, tileSetWidth, tileSetHeight, tileSetColumns, imageWidth, imageHeight}, Map_t {map, tileWidth, tileHeight, columns, rows}});
+        return std::move(TileMapRenderShape{tileSetImage.string(), TileSet_t{colliderTiles, tileSetWidth, tileSetHeight, tileSetColumns, imageWidth, imageHeight}, Map_t {map, tileWidth, tileHeight, columns, rows}});
     }
 
-    std::string PugiXMLTileMapParserService::readFile(const std::string& path) {
+    std::string PugiXMLTileMapParserService::readFile(const std::filesystem::path& path) {
         std::string fileContent;
         std::string line;
         std::ifstream file {path};
@@ -124,7 +124,7 @@ namespace GolfEngine::Services::TileMapParser {
             file.close();
         }
         else
-            throw std::runtime_error("Unable to open/load file: " + path + " in PugiXMLTileMapParserService");
+            throw std::runtime_error("Unable to open/load file: " + path.string() + " in PugiXMLTileMapParserService");
 
         return fileContent;
     }

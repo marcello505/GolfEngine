@@ -9,6 +9,7 @@
 // Game includes
 #include "scenes/PlayerTestScene.h"
 #include "scenes/Level2Scene.h"
+#include "scenes/Level1Scene.h"
 
 
 int main(int argc, char* argv[]){
@@ -39,8 +40,9 @@ int main(int argc, char* argv[]){
     //Scene initialization
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
     sceneManager.addScene<PlayerTestScene>("playerTest");
+    sceneManager.addScene<Level1Scene>("level1");
     sceneManager.addScene<Level2Scene>("level2");
-    sceneManager.loadScene("level2");
+    sceneManager.loadScene("level1");
 
     //Render initialization
     GolfEngine::Services::Render::getService()->setScreenSize(1920, 1080);

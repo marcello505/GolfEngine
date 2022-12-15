@@ -10,7 +10,7 @@ set(GAMEOBJECTS_SOURCES
         gameobjects/Wall.cpp gameobjects/Projectile.cpp gameobjects/Projectile.h gameobjects/ProjectilePoolObject.cpp gameobjects/ProjectilePoolObject.h gameobjects/TestBlock.cpp gameobjects/TestBlock.h)
 set(SCENE_SOURCES
         scenes/PlayerTestScene.cpp
-        scenes/Level2Scene.cpp)
+        scenes/Level2Scene.cpp scenes/Level1Scene.cpp scenes/Level1Scene.h)
 
 # Resource files
 add_custom_target(Game_Resources ALL

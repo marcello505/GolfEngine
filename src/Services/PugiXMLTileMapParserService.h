@@ -16,7 +16,7 @@ namespace GolfEngine::Services::TileMapParser {
         /// \return TileMapRenderShape that holds all the info to render the map
         TileMapRenderShape loadMap(const std::filesystem::path& mapPath) override;
     private:
-        std::string readFile(const std::string& path);
+        std::string readFile(const std::filesystem::path& path);
     };
 }
 
