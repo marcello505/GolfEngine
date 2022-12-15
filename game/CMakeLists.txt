@@ -10,14 +10,16 @@ set(SCRIPT_SOURCES
         scripts/ProjectileScript.cpp
         scripts/SaveStateScript.cpp
         scripts/SaveGameTestScripts/SaveGameTestScript.cpp
-        scripts/SaveGameTestScripts/ShotCounterScript.cpp)
+        scripts/SaveGameTestScripts/ShotCounterScript.cpp
+        scripts/HUDScript.cpp)
 
 set(GAMEOBJECTS_SOURCES
         gameobjects/PlayerObject.cpp
         gameobjects/Wall.cpp
         gameobjects/Projectile.cpp
         gameobjects/ProjectilePoolObject.cpp
-        gameobjects/TestBlock.cpp)
+        gameobjects/TestBlock.cpp
+        gameobjects/HUD.cpp)
 
 set(SCENE_SOURCES
         scenes/PlayerTestScene.cpp

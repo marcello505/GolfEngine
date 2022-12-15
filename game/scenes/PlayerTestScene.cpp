@@ -10,6 +10,7 @@
 #include "../gameobjects/ProjectilePoolObject.h"
 #include "../scripts/SaveStateScript.h"
 #include "../gameobjects/TestBlock.h"
+#include "../gameobjects/HUD.h"
 
 void PlayerTestScene::build(Scene& scene) const {
     auto& root = scene.createNewGameObject<GameObject>();
@@ -39,4 +40,6 @@ void PlayerTestScene::build(Scene& scene) const {
 
     auto& player = scene.createNewGameObject<PlayerObject>(root, &projectilePool.getComponent<ProjectilePoolScript>());
     player.setLocalPosition({200.f, 200.f});
+
+    scene.createNewGameObject<HUD>(std::ref(scene));
 }

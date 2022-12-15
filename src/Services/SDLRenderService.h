@@ -60,6 +60,8 @@ public:
     [[nodiscard]] bool fullScreen() const;
     [[nodiscard]] std::optional<std::reference_wrapper<Camera>> getMainCamera() const override;
     void setMainCamera(Camera& camera) override;
+    [[nodiscard]] int getScreenSizeWidth() const override;
+    [[nodiscard]] int getScreenSizeHeight() const override;
 private:
     void renderRect(RectRenderShape &renderShape);
     void renderLine(LineRenderShape &renderShape);

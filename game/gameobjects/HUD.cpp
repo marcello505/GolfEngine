@@ -1,0 +1,25 @@
+//
+// Created by conner on 12/15/2022.
+//
+
+#include "HUD.h"
+#include "Services/Singletons/RenderSingleton.h"
+#include "../scripts/HUDScript.h"
+#include <Scene/GameObjects/UIObject/Text.h>
+
+HUD::HUD(Scene &scene) {
+    Vector2 windowSize {(float)GolfEngine::Services::Render::getService()->getScreenSizeWidth(), (float)GolfEngine::Services::Render::getService()->getScreenSizeHeight()};
+
+    auto& fpsText = scene.createNewGameObject<Text>((GameObject&)*this, Vector2(windowSize.x * 0.925f, 0), 0, "",
+                                                              20, Color(),
+                                                              "res/fonts/Rubik-VariableFont_wght.ttf",
+                                                              Alignment::Center, false);
+
+    auto& timeText = scene.createNewGameObject<Text>((GameObject&)*this, Vector2(windowSize.x * 0.025f, 0), 0, "Time: 0:0",
+                                                    20, Color(),
+                                                    "res/fonts/Rubik-VariableFont_wght.ttf",
+                                                    Alignment::Center, false);
+
+    // Add HUB script to update text
+    addComponent<HUDScript>(&fpsText, &timeText);
+}

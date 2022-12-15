@@ -43,6 +43,10 @@ int main(int argc, char* argv[]){
     actionMap->addAction("loadGame");
     actionMap->addInputKeyToAction("loadGame", InputKey::Key_L);
 
+    // Render FPS
+    actionMap->addAction("renderFPS");
+    actionMap->addInputKeyToAction("renderFPS", Key_BackQuote);
+
     //Debug settings
     GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS, true); //Render colliders
 
@@ -50,7 +54,7 @@ int main(int argc, char* argv[]){
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
     sceneManager.addScene<PlayerTestScene>("playerTest");
     sceneManager.addScene<SaveGameTestScene>("saveGameTest");
-    sceneManager.loadScene("saveGameTest");
+    sceneManager.loadScene("playerTest");
 
     //Render initialization
     GolfEngine::Services::Render::getService()->setScreenSize(1280, 720);

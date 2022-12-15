@@ -119,6 +119,8 @@ namespace GolfEngine::Services::Render {
     }
 
     void SDLRenderService::setScreenSize(int width, int height) {
+        _screenSizeWidth = width;
+        _screenSizeHeight = height;
         SDL_SetWindowSize(_window.get(), width, height);
     }
 
@@ -516,5 +518,13 @@ namespace GolfEngine::Services::Render {
 
     void SDLRenderService::setMainCamera(Camera &camera) {
         _mainCamera = camera;
+    }
+
+    int SDLRenderService::getScreenSizeWidth() const {
+        return _screenSizeWidth;
+    }
+
+    int SDLRenderService::getScreenSizeHeight() const {
+        return _screenSizeHeight;
     }
 }
