@@ -6,9 +6,10 @@
 #include <fstream>
 #include <pugixml.hpp>
 #include <sstream>
+#include <filesystem>
 
 namespace GolfEngine::Services::TileMapParser {
-    TileMapRenderShape PugiXMLTileMapParserService::loadMap(const std::string& mapPath) {
+    TileMapRenderShape PugiXMLTileMapParserService::loadMap(const std::filesystem::path& mapPath) {
         pugi::xml_document doc;
 
         // Parse TileSet file
@@ -16,7 +17,7 @@ namespace GolfEngine::Services::TileMapParser {
         pugi::xml_parse_result xmlResult = doc.load_string(mapFile.c_str());
 
         if(!xmlResult)
-            throw std::runtime_error("Unable to parse map file content to XML, from path: " + mapPath);
+            throw std::runtime_error("Unable to parse map file content to XML, from path: " + mapPath.string());
 
         // Map temp variables
         std::vector<std::vector<int>> map {};
@@ -66,16 +67,15 @@ namespace GolfEngine::Services::TileMapParser {
         }
 
         // Parse TileSet file
-        std::string tileSetPath = "res/";
-        tileSetPath += tileSetFileName;
+        auto tileSetPath = mapPath.parent_path() /= tileSetFileName;
         std::string tileSetFile = readFile(tileSetPath);
         xmlResult = doc.load_string(tileSetFile.c_str());
 
         if(!xmlResult)
-            throw std::runtime_error("Unable to parse tile set file content to XML, from path: " + tileSetPath);
+            throw std::runtime_error("Unable to parse tile set file content to XML, from path: " + tileSetPath.string());
 
         // Tile set temp variables
-        std::string tileSetImage = "res/";
+        std::filesystem::path tileSetImage = mapPath.parent_path();
         int tileSetWidth, tileSetHeight, tileSetColumns, imageWidth, imageHeight;
         std::vector<int> colliderTiles {};
 
@@ -86,7 +86,7 @@ namespace GolfEngine::Services::TileMapParser {
         tileSetWidth = tileSetObject.attribute("tilewidth").as_int();
         tileSetHeight = tileSetObject.attribute("tileheight").as_int();
         tileSetColumns = tileSetObject.attribute("columns").as_int();
-        tileSetImage += imageObject.attribute("source").as_string();
+        tileSetImage /= imageObject.attribute("source").as_string();
         imageWidth = imageObject.attribute("width").as_int();
         imageHeight = imageObject.attribute("height").as_int();
 
