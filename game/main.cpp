@@ -32,7 +32,7 @@ int main(int argc, char* argv[]){
     actionMap->addAction("playerReload");
     actionMap->addInputKeyToAction("playerReload", InputKey::Key_R);
     actionMap->addAction("restart");
-    actionMap->addInputKeyToAction("restart", InputKey::Key_L);
+    actionMap->addInputKeyToAction("restart", InputKey::Key_Backspace);
 
     //Set up recording controls
     actionMap->addAction("startRecordingReplay");
@@ -55,7 +55,7 @@ int main(int argc, char* argv[]){
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
     sceneManager.addScene<PlayerTestScene>("playerTest");
     sceneManager.addScene<SaveGameTestScene>("saveGameTest");
-    sceneManager.loadScene("saveGameTest");
+    sceneManager.loadScene("playerTest");
 
     //Render initialization
     GolfEngine::Services::Render::getService()->setScreenSize(1280, 720);
