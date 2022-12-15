@@ -39,6 +39,9 @@ public:
     // Getters and boolean Methods
     virtual bool isMusicPlaying() = 0;
     virtual bool isMusicPaused() = 0;
+
+    // Virtual Destructors
+    virtual ~AudioService() = default;
 };
 
 

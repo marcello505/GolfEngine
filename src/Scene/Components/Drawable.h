@@ -10,6 +10,8 @@
 class Drawable {
 public:
     virtual RenderShape& getRenderShape() = 0;
+    // Virtual destructor
+    virtual ~Drawable() = default;
 };
 
 
