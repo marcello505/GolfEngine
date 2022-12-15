@@ -2,8 +2,8 @@
 // Created by conner on 11/24/2022.
 //
 
-#ifndef GOLFENGINE_ZOMBIESCRIPT_H
-#define GOLFENGINE_ZOMBIESCRIPT_H
+#ifndef GOLFENGINE_DRAWPATHSCRIPT_H
+#define GOLFENGINE_DRAWPATHSCRIPT_H
 
 #include "Scene/Components/BehaviourScript.h"
 #include "Scene/Components/Pathfinding.h"
@@ -19,4 +19,4 @@ private:
     std::optional<std::reference_wrapper<Pathfinding>> pathfinding;
 };
 
-#endif //GOLFENGINE_ZOMBIESCRIPT_H
+#endif //GOLFENGINE_DRAWPATHSCRIPT_H

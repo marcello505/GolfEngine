@@ -246,9 +246,8 @@ namespace GolfEngine::Services::Physics{
             if (rb.first->getRigidBodyDef().bodyType == RigidBodyTypes::StaticBody) {
                 for (auto collider: rb.first->getColliders()) {
                     colliders.emplace_back(collider);
-                };
+                }
             }
-
         }
         return colliders;
     }

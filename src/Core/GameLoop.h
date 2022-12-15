@@ -40,11 +40,9 @@ private:
     bool _running {true};
     std::chrono::duration<GameTic, std::milli> _msPerUpdate {1000.f/ 60};
 
-
     void processInput();
     void update();
     void render();
-
     static void findPaths();
 };
 

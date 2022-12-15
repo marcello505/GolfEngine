@@ -8,7 +8,7 @@
 #include "Scene/ISceneFactory.h"
 
 class SceneFactory : public ISceneFactory{
-    void build(Scene& scene) const override
+    void build(Scene& scene) const override;
 };
 
 

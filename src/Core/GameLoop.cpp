@@ -22,10 +22,8 @@
 using namespace GolfEngine::Services;
 
 void GameLoop::start() {
-
     //Initialize services
     if(Audio::hasService()) Audio::getService()->init();
-
 
     auto previous = std::chrono::steady_clock::now();
     std::chrono::duration<GameTic, std::milli> lag {0.0f};
@@ -40,11 +38,11 @@ void GameLoop::start() {
 
         while(lag >= _msPerUpdate / time->getTimeScale()){
             update();
+            findPaths();
             lag -= _msPerUpdate / time->getTimeScale();
         }
 
         render();
-        findPaths();
     }
 }
 
@@ -99,10 +97,7 @@ void GameLoop::useDefaultServices() {
     setPathfindingService(new GolfEngine::Services::Pathfinding::AStarPathfindingService {});
 }
 
-
-
 // SETTERS AND GETTERS
-
 void GameLoop::setFramesPerSeccond(GameTic fps) {
     _msPerUpdate = std::chrono::duration<GameTic, std::milli>{1000.f / fps};
 }
@@ -138,6 +133,6 @@ bool GameLoop::isGameRunning() const {
     return _running;
 }
 
-void GameLoop::setPathfindingService(PathfindingService *pathfindingService) {
-    Pathfinding::setService(pathfindingService);
+void GameLoop::setPathfindingService(PathfindingService* pathfindingService) {
+    GolfEngine::Services::Pathfinding::setService(pathfindingService);
 }

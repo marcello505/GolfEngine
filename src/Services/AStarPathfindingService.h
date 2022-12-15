@@ -12,11 +12,9 @@
 #include <functional>
 
 namespace GolfEngine::Services::Pathfinding{
-        ///small queue used to determine where nodes needs to be placed
-        using node_priority_queue = std::priority_queue<
-           Node, std::vector<Node>, std::function<bool(const Node &, const Node &)>>;
-
-
+    ///small queue used to determine where nodes needs to be placed
+    using node_priority_queue = std::priority_queue<
+       Node, std::vector<Node>, std::function<bool(const Node &, const Node &)>>;
 
     class AStarPathfindingService : public PathfindingService {
     private:
@@ -25,10 +23,8 @@ namespace GolfEngine::Services::Pathfinding{
         int _nodeDistance {20};
         int rectMargin{0};
 
-
-
     public:
-        AStarPathfindingService();
+        AStarPathfindingService() = default;
         /// Return path to given nodes
         /// \param start Node where path needs to start
         /// \param target node that needs to be found
@@ -70,9 +66,6 @@ namespace GolfEngine::Services::Pathfinding{
         /// \return Returns node closest to given position
         Node &covertPosToNode(Vector2 position);
 
-
-
-
         /// Determines the distance between all nodes in graph
         /// \param nodeDistance distance between each node
         void setNodeDistance(int nodeDistance) override;
@@ -80,7 +73,6 @@ namespace GolfEngine::Services::Pathfinding{
         /// Creates a margin around al rect colliders to avoid objects getting stuck
         /// \param margin the margin around the rectangles.
         void setMarginAroundRectColliders(int margin) override;
-
     };
 
     struct heuristicValues {

@@ -12,25 +12,17 @@
 #include "Services/Singletons/PhysicsSingleton.h"
 
 namespace GolfEngine::Services::Pathfinding {
-    AStarPathfindingService::AStarPathfindingService()  {
-
-    }
-
     void AStarPathfindingService::findPathEveryTick(){
         for (auto& pathfindingComponent : _pathfindingComponents) {
             if(pathfindingComponent.get().needsNewPath() && !_graph->nodes.empty()){
                 auto startNode = covertPosToNode(pathfindingComponent.get().getParentGameObjectPosition());
-                auto targetnode = covertPosToNode(pathfindingComponent.get().getTargetPosition());
-                pathfindingComponent.get().setPath(findPath(startNode,targetnode, *_graph));
+                auto targetNode = covertPosToNode(pathfindingComponent.get().getTargetPosition());
+                pathfindingComponent.get().setPath(findPath(startNode,targetNode, *_graph));
             }
-
         }
-
     }
 
-
     std::vector<Node> AStarPathfindingService::findPath(Node& start, Node& target, Graph& graph) {
-
         std::map<int, heuristicValues> weights;
         for (auto &node : graph.nodes) {
             weights[node.id] = {};
@@ -97,7 +89,6 @@ namespace GolfEngine::Services::Pathfinding {
             }
         }
         return {};
-
     }
 
     int AStarPathfindingService::calculateHeuristic(const Node& start, const Node& target) {
@@ -111,7 +102,6 @@ namespace GolfEngine::Services::Pathfinding {
             res -= 1;
 
         return res;
-
     }
 
     void AStarPathfindingService::removePathfinding(class Pathfinding &pathfinding) {
@@ -122,7 +112,6 @@ namespace GolfEngine::Services::Pathfinding {
 
     void AStarPathfindingService::addPathfinding(class Pathfinding &pathfinding) {
         _pathfindingComponents.emplace_back(std::ref(pathfinding));
-
     }
 
 
@@ -134,7 +123,6 @@ namespace GolfEngine::Services::Pathfinding {
 
         std::vector<int> nodeIds;
         std::vector<std::pair<int,int>> edges;
-
 
         int height = rs->screenSizeHeight();
         int width = rs->screenSizeWidth();
@@ -155,9 +143,7 @@ namespace GolfEngine::Services::Pathfinding {
                     auto node = Node(nodeCounter,Vector2(widthNodeDistance, heightNodeDistance));
                     nodeList.emplace_back(node);
                     nodeCounter++;
-
                 }
-
                 widthNodeDistance += _nodeDistance;
             }
             widthNodeDistance = _nodeDistance;
@@ -175,10 +161,8 @@ namespace GolfEngine::Services::Pathfinding {
             }
         }
 
-
        _graph = std::make_unique<Graph>(nodeList);
         _graph->drawables = drawables;
-
     }
 
     bool AStarPathfindingService::isValidSpot(Vector2 pos) const {
@@ -236,15 +220,9 @@ namespace GolfEngine::Services::Pathfinding {
 
     void AStarPathfindingService::setNodeDistance(int nodeDistance) {
         _nodeDistance = nodeDistance;
-
     }
 
     void AStarPathfindingService::setMarginAroundRectColliders(int margin) {
         rectMargin = margin;
-
     }
-
-
-
-
 }

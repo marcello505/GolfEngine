@@ -4,7 +4,6 @@
 
 #include "Pathfinding.h"
 
-#include <utility>
 #include <valarray>
 #include "Services/Abstracts/PathfindingService.h"
 #include "Services/Singletons/PathfindingSingleton.h"
@@ -13,12 +12,9 @@
 Pathfinding::Pathfinding(GameObject *target, float recalculatePathTime) : _target{*target}, _fps{60},_recalculatePathTime{recalculatePathTime}  {
 }
 
-
-
 void Pathfinding::onStart() {
     GolfEngine::Services::Pathfinding::getService()->addPathfinding(*this);
     _countedFrames = 120;
-
 }
 
 void Pathfinding::onUpdate() {
@@ -37,13 +33,12 @@ void Pathfinding::onRemove() {
             if(GolfEngine::Services::Render::hasService()){
                 auto* rs = GolfEngine::Services::Render::getService();
                 for (const auto& drawable : graph.drawables ) {
-                    rs->addDrawable(*drawable.second);
+                    rs->removeDrawable(*drawable.second);
                 }
                 pathIsRegistered = false;
             }
         }
     }
-
 }
 
 bool Pathfinding::getActive() {
@@ -52,7 +47,6 @@ bool Pathfinding::getActive() {
 
 void Pathfinding::setActive(bool active) {
     _active = active;
-
 }
 
 void Pathfinding::setParentGameObject(GameObject &gameObject) {
@@ -82,6 +76,7 @@ void Pathfinding::setPath(const std::vector<Node>& path) {
 std::vector<Node> Pathfinding::getPath() {
     return _path;
 }
+
 //TODO ask if setTarget is needed because it is not possible yet
 void Pathfinding::setTarget(GameObject &target) {
    // _target = *target;
@@ -142,30 +137,29 @@ void Pathfinding::displayGraph(bool displayPath, bool displayVisited) {
     if(GolfEngine::Services::Pathfinding::hasService()){
         auto& graph = GolfEngine::Services::Pathfinding::getService()->getGraph();
 
-    if(!pathIsRegistered){
-        if(GolfEngine::Services::Render::hasService()){
-            auto* rs = GolfEngine::Services::Render::getService();
-            for (const auto& drawable : graph.drawables ) {
-                rs->addDrawable(*drawable.second);
+        if(!pathIsRegistered){
+            if(GolfEngine::Services::Render::hasService()){
+                auto* rs = GolfEngine::Services::Render::getService();
+                for (const auto& drawable : graph.drawables ) {
+                    rs->addDrawable(*drawable.second);
+                }
+                pathIsRegistered = true;
             }
-            pathIsRegistered = true;
+        }
+
+        for (const auto& node : graph.nodes ) {
+            graph.drawables.at(node.id)->setColor(Color(255,255,255));
+            if(displayVisited && node.tag == NodeTags::Visited){
+                graph.drawables.at(node.id)->setColor(Color(0,0,255));
+            }
+        }
+        if(displayPath){
+            for (const auto& node : getPath()) {
+                graph.drawables.at(node.id)->setColor(Color(0,255,0));
+            }
         }
     }
-
-
-    for (const auto& node : graph.nodes ) {
-        graph.drawables.at(node.id)->setColor(Color(255,255,255));
-        if(displayVisited && node.tag == NodeTags::Visited){
-            graph.drawables.at(node.id)->setColor(Color(0,0,255));
-        }
-    }
-    if(displayPath){
-        for (const auto& node : getPath()) {
-            graph.drawables.at(node.id)->setColor(Color(0,255,0));
-        }
-    }
-
-}}
+}
 
 
 

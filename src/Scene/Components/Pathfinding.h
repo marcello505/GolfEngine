@@ -13,7 +13,7 @@
 
 class Pathfinding : public Component{
 public:
-    Pathfinding(GameObject *target, float recalculatePathTime = 1.0 );
+    explicit Pathfinding(GameObject *target, float recalculatePathTime = 1.0 );
 
     // Overrides
     void onStart() override;
@@ -33,7 +33,6 @@ public:
     /// calculates vector displaying direction to target
     /// \return returns vector with direction to target
     Vector2 getNewDirection();
-
 
     /// Display the Graph in rects
     /// \param displayPath if true path is colored green

@@ -13,25 +13,17 @@
 class PathfindingService {
 public:
     virtual std::vector<Node> findPath(Node& start, Node& target, Graph& graph) = 0;
-
     virtual void addPathfinding(Pathfinding& pathfinding) = 0;
-
     virtual void removePathfinding(Pathfinding& pathfinding)= 0;
-
     virtual void findPathEveryTick() = 0;
-
     virtual void createGraph() = 0;
-
     virtual Graph& getGraph() = 0;
-
     virtual Node& covertPosToNode(Vector2 position) = 0;
-
     virtual void setNodeDistance(int nodeDistance) = 0;
-
     virtual void setMarginAroundRectColliders(int margin) = 0;
 
-
-
+    // Virtual destructor
+    virtual ~PathfindingService() = default;
 };
 
 
