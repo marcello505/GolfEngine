@@ -35,3 +35,14 @@ void HUDScript::onUpdate() {
     time << std::setw(2) << std::setfill('0') << (int)(_timePassed*100) % 100; // Milliseconds
     _timeText->_renderShape.setText(time.str());
 }
+
+std::unique_ptr<ISnapshot> HUDScript::saveSnapshot() {
+    auto snapshot = std::make_unique<Snapshot>();
+    snapshot->timePassed = _timePassed;
+    return std::move(snapshot);
+}
+
+void HUDScript::loadSnapshot(const ISnapshot& rawSnapshot) {
+    auto snapshot = (Snapshot&)rawSnapshot;
+    _timePassed = snapshot.timePassed;
+}
