@@ -52,7 +52,6 @@ namespace GolfEngine::Services::TileMapParser {
                 lineStream.str(line);
                 for(std::string tile; std::getline(lineStream, tile, ',');){
                     int tileValue = std::stoi(tile);
-                    if(tileValue <= 0) { column++; continue; }
 
                     // Change tile value or create new entry
                     if(column >= map[row].size())
