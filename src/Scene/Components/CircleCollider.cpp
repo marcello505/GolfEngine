@@ -1,13 +1,16 @@
 #include "CircleCollider.h"
 #include "Services/Singletons/RenderSingleton.h"
+#include "Core/Settings.h"
 
 ColliderShapes CircleCollider::getColliderShape() {
     return ColliderShapes::Circle;
 }
 
 void CircleCollider::onStart() {
-    //TODO make it so that this only happens if debug is on
-    if(GolfEngine::Services::Render::hasService()){
+    //Register to Render Service if the PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS key is true in ProjectSettings
+    auto& projectSettings = GolfEngine::Core::getProjectSettings();
+    if(projectSettings.hasBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS) && projectSettings.getBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS) && GolfEngine::Services::Render::hasService()){
+        _isBeingRendered = true;
         GolfEngine::Services::Render::getService()->addDrawable(*this);
     }
 }
@@ -17,7 +20,7 @@ void CircleCollider::onUpdate() {
 }
 
 void CircleCollider::onRemove() {
-    if(GolfEngine::Services::Render::hasService()){
+    if(GolfEngine::Services::Render::hasService() && _isBeingRendered){
         GolfEngine::Services::Render::getService()->removeDrawable(*this);
     }
 }

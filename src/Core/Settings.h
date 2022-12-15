@@ -10,6 +10,9 @@
 
 #define SETTINGS_KEY_PARAMETER const std::string&
 
+//Engine recognized Project Settings keys
+#define PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS "debugRenderColliders" //Enable/Disable rendering of Colliders
+
 namespace GolfEngine::Core{
     enum class SettingsTypes{
         String,

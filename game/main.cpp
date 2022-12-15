@@ -1,6 +1,7 @@
 
 // Engine includes
 #include "Core/GameLoop.h"
+#include "Core/Settings.h"
 #include "Services/Singletons/RenderSingleton.h"
 
 //TODO find something to fix this
@@ -41,6 +42,9 @@ int main(int argc, char* argv[]){
     actionMap->addInputKeyToAction("saveGame", InputKey::Key_K);
     actionMap->addAction("loadGame");
     actionMap->addInputKeyToAction("loadGame", InputKey::Key_L);
+
+    //Debug settings
+    GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS, true); //Render colliders
 
     //Scene initialization
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
