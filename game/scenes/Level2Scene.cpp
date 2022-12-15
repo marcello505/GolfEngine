@@ -14,7 +14,7 @@ void Level2Scene::build(Scene& scene) const {
     //load in tileset
     {
         auto& mapObject = scene.createNewGameObject<GameObject>(root);
-        auto& mapComponent = mapObject.addComponent<TiledComponent>("res/tilesets/Level2.tmx", Vector2{2.25f, 2.25f});
+        auto& mapComponent = mapObject.addComponent<TiledComponent>("res/tilesets/Level2.tmx", Vector2{3, 3});
         mapComponent.initColliders();
     }
 
@@ -26,6 +26,8 @@ void Level2Scene::build(Scene& scene) const {
         player.setLocalPosition(Vector2{1615, 1058});
 
         auto& cam = scene.createNewGameObject<Camera>(player, 1280.0f, 720.0f);
+        //TODO remove the following manual offset
+        cam.setLocalPosition({-640, -300});
     }
 
 }
