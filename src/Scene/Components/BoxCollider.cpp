@@ -4,10 +4,13 @@
 
 #include "Services/Singletons/RenderSingleton.h"
 #include "BoxCollider.h"
+#include "Core/Settings.h"
 
 void BoxCollider::onStart() {
-    //TODO make it so that this only happens if debug is on
-    if(GolfEngine::Services::Render::hasService()){
+    //Register to Render Service if the PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS key is true in ProjectSettings
+    auto& projSett = GolfEngine::Core::getProjectSettings();
+    if(projSett.hasBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS) && projSett.getBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS) && GolfEngine::Services::Render::hasService()){
+        _isBeingRendered = true;
         GolfEngine::Services::Render::getService()->addDrawable(*this);
     }
 }
@@ -17,7 +20,7 @@ void BoxCollider::onUpdate() {
 }
 
 void BoxCollider::onRemove() {
-    if(GolfEngine::Services::Render::hasService()){
+    if(GolfEngine::Services::Render::hasService() && _isBeingRendered){
         GolfEngine::Services::Render::getService()->removeDrawable(*this);
     }
 }
