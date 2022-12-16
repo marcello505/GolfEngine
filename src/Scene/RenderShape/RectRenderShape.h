@@ -23,12 +23,11 @@ public:
     /// \param transform Transform to be applied
     void applyTransform(const Transform& transform) override;
 
-    // Getters
+    // Getters, Setters
     [[nodiscard]] Rect2 rect() const;
     [[nodiscard]] float rotation() const;
     [[nodiscard]] Color color() const;
     [[nodiscard]] Vector2 pivotPoint() const;
-
     void setColor(Color color);
 private:
     Rect2 _rect;

@@ -18,6 +18,7 @@ int main(int argc, char* argv[]){
     gameLoop.useDefaultServices();
     //Render initialization
     GolfEngine::Services::Render::getService()->setScreenSize(1920, 1080);
+    GolfEngine::Services::Render::getService()->setWindowTitle("Game name");
 
     //Set up controls
     auto* actionMap = ActionMap::getActionMap();

@@ -122,6 +122,8 @@ namespace GolfEngine::Services::Render {
         _screenSizeWidth = width;
         _screenSizeHeight = height;
         SDL_SetWindowSize(_window.get(), width, height);
+        _screenSizeHeight = height;
+        _screenSizeWidth = width;
     }
 
     void SDLRenderService::setFullScreen(bool fullScreen) {
@@ -431,7 +433,6 @@ namespace GolfEngine::Services::Render {
         // Get direct reference to texture for easy access
         auto& font {f->get()};
 
-        // TODO add COLOR
 
         SDL_Surface* surface = TTF_RenderText_Solid(&font, renderShape.text().c_str(), {renderShape.color().r8,renderShape.color().g8,renderShape.color().b8});
         if(surface == nullptr){
@@ -549,5 +550,9 @@ namespace GolfEngine::Services::Render {
             return camOffset;
 
         throw std::runtime_error("Camera offset requested without an active camera in the scene.");
+    }
+
+    void SDLRenderService::setWindowTitle(const std::string& title) {
+        SDL_SetWindowTitle(_window.get(), title.c_str());
     }
 }

@@ -38,14 +38,17 @@ set(SERVICES_SOURCES
         src/Services/SDLAudioService.cpp
         src/Services/SDLRenderService.cpp
         src/Services/SDLInputService.cpp
+        src/Services/AStarPathfindingService.cpp
         src/Services/Singletons/PhysicsSingleton.cpp
         src/Services/Singletons/AudioSingleton.cpp
         src/Services/Singletons/RenderSingleton.cpp
         src/Services/Singletons/InputSingleton.cpp
+        src/Services/Singletons/PathfindingSingleton.cpp
         src/Services/Render/Texture.cpp
         src/Services/Physics/Box2DCollisionListener.cpp
         src/Services/PugiXMLTileMapParserService.cpp
         src/Services/Singletons/TileMapParserSingleton.cpp)
+
 
 set(SCENE_SOURCES
         src/Scene/Scene.cpp
@@ -68,6 +71,7 @@ set(SCENE_SOURCES
         src/Scene/Components/CircleCollider.cpp
         src/Scene/Components/SpriteComponent.cpp
         src/Scene/Particle.cpp
+        src/Scene/PathDrawable.cpp
         src/Scene/Components/TiledComponent.cpp
         src/Scene/RenderShape/TileMapRenderShape.cpp
         src/Scene/GameObjects/Camera.cpp)
@@ -112,6 +116,8 @@ add_subdirectory(validation/US08_RenderUIObject)
 add_subdirectory(validation/US14_PhysicsService)
 add_subdirectory(validation/US101_Particles)
 add_subdirectory(validation/US00_AllServices)
+add_subdirectory(validation/US13_AIObjects)
 add_subdirectory(validation/US14_CollisionLogic)
 add_subdirectory(validation/US00_TileMap)
 add_subdirectory(validation/US00_Camera)
+
