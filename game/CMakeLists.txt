@@ -16,7 +16,7 @@ set(SCRIPT_SOURCES
         scripts/PlayerCollisionScript.cpp
         scripts/GameManagerScript.cpp
         scripts/EnemyMovementScript.cpp
-        scripts/EnemyCollisionScript.cpp scripts/EnemyCollisionScript.h)
+        scripts/EnemyCollisionScript.cpp)
 
 set(GAMEOBJECTS_SOURCES
         gameobjects/PlayerObject.cpp     
