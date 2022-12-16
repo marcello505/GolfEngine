@@ -12,13 +12,15 @@ public:
     void restartLevel();
     void tryFinishLevel();
 
-    float getTimePassed() const;
+    [[nodiscard]] float getTimePassed() const;
+    [[nodiscard]] float getHighScoreTime() const;
 private:
     void onStart() override;
     void onUpdate() override;
     void finishLevel();
 private:
     float _timePassed {0.0f};
+    std::string _highScoreKey{};
 };
 
 

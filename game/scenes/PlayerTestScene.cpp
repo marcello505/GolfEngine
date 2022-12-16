@@ -59,5 +59,6 @@ void PlayerTestScene::build(Scene& scene) const {
 
     scene.createNewGameObject<GameManager>();
 
+    // IMPORTANT! Create this object after the GameManager (GameManager.onStart() needs to happen before HUD.onStart())
     scene.createNewGameObject<HUD>(std::ref(scene));
 }

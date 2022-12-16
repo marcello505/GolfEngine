@@ -16,6 +16,8 @@
 int main(int argc, char* argv[]){
     GameLoop gameLoop {};
     gameLoop.useDefaultServices();
+    //Render initialization
+    GolfEngine::Services::Render::getService()->setScreenSize(1920, 1080);
 
     //Set up controls
     auto* actionMap = ActionMap::getActionMap();
@@ -60,9 +62,6 @@ int main(int argc, char* argv[]){
     sceneManager.addScene<PlayerTestScene>("playerTest");
     sceneManager.addScene<SaveGameTestScene>("saveGameTest");
     sceneManager.loadScene("playerTest");
-
-    //Render initialization
-    GolfEngine::Services::Render::getService()->setScreenSize(1280, 720);
 
     gameLoop.start();
     return 0;
