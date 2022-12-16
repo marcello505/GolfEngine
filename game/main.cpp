@@ -49,6 +49,9 @@ int main(int argc, char* argv[]){
     actionMap->addAction("loadGame");
     actionMap->addInputKeyToAction("loadGame", InputKey::Key_L);
 
+    actionMap->addAction("test");
+    actionMap->addInputKeyToAction("test", Key_Space);
+
     //Debug settings
     GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS, true); //Render colliders
 

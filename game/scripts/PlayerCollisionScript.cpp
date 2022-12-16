@@ -15,11 +15,19 @@ void PlayerCollisionScript::onStart() {
 
     if(_gameObject->get().hasComponent<PlayerShootScript>())
         _playerShoot = &_gameObject->get().getComponent<PlayerShootScript>();
+
+    if(_gameObject->get().hasComponent<GolfEngine::Scene::Components::AudioSource>())
+        _audioSource = &_gameObject->get().getComponent<GolfEngine::Scene::Components::AudioSource>();
+
+    if(_gameObject->get().hasComponent<ParticleSystem>())
+        _particleSystem = &_gameObject->get().getComponent<ParticleSystem>();
 }
 
 void PlayerCollisionScript::onCollisionEnter(RigidBody &other) {
     if(other.getParentGameObject()->tag == "enemy"){
-        // TODO add some "death" effects (maybe change to a death animation?)
+        // Play some death effects and disable player controls
+        _audioSource->play("death", false);
+        _particleSystem->play(false);
         _playerMovement->setActive(false);
         _playerShoot->setActive(false);
     }

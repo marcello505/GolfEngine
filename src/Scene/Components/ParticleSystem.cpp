@@ -46,12 +46,19 @@ Particle& ParticleSystem::addParticle(){
 void ParticleSystem::play(bool looping) {
     _looping = looping;
 
-    auto& particle = addParticle();
-
-    auto renderService = GolfEngine::Services::Render::getService();
-    if(renderService)
-        renderService->addDrawable(particle);
-
+    // If not looping shoot all particles as a one shot
+    if(!_looping){
+        for(int i = 0; i < _particlesPerSecond; i++){
+            auto& particle = addParticle();
+            if(GolfEngine::Services::Render::hasService())
+                GolfEngine::Services::Render::getService()->addDrawable(particle);
+        }
+    }
+    else{
+        auto& particle = addParticle();
+        if(GolfEngine::Services::Render::hasService())
+            GolfEngine::Services::Render::getService()->addDrawable(particle);
+    }
 }
 
 void ParticleSystem::stop() {

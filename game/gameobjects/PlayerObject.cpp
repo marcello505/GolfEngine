@@ -5,9 +5,9 @@
 #include "PlayerObject.h"
 
 #include <Scene/Components/BoxCollider.h>
+#include <Scene/Components/ParticleSystem.h>
 #include "../scripts/GameManagerScript.h"
 #include "../scripts/PlayerCollisionScript.h"
-
 
 PlayerObject::PlayerObject(ProjectilePoolScript* projectilePoolScript) {
     addComponent<BoxCollider>(Vector2{25.f, 25.f});
@@ -31,4 +31,10 @@ PlayerObject::PlayerObject(ProjectilePoolScript* projectilePoolScript) {
     auto& audioSource = addComponent<GolfEngine::Scene::Components::AudioSource>(false);
     audioSource.addSound("shoot", "res/audio/short-shot.ogg");
     audioSource.addSound("reload", "res/audio/gun-reload.wav");
+    audioSource.addSound("death", "res/audio/blood_splatter.mp3");
+
+    auto& bloodParticleSystem = addComponent<ParticleSystem>("res/sprites/blood_splatter.png", 10, 1.0f, Vector2{3.0f, 3.0f});
+    bloodParticleSystem.setSpread({0, 359});
+    bloodParticleSystem.setRandomVelocity({2.0f, 4.0f});
+    bloodParticleSystem.setFade(true);
 }
