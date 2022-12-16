@@ -8,10 +8,12 @@
 #include "Scene/Components/SpriteComponent.h"
 #include "Scene/Components/Animator.h"
 #include "../scripts/EnemyMovementScript.h"
+#include "../scripts/EnemyCollisionScript.h"
 #include "Scene/Components/AudioSource.h"
 #include "Scene/Components/Pathfinding.h"
 
 EnemyObject::EnemyObject(GameObject *target){
+    tag = "enemy";
     addComponent<BoxCollider>(Vector2{12.5f, 12.5f});
 
 //
@@ -28,7 +30,7 @@ EnemyObject::EnemyObject(GameObject *target){
     addComponent<GolfEngine::Scene::Components::AudioSource>("res/audio/Zombie-Sound.ogg", false);
     addComponent<Pathfinding>(target);
     addComponent<EnemyMovementScript>(target);
-
+    addComponent<EnemyCollisionScript>();
 }
 
 void EnemyObject::addPatrolPoint(Vector2 point) {
