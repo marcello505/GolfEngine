@@ -76,7 +76,6 @@ void PlayerTestScene::build(Scene& scene) const {
    enemy3.setLocalPosition({400.f, 150.f});
    auto& enemy4 = scene.createNewGameObject<EnemyObject>(root, &player);
    enemy4.setLocalPosition({850.f, 150.f});
-    enemy4.setActive(false);
 
     scene.createNewGameObject<GameManager>();
 }
