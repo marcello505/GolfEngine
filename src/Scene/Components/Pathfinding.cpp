@@ -30,7 +30,7 @@ void Pathfinding::onRemove() {
         GolfEngine::Services::Pathfinding::getService()->removePathfinding(*this);
     }
 
-    if(pathIsRegistered){
+    if(_pathIsRegistered){
         if(GolfEngine::Services::Pathfinding::hasService()){
             auto& graph = GolfEngine::Services::Pathfinding::getService()->getGraph();
 
@@ -39,7 +39,7 @@ void Pathfinding::onRemove() {
                 for (const auto& drawable : graph.drawables ) {
                     rs->removeDrawable(*drawable.second);
                 }
-                pathIsRegistered = false;
+                _pathIsRegistered = false;
             }
         }
     }
@@ -63,7 +63,7 @@ Vector2 Pathfinding::getParentGameObjectPosition() const  {
 }
 
 Vector2 Pathfinding::getTargetPosition() {
-    return _target.getWorldTransform().position;
+    return _target.get().getWorldTransform().position;
 }
 
 void Pathfinding::setPath(const std::vector<Node>& path) {
@@ -74,9 +74,9 @@ void Pathfinding::setPath(const std::vector<Node>& path) {
 std::vector<Node> Pathfinding::getPath() {
     return _path;
 }
-//TODO ask if setTarget is needed because it is not possible yet
+
 void Pathfinding::setTarget(GameObject &target) {
-   // _target = *target;
+   _target = target;
 }
 
 bool Pathfinding::needsNewPath() {
@@ -115,13 +115,13 @@ void Pathfinding::displayGraph(bool displayPath, bool displayVisited) {
     if(GolfEngine::Services::Pathfinding::hasService()){
         auto& graph = GolfEngine::Services::Pathfinding::getService()->getGraph();
 
-    if(!pathIsRegistered){
+    if(!_pathIsRegistered){
         if(GolfEngine::Services::Render::hasService()){
             auto* rs = GolfEngine::Services::Render::getService();
             for (const auto& drawable : graph.drawables ) {
                 rs->addDrawable(*drawable.second);
             }
-            pathIsRegistered = true;
+            _pathIsRegistered = true;
         }
     }
 
@@ -142,11 +142,25 @@ void Pathfinding::displayGraph(bool displayPath, bool displayVisited) {
 }}
 
 std::unique_ptr<ISnapshot> Pathfinding::saveSnapshot() {
-    return {};
+    auto snapshot = std::make_unique<Snapshot>();
+
+    snapshot->target = &_target.get();
+    snapshot->pathIsRegistered = _pathIsRegistered;
+    snapshot->path = _path;
+    snapshot->recalculatePathTime = _recalculatePathTime;
+    snapshot->countedFrames = _countedFrames;
+
+    return snapshot;
 }
 
 void Pathfinding::loadSnapshot(const ISnapshot& rawSnapshot) {
-    //Explicitly do nothing
+    auto& snapshot = (Snapshot&)rawSnapshot;
+
+    _target = *snapshot.target;
+    _pathIsRegistered = snapshot.pathIsRegistered;
+    _path = snapshot.path;
+    _recalculatePathTime = snapshot.recalculatePathTime;
+    _countedFrames = snapshot.countedFrames;
 }
 
 Vector2 Pathfinding::getDirection(Vector2 target) {

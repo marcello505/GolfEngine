@@ -54,6 +54,7 @@ int main(int argc, char* argv[]){
 
     //Debug settings
     GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS, true); //Render colliders
+    GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_PATHFINDING, true); //Render pathfinding nodes
 
     //Scene initialization
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();

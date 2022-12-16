@@ -58,12 +58,20 @@ public:
     void loadSnapshot(const ISnapshot& rawSnapshot) override;
 private:
     int _countedFrames {0};
-    GameObject& _target;
+    std::reference_wrapper<GameObject> _target;
     std::vector<Node> _path;
-    int _fps;
+    const int _fps;
     float _recalculatePathTime;
 
-    bool pathIsRegistered {false};
+    bool _pathIsRegistered {false};
+
+    struct Snapshot : ISnapshot{
+        GameObject* target;
+        int countedFrames;
+        std::vector<Node> path;
+        float recalculatePathTime;
+        bool pathIsRegistered;
+    };
 };
 
 
