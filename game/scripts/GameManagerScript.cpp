@@ -6,8 +6,10 @@
 #include "Input/ActionMap.h"
 #include "Core/SceneManager.h"
 #include <iostream>
+#include <Core/Time.h>
 
 void GameManagerScript::restartLevel() {
+    _timePassed = 0.0f;
     GolfEngine::SceneManager::GetSceneManager().getCurrentScene().loadCurrentSceneState(1);
 }
 
@@ -26,7 +28,13 @@ void GameManagerScript::onStart() {
 }
 
 void GameManagerScript::onUpdate() {
+    _timePassed += GolfEngine::Time::getPhysicsDeltaTime();
+
     if(ActionMap::getActionMap()->isJustPressed("restart"))
         restartLevel();
+}
+
+float GameManagerScript::getTimePassed() const {
+    return _timePassed;
 }
 

@@ -11,10 +11,14 @@ class GameManagerScript : public BehaviourScript {
 public:
     void restartLevel();
     void tryFinishLevel();
+
+    float getTimePassed() const;
 private:
     void onStart() override;
     void onUpdate() override;
     void finishLevel();
+private:
+    float _timePassed {0.0f};
 };
 
 

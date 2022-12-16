@@ -2,6 +2,7 @@
 // Created by conner on 12/15/2022.
 //
 
+#include <Core/SceneManager.h>
 #include <Core/Time.h>
 #include <Input/ActionMap.h>
 #include <iostream>
@@ -9,7 +10,8 @@
 #include <iomanip>
 #include "HUDScript.h"
 
-HUDScript::HUDScript(Text* fpsText, Text* timeText) : _fpsText{fpsText}, _timeText{timeText}, _renderFPS{false}, _timePassed{0.0f} {
+HUDScript::HUDScript(Text* fpsText, Text* timeText) : _fpsText{fpsText}, _timeText{timeText}, _renderFPS{false} {
+    _gameManager = &GolfEngine::SceneManager::GetSceneManager().getCurrentScene().getGameObjectWithTag("GameManager").getComponent<GameManagerScript>();
 }
 
 void HUDScript::onUpdate() {
@@ -26,23 +28,12 @@ void HUDScript::onUpdate() {
     }
 
     // Update time text
-    _timePassed += GolfEngine::Time::getPhysicsDeltaTime();
+    float timePassed = _gameManager->getTimePassed();
     std::stringstream time {};
-    time << std::setw(2) << std::setfill('0') << (int)_timePassed/60; // Minutes
+    time << std::setw(2) << std::setfill('0') << (int)timePassed/60; // Minutes
     time << ':';
-    time << std::setw(2) << std::setfill('0') << (int)_timePassed%60; // Seconds
+    time << std::setw(2) << std::setfill('0') << (int)timePassed%60; // Seconds
     time << ':';
-    time << std::setw(2) << std::setfill('0') << (int)(_timePassed*100) % 100; // Milliseconds
+    time << std::setw(2) << std::setfill('0') << (int)(timePassed*100) % 100; // Milliseconds
     _timeText->_renderShape.setText(time.str());
-}
-
-std::unique_ptr<ISnapshot> HUDScript::saveSnapshot() {
-    auto snapshot = std::make_unique<Snapshot>();
-    snapshot->timePassed = _timePassed;
-    return std::move(snapshot);
-}
-
-void HUDScript::loadSnapshot(const ISnapshot& rawSnapshot) {
-    auto snapshot = (Snapshot&)rawSnapshot;
-    _timePassed = snapshot.timePassed;
 }
