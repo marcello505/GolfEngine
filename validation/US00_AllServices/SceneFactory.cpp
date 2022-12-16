@@ -11,9 +11,6 @@
 #include "MovementScript.h"
 
 void SceneFactory::build(Scene& scene) const {
-
-
-
     //PLayer Sprite
     auto& go = scene.createNewGameObject<GameObject>();
     go.addComponent<SpriteComponent>("res/player.png");
@@ -24,8 +21,5 @@ void SceneFactory::build(Scene& scene) const {
     go.addComponent<BoxCollider>(Vector2(50,100));
     go.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
     go.addComponent<MovementScript>();
-
-
-
-
 }
+
