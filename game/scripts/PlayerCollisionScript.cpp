@@ -19,14 +19,24 @@ void PlayerCollisionScript::onStart() {
     if(_gameObject->get().hasComponent<GolfEngine::Scene::Components::AudioSource>())
         _audioSource = &_gameObject->get().getComponent<GolfEngine::Scene::Components::AudioSource>();
 
-    if(_gameObject->get().hasComponent<ParticleSystem>())
-        _particleSystem = &_gameObject->get().getComponent<ParticleSystem>();
+    // Get blood splatter particle system from child
+    auto& children = _gameObject->get().children();
+    if(!children.empty()){
+        for(auto& c : children){
+            if(c.get().name == "blood splatter"){
+                if(c.get().hasComponent<ParticleSystem>()){
+                    _particleSystem = &c.get().getComponent<ParticleSystem>();
+                    break;
+                }
+            }
+        }
+    }
 }
 
 void PlayerCollisionScript::onCollisionEnter(RigidBody &other) {
     if(other.getParentGameObject()->tag == "enemy"){
-        // Play some death effects and disable player controls
         // TODO maybe change sprite/animation
+        // Play some death effects and disable player controls
         _audioSource->play("death", false);
         _particleSystem->play(false);
         _playerMovement->setActive(false);

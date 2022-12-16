@@ -5,11 +5,11 @@
 #include "PlayerObject.h"
 
 #include <Scene/Components/BoxCollider.h>
-#include <Scene/Components/ParticleSystem.h>
 #include "../scripts/GameManagerScript.h"
 #include "../scripts/PlayerCollisionScript.h"
+#include "BloodSplatterParticleEffect.h"
 
-PlayerObject::PlayerObject(ProjectilePoolScript* projectilePoolScript) {
+PlayerObject::PlayerObject(ProjectilePoolScript* projectilePoolScript, Scene& scene) {
     addComponent<BoxCollider>(Vector2{25.f, 25.f});
 
     RigidBodyDef rbDef {};
@@ -33,9 +33,11 @@ PlayerObject::PlayerObject(ProjectilePoolScript* projectilePoolScript) {
     audioSource.addSound("reload", "res/audio/gun-reload.wav");
     audioSource.addSound("death", "res/audio/blood_splatter.mp3");
 
-    auto& bloodParticleSystem = addComponent<ParticleSystem>("res/sprites/blood_splatter.png", 15, 1.0f, Vector2{4.0f, 4.0f});
-    bloodParticleSystem.setSpread({0, 359});
-    bloodParticleSystem.setRandomVelocity({2.0f, 4.0f});
-    bloodParticleSystem.setFade(true);
-    bloodParticleSystem.setRandomStartRotation(true);
+    // Blood splatter particle effect game object
+    scene.createNewGameObject<BloodSplatterParticleEffect>((GameObject&)*this);
+
+    auto& bulletCasingParticleEffect = addComponent<ParticleSystem>("res/sprites/bullet_casing.png", 1, 0.5f, Vector2{2,2}, Vector2{30, 15});
+    bulletCasingParticleEffect.setSpread({85, 95});
+    bulletCasingParticleEffect.setFade(true);
+    bulletCasingParticleEffect.setRandomVelocity({2,3});
 }

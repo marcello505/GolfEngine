@@ -22,7 +22,8 @@ set(GAMEOBJECTS_SOURCES
         gameobjects/Projectile.cpp
         gameobjects/ProjectilePoolObject.cpp
         gameobjects/TestBlock.cpp
-        gameobjects/GameManager.cpp)
+        gameobjects/GameManager.cpp
+        gameobjects/BloodSplatterParticleEffect.cpp)
 
 set(SCENE_SOURCES
         scenes/PlayerTestScene.cpp

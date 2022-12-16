@@ -9,25 +9,24 @@
 
 void PlayerShootScript::onStart() {
     _audioSource = &_gameObject.value().get().getComponent<GolfEngine::Scene::Components::AudioSource>();
-    _particleSystem = &_gameObject->get().getComponent<ParticleSystem>();
 
-    if (_gameObject.value().get().hasComponent<Animator>())
-        _animator = &_gameObject.value().get().getComponent<Animator>();
+    if(_gameObject->get().hasComponent<ParticleSystem>())
+        _particleSystem = &_gameObject->get().getComponent<ParticleSystem>();
+
+    if (_gameObject->get().hasComponent<Animator>())
+        _animator = &_gameObject->get().getComponent<Animator>();
 }
 
 void PlayerShootScript::onUpdate() {
-    if(ActionMap::getActionMap()->isJustPressed("test")){
-        _audioSource->play("death", false);
-        _particleSystem->play(false);
-    }
-
     //Handle shooting
     if(ActionMap::getActionMap()->isJustPressed("playerShoot")){
         if(_currentAmmo > 0 && !_reloading){
             _currentAmmo--;
 
+            // Shoot effects
             _audioSource->play("shoot");
             _animator->play("shoot");
+            _particleSystem->play(false);
 
             auto projectile = _projectilePool->getProjectile();
             if(projectile){
