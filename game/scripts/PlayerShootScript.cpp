@@ -10,9 +10,6 @@
 void PlayerShootScript::onStart() {
     _audioSource = &_gameObject.value().get().getComponent<GolfEngine::Scene::Components::AudioSource>();
 
-    if(_gameObject->get().hasComponent<ParticleSystem>())
-        _particleSystem = &_gameObject->get().getComponent<ParticleSystem>();
-
     if (_gameObject->get().hasComponent<Animator>())
         _animator = &_gameObject->get().getComponent<Animator>();
 }
@@ -26,7 +23,6 @@ void PlayerShootScript::onUpdate() {
             // Shoot effects
             _audioSource->play("shoot");
             _animator->play("shoot");
-            _particleSystem->play(false);
 
             auto projectile = _projectilePool->getProjectile();
             if(projectile){

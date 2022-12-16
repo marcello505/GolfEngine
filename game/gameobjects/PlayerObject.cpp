@@ -35,9 +35,4 @@ PlayerObject::PlayerObject(ProjectilePoolScript* projectilePoolScript, Scene& sc
 
     // Blood splatter particle effect game object
     scene.createNewGameObject<BloodSplatterParticleEffect>((GameObject&)*this);
-
-    auto& bulletCasingParticleEffect = addComponent<ParticleSystem>("res/sprites/bullet_casing.png", 1, 0.5f, Vector2{2,2}, Vector2{30, 15});
-    bulletCasingParticleEffect.setSpread({85, 95});
-    bulletCasingParticleEffect.setFade(true);
-    bulletCasingParticleEffect.setRandomVelocity({2,3});
 }

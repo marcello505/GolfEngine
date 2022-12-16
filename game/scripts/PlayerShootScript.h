@@ -5,7 +5,6 @@
 #ifndef GOLFENGINE_PLAYERSHOOTSCRIPT_H
 #define GOLFENGINE_PLAYERSHOOTSCRIPT_H
 
-#include <Scene/Components/ParticleSystem.h>
 #include "Scene/Components/BehaviourScript.h"
 #include "ProjectilePoolScript.h"
 #include "Scene/Components/Animator.h"
@@ -37,7 +36,6 @@ private:
     bool _reloading {false};
     float _reloadTime {1.0f};
     float _timePassedReloading {0.0f};
-    ParticleSystem* _particleSystem;
 };
 
 
