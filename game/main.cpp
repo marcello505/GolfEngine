@@ -16,6 +16,7 @@
 int main(int argc, char* argv[]){
     GameLoop gameLoop {};
     gameLoop.useDefaultServices();
+    GolfEngine::Services::Render::getService()->setWindowTitle("Game name");
 
     //Set up controls
     auto* actionMap = ActionMap::getActionMap();

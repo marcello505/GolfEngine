@@ -34,6 +34,10 @@ public:
     SDLRenderService(SDLRenderService &&other) noexcept;
     SDLRenderService &operator=(SDLRenderService &&other) noexcept;
 
+    /// Sets the title of the window
+    /// \param title new title
+    void setWindowTitle(const std::string& title) override;
+
     /// Adds a drawable to the list of registered drawables
     /// \param drawable to be added
     void addDrawable(Drawable& drawable) override;

@@ -551,4 +551,8 @@ namespace GolfEngine::Services::Render {
 
         throw std::runtime_error("Camera offset requested without an active camera in the scene.");
     }
+
+    void SDLRenderService::setWindowTitle(const std::string& title) {
+        SDL_SetWindowTitle(_window.get(), title.c_str());
+    }
 }
