@@ -13,14 +13,18 @@
 
 namespace GolfEngine::Services::Pathfinding {
     void AStarPathfindingService::findPathEveryTick(){
+        int pathsCalculated = 0;
         // checks if any Pathfinding component needs update of his path
         for (auto& pathfindingComponent : _pathfindingComponents) {
             if(pathfindingComponent.get().needsNewPath() && !_graph->nodes.empty()){
                 auto startNode = covertPosToNode(pathfindingComponent.get().getParentGameObjectPosition());
                 auto targetNode = covertPosToNode(pathfindingComponent.get().getTargetPosition());
                 pathfindingComponent.get().setPath(findPath(startNode,targetNode, *_graph));
+                if(pathsCalculated++ >= _maxPathsToCalculatePerTic) break;
             }
         }
+
+        if(_graph) _graph->updateGraphColors();
     }
 
     std::vector<Node> AStarPathfindingService::findPath(Node& start, Node& target, Graph& graph) {
@@ -55,17 +59,17 @@ namespace GolfEngine::Services::Pathfinding {
                //Trace back Path
                std::vector<Node> path;
 
-               auto& parent = target;
-               path.emplace_back(parent);
-               parent.tag = NodeTags::Path;
+               Node* parent = &target;
+               path.emplace_back(*parent);
+               parent->tag = NodeTags::Path;
 
                //sets path by getting all parents untill parent is equal to -1
-               while(weights[parent.id].parent != -1){
-                   parent = graph.nodes[weights.at(parent.id).parent];
+               while(weights[parent->id].parent != -1){
+                   parent = &graph.nodes[weights.at(parent->id).parent];
 
                    //adds and tags all nodes in path
-                   path.emplace_back(parent);
-                   parent.tag = NodeTags::Path;
+                   path.emplace_back(*parent);
+                   parent->tag = NodeTags::Path;
                }
                path.pop_back();
                //Display Visited
@@ -130,7 +134,7 @@ namespace GolfEngine::Services::Pathfinding {
 
     void AStarPathfindingService::createGraph(){
         //Sets couple help variables
-        std::map<int, PathDrawable*> drawables;
+        std::vector<std::unique_ptr<RectRenderShape>> drawables {};
         std::vector<Node> nodeList;
         std::vector<std::pair<int,int>> edges;
 
@@ -147,11 +151,8 @@ namespace GolfEngine::Services::Pathfinding {
                 //Checks if position is at valid place
                 if(isValidSpot(Vector2(widthNodeDistance, heightNodeDistance))){
                     //creates drawable used to visualize graph
-                    auto* rect = new PathDrawable(Rect2(Vector2(widthNodeDistance,heightNodeDistance), Vector2(5,5)),
-                                                                                                    Color());
-
-
-                    drawables.insert(std::make_pair(nodeCounter, rect));
+                    auto rect = std::make_unique<RectRenderShape>(Rect2(Vector2(widthNodeDistance, heightNodeDistance), Vector2(5, 5)), 0, Vector2{}, Color{});
+                    drawables.push_back(std::move(rect));
 
                     // add node to nodeList
                     auto node = Node(nodeCounter,Vector2(widthNodeDistance, heightNodeDistance));
@@ -177,8 +178,7 @@ namespace GolfEngine::Services::Pathfinding {
         }
 
         //Create graph based on nodesList
-       _graph = std::make_unique<Graph>(nodeList);
-        _graph->drawables = drawables;
+        _graph = std::make_unique<Graph>(nodeList, std::move(drawables));
     }
 
     bool AStarPathfindingService::isValidSpot(Vector2 pos) const {
@@ -247,5 +247,9 @@ namespace GolfEngine::Services::Pathfinding {
     void AStarPathfindingService::setGraphSize(int width, int height) {
         _graphWidth = width;
         _graphHeight = height;
+    }
+
+    void AStarPathfindingService::setMaxPathsToCalculatePerTic(int maxPathsPerTic) {
+        _maxPathsToCalculatePerTic = std::max(1, maxPathsPerTic);
     }
 }

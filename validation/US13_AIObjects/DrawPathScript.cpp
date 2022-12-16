@@ -14,8 +14,4 @@ void DrawPathScript::onUpdate() {
     auto direction = pathfinding->get().getPathDirection();
     auto rb = &_gameObject.value().get().getComponent<RigidBody>();
     rb->applyWorldForceToCenter(direction * 0.05);
-
-    if(!pathfinding->get().getPath().empty()){
-        pathfinding->get().displayGraph(true, false);
-    }
 }

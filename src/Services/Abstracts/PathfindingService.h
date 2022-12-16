@@ -22,6 +22,7 @@ public:
     virtual void setNodeDistance(int nodeDistance) = 0;
     virtual void setMarginAroundRectColliders(int margin) = 0;
     virtual void setGraphSize(int width, int height) = 0;
+    virtual void setMaxPathsToCalculatePerTic(int maxPathsPerTic) = 0;
 
     // Virtual destructor
     virtual ~PathfindingService() = default;

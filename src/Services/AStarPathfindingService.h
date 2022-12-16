@@ -25,6 +25,7 @@ namespace GolfEngine::Services::Pathfinding{
 
         int _graphWidth {1920};
         int _graphHeight {1080};
+        int _maxPathsToCalculatePerTic {1};
 
     public:
         AStarPathfindingService() = default;
@@ -33,7 +34,7 @@ namespace GolfEngine::Services::Pathfinding{
         /// \param target node that needs to be found
         /// \param graph Graph where all nodes can be found
         /// \return
-        std::vector<Node> findPath(Node& start, Node& target,Graph& graph) override;
+        std::vector<Node> findPath(Node& start, Node& target, Graph& graph) override;
 
         /// registers component auto update its own path
         /// \param pathfinding component that needs updates
@@ -77,8 +78,15 @@ namespace GolfEngine::Services::Pathfinding{
         /// \param margin the margin around the rectangles.
         void setMarginAroundRectColliders(int margin) override;
 
+        /// Set the width and height of the graph that is created.
+        /// \param width width in world space (pixels)
+        /// \param height height in world space (pixels)
         void setGraphSize(int width, int height) override;
 
+        /// Set the maximum amount of paths to process each tic.
+        /// By default this is set to 1
+        /// \param maxPathsPerTic an integer of 1 or more
+        void setMaxPathsToCalculatePerTic(int maxPathsPerTic) override;
     };
 
     struct heuristicValues {

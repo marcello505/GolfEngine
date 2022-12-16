@@ -8,7 +8,6 @@
 #include <valarray>
 #include "Services/Abstracts/PathfindingService.h"
 #include "Services/Singletons/PathfindingSingleton.h"
-#include "Services/Singletons/RenderSingleton.h"
 
 Pathfinding::Pathfinding(GameObject *target, float recalculatePathTime) : _target{*target}, _fps{60}, _recalculatePathTime{recalculatePathTime}  {
 }
@@ -29,21 +28,6 @@ void Pathfinding::onRemove() {
     if( GolfEngine::Services::Pathfinding::getService()){
         GolfEngine::Services::Pathfinding::getService()->removePathfinding(*this);
     }
-
-    if(_pathIsRegistered){
-        if(GolfEngine::Services::Pathfinding::hasService()){
-            auto& graph = GolfEngine::Services::Pathfinding::getService()->getGraph();
-
-            if(GolfEngine::Services::Render::hasService()){
-                auto* rs = GolfEngine::Services::Render::getService();
-                for (const auto& drawable : graph.drawables ) {
-                    rs->removeDrawable(*drawable.second);
-                }
-                _pathIsRegistered = false;
-            }
-        }
-    }
-
 }
 
 bool Pathfinding::getActive() {
@@ -111,41 +95,10 @@ Vector2 Pathfinding::getPathDirection()
     return getDirection(nextPos);
 }
 
-void Pathfinding::displayGraph(bool displayPath, bool displayVisited) {
-    if(GolfEngine::Services::Pathfinding::hasService()){
-        auto& graph = GolfEngine::Services::Pathfinding::getService()->getGraph();
-
-    if(!_pathIsRegistered){
-        if(GolfEngine::Services::Render::hasService()){
-            auto* rs = GolfEngine::Services::Render::getService();
-            for (const auto& drawable : graph.drawables ) {
-                rs->addDrawable(*drawable.second);
-            }
-            _pathIsRegistered = true;
-        }
-    }
-
-
-    for (const auto& node : graph.nodes ) {
-
-        graph.drawables.at(node.id)->setColor(Color(255,255,255));
-        if(displayVisited && node.tag == NodeTags::Visited){
-            graph.drawables.at(node.id)->setColor(Color(0,0,255));
-        }
-    }
-    if(displayPath){
-        for (const auto& node : getPath()) {
-            graph.drawables.at(node.id)->setColor(Color(0,255,0));
-        }
-    }
-
-}}
-
 std::unique_ptr<ISnapshot> Pathfinding::saveSnapshot() {
     auto snapshot = std::make_unique<Snapshot>();
 
     snapshot->target = &_target.get();
-    snapshot->pathIsRegistered = _pathIsRegistered;
     snapshot->path = _path;
     snapshot->recalculatePathTime = _recalculatePathTime;
     snapshot->countedFrames = _countedFrames;
@@ -157,7 +110,6 @@ void Pathfinding::loadSnapshot(const ISnapshot& rawSnapshot) {
     auto& snapshot = (Snapshot&)rawSnapshot;
 
     _target = *snapshot.target;
-    _pathIsRegistered = snapshot.pathIsRegistered;
     _path = snapshot.path;
     _recalculatePathTime = snapshot.recalculatePathTime;
     _countedFrames = snapshot.countedFrames;

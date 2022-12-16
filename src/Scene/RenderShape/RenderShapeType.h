@@ -13,7 +13,8 @@ enum class RenderShapeType {
     ParticleSystemShape,
     TextRenderShape,
     ButtonRenderShape,
-    TileMapRenderShape
+    TileMapRenderShape,
+    GraphRenderShape
 };
 
 #endif //SPC_PROJECT_RENDERSHAPETYPE_H

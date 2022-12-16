@@ -36,12 +36,6 @@ public:
 
     Vector2 getDirection(Vector2 target);
 
-
-    /// Display the Graph in rects
-    /// \param displayPath if true path is colored green
-    /// \param displayVisited if true all visited nodes are colored blue
-    void displayGraph(bool displayPath, bool displayVisited);
-
     /// Return the gameobject this component is navigating to
     /// \return Target gameobject
     Vector2 getTargetPosition();
@@ -63,14 +57,11 @@ private:
     const int _fps;
     float _recalculatePathTime;
 
-    bool _pathIsRegistered {false};
-
     struct Snapshot : ISnapshot{
         GameObject* target;
         int countedFrames;
         std::vector<Node> path;
         float recalculatePathTime;
-        bool pathIsRegistered;
     };
 };
 

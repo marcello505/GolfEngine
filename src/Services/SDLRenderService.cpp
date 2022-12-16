@@ -4,6 +4,7 @@
 
 #include "SDLRenderService.h"
 #include "Scene/RenderShape/ButtonRenderShape.h"
+#include "Scene/RenderShape/GraphRenderShape.h"
 #include <cmath>
 #include <iostream>
 #include <algorithm>
@@ -102,6 +103,11 @@ namespace GolfEngine::Services::Render {
                     break;
                 case RenderShapeType::TileMapRenderShape:
                     renderTileMap(dynamic_cast<TileMapRenderShape&>(renderShape));
+                    break;
+                case RenderShapeType::GraphRenderShape:
+                    for(const auto& shape : dynamic_cast<GraphRenderShape&>(renderShape).nodes){
+                        renderRect(*shape);
+                    }
                     break;
             }
         }
