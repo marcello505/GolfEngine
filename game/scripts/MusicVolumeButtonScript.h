@@ -7,14 +7,14 @@
 
 
 #include "Scene/Components/BehaviourScript.h"
-#include "VolumeTextUpdateScript.h"
+#include "TextUpdateScript.h"
 
 class MusicVolumeButtonScript : public BehaviourScript{
 public:
-    explicit MusicVolumeButtonScript(VolumeTextUpdateScript* script) : _textUpdateScript{script} {}
+    explicit MusicVolumeButtonScript(TextUpdateScript* script) : _textUpdateScript{script} {}
     void onUpdate() override;
 private:
-    VolumeTextUpdateScript* _textUpdateScript {};
+    TextUpdateScript* _textUpdateScript {};
 };
 
 

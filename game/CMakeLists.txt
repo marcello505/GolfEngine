@@ -8,7 +8,7 @@ set(SCRIPT_SOURCES scripts/PlayerMovementScript.cpp scripts/ProjectilePoolScript
         scripts/SaveStateScript.cpp scripts/SaveStateScript.h scripts/StartGameButtonScript.cpp
         scripts/SelectLevelButtonScript.cpp scripts/BackButtonScript.cpp scripts/SettingsButtonScript.cpp
         scripts/MasterVolumeButtonScript.cpp scripts/SoundEffectVolumeButtonScript.cpp scripts/FullScreenButtonScript.cpp
-        scripts/ExitButtonScript.cpp scripts/VolumeTextUpdateScript.cpp scripts/MusicVolumeButtonScript.cpp
+        scripts/ExitButtonScript.cpp scripts/TextUpdateScript.cpp scripts/MusicVolumeButtonScript.cpp
         scripts/KeyConfigButtonScript.cpp)
 set(GAMEOBJECTS_SOURCES
         gameobjects/PlayerObject.cpp

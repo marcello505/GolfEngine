@@ -6,14 +6,14 @@
 #define GOLFENGINE_SOUNDEFFECTVOLUMEBUTTONSCRIPT_H
 
 #include "Scene/Components/BehaviourScript.h"
-#include "VolumeTextUpdateScript.h"
+#include "TextUpdateScript.h"
 
 class SoundEffectVolumeButtonScript : public BehaviourScript{
 public:
-    explicit SoundEffectVolumeButtonScript(VolumeTextUpdateScript* script) : _textUpdateScript{script} {}
+    explicit SoundEffectVolumeButtonScript(TextUpdateScript* script) : _textUpdateScript{script} {}
     void onUpdate() override;
 private:
-    VolumeTextUpdateScript* _textUpdateScript {};
+    TextUpdateScript* _textUpdateScript {};
 };
 
 

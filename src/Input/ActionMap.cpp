@@ -26,6 +26,18 @@ ActionMap* ActionMap::actionMap = nullptr;
         return actionMap;
     }
 
+    std::vector<InputKey> ActionMap::getActionKeys(std::string action){
+        std::vector<InputKey> inputKeys;
+        for (auto &_actionList : _inputKeys) {
+            for (auto &_action: _actionList.second) {
+                if (_action.name == action) {
+                    inputKeys.push_back(_actionList.first);
+                }
+            }
+        }
+
+        return inputKeys;
+    }
 
 
     // add action to actionlist
@@ -40,10 +52,9 @@ ActionMap* ActionMap::actionMap = nullptr;
         }
     }
 
-    // bind action to input
-    void ActionMap::addInputKeyToAction(const std::string& action, InputKey inputKey)
-    {
-/*        for (auto &_actionList : _inputKeys){
+    // remove action from actionlist
+    void ActionMap::removeInputKeyFromAction(std::string& action){
+        for (auto &_actionList : _inputKeys){
             for (auto &_action : _actionList.second){
                 if(_action.name == action){
                     _actionList.second.erase(std::find_if(_actionList.second.begin(), _actionList.second.end(), [&](const Action &d) {
@@ -51,7 +62,13 @@ ActionMap* ActionMap::actionMap = nullptr;
                     }));
                 }
             }
-        }*/
+        }
+    }
+
+    // bind action to input
+    void ActionMap::addInputKeyToAction(const std::string& action, InputKey inputKey)
+    {
+
 
         if (_inputKeys.count(inputKey) > 0 && _actions.find(action) != _actions.end()) // if key and action exist
         {

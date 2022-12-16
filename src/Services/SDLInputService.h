@@ -22,7 +22,7 @@ public:
     bool hasReceivedQuitSignal() const override;
     bool pressedKey() const override;
     void setKeyPressed(bool pressed) override;
-
+    std::string getKeyString(InputKey key) override;
 
 };
 

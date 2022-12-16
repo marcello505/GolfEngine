@@ -14,12 +14,16 @@
 #include "../scripts/SoundEffectVolumeButtonScript.h"
 #include "../scripts/MusicVolumeButtonScript.h"
 #include "../scripts/KeyConfigButtonScript.h"
+#include "Services/Singletons/InputSingleton.h"
+
+
 
 void SettingsScene::build(Scene& scene) const {
 
     auto* rs = GolfEngine::Services::Render::getService();
     auto& root = scene.createNewGameObject<GameObject>();
     auto* _audioService = GolfEngine::Services::Audio::getService();
+    auto* inputService = GolfEngine::Services::Input::getService();
     auto* actionMap = ActionMap::getActionMap();
 
     BackButtonScript backScript;
@@ -63,9 +67,9 @@ void SettingsScene::build(Scene& scene) const {
                                                             Alignment::Center, false);
 
     auto& volumeTextUpdateScriptMaster =
-            masterVolumeValueText.addComponent<VolumeTextUpdateScript>(&masterVolumeValueText);
+            masterVolumeValueText.addComponent<TextUpdateScript>(&masterVolumeValueText);
     volumeTextUpdateScriptMaster.setParentGameObject(masterVolumeValueText);
-    masterVolumeValueText.addComponent<VolumeTextUpdateScript>(volumeTextUpdateScriptMaster);
+    masterVolumeValueText.addComponent<TextUpdateScript>(volumeTextUpdateScriptMaster);
 
     auto masterVolumeScript = MasterVolumeButtonScript(&volumeTextUpdateScriptMaster);
 
@@ -109,9 +113,9 @@ void SettingsScene::build(Scene& scene) const {
                                                                   Alignment::Center, false);
 
     auto& volumeTextUpdateScriptSoundEffect =
-            soundEffectVolumeValueText.addComponent<VolumeTextUpdateScript>(&soundEffectVolumeValueText);
+            soundEffectVolumeValueText.addComponent<TextUpdateScript>(&soundEffectVolumeValueText);
     volumeTextUpdateScriptSoundEffect.setParentGameObject(soundEffectVolumeValueText);
-    soundEffectVolumeValueText.addComponent<VolumeTextUpdateScript>(volumeTextUpdateScriptSoundEffect);
+    soundEffectVolumeValueText.addComponent<TextUpdateScript>(volumeTextUpdateScriptSoundEffect);
 
     auto soundEffectVolumeScript = SoundEffectVolumeButtonScript(&volumeTextUpdateScriptSoundEffect);
 
@@ -139,7 +143,7 @@ void SettingsScene::build(Scene& scene) const {
 
     auto& musicVolumeText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 13,
                                                                                 rs->screenSizeHeight() / 1.49),0,
-                                                                  "Sound: ",20,
+                                                                  "Music: ",20,
                                                                   Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
                                                                   Alignment::Center, false);
 
@@ -153,9 +157,9 @@ void SettingsScene::build(Scene& scene) const {
                                                                        Alignment::Center, false);
 
     auto& volumeTextUpdateScriptMusic =
-            musicVolumeValueText.addComponent<VolumeTextUpdateScript>(&musicVolumeValueText);
+            musicVolumeValueText.addComponent<TextUpdateScript>(&musicVolumeValueText);
     volumeTextUpdateScriptMusic.setParentGameObject(musicVolumeValueText);
-    musicVolumeValueText.addComponent<VolumeTextUpdateScript>(volumeTextUpdateScriptMusic);
+    musicVolumeValueText.addComponent<TextUpdateScript>(volumeTextUpdateScriptMusic);
 
     auto musicVolumeScript = MusicVolumeButtonScript(&volumeTextUpdateScriptMusic);
 
@@ -209,85 +213,142 @@ void SettingsScene::build(Scene& scene) const {
 
 
     //playerleft
+
+    std::string playerLeftInputKey = inputService->getKeyString(actionMap->getActionKeys("playerLeft")[0]);
+
+
     auto& playerLeftKeyText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 70,
                                                                           rs->screenSizeHeight() / 2.3),0,
-                                                            "playerLeft" ,20,
+                                                            "playerLeft ( " + playerLeftInputKey + " )" ,20,
                                                             Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
                                                             Alignment::Center, false);
 
+    auto& playerLeftTextUpdateScript =
+            playerLeftKeyText.addComponent<TextUpdateScript>(&playerLeftKeyText);
+    playerLeftTextUpdateScript.setParentGameObject(playerLeftKeyText);
+    playerLeftKeyText.addComponent<TextUpdateScript>(playerLeftTextUpdateScript);
+
     auto& playerLeftKeyButton = scene.createNewGameObject<Button>(root, 120, 40,
-                                                                     Vector2(rs->screenSizeWidth() / 100 * 82,
+                                                                     Vector2(rs->screenSizeWidth() / 100 * 92,
                                                                              rs->screenSizeHeight() / 2.25),true,
                                                                      "clickButton", Vector2(0, 0), 0,
                                                                      "Change key", 20, Color(),
                                                                      R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
                                                                     ,Alignment::Center);
 
-    auto& keyConfigScript =
-            playerLeftKeyButton.addComponent<KeyConfigButtonScript>("playerLeft");
-    keyConfigScript.setParentGameObject(playerLeftKeyButton);
-    playerLeftKeyButton.addComponent<KeyConfigButtonScript>(keyConfigScript);
-
+    auto keyConfigScriptPlayerLeft = KeyConfigButtonScript("playerLeft", &playerLeftTextUpdateScript);
+    keyConfigScriptPlayerLeft.setParentGameObject(playerLeftKeyButton);
+    playerLeftKeyButton.addComponent<KeyConfigButtonScript>(keyConfigScriptPlayerLeft);
 
     //playerRight
+
+    std::string playerRightInputKey = inputService->getKeyString(actionMap->getActionKeys("playerRight")[0]);
+
     auto& playerRightKeyText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 70,
                                                                             rs->screenSizeHeight() / 2.0),0,
-                                                              "playerRight" ,20,
+                                                              "playerRight ( " + playerRightInputKey + " )" ,20,
                                                               Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
                                                               Alignment::Center, false);
 
+    auto& playerRightTextUpdateScript =
+            playerRightKeyText.addComponent<TextUpdateScript>(&playerRightKeyText);
+    playerRightTextUpdateScript.setParentGameObject(playerRightKeyText);
+    playerRightKeyText.addComponent<TextUpdateScript>(playerRightTextUpdateScript);
+
     auto& playerRightKeyButton = scene.createNewGameObject<Button>(root, 120, 40,
-                                                                  Vector2(rs->screenSizeWidth() / 100 * 82,
+                                                                  Vector2(rs->screenSizeWidth() / 100 * 92,
                                                                           rs->screenSizeHeight() / 1.95),true,
                                                                   "clickButton", Vector2(0, 0), 0,
                                                                   "Change key", 20, Color(),
                                                                   R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
                                                                   ,Alignment::Center);
 
+    auto keyConfigScriptPlayerRight = KeyConfigButtonScript("playerRight", &playerRightTextUpdateScript);
+    keyConfigScriptPlayerRight.setParentGameObject(playerRightKeyButton);
+    playerRightKeyButton.addComponent<KeyConfigButtonScript>(keyConfigScriptPlayerRight);
+
     //playerUp
+
+
+
+    std::string playerUpInputKey = inputService->getKeyString(actionMap->getActionKeys("playerUp")[0]);
+
     auto& playerUpKeyText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 70,
                                                                              rs->screenSizeHeight() / 1.77),0,
-                                                               "playerUp" ,20,
+                                                            "playerUp ( " + playerUpInputKey + " )" ,20,
                                                                Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
                                                                Alignment::Center, false);
 
+    auto& playerUpTextUpdateScript =
+            playerUpKeyText.addComponent<TextUpdateScript>(&playerUpKeyText);
+    playerUpTextUpdateScript.setParentGameObject(playerUpKeyText);
+    playerUpKeyText.addComponent<TextUpdateScript>(playerUpTextUpdateScript);
+
+
     auto& playerUpKeyButton = scene.createNewGameObject<Button>(root, 120, 40,
-                                                                   Vector2(rs->screenSizeWidth() / 100 * 82,
+                                                                   Vector2(rs->screenSizeWidth() / 100 * 92,
                                                                            rs->screenSizeHeight() / 1.73),true,
                                                                    "clickButton", Vector2(0, 0), 0,
                                                                    "Change key", 20, Color(),
                                                                    R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
                                                                    ,Alignment::Center);
 
+    auto keyConfigScriptPlayerUp = KeyConfigButtonScript("playerUp", &playerUpTextUpdateScript);
+    keyConfigScriptPlayerUp.setParentGameObject(playerUpKeyButton);
+    playerUpKeyButton.addComponent<KeyConfigButtonScript>(keyConfigScriptPlayerUp);
+
     //playerDown
+
+    std::string playerDownInputKey = inputService->getKeyString(actionMap->getActionKeys("playerDown")[0]);
+
     auto& playerDownKeyText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 70,
                                                                           rs->screenSizeHeight() / 1.58),0,
-                                                            "playerDown" ,20,
+                                                              "playerDown ( " + playerDownInputKey + " )"  ,20,
                                                             Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
                                                             Alignment::Center, false);
 
+    auto& playerDownTextUpdateScript =
+            playerDownKeyText.addComponent<TextUpdateScript>(&playerDownKeyText);
+    playerDownTextUpdateScript.setParentGameObject(playerDownKeyText);
+    playerDownKeyText.addComponent<TextUpdateScript>(playerDownTextUpdateScript);
+
     auto& playerDownKeyButton = scene.createNewGameObject<Button>(root, 120, 40,
-                                                                Vector2(rs->screenSizeWidth() / 100 * 82,
+                                                                Vector2(rs->screenSizeWidth() / 100 * 92,
                                                                         rs->screenSizeHeight() / 1.55),true,
                                                                 "clickButton", Vector2(0, 0), 0,
                                                                 "Change key", 20, Color(),
                                                                 R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
                                                                 ,Alignment::Center);
 
+    auto keyConfigScriptPlayerDown = KeyConfigButtonScript("playerDown", &playerDownTextUpdateScript);
+    keyConfigScriptPlayerDown.setParentGameObject(playerDownKeyButton);
+    playerDownKeyButton.addComponent<KeyConfigButtonScript>(keyConfigScriptPlayerDown);
 
     //playerShoot
+
+    std::string playerShootInputKey = inputService->getKeyString(actionMap->getActionKeys("playerShoot")[0]);
+
     auto& playerShootKeyText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 70,
                                                                             rs->screenSizeHeight() / 1.43),0,
-                                                              "playerShoot" ,20,
+                                                               "playerShoot ( " + playerShootInputKey + " )"  ,20,
                                                               Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
                                                               Alignment::Center, false);
 
+    auto& playerShootTextUpdateScript =
+            playerShootKeyText.addComponent<TextUpdateScript>(&playerShootKeyText);
+    playerShootTextUpdateScript.setParentGameObject(playerShootKeyText);
+    playerShootKeyText.addComponent<TextUpdateScript>(playerShootTextUpdateScript);
+
     auto& playerShootKeyButton = scene.createNewGameObject<Button>(root, 120, 40,
-                                                                  Vector2(rs->screenSizeWidth() / 100 * 82,
+                                                                  Vector2(rs->screenSizeWidth() / 100 * 92,
                                                                           rs->screenSizeHeight() / 1.40),true,
                                                                   "clickButton", Vector2(0, 0), 0,
                                                                   "Change key", 20, Color(),
                                                                   R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
                                                                   ,Alignment::Center);
+
+    auto keyConfigScriptPlayerShoot = KeyConfigButtonScript("playerShoot", &playerShootTextUpdateScript);
+    keyConfigScriptPlayerShoot.setParentGameObject(playerShootKeyButton);
+    playerShootKeyButton.addComponent<KeyConfigButtonScript>(keyConfigScriptPlayerShoot);
 
 }

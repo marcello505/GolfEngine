@@ -11,23 +11,21 @@ void KeyConfigButtonScript::onUpdate() {
 
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
     auto* inputService = GolfEngine::Services::Input::getService();
+    auto* actionMap = ActionMap::getActionMap();
 
-    //get range of button area to check if we clicked there
     auto& btn = getParentGameObject<Button>();
 
-
     if(btn.isClicked()){
-     /*   sceneManager.loadScene("keyConfig");*/
+        btn._text.value ="reading..";
         InputKey newKey;
         while (!(inputService->pressedKey()))
         {
             newKey = inputService->getKeyPressed();
         }
         inputService->setKeyPressed(false);
-        ActionMap::getActionMap()->addInputKeyToAction(_actionName, newKey);
-/*        sceneManager.loadScene("settings");*/
-/*        showingKeyConfigScene = false;
-        showingKeyConfigScene = true;*/
+        actionMap->removeInputKeyFromAction(_actionName);
+        actionMap->addInputKeyToAction(_actionName, newKey);
+        std::string playerInputKey = inputService->getKeyString(actionMap->getActionKeys(_actionName)[0]);
+        _textUpdateScript->SetNewText(_actionName + " ( " + playerInputKey  + " )");
     }
-
 }

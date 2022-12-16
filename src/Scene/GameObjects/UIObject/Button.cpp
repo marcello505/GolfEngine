@@ -86,6 +86,7 @@ void Button::onUpdate() {
     GameObject::onUpdate();
 }
 
+
 bool Button::isClicked() {
     return _isClicked;
 }

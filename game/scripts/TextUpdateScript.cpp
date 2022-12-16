@@ -5,10 +5,10 @@
 #include <sstream>
 #include <utility>
 #include "Core/GameLoop.h"
-#include "VolumeTextUpdateScript.h"
+#include "TextUpdateScript.h"
 #include "Scene/GameObjects/UIObject/Button.h"
 
-void VolumeTextUpdateScript::SetNewText(std::string newText){
+void TextUpdateScript::SetNewText(std::string newText){
     _newText = std::move(newText);
     _text->_renderShape.setText(_newText);
 }
