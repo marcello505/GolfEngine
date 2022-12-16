@@ -21,6 +21,7 @@ public:
     virtual Node& covertPosToNode(Vector2 position) = 0;
     virtual void setNodeDistance(int nodeDistance) = 0;
     virtual void setMarginAroundRectColliders(int margin) = 0;
+    virtual void setGraphSize(int width, int height) = 0;
 
     // Virtual destructor
     virtual ~PathfindingService() = default;

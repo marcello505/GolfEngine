@@ -129,15 +129,14 @@ namespace GolfEngine::Services::Pathfinding {
 
 
     void AStarPathfindingService::createGraph(){
-        auto* rs = GolfEngine::Services::Render::getService();
         //Sets couple help variables
         std::map<int, PathDrawable*> drawables;
         std::vector<Node> nodeList;
         std::vector<std::pair<int,int>> edges;
 
         //calculate and set helpVariables
-        int height = rs->screenSizeHeight();
-        int width = rs->screenSizeWidth();
+        int height = _graphHeight;
+        int width = _graphWidth;
         int widthNodeDistance = _nodeDistance;
         int heightNodeDistance = _nodeDistance;
         int nodeCounter = 0;
@@ -243,5 +242,10 @@ namespace GolfEngine::Services::Pathfinding {
 
     void AStarPathfindingService::setMarginAroundRectColliders(int margin) {
         rectMargin = margin;
+    }
+
+    void AStarPathfindingService::setGraphSize(int width, int height) {
+        _graphWidth = width;
+        _graphHeight = height;
     }
 }

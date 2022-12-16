@@ -23,6 +23,9 @@ namespace GolfEngine::Services::Pathfinding{
         int _nodeDistance {20};
         int rectMargin{0};
 
+        int _graphWidth {1920};
+        int _graphHeight {1080};
+
     public:
         AStarPathfindingService() = default;
         /// Return path to given nodes
@@ -73,6 +76,9 @@ namespace GolfEngine::Services::Pathfinding{
         /// Creates a margin around al rect colliders to avoid objects getting stuck
         /// \param margin the margin around the rectangles.
         void setMarginAroundRectColliders(int margin) override;
+
+        void setGraphSize(int width, int height) override;
+
     };
 
     struct heuristicValues {
