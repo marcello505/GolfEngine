@@ -3,12 +3,25 @@
 //
 
 #include "SDLAudioService.h"
+#include <SDL_mixer.h>
 #include <iostream>
 #include <sstream>
 
+class Chunk_Wrapper{
+public:
+    explicit Chunk_Wrapper(Mix_Chunk* c) : chunk{c}{}
+    Mix_Chunk* chunk;
+};
+
+class Music_Wrapper{
+public:
+    explicit Music_Wrapper(Mix_Music* m) : music{m}{}
+    Mix_Music* music;
+};
+
 void SDLAudioService::playSfx(const std::string& path, float volume, bool loop) {
     //Play sfx
-    Mix_Chunk* chunk = getChunk(path);
+    Mix_Chunk* chunk = getChunk(path)->chunk;
     int channelNr = Mix_PlayChannel(-1, chunk, loop ? -1 : 0);
 
     if(channelNr != -1){
@@ -18,7 +31,7 @@ void SDLAudioService::playSfx(const std::string& path, float volume, bool loop) 
 }
 
 void SDLAudioService::playMusic(const std::string& path, float volume, bool loop) {
-    Mix_Music* music = getMusic(path);
+    Mix_Music* music = getMusic(path)->music;
     _musicFragmentVolume = clampFloat01(volume);
 
     Mix_PlayMusic(music, loop ? -1 : 0);
@@ -85,7 +98,7 @@ void SDLAudioService::preloadSfx(const std::string& path) {
 
     Mix_Chunk* chunk = Mix_LoadWAV(path.c_str());
     if(chunk){
-        _cachedChunks[path] = chunk;
+        _cachedChunks[path] = new Chunk_Wrapper{chunk};
     }
     else{
         std::stringstream errMessage {};
@@ -102,7 +115,7 @@ void SDLAudioService::preloadMusic(const std::string& path) {
 
     Mix_Music* music = Mix_LoadMUS(path.c_str());
     if(music){
-        _cachedMusic[path] = music;
+        _cachedMusic[path] = new Music_Wrapper{music};
     }
     else{
         std::stringstream errMessage {};
@@ -113,12 +126,12 @@ void SDLAudioService::preloadMusic(const std::string& path) {
 
 void SDLAudioService::clearCache() {
     for(auto& item : _cachedChunks){
-        Mix_FreeChunk(item.second);
+        Mix_FreeChunk(item.second->chunk);
     }
     _cachedChunks.clear();
 
     for(auto& item : _cachedMusic){
-        Mix_FreeMusic(item.second);
+        Mix_FreeMusic(item.second->music);
     }
     _cachedMusic.clear();
 }
@@ -139,7 +152,7 @@ bool SDLAudioService::hasCachedMusic(const std::string& path) {
     return _cachedMusic.find(path) != _cachedMusic.end();
 }
 
-Mix_Chunk* SDLAudioService::getChunk(const std::string& path) {
+Chunk_Wrapper* SDLAudioService::getChunk(const std::string& path) {
     if(!hasCachedChunk(path)){
         //Not cached
         preloadSfx(path);
@@ -147,7 +160,7 @@ Mix_Chunk* SDLAudioService::getChunk(const std::string& path) {
     return _cachedChunks[path];
 }
 
-Mix_Music* SDLAudioService::getMusic(const std::string& path) {
+Music_Wrapper* SDLAudioService::getMusic(const std::string& path) {
     if(!hasCachedMusic(path)){
         //Not cached
         preloadMusic(path);
@@ -184,7 +197,7 @@ void SDLAudioService::stopSfx(const std::string& path) {
         return;
     }
 
-    Mix_Chunk* chunk = getChunk(path);
+    Mix_Chunk* chunk = getChunk(path)->chunk;
     for(int i = 0; i < MIX_CHANNELS; i++){
         if(Mix_GetChunk(i) == chunk){
             Mix_HaltChannel(i);

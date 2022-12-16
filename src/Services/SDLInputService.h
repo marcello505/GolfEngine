@@ -5,20 +5,22 @@
 #include "Abstracts/InputService.h"
 #include "../Input/ActionMap.h"
 #include "../Input/InputKey.h"
-#include <SDL.h>
+
+// Forward declaration
+class Event_Wrapper;
 
 class SDLInputService : public InputService {
 private:
     ActionMap* _actionMap;
     std::map<std::string, InputKey> _inputBinds;
     void bindKeys();
-    void handleMouseEvent(SDL_Event event, bool pressed);
+    void handleMouseEvent(Event_Wrapper event, bool pressed);
     bool _hasReceivedQuitSignal {};
 public:
     SDLInputService();
     void handleInputs() override;
 
-    bool hasReceivedQuitSignal() const override;
+    [[nodiscard]] bool hasReceivedQuitSignal() const override;
 
 };
 

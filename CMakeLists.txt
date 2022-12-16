@@ -44,7 +44,7 @@ set(SERVICES_SOURCES
         src/Services/Singletons/RenderSingleton.cpp
         src/Services/Singletons/InputSingleton.cpp
         src/Services/Singletons/PathfindingSingleton.cpp
-        src/Services/Render/Texture.cpp
+#        src/Services/Render/Texture.cpp
         src/Services/Physics/Box2DCollisionListener.cpp
         src/Services/PugiXMLTileMapParserService.cpp
         src/Services/Singletons/TileMapParserSingleton.cpp)
