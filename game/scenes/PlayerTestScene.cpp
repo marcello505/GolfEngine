@@ -7,6 +7,8 @@
 #include "../gameobjects/PlayerObject.h"
 #include "../gameobjects/Wall.h"
 #include "../gameobjects/ProjectilePoolObject.h"
+#include "../gameobjects/EnemyObject.h"
+#include "Scene/Components/Animator.h"
 #include "../scripts/SaveStateScript.h"
 #include "../gameobjects/TestBlock.h"
 #include "Scene/Components/BoxCollider.h"
@@ -55,6 +57,25 @@ void PlayerTestScene::build(Scene& scene) const {
     testEnemyCollision.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::DynamicBody});
     testEnemyCollision.tag = "enemy";
     testEnemyCollision.setLocalPosition({1000.0f, 500.0f});
+
+ auto& enemy1 = scene.createNewGameObject<EnemyObject>(root, &player);
+    enemy1.setLocalPosition({700.f, 400.f});
+    enemy1.originalTransform = Transform({700.f, 400.f}, 0, {1,1});
+    enemy1.addPatrolPoint({700.f, 400.f});
+    enemy1.addPatrolPoint({800,400});
+    enemy1.addPatrolPoint({800,500});
+    enemy1.addPatrolPoint({700,500});
+
+    auto& enemy2 = scene.createNewGameObject<EnemyObject>(root, &player);
+    enemy2.setLocalPosition({800.f, 100.f});
+    enemy2.addPatrolPoint({800.f, 400.f});
+    enemy2.addPatrolPoint({700.f, 50.f});
+    enemy2.addPatrolPoint({700.f, 400.f});
+
+    auto& enemy3 = scene.createNewGameObject<EnemyObject>(root, &player);
+   enemy3.setLocalPosition({400.f, 150.f});
+   auto& enemy4 = scene.createNewGameObject<EnemyObject>(root, &player);
+   enemy4.setLocalPosition({850.f, 150.f});
 
     scene.createNewGameObject<GameManager>();
 }

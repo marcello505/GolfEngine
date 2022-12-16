@@ -88,7 +88,7 @@ private:
     std::unique_ptr<SDL_Renderer, void(*)(SDL_Renderer*)> _renderer;
     std::vector<std::reference_wrapper<Drawable>> _drawables;
     std::map<std::string, std::unique_ptr<Texture>> _cachedTextures;
-    std::map<std::string, std::pair<size_t , std::unique_ptr<TTF_Font, void(*)(TTF_Font*)>>> _cachedFonts;
+    std::map<std::pair<std::string ,size_t >,  std::unique_ptr<TTF_Font, void(*)(TTF_Font*)>> _cachedFonts;
     std::optional<std::reference_wrapper<Camera>> _mainCamera;
     Vector2 camOffset;
 };

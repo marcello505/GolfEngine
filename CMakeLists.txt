@@ -71,10 +71,11 @@ set(SCENE_SOURCES
         src/Scene/Components/CircleCollider.cpp
         src/Scene/Components/SpriteComponent.cpp
         src/Scene/Particle.cpp
-        src/Scene/PathDrawable.cpp
         src/Scene/Components/TiledComponent.cpp
         src/Scene/RenderShape/TileMapRenderShape.cpp
-        src/Scene/GameObjects/Camera.cpp)
+        src/Scene/GameObjects/Camera.cpp
+        src/Scene/Graph.cpp
+        src/Scene/RenderShape/GraphRenderShape.cpp)
 
 set(CORE_SOURCES
         src/Core/GameLoop.cpp

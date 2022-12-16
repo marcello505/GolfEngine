@@ -45,11 +45,6 @@ void ProjectileScript::loadSnapshot(const ISnapshot& rawSnapshot) {
 }
 
 void ProjectileScript::onCollisionEnter(RigidBody& other) {
-    if(other.getParentGameObject()->tag == "enemy")
-    {
-        // TODO kill the enemy
-    }
-
     if(_ticksToLive < 30){
         _ticksToLive = 31;
     }
