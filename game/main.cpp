@@ -11,9 +11,18 @@
 // Game includes
 #include "scenes/PlayerTestScene.h"
 #include "scenes/SaveGameTestScene.h"
+#include "Utilities/IO.h"
+
+#define PROJECT_SETTINGS_SAVE_PATH "ProjectSettings.xml"
 
 
 int main(int argc, char* argv[]){
+    // Load project settings save file
+    if(GolfEngine::Utilities::IO::userDataFileExists(PROJECT_SETTINGS_SAVE_PATH)){
+        auto projectSettings = GolfEngine::Utilities::IO::loadSettings(PROJECT_SETTINGS_SAVE_PATH);
+        GolfEngine::Core::initProjectSettings(projectSettings);
+    }
+
     GameLoop gameLoop {};
     gameLoop.useDefaultServices();
     GolfEngine::Services::Render::getService()->setWindowTitle("Game name");
@@ -50,7 +59,7 @@ int main(int argc, char* argv[]){
     actionMap->addInputKeyToAction("loadGame", InputKey::Key_L);
 
     //Debug settings
-    GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS, true); //Render colliders
+//    GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS, true); //Render colliders
 
     //Scene initialization
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
@@ -62,5 +71,9 @@ int main(int argc, char* argv[]){
     GolfEngine::Services::Render::getService()->setScreenSize(1280, 720);
 
     gameLoop.start();
+
+    // Save project settings when closing the game
+    auto projectSettings = GolfEngine::Core::getProjectSettings();
+    GolfEngine::Utilities::IO::saveSettings(PROJECT_SETTINGS_SAVE_PATH, projectSettings);
     return 0;
 }

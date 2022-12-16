@@ -59,6 +59,9 @@ namespace GolfEngine::Core{
 
 
     // Global ProjectSettings
+    /// Resets the global instance of Settings
+    /// \param settings Reference to new instance to be set as the global project settings
+    void initProjectSettings(Settings& settings);
     /// Returns a reference to the global instance of Settings.
     /// \return A reference to the project-wide Settings instance.
     Settings& getProjectSettings();
