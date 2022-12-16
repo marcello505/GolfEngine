@@ -4,17 +4,21 @@
 
 #include "Pathfinding.h"
 
+#include <utility>
 #include <valarray>
 #include "Services/Abstracts/PathfindingService.h"
 #include "Services/Singletons/PathfindingSingleton.h"
 #include "Services/Singletons/RenderSingleton.h"
 
-Pathfinding::Pathfinding(GameObject *target, float recalculatePathTime) : _target{*target}, _fps{60},_recalculatePathTime{recalculatePathTime}  {
+Pathfinding::Pathfinding(GameObject *target, float recalculatePathTime) : _target{*target}, _fps{60}, _recalculatePathTime{recalculatePathTime}  {
 }
+
+
 
 void Pathfinding::onStart() {
     GolfEngine::Services::Pathfinding::getService()->addPathfinding(*this);
     _countedFrames = 120;
+
 }
 
 void Pathfinding::onUpdate() {
@@ -33,12 +37,13 @@ void Pathfinding::onRemove() {
             if(GolfEngine::Services::Render::hasService()){
                 auto* rs = GolfEngine::Services::Render::getService();
                 for (const auto& drawable : graph.drawables ) {
-                    rs->removeDrawable(*drawable.second);
+                    rs->addDrawable(*drawable.second);
                 }
                 pathIsRegistered = false;
             }
         }
     }
+
 }
 
 bool Pathfinding::getActive() {
@@ -47,6 +52,7 @@ bool Pathfinding::getActive() {
 
 void Pathfinding::setActive(bool active) {
     _active = active;
+
 }
 
 void Pathfinding::setParentGameObject(GameObject &gameObject) {
@@ -54,14 +60,6 @@ void Pathfinding::setParentGameObject(GameObject &gameObject) {
 }
 Vector2 Pathfinding::getParentGameObjectPosition() const  {
     return _gameObject->get().getWorldTransform().position;
-}
-
-std::unique_ptr<ISnapshot> Pathfinding::saveSnapshot() {
-    return {};
-}
-
-void Pathfinding::loadSnapshot(const ISnapshot& rawSnapshot) {
-    //Explicitly do nothing
 }
 
 Vector2 Pathfinding::getTargetPosition() {
@@ -76,7 +74,6 @@ void Pathfinding::setPath(const std::vector<Node>& path) {
 std::vector<Node> Pathfinding::getPath() {
     return _path;
 }
-
 //TODO ask if setTarget is needed because it is not possible yet
 void Pathfinding::setTarget(GameObject &target) {
    // _target = *target;
@@ -90,7 +87,7 @@ bool Pathfinding::needsNewPath() {
     return false;
 }
 
-Vector2 Pathfinding::getNewDirection()
+Vector2 Pathfinding::getPathDirection()
 {
     Vector2 newDir;
     Vector2 nextPos;
@@ -111,57 +108,71 @@ Vector2 Pathfinding::getNewDirection()
         nodeCounter ++;
     }
 
-    //set new direction
-    if(nextPos.x < getParentGameObjectPosition().x && nextPos.y == getParentGameObjectPosition().y){ // left
-        newDir = Vector2(-1.0f, 0.0f);
-    }else if(nextPos.x > getParentGameObjectPosition().x && nextPos.y == getParentGameObjectPosition().y){ // right
-        newDir = Vector2(1.0f, 0.0f);
-    }else if(nextPos.y < getParentGameObjectPosition().y && nextPos.x == getParentGameObjectPosition().x){ // up
-        newDir = Vector2(0.0f, -1.0f);
-    }else if(nextPos.y > getParentGameObjectPosition().y && nextPos.x == getParentGameObjectPosition().x){ // down
-        newDir = Vector2(0.0f, 1.0f);
-    }else if(nextPos.x < getParentGameObjectPosition().x && nextPos.y < getParentGameObjectPosition().y){ // leftUp
-        newDir = Vector2(-1.0f, -1.0f);
-    }else if(nextPos.x < getParentGameObjectPosition().x && nextPos.y > getParentGameObjectPosition().y){ // leftDown
-        newDir = Vector2(-1.0f, 1.0f);
-    }else if(nextPos.x > getParentGameObjectPosition().x && nextPos.y < getParentGameObjectPosition().y){ // rightUp
-        newDir = Vector2(1.0f, -1.0f);
-    }else if(nextPos.x > getParentGameObjectPosition().x && nextPos.y > getParentGameObjectPosition().y){ // rightDown
-        newDir = Vector2(1.0f, 1.0f);
-    }
-
-    return newDir.normalized();
+    return getDirection(nextPos);
 }
 
 void Pathfinding::displayGraph(bool displayPath, bool displayVisited) {
     if(GolfEngine::Services::Pathfinding::hasService()){
         auto& graph = GolfEngine::Services::Pathfinding::getService()->getGraph();
 
-        if(!pathIsRegistered){
-            if(GolfEngine::Services::Render::hasService()){
-                auto* rs = GolfEngine::Services::Render::getService();
-                for (const auto& drawable : graph.drawables ) {
-                    rs->addDrawable(*drawable.second);
-                }
-                pathIsRegistered = true;
+    if(!pathIsRegistered){
+        if(GolfEngine::Services::Render::hasService()){
+            auto* rs = GolfEngine::Services::Render::getService();
+            for (const auto& drawable : graph.drawables ) {
+                rs->addDrawable(*drawable.second);
             }
-        }
-
-        for (const auto& node : graph.nodes ) {
-            graph.drawables.at(node.id)->setColor(Color(255,255,255));
-            if(displayVisited && node.tag == NodeTags::Visited){
-                graph.drawables.at(node.id)->setColor(Color(0,0,255));
-            }
-        }
-        if(displayPath){
-            for (const auto& node : getPath()) {
-                graph.drawables.at(node.id)->setColor(Color(0,255,0));
-            }
+            pathIsRegistered = true;
         }
     }
+
+
+    for (const auto& node : graph.nodes ) {
+
+        graph.drawables.at(node.id)->setColor(Color(255,255,255));
+        if(displayVisited && node.tag == NodeTags::Visited){
+            graph.drawables.at(node.id)->setColor(Color(0,0,255));
+        }
+    }
+    if(displayPath){
+        for (const auto& node : getPath()) {
+            graph.drawables.at(node.id)->setColor(Color(0,255,0));
+        }
+    }
+
+}}
+
+std::unique_ptr<ISnapshot> Pathfinding::saveSnapshot() {
+    return {};
 }
 
+void Pathfinding::loadSnapshot(const ISnapshot& rawSnapshot) {
+    //Explicitly do nothing
+}
 
+Vector2 Pathfinding::getDirection(Vector2 target) {
+    Vector2 newDir;
+
+    //set new direction
+    if(target.x < getParentGameObjectPosition().x && target.y == getParentGameObjectPosition().y){ // left
+        newDir = Vector2(-1.0f, 0.0f);
+    }else if(target.x > getParentGameObjectPosition().x && target.y == getParentGameObjectPosition().y){ // right
+        newDir = Vector2(1.0f, 0.0f);
+    }else if(target.y < getParentGameObjectPosition().y && target.x == getParentGameObjectPosition().x){ // up
+        newDir = Vector2(0.0f, -1.0f);
+    }else if(target.y > getParentGameObjectPosition().y && target.x == getParentGameObjectPosition().x){ // down
+        newDir = Vector2(0.0f, 1.0f);
+    }else if(target.x < getParentGameObjectPosition().x && target.y < getParentGameObjectPosition().y){ // leftUp
+        newDir = Vector2(-1.0f, -1.0f);
+    }else if(target.x < getParentGameObjectPosition().x && target.y > getParentGameObjectPosition().y){ // leftDown
+        newDir = Vector2(-1.0f, 1.0f);
+    }else if(target.x > getParentGameObjectPosition().x && target.y < getParentGameObjectPosition().y){ // rightUp
+        newDir = Vector2(1.0f, -1.0f);
+    }else if(target.x > getParentGameObjectPosition().x && target.y > getParentGameObjectPosition().y){ // rightDown
+        newDir = Vector2(1.0f, 1.0f);
+    }
+
+    return newDir.normalized();;
+}
 
 
 

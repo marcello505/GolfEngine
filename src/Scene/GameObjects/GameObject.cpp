@@ -85,6 +85,9 @@ void GameObject::setLocalTransform(const Transform& rTransform) {
 void GameObject::setLocalPosition(const Vector2& rPosition) {
     _localTransform.position = rPosition;
 }
+void GameObject::setLocalRotation(const float& rotation) {
+    _localTransform.rotation = rotation;
+}
 
 Transform GameObject::getWorldTransform() const {
     Transform result {_localTransform};

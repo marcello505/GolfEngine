@@ -14,7 +14,8 @@ set(SCRIPT_SOURCES
         scripts/SaveGameTestScripts/ShotCounterScript.cpp
         scripts/PlayerShootScript.cpp
         scripts/PlayerCollisionScript.cpp
-        scripts/GameManagerScript.cpp)
+        scripts/GameManagerScript.cpp
+        scripts/EnemyMovementScript.cpp)
 
 set(GAMEOBJECTS_SOURCES
         gameobjects/PlayerObject.cpp     
@@ -22,7 +23,8 @@ set(GAMEOBJECTS_SOURCES
         gameobjects/Projectile.cpp
         gameobjects/ProjectilePoolObject.cpp
         gameobjects/TestBlock.cpp
-        gameobjects/GameManager.cpp)
+        gameobjects/GameManager.cpp
+        gameobjects/EnemyObject.cpp)
 
 set(SCENE_SOURCES
         scenes/PlayerTestScene.cpp
