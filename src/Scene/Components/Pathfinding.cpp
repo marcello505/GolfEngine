@@ -37,7 +37,7 @@ void Pathfinding::onRemove() {
             if(GolfEngine::Services::Render::hasService()){
                 auto* rs = GolfEngine::Services::Render::getService();
                 for (const auto& drawable : graph.drawables ) {
-                    rs->addDrawable(*drawable.second);
+                    rs->removeDrawable(*drawable.second);
                 }
                 pathIsRegistered = false;
             }
