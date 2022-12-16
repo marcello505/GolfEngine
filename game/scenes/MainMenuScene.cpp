@@ -5,10 +5,10 @@
 #include "MainMenuScene.h"
 #include "Services/Singletons/RenderSingleton.h"
 #include "Scene/Components/SpriteComponent.h"
-#include "../scripts/StartGameButtonScript.h"
-#include "../scripts/SelectLevelButtonScript.h"
-#include "../scripts/SettingsButtonScript.h"
-#include "../scripts/ExitButtonScript.h"
+#include "../scripts/MenuScripts/StartGameButtonScript.h"
+#include "../scripts/MenuScripts/SelectLevelButtonScript.h"
+#include "../scripts/MenuScripts/SettingsButtonScript.h"
+#include "../scripts/MenuScripts/ExitButtonScript.h"
 
 void MainMenuScene::build(Scene& scene) const {
 

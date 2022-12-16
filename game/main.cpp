@@ -12,7 +12,6 @@
 #include "scenes/SelectLevelScene.h"
 #include "scenes/SettingsScene.h"
 #include "Scene/Components/AudioSource.h"
-#include "scenes/KeyConfigScene.h"
 
 
 int main(int argc, char* argv[]){
@@ -57,8 +56,6 @@ int main(int argc, char* argv[]){
     sceneManager.addSceneFactory<MainMenuScene>("mainMenu");
     sceneManager.addSceneFactory<SelectLevelScene>("selectLevel");
     sceneManager.addSceneFactory<SettingsScene>("settings");
-    sceneManager.addSceneFactory<KeyConfigScene>("keyConfig");
-
     sceneManager.loadScene("mainMenu");
 
     gameLoop.start();

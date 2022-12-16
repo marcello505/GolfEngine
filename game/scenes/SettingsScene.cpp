@@ -7,13 +7,13 @@
 #include "Core/GameLoop.h"
 #include "Services/Singletons/RenderSingleton.h"
 #include "Scene/Components/SpriteComponent.h"
-#include "../scripts/BackButtonScript.h"
-#include "../scripts/MasterVolumeButtonScript.h"
+#include "../scripts/MenuScripts/BackButtonScript.h"
+#include "../scripts/MenuScripts/MasterVolumeButtonScript.h"
 #include "Services/Singletons/AudioSingleton.h"
-#include "../scripts/FullScreenButtonScript.h"
-#include "../scripts/SoundEffectVolumeButtonScript.h"
-#include "../scripts/MusicVolumeButtonScript.h"
-#include "../scripts/KeyConfigButtonScript.h"
+#include "../scripts/MenuScripts/FullScreenButtonScript.h"
+#include "../scripts/MenuScripts/SoundEffectVolumeButtonScript.h"
+#include "../scripts/MenuScripts/MusicVolumeButtonScript.h"
+#include "../scripts/MenuScripts/KeyConfigButtonScript.h"
 #include "Services/Singletons/InputSingleton.h"
 
 
@@ -217,7 +217,7 @@ void SettingsScene::build(Scene& scene) const {
     std::string playerLeftInputKey = inputService->getKeyString(actionMap->getActionKeys("playerLeft")[0]);
 
 
-    auto& playerLeftKeyText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 70,
+    auto& playerLeftKeyText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 63,
                                                                           rs->screenSizeHeight() / 2.3),0,
                                                             "playerLeft ( " + playerLeftInputKey + " )" ,20,
                                                             Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
@@ -229,7 +229,7 @@ void SettingsScene::build(Scene& scene) const {
     playerLeftKeyText.addComponent<TextUpdateScript>(playerLeftTextUpdateScript);
 
     auto& playerLeftKeyButton = scene.createNewGameObject<Button>(root, 120, 40,
-                                                                     Vector2(rs->screenSizeWidth() / 100 * 92,
+                                                                     Vector2(rs->screenSizeWidth() / 100 * 85,
                                                                              rs->screenSizeHeight() / 2.25),true,
                                                                      "clickButton", Vector2(0, 0), 0,
                                                                      "Change key", 20, Color(),
@@ -244,7 +244,7 @@ void SettingsScene::build(Scene& scene) const {
 
     std::string playerRightInputKey = inputService->getKeyString(actionMap->getActionKeys("playerRight")[0]);
 
-    auto& playerRightKeyText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 70,
+    auto& playerRightKeyText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 63,
                                                                             rs->screenSizeHeight() / 2.0),0,
                                                               "playerRight ( " + playerRightInputKey + " )" ,20,
                                                               Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
@@ -256,7 +256,7 @@ void SettingsScene::build(Scene& scene) const {
     playerRightKeyText.addComponent<TextUpdateScript>(playerRightTextUpdateScript);
 
     auto& playerRightKeyButton = scene.createNewGameObject<Button>(root, 120, 40,
-                                                                  Vector2(rs->screenSizeWidth() / 100 * 92,
+                                                                  Vector2(rs->screenSizeWidth() / 100 * 85,
                                                                           rs->screenSizeHeight() / 1.95),true,
                                                                   "clickButton", Vector2(0, 0), 0,
                                                                   "Change key", 20, Color(),
@@ -273,7 +273,7 @@ void SettingsScene::build(Scene& scene) const {
 
     std::string playerUpInputKey = inputService->getKeyString(actionMap->getActionKeys("playerUp")[0]);
 
-    auto& playerUpKeyText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 70,
+    auto& playerUpKeyText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 63,
                                                                              rs->screenSizeHeight() / 1.77),0,
                                                             "playerUp ( " + playerUpInputKey + " )" ,20,
                                                                Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
@@ -286,7 +286,7 @@ void SettingsScene::build(Scene& scene) const {
 
 
     auto& playerUpKeyButton = scene.createNewGameObject<Button>(root, 120, 40,
-                                                                   Vector2(rs->screenSizeWidth() / 100 * 92,
+                                                                   Vector2(rs->screenSizeWidth() / 100 * 85,
                                                                            rs->screenSizeHeight() / 1.73),true,
                                                                    "clickButton", Vector2(0, 0), 0,
                                                                    "Change key", 20, Color(),
@@ -301,7 +301,7 @@ void SettingsScene::build(Scene& scene) const {
 
     std::string playerDownInputKey = inputService->getKeyString(actionMap->getActionKeys("playerDown")[0]);
 
-    auto& playerDownKeyText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 70,
+    auto& playerDownKeyText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 63,
                                                                           rs->screenSizeHeight() / 1.58),0,
                                                               "playerDown ( " + playerDownInputKey + " )"  ,20,
                                                             Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
@@ -313,7 +313,7 @@ void SettingsScene::build(Scene& scene) const {
     playerDownKeyText.addComponent<TextUpdateScript>(playerDownTextUpdateScript);
 
     auto& playerDownKeyButton = scene.createNewGameObject<Button>(root, 120, 40,
-                                                                Vector2(rs->screenSizeWidth() / 100 * 92,
+                                                                Vector2(rs->screenSizeWidth() / 100 * 85,
                                                                         rs->screenSizeHeight() / 1.55),true,
                                                                 "clickButton", Vector2(0, 0), 0,
                                                                 "Change key", 20, Color(),
@@ -328,7 +328,7 @@ void SettingsScene::build(Scene& scene) const {
 
     std::string playerShootInputKey = inputService->getKeyString(actionMap->getActionKeys("playerShoot")[0]);
 
-    auto& playerShootKeyText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 70,
+    auto& playerShootKeyText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 63,
                                                                             rs->screenSizeHeight() / 1.43),0,
                                                                "playerShoot ( " + playerShootInputKey + " )"  ,20,
                                                               Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
@@ -340,7 +340,7 @@ void SettingsScene::build(Scene& scene) const {
     playerShootKeyText.addComponent<TextUpdateScript>(playerShootTextUpdateScript);
 
     auto& playerShootKeyButton = scene.createNewGameObject<Button>(root, 120, 40,
-                                                                  Vector2(rs->screenSizeWidth() / 100 * 92,
+                                                                  Vector2(rs->screenSizeWidth() / 100 * 85,
                                                                           rs->screenSizeHeight() / 1.40),true,
                                                                   "clickButton", Vector2(0, 0), 0,
                                                                   "Change key", 20, Color(),

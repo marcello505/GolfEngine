@@ -21,32 +21,39 @@ std::string SDLInputService::getKeyString(InputKey key){
 InputKey SDLInputService::getKeyPressed()
 {
     SDL_Event event;
+    InputKey key;
 
     while (SDL_PollEvent(&event)) //check for pollevents
     {
         if (event.type == SDL_KEYDOWN) // if key is pressed
         {
             setKeyPressed(true);
-            return _inputBinds.find(SDL_GetKeyName(event.key.keysym.sym))->second; // get key
+            key = _inputBinds.find(SDL_GetKeyName(event.key.keysym.sym))->second; // get key
+        }
+        if (event.type == SDL_KEYUP) // if key is pressed{
+        {
+            return key;
         }
         if(event.type == SDL_MOUSEBUTTONDOWN){
             setKeyPressed(true);
             switch(event.button.button){
                 case 1: // left mouse button
                     return Mouse_Left; // handle action for this button
-                    break;
                 case 2: // middle mouse button
                     return Mouse_Middle; // handle action for this button
-                    break;
                 case 3: // right mouse button
                     return Mouse_Right;
                      // handle action for this button
-                    break;
                 default: // when no button is pressed but mouse moved
                     break;
-            }
+           }
+        }
+        if (event.type == SDL_MOUSEBUTTONUP) // if mouse button is released
+        {
+            SDLInputService::handleMouseEvent(event, false); // handle mouse event
         }
     }
+    return key;
 }
 
 // handle input via SDL

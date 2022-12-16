@@ -5,8 +5,8 @@
 #include "SelectLevelScene.h"
 #include "Services/Singletons/RenderSingleton.h"
 #include "Scene/Components/SpriteComponent.h"
-#include "../scripts/StartGameButtonScript.h"
-#include "../scripts/BackButtonScript.h"
+#include "../scripts/MenuScripts/StartGameButtonScript.h"
+#include "../scripts/MenuScripts/BackButtonScript.h"
 
 void SelectLevelScene::build(Scene& scene) const {
 

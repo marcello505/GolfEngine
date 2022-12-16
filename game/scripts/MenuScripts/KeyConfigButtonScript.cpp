@@ -6,20 +6,20 @@
 #include "Core/GameLoop.h"
 #include "Scene/GameObjects/UIObject/Button.h"
 #include "Services/Singletons/InputSingleton.h"
+#include "Services/Singletons/RenderSingleton.h"
 
 void KeyConfigButtonScript::onUpdate() {
 
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
     auto* inputService = GolfEngine::Services::Input::getService();
     auto* actionMap = ActionMap::getActionMap();
+    auto* rs = GolfEngine::Services::Render::getService();
 
     auto& btn = getParentGameObject<Button>();
 
     if(btn.isClicked()){
-        btn._text.value ="reading..";
         InputKey newKey;
-        while (!(inputService->pressedKey()))
-        {
+        while(!inputService->pressedKey()){
             newKey = inputService->getKeyPressed();
         }
         inputService->setKeyPressed(false);

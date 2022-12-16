@@ -6,6 +6,7 @@
 #define SPC_PROJECT_RENDERSERVICE_H
 
 #include "../../Scene/Components/Drawable.h"
+#include <SDL.h>
 
 class RenderService {
 public:
