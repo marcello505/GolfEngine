@@ -23,4 +23,17 @@ void EnemyCollisionScript::onCollisionEnter(RigidBody &other) {
     }
 }
 
+std::unique_ptr<ISnapshot> EnemyCollisionScript::saveSnapshot() {
+    auto snapshot = std::make_unique<Snapshot>();
+
+    snapshot->death = _death;
+    return snapshot;
+}
+
+void EnemyCollisionScript::loadSnapshot(const ISnapshot& rawSnapshot) {
+    auto& snapshot = (const Snapshot&)rawSnapshot;
+
+    _death = snapshot.death;
+}
+
 

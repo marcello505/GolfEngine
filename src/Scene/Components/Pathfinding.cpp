@@ -16,12 +16,11 @@ Pathfinding::Pathfinding(GameObject *target, float recalculatePathTime) : _targe
 
 void Pathfinding::onStart() {
     GolfEngine::Services::Pathfinding::getService()->addPathfinding(*this);
-    _countedFrames = 120;
-
+    _countedFrames = _fps * _recalculatePathTime;
 }
 
 void Pathfinding::onUpdate() {
-    _countedFrames ++;
+    _countedFrames++;
 }
 
 void Pathfinding::onRemove() {
