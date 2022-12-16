@@ -6,11 +6,21 @@
 #include "Scene/Components/SpriteComponent.h"
 #include "Scene/Components/Animator.h"
 #include "ZombieScript.h"
+#include "Scene/Components/BehaviourScript.h"
+#include "Input/ActionMap.h"
+
+class TestScript : public BehaviourScript {
+    void onUpdate() override{
+        if(ActionMap::getActionMap()->isJustPressed("test"))
+            _gameObject->get().setActive(!_gameObject->get().getActive());
+    }
+};
 
 void SceneFactory::build(Scene& scene) const {
     auto& player = scene.createNewGameObject<GameObject>();
     player.addComponent<SpriteComponent>(R"(../../../validation/US09_Animations/res/player.png)");
-    player.setWorldTransform(Transform(Vector2(200,200), 0, Vector2(0.5f,0.5f)));
+    player.addComponent<TestScript>();
+    player.setWorldTransform(Transform(Vector2(200,200), 0, Vector2(1,1)));
 
     auto& enemy = scene.createNewGameObject<GameObject>();
     enemy.addComponent<ZombieScript>();
@@ -20,5 +30,5 @@ void SceneFactory::build(Scene& scene) const {
     animator.addAnimation("moving", 26, 42, 15.0f);
     animator.addReturnTransition("attack", "idle");
     animator.play("idle", true);
-    enemy.setWorldTransform(Transform(Vector2(400, 200), 0, Vector2(0.1f, 0.1f)));
+    enemy.setWorldTransform(Transform(Vector2(400, 200), 0, Vector2(1.0f, 1.0f)));
 }

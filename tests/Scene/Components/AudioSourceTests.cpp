@@ -61,8 +61,10 @@ TEST_SUITE("Components/AudioSource"){
 
     TEST_CASE("onStart() preloads the audio"){
         //Arrange
-        GolfEngine::Scene::Components::AudioSource musicSource {DUMMY_AUDIO_PATH, true};
-        GolfEngine::Scene::Components::AudioSource sfxSource {DUMMY_AUDIO_PATH, false};
+        GolfEngine::Scene::Components::AudioSource musicSource {true};
+        musicSource.addSound(DUMMY_AUDIO_PATH, DUMMY_AUDIO_PATH);
+        GolfEngine::Scene::Components::AudioSource sfxSource {false};
+        sfxSource.addSound(DUMMY_AUDIO_PATH, DUMMY_AUDIO_PATH);
 
         SUBCASE("Sfx"){
             sfxSource.onStart();
@@ -77,15 +79,17 @@ TEST_SUITE("Components/AudioSource"){
 
     TEST_CASE("play() calls the corresponding play method in AudioService"){
         //Arrange
-        GolfEngine::Scene::Components::AudioSource musicSource {DUMMY_AUDIO_PATH, true};
-        GolfEngine::Scene::Components::AudioSource sfxSource {DUMMY_AUDIO_PATH, false};
+        GolfEngine::Scene::Components::AudioSource musicSource {true};
+        musicSource.addSound(DUMMY_AUDIO_PATH, DUMMY_AUDIO_PATH);
+        GolfEngine::Scene::Components::AudioSource sfxSource {false};
+        sfxSource.addSound(DUMMY_AUDIO_PATH, DUMMY_AUDIO_PATH);
 
         SUBCASE("Sfx"){
-            sfxSource.play();
+            sfxSource.play(DUMMY_AUDIO_PATH);
             CHECK(audioService->calledPlaySfx);
         }
         SUBCASE("Music"){
-            musicSource.play();
+            musicSource.play(DUMMY_AUDIO_PATH);
             CHECK(audioService->calledPlayMusic);
         }
         audioService->resetCalledFields();
@@ -93,15 +97,17 @@ TEST_SUITE("Components/AudioSource"){
 
     TEST_CASE("stop() calls the corresponding stop method in AudioService"){
         //Arrange
-        GolfEngine::Scene::Components::AudioSource musicSource {DUMMY_AUDIO_PATH, true};
-        GolfEngine::Scene::Components::AudioSource sfxSource {DUMMY_AUDIO_PATH, false};
+        GolfEngine::Scene::Components::AudioSource musicSource {true};
+        musicSource.addSound(DUMMY_AUDIO_PATH, DUMMY_AUDIO_PATH);
+        GolfEngine::Scene::Components::AudioSource sfxSource {false};
+        sfxSource.addSound(DUMMY_AUDIO_PATH, DUMMY_AUDIO_PATH);
 
         SUBCASE("Sfx"){
-            sfxSource.stop();
+            sfxSource.stop(DUMMY_AUDIO_PATH);
             CHECK(audioService->calledStopSfx);
         }
         SUBCASE("Music"){
-            musicSource.stop();
+            musicSource.stop(DUMMY_AUDIO_PATH);
             CHECK(audioService->calledStopMusic);
         }
         audioService->resetCalledFields();
@@ -109,8 +115,10 @@ TEST_SUITE("Components/AudioSource"){
 
     TEST_CASE("onStart() plays the audio when PlayOnAwake is true"){
         //Arrange
-        GolfEngine::Scene::Components::AudioSource musicSource {DUMMY_AUDIO_PATH, true, true};
-        GolfEngine::Scene::Components::AudioSource sfxSource {DUMMY_AUDIO_PATH, false, true};
+        GolfEngine::Scene::Components::AudioSource musicSource {true, true};
+        musicSource.addSound(DUMMY_AUDIO_PATH, DUMMY_AUDIO_PATH);
+        GolfEngine::Scene::Components::AudioSource sfxSource {false, true};
+        sfxSource.addSound(DUMMY_AUDIO_PATH, DUMMY_AUDIO_PATH);
 
         SUBCASE("Sfx"){
             sfxSource.onStart();
@@ -125,14 +133,16 @@ TEST_SUITE("Components/AudioSource"){
 
     TEST_CASE("when inactive, none of the AudioService methods get called"){
         //Arrange
-        GolfEngine::Scene::Components::AudioSource musicSource {DUMMY_AUDIO_PATH, true};
-        GolfEngine::Scene::Components::AudioSource sfxSource {DUMMY_AUDIO_PATH, false};
+        GolfEngine::Scene::Components::AudioSource musicSource {true, true};
+        musicSource.addSound(DUMMY_AUDIO_PATH, DUMMY_AUDIO_PATH);
+        GolfEngine::Scene::Components::AudioSource sfxSource {false, true};
+        sfxSource.addSound(DUMMY_AUDIO_PATH, DUMMY_AUDIO_PATH);
 
         SUBCASE("Sfx"){
             sfxSource.setActive(false);
             sfxSource.onStart();
-            sfxSource.play();
-            sfxSource.stop();
+            sfxSource.play(DUMMY_AUDIO_PATH);
+            sfxSource.stop(DUMMY_AUDIO_PATH);
             CHECK_FALSE(sfxSource.getActive());
             CHECK_FALSE(audioService->calledPlaySfx);
             CHECK_FALSE(audioService->calledStopSfx);
@@ -141,8 +151,8 @@ TEST_SUITE("Components/AudioSource"){
         SUBCASE("Music"){
             musicSource.setActive(false);
             musicSource.onStart();
-            musicSource.play();
-            musicSource.stop();
+            musicSource.play(DUMMY_AUDIO_PATH);
+            musicSource.stop(DUMMY_AUDIO_PATH);
             CHECK_FALSE(musicSource.getActive());
             CHECK_FALSE(audioService->calledPlayMusic);
             CHECK_FALSE(audioService->calledStopMusic);

@@ -15,6 +15,7 @@ public:
     /// \param aspectHeight height of the camera display
     /// \param backgroundColor color used on the background where no sprites are present
     Camera(float aspectWidth, float aspectHeight, Color backgroundColor = Color{50, 50, 50, 255});
+    explicit Camera(Color backgroundColor = Color{50, 50, 50, 255});
 
     /// Sets the main camera in the render service
     /// \param camera reference to the camera to be set
@@ -23,6 +24,16 @@ public:
     /// Returns a reference to the current main camera if there is one present
     /// \return reference to current main camera
     static std::optional<std::reference_wrapper<Camera>> getMainCamera();
+
+    /// Converts screen space position to a world space position
+    /// \param screenPos position to be converted
+    /// \return world position
+    static Vector2 screenToWorldSpace(Vector2 screenPos);
+
+    /// Converts world space position to a screen space position
+    /// \param worldPos position to be converted
+    /// \return screen position
+    static Vector2 worldToScreenSpace(Vector2 worldPos);
 
     // Getters
     [[nodiscard]] float aspectWidth() const;

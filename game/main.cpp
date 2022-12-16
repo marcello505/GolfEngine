@@ -3,6 +3,7 @@
 #include "Core/GameLoop.h"
 #include "Core/Settings.h"
 #include "Services/Singletons/RenderSingleton.h"
+#include <SDL.h>
 
 //TODO find something to fix this
 #include <SDL.h>
@@ -29,6 +30,10 @@ int main(int argc, char* argv[]){
     actionMap->addInputKeyToAction("playerDown", InputKey::Key_S);
     actionMap->addAction("playerShoot");
     actionMap->addInputKeyToAction("playerShoot", InputKey::Mouse_Left);
+    actionMap->addAction("playerReload");
+    actionMap->addInputKeyToAction("playerReload", InputKey::Key_R);
+    actionMap->addAction("restart");
+    actionMap->addInputKeyToAction("restart", InputKey::Key_Backspace);
 
     //Set up recording controls
     actionMap->addAction("startRecordingReplay");
@@ -51,7 +56,7 @@ int main(int argc, char* argv[]){
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
     sceneManager.addScene<PlayerTestScene>("playerTest");
     sceneManager.addScene<SaveGameTestScene>("saveGameTest");
-    sceneManager.loadScene("saveGameTest");
+    sceneManager.loadScene("playerTest");
 
     //Render initialization
     GolfEngine::Services::Render::getService()->setScreenSize(1280, 720);

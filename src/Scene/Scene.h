@@ -24,6 +24,8 @@ private:
 
     void saveCurrentState(std::vector<std::unique_ptr<ISnapshot>>& list);
     void loadCurrentState(std::vector<std::unique_ptr<ISnapshot>>& list);
+
+    std::map<int, std::vector<std::unique_ptr<ISnapshot>>> _saveStates;
 protected:
     std::vector<std::unique_ptr<GameObject>> _gameObjects;
     std::unique_ptr<std::reference_wrapper<GameObject>> _rootGameObject;
@@ -42,12 +44,25 @@ public:
     void playReplay();
     void stopReplay();
 
+    void saveCurrentSceneState(int slot);
+    void loadCurrentSceneState(int slot);
+
     virtual void startScene();
 
     /// Executes all the steps needed to handle recordings, wether it is playing a recording or making one.
     /// Should be executed before `updateScene()`
     void updateReplay();
     virtual void updateScene();
+
+    /// Retrieves a gameObject with the corresponding tag
+    /// \param tag to be searched with
+    /// \return a reference to a gameObject
+    GameObject& getGameObjectWithTag(const std::string& tag) const;
+
+    /// Retrieves a list of gameObjects with the corresponding tag
+    /// \param tag to be searched with
+    /// \return List of gameObjects reference_wrappers
+    std::vector<std::reference_wrapper<GameObject>> getGameObjectsWithTag(const std::string& tag);
 
     /// Creates a new GameObject
     /// \tparam GO Type of GameObject to be created

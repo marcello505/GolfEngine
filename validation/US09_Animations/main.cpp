@@ -10,6 +10,9 @@ int main(int argc, char* argv[]){
     GameLoop gameLoop{};
     gameLoop.useDefaultServices();
 
+    ActionMap::getActionMap()->addAction("test");
+    ActionMap::getActionMap()->addInputKeyToAction("test", Key_T);
+
     GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
     GolfEngine::SceneManager::GetSceneManager().loadScene("main");
 

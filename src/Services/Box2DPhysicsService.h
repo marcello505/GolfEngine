@@ -49,6 +49,8 @@ namespace GolfEngine::Services::Physics{
         void setLinearVelocity(RigidBody* pRigidBody, const Vector2& velocity) override;
         void setAngularVelocity(RigidBody* pRigidBody, float omega) override;
 
+        std::vector<Collider*> getStaticColliders() override;
+
         // Methods for testing
         int getBodyCount() const;
         int getFixtureCount() const;

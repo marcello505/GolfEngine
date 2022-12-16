@@ -12,6 +12,9 @@ RenderShape& RectDrawable::getRenderShape() {
     _renderShape.applyTransform(_transform);
     return _renderShape;
 }
+void RectDrawable::setColor(Color color){
+    _renderShape.setColor(color);
+}
 
 void RectDrawable::rotate(float amount) {
     _transform.rotation += amount;

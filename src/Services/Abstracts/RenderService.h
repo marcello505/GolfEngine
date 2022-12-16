@@ -13,9 +13,15 @@ public:
     virtual void setWindowTitle(const std::string& title) = 0;
     virtual void addDrawable(Drawable& drawable) = 0;
     virtual void removeDrawable(Drawable& drawable) = 0;
+    virtual bool isRegistered(Drawable& drawable) = 0;
     virtual void render() = 0;
     virtual void setScreenSize(int width, int height) = 0;
+    virtual int getScreenSizeWidth() const = 0;
+    virtual int getScreenSizeHeight() const = 0;
+    virtual Vector2 getCameraOffset() const = 0;
     virtual void setFullScreen(bool fullScreen) = 0;
+    [[nodiscard]] virtual int screenSizeHeight() const = 0;
+    [[nodiscard]] virtual int screenSizeWidth() const = 0;
     [[nodiscard]] virtual std::optional<std::reference_wrapper<Camera>> getMainCamera() const = 0;
     virtual void setMainCamera(Camera& camera) = 0;
 

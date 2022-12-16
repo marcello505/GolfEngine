@@ -54,6 +54,10 @@ namespace GameLoopTests{
         void setFullScreen(bool fullScreen) override {};
         std::optional<std::reference_wrapper<Camera>> getMainCamera() const override { return {};}
         void setMainCamera(Camera& camera) override {}
+        bool isRegistered(Drawable& drawable) override {return false;}
+        int getScreenSizeWidth() const override {return 0;}
+        int getScreenSizeHeight() const override {return 0;}
+        Vector2 getCameraOffset() const override {return Vector2();}
     };
 
     class DummyPhysicsService : public PhysicsService{
