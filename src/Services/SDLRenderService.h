@@ -6,23 +6,26 @@
 #define SPC_PROJECT_SDLRENDERSERVICE_H
 
 #include "Abstracts/RenderService.h"
-#include <SDL.h>
 #include <map>
 #include <vector>
 #include <memory>
 #include <string>
-#include <SDL_ttf.h>
 #include "../Scene/RenderShape/RectRenderShape.h"
 #include "../Scene/RenderShape/LineRenderShape.h"
 #include "../Scene/RenderShape/SpriteRenderShape.h"
 #include "../Scene/RenderShape/CircleRenderShape.h"
 #include "../Scene/RenderShape/ButtonRenderShape.h"
-#include "Render/Texture.h"
 #include "../Scene/RenderShape/TextRenderShape.h"
 #include "../Scene/RenderShape/TileMapRenderShape.h"
 #include "Scene/GameObjects/Camera.h"
 
+
 namespace GolfEngine::Services::Render {
+// Forward declaration
+class Window_Wrapper;
+class Renderer_Wrapper;
+class Font_Wrapper;
+class Texture_Wrapper;
 
 class SDLRenderService : public RenderService {
 public:
@@ -31,8 +34,8 @@ public:
     // RAII
     SDLRenderService(SDLRenderService &sdlRenderService) = delete;
     SDLRenderService &operator=(SDLRenderService *other) = delete;
-    SDLRenderService(SDLRenderService &&other) noexcept;
-    SDLRenderService &operator=(SDLRenderService &&other) noexcept;
+    SDLRenderService(SDLRenderService &&other) = default;
+    SDLRenderService &operator=(SDLRenderService &&other) = default;
 
     /// Sets the title of the window
     /// \param title new title
@@ -77,18 +80,18 @@ private:
     void renderButton(ButtonRenderShape &renderShape);
     void renderTileMap(TileMapRenderShape &renderShape);
 
-    Texture& loadSprite(const std::string& path);
+    Texture_Wrapper& loadSprite(const std::string& path);
     void renderSprite(SpriteRenderShape &renderShape);
-    TTF_Font& loadFont(const std::string &path, size_t fontSize);
+    Font_Wrapper& loadFont(const std::string &path, size_t fontSize);
 
     int _screenSizeWidth;
     int _screenSizeHeight;
     bool _fullScreen;
-    std::unique_ptr<SDL_Window, void(*)(SDL_Window*)> _window;
-    std::unique_ptr<SDL_Renderer, void(*)(SDL_Renderer*)> _renderer;
+    std::unique_ptr<Window_Wrapper, void(*)(Window_Wrapper*)> _window;
+    std::unique_ptr<Renderer_Wrapper, void(*)(Renderer_Wrapper*)> _renderer;
     std::vector<std::reference_wrapper<Drawable>> _drawables;
-    std::map<std::string, std::unique_ptr<Texture>> _cachedTextures;
-    std::map<std::string, std::pair<size_t , std::unique_ptr<TTF_Font, void(*)(TTF_Font*)>>> _cachedFonts;
+    std::map<std::string, std::unique_ptr<Texture_Wrapper, void(*)(Texture_Wrapper*)>> _cachedTextures;
+    std::map<std::string, std::pair<size_t , std::unique_ptr<Font_Wrapper, void(*)(Font_Wrapper*)>>> _cachedFonts;
     std::optional<std::reference_wrapper<Camera>> _mainCamera;
     Vector2 camOffset;
 };

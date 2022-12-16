@@ -3,10 +3,9 @@
 #include "Core/GameLoop.h"
 #include "Core/Settings.h"
 #include "Services/Singletons/RenderSingleton.h"
-#include <SDL.h>
 
 //TODO find something to fix this
-#include <SDL.h>
+//#include <SDL.h>
 
 // Game includes
 #include "scenes/PlayerTestScene.h"

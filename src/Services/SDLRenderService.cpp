@@ -3,14 +3,60 @@
 //
 
 #include "SDLRenderService.h"
-#include "Scene/RenderShape/ButtonRenderShape.h"
 #include <cmath>
 #include <iostream>
 #include <algorithm>
+#include <SDL.h>
+#include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <optional>
 
 namespace GolfEngine::Services::Render {
+
+    class Window_Wrapper{
+    public:
+        explicit Window_Wrapper(SDL_Window* w) : window{w}{}
+        SDL_Window* window;
+    };
+
+    void SDL_DestroyWindowWrapper(Window_Wrapper* window){
+        SDL_DestroyWindow(window->window);
+        delete window;
+    }
+
+    class Renderer_Wrapper{
+    public:
+        explicit Renderer_Wrapper(SDL_Renderer* r) : renderer{r}{}
+        SDL_Renderer* renderer;
+    };
+
+    void SDL_DestroyRendererWrapper(Renderer_Wrapper* renderer){
+        SDL_DestroyRenderer(renderer->renderer);
+        delete renderer;
+    }
+
+    class Font_Wrapper{
+    public:
+        explicit Font_Wrapper(TTF_Font* f) : font{f}{}
+        TTF_Font* font;
+    };
+
+    void TTF_CloseFontWrapper(Font_Wrapper* font){
+        TTF_CloseFont(font->font);
+        delete font;
+    }
+
+    class Texture_Wrapper{
+    public:
+        explicit Texture_Wrapper(SDL_Texture* t, int w, int h) : texture{t}, width{w}, height{h}{}
+        SDL_Texture* texture;
+        int width, height;
+    };
+
+    void SDL_DestroyTextureWrapper(Texture_Wrapper* texture){
+        SDL_DestroyTexture(texture->texture);
+        delete texture;
+    }
 
     SDLRenderService::SDLRenderService()
             : _screenSizeHeight{480}, _screenSizeWidth{640}, _window{nullptr, nullptr}, _renderer{nullptr, nullptr}, _fullScreen{false} {
@@ -38,19 +84,19 @@ namespace GolfEngine::Services::Render {
         }
 
         // Wrap window and renderer in a unique pointer
-        std::unique_ptr<SDL_Window, void(*)(SDL_Window*)> window_wrapper (window, SDL_DestroyWindow);
+        std::unique_ptr<Window_Wrapper, void(*)(Window_Wrapper*)> window_wrapper (new Window_Wrapper{window}, SDL_DestroyWindowWrapper);
         _window = std::move(window_wrapper);
-        std::unique_ptr<SDL_Renderer, void(*)(SDL_Renderer*)> renderer_wrapper (renderer, SDL_DestroyRenderer);
+        std::unique_ptr<Renderer_Wrapper, void(*)(Renderer_Wrapper*)> renderer_wrapper (new Renderer_Wrapper{renderer}, SDL_DestroyRendererWrapper);
         _renderer = std::move(renderer_wrapper);
 
         // Set some basic window properties
-        SDL_SetWindowTitle(_window.get(), "Hello World");
+        SDL_SetWindowTitle(_window->window, "Hello World");
         SDL_ShowCursor(1); // 0 is disable cursor, 1 is enable
         SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY,
                     "0"); // Increases quality with the scaling of textures, 0 nothing, 1 linear filtering, 2 anisotropic filtering
 
         //Makes alpha blending possible(used for opacity)
-        SDL_SetRenderDrawBlendMode(_renderer.get(), SDL_BLENDMODE_BLEND);
+        SDL_SetRenderDrawBlendMode(_renderer->renderer, SDL_BLENDMODE_BLEND);
     }
 
     void SDLRenderService::addDrawable(Drawable& drawable) {
@@ -65,7 +111,7 @@ namespace GolfEngine::Services::Render {
 
     void SDLRenderService::render() {
         // Clear screen
-        SDL_RenderClear(_renderer.get());
+        SDL_RenderClear(_renderer->renderer);
 
         if(_mainCamera){
             camOffset.x = _mainCamera->get().getWorldTransform().position.x - (int)(_screenSizeWidth/2);
@@ -109,19 +155,19 @@ namespace GolfEngine::Services::Render {
         // Set the background color
         if(_mainCamera){
             Color bgColor {_mainCamera->get().backgroundColor()};
-            SDL_SetRenderDrawColor(_renderer.get(), bgColor.r8, bgColor.g8, bgColor.b8, bgColor.a);
+            SDL_SetRenderDrawColor(_renderer->renderer, bgColor.r8, bgColor.g8, bgColor.b8, bgColor.a);
         }
         else
-            SDL_SetRenderDrawColor(_renderer.get(), 50, 50, 50, 255);
+            SDL_SetRenderDrawColor(_renderer->renderer, 50, 50, 50, 255);
 
         // Displays all the updates made in the back buffer
-        SDL_RenderPresent(_renderer.get());
+        SDL_RenderPresent(_renderer->renderer);
     }
 
     void SDLRenderService::setScreenSize(int width, int height) {
         _screenSizeWidth = width;
         _screenSizeHeight = height;
-        SDL_SetWindowSize(_window.get(), width, height);
+        SDL_SetWindowSize(_window->window, width, height);
         _screenSizeHeight = height;
         _screenSizeWidth = width;
     }
@@ -129,7 +175,7 @@ namespace GolfEngine::Services::Render {
     void SDLRenderService::setFullScreen(bool fullScreen) {
         // Set window flags fullscreen or 0 for no fullscreen
         if (_fullScreen != fullScreen)
-            SDL_SetWindowFullscreen(_window.get(), fullScreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
+            SDL_SetWindowFullscreen(_window->window, fullScreen ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
         _fullScreen = fullScreen;
     }
 
@@ -149,7 +195,7 @@ namespace GolfEngine::Services::Render {
     void SDLRenderService::renderButton(ButtonRenderShape &renderShape) {
         renderRect(*renderShape._rectRenderShape);
 
-        std::optional<std::reference_wrapper<TTF_Font>> f;
+        std::optional<std::reference_wrapper<Font_Wrapper>> f;
 
         try{
             f = loadFont(renderShape._textRenderShape->filePath(), renderShape._textRenderShape->fontSize());
@@ -159,7 +205,7 @@ namespace GolfEngine::Services::Render {
         }
 
         // Get direct reference to texture for easy access
-        auto& font {f->get()};
+        auto& font {*f->get().font};
 
         SDL_Surface* surface = TTF_RenderText_Solid(&font, renderShape._textRenderShape->text().c_str(),
                                                     {renderShape._textRenderShape->color().r8,
@@ -189,7 +235,7 @@ namespace GolfEngine::Services::Render {
         dstRect.h = surface->h;
 
         // Create texture from surface
-        auto texture = SDL_CreateTextureFromSurface(_renderer.get(), surface);
+        auto texture = SDL_CreateTextureFromSurface(_renderer->renderer, surface);
         // Free surface memory
         SDL_FreeSurface(surface);
         if(texture == nullptr){
@@ -198,7 +244,7 @@ namespace GolfEngine::Services::Render {
             return;
         }
 
-        SDL_RenderCopyEx(_renderer.get(), texture, nullptr, &dstRect,
+        SDL_RenderCopyEx(_renderer->renderer, texture, nullptr, &dstRect,
                          renderShape._textRenderShape->rotation(), nullptr, SDL_FLIP_NONE);
 
         SDL_DestroyTexture(texture);
@@ -207,7 +253,7 @@ namespace GolfEngine::Services::Render {
 
     void SDLRenderService::renderRect(RectRenderShape& renderShape) {
         // Set color
-        SDL_SetRenderDrawColor(_renderer.get(), renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, renderShape.color().a);
+        SDL_SetRenderDrawColor(_renderer->renderer, renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, renderShape.color().a);
 
         float xPivot;
         float yPivot;
@@ -255,16 +301,16 @@ namespace GolfEngine::Services::Render {
 
         // Draw the lines to make the rectangle
         //First to second
-        SDL_RenderDrawLine(_renderer.get(), (int) points.at(0).first, (int) points.at(0).second, (int) points.at(1).first,
+        SDL_RenderDrawLine(_renderer->renderer, (int) points.at(0).first, (int) points.at(0).second, (int) points.at(1).first,
                            (int) points.at(1).second);
         //First to third
-        SDL_RenderDrawLine(_renderer.get(), (int) points.at(0).first, (int) points.at(0).second, (int) points.at(2).first,
+        SDL_RenderDrawLine(_renderer->renderer, (int) points.at(0).first, (int) points.at(0).second, (int) points.at(2).first,
                            (int) points.at(2).second);
         //Second to Last
-        SDL_RenderDrawLine(_renderer.get(), (int) points.at(1).first, (int) points.at(1).second, (int) points.at(3).first,
+        SDL_RenderDrawLine(_renderer->renderer, (int) points.at(1).first, (int) points.at(1).second, (int) points.at(3).first,
                            (int) points.at(3).second);
         //Third to Last
-        SDL_RenderDrawLine(_renderer.get(), (int) points.at(2).first, (int) points.at(2).second, (int) points.at(3).first,
+        SDL_RenderDrawLine(_renderer->renderer, (int) points.at(2).first, (int) points.at(2).second, (int) points.at(3).first,
                            (int) points.at(3).second);
 
 
@@ -272,17 +318,17 @@ namespace GolfEngine::Services::Render {
 
     void SDLRenderService::renderLine(LineRenderShape& renderShape) {
         // Set color
-        SDL_SetRenderDrawColor(_renderer.get(), renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, renderShape.color().a);
+        SDL_SetRenderDrawColor(_renderer->renderer, renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, renderShape.color().a);
 
         // Draw Line
-        SDL_RenderDrawLineF(_renderer.get(),
+        SDL_RenderDrawLineF(_renderer->renderer,
                             renderShape.positionA().x - camOffset.x, renderShape.positionA().y - camOffset.y,
                             renderShape.positionB().x - camOffset.x, renderShape.positionB().y - camOffset.y);
     }
 
     void SDLRenderService::renderCircle(CircleRenderShape& renderShape) {
         // Set color
-        SDL_SetRenderDrawColor(_renderer.get(), renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, renderShape.color().a);
+        SDL_SetRenderDrawColor(_renderer->renderer, renderShape.color().r8, renderShape.color().g8, renderShape.color().b8, renderShape.color().a);
 
         const int32_t diameter = (abs(renderShape.radius()) * 2);
 
@@ -295,14 +341,14 @@ namespace GolfEngine::Services::Render {
         while (x >= y)
         {
             //  Each of the following renders an octant of the circle
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + x - camOffset.x, renderShape.position().y + y - camOffset.y);
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + x - camOffset.x, renderShape.position().y - y - camOffset.y);
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - x - camOffset.x, renderShape.position().y - y - camOffset.y);
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - x - camOffset.x, renderShape.position().y + y - camOffset.y);
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + y - camOffset.x, renderShape.position().y - x - camOffset.y);
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + y - camOffset.x, renderShape.position().y + x - camOffset.y);
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - y - camOffset.x, renderShape.position().y - x - camOffset.y);
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - y - camOffset.x, renderShape.position().y + x - camOffset.y);
+            SDL_RenderDrawPoint(_renderer->renderer, renderShape.position().x + x - camOffset.x, renderShape.position().y + y - camOffset.y);
+            SDL_RenderDrawPoint(_renderer->renderer, renderShape.position().x + x - camOffset.x, renderShape.position().y - y - camOffset.y);
+            SDL_RenderDrawPoint(_renderer->renderer, renderShape.position().x - x - camOffset.x, renderShape.position().y - y - camOffset.y);
+            SDL_RenderDrawPoint(_renderer->renderer, renderShape.position().x - x - camOffset.x, renderShape.position().y + y - camOffset.y);
+            SDL_RenderDrawPoint(_renderer->renderer, renderShape.position().x + y - camOffset.x, renderShape.position().y - x - camOffset.y);
+            SDL_RenderDrawPoint(_renderer->renderer, renderShape.position().x + y - camOffset.x, renderShape.position().y + x - camOffset.y);
+            SDL_RenderDrawPoint(_renderer->renderer, renderShape.position().x - y - camOffset.x, renderShape.position().y - x - camOffset.y);
+            SDL_RenderDrawPoint(_renderer->renderer, renderShape.position().x - y - camOffset.x, renderShape.position().y + x - camOffset.y);
             if (error <= 0)
             {
                 ++y;
@@ -321,7 +367,7 @@ namespace GolfEngine::Services::Render {
 
     void SDLRenderService::renderSprite(SpriteRenderShape& renderShape) {
         // Try to load sprite with given path
-        std::optional<std::reference_wrapper<Texture>> t;
+        std::optional<std::reference_wrapper<Texture_Wrapper>> t;
         try {
             t = loadSprite(renderShape.path());
         }
@@ -333,16 +379,17 @@ namespace GolfEngine::Services::Render {
         // Get direct reference to texture for easy access
         auto& texture {t->get()};
 
-        // Set color and blend mode
-        texture.setColor(renderShape.color());
-        texture.setAlphaMod(renderShape.color().a);
+        // Set color and alpha mod
+        Color color = renderShape.color();
+        SDL_SetTextureColorMod(texture.texture, color.r8, color.g8, color.b8);
+        SDL_SetTextureAlphaMod(texture.texture, color.a);
 
         // Calculate desired width and height of sprite
         float dstWidth, dstHeight;
         auto imageSource{renderShape.imageSource()};
         if (imageSource.size.x == 0 && imageSource.size.y == 0) {
-            dstWidth = (texture.width() * abs(renderShape.pixelScale().x));
-            dstHeight = (texture.height() * abs(renderShape.pixelScale().y));
+            dstWidth = (texture.width * abs(renderShape.pixelScale().x));
+            dstHeight = (texture.height * abs(renderShape.pixelScale().y));
         }
         else{
             dstWidth = (imageSource.size.x * abs(renderShape.pixelScale().x));
@@ -359,12 +406,12 @@ namespace GolfEngine::Services::Render {
             float pivotX;
             float pivotY;
             if (renderShape.pixelScale().x < 0)
-                pivotX = (1 - (renderShape.pivotPoint().x / texture.width())) * texture.width();
+                pivotX = (1 - (renderShape.pivotPoint().x / texture.width)) * texture.width;
             else
                 pivotX = renderShape.pivotPoint().x;
 
             if (renderShape.pixelScale().y < 0)
-                pivotY = (1 - (renderShape.pivotPoint().y / texture.height())) * texture.height();
+                pivotY = (1 - (renderShape.pivotPoint().y / texture.height)) * texture.height;
             else
                 pivotY = renderShape.pivotPoint().y;
 
@@ -400,29 +447,43 @@ namespace GolfEngine::Services::Render {
 
 
         // Render sprite
-        SDL_RenderCopyEx(_renderer.get(), texture.texture(), useFullSize ? nullptr : &srcRect, &dstRect,
+        SDL_RenderCopyEx(_renderer->renderer, texture.texture, useFullSize ? nullptr : &srcRect, &dstRect,
                          renderShape.rotation(), &pivotPoint, flip);
 
     }
 
-    Texture& SDLRenderService::loadSprite(const std::string& path) {
+    Texture_Wrapper& SDLRenderService::loadSprite(const std::string& path) {
         auto cachedTexture = _cachedTextures.find(path);
         if(cachedTexture != _cachedTextures.end()){
             // Use existing texture
             return *cachedTexture->second;
         }
         else{
-            std::unique_ptr<Texture> newTexture {std::make_unique<Texture>()};
-            if(newTexture->loadFromFileSprite(path, *_renderer)){
-                auto ref = _cachedTextures.insert({path, std::move(newTexture)});
-                return *ref.first->second;
+            // Load surface
+            SDL_Surface* surface = IMG_Load(path.c_str());
+            if(surface == nullptr){
+                throw std::runtime_error("Unable to load image " + path + " Error: " + IMG_GetError());
             }
+
+            auto width = surface->w;
+            auto height = surface->h;
+
+            // Create texture from surface
+            auto newTexture = SDL_CreateTextureFromSurface(_renderer->renderer, surface);
+            // Free surface memory
+            SDL_FreeSurface(surface);
+            if(newTexture == nullptr){
+                throw std::runtime_error("Unable to create texture from " + path + "Error: " + SDL_GetError());
+            }
+
+            std::unique_ptr<Texture_Wrapper, void(*)(Texture_Wrapper*)> newTexture_wrapper {new Texture_Wrapper{newTexture, width, height}, SDL_DestroyTextureWrapper};
+            auto ref = _cachedTextures.insert({path, std::move(newTexture_wrapper)});
+            return *ref.first->second;
         }
-        throw std::runtime_error("Could not find/load sprite with path: " + path);
     }
 
     void SDLRenderService::renderText(TextRenderShape& renderShape) {
-        std::optional<std::reference_wrapper<TTF_Font>> f;
+        std::optional<std::reference_wrapper<Font_Wrapper>> f;
         try{
             f = loadFont(renderShape.filePath(), renderShape.fontSize());
         } catch(std::exception& e){
@@ -430,8 +491,8 @@ namespace GolfEngine::Services::Render {
             return;
         }
 
-        // Get direct reference to texture for easy access
-        auto& font {f->get()};
+        // Get direct reference to font for easy access
+        auto& font {*f->get().font};
 
 
         SDL_Surface* surface = TTF_RenderText_Solid(&font, renderShape.text().c_str(), {renderShape.color().r8,renderShape.color().g8,renderShape.color().b8});
@@ -448,7 +509,7 @@ namespace GolfEngine::Services::Render {
         dstRect.h = surface->h;
 
         // Create texture from surface
-        auto texture = SDL_CreateTextureFromSurface(_renderer.get(), surface);
+        auto texture = SDL_CreateTextureFromSurface(_renderer->renderer, surface);
         // Free surface memory
         SDL_FreeSurface(surface);
         if(texture == nullptr){
@@ -456,12 +517,11 @@ namespace GolfEngine::Services::Render {
             return;
         }
 
-        SDL_RenderCopyEx(_renderer.get(), texture, nullptr, &dstRect, renderShape.rotation(), nullptr, SDL_FLIP_NONE);
-
+        SDL_RenderCopyEx(_renderer->renderer, texture, nullptr, &dstRect, renderShape.rotation(), nullptr, SDL_FLIP_NONE);
         SDL_DestroyTexture(texture);
     }
     
-    TTF_Font& SDLRenderService::loadFont(const std::string& path, size_t fontSize) {
+    Font_Wrapper& SDLRenderService::loadFont(const std::string& path, size_t fontSize) {
         auto cachedFont = _cachedFonts.find(path);
         if(cachedFont != _cachedFonts.end() && cachedFont->second.first == fontSize){
             // Use existing texture
@@ -471,8 +531,8 @@ namespace GolfEngine::Services::Render {
             // Load new font
             auto newFont = TTF_OpenFont(path.c_str(), fontSize);
             if(newFont){
-                std::unique_ptr<TTF_Font, void(*)(TTF_Font*)> font_wrapper {newFont, TTF_CloseFont};
-                auto ref = _cachedFonts.insert({path, std::pair<size_t, std::unique_ptr<TTF_Font, void(*)(TTF_Font*)>>(fontSize, std::move(font_wrapper))});
+                std::unique_ptr<Font_Wrapper, void(*)(Font_Wrapper*)> font_wrapper {new Font_Wrapper{newFont}, TTF_CloseFontWrapper};
+                auto ref = _cachedFonts.insert({path, std::pair<size_t, std::unique_ptr<Font_Wrapper, void(*)(Font_Wrapper*)>>(fontSize, std::move(font_wrapper))});
                 return *ref.first->second.second;
             }
         }
@@ -481,7 +541,7 @@ namespace GolfEngine::Services::Render {
 
     void SDLRenderService::renderTileMap(TileMapRenderShape& renderShape) {
         // Try to load tile set with given path
-        std::optional<std::reference_wrapper<Texture>> t;
+        std::optional<std::reference_wrapper<Texture_Wrapper>> t;
         try {
             t = loadSprite(renderShape.imagePath());
         }
@@ -511,7 +571,7 @@ namespace GolfEngine::Services::Render {
                 srcRect.y = ((tile-1) / tileSetColumns) * srcRect.h;
                 dstRect.x = ((column % mapColumns) * dstRect.w) + renderShape.position().x - camOffset.x;
                 dstRect.y = (rowIndex * dstRect.h) + renderShape.position().y - camOffset.y;
-                SDL_RenderCopy(_renderer.get(), texture.texture(), &srcRect, &dstRect);
+                SDL_RenderCopy(_renderer->renderer, texture.texture, &srcRect, &dstRect);
                 column++;
             }
             rowIndex++;
@@ -553,6 +613,6 @@ namespace GolfEngine::Services::Render {
     }
 
     void SDLRenderService::setWindowTitle(const std::string& title) {
-        SDL_SetWindowTitle(_window.get(), title.c_str());
+        SDL_SetWindowTitle(_window->window, title.c_str());
     }
 }

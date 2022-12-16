@@ -2,6 +2,11 @@
 #include <iostream>
 #include <SDL.h>
 
+class Event_Wrapper{
+public:
+    explicit Event_Wrapper(SDL_Event e) : event{e}{}
+    SDL_Event event;
+};
 
 SDLInputService::SDLInputService(): _hasReceivedQuitSignal{false}
 {
@@ -30,11 +35,11 @@ void SDLInputService::handleInputs()
 
         if (event.type == SDL_MOUSEBUTTONDOWN) // if mouse button is pressed
         {
-            SDLInputService::handleMouseEvent(event, true); // handle mouse event
+            SDLInputService::handleMouseEvent(Event_Wrapper{event}, true); // handle mouse event
         }
         if (event.type == SDL_MOUSEBUTTONUP) // if mouse button is released
         {
-            SDLInputService::handleMouseEvent(event, false); // handle mouse event
+            SDLInputService::handleMouseEvent(Event_Wrapper{event}, false); // handle mouse event
         }
         if (event.type == SDL_MOUSEMOTION) // if mouse button is released
         {
@@ -52,8 +57,8 @@ void SDLInputService::handleInputs()
     _actionMap->setMousePosition(mouseX, mouseY); //set current mouse pos
 }
 
-void SDLInputService::handleMouseEvent(SDL_Event event, bool pressed) {
-    switch(event.button.button){
+void SDLInputService::handleMouseEvent(Event_Wrapper event, bool pressed) {
+    switch(event.event.button.button){
         case 1: // left mouse button
             _actionMap->setInputKeyPressed(Mouse_Left, pressed); // handle action for this button
             break;

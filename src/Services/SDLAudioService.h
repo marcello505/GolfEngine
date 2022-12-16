@@ -7,9 +7,12 @@
 
 #include "Abstracts/AudioService.h"
 
-#include <SDL_mixer.h>
 #include <map>
 #include <array>
+
+// Forward declaration
+class Chunk_Wrapper;
+class Music_Wrapper;
 
 class SDLAudioService : public AudioService {
 public:
@@ -60,15 +63,15 @@ private:
     float _musicFragmentVolume {1.0f};
     float _sfxVolume {1.0f};
     std::array<float, 8> _sfxFragmentsVolume {};
-    std::map<std::string, Mix_Chunk*> _cachedChunks {};
-    std::map<std::string, Mix_Music*> _cachedMusic {};
+    std::map<std::string, Chunk_Wrapper*> _cachedChunks {};
+    std::map<std::string, Music_Wrapper*> _cachedMusic {};
 
     //Methods
     void updateMusicVolume();
     void updateSfxVolume(int channel);
     void updateSfxVolume();
-    Mix_Chunk* getChunk(const std::string& path);
-    Mix_Music* getMusic(const std::string& path);
+    Chunk_Wrapper* getChunk(const std::string& path);
+    Music_Wrapper* getMusic(const std::string& path);
     bool hasCachedChunk(const std::string& path);
     bool hasCachedMusic(const std::string& path);
     float clampFloat01(float value);
