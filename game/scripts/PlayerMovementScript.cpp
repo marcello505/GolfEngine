@@ -2,6 +2,7 @@
 // Created by marcello on 11/29/22.
 //
 
+#include "Scene/GameObjects/Camera.h"
 #include <iostream>
 #include "PlayerMovementScript.h"
 
@@ -9,7 +10,6 @@ void PlayerMovementScript::onStart() {
     _sprite = &_gameObject.value().get().getComponent<SpriteComponent>();
     _rb = &_gameObject.value().get().getComponent<RigidBody>();
     _actionMap = ActionMap::getActionMap();
-    _gunShotAudio = &_gameObject.value().get().getComponent<GolfEngine::Scene::Components::AudioSource>();
 
     if(_gameObject.value().get().hasComponent<Animator>())
         _animator = &_gameObject.value().get().getComponent<Animator>();
@@ -35,28 +35,24 @@ void PlayerMovementScript::onUpdate() {
         }
 
         _rb->applyWorldForceToCenter(inputDirection.normalized() * playerSpeed);
+
+        std::cout << "X = " << _gameObject->get().getWorldTransform().position.x  << "Y = " << _gameObject->get().getWorldTransform().position.y << std::endl ;
     }
 
     //Point to mouse logic
     {
-        float angleToMouse = _gameObject->get().getWorldTransform().position.angleToDegrees(_actionMap->getMousePosition());
+        float angleToMouse = _gameObject->get().getWorldTransform().position.angleToDegrees(Camera::screenToWorldSpace(_actionMap->getMousePosition())) - rotationOffset;
         _sprite->setRotation(angleToMouse); //angle to mouse + offset
     }
+}
 
-    //Handle shooting
-    if(_actionMap->isJustPressed("playerShoot")){
-        _gunShotAudio->play();
+std::unique_ptr<ISnapshot> PlayerMovementScript::saveSnapshot() {
+    auto snapshot = std::make_unique<Snapshot>();
+    snapshot->active = _active;
+    return std::move(snapshot);
+}
 
-        _animator->play("shoot");
-
-        auto projectile = _projectilePool->getProjectile();
-        if(projectile){
-            Transform projectileTransform {_gameObject->get().getWorldTransform()};
-            projectileTransform.rotation = _gameObject->get().getWorldTransform().position.angleToDegrees(_actionMap->getMousePosition());
-            auto directionToMouse = _gameObject->get().getWorldTransform().position.directionTo(_actionMap->getMousePosition());
-            projectileTransform.position += directionToMouse * 30.0f;
-
-            projectile.value().get().shoot(projectileTransform, directionToMouse);
-        }
-    }
+void PlayerMovementScript::loadSnapshot(const ISnapshot &rawSnapshot) {
+    auto& snapshot = (Snapshot&)rawSnapshot;
+    BehaviourScript::setActive(snapshot.active);
 }

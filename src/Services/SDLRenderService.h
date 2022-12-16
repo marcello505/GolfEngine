@@ -34,6 +34,10 @@ public:
     SDLRenderService(SDLRenderService &&other) noexcept;
     SDLRenderService &operator=(SDLRenderService &&other) noexcept;
 
+    /// Sets the title of the window
+    /// \param title new title
+    void setWindowTitle(const std::string& title) override;
+
     /// Adds a drawable to the list of registered drawables
     /// \param drawable to be added
     void addDrawable(Drawable& drawable) override;
@@ -41,6 +45,8 @@ public:
     /// Removes a drawable from the list of registered drawables
     /// \param drawable to be removed
     void removeDrawable(Drawable& drawable) override;
+
+    bool isRegistered(Drawable &drawable) override;
 
     /// Renders all drawables in registered drawable list
     void render() override;
@@ -54,12 +60,15 @@ public:
     /// \param fullScreen true is fullscreen
     void setFullScreen(bool fullScreen) override;
 
-    // Getters
+    // Getters, setters
     [[nodiscard]] int screenSizeWidth() const;
     [[nodiscard]] int screenSizeHeight() const;
     [[nodiscard]] bool fullScreen() const;
     [[nodiscard]] std::optional<std::reference_wrapper<Camera>> getMainCamera() const override;
     void setMainCamera(Camera& camera) override;
+    [[nodiscard]] int getScreenSizeWidth() const override;
+    [[nodiscard]] int getScreenSizeHeight() const override;
+    [[nodiscard]] Vector2 getCameraOffset() const override;
 private:
     void renderRect(RectRenderShape &renderShape);
     void renderLine(LineRenderShape &renderShape);

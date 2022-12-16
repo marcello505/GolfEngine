@@ -4,13 +4,31 @@ cmake_minimum_required(VERSION 3.23)
 set(CMAKE_CXX_STANDARD 17)
 
 # Sources
-set(SCRIPT_SOURCES scripts/PlayerMovementScript.cpp scripts/ProjectilePoolScript.cpp scripts/ProjectileScript.cpp scripts/SaveStateScript.cpp scripts/SaveStateScript.h)
+
+set(SCRIPT_SOURCES
+        scripts/PlayerMovementScript.cpp
+        scripts/ProjectilePoolScript.cpp
+        scripts/ProjectileScript.cpp
+        scripts/SaveStateScript.cpp
+        scripts/SaveGameTestScripts/SaveGameTestScript.cpp
+        scripts/SaveGameTestScripts/ShotCounterScript.cpp
+        scripts/PlayerShootScript.cpp
+        scripts/PlayerCollisionScript.cpp
+        scripts/GameManagerScript.cpp)
+
 set(GAMEOBJECTS_SOURCES
-        gameobjects/PlayerObject.cpp
-        gameobjects/Wall.cpp gameobjects/Projectile.cpp gameobjects/Projectile.h gameobjects/ProjectilePoolObject.cpp gameobjects/ProjectilePoolObject.h gameobjects/TestBlock.cpp gameobjects/TestBlock.h)
+        gameobjects/PlayerObject.cpp     
+        gameobjects/Wall.cpp
+        gameobjects/Projectile.cpp
+        gameobjects/ProjectilePoolObject.cpp
+        gameobjects/TestBlock.cpp
+        gameobjects/GameManager.cpp gameobjects/PhysicGameObject.cpp gameobjects/PhysicGameObject.h)
+
 set(SCENE_SOURCES
         scenes/PlayerTestScene.cpp
-        scenes/Level2Scene.cpp scenes/Level1Scene.cpp scenes/Level1Scene.h)
+        scenes/SaveGameTestScene.cpp
+        scenes/Level2Scene.cpp
+        scenes/Level1Scene.cpp)
 
 # Resource files
 add_custom_target(Game_Resources ALL

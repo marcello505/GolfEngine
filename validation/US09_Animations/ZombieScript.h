@@ -12,7 +12,6 @@
 class ZombieScript : public BehaviourScript{
 public:
     void onStart() override;
-
     void onUpdate() override;
 private:
     float timePassed = 0;

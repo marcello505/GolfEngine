@@ -6,24 +6,32 @@
 #include "Services/Singletons/AudioSingleton.h"
 
 namespace GolfEngine::Scene::Components{
-    void AudioSource::play(bool looping) {
+    void AudioSource::play(const std::string& sound, bool looping) {
         if(GolfEngine::Services::Audio::hasService() && _active){
+            // Find sound path using key
+            auto result = _sounds.find(sound);
+            if(result == _sounds.end()) { return; }
+
             if(_isMusic){
-                GolfEngine::Services::Audio::getService()->playMusic(_audioPath, volume, looping);
+                GolfEngine::Services::Audio::getService()->playMusic(result->second, volume, looping);
             }
             else{
-                GolfEngine::Services::Audio::getService()->playSfx(_audioPath, volume, looping);
+                GolfEngine::Services::Audio::getService()->playSfx(result->second, volume, looping);
             }
         }
     }
 
-    void AudioSource::stop() {
+    void AudioSource::stop(const std::string& sound) {
         if(GolfEngine::Services::Audio::hasService() && _active){
+            // Find sound path using key
+            auto result = _sounds.find(sound);
+            if(result == _sounds.end()) { return; }
+
             if(_isMusic){
                 GolfEngine::Services::Audio::getService()->stopMusic();
             }
             else{
-                GolfEngine::Services::Audio::getService()->stopSfx(_audioPath);
+                GolfEngine::Services::Audio::getService()->stopSfx(result->second);
             }
         }
     }
@@ -31,16 +39,18 @@ namespace GolfEngine::Scene::Components{
     void AudioSource::onStart() {
         if(_active){
             if(Services::Audio::hasService()){
-                if(_isMusic){
-                    Services::Audio::getService()->preloadMusic(_audioPath);
-                }
-                else{
-                    Services::Audio::getService()->preloadSfx(_audioPath);
+                for(auto& sound : _sounds){
+                    if(_isMusic){
+                        Services::Audio::getService()->preloadMusic(sound.second);
+                    }
+                    else{
+                        Services::Audio::getService()->preloadSfx(sound.second);
+                    }
                 }
             }
 
-            if(_playOnAwake){
-                play(_loopOnAwake);
+            if(_playOnAwake && !_sounds.empty()){
+                play(_sounds.begin()->second, _loopOnAwake);
             }
         }
     }
@@ -74,6 +84,16 @@ namespace GolfEngine::Scene::Components{
         auto& snapshot = (Snapshot&)rawSnapshot;
 
         volume = snapshot.volume;
+    }
+
+    void AudioSource::addSound(const std::string& sound, const std::string& path) {
+        // Check if an entry with the name already exists, if so delete it first to overwrite it
+        auto existingEntry = _sounds.find(sound);
+        if(existingEntry != _sounds.end())
+            _sounds.erase(existingEntry);
+
+        // Add entry to sounds map
+        _sounds.insert({sound, path});
     }
 
 }
