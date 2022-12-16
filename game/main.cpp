@@ -3,7 +3,7 @@
 #include "Core/GameLoop.h"
 #include "Core/Settings.h"
 #include "Services/Singletons/RenderSingleton.h"
-#include <SDL.h>
+#include "Utilities/IO.h"
 
 //TODO find something to fix this
 #include <SDL.h>
@@ -11,7 +11,6 @@
 // Game includes
 #include "scenes/PlayerTestScene.h"
 #include "scenes/SaveGameTestScene.h"
-#include "Utilities/IO.h"
 
 #define PROJECT_SETTINGS_SAVE_PATH "ProjectSettings.xml"
 
@@ -59,7 +58,7 @@ int main(int argc, char* argv[]){
     actionMap->addInputKeyToAction("loadGame", InputKey::Key_L);
 
     //Debug settings
-//    GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS, true); //Render colliders
+    GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS, true); //Render colliders
 
     //Scene initialization
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
@@ -72,7 +71,7 @@ int main(int argc, char* argv[]){
 
     gameLoop.start();
 
-    // Save project settings when closing the game
+    // Save project settings before closing the game
     auto projectSettings = GolfEngine::Core::getProjectSettings();
     GolfEngine::Utilities::IO::saveSettings(PROJECT_SETTINGS_SAVE_PATH, projectSettings);
     return 0;
