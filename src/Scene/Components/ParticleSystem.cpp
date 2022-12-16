@@ -17,11 +17,15 @@ _spritePath{spritePath}, _particlesPerSecond{particlesPerSecond}, _lifeTime{life
 }
 
 Particle& ParticleSystem::addParticle(){
-    particles.push_back(std::make_unique<Particle>(_spritePath,_velocity,_rotation, _pixelScale, _color));
+    int randomRotation = 0;
+    if(_randomStartRotation){
+        randomRotation = GolfEngine::Utilities::Random::getIntRange(0, 359);
+    }
+    particles.push_back(std::make_unique<Particle>(_spritePath,_velocity,_randomStartRotation? randomRotation : _rotation, _pixelScale, _color));
     auto& particle = particles.at(particles.size() - 1);
 
     auto transform = _gameObject->get().getWorldTransform();
-    transform.rotation += _rotation;
+    transform.rotation += particle->getSpriteRenderShape().rotation();
 
     transform.position.x += _position.x;
     transform.position.y += _position.y;
@@ -178,4 +182,8 @@ std::unique_ptr<ISnapshot> ParticleSystem::saveSnapshot() {
 
 void ParticleSystem::loadSnapshot(const ISnapshot& rawSnapshot) {
     //Empty on purpose
+}
+
+void ParticleSystem::setRandomStartRotation(bool randomRotation) {
+    _randomStartRotation = randomRotation;
 }

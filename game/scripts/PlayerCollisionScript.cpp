@@ -26,6 +26,7 @@ void PlayerCollisionScript::onStart() {
 void PlayerCollisionScript::onCollisionEnter(RigidBody &other) {
     if(other.getParentGameObject()->tag == "enemy"){
         // Play some death effects and disable player controls
+        // TODO maybe change sprite/animation
         _audioSource->play("death", false);
         _particleSystem->play(false);
         _playerMovement->setActive(false);
