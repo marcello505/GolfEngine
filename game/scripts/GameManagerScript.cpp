@@ -48,9 +48,6 @@ void GameManagerScript::onUpdate() {
 
     if(ActionMap::getActionMap()->isJustPressed("restart"))
         restartLevel();
-
-    if(ActionMap::getActionMap()->isJustPressed("backToMenu"))
-        GolfEngine::SceneManager::GetSceneManager().loadScene("mainMenu"); //go to main menu
 }
 
 float GameManagerScript::getTimePassed() const {

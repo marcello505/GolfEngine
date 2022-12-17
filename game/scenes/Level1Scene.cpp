@@ -114,6 +114,8 @@ void Level1Scene::build(Scene& scene) const {
         GolfEngine::Services::Pathfinding::getService()->setGraphSize(1980, 1980);
         GolfEngine::Services::Pathfinding::getService()->setNodeDistance(50);
     }
+    // IMPORTANT! Create this object after the GameManager (GameManager.onStart() needs to happen before HUD.onStart())
+    scene.createNewGameObject<HUD>(std::ref(scene));
 
 
 }

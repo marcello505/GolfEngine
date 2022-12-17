@@ -12,6 +12,7 @@
 TiledComponent::TiledComponent(const std::string& mapPath, Vector2 pixelScale)
 : _renderShape{GolfEngine::Services::TileMapParser::getService().loadMap(mapPath)} {
     _renderShape.setPixelScale(pixelScale);
+    layer=-1;
 }
 
 void TiledComponent::onStart() {
