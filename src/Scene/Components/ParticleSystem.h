@@ -64,7 +64,9 @@ public:
     /// \param rotationsPerSecond the amount of rotation each particle makes every second.
     void setRotationsPerSecond(float rotationsPerSecond);
 
-
+    /// Inits the particles with a random starting rotation
+    /// \param randomRotation if true particles will have a random starting rotation
+    void setRandomStartRotation(bool randomRotation);
 private:
     ///Creates a new particle and adds it to particles
     Particle& addParticle();
@@ -73,6 +75,7 @@ private:
     std::vector<std::unique_ptr<Particle>> particles {};
     bool _fade {false};
     bool _looping {false};
+    bool _randomStartRotation {false};
 
     int _particlesPerSecond;
     float _lifeTime;

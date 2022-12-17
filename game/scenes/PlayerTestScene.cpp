@@ -17,6 +17,7 @@
 #include "Scene/Components/BoxCollider.h"
 #include "../gameobjects/GameManager.h"
 #include "Scene/GameObjects/Camera.h"
+#include "../gameobjects/HUD.h"
 #include "Services/Singletons/PathfindingSingleton.h"
 
 void PlayerTestScene::build(Scene& scene) const {
@@ -58,7 +59,7 @@ void PlayerTestScene::build(Scene& scene) const {
 
     auto& projectilePool = scene.createNewGameObject<ProjectilePoolObject>(root, std::ref(scene), 20);
 
-    auto& player = scene.createNewGameObject<PlayerObject>(&projectilePool.getComponent<ProjectilePoolScript>());
+    auto& player = scene.createNewGameObject<PlayerObject>(&projectilePool.getComponent<ProjectilePoolScript>(), std::ref(scene));
     player.setLocalPosition({200.f, 200.f});
     // Add camera to player
     scene.createNewGameObject<Camera>((GameObject&)player);
@@ -98,4 +99,7 @@ void PlayerTestScene::build(Scene& scene) const {
 
     GolfEngine::Services::Pathfinding::getService()->setGraphSize(1280, 720);
     GolfEngine::Services::Pathfinding::getService()->setNodeDistance(50);
+
+    // IMPORTANT! Create this object after the GameManager (GameManager.onStart() needs to happen before HUD.onStart())
+    scene.createNewGameObject<HUD>(std::ref(scene));
 }
