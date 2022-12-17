@@ -543,15 +543,6 @@ namespace GolfEngine::Services::Render {
         _mainCamera = camera;
     }
 
-    bool SDLRenderService::isRegistered(Drawable& drawable) {
-        auto result = std::find_if(_drawables.begin(), _drawables.end(), [&](const std::reference_wrapper<Drawable> &d) {
-            return &d.get() == &drawable;
-        });
-        if(result != _drawables.end())
-            return true;
-        return false;
-    }
-
     int SDLRenderService::getScreenSizeWidth() const {
         return _screenSizeWidth;
     }

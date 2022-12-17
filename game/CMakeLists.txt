@@ -42,6 +42,7 @@ set(SCENE_SOURCES
         scenes/SaveGameTestScene.cpp
         scenes/MainMenuScene.cpp
         scenes/SelectLevelScene.cpp
+        scenes/SettingsScene.cpp)
 
 # Resource files
 add_custom_target(Game_Resources ALL

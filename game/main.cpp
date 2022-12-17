@@ -53,8 +53,8 @@ int main(int argc, char* argv[]){
     actionMap->addInputKeyToAction("clickButton", Mouse_Left);
 
     //Audio initialisation
-    GolfEngine::Scene::Components::AudioSource mgsThemeSound {R"(../../game/res/audio/mgs-theme.flac)", true};
-/*    mgsThemeSound.play(true);*/
+/*    GolfEngine::Scene::Components::AudioSource mgsThemeSound {static_cast<bool>(R"(../../game/res/audio/mgs-theme.flac)"), true};
+    mgsThemeSound.play(true);*/
 
     // Save Game actions
     actionMap->addAction("saveGame");
