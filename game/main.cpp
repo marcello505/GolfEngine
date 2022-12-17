@@ -3,6 +3,7 @@
 #include "Core/GameLoop.h"
 #include "Core/Settings.h"
 #include "Services/Singletons/RenderSingleton.h"
+#include "Services/Singletons/AudioSingleton.h"
 #include "Utilities/IO.h"
 
 // Game includes
@@ -11,7 +12,6 @@
 #include "scenes/MainMenuScene.h"
 #include "scenes/SelectLevelScene.h"
 #include "scenes/SettingsScene.h"
-#include "Scene/Components/AudioSource.h"
 
 #include "scenes/SaveGameTestScene.h"
 #include <SDL.h>
@@ -32,6 +32,16 @@ int main(int argc, char* argv[]){
     //Render initialization
     GolfEngine::Services::Render::getService()->setScreenSize(1920, 1080);
     GolfEngine::Services::Render::getService()->setWindowTitle("Game name");
+
+    // Init volume settings
+    auto& volumeSettings = GolfEngine::Core::getProjectSettings();
+    auto audioService = GolfEngine::Services::Audio::getService();
+    if(volumeSettings.hasFloat("MasterVolume"))
+        audioService->setMasterVolume(volumeSettings.getFloat("MasterVolume"));
+    if(volumeSettings.hasFloat("MusicVolume"))
+        audioService->setMusicVolume(volumeSettings.getFloat("MusicVolume"));
+    if(volumeSettings.hasFloat("SFXVolume"))
+        audioService->setSfxVolume(volumeSettings.getFloat("SFXVolume"));
 
     //Set up controls
     auto* actionMap = ActionMap::getActionMap();
