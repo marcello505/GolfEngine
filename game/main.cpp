@@ -45,6 +45,8 @@ int main(int argc, char* argv[]){
     actionMap->addInputKeyToAction("playerReload", InputKey::Key_R);
     actionMap->addAction("restart");
     actionMap->addInputKeyToAction("restart", InputKey::Key_Backspace);
+    actionMap->addAction("backToMenu");
+    actionMap->addInputKeyToAction("backToMenu", InputKey::Key_Escape);
 
     //Set up recording controls
     actionMap->addAction("startRecordingReplay");

@@ -22,11 +22,16 @@ void GameManagerScript::finishLevel() {
 }
 
 void GameManagerScript::onStart() {
-    GolfEngine::SceneManager::GetSceneManager().getCurrentScene().saveCurrentSceneState(1);
+  GolfEngine::SceneManager::GetSceneManager().getCurrentScene().saveCurrentSceneState(1);
+
 }
 
 void GameManagerScript::onUpdate() {
     if(ActionMap::getActionMap()->isJustPressed("restart"))
         restartLevel();
+
+    if(ActionMap::getActionMap()->isJustPressed("backToMenu"))
+        GolfEngine::SceneManager::GetSceneManager().loadScene("mainMenu"); //go to main menu
 }
+
 
