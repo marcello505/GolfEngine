@@ -13,6 +13,6 @@ void ExitButtonScript::onUpdate() {
     auto& btn = getParentGameObject<Button>();
 
     if(btn.isClicked()){ //if button clicked
-        exit(0); //exit application
+        GolfEngine::Core::getRunningGameLoop().stop();
     }
 }
