@@ -11,6 +11,10 @@ class GameManagerScript : public BehaviourScript {
 public:
     void restartLevel();
     void tryFinishLevel();
+
+    [[nodiscard]] float getTimePassed() const;
+    [[nodiscard]] float getHighScoreTime() const;
+private:
     void onStart() override;
     void onUpdate() override;
 private:
@@ -22,7 +26,9 @@ private:
                                                    "playerReload"};
 
     void finishLevel();
-    void startRecordingReplay();
+private:
+    float _timePassed {0.0f};
+    std::string _highScoreKey{};
 };
 
 

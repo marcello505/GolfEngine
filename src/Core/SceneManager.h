@@ -61,6 +61,10 @@ public:
     /// Clears the scenes map by deleting factories
     void clearScenes();
 
+    /// Returns the name of the scene that was last loaded
+    /// \return name of the scene
+    [[nodiscard]] std::string getCurrentSceneName() const;
+
     /// Adds a scene to the scene list
     /// \param sceneName Name of the scene
     /// \param newScene Pointer reference to the scene object
