@@ -17,6 +17,7 @@ std::string SDLInputService::getKeyString(InputKey key){
            return i.first;
         }
     }
+    return {};
 }
 
 // read any key / mouse click
