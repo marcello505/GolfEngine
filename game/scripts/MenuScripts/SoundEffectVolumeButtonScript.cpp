@@ -16,11 +16,13 @@ void SoundEffectVolumeButtonScript::onUpdate() {
 
     if(btn.isClicked()){
         if(btn._text.value == "-"){ //if button is clicked
-            _audioService->setSfxVolume( _audioService->getSfxVolume() - 0.1f); //lower sfx volume
-            _textUpdateScript->SetNewText(std::to_string((int)(_audioService->getSfxVolume() *10) * 10));
+            _audioService->setSfxVolume( _audioService->getSfxVolume() - 0.05f); //lower sfx volume
+            int volumeNumber = GolfEngine::Utilities::Math::roundToNearestMultiple(_audioService->getSfxVolume() * 100, 5);
+            _textUpdateScript->SetNewText(std::to_string(volumeNumber));
         } else {
-            _audioService->setSfxVolume( _audioService->getSfxVolume() + 0.1f); //higher sfx volume
-            _textUpdateScript->SetNewText(std::to_string((int)(_audioService->getSfxVolume() *10) * 10));
+            _audioService->setSfxVolume( _audioService->getSfxVolume() + 0.05f); //higher sfx volume
+            int volumeNumber = GolfEngine::Utilities::Math::roundToNearestMultiple(_audioService->getSfxVolume() * 100, 5);
+            _textUpdateScript->SetNewText(std::to_string(volumeNumber));
         }
 
     }

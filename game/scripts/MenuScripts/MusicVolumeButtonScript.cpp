@@ -18,11 +18,13 @@ void MusicVolumeButtonScript::onUpdate() {
 
     if(btn.isClicked()){ //if button is clicked
         if(btn._text.value == "-"){
-            _audioService->setMusicVolume( _audioService->getMusicVolume() - 0.1f); //lower music volume
-            _textUpdateScript->SetNewText(std::to_string((int)(_audioService->getMusicVolume() *10) * 10));
+            _audioService->setMusicVolume( _audioService->getMusicVolume() - 0.05f); //lower music volume
+            int volumeNumber = GolfEngine::Utilities::Math::roundToNearestMultiple(_audioService->getMusicVolume() * 100, 5);
+            _textUpdateScript->SetNewText(std::to_string(volumeNumber));
         } else {
-            _audioService->setMusicVolume( _audioService->getMusicVolume() + 0.1f); //higher music volume
-            _textUpdateScript->SetNewText(std::to_string((int)(_audioService->getMusicVolume() *10) * 10));
+            _audioService->setMusicVolume( _audioService->getMusicVolume() + 0.05f); //higher music volume
+            int volumeNumber = GolfEngine::Utilities::Math::roundToNearestMultiple(_audioService->getMusicVolume() * 100, 5);
+            _textUpdateScript->SetNewText(std::to_string(volumeNumber));
         }
     }
 }

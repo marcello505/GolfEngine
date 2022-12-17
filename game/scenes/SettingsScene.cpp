@@ -59,7 +59,7 @@ void SettingsScene::build(Scene& scene) const {
                                                        Alignment::Center, false);
 
 
-    std::string currentMasterVolume = std::to_string((int)(_audioService->getMasterVolume() *10) * 10);
+    std::string currentMasterVolume = std::to_string((int)(_audioService->getMasterVolume() * 100));
 
     auto& masterVolumeValueText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 26,
                                                                      rs->screenSizeHeight() / 2.3),0, currentMasterVolume,20,
@@ -105,7 +105,7 @@ void SettingsScene::build(Scene& scene) const {
 
 
 
-    std::string currentSoundEffectVolume = std::to_string((int)(_audioService->getSfxVolume() *10) * 10);
+    std::string currentSoundEffectVolume = std::to_string((int)(_audioService->getSfxVolume() * 100));
 
     auto& soundEffectVolumeValueText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 26,
                                                                                      rs->screenSizeHeight() / 1.83),0, currentSoundEffectVolume,20,
@@ -149,7 +149,7 @@ void SettingsScene::build(Scene& scene) const {
 
 
 
-    std::string currentMusicVolume = std::to_string((int)(_audioService->getSfxVolume() *10) * 10);
+    std::string currentMusicVolume = std::to_string((int)(_audioService->getMusicVolume() * 100));
 
     auto& musicVolumeValueText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 26,
                                                                                      rs->screenSizeHeight() / 1.49),0, currentMusicVolume,20,
