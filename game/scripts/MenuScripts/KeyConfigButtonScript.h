@@ -21,7 +21,6 @@ public:
 private:
     Text* _text {};
     std::string _actionName;
-    bool showingKeyConfigScene = false;
     TextUpdateScript* _textUpdateScript {};
 };
 

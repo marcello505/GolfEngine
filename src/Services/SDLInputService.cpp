@@ -10,6 +10,7 @@ SDLInputService::SDLInputService(): _hasReceivedQuitSignal{false}
     bindKeys(); // bind all the SDL keynames with our InputKey enum values
 }
 
+// get key string
 std::string SDLInputService::getKeyString(InputKey key){
     for (auto &i : _inputBinds) {
         if (i.second == key) {
@@ -18,6 +19,7 @@ std::string SDLInputService::getKeyString(InputKey key){
     }
 }
 
+// read any key / mouse click
 InputKey SDLInputService::getKeyPressed()
 {
     SDL_Event event;

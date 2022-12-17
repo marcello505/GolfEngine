@@ -15,11 +15,11 @@ void SoundEffectVolumeButtonScript::onUpdate() {
     auto& btn = getParentGameObject<Button>();
 
     if(btn.isClicked()){
-        if(btn._text.value == "-"){
-            _audioService->setSfxVolume( _audioService->getSfxVolume() - 0.1f);
+        if(btn._text.value == "-"){ //if button is clicked
+            _audioService->setSfxVolume( _audioService->getSfxVolume() - 0.1f); //lower sfx volume
             _textUpdateScript->SetNewText(std::to_string((int)(_audioService->getSfxVolume() *10) * 10));
         } else {
-            _audioService->setSfxVolume( _audioService->getSfxVolume() + 0.1f);
+            _audioService->setSfxVolume( _audioService->getSfxVolume() + 0.1f); //higher sfx volume
             _textUpdateScript->SetNewText(std::to_string((int)(_audioService->getSfxVolume() *10) * 10));
         }
 

@@ -15,12 +15,12 @@ void MasterVolumeButtonScript::onUpdate() {
 
     auto& btn = getParentGameObject<Button>();
 
-    if(btn.isClicked()){
-        if(btn._text.value == "-"){
-            _audioService->setMasterVolume( _audioService->getMasterVolume() - 0.1f);
+    if(btn.isClicked()){ //if button is clicked
+        if(btn._text.value == "-"){  //if button is meant for minus
+            _audioService->setMasterVolume( _audioService->getMasterVolume() - 0.1f); //lower master volume
             _textUpdateScript->SetNewText(std::to_string((int)(_audioService->getMasterVolume() *10) * 10));
         } else {
-            _audioService->setMasterVolume( _audioService->getMasterVolume() + 0.1f);
+            _audioService->setMasterVolume( _audioService->getMasterVolume() + 0.1f); //higher master volume
             _textUpdateScript->SetNewText(std::to_string((int)(_audioService->getMasterVolume() *10) * 10));
         }
 

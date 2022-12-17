@@ -9,6 +9,7 @@
 #include "Scene/GameObjects/UIObject/Button.h"
 
 void TextUpdateScript::SetNewText(std::string newText){
+    //update text
     _newText = std::move(newText);
     _text->_renderShape.setText(_newText);
 }

@@ -10,10 +10,9 @@ void ExitButtonScript::onUpdate() {
 
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
 
-    //get range of button area to check if we clicked there
     auto& btn = getParentGameObject<Button>();
 
-    if(btn.isClicked()){
-        exit(0);
+    if(btn.isClicked()){ //if button clicked
+        exit(0); //exit application
     }
 }

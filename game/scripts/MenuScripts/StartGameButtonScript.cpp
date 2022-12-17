@@ -14,8 +14,8 @@ void StartGameButtonScript::onUpdate() {
     //get range of button area to check if we clicked there
     auto& btn = getParentGameObject<Button>();
 
-    if(btn.isClicked()){
-        sceneManager.loadScene("playerTest");
+    if(btn.isClicked()){ //if button is clicked
+        sceneManager.loadScene("playerTest"); //load playerTest scene
     }
 }
 

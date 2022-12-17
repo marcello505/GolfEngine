@@ -26,6 +26,7 @@ ActionMap* ActionMap::actionMap = nullptr;
         return actionMap;
     }
 
+    //get keys bound to action
     std::vector<InputKey> ActionMap::getActionKeys(std::string action){
         std::vector<InputKey> inputKeys;
         for (auto &_actionList : _inputKeys) {

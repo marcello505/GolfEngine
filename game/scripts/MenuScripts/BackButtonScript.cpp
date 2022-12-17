@@ -10,10 +10,9 @@ void BackButtonScript::onUpdate() {
 
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
 
-    //get range of button area to check if we clicked there
     auto& btn = getParentGameObject<Button>();
 
-    if(btn.isClicked()){
-        sceneManager.loadScene("mainMenu");
+    if(btn.isClicked()){ //if button is clicked
+        sceneManager.loadScene("mainMenu"); //go to main menu
     }
 }

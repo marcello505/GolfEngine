@@ -13,7 +13,7 @@ void SelectLevelButtonScript::onUpdate() {
     //get range of button area to check if we clicked there
     auto& btn = getParentGameObject<Button>();
 
-    if(btn.isClicked()){
-        sceneManager.loadScene("selectLevel");
+    if(btn.isClicked()){ // if button is clicked
+        sceneManager.loadScene("selectLevel"); //load scene
     }
 }

@@ -16,12 +16,12 @@ void MusicVolumeButtonScript::onUpdate() {
 
     auto& btn = getParentGameObject<Button>();
 
-    if(btn.isClicked()){
+    if(btn.isClicked()){ //if button is clicked
         if(btn._text.value == "-"){
-            _audioService->setMusicVolume( _audioService->getMusicVolume() - 0.1f);
+            _audioService->setMusicVolume( _audioService->getMusicVolume() - 0.1f); //lower music volume
             _textUpdateScript->SetNewText(std::to_string((int)(_audioService->getMusicVolume() *10) * 10));
         } else {
-            _audioService->setMusicVolume( _audioService->getMusicVolume() + 0.1f);
+            _audioService->setMusicVolume( _audioService->getMusicVolume() + 0.1f); //higher music volume
             _textUpdateScript->SetNewText(std::to_string((int)(_audioService->getMusicVolume() *10) * 10));
         }
     }

@@ -190,6 +190,7 @@ void SettingsScene::build(Scene& scene) const {
                                                                 R"(../../game/res/fonts/ZenDots-Regular.ttf)",
                                                                 Alignment::Center, false);
 
+    //fullscreen
     FullScreenButtonScript fullScreenScript;
     auto& FullScreenButton = scene.createNewGameObject<Button>(root, 200, 100,
                                                              Vector2(rs->screenSizeWidth() / 2.05,

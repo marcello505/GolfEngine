@@ -6,26 +6,28 @@
 #include "Core/GameLoop.h"
 #include "Scene/GameObjects/UIObject/Button.h"
 #include "Services/Singletons/InputSingleton.h"
-#include "Services/Singletons/RenderSingleton.h"
 
 void KeyConfigButtonScript::onUpdate() {
 
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
     auto* inputService = GolfEngine::Services::Input::getService();
     auto* actionMap = ActionMap::getActionMap();
-    auto* rs = GolfEngine::Services::Render::getService();
 
     auto& btn = getParentGameObject<Button>();
 
-    if(btn.isClicked()){
+    if(btn.isClicked()){ //if button is clicked
         InputKey newKey;
-        while(!inputService->pressedKey()){
+        while(!inputService->pressedKey()){ // read key input
             newKey = inputService->getKeyPressed();
         }
-        inputService->setKeyPressed(false);
-        actionMap->removeInputKeyFromAction(_actionName);
-        actionMap->addInputKeyToAction(_actionName, newKey);
-        std::string playerInputKey = inputService->getKeyString(actionMap->getActionKeys(_actionName)[0]);
-        _textUpdateScript->SetNewText(_actionName + " ( " + playerInputKey  + " )");
+        inputService->setKeyPressed(false); // setup available for next read
+        actionMap->removeInputKeyFromAction(_actionName); //remove current input key bound to action
+        actionMap->addInputKeyToAction(_actionName, newKey); //add new input key to action
+        std::string playerInputKey = inputService->
+                getKeyString(actionMap->getActionKeys(_actionName)[0]); // get first key from list (our game
+                                                                                  // happens to bound
+                                                                                  // only one key per action)
+
+        _textUpdateScript->SetNewText(_actionName + " ( " + playerInputKey  + " )"); // show new key in ui
     }
 }

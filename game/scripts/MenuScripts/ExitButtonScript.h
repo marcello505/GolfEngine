@@ -5,7 +5,6 @@
 #ifndef GOLFENGINE_EXITBUTTONSCRIPT_H
 #define GOLFENGINE_EXITBUTTONSCRIPT_H
 
-
 #include "Scene/Components/BehaviourScript.h"
 
 class ExitButtonScript : public BehaviourScript{

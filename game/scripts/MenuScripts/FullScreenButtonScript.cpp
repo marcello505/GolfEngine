@@ -12,11 +12,9 @@ void FullScreenButtonScript::onUpdate() {
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
     auto* rs = GolfEngine::Services::Render::getService();
 
-    //get range of button area to check if we clicked there
     auto& btn = getParentGameObject<Button>();
 
-    if(btn.isClicked()){
-        GolfEngine::Services::Render::getService()->setFullScreen(!rs->fullScreen());
-        sceneManager.loadScene("settings");
+    if(btn.isClicked()){ //if button is clicked
+        GolfEngine::Services::Render::getService()->setFullScreen(!rs->fullScreen()); //toggle fullScreen
     }
 }
