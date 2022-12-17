@@ -66,6 +66,7 @@ namespace GameLoopTests{
         void setWindowTitle(const std::string& title) override {}
         int screenSizeHeight() const override { return 0; }
         int screenSizeWidth() const override { return 0; }
+        bool fullScreen() const override { return false; }
     };
 
     class DummyPhysicsService : public PhysicsService{
