@@ -18,7 +18,7 @@ public:
     /// \param spriteSheetRows Amount of rows of cells in the sprite sheet
     /// \param spriteSheetCols Amount of columns of cells in the sprite sheet
     /// \param spriteSheetCellSize The size of a cell in the sprite sheet (rectangle containing a single sprite)
-    Animator(std::string spriteSheetPath, int spriteSheetRows, int spriteSheetCols, Vector2 spriteSheetCellSize);
+    Animator(std::string spriteSheetPath, int spriteSheetRows, int spriteSheetCols, Vector2 spriteSheetCellSize, Vector2 pixelScale =Vector2(1,1));
 
     /// Adds an animation to the list of animations
     /// \param name The name of the animation to address later for playing
@@ -66,6 +66,7 @@ private:
     bool _looping;
     int _countedFrames;
     int _currentCell;
+    Vector2 _pixelScale;
 
     struct Snapshot : public ISnapshot{
         bool looping;

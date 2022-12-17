@@ -3,19 +3,26 @@
 #include "Core/GameLoop.h"
 #include "Core/Settings.h"
 #include "Services/Singletons/RenderSingleton.h"
-#include <SDL.h>
-
-//TODO find something to fix this
-#include <SDL.h>
 
 // Game includes
 #include "scenes/PlayerTestScene.h"
+
+#include "scenes/MainMenuScene.h"
+#include "scenes/SelectLevelScene.h"
+#include "scenes/SettingsScene.h"
+#include "Scene/Components/AudioSource.h"
+
 #include "scenes/SaveGameTestScene.h"
+#include <SDL.h>
+
 
 
 int main(int argc, char* argv[]){
     GameLoop gameLoop {};
     gameLoop.useDefaultServices();
+
+    //Render initialization
+    GolfEngine::Services::Render::getService()->setScreenSize(1920, 1080);
     GolfEngine::Services::Render::getService()->setWindowTitle("Game name");
 
     //Set up controls
@@ -43,23 +50,32 @@ int main(int argc, char* argv[]){
     actionMap->addAction("playReplay");
     actionMap->addInputKeyToAction("playReplay", InputKey::Key_P);
 
+    //Set up menu controls
+    actionMap->addAction("clickButton");
+    actionMap->addInputKeyToAction("clickButton", Mouse_Left);
+
     // Save Game actions
     actionMap->addAction("saveGame");
     actionMap->addInputKeyToAction("saveGame", InputKey::Key_K);
     actionMap->addAction("loadGame");
     actionMap->addInputKeyToAction("loadGame", InputKey::Key_L);
 
+    // Render FPS
+    actionMap->addAction("renderFPS");
+    actionMap->addInputKeyToAction("renderFPS", Key_F9);
+
     //Debug settings
     GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS, true); //Render colliders
+    GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_PATHFINDING, false); //Render pathfinding nodes
 
     //Scene initialization
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
     sceneManager.addScene<PlayerTestScene>("playerTest");
     sceneManager.addScene<SaveGameTestScene>("saveGameTest");
-    sceneManager.loadScene("playerTest");
-
-    //Render initialization
-    GolfEngine::Services::Render::getService()->setScreenSize(1280, 720);
+    sceneManager.addSceneFactory<MainMenuScene>("mainMenu");
+    sceneManager.addSceneFactory<SelectLevelScene>("selectLevel");
+    sceneManager.addSceneFactory<SettingsScene>("settings");
+    sceneManager.loadScene("mainMenu");
 
     gameLoop.start();
     return 0;
