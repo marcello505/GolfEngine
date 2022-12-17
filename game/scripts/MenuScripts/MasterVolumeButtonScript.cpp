@@ -21,8 +21,12 @@ void MasterVolumeButtonScript::onUpdate() {
         float newVolume;
         if(btn._text.value == "-"){  //if button is meant for minus
             newVolume = _audioService->getMasterVolume() - 0.05f;
+            if(newVolume < 0.0f)
+                newVolume = 0.0f;
         } else {
             newVolume = _audioService->getMasterVolume() + 0.05f;
+            if(newVolume > 1.0f)
+                newVolume = 1.0f;
         }
 
         // Update volume in Audio Service and update text

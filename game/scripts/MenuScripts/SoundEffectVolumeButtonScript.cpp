@@ -19,8 +19,12 @@ void SoundEffectVolumeButtonScript::onUpdate() {
         float newVolume;
         if(btn._text.value == "-"){ //if button is clicked
             newVolume = _audioService->getSfxVolume() - 0.05f;
+            if(newVolume < 0.0f)
+                newVolume = 0.0f;
         } else {
             newVolume = _audioService->getSfxVolume() + 0.05f;
+            if(newVolume > 1.0f)
+                newVolume = 1.0f;
         }
 
         _audioService->setSfxVolume(newVolume); //lower sfx volume

@@ -21,8 +21,12 @@ void MusicVolumeButtonScript::onUpdate() {
         float newVolume;
         if(btn._text.value == "-"){
             newVolume = _audioService->getMusicVolume() - 0.05f;
+            if(newVolume < 0.0f)
+                newVolume = 0.0f;
         } else {
             newVolume = _audioService->getMusicVolume() + 0.05f;
+            if(newVolume > 1.0f)
+                newVolume = 1.0f;
         }
 
         _audioService->setMusicVolume(newVolume); //lower music volume
