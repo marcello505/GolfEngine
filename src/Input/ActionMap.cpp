@@ -54,7 +54,7 @@ ActionMap* ActionMap::actionMap = nullptr;
     }
 
     // remove action from actionlist
-    void ActionMap::removeInputKeyFromAction(std::string& action){
+    void ActionMap::removeInputKeysFromAction(std::string& action){
         for (auto &_actionList : _inputKeys){
             for (auto &_action : _actionList.second){
                 if(_action.name == action){

@@ -21,7 +21,7 @@ void KeyConfigButtonScript::onUpdate() {
             newKey = inputService->getKeyPressed();
         }
         inputService->setKeyPressed(false); // setup available for next read
-        actionMap->removeInputKeyFromAction(_actionName); //remove current input key bound to action
+        actionMap->removeInputKeysFromAction(_actionName); //remove current input key bound to action
         actionMap->addInputKeyToAction(_actionName, newKey); //add new input key to action
         std::string playerInputKey = inputService->
                 getKeyString(actionMap->getActionKeys(_actionName)[0]); // get first key from list (our game
