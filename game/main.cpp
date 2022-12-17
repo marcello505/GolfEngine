@@ -13,6 +13,7 @@
 #include "scenes/Level2Scene.h"
 #include "scenes/Level1Scene.h"
 #include "scenes/SaveGameTestScene.h"
+#include "Services/Singletons/PathfindingSingleton.h"
 #include <SDL.h>
 
 
@@ -23,6 +24,7 @@ int main(int argc, char* argv[]){
     //Render initialization
 //    GolfEngine::Services::Render::getService()->setScreenSize(1920, 1080);
     GolfEngine::Services::Render::getService()->setScreenSize(1280, 720);
+    GolfEngine::Services::Pathfinding::getService()->setGraphSize(1920,1920);
 
     //Set up controls
     auto* actionMap = ActionMap::getActionMap();
