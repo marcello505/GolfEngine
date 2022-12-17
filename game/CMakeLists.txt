@@ -4,7 +4,6 @@ cmake_minimum_required(VERSION 3.23)
 set(CMAKE_CXX_STANDARD 17)
 
 # Sources
-
 set(SCRIPT_SOURCES
         scripts/PlayerMovementScript.cpp
         scripts/ProjectilePoolScript.cpp
@@ -16,7 +15,18 @@ set(SCRIPT_SOURCES
         scripts/PlayerCollisionScript.cpp
         scripts/GameManagerScript.cpp
         scripts/EnemyMovementScript.cpp
-        scripts/EnemyCollisionScript.cpp)
+        scripts/EnemyCollisionScript.cpp
+        scripts/MenuScripts/StartGameButtonScript.cpp
+        scripts/MenuScripts/SelectLevelButtonScript.cpp
+        scripts/MenuScripts/BackButtonScript.cpp
+        scripts/MenuScripts/SettingsButtonScript.cpp
+        scripts/MenuScripts/MasterVolumeButtonScript.cpp
+        scripts/MenuScripts/SoundEffectVolumeButtonScript.cpp
+        scripts/MenuScripts/FullScreenButtonScript.cpp
+        scripts/MenuScripts/ExitButtonScript.cpp
+        scripts/MenuScripts/TextUpdateScript.cpp
+        scripts/MenuScripts/MusicVolumeButtonScript.cpp
+        scripts/MenuScripts/KeyConfigButtonScript.cpp)
 
 set(GAMEOBJECTS_SOURCES
         gameobjects/PlayerObject.cpp     
@@ -32,7 +42,10 @@ set(SCENE_SOURCES
         scenes/PlayerTestScene.cpp
         scenes/SaveGameTestScene.cpp
         scenes/Level2Scene.cpp
-        scenes/Level1Scene.cpp)
+        scenes/Level1Scene.cpp
+        scenes/MainMenuScene.cpp
+        scenes/SelectLevelScene.cpp
+        scenes/SettingsScene.cpp)
 
 # Resource files
 add_custom_target(Game_Resources ALL

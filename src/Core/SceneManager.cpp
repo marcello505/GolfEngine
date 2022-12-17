@@ -55,6 +55,7 @@ namespace GolfEngine {
                     GolfEngine::Services::Render::getService()->setMainCamera({});
                 }
 
+                //Start Scene
                 _currentScene->startScene();
 
                 //Create new PathFinding Graph

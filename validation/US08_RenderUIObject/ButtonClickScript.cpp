@@ -2,11 +2,8 @@
 // Created by olafv on 12/12/2022.
 //
 
-#include <iostream>
 #include "ButtonClickScript.h"
-#include "Input/ActionMap.h"
 #include "Scene/GameObjects/UIObject/Button.h"
-#include <utility>
 
 void ButtonClickScript::onUpdate() {
 
@@ -14,7 +11,7 @@ void ButtonClickScript::onUpdate() {
     auto& btn = getParentGameObject<Button>();
 
     if(btn.isClicked()){
-        btn._text->_renderShape.setText("Clicked!");
+        btn._text.value = "Clicked!";
     }
 }
 

@@ -22,6 +22,11 @@ namespace GameLoopTests{
         int callCount {0};
         GameLoop* gameLoop {nullptr};
 
+        bool pressedKey() const override { return false; }
+        void setKeyPressed(bool pressed) override {}
+        InputKey getKeyPressed() override { return Key_Tab; }
+        std::string getKeyString(InputKey key) override { return std::string(); }
+
     private:
     };
 
@@ -61,6 +66,7 @@ namespace GameLoopTests{
         void setWindowTitle(const std::string& title) override {}
         int screenSizeHeight() const override { return 0; }
         int screenSizeWidth() const override { return 0; }
+        bool fullScreen() const override { return false; }
     };
 
     class DummyPhysicsService : public PhysicsService{

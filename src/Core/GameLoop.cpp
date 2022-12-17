@@ -21,7 +21,25 @@
 
 using namespace GolfEngine::Services;
 
+namespace GolfEngine::Core{
+
+    GameLoop* _currentlyRunningGameLoop {};
+
+    GameLoop& getRunningGameLoop() {
+        if(_currentlyRunningGameLoop){
+            return *_currentlyRunningGameLoop;
+        }
+        else{
+            throw std::logic_error("No GameLoop is currently running.");
+        }
+    }
+}
+
+
 void GameLoop::start() {
+    //Set this GameLoop as the currently running GameLoop
+    GolfEngine::Core::_currentlyRunningGameLoop = this;
+
     //Initialize services
     if(Audio::hasService()) Audio::getService()->init();
 
@@ -47,6 +65,7 @@ void GameLoop::start() {
 }
 
 void GameLoop::stop() {
+    GolfEngine::Core::_currentlyRunningGameLoop = nullptr;
     _running = false;
 }
 

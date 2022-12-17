@@ -35,6 +35,8 @@
         void setMousePosition(int x, int y);
         ActionMap();
         void setInputKeyPressed(InputKey inputKey, bool pressed);
+        std::vector<InputKey> getActionKeys(std::string action);
+        void removeInputKeysFromAction(std::string& action);
 
         /// Primarily used by Replays to directly set the inputs
         /// \param action name of the action
