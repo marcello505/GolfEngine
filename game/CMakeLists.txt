@@ -45,7 +45,8 @@ set(SCENE_SOURCES
         scenes/SelectLevelScene.cpp
         scenes/SettingsScene.cpp
         scenes/Level2Scene.cpp
-        scenes/Level1Scene.cpp)
+        scenes/Level1Scene.cpp
+        scenes/Level3Scene.cpp)
 
 
 # Resource files

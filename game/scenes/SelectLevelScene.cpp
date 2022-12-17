@@ -41,14 +41,14 @@ void SelectLevelScene::build(Scene& scene) const {
                                                               Vector2(rs->screenSizeWidth() / 5.0,
                                                                       rs->screenSizeHeight() / 2.0) ,true,
                                                                       "clickButton", Vector2(0, 0), 0,
-                                                                      "Start game", 20, Color(),
+                                                                      "1", 20, Color(),
                                                                       "res/fonts/Rubik-VariableFont_wght.ttf"
                                                                       ,Alignment::Center);
     script.setParentGameObject(startLevelOneButton);
     startLevelOneButton.addComponent<StartGameButtonScript>(script);
 
     auto& startLevelOneImage = scene.createNewGameObject<GameObject>();
-    startLevelOneImage.addComponent<SpriteComponent>("res/sprites/level-1.png");
+    startLevelOneImage.addComponent<SpriteComponent>("res/sprites/level1.png");
     startLevelOneImage.setWorldTransform(Transform(Vector2(rs->screenSizeWidth() / 5.0,rs->screenSizeHeight() / 2.0),
                                    0, Vector2(1,1)));
 
@@ -58,14 +58,14 @@ void SelectLevelScene::build(Scene& scene) const {
                                                                   Vector2(rs->screenSizeWidth() / 2,
                                                                           rs->screenSizeHeight() / 2.0) ,true,
                                                                   "clickButton", Vector2(0, 0), 0,
-                                                                  "Start game", 20, Color(),
+                                                                  "2", 20, Color(),
                                                                   "res/fonts/Rubik-VariableFont_wght.ttf"
                                                                   ,Alignment::Center);
     script.setParentGameObject(startLevelTwoButton);
     startLevelTwoButton.addComponent<StartGameButtonScript>(script);
 
     auto& startLevelTwoImage = scene.createNewGameObject<GameObject>();
-    startLevelTwoImage.addComponent<SpriteComponent>("res/sprites/level-1.png");
+    startLevelTwoImage.addComponent<SpriteComponent>("res/sprites/level2.png");
     startLevelTwoImage.setWorldTransform(Transform(Vector2(rs->screenSizeWidth() / 2,
                                                            rs->screenSizeHeight() / 2.0), 0, Vector2(1,1)));
 
@@ -75,14 +75,14 @@ void SelectLevelScene::build(Scene& scene) const {
                                                                   Vector2(rs->screenSizeWidth() / 1.25,
                                                                           rs->screenSizeHeight() / 2.0) ,true,
                                                                   "clickButton", Vector2(0, 0), 0,
-                                                                  "Start game", 20, Color(),
+                                                                  "3", 20, Color(),
                                                                   "res/fonts/Rubik-VariableFont_wght.ttf"
                                                                   ,Alignment::Center);
     script.setParentGameObject(startLevelThreeButton);
     startLevelThreeButton.addComponent<StartGameButtonScript>(script);
 
     auto& startLevelThreeImage = scene.createNewGameObject<GameObject>();
-    startLevelThreeImage.addComponent<SpriteComponent>("res/sprites/level-1.png");
+    startLevelThreeImage.addComponent<SpriteComponent>("res/sprites/level3.png");
     startLevelThreeImage.setWorldTransform(Transform(Vector2(rs->screenSizeWidth() / 1.25,
                                                                      rs->screenSizeHeight() / 2.0),
                                                                     0, Vector2(1,1)));
