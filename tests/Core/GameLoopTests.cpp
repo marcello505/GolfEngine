@@ -53,11 +53,14 @@ namespace GameLoopTests{
         void addDrawable(Drawable& drawable) override {}
         void setFullScreen(bool fullScreen) override {};
         std::optional<std::reference_wrapper<Camera>> getMainCamera() const override { return {};}
-        void setMainCamera(Camera& camera) override {}
+        void setMainCamera(const std::optional<std::reference_wrapper<Camera>>& camera) override {}
         bool isRegistered(Drawable& drawable) override {return false;}
         int getScreenSizeWidth() const override {return 0;}
         int getScreenSizeHeight() const override {return 0;}
         Vector2 getCameraOffset() const override {return Vector2();}
+        void setWindowTitle(const std::string& title) override {}
+        int screenSizeHeight() const override { return 0; }
+        int screenSizeWidth() const override { return 0; }
     };
 
     class DummyPhysicsService : public PhysicsService{
@@ -99,6 +102,8 @@ namespace GameLoopTests{
         float getAngularVelocity(RigidBody* pBody) override {return 0;}
         void setAngularVelocity(RigidBody* pRigidBody, float omega) override {}
         void applyLocalForceToCenter(RigidBody* pRigidBody, const Vector2& force) override {}
+        std::vector<Collider*> getStaticColliders() override { return {}; }
+        bool raycastWorld(RigidBody* start, RigidBody* target) override { return false; }
     };
 }
 

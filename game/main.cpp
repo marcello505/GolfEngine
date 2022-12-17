@@ -13,12 +13,16 @@
 #include "scenes/Level2Scene.h"
 #include "scenes/Level1Scene.h"
 #include "scenes/SaveGameTestScene.h"
+#include <SDL.h>
 
 
 int main(int argc, char* argv[]){
     GameLoop gameLoop {};
     gameLoop.useDefaultServices();
     GolfEngine::Services::Render::getService()->setWindowTitle("Game name");
+    //Render initialization
+//    GolfEngine::Services::Render::getService()->setScreenSize(1920, 1080);
+    GolfEngine::Services::Render::getService()->setScreenSize(1280, 720);
 
     //Set up controls
     auto* actionMap = ActionMap::getActionMap();
@@ -53,6 +57,7 @@ int main(int argc, char* argv[]){
 
     //Debug settings
     GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS, true); //Render colliders
+    GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_PATHFINDING, false); //Render pathfinding nodes
 
     //Scene initialization
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
@@ -63,7 +68,6 @@ int main(int argc, char* argv[]){
     sceneManager.loadScene("level1");
 
     //Render initialization
-    GolfEngine::Services::Render::getService()->setScreenSize(1920, 1080);
 
     gameLoop.start();
     return 0;

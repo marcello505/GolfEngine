@@ -5,6 +5,7 @@
 #include "SceneFactory.h"
 #include "Services/Singletons/PathfindingSingleton.h"
 #include "Services/Singletons/PhysicsSingleton.h"
+#include "Core/Settings.h"
 
 #include <utility>
 #include <map>
@@ -26,6 +27,7 @@ int main(int argc, char* argv[])
     ActionMap::getActionMap()->addInputKeyToAction("Up", Key_Up);
     ActionMap::getActionMap()->addInputKeyToAction("Down", Key_Down);
 
+    GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_PATHFINDING, true); //Render pathfinding nodes
 
     //Creates margin around all recColliders
     if(GolfEngine::Services::Pathfinding::hasService())

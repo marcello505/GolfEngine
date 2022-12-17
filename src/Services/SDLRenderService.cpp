@@ -4,6 +4,7 @@
 
 #include "SDLRenderService.h"
 #include "Scene/RenderShape/ButtonRenderShape.h"
+#include "Scene/RenderShape/GraphRenderShape.h"
 #include <cmath>
 #include <iostream>
 #include <algorithm>
@@ -102,6 +103,11 @@ namespace GolfEngine::Services::Render {
                     break;
                 case RenderShapeType::TileMapRenderShape:
                     renderTileMap(dynamic_cast<TileMapRenderShape&>(renderShape));
+                    break;
+                case RenderShapeType::GraphRenderShape:
+                    for(const auto& shape : dynamic_cast<GraphRenderShape&>(renderShape).nodes){
+                        renderRect(*shape);
+                    }
                     break;
             }
         }
@@ -462,18 +468,19 @@ namespace GolfEngine::Services::Render {
     }
     
     TTF_Font& SDLRenderService::loadFont(const std::string& path, size_t fontSize) {
-        auto cachedFont = _cachedFonts.find(path);
-        if(cachedFont != _cachedFonts.end() && cachedFont->second.first == fontSize){
+        auto cachedFont = _cachedFonts.find(std::make_pair(path, fontSize));
+        if(cachedFont != _cachedFonts.end() && cachedFont->first.second == fontSize){
             // Use existing texture
-            return *cachedFont->second.second;
+            return *cachedFont->second;
         }
         else{
             // Load new font
             auto newFont = TTF_OpenFont(path.c_str(), fontSize);
             if(newFont){
                 std::unique_ptr<TTF_Font, void(*)(TTF_Font*)> font_wrapper {newFont, TTF_CloseFont};
-                auto ref = _cachedFonts.insert({path, std::pair<size_t, std::unique_ptr<TTF_Font, void(*)(TTF_Font*)>>(fontSize, std::move(font_wrapper))});
-                return *ref.first->second.second;
+                std::pair<std::string , size_t > pair = std::make_pair(path, fontSize);
+                auto ref = _cachedFonts.insert({pair, std::move(font_wrapper)});
+                return *ref.first->second;
             }
         }
         throw std::runtime_error("Could not find/load font with path: " + path);
@@ -524,7 +531,7 @@ namespace GolfEngine::Services::Render {
             return std::nullopt;
     }
 
-    void SDLRenderService::setMainCamera(Camera &camera) {
+    void SDLRenderService::setMainCamera(const std::optional<std::reference_wrapper<Camera>>& camera) {
         _mainCamera = camera;
     }
 

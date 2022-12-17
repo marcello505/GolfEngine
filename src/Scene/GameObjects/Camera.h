@@ -17,6 +17,8 @@ public:
     Camera(float aspectWidth, float aspectHeight, Color backgroundColor = Color{50, 50, 50, 255});
     explicit Camera(Color backgroundColor = Color{50, 50, 50, 255});
 
+    void onStart() override;
+
     /// Sets the main camera in the render service
     /// \param camera reference to the camera to be set
     static void setMainCamera(Camera& camera);
