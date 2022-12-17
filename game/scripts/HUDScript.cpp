@@ -10,7 +10,8 @@
 #include <iomanip>
 #include "HUDScript.h"
 
-HUDScript::HUDScript(Text* fpsText, Text* timeText, Text* highScoreTimeText) : _fpsText{fpsText}, _timeText{timeText}, _highScoreTimeText{highScoreTimeText}, _renderFPS{false} {
+HUDScript::HUDScript(Text* fpsText, Text* timeText, Text* highScoreTimeText, Text* quitConfirmationText)
+        : _fpsText{fpsText}, _timeText{timeText}, _highScoreTimeText{highScoreTimeText}, _quitConfirmationText{quitConfirmationText}, _renderFPS{false} {
     _gameManager = &GolfEngine::SceneManager::GetSceneManager().getCurrentScene().getGameObjectWithTag("GameManager").getComponent<GameManagerScript>();
 }
 
@@ -50,4 +51,12 @@ void HUDScript::onUpdate() {
     time << ':';
     time << std::setw(2) << std::setfill('0') << (int)(timePassed*100) % 100; // Milliseconds
     _timeText->_renderShape.setText(time.str());
+
+    // Update quit confirmation text
+    if(_gameManager->isWaitingForQuitConfirmation()){
+        _quitConfirmationText->_renderShape.setText("Are you sure you want to quit? Press ESC again to confirm.");
+    }
+    else{
+        _quitConfirmationText->_renderShape.setText("");
+    }
 }

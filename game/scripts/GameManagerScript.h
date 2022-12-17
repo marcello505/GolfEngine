@@ -14,6 +14,8 @@ public:
 
     [[nodiscard]] float getTimePassed() const;
     [[nodiscard]] float getHighScoreTime() const;
+    bool isWaitingForQuitConfirmation() const;
+
     void onStart() override;
     void onUpdate() override;
 private:
@@ -28,6 +30,10 @@ private:
     void startRecordingReplay();
     float _timePassed {0.0f};
     std::string _highScoreKey{};
+
+    // Exit level logic
+    bool _waitingForQuitConfirmation {false};
+    float _quitConfirmationTimePassed {0.0f};
 };
 
 

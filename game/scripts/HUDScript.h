@@ -11,11 +11,11 @@
 
 class HUDScript : public BehaviourScript {
 public:
-    HUDScript(Text* fpsText, Text* timeText, Text* highScoreTimeText);
+    HUDScript(Text* fpsText, Text* timeText, Text* highScoreTimeText, Text* quitConfirmationText);
     void onStart() override;
     void onUpdate() override;
 private:
-    Text* _fpsText, *_timeText, *_highScoreTimeText;
+    Text* _fpsText, *_timeText, *_highScoreTimeText, *_quitConfirmationText;
     GameManagerScript* _gameManager;
     bool _renderFPS;
 };

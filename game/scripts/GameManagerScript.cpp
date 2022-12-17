@@ -69,6 +69,25 @@ void GameManagerScript::onUpdate() {
         GolfEngine::Time::setTimeScale(GolfEngine::Time::getTimeScale() - 0.1f);
     else if(actionMap->isJustPressed(ACTION_GAME_MANAGER_TIME_SCALE_RESET))
         GolfEngine::Time::setTimeScale(1.0f);
+
+    //Exit level logic
+    {
+        if(_waitingForQuitConfirmation) _quitConfirmationTimePassed += GolfEngine::Time::getPhysicsDeltaTime();
+
+        if(!_waitingForQuitConfirmation && actionMap->isJustPressed(ACTION_GAME_MANAGER_EXIT)){
+            //Esc was pressed once
+            _waitingForQuitConfirmation = true;
+            _quitConfirmationTimePassed = 0.0f;
+        }
+        else if(_waitingForQuitConfirmation && actionMap->isJustPressed(ACTION_GAME_MANAGER_EXIT)){
+            //Escape level
+            GolfEngine::SceneManager::GetSceneManager().loadScene("mainMenu");
+        }
+        else if(_waitingForQuitConfirmation && _quitConfirmationTimePassed >= 3.0f){
+            _waitingForQuitConfirmation = false;
+        }
+    }
+
 }
 
 void GameManagerScript::startRecordingReplay() {
@@ -83,5 +102,9 @@ float GameManagerScript::getHighScoreTime() const {
         return GolfEngine::Core::getProjectSettings().getFloat(_highScoreKey);
     }
     return 0.0f;
+}
+
+bool GameManagerScript::isWaitingForQuitConfirmation() const {
+    return _waitingForQuitConfirmation;
 }
 
