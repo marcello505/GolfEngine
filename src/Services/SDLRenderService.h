@@ -64,7 +64,7 @@ public:
     [[nodiscard]] int screenSizeHeight() const;
     [[nodiscard]] bool fullScreen() const;
     [[nodiscard]] std::optional<std::reference_wrapper<Camera>> getMainCamera() const override;
-    void setMainCamera(Camera& camera) override;
+    void setMainCamera(const std::optional<std::reference_wrapper<Camera>>& camera) override;
     [[nodiscard]] int getScreenSizeWidth() const override;
     [[nodiscard]] int getScreenSizeHeight() const override;
     [[nodiscard]] Vector2 getCameraOffset() const override;

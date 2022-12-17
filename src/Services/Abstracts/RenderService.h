@@ -26,7 +26,7 @@ public:
     [[nodiscard]] virtual int screenSizeWidth() const = 0;
     [[nodiscard]] virtual bool fullScreen() const = 0;
     [[nodiscard]] virtual std::optional<std::reference_wrapper<Camera>> getMainCamera() const = 0;
-    virtual void setMainCamera(Camera& camera) = 0;
+    virtual void setMainCamera(const std::optional<std::reference_wrapper<Camera>>& camera) = 0;
 
     // Virtual Destructors
     virtual ~RenderService() = default;

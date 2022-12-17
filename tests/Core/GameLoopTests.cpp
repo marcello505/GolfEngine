@@ -58,7 +58,7 @@ namespace GameLoopTests{
         void addDrawable(Drawable& drawable) override {}
         void setFullScreen(bool fullScreen) override {};
         std::optional<std::reference_wrapper<Camera>> getMainCamera() const override { return {};}
-        void setMainCamera(Camera& camera) override {}
+        void setMainCamera(const std::optional<std::reference_wrapper<Camera>>& camera) override {}
         bool isRegistered(Drawable& drawable) override {return false;}
         int getScreenSizeWidth() const override {return 0;}
         int getScreenSizeHeight() const override {return 0;}
