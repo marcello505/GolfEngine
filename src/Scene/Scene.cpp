@@ -5,7 +5,6 @@
 #include "Scene.h"
 #include "GameObjects/GameObject.h"
 #include "Input/ActionMap.h"
-#include "Core/SceneManager.h"
 
 //Add a max replay length so it doesn't keep growing. 36000 frames = 10 minutes
 #define MAX_REPLAY_LENGTH 36000
@@ -26,8 +25,6 @@ void Scene::updateScene() {
     for(auto& go : _gameObjects)
         if(go->getActive()){
             go->onUpdate();
-            if(&GolfEngine::SceneManager::GetSceneManager().getCurrentScene() != this)
-                return;
         }
 }
 

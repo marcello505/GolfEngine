@@ -50,26 +50,18 @@ namespace GolfEngine {
                 _currentScene = std::make_unique<Scene>();
                 sceneFactory->second->build(*_currentScene);
 
-
                 //Reset camera to empty
                 if(GolfEngine::Services::Render::hasService()){
                     GolfEngine::Services::Render::getService()->setMainCamera({});
                 }
 
+                //Start Scene
                 _currentScene->startScene();
-
 
                 //Create new PathFinding Graph
                 if(GolfEngine::Services::Pathfinding::hasService()){
                     GolfEngine::Services::Pathfinding::getService()->createGraph();
                 }
-
-                //Reset camera to empty
-                if(GolfEngine::Services::Render::hasService()){
-                    GolfEngine::Services::Render::getService()->setMainCamera({});
-                }
-
-                _currentScene->startScene();
             }
 
 
