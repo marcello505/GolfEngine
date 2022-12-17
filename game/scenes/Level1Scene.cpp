@@ -69,13 +69,14 @@ void Level1Scene::build(Scene& scene) const {
     enemy6.setLocalPosition({330.f, 1140.f});
 
     auto& enemy7 = scene.createNewGameObject<EnemyObject>(root, &player);
-    enemy7.setLocalPosition({700.f, 1180.f});
-    enemy7.addPatrolPoint({700.f, 1180.f});
-    enemy7.addPatrolPoint({390.f, 1130.f});
-    enemy7.addPatrolPoint({390.f, 800.f});
+    enemy7.setLocalPosition({640.f, 800.f});
     enemy7.addPatrolPoint({640.f, 800.f});
     enemy7.addPatrolPoint({390.f, 800.f});
     enemy7.addPatrolPoint({390.f, 1130.f});
+    enemy7.addPatrolPoint({700.f, 1180.f});
+    enemy7.addPatrolPoint({390.f, 1130.f});
+    enemy7.addPatrolPoint({390.f, 800.f});
+
 
 
     auto& enemy8 = scene.createNewGameObject<EnemyObject>(root, &player);

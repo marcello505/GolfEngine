@@ -63,7 +63,7 @@ void SelectLevelScene::build(Scene& scene) const {
                                                                   "Start game", 20, Color(),
                                                                   "res/fonts/Rubik-VariableFont_wght.ttf"
                                                                   ,Alignment::Center);
-    startLevelTwoButton.name = "level2";
+    startLevelTwoButton.name = "playerTest";
 
     script.setParentGameObject(startLevelTwoButton);
     startLevelTwoButton.addComponent<StartGameButtonScript>(script);
