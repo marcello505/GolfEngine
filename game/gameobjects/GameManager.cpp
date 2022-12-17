@@ -5,7 +5,7 @@
 #include "GameManager.h"
 #include "../scripts/GameManagerScript.h"
 
-GameManager::GameManager() {
+GameManager::GameManager(const std::string& nextLevelName) {
     tag = "GameManager";
-    addComponent<GameManagerScript>();
+    addComponent<GameManagerScript>(nextLevelName);
 }

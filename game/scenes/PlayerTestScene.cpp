@@ -19,23 +19,13 @@
 #include "Scene/GameObjects/Camera.h"
 #include "../gameobjects/HUD.h"
 #include "Services/Singletons/PathfindingSingleton.h"
+#include "../gameobjects/FinishLevelAreaObject.h"
 
 void PlayerTestScene::build(Scene& scene) const {
 
     auto* rs = GolfEngine::Services::Render::getService();
     auto& root = scene.createNewGameObject<GameObject>();
     root.addComponent<SaveStateScript>();
-
-    BackButtonScript backScript;
-    auto& backButton = scene.createNewGameObject<Button>(root, 45, 26,
-                                                         Vector2(rs->screenSizeWidth() / 100 * 4,
-                                                                 rs->screenSizeHeight() / 100 * 1.8) ,true,
-                                                         "clickButton", Vector2(0, 0), 0,
-                                                         "Back", 15, Color(),
-                                                         "res/fonts/Rubik-VariableFont_wght.ttf",
-                                                         Alignment::Center);
-    backScript.setParentGameObject(backButton);
-    backButton.addComponent<BackButtonScript>(backScript);
 
     //Walls
     {
@@ -64,11 +54,8 @@ void PlayerTestScene::build(Scene& scene) const {
     // Add camera to player
     scene.createNewGameObject<Camera>((GameObject&)player);
 
-    auto& testFinishArea = scene.createNewGameObject<GameObject>();
-    testFinishArea.addComponent<BoxCollider>(Vector2{50.0f, 50.0f});
-    testFinishArea.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::AreaBody});
-    testFinishArea.tag = "finish";
-    testFinishArea.setLocalPosition({1000.0f, 100.0f});
+    //Finish area
+    scene.createNewGameObject<FinishLevelAreaObject>(Vector2{1000.0f, 100.0f}, Vector2{50.0f, 50.0f});
 
     auto& testEnemyCollision = scene.createNewGameObject<GameObject>();
     testEnemyCollision.addComponent<BoxCollider>(Vector2{25.0f, 25.0f});
@@ -95,7 +82,7 @@ void PlayerTestScene::build(Scene& scene) const {
    auto& enemy4 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
    enemy4.setLocalPosition({850.f, 150.f});
 
-    scene.createNewGameObject<GameManager>();
+    scene.createNewGameObject<GameManager>("mainMenu");
 
     GolfEngine::Services::Pathfinding::getService()->setGraphSize(1280, 720);
     GolfEngine::Services::Pathfinding::getService()->setNodeDistance(50);

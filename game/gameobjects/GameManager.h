@@ -9,7 +9,7 @@
 
 class GameManager : public GameObject{
 public:
-    GameManager();
+    GameManager(const std::string& nextLevelName);
 };
 
 
