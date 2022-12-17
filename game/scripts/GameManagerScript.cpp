@@ -11,12 +11,11 @@
 
 void GameManagerScript::restartLevel() {
     GolfEngine::SceneManager::GetSceneManager().getCurrentScene().loadCurrentSceneState(1);
+    startRecordingReplay();
 }
 
 void GameManagerScript::tryFinishLevel() {
-    // TODO check if all enemies have died before calling finishLevel()
     auto enemyGameObjects = GolfEngine::SceneManager::GetSceneManager().getCurrentScene().getGameObjectsWithTag("enemy");
-
     bool allEnemiesDead {true};
 
     for(const auto& enemy : enemyGameObjects){
@@ -31,16 +30,20 @@ void GameManagerScript::tryFinishLevel() {
 }
 
 void GameManagerScript::finishLevel() {
-    // TODO finish the level by showing replay
-    std::cout << "finish" << std::endl;
+    GolfEngine::SceneManager::GetSceneManager().getCurrentScene().playReplay();
 }
 
 void GameManagerScript::onStart() {
     GolfEngine::SceneManager::GetSceneManager().getCurrentScene().saveCurrentSceneState(1);
+    startRecordingReplay();
 }
 
 void GameManagerScript::onUpdate() {
     if(ActionMap::getActionMap()->isJustPressed("restart"))
         restartLevel();
+}
+
+void GameManagerScript::startRecordingReplay() {
+    GolfEngine::SceneManager::GetSceneManager().getCurrentScene().startRecordingReplay(_playerActionsToLock, true);
 }
 

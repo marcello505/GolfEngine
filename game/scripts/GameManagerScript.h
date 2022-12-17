@@ -11,10 +11,18 @@ class GameManagerScript : public BehaviourScript {
 public:
     void restartLevel();
     void tryFinishLevel();
-private:
     void onStart() override;
     void onUpdate() override;
+private:
+    std::vector<std::string> _playerActionsToLock {"playerLeft",
+                                                   "playerRight",
+                                                   "playerUp",
+                                                   "playerDown",
+                                                   "playerShoot",
+                                                   "playerReload"};
+
     void finishLevel();
+    void startRecordingReplay();
 };
 
 
