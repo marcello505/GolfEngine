@@ -35,8 +35,6 @@ void PlayerMovementScript::onUpdate() {
         }
 
         _rb->applyWorldForceToCenter(inputDirection.normalized() * playerSpeed);
-
-        std::cout << "X = " << _gameObject->get().getWorldTransform().position.x  << "Y = " << _gameObject->get().getWorldTransform().position.y << std::endl ;
     }
 
     //Point to mouse logic
