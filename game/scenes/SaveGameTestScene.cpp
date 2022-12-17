@@ -30,7 +30,7 @@ void SaveGameTestScene::build(Scene& scene) const {
 
     auto& projectilePool = scene.createNewGameObject<ProjectilePoolObject>(root, std::ref(scene), 20);
 
-    auto& player = scene.createNewGameObject<PlayerObject>(root, &projectilePool.getComponent<ProjectilePoolScript>());
+    auto& player = scene.createNewGameObject<PlayerObject>(root, &projectilePool.getComponent<ProjectilePoolScript>(), std::ref(scene));
     player.setLocalPosition({200.f, 200.f});
     scene.createNewGameObject<Camera>((GameObject&)player);
 

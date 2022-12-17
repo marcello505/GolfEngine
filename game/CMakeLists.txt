@@ -39,6 +39,7 @@ set(GAMEOBJECTS_SOURCES
         gameobjects/GameManager.cpp
         gameobjects/HUD.cpp
         gameobjects/EnemyObject.cpp
+        gameobjects/BloodSplatterParticleEffect.cpp
         gameobjects/FinishLevelAreaObject.cpp)
 
 set(SCENE_SOURCES
