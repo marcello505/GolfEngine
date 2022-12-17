@@ -20,12 +20,10 @@
 int main(int argc, char* argv[]){
     GameLoop gameLoop {};
     gameLoop.useDefaultServices();
-    //Render initialization
-    GolfEngine::Services::Render::getService()->setScreenSize(1920, 1080);
-    GolfEngine::Services::Render::getService()->setWindowTitle("Game name");
 
     //Render initialization
     GolfEngine::Services::Render::getService()->setScreenSize(1920, 1080);
+    GolfEngine::Services::Render::getService()->setWindowTitle("Game name");
 
     //Set up controls
     auto* actionMap = ActionMap::getActionMap();
@@ -64,7 +62,7 @@ int main(int argc, char* argv[]){
 
     // Render FPS
     actionMap->addAction("renderFPS");
-    actionMap->addInputKeyToAction("renderFPS", Key_BackQuote);
+    actionMap->addInputKeyToAction("renderFPS", Key_F9);
 
     //Debug settings
     GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS, true); //Render colliders
