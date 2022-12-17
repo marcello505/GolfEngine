@@ -6,6 +6,7 @@
 
 // Game includes
 #include "utils/GameActions.h"
+#include "utils/GameSettings.h"
 #include "scenes/PlayerTestScene.h"
 #include "scenes/Level2Scene.h"
 #include "scenes/Level1Scene.h"
@@ -83,6 +84,9 @@ int main(int argc, char* argv[]){
     //Debug settings
     GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS, true); //Render colliders
     GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_PATHFINDING, false); //Render pathfinding nodes
+
+    //Game-based debug settigns
+    GolfEngine::Core::getProjectSettings().setBool(GAME_SETTINGS_DEBUG_PRINT_PLAYER_POS, true); //Output player position in console
 
     //Scene initialization
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();

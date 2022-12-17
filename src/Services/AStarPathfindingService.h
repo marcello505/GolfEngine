@@ -25,6 +25,8 @@ namespace GolfEngine::Services::Pathfinding{
 
         int _graphWidth {1920};
         int _graphHeight {1080};
+        int _graphStartPointX {0};
+        int _graphStartPointY {0};
         int _maxPathsToCalculatePerTic {1};
 
     public:
@@ -87,6 +89,8 @@ namespace GolfEngine::Services::Pathfinding{
         /// By default this is set to 1
         /// \param maxPathsPerTic an integer of 1 or more
         void setMaxPathsToCalculatePerTic(int maxPathsPerTic) override;
+
+        void setGraphStartPoint(int x, int y) override;
     };
 
     struct heuristicValues {
