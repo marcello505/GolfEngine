@@ -109,7 +109,7 @@ void Level1Scene::build(Scene& scene) const {
     auto& enemy14 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
     enemy14.setLocalPosition({870.f, 300.f});
 
-    scene.createNewGameObject<GameManager>();
+    scene.createNewGameObject<GameManager>("mainMenu");
 
     if(GolfEngine::Services::Pathfinding::hasService()) {
         GolfEngine::Services::Pathfinding::getService()->setGraphSize(1980, 1980);
