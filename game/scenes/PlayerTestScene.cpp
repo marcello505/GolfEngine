@@ -19,6 +19,7 @@
 #include "Scene/GameObjects/Camera.h"
 #include "../gameobjects/HUD.h"
 #include "Services/Singletons/PathfindingSingleton.h"
+#include "../gameobjects/FinishLevelAreaObject.h"
 
 void PlayerTestScene::build(Scene& scene) const {
 
@@ -53,11 +54,8 @@ void PlayerTestScene::build(Scene& scene) const {
     // Add camera to player
     scene.createNewGameObject<Camera>((GameObject&)player);
 
-    auto& testFinishArea = scene.createNewGameObject<GameObject>();
-    testFinishArea.addComponent<BoxCollider>(Vector2{50.0f, 50.0f});
-    testFinishArea.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::AreaBody});
-    testFinishArea.tag = "finish";
-    testFinishArea.setLocalPosition({1000.0f, 100.0f});
+    //Finish area
+    scene.createNewGameObject<FinishLevelAreaObject>(Vector2{1000.0f, 100.0f}, Vector2{50.0f, 50.0f});
 
     auto& testEnemyCollision = scene.createNewGameObject<GameObject>();
     testEnemyCollision.addComponent<BoxCollider>(Vector2{25.0f, 25.0f});

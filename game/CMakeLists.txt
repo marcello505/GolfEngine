@@ -38,7 +38,8 @@ set(GAMEOBJECTS_SOURCES
         gameobjects/TestBlock.cpp
         gameobjects/GameManager.cpp
         gameobjects/HUD.cpp
-        gameobjects/EnemyObject.cpp)
+        gameobjects/EnemyObject.cpp
+        gameobjects/FinishLevelAreaObject.cpp)
 
 set(SCENE_SOURCES
         scenes/PlayerTestScene.cpp
