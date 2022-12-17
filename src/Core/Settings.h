@@ -12,6 +12,7 @@
 
 //Engine recognized Project Settings keys
 #define PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS "debugRenderColliders" //Enable/Disable rendering of Colliders
+#define PROJECT_SETTINGS_BOOL_RENDER_PATHFINDING "debugRenderPathfinding" //Enable/Disable rendering of pathfinding nodes
 
 namespace GolfEngine::Core{
     enum class SettingsTypes{
