@@ -26,17 +26,6 @@ void PlayerTestScene::build(Scene& scene) const {
     auto& root = scene.createNewGameObject<GameObject>();
     root.addComponent<SaveStateScript>();
 
-    BackButtonScript backScript;
-    auto& backButton = scene.createNewGameObject<Button>(root, 45, 26,
-                                                         Vector2(rs->screenSizeWidth() / 100 * 4,
-                                                                 rs->screenSizeHeight() / 100 * 1.8) ,true,
-                                                         "clickButton", Vector2(0, 0), 0,
-                                                         "Back", 15, Color(),
-                                                         "res/fonts/Rubik-VariableFont_wght.ttf",
-                                                         Alignment::Center);
-    backScript.setParentGameObject(backButton);
-    backButton.addComponent<BackButtonScript>(backScript);
-
     //Walls
     {
         //Borders

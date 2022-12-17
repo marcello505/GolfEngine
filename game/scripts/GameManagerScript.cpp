@@ -9,6 +9,7 @@
 #include <Core/Time.h>
 #include <Core/Settings.h>
 
+#include "../utils/GameActions.h"
 #include "GameManagerScript.h"
 #include "EnemyCollisionScript.h"
 
@@ -57,10 +58,17 @@ void GameManagerScript::onStart() {
 }
 
 void GameManagerScript::onUpdate() {
+    ActionMap* actionMap = ActionMap::getActionMap();
     _timePassed += GolfEngine::Time::getPhysicsDeltaTime();
 
-    if(ActionMap::getActionMap()->isJustPressed("restart"))
+    if(actionMap->isJustPressed(ACTION_GAME_MANAGER_RESTART))
         restartLevel();
+    else if(actionMap->isJustPressed(ACTION_GAME_MANAGER_TIME_SCALE_UP))
+        GolfEngine::Time::setTimeScale(GolfEngine::Time::getTimeScale() + 0.1f);
+    else if(actionMap->isJustPressed(ACTION_GAME_MANAGER_TIME_SCALE_DOWN))
+        GolfEngine::Time::setTimeScale(GolfEngine::Time::getTimeScale() - 0.1f);
+    else if(actionMap->isJustPressed(ACTION_GAME_MANAGER_TIME_SCALE_RESET))
+        GolfEngine::Time::setTimeScale(1.0f);
 }
 
 void GameManagerScript::startRecordingReplay() {
