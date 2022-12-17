@@ -12,6 +12,7 @@
 #include "../Services/Abstracts/RenderService.h"
 #include "../Services/Abstracts/PhysicsService.h"
 #include "../Services/Abstracts/TileMapParserService.h"
+#include "../Services/Abstracts/PathfindingService.h"
 #include "SceneManager.h"
 #include "../Input/ActionMap.h"
 #include "Time.h"
@@ -26,6 +27,7 @@ public:
     void setRenderService(RenderService* renderService);
     void setPhysicsService(PhysicsService* physicsService);
     void setTileMapParserService(TileMapParserService* tileMapParserService);
+    void setPathfindingService(PathfindingService* pathfindingService);
     void setFramesPerSeccond(GameTic fps);
     [[nodiscard]] bool isGameRunning() const;
 
@@ -38,10 +40,10 @@ private:
     bool _running {true};
     std::chrono::duration<GameTic, std::milli> _msPerUpdate {1000.f/ 60};
 
-
     void processInput();
     void update();
     void render();
+    static void findPaths();
 };
 
 

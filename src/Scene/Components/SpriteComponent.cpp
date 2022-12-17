@@ -20,9 +20,8 @@ void SpriteComponent::onUpdate() {
 }
 
 void SpriteComponent::onRemove() {
-    auto renderService = GolfEngine::Services::Render::getService();
-    if(renderService)
-        renderService->removeDrawable(*this);
+    if(GolfEngine::Services::Render::hasService() && GolfEngine::Services::Render::getService()->isRegistered(*this))
+        GolfEngine::Services::Render::getService()->removeDrawable(*this);
 }
 
 bool SpriteComponent::getActive() {

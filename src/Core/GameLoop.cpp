@@ -9,17 +9,22 @@
 #include "../Services/SDLRenderService.h"
 #include "../Services/Box2DPhysicsService.h"
 #include "../Services/PugiXMLTileMapParserService.h"
+#include "../Services/AStarPathfindingService.h"
 #define GOLFENGINE_SINGLETON_PRIVATE //Grants access to the "private" methods of singletons
 #include "../Services/Singletons/PhysicsSingleton.h"
 #include "../Services/Singletons/AudioSingleton.h"
 #include "../Services/Singletons/RenderSingleton.h"
 #include "../Services/Singletons/InputSingleton.h"
+#include "../Services/Singletons/PathfindingSingleton.h"
 #include "../Services/Singletons/TileMapParserSingleton.h"
 #include "../Input/ActionMap.h"
 
 using namespace GolfEngine::Services;
 
 void GameLoop::start() {
+    //Initialize services
+    if(Audio::hasService()) Audio::getService()->init();
+
     auto previous = std::chrono::steady_clock::now();
     std::chrono::duration<GameTic, std::milli> lag {0.0f};
 
@@ -33,6 +38,7 @@ void GameLoop::start() {
 
         while(lag >= _msPerUpdate / time->getTimeScale()){
             update();
+            findPaths();
             lag -= _msPerUpdate / time->getTimeScale();
         }
 
@@ -59,8 +65,10 @@ void GameLoop::update() {
     }
 
     // Update scene
-    if(GolfEngine::SceneManager::GetSceneManager().hasCurrentScene()){
-        auto& currentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
+    auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
+    sceneManager.updateSceneManager();
+    if(sceneManager.hasCurrentScene()){
+        auto& currentScene = sceneManager.getCurrentScene();
         currentScene.updateReplay();
         currentScene.updateScene();
     }
@@ -77,17 +85,21 @@ void GameLoop::render() {
         Render::getService()->render();
     }
 }
-
+void GameLoop::findPaths() {
+    if(GolfEngine::Services::Pathfinding::hasService()){
+        GolfEngine::Services::Pathfinding::getService()->findPathEveryTick();
+    }
+}
 void GameLoop::useDefaultServices() {
     setInputService(new SDLInputService());
     setAudioService(new SDLAudioService());
     setRenderService(new Render::SDLRenderService {});
     setPhysicsService(new Physics::Box2DPhysicsService {});
     setTileMapParserService(new TileMapParser::PugiXMLTileMapParserService{});
+    setPathfindingService(new GolfEngine::Services::Pathfinding::AStarPathfindingService {});
 }
 
 // SETTERS AND GETTERS
-
 void GameLoop::setFramesPerSeccond(GameTic fps) {
     _msPerUpdate = std::chrono::duration<GameTic, std::milli>{1000.f / fps};
 }
@@ -121,4 +133,8 @@ void GameLoop::setTileMapParserService(TileMapParserService* tileMapParserServic
 
 bool GameLoop::isGameRunning() const {
     return _running;
+}
+
+void GameLoop::setPathfindingService(PathfindingService* pathfindingService) {
+    GolfEngine::Services::Pathfinding::setService(pathfindingService);
 }

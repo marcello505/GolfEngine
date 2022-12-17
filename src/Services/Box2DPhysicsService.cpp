@@ -239,6 +239,20 @@ namespace GolfEngine::Services::Physics{
         }
     }
 
+
+    std::vector<Collider*> Box2DPhysicsService::getStaticColliders() {
+        std::vector<Collider *> colliders;
+        for (auto rb: _rigidBodies) {
+            if (rb.first->getRigidBodyDef().bodyType == RigidBodyTypes::StaticBody) {
+                for (auto collider: rb.first->getColliders()) {
+                    colliders.emplace_back(collider);
+                };
+            }
+
+        }
+        return colliders;
+    }
+
     std::optional<std::reference_wrapper<RigidBody>> Box2DPhysicsService::getRigidBodyWithB2Body(b2Body& body) {
         auto result = std::find_if(_rigidBodies.begin(), _rigidBodies.end(), [&](const std::pair<RigidBody*, b2Body*>& pair){
            return pair.second == &body;
@@ -292,5 +306,31 @@ namespace GolfEngine::Services::Physics{
     }
 
 
+    bool Box2DPhysicsService::raycastWorld(RigidBody* start, RigidBody* target) {
+        auto bvec = b2Vec2(start->getParentGameObject()->getWorldTransform().position.x / PhysicsSpaceToWorldSpace,start->getParentGameObject()->getWorldTransform().position.y / PhysicsSpaceToWorldSpace);
+        auto bvec2 = b2Vec2(target->getParentGameObject()->getWorldTransform().position.x / PhysicsSpaceToWorldSpace,target->getParentGameObject()->getWorldTransform().position.y / PhysicsSpaceToWorldSpace);
+
+        RaysCastCallback callback;
+        _world.RayCast(&callback,bvec,bvec2);
+
+        if (callback.m_fixture) {
+            if (callback.m_fixture->GetBody() == getB2Body(target)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    float
+    RaysCastCallback::ReportFixture(b2Fixture *fixture, const b2Vec2 &point, const b2Vec2 &normal, float fraction) {
+        m_fixture = fixture;
+        m_point = point;
+        m_normal = normal;
+        m_fraction = fraction;
+        return fraction;
+    }
 }
+
+
 

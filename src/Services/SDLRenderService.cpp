@@ -4,6 +4,7 @@
 
 #include "SDLRenderService.h"
 #include "Scene/RenderShape/ButtonRenderShape.h"
+#include "Scene/RenderShape/GraphRenderShape.h"
 #include <cmath>
 #include <iostream>
 #include <algorithm>
@@ -20,15 +21,13 @@ namespace GolfEngine::Services::Render {
         }
 
         //Initialize PNG AND JPG loading
-        if(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) < 0)
-        {
+        if(IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) < 0) {
             printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
         }
 
         //initialize TTF support
         if(TTF_Init() == -1){
             printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
-
         }
 
         SDL_Window* window;
@@ -69,6 +68,14 @@ namespace GolfEngine::Services::Render {
         // Clear screen
         SDL_RenderClear(_renderer.get());
 
+        if(_mainCamera){
+            camOffset.x = _mainCamera->get().getWorldTransform().position.x - (int)(_screenSizeWidth/2);
+            camOffset.y = _mainCamera->get().getWorldTransform().position.y - (int)(_screenSizeHeight/2);
+        }
+        else {
+            camOffset.x = camOffset.y = 0;
+        }
+
         // Loop through all registered drawables
         for (auto drawable: _drawables) {
 
@@ -97,10 +104,21 @@ namespace GolfEngine::Services::Render {
                 case RenderShapeType::TileMapRenderShape:
                     renderTileMap(dynamic_cast<TileMapRenderShape&>(renderShape));
                     break;
+                case RenderShapeType::GraphRenderShape:
+                    for(const auto& shape : dynamic_cast<GraphRenderShape&>(renderShape).nodes){
+                        renderRect(*shape);
+                    }
+                    break;
             }
         }
 
-        SDL_SetRenderDrawColor(_renderer.get(), 50, 50, 50, 255);
+        // Set the background color
+        if(_mainCamera){
+            Color bgColor {_mainCamera->get().backgroundColor()};
+            SDL_SetRenderDrawColor(_renderer.get(), bgColor.r8, bgColor.g8, bgColor.b8, bgColor.a);
+        }
+        else
+            SDL_SetRenderDrawColor(_renderer.get(), 50, 50, 50, 255);
 
         // Displays all the updates made in the back buffer
         SDL_RenderPresent(_renderer.get());
@@ -110,6 +128,8 @@ namespace GolfEngine::Services::Render {
         _screenSizeWidth = width;
         _screenSizeHeight = height;
         SDL_SetWindowSize(_window.get(), width, height);
+        _screenSizeHeight = height;
+        _screenSizeWidth = width;
     }
 
     void SDLRenderService::setFullScreen(bool fullScreen) {
@@ -239,10 +259,12 @@ namespace GolfEngine::Services::Render {
             point.second = tempX * std::sin(radians) + tempY * std::cos(radians);
         }
 
-        // Translate rect back to original position and set center point to pivot point
+        // Translate rect back to original position and set center point to pivot point and add cam offset
         for (auto &point: points) {
             point.first += xOrigin - xPivot;
             point.second += yOrigin - yPivot;
+            point.first -= camOffset.x;
+            point.second -= camOffset.y;
         }
 
         // Draw the lines to make the rectangle
@@ -268,8 +290,8 @@ namespace GolfEngine::Services::Render {
 
         // Draw Line
         SDL_RenderDrawLineF(_renderer.get(),
-                            renderShape.positionA().x, renderShape.positionA().y,
-                            renderShape.positionB().x, renderShape.positionB().y);
+                            renderShape.positionA().x - camOffset.x, renderShape.positionA().y - camOffset.y,
+                            renderShape.positionB().x - camOffset.x, renderShape.positionB().y - camOffset.y);
     }
 
     void SDLRenderService::renderCircle(CircleRenderShape& renderShape) {
@@ -287,15 +309,14 @@ namespace GolfEngine::Services::Render {
         while (x >= y)
         {
             //  Each of the following renders an octant of the circle
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + x, renderShape.position().y + y);
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + x, renderShape.position().y - y);
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - x, renderShape.position().y - y);
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - x, renderShape.position().y + y);
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + y, renderShape.position().y - x);
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + y, renderShape.position().y + x);
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - y, renderShape.position().y - x);
-            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - y, renderShape.position().y + x);
-
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + x - camOffset.x, renderShape.position().y + y - camOffset.y);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + x - camOffset.x, renderShape.position().y - y - camOffset.y);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - x - camOffset.x, renderShape.position().y - y - camOffset.y);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - x - camOffset.x, renderShape.position().y + y - camOffset.y);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + y - camOffset.x, renderShape.position().y - x - camOffset.y);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x + y - camOffset.x, renderShape.position().y + x - camOffset.y);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - y - camOffset.x, renderShape.position().y - x - camOffset.y);
+            SDL_RenderDrawPoint(_renderer.get(), renderShape.position().x - y - camOffset.x, renderShape.position().y + x - camOffset.y);
             if (error <= 0)
             {
                 ++y;
@@ -331,8 +352,16 @@ namespace GolfEngine::Services::Render {
         texture.setAlphaMod(renderShape.color().a);
 
         // Calculate desired width and height of sprite
-        float dstWidth{(texture.width() * abs(renderShape.pixelScale().x))};
-        float dstHeight{(texture.height() * abs(renderShape.pixelScale().y))};
+        float dstWidth, dstHeight;
+        auto imageSource{renderShape.imageSource()};
+        if (imageSource.size.x == 0 && imageSource.size.y == 0) {
+            dstWidth = (texture.width() * abs(renderShape.pixelScale().x));
+            dstHeight = (texture.height() * abs(renderShape.pixelScale().y));
+        }
+        else{
+            dstWidth = (imageSource.size.x * abs(renderShape.pixelScale().x));
+            dstHeight = (imageSource.size.y * abs(renderShape.pixelScale().y));
+        }
 
         // Determine pivot point
         SDL_Point pivotPoint;
@@ -360,15 +389,14 @@ namespace GolfEngine::Services::Render {
 
         // Creating destination rect
         SDL_Rect dstRect;
-        dstRect.x = renderShape.position().x - pivotPoint.x;
-        dstRect.y = renderShape.position().y - pivotPoint.y;
+        dstRect.x = renderShape.position().x - pivotPoint.x - camOffset.x;
+        dstRect.y = renderShape.position().y - pivotPoint.y - camOffset.y;
         dstRect.w = dstWidth;
         dstRect.h = dstHeight;
 
         // Convert Rect2 to SDL_Rect only if there is a given size, else just use the full size by giving a nullptr
         SDL_Rect srcRect;
         bool useFullSize{true};
-        auto imageSource{renderShape.imageSource()};
         if (imageSource.size.x != 0 && imageSource.size.y != 0) {
             useFullSize = false;
             srcRect.x = imageSource.position.x;
@@ -419,7 +447,6 @@ namespace GolfEngine::Services::Render {
         // Get direct reference to texture for easy access
         auto& font {f->get()};
 
-        // TODO add COLOR
 
         SDL_Surface* surface = TTF_RenderText_Solid(&font, renderShape.text().c_str(), {renderShape.color().r8,renderShape.color().g8,renderShape.color().b8});
         if(surface == nullptr){
@@ -461,8 +488,6 @@ namespace GolfEngine::Services::Render {
                 std::unique_ptr<TTF_Font, void(*)(TTF_Font*)> font_wrapper {newFont, TTF_CloseFont};
                 std::pair<std::string , size_t > pair = std::make_pair(path, fontSize);
                 auto ref = _cachedFonts.insert({pair, std::move(font_wrapper)});
-
-
                 return *ref.first->second;
             }
         }
@@ -499,12 +524,50 @@ namespace GolfEngine::Services::Render {
                 if(tile == 0) {column++; continue;}
                 srcRect.x = ((tile-1) % tileSetColumns) * srcRect.w;
                 srcRect.y = ((tile-1) / tileSetColumns) * srcRect.h;
-                dstRect.x = ((column % mapColumns) * dstRect.w) + renderShape.position().x;
-                dstRect.y = (rowIndex * dstRect.h) + renderShape.position().y;
+                dstRect.x = ((column % mapColumns) * dstRect.w) + renderShape.position().x - camOffset.x;
+                dstRect.y = (rowIndex * dstRect.h) + renderShape.position().y - camOffset.y;
                 SDL_RenderCopy(_renderer.get(), texture.texture(), &srcRect, &dstRect);
                 column++;
             }
             rowIndex++;
         }
+    }
+    std::optional<std::reference_wrapper<Camera>> SDLRenderService::getMainCamera() const {
+        if(_mainCamera)
+            return _mainCamera;
+        else
+            return std::nullopt;
+    }
+
+    void SDLRenderService::setMainCamera(Camera &camera) {
+        _mainCamera = camera;
+    }
+
+    bool SDLRenderService::isRegistered(Drawable& drawable) {
+        auto result = std::find_if(_drawables.begin(), _drawables.end(), [&](const std::reference_wrapper<Drawable> &d) {
+            return &d.get() == &drawable;
+        });
+        if(result != _drawables.end())
+            return true;
+        return false;
+    }
+
+    int SDLRenderService::getScreenSizeWidth() const {
+        return _screenSizeWidth;
+    }
+
+    int SDLRenderService::getScreenSizeHeight() const {
+        return _screenSizeHeight;
+    }
+
+    Vector2 SDLRenderService::getCameraOffset() const {
+        if(_mainCamera)
+            return camOffset;
+
+        throw std::runtime_error("Camera offset requested without an active camera in the scene.");
+    }
+
+    void SDLRenderService::setWindowTitle(const std::string& title) {
+        SDL_SetWindowTitle(_window.get(), title.c_str());
     }
 }

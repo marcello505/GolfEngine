@@ -2,6 +2,7 @@
 // Created by marcello on 12/1/22.
 //
 
+#include <iostream>
 #include "ProjectileScript.h"
 
 void ProjectileScript::onStart() {
@@ -11,10 +12,12 @@ void ProjectileScript::onStart() {
 
 void ProjectileScript::onUpdate() {
     if(_ticksToLive < 30){
-        _rigidBody->setLinearVelocity(_dir * 20.0f);
+        _rigidBody->setLinearVelocity(_dir * _bulletSpeed);
         _ticksToLive++;
     }
-    else{
+    else {
+        _gameObject->get().setLocalPosition({0,0});
+        _rigidBody->setTransform(_gameObject->get().getWorldTransform());
         _gameObject->get().setActive(false);
     }
 }
@@ -39,4 +42,10 @@ void ProjectileScript::loadSnapshot(const ISnapshot& rawSnapshot) {
 
     _dir = snapshot.dir;
     _ticksToLive = snapshot.ticksToLive;
+}
+
+void ProjectileScript::onCollisionEnter(RigidBody& other) {
+    if(_ticksToLive < 30){
+        _ticksToLive = 31;
+    }
 }

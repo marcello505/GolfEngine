@@ -4,17 +4,44 @@ cmake_minimum_required(VERSION 3.23)
 set(CMAKE_CXX_STANDARD 17)
 
 # Sources
-set(SCRIPT_SOURCES scripts/PlayerMovementScript.cpp scripts/ProjectilePoolScript.cpp scripts/ProjectileScript.cpp
-        scripts/SaveStateScript.cpp scripts/SaveStateScript.h scripts/MenuScripts/StartGameButtonScript.cpp
-        scripts/MenuScripts/SelectLevelButtonScript.cpp scripts/MenuScripts/BackButtonScript.cpp scripts/MenuScripts/SettingsButtonScript.cpp
-        scripts/MenuScripts/MasterVolumeButtonScript.cpp scripts/MenuScripts/SoundEffectVolumeButtonScript.cpp scripts/MenuScripts/FullScreenButtonScript.cpp
-        scripts/MenuScripts/ExitButtonScript.cpp scripts/MenuScripts/TextUpdateScript.cpp scripts/MenuScripts/MusicVolumeButtonScript.cpp
+set(SCRIPT_SOURCES
+        scripts/PlayerMovementScript.cpp
+        scripts/ProjectilePoolScript.cpp
+        scripts/ProjectileScript.cpp
+        scripts/SaveStateScript.cpp
+        scripts/SaveGameTestScripts/SaveGameTestScript.cpp
+        scripts/SaveGameTestScripts/ShotCounterScript.cpp
+        scripts/PlayerShootScript.cpp
+        scripts/PlayerCollisionScript.cpp
+        scripts/GameManagerScript.cpp
+        scripts/EnemyMovementScript.cpp
+        scripts/EnemyCollisionScript.cpp
+        scripts/MenuScripts/StartGameButtonScript.cpp
+        scripts/MenuScripts/SelectLevelButtonScript.cpp
+        scripts/MenuScripts/BackButtonScript.cpp
+        scripts/MenuScripts/SettingsButtonScript.cpp
+        scripts/MenuScripts/MasterVolumeButtonScript.cpp
+        scripts/MenuScripts/SoundEffectVolumeButtonScript.cpp
+        scripts/MenuScripts/FullScreenButtonScript.cpp
+        scripts/MenuScripts/ExitButtonScript.cpp
+        scripts/MenuScripts/TextUpdateScript.cpp
+        scripts/MenuScripts/MusicVolumeButtonScript.cpp
         scripts/MenuScripts/KeyConfigButtonScript.cpp)
+
 set(GAMEOBJECTS_SOURCES
-        gameobjects/PlayerObject.cpp
-        gameobjects/Wall.cpp gameobjects/Projectile.cpp gameobjects/Projectile.h gameobjects/ProjectilePoolObject.cpp
-        gameobjects/ProjectilePoolObject.h gameobjects/TestBlock.cpp gameobjects/TestBlock.h)
-set(SCENE_SOURCES scenes/PlayerTestScene.cpp scenes/MainMenuScene.cpp scenes/SelectLevelScene.cpp scenes/SettingsScene.cpp )
+        gameobjects/PlayerObject.cpp     
+        gameobjects/Wall.cpp
+        gameobjects/Projectile.cpp
+        gameobjects/ProjectilePoolObject.cpp
+        gameobjects/TestBlock.cpp
+        gameobjects/GameManager.cpp
+        gameobjects/EnemyObject.cpp)
+
+set(SCENE_SOURCES
+        scenes/PlayerTestScene.cpp
+        scenes/SaveGameTestScene.cpp
+        scenes/MainMenuScene.cpp
+        scenes/SelectLevelScene.cpp
 
 # Resource files
 add_custom_target(Game_Resources ALL

@@ -16,6 +16,9 @@ public:
     virtual void setKeyPressed(bool pressed) = 0;
     virtual InputKey getKeyPressed() = 0;
     virtual std::string getKeyString(InputKey key) = 0;
+
+    // Virtual Destructors
+    virtual ~InputService() = default;
 };
 
 

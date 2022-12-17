@@ -3,6 +3,7 @@
 //
 
 #include "SceneManager.h"
+#include "Services/Singletons/PathfindingSingleton.h"
 
 namespace GolfEngine {
     std::unique_ptr<SceneManager> SceneManager::sceneManager = nullptr;
@@ -17,19 +18,7 @@ namespace GolfEngine {
     }
 
     void SceneManager::loadScene(const std::string& sceneName) {
-        std::_Rb_tree_iterator<std::pair<const std::basic_string<char>, std::unique_ptr<ISceneFactory>>> sceneFactory;
-        // If empty string is passed, reload last loaded scene
-        if(sceneName.empty())
-            sceneFactory = _scenes.find(_lastScene);
-        else
-            sceneFactory = _scenes.find(sceneName);
-
-        if (sceneFactory != _scenes.end()){
-            _lastScene = sceneName;
-            _currentScene = std::make_unique<Scene>();
-            sceneFactory->second->build(*_currentScene);
-            _currentScene->startScene();
-        }
+        _nextScene = sceneName;
     }
 
     Scene& SceneManager::getCurrentScene() {
@@ -42,5 +31,32 @@ namespace GolfEngine {
 
     void SceneManager::clearScenes() {
         _scenes.erase(_scenes.begin(), _scenes.end());
+    }
+
+    void SceneManager::updateSceneManager() {
+        //Check if the current scene should be changed
+        if(_nextScene){
+            const auto& sceneName = _nextScene.value();
+            std::_Rb_tree_iterator<std::pair<const std::basic_string<char>, std::unique_ptr<ISceneFactory>>> sceneFactory;
+            // If empty string is passed, reload last loaded scene
+            if(sceneName.empty())
+                sceneFactory = _scenes.find(_lastScene);
+            else
+                sceneFactory = _scenes.find(sceneName);
+
+            if (sceneFactory != _scenes.end()){
+                _lastScene = sceneName;
+                _currentScene = std::make_unique<Scene>();
+                sceneFactory->second->build(*_currentScene);
+                _currentScene->startScene();
+                if(GolfEngine::Services::Pathfinding::hasService()){
+                    GolfEngine::Services::Pathfinding::getService()->createGraph();
+                }
+            }
+
+
+            _nextScene.reset();
+        }
+
     }
 }

@@ -20,19 +20,22 @@
 #include "Render/Texture.h"
 #include "../Scene/RenderShape/TextRenderShape.h"
 #include "../Scene/RenderShape/TileMapRenderShape.h"
+#include "Scene/GameObjects/Camera.h"
 
 namespace GolfEngine::Services::Render {
 
 class SDLRenderService : public RenderService {
 public:
     SDLRenderService();
-    ~SDLRenderService();
-    bool isRegistered(Drawable &drawable) override;
     // RAII
     SDLRenderService(SDLRenderService &sdlRenderService) = delete;
     SDLRenderService &operator=(SDLRenderService *other) = delete;
     SDLRenderService(SDLRenderService &&other) noexcept;
     SDLRenderService &operator=(SDLRenderService &&other) noexcept;
+
+    /// Sets the title of the window
+    /// \param title new title
+    void setWindowTitle(const std::string& title) override;
 
     /// Adds a drawable to the list of registered drawables
     /// \param drawable to be added
@@ -41,6 +44,8 @@ public:
     /// Removes a drawable from the list of registered drawables
     /// \param drawable to be removed
     void removeDrawable(Drawable& drawable) override;
+
+    bool isRegistered(Drawable &drawable) override;
 
     /// Renders all drawables in registered drawable list
     void render() override;
@@ -54,10 +59,15 @@ public:
     /// \param fullScreen true is fullscreen
     void setFullScreen(bool fullScreen) override;
 
-    // Getters
+    // Getters, setters
     [[nodiscard]] int screenSizeWidth() const;
     [[nodiscard]] int screenSizeHeight() const;
     [[nodiscard]] bool fullScreen() const;
+    [[nodiscard]] std::optional<std::reference_wrapper<Camera>> getMainCamera() const override;
+    void setMainCamera(Camera& camera) override;
+    [[nodiscard]] int getScreenSizeWidth() const override;
+    [[nodiscard]] int getScreenSizeHeight() const override;
+    [[nodiscard]] Vector2 getCameraOffset() const override;
 private:
     void renderRect(RectRenderShape &renderShape);
     void renderLine(LineRenderShape &renderShape);
@@ -68,6 +78,7 @@ private:
 
     Texture& loadSprite(const std::string& path);
     void renderSprite(SpriteRenderShape &renderShape);
+    TTF_Font& loadFont(const std::string &path, size_t fontSize);
 
     int _screenSizeWidth;
     int _screenSizeHeight;
@@ -78,7 +89,8 @@ private:
     std::map<std::string, std::unique_ptr<Texture>> _cachedTextures;
     std::map<std::pair<std::string ,size_t >,  std::unique_ptr<TTF_Font, void(*)(TTF_Font*)>> _cachedFonts;
 
-    TTF_Font& loadFont(const std::string &path, size_t fontSize);
+    std::optional<std::reference_wrapper<Camera>> _mainCamera;
+    Vector2 camOffset;
 };
 
 }

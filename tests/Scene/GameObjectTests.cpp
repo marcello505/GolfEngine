@@ -34,6 +34,7 @@ namespace GameObjectTests{
 TEST_CASE("Getting a component"){
     GolfEngine::SceneManager::GetSceneManager().addSceneFactory<GameObjectTests::MainSceneFactory>("main");
     GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    GolfEngine::SceneManager::GetSceneManager().updateSceneManager();
     auto& currentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
 
     // Act
@@ -72,11 +73,13 @@ TEST_CASE("Removing a component"){
 TEST_CASE("Reloading a scene using a custom behaviour script"){
     GolfEngine::SceneManager::GetSceneManager().addSceneFactory<GameObjectTests::MainSceneFactory>("main");
     GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    GolfEngine::SceneManager::GetSceneManager().updateSceneManager();
     auto& prevCurrentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
 
     // Act
     auto& script = prevCurrentScene.getRootGameObject().childAt(0).getComponent<GameObjectTests::DummyScript>();
     script.reloadScene();
+    GolfEngine::SceneManager::GetSceneManager().updateSceneManager();
     auto& currentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
 
     // Assert
@@ -86,6 +89,7 @@ TEST_CASE("Reloading a scene using a custom behaviour script"){
 TEST_CASE("Check if GameObject has a certain Component"){
     GolfEngine::SceneManager::GetSceneManager().addSceneFactory<GameObjectTests::MainSceneFactory>("main");
     GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    GolfEngine::SceneManager::GetSceneManager().updateSceneManager();
     auto& currentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
 
     // Act
@@ -99,6 +103,7 @@ TEST_CASE("Getting list of BehaviourScript components"){
     // Arrange
     GolfEngine::SceneManager::GetSceneManager().addSceneFactory<GameObjectTests::MainSceneFactory>("main");
     GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    GolfEngine::SceneManager::GetSceneManager().updateSceneManager();
     auto& currentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
 
     // Act
