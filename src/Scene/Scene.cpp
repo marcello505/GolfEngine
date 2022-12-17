@@ -23,9 +23,12 @@ void Scene::startScene() {
 void Scene::updateScene() {
     //Update scene
     for(auto& go : _gameObjects)
-        if(go->getActive())
+        if(go->getActive()){
             go->onUpdate();
+        }
 }
+
+
 
 void Scene::startRecordingReplay(const std::vector<std::string>& actionsToLock, bool recordMouse) {
     _replayState = ReplayState::InitializeRecording;

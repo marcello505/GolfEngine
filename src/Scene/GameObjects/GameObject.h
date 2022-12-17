@@ -126,8 +126,8 @@ public:
     [[nodiscard]] bool isActiveSelf() const;
     [[nodiscard]] bool getActive() const;
     void setActive(bool active);
-    void onStart();
 
+    virtual void onStart();
     virtual void onUpdate();
 
     std::vector<std::reference_wrapper<GameObject>>& children();
@@ -141,6 +141,8 @@ public:
     const Transform& getLocalTransform() const;
     void setLocalTransform(const Transform& rTransform);
     void setLocalPosition(const Vector2& rPosition);
+    void setLocalRotation(const float &rotation);
+
     /// Calculates the current world transform and returns it
     /// \return A Transform instance which is the current world transform
     Transform getWorldTransform() const;
@@ -153,6 +155,7 @@ public:
     std::unique_ptr<ISnapshot> saveSnapshot() override;
     void loadSnapshot(const ISnapshot& rawSnapshot) override;
     bool isRecordable() const;
+
 };
 
 

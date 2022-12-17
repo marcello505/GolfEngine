@@ -7,15 +7,34 @@
 #include "../gameobjects/PlayerObject.h"
 #include "../gameobjects/Wall.h"
 #include "../gameobjects/ProjectilePoolObject.h"
+#include "../gameobjects/EnemyObject.h"
+#include "Scene/Components/Animator.h"
 #include "../scripts/SaveStateScript.h"
 #include "../gameobjects/TestBlock.h"
+#include "../scripts/MenuScripts/BackButtonScript.h"
+#include "Scene/GameObjects/UIObject/Button.h"
+#include "Services/Singletons/RenderSingleton.h"
 #include "Scene/Components/BoxCollider.h"
 #include "../gameobjects/GameManager.h"
 #include "Scene/GameObjects/Camera.h"
+#include "Services/Singletons/PathfindingSingleton.h"
 
 void PlayerTestScene::build(Scene& scene) const {
+
+    auto* rs = GolfEngine::Services::Render::getService();
     auto& root = scene.createNewGameObject<GameObject>();
     root.addComponent<SaveStateScript>();
+
+    BackButtonScript backScript;
+    auto& backButton = scene.createNewGameObject<Button>(root, 45, 26,
+                                                         Vector2(rs->screenSizeWidth() / 100 * 4,
+                                                                 rs->screenSizeHeight() / 100 * 1.8) ,true,
+                                                         "clickButton", Vector2(0, 0), 0,
+                                                         "Back", 15, Color(),
+                                                         "res/fonts/Rubik-VariableFont_wght.ttf",
+                                                         Alignment::Center);
+    backScript.setParentGameObject(backButton);
+    backButton.addComponent<BackButtonScript>(backScript);
 
     //Walls
     {
@@ -56,5 +75,27 @@ void PlayerTestScene::build(Scene& scene) const {
     testEnemyCollision.tag = "enemy";
     testEnemyCollision.setLocalPosition({1000.0f, 500.0f});
 
+ auto& enemy1 = scene.createNewGameObject<EnemyObject>(root, &player);
+    enemy1.setLocalPosition({700.f, 400.f});
+    enemy1.originalTransform = Transform({700.f, 400.f}, 0, {1,1});
+    enemy1.addPatrolPoint({700.f, 400.f});
+    enemy1.addPatrolPoint({800,400});
+    enemy1.addPatrolPoint({800,500});
+    enemy1.addPatrolPoint({700,500});
+
+    auto& enemy2 = scene.createNewGameObject<EnemyObject>(root, &player);
+    enemy2.setLocalPosition({800.f, 100.f});
+    enemy2.addPatrolPoint({800.f, 400.f});
+    enemy2.addPatrolPoint({700.f, 50.f});
+    enemy2.addPatrolPoint({700.f, 400.f});
+
+    auto& enemy3 = scene.createNewGameObject<EnemyObject>(root, &player);
+   enemy3.setLocalPosition({400.f, 150.f});
+   auto& enemy4 = scene.createNewGameObject<EnemyObject>(root, &player);
+   enemy4.setLocalPosition({850.f, 150.f});
+
     scene.createNewGameObject<GameManager>();
+
+    GolfEngine::Services::Pathfinding::getService()->setGraphSize(1280, 720);
+    GolfEngine::Services::Pathfinding::getService()->setNodeDistance(50);
 }

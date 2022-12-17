@@ -10,32 +10,35 @@
 
 void UIScene::build(Scene& scene) const
 {
-    //setup text for button
-    auto text = new Text(Vector2(0, 0), 0, "Click me!",
-                         20, Color(),
-                         R"(../../../validation/US08_RenderUIObject/resources/Rubik-VariableFont_wght.ttf)",
-                         Alignment::Center, true);
-
-    auto text2 = new Text(Vector2(0, 0), 0, "And me!",
-                         20, Color(),
-                         R"(../../../validation/US08_RenderUIObject/resources/Rubik-VariableFont_wght.ttf)",
-                         Alignment::Center, true);
-
-
+    auto* rs = GolfEngine::Services::Render::getService();
     //create gameobject for button
     auto& root = scene.createNewGameObject<GameObject>();
-    auto& GOButton = scene.createNewGameObject<Button>(root, 100, 60, Vector2(50, 30), true, text);
-    auto& GOButton2 = scene.createNewGameObject<Button>(root, 100, 60, Vector2(200, 30), true, text2);
+    auto& GOButton = scene.createNewGameObject<Button>(root,200, 100,
+                                                             Vector2(rs->screenSizeWidth() / 2.0,
+                                                                     rs->screenSizeHeight() / 3),true,
+                                                             "ClickButton", Vector2(0, 0), 0,
+                                                             "Click me!", 20, Color(),
+                                                             R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
+                                                             ,Alignment::Center);
 
     //bind click logic to button via behavior script
-    ButtonClickScript script;
-    script.setParentGameObject(GOButton);
-    GOButton.addComponent<ButtonClickScript>(script);
-    GOButton2.addComponent<ButtonClickScript>(script);
+    ButtonClickScript buttonClickScript;
+    buttonClickScript.setParentGameObject(GOButton);
+    GOButton.addComponent<ButtonClickScript>(buttonClickScript);
+
+    auto& GOButton2 = scene.createNewGameObject<Button>(root,200, 100,
+                                                       Vector2(rs->screenSizeWidth() / 2.0,
+                                                               rs->screenSizeHeight() / 1.5),true,
+                                                       "ClickButton", Vector2(0, 0), 0,
+                                                       "And me!", 20, Color(),
+                                                       R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
+                                                        ,Alignment::Center);
+
+
 
     //create game object for independent piece of text
-    auto& GOText = scene.createNewGameObject<Text>(root, Vector2(535, 10), 0, "score: 237",
-                                                       40, Color(),
+    auto& GOText = scene.createNewGameObject<Text>(root, Vector2(435, 10), 0, "score: 237",
+                                                       30, Color(),
                                                        R"(../../../validation/US08_RenderUIObject/resources/Rubik-VariableFont_wght.ttf)",
                                                        Alignment::Center, false);
 }

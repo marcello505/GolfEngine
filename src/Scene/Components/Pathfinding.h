@@ -13,7 +13,7 @@
 
 class Pathfinding : public Component{
 public:
-    explicit Pathfinding(GameObject *target, float recalculatePathTime = 1.0 );
+    explicit Pathfinding(GameObject *target, float recalculatePathTime = 0.1 );
 
     // Overrides
     void onStart() override;
@@ -32,12 +32,9 @@ public:
     void setTarget(GameObject &gameObject);
     /// calculates vector displaying direction to target
     /// \return returns vector with direction to target
-    Vector2 getNewDirection();
+    Vector2 getPathDirection();
 
-    /// Display the Graph in rects
-    /// \param displayPath if true path is colored green
-    /// \param displayVisited if true all visited nodes are colored blue
-    void displayGraph(bool displayPath, bool displayVisited);
+    Vector2 getDirection(Vector2 target);
 
     /// Return the gameobject this component is navigating to
     /// \return Target gameobject
@@ -55,12 +52,17 @@ public:
     void loadSnapshot(const ISnapshot& rawSnapshot) override;
 private:
     int _countedFrames {0};
-    GameObject& _target;
+    std::reference_wrapper<GameObject> _target;
     std::vector<Node> _path;
-    int _fps;
+    const int _fps;
     float _recalculatePathTime;
 
-    bool pathIsRegistered {false};
+    struct Snapshot : ISnapshot{
+        GameObject* target;
+        int countedFrames;
+        std::vector<Node> path;
+        float recalculatePathTime;
+    };
 };
 
 
