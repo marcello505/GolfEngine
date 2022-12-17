@@ -49,12 +49,10 @@ int main(int argc, char* argv[]){
     actionMap->addInputKeyToAction("stopRecordingReplay", InputKey::Key_O);
     actionMap->addAction("playReplay");
     actionMap->addInputKeyToAction("playReplay", InputKey::Key_P);
+
+    //Set up menu controls
     actionMap->addAction("clickButton");
     actionMap->addInputKeyToAction("clickButton", Mouse_Left);
-
-    //Audio initialisation
-/*    GolfEngine::Scene::Components::AudioSource mgsThemeSound {static_cast<bool>(R"(../../game/res/audio/mgs-theme.flac)"), true};
-    mgsThemeSound.play(true);*/
 
     // Save Game actions
     actionMap->addAction("saveGame");

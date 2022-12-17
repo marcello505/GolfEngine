@@ -23,7 +23,7 @@ void SelectLevelScene::build(Scene& scene) const {
                                                                             100.0 * 12.0), 0,
                                                                   "clickButton", Vector2(0,0 ), true,
                                                                   "Back", 20, Color(),
-                                                                  R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)",
+                                                                  "res/fonts/Rubik-VariableFont_wght.ttf",
                                                                   Alignment::Center);
     backScript.setParentGameObject(backButton);
     backButton.addComponent<BackButtonScript>(backScript);
@@ -32,7 +32,7 @@ void SelectLevelScene::build(Scene& scene) const {
     auto& TitleText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100.0 * 35.0,
                                                                     rs->screenSizeHeight() / 100.0 * 8.0),
                                                       0, "Select Level",70, Color(),
-                                                      R"(../../game/res/fonts/ZenDots-Regular.ttf)",
+                                                      "res/fonts/ZenDots-Regular.ttf",
                                                       Alignment::Center, false);
 
     StartGameButtonScript script;
@@ -42,7 +42,7 @@ void SelectLevelScene::build(Scene& scene) const {
                                                                       rs->screenSizeHeight() / 2.0) ,true,
                                                                       "clickButton", Vector2(0, 0), 0,
                                                                       "Start game", 20, Color(),
-                                                                      R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
+                                                                      "res/fonts/Rubik-VariableFont_wght.ttf"
                                                                       ,Alignment::Center);
     script.setParentGameObject(startLevelOneButton);
     startLevelOneButton.addComponent<StartGameButtonScript>(script);
@@ -59,7 +59,7 @@ void SelectLevelScene::build(Scene& scene) const {
                                                                           rs->screenSizeHeight() / 2.0) ,true,
                                                                   "clickButton", Vector2(0, 0), 0,
                                                                   "Start game", 20, Color(),
-                                                                  R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
+                                                                  "res/fonts/Rubik-VariableFont_wght.ttf"
                                                                   ,Alignment::Center);
     script.setParentGameObject(startLevelTwoButton);
     startLevelTwoButton.addComponent<StartGameButtonScript>(script);
@@ -76,7 +76,7 @@ void SelectLevelScene::build(Scene& scene) const {
                                                                           rs->screenSizeHeight() / 2.0) ,true,
                                                                   "clickButton", Vector2(0, 0), 0,
                                                                   "Start game", 20, Color(),
-                                                                  R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
+                                                                  "res/fonts/Rubik-VariableFont_wght.ttf"
                                                                   ,Alignment::Center);
     script.setParentGameObject(startLevelThreeButton);
     startLevelThreeButton.addComponent<StartGameButtonScript>(script);

@@ -34,7 +34,7 @@ void SettingsScene::build(Scene& scene) const {
                                                                  100.0 * 12.0), 0,
                                                          "clickButton", Vector2(0,0 ), true,
                                                          "Back", 20, Color(),
-                                                         R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)",
+                                                         "res/fonts/Rubik-VariableFont_wght.ttf",
                                                          Alignment::Center);
     backScript.setParentGameObject(backButton);
     backButton.addComponent<BackButtonScript>(backScript);
@@ -42,20 +42,20 @@ void SettingsScene::build(Scene& scene) const {
     auto& titleText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 40,
                                                                     rs->screenSizeHeight() / 100 * 8),
                                                       0, "Settings",70, Color(),
-                                                      R"(../../game/res/fonts/ZenDots-Regular.ttf)",
+                                                      "res/fonts/ZenDots-Regular.ttf",
                                                       Alignment::Center, false);
 
     auto& volumeTitleText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 20,
                                                                           rs->screenSizeHeight() / 3.5),0,
                                                                           "Volume",50, Color(),
-                                                                          R"(../../game/res/fonts/ZenDots-Regular.ttf)",
+                                                                          "res/fonts/ZenDots-Regular.ttf",
                                                                           Alignment::Center, false);
 
     // master
 
     auto& masterVolumeText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 13,
                                                                      rs->screenSizeHeight() / 2.3),0, "Master: ",20,
-                                                       Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
+                                                       Color(), "res/fonts/ZenDots-Regular.ttf",
                                                        Alignment::Center, false);
 
 
@@ -63,7 +63,7 @@ void SettingsScene::build(Scene& scene) const {
 
     auto& masterVolumeValueText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 26,
                                                                      rs->screenSizeHeight() / 2.3),0, currentMasterVolume,20,
-                                                            Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
+                                                            Color(), "res/fonts/ZenDots-Regular.ttf",
                                                             Alignment::Center, false);
 
     auto& volumeTextUpdateScriptMaster =
@@ -78,7 +78,7 @@ void SettingsScene::build(Scene& scene) const {
                                                                        rs->screenSizeHeight() / 2.25),true,
                                                                "clickButton", Vector2(0, 0), 0,
                                                                "-", 60, Color(),
-                                                               R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
+                                                               "res/fonts/Rubik-VariableFont_wght.ttf"
                                                                ,Alignment::Center);
     masterVolumeScript.setParentGameObject(masterVolumeDownButton);
     masterVolumeDownButton.addComponent<MasterVolumeButtonScript>(masterVolumeScript);
@@ -89,7 +89,7 @@ void SettingsScene::build(Scene& scene) const {
                                                                        rs->screenSizeHeight() / 2.25),true,
                                                                "clickButton", Vector2(0, 0), 0,
                                                                "+", 50, Color(),
-                                                               R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
+                                                               "res/fonts/Rubik-VariableFont_wght.ttf"
                                                                ,Alignment::Center);
     masterVolumeScript.setParentGameObject(masterVolumeUpButton);
     masterVolumeUpButton.addComponent<MasterVolumeButtonScript>(masterVolumeScript);
@@ -100,7 +100,7 @@ void SettingsScene::build(Scene& scene) const {
     auto& soundEffectVolumeText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 13,
                                                                            rs->screenSizeHeight() / 1.83),0,
                                                                   "Sound: ",20,
-                                                                  Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
+                                                                  Color(), "res/fonts/ZenDots-Regular.ttf",
                                                                  Alignment::Center, false);
 
 
@@ -109,7 +109,7 @@ void SettingsScene::build(Scene& scene) const {
 
     auto& soundEffectVolumeValueText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 26,
                                                                                      rs->screenSizeHeight() / 1.83),0, currentSoundEffectVolume,20,
-                                                                  Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
+                                                                  Color(), "res/fonts/ZenDots-Regular.ttf",
                                                                   Alignment::Center, false);
 
     auto& volumeTextUpdateScriptSoundEffect =
@@ -124,7 +124,7 @@ void SettingsScene::build(Scene& scene) const {
                                                                        rs->screenSizeHeight() / 1.8),true,
                                                                "clickButton", Vector2(0, 0), 0,
                                                                "-", 60, Color(),
-                                                               R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
+                                                               "res/fonts/Rubik-VariableFont_wght.ttf"
                                                                 ,Alignment::Center);
     soundEffectVolumeScript.setParentGameObject(soundEffectVolumeDownButton);
     soundEffectVolumeDownButton.addComponent<SoundEffectVolumeButtonScript>(soundEffectVolumeScript);
@@ -134,7 +134,7 @@ void SettingsScene::build(Scene& scene) const {
                                                                      rs->screenSizeHeight() / 1.8),true,
                                                              "clickButton", Vector2(0, 0), 0,
                                                              "+", 50, Color(),
-                                                             R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
+                                                             "res/fonts/Rubik-VariableFont_wght.ttf"
                                                              ,Alignment::Center);
     soundEffectVolumeScript.setParentGameObject(soundEffectVolumeUpButton);
     soundEffectVolumeUpButton.addComponent<SoundEffectVolumeButtonScript>(soundEffectVolumeScript);
@@ -144,7 +144,7 @@ void SettingsScene::build(Scene& scene) const {
     auto& musicVolumeText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 13,
                                                                                 rs->screenSizeHeight() / 1.49),0,
                                                                   "Music: ",20,
-                                                                  Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
+                                                                  Color(), "res/fonts/ZenDots-Regular.ttf",
                                                                   Alignment::Center, false);
 
 
@@ -153,7 +153,7 @@ void SettingsScene::build(Scene& scene) const {
 
     auto& musicVolumeValueText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 26,
                                                                                      rs->screenSizeHeight() / 1.49),0, currentMusicVolume,20,
-                                                                       Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
+                                                                       Color(), "res/fonts/ZenDots-Regular.ttf",
                                                                        Alignment::Center, false);
 
     auto& volumeTextUpdateScriptMusic =
@@ -168,7 +168,7 @@ void SettingsScene::build(Scene& scene) const {
                                                                                   rs->screenSizeHeight() / 1.47),true,
                                                                           "clickButton", Vector2(0, 0), 0,
                                                                           "-", 60, Color(),
-                                                                          R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
+                                                                          "res/fonts/Rubik-VariableFont_wght.ttf"
                                                                           ,Alignment::Center);
     musicVolumeScript.setParentGameObject(musicVolumeDownButton);
     musicVolumeDownButton.addComponent<MusicVolumeButtonScript>(musicVolumeScript);
@@ -178,7 +178,7 @@ void SettingsScene::build(Scene& scene) const {
                                                                                 rs->screenSizeHeight() / 1.47),true,
                                                                         "clickButton", Vector2(0, 0), 0,
                                                                         "+", 50, Color(),
-                                                                        R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
+                                                                        "res/fonts/Rubik-VariableFont_wght.ttf"
                                                                         ,Alignment::Center);
     musicVolumeScript.setParentGameObject(musicVolumeUpButton);
     musicVolumeUpButton.addComponent<MusicVolumeButtonScript>(musicVolumeScript);
@@ -187,7 +187,7 @@ void SettingsScene::build(Scene& scene) const {
     auto& fullScreenTitleText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 2.45,
                                                                               rs->screenSizeHeight() / 3.5),0,
                                                                 "Fullscreen",50, Color(),
-                                                                R"(../../game/res/fonts/ZenDots-Regular.ttf)",
+                                                                "res/fonts/ZenDots-Regular.ttf",
                                                                 Alignment::Center, false);
 
     //fullscreen
@@ -197,7 +197,7 @@ void SettingsScene::build(Scene& scene) const {
                                                                      rs->screenSizeHeight() / 1.9),true,
                                                              "clickButton", Vector2(0, 0), 0,
                                                              "Toggle full screen", 20, Color(),
-                                                             R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
+                                                             "res/fonts/Rubik-VariableFont_wght.ttf"
                                                              ,Alignment::Center);
     fullScreenScript.setParentGameObject(FullScreenButton);
     FullScreenButton.addComponent<FullScreenButtonScript>(fullScreenScript);
@@ -206,7 +206,7 @@ void SettingsScene::build(Scene& scene) const {
     auto& keyConfigTitleText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 1.5,
                                                                               rs->screenSizeHeight() / 3.5),0,
                                                                 "Key config",50, Color(),
-                                                                R"(../../game/res/fonts/ZenDots-Regular.ttf)",
+                                                                "res/fonts/ZenDots-Regular.ttf",
                                                                 Alignment::Center, false);
 
 
@@ -221,7 +221,7 @@ void SettingsScene::build(Scene& scene) const {
     auto& playerLeftKeyText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 63,
                                                                           rs->screenSizeHeight() / 2.3),0,
                                                             "playerLeft ( " + playerLeftInputKey + " )" ,20,
-                                                            Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
+                                                            Color(), "res/fonts/ZenDots-Regular.ttf",
                                                             Alignment::Center, false);
 
     auto& playerLeftTextUpdateScript =
@@ -234,7 +234,7 @@ void SettingsScene::build(Scene& scene) const {
                                                                              rs->screenSizeHeight() / 2.25),true,
                                                                      "clickButton", Vector2(0, 0), 0,
                                                                      "Change key", 20, Color(),
-                                                                     R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
+                                                                     "res/fonts/Rubik-VariableFont_wght.ttf"
                                                                     ,Alignment::Center);
 
     auto keyConfigScriptPlayerLeft = KeyConfigButtonScript("playerLeft", &playerLeftTextUpdateScript);
@@ -248,7 +248,7 @@ void SettingsScene::build(Scene& scene) const {
     auto& playerRightKeyText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 63,
                                                                             rs->screenSizeHeight() / 2.0),0,
                                                               "playerRight ( " + playerRightInputKey + " )" ,20,
-                                                              Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
+                                                              Color(), "res/fonts/ZenDots-Regular.ttf",
                                                               Alignment::Center, false);
 
     auto& playerRightTextUpdateScript =
@@ -261,7 +261,7 @@ void SettingsScene::build(Scene& scene) const {
                                                                           rs->screenSizeHeight() / 1.95),true,
                                                                   "clickButton", Vector2(0, 0), 0,
                                                                   "Change key", 20, Color(),
-                                                                  R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
+                                                                  "res/fonts/Rubik-VariableFont_wght.ttf"
                                                                   ,Alignment::Center);
 
     auto keyConfigScriptPlayerRight = KeyConfigButtonScript("playerRight", &playerRightTextUpdateScript);
@@ -277,7 +277,7 @@ void SettingsScene::build(Scene& scene) const {
     auto& playerUpKeyText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 63,
                                                                              rs->screenSizeHeight() / 1.77),0,
                                                             "playerUp ( " + playerUpInputKey + " )" ,20,
-                                                               Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
+                                                               Color(), "res/fonts/ZenDots-Regular.ttf",
                                                                Alignment::Center, false);
 
     auto& playerUpTextUpdateScript =
@@ -291,7 +291,7 @@ void SettingsScene::build(Scene& scene) const {
                                                                            rs->screenSizeHeight() / 1.73),true,
                                                                    "clickButton", Vector2(0, 0), 0,
                                                                    "Change key", 20, Color(),
-                                                                   R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
+                                                                   "res/fonts/Rubik-VariableFont_wght.ttf"
                                                                    ,Alignment::Center);
 
     auto keyConfigScriptPlayerUp = KeyConfigButtonScript("playerUp", &playerUpTextUpdateScript);
@@ -305,7 +305,7 @@ void SettingsScene::build(Scene& scene) const {
     auto& playerDownKeyText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 63,
                                                                           rs->screenSizeHeight() / 1.58),0,
                                                               "playerDown ( " + playerDownInputKey + " )"  ,20,
-                                                            Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
+                                                            Color(), "res/fonts/ZenDots-Regular.ttf",
                                                             Alignment::Center, false);
 
     auto& playerDownTextUpdateScript =
@@ -318,7 +318,7 @@ void SettingsScene::build(Scene& scene) const {
                                                                         rs->screenSizeHeight() / 1.55),true,
                                                                 "clickButton", Vector2(0, 0), 0,
                                                                 "Change key", 20, Color(),
-                                                                R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
+                                                                "res/fonts/Rubik-VariableFont_wght.ttf"
                                                                 ,Alignment::Center);
 
     auto keyConfigScriptPlayerDown = KeyConfigButtonScript("playerDown", &playerDownTextUpdateScript);
@@ -332,7 +332,7 @@ void SettingsScene::build(Scene& scene) const {
     auto& playerShootKeyText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 63,
                                                                             rs->screenSizeHeight() / 1.43),0,
                                                                "playerShoot ( " + playerShootInputKey + " )"  ,20,
-                                                              Color(), R"(../../game/res/fonts/ZenDots-Regular.ttf)",
+                                                              Color(), "res/fonts/ZenDots-Regular.ttf",
                                                               Alignment::Center, false);
 
     auto& playerShootTextUpdateScript =
@@ -345,7 +345,7 @@ void SettingsScene::build(Scene& scene) const {
                                                                           rs->screenSizeHeight() / 1.40),true,
                                                                   "clickButton", Vector2(0, 0), 0,
                                                                   "Change key", 20, Color(),
-                                                                  R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
+                                                                  "res/fonts/Rubik-VariableFont_wght.ttf"
                                                                   ,Alignment::Center);
 
     auto keyConfigScriptPlayerShoot = KeyConfigButtonScript("playerShoot", &playerShootTextUpdateScript);

@@ -31,7 +31,7 @@ void PlayerTestScene::build(Scene& scene) const {
                                                                  rs->screenSizeHeight() / 100 * 1.8) ,true,
                                                          "clickButton", Vector2(0, 0), 0,
                                                          "Back", 15, Color(),
-                                                         R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)",
+                                                         "res/fonts/Rubik-VariableFont_wght.ttf",
                                                          Alignment::Center);
     backScript.setParentGameObject(backButton);
     backButton.addComponent<BackButtonScript>(backScript);

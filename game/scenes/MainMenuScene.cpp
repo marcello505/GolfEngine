@@ -19,7 +19,7 @@ void MainMenuScene::build(Scene& scene) const {
     auto& TitleText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 34,
                                                                     rs->screenSizeHeight() / 100 * 8),
                                                       0, "Zombie Slayer",70, Color(),
-                                                   R"(../../game/res/fonts/ZenDots-Regular.ttf)",
+                                                   "res/fonts/ZenDots-Regular.ttf",
                                                    Alignment::Center, false);
 
     auto& startGameButton = scene.createNewGameObject<Button>(root, 200, 100,
@@ -27,7 +27,7 @@ void MainMenuScene::build(Scene& scene) const {
                                                                       rs->screenSizeHeight() / 3.0),true,
                                                                       "clickButton", Vector2(0, 0), 0,
                                                                       "Start game", 20, Color(),
-                                                                      R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
+                                                                      "res/fonts/Rubik-VariableFont_wght.ttf"
                                                                       , Alignment::Center);
      StartGameButtonScript startGameScript;
      startGameScript.setParentGameObject(startGameButton);
@@ -38,7 +38,7 @@ void MainMenuScene::build(Scene& scene) const {
                                                                        rs->screenSizeHeight() / 2.0),true,
                                                                  "clickButton", Vector2(0, 0), 0,
                                                                  "Select level", 20, Color(),
-                                                                 R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)",
+                                                                 "res/fonts/Rubik-VariableFont_wght.ttf",
                                                                  Alignment::Center);
     SelectLevelButtonScript selectLevelScript;
     selectLevelScript.setParentGameObject(selectLevelButton);
@@ -50,7 +50,7 @@ void MainMenuScene::build(Scene& scene) const {
                                                                          rs->screenSizeHeight() / 1.5),true,
                                                               "clickButton", Vector2(0, 0), 0,
                                                               "Settings", 20, Color(),
-                                                              R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
+                                                              "res/fonts/Rubik-VariableFont_wght.ttf"
                                                               ,Alignment::Center);
     SettingsButtonScript settingsScript;
     settingsScript.setParentGameObject(settingsButton);
@@ -61,7 +61,7 @@ void MainMenuScene::build(Scene& scene) const {
                                                                          rs->screenSizeHeight() / 1.2),true,
                                                           "clickButton", Vector2(0, 0), 0,
                                                           "Exit", 20, Color(),
-                                                          R"(../../game/res/fonts/Rubik-VariableFont_wght.ttf)"
+                                                          "res/fonts/Rubik-VariableFont_wght.ttf"
                                                           ,Alignment::Center);
 
     ExitButtonScript exitScript;
