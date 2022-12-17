@@ -20,7 +20,7 @@ namespace GolfEngine::Services::Pathfinding{
     private:
         std::vector<std::reference_wrapper<class Pathfinding>> _pathfindingComponents ;
         std::unique_ptr<Graph> _graph;
-        int _nodeDistance {20};
+        int _nodeDistance {50};
         int rectMargin{0};
 
         int _graphWidth {1920};

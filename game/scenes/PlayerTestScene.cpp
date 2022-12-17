@@ -14,6 +14,7 @@
 #include "Scene/Components/BoxCollider.h"
 #include "../gameobjects/GameManager.h"
 #include "Scene/GameObjects/Camera.h"
+#include "Services/Singletons/PathfindingSingleton.h"
 
 void PlayerTestScene::build(Scene& scene) const {
     auto& root = scene.createNewGameObject<GameObject>();
@@ -78,4 +79,7 @@ void PlayerTestScene::build(Scene& scene) const {
    enemy4.setLocalPosition({850.f, 150.f});
 
     scene.createNewGameObject<GameManager>();
+
+    GolfEngine::Services::Pathfinding::getService()->setGraphSize(1280, 720);
+    GolfEngine::Services::Pathfinding::getService()->setNodeDistance(50);
 }
