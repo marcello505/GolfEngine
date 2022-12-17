@@ -10,10 +10,11 @@
 #include "Scene/GameObjects/GameObject.h"
 #include "../scripts/PlayerMovementScript.h"
 #include "../scripts/PlayerShootScript.h"
+#include "Scene/Scene.h"
 
 class PlayerObject : public GameObject {
 public:
-    explicit PlayerObject(ProjectilePoolScript* projectilePoolScript);
+    explicit PlayerObject(ProjectilePoolScript* projectilePoolScript, Scene& scene);
 };
 
 
