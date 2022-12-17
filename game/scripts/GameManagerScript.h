@@ -14,7 +14,6 @@ public:
 
     [[nodiscard]] float getTimePassed() const;
     [[nodiscard]] float getHighScoreTime() const;
-private:
     void onStart() override;
     void onUpdate() override;
 private:
@@ -26,7 +25,7 @@ private:
                                                    "playerReload"};
 
     void finishLevel();
-private:
+    void startRecordingReplay();
     float _timePassed {0.0f};
     std::string _highScoreKey{};
 };
