@@ -35,4 +35,9 @@ PlayerObject::PlayerObject(ProjectilePoolScript* projectilePoolScript, Scene& sc
 
     // Blood splatter particle effect game object
     scene.createNewGameObject<BloodSplatterParticleEffect>((GameObject&)*this);
+
+
+
+
+
 }
