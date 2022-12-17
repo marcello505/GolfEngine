@@ -22,6 +22,11 @@ namespace GameLoopTests{
         int callCount {0};
         GameLoop* gameLoop {nullptr};
 
+        bool pressedKey() const override { return false; }
+        void setKeyPressed(bool pressed) override {}
+        InputKey getKeyPressed() override { return Key_Tab; }
+        std::string getKeyString(InputKey key) override { return std::string(); }
+
     private:
     };
 
