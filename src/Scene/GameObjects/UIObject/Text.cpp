@@ -22,3 +22,8 @@ RenderShape& Text::getRenderShape() {
     return _renderShape;
 }
 
+Text::~Text() {
+    if(GolfEngine::Services::Render::hasService())
+        GolfEngine::Services::Render::getService()->removeDrawable(*this);
+}
+

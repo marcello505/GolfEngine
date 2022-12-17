@@ -1,12 +1,62 @@
 #include "SDLInputService.h"
 #include <iostream>
 #include <SDL.h>
-
+#include <algorithm>
+#include <string>
 
 SDLInputService::SDLInputService(): _hasReceivedQuitSignal{false}
 {
     _actionMap = ActionMap::getActionMap(); // actionMap the service will use as reference
     bindKeys(); // bind all the SDL keynames with our InputKey enum values
+}
+
+// get key string
+std::string SDLInputService::getKeyString(InputKey key){
+    for (auto &i : _inputBinds) {
+        if (i.second == key) {
+           return i.first;
+        }
+    }
+    return {};
+}
+
+// read any key / mouse click
+InputKey SDLInputService::getKeyPressed()
+{
+    SDL_Event event;
+    InputKey key;
+
+    while (SDL_PollEvent(&event)) //check for pollevents
+    {
+        if (event.type == SDL_KEYDOWN) // if key is pressed
+        {
+            setKeyPressed(true);
+            key = _inputBinds.find(SDL_GetKeyName(event.key.keysym.sym))->second; // get key
+        }
+        if (event.type == SDL_KEYUP) // if key is pressed{
+        {
+            return key;
+        }
+        if(event.type == SDL_MOUSEBUTTONDOWN){
+            setKeyPressed(true);
+            switch(event.button.button){
+                case 1: // left mouse button
+                    return Mouse_Left; // handle action for this button
+                case 2: // middle mouse button
+                    return Mouse_Middle; // handle action for this button
+                case 3: // right mouse button
+                    return Mouse_Right;
+                     // handle action for this button
+                default: // when no button is pressed but mouse moved
+                    break;
+           }
+        }
+        if (event.type == SDL_MOUSEBUTTONUP) // if mouse button is released
+        {
+            SDLInputService::handleMouseEvent(event, false); // handle mouse event
+        }
+    }
+    return key;
 }
 
 // handle input via SDL
@@ -307,8 +357,20 @@ void SDLInputService::bindKeys() {
     _inputBinds.insert(std::pair<std::string, InputKey>("\"", Key_QuoteDbl));
     _inputBinds.insert(std::pair<std::string, InputKey>(")", Key_RightParen));
     _inputBinds.insert(std::pair<std::string, InputKey>("_", Key_Underscore));
+    _inputBinds.insert(std::pair<std::string, InputKey>("mouse-left", Mouse_Left));
+    _inputBinds.insert(std::pair<std::string, InputKey>("mouse-middle", Mouse_Middle));
+    _inputBinds.insert(std::pair<std::string, InputKey>("mouse-right", Mouse_Right));
 }
+
 
 bool SDLInputService::hasReceivedQuitSignal() const{
     return _hasReceivedQuitSignal;
+}
+
+bool SDLInputService::pressedKey() const{
+    return _pressedKey;
+}
+
+void SDLInputService::setKeyPressed(bool pressed) {
+    _pressedKey = pressed;
 }

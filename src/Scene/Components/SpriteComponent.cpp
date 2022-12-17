@@ -16,7 +16,6 @@ void SpriteComponent::onStart() {
         if(!GolfEngine::Services::Render::getService()->isRegistered(*this))
             GolfEngine::Services::Render::getService()->addDrawable(*this);
 }
-
 void SpriteComponent::onUpdate() {
 }
 

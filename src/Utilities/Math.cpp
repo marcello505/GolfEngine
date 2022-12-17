@@ -23,4 +23,8 @@ namespace GolfEngine::Utilities::Math{
         float y = vec.y;
         return atan2f(y, x);
     }
+
+    int roundToNearestMultiple(int number, int multiple) {
+        return ((number + multiple / 2) / multiple) * multiple;
+    }
 }

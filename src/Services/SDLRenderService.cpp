@@ -151,6 +151,14 @@ namespace GolfEngine::Services::Render {
         return _fullScreen;
     }
 
+    bool SDLRenderService::isRegistered(Drawable& drawable) {
+        auto result = std::find_if(_drawables.begin(), _drawables.end(), [&](const std::reference_wrapper<Drawable> &d) {
+            return &d.get() == &drawable;
+        });
+        if(result != _drawables.end())
+            return true;
+        return false;
+    }
 
     void SDLRenderService::renderButton(ButtonRenderShape &renderShape) {
         renderRect(*renderShape._rectRenderShape);
@@ -185,7 +193,7 @@ namespace GolfEngine::Services::Render {
         } else if(renderShape._textAlign == Alignment::Center){
             dstRect.x = renderShape._rectRenderShape->rect().position.x  - (surface->w / 2.0);
         } else{
-            dstRect.x = renderShape._rectRenderShape->rect().position.x  - (surface->w / 4.0);
+            dstRect.x = renderShape._rectRenderShape->rect().position.x - (surface->w / 4.0);
         }
 
 
@@ -533,15 +541,6 @@ namespace GolfEngine::Services::Render {
 
     void SDLRenderService::setMainCamera(const std::optional<std::reference_wrapper<Camera>>& camera) {
         _mainCamera = camera;
-    }
-
-    bool SDLRenderService::isRegistered(Drawable& drawable) {
-        auto result = std::find_if(_drawables.begin(), _drawables.end(), [&](const std::reference_wrapper<Drawable> &d) {
-            return &d.get() == &drawable;
-        });
-        if(result != _drawables.end())
-            return true;
-        return false;
     }
 
     int SDLRenderService::getScreenSizeWidth() const {
