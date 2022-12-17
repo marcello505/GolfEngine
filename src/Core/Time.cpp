@@ -2,6 +2,7 @@
 // Created by marcello on 11/7/22.
 //
 
+#include <algorithm>
 #include "Time.h"
 
 // Setting default timescale as 1.0
@@ -63,5 +64,6 @@ GameTic GolfEngine::Time::getTimeScale() {
 }
 
 void GolfEngine::Time::setTimeScale(GameTic timeScale) {
-    _timeScale = timeScale;
+    //Ensure that the time scale is atleast 0.1;
+    _timeScale = std::max(0.1f, timeScale);
 }

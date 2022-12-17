@@ -14,9 +14,11 @@ public:
     void onStart() override;
     void onUpdate() override;
     void onCollisionEnter(RigidBody& other) override;
+    bool isDead();
+
+
     std::unique_ptr<ISnapshot> saveSnapshot() override;
     void loadSnapshot(const ISnapshot& rawSnapshot) override;
-
 private:
     EnemyMovementScript* _enemyMovement;
     bool _death{false};

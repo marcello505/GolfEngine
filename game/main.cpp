@@ -5,6 +5,7 @@
 #include "Services/Singletons/RenderSingleton.h"
 
 // Game includes
+#include "utils/GameActions.h"
 #include "scenes/PlayerTestScene.h"
 #include "scenes/Level2Scene.h"
 #include "scenes/Level1Scene.h"
@@ -30,20 +31,18 @@ int main(int argc, char* argv[]){
 
     //Set up controls
     auto* actionMap = ActionMap::getActionMap();
-    actionMap->addAction("playerLeft");
-    actionMap->addInputKeyToAction("playerLeft", InputKey::Key_A);
-    actionMap->addAction("playerRight");
-    actionMap->addInputKeyToAction("playerRight", InputKey::Key_D);
-    actionMap->addAction("playerUp");
-    actionMap->addInputKeyToAction("playerUp", InputKey::Key_W);
-    actionMap->addAction("playerDown");
-    actionMap->addInputKeyToAction("playerDown", InputKey::Key_S);
-    actionMap->addAction("playerShoot");
-    actionMap->addInputKeyToAction("playerShoot", InputKey::Mouse_Left);
-    actionMap->addAction("playerReload");
-    actionMap->addInputKeyToAction("playerReload", InputKey::Key_R);
-    actionMap->addAction("restart");
-    actionMap->addInputKeyToAction("restart", InputKey::Key_Backspace);
+    actionMap->addAction(ACTION_PLAYER_LEFT);
+    actionMap->addInputKeyToAction(ACTION_PLAYER_LEFT, InputKey::Key_A);
+    actionMap->addAction(ACTION_PLAYER_RIGHT);
+    actionMap->addInputKeyToAction(ACTION_PLAYER_RIGHT, InputKey::Key_D);
+    actionMap->addAction(ACTION_PLAYER_UP);
+    actionMap->addInputKeyToAction(ACTION_PLAYER_UP, InputKey::Key_W);
+    actionMap->addAction(ACTION_PLAYER_DOWN);
+    actionMap->addInputKeyToAction(ACTION_PLAYER_DOWN, InputKey::Key_S);
+    actionMap->addAction(ACTION_PLAYER_SHOOT);
+    actionMap->addInputKeyToAction(ACTION_PLAYER_SHOOT, InputKey::Mouse_Left);
+    actionMap->addAction(ACTION_PLAYER_RELOAD);
+    actionMap->addInputKeyToAction(ACTION_PLAYER_RELOAD, InputKey::Key_R);
 
     //Set up recording controls
     actionMap->addAction("startRecordingReplay");
@@ -52,6 +51,20 @@ int main(int argc, char* argv[]){
     actionMap->addInputKeyToAction("stopRecordingReplay", InputKey::Key_O);
     actionMap->addAction("playReplay");
     actionMap->addInputKeyToAction("playReplay", InputKey::Key_P);
+
+    // GameManager Actions
+    actionMap->addAction(ACTION_GAME_MANAGER_RESTART);
+    actionMap->addInputKeyToAction(ACTION_GAME_MANAGER_RESTART, InputKey::Key_Backspace);
+    actionMap->addAction(ACTION_GAME_MANAGER_EXIT);
+    actionMap->addInputKeyToAction(ACTION_GAME_MANAGER_EXIT, InputKey::Key_Escape);
+    actionMap->addAction(ACTION_GAME_MANAGER_NEXT);
+    actionMap->addInputKeyToAction(ACTION_GAME_MANAGER_NEXT, InputKey::Key_Space);
+    actionMap->addAction(ACTION_GAME_MANAGER_TIME_SCALE_UP);
+    actionMap->addInputKeyToAction(ACTION_GAME_MANAGER_TIME_SCALE_UP, InputKey::Key_PageUp);
+    actionMap->addAction(ACTION_GAME_MANAGER_TIME_SCALE_DOWN);
+    actionMap->addInputKeyToAction(ACTION_GAME_MANAGER_TIME_SCALE_DOWN, InputKey::Key_PageDown);
+    actionMap->addAction(ACTION_GAME_MANAGER_TIME_SCALE_RESET);
+    actionMap->addInputKeyToAction(ACTION_GAME_MANAGER_TIME_SCALE_RESET, InputKey::Key_Home);
 
     //Set up menu controls
     actionMap->addAction("clickButton");

@@ -52,4 +52,8 @@ void EnemyCollisionScript::loadSnapshot(const ISnapshot& rawSnapshot) {
     _death = snapshot.death;
 }
 
+bool EnemyCollisionScript::isDead() {
+    return _death;
+}
+
 
