@@ -73,7 +73,7 @@ void Level1Scene::build(Scene& scene) const {
     enemy7.addPatrolPoint({640.f, 800.f});
     enemy7.addPatrolPoint({390.f, 800.f});
     enemy7.addPatrolPoint({390.f, 1130.f});
-    enemy7.addPatrolPoint({700.f, 1180.f});
+    enemy7.addPatrolPoint({700.f, 1130.f});
     enemy7.addPatrolPoint({390.f, 1130.f});
     enemy7.addPatrolPoint({390.f, 800.f});
 
