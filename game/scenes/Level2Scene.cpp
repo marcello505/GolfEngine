@@ -16,6 +16,8 @@ void Level2Scene::build(Scene& scene) const {
         auto& mapObject = scene.createNewGameObject<GameObject>(root);
         auto& mapComponent = mapObject.addComponent<TiledComponent>("res/tilesets/Level2.tmx", Vector2{3, 3});
         mapComponent.initColliders();
+        mapComponent.layer=-1;
+
     }
 
     //Set up player
