@@ -436,6 +436,11 @@ namespace GolfEngine::Services::Render {
     }
 
     void SDLRenderService::renderText(TextRenderShape& renderShape) {
+        if(renderShape.text().empty()){
+            //If text is empty, don't render anything
+            return;
+        }
+
         std::optional<std::reference_wrapper<TTF_Font>> f;
         try{
             f = loadFont(renderShape.filePath(), renderShape.fontSize());
@@ -448,9 +453,10 @@ namespace GolfEngine::Services::Render {
         auto& font {f->get()};
 
 
+
         SDL_Surface* surface = TTF_RenderText_Solid(&font, renderShape.text().c_str(), {renderShape.color().r8,renderShape.color().g8,renderShape.color().b8});
         if(surface == nullptr){
-            printf("Unable to load image %s, Error: %s\n", renderShape.filePath().c_str(), IMG_GetError());
+            printf("Unable to load text %s, Error: %s\n", renderShape.filePath().c_str(), TTF_GetError());
             return;
         }
 

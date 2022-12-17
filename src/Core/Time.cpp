@@ -7,6 +7,8 @@
 // Setting default timescale as 1.0
 GameTic GolfEngine::Time::_timeScale {1.0f};
 GameTic GolfEngine::Time::_physicsDeltaTime {0.0f};
+GameTic GolfEngine::Time::_fpsPhysics {0.0f};
+GameTic GolfEngine::Time::_fpsRender {0.0f};
 
 GameTic GolfEngine::Time::getPhysicsDeltaTime() {
     return _physicsDeltaTime;
@@ -48,11 +50,11 @@ void GolfEngine::Time::measureRenderCall() {
     }
 }
 
-GameTic GolfEngine::Time::getPhysicsFps() const {
+GameTic GolfEngine::Time::getPhysicsFps() {
     return _fpsPhysics;
 }
 
-GameTic GolfEngine::Time::getRenderFps() const {
+GameTic GolfEngine::Time::getRenderFps() {
     return _fpsRender;
 }
 

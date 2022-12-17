@@ -17,6 +17,7 @@
 #include "Scene/Components/BoxCollider.h"
 #include "../gameobjects/GameManager.h"
 #include "Scene/GameObjects/Camera.h"
+#include "../gameobjects/HUD.h"
 #include "Services/Singletons/PathfindingSingleton.h"
 
 void PlayerTestScene::build(Scene& scene) const {
@@ -98,4 +99,7 @@ void PlayerTestScene::build(Scene& scene) const {
 
     GolfEngine::Services::Pathfinding::getService()->setGraphSize(1280, 720);
     GolfEngine::Services::Pathfinding::getService()->setNodeDistance(50);
+
+    // IMPORTANT! Create this object after the GameManager (GameManager.onStart() needs to happen before HUD.onStart())
+    scene.createNewGameObject<HUD>(std::ref(scene));
 }

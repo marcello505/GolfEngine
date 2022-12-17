@@ -14,8 +14,8 @@ namespace GolfEngine{
     public:
 
         //Methods
-        GameTic getRenderFps() const;
-        GameTic getPhysicsFps() const;
+        static GameTic getRenderFps();
+        static GameTic getPhysicsFps();
         GameTic getRenderDeltaTime() const;
         static GameTic getPhysicsDeltaTime();
         static GameTic getTimeScale();
@@ -35,8 +35,8 @@ namespace GolfEngine{
         static GameTic _physicsDeltaTime;
         int _physicsCalls {0};
         int _renderCalls {0};
-        GameTic _fpsPhysics {0};
-        GameTic _fpsRender {0};
+        static GameTic _fpsPhysics;
+        static GameTic _fpsRender;
         static GameTic _timeScale;
     };
 }
