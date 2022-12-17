@@ -6,6 +6,8 @@
 #define GOLFENGINE_PLAYERCOLLISIONSCRIPT_H
 
 #include "Scene/Components/BehaviourScript.h"
+#include <Scene/Components/ParticleSystem.h>
+#include <Scene/Components/AudioSource.h>
 #include "GameManagerScript.h"
 #include "PlayerMovementScript.h"
 #include "PlayerShootScript.h"
@@ -18,6 +20,8 @@ private:
     GameManagerScript* _gameManager;
     PlayerMovementScript* _playerMovement;
     PlayerShootScript* _playerShoot;
+    GolfEngine::Scene::Components::AudioSource* _audioSource;
+    ParticleSystem* _particleSystem;
 };
 
 

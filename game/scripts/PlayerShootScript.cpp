@@ -10,8 +10,8 @@
 void PlayerShootScript::onStart() {
     _audioSource = &_gameObject.value().get().getComponent<GolfEngine::Scene::Components::AudioSource>();
 
-    if (_gameObject.value().get().hasComponent<Animator>())
-        _animator = &_gameObject.value().get().getComponent<Animator>();
+    if (_gameObject->get().hasComponent<Animator>())
+        _animator = &_gameObject->get().getComponent<Animator>();
 }
 
 void PlayerShootScript::onUpdate() {
@@ -20,6 +20,7 @@ void PlayerShootScript::onUpdate() {
         if(_currentAmmo > 0 && !_reloading){
             _currentAmmo--;
 
+            // Shoot effects
             _audioSource->play("shoot");
             _animator->play("shoot");
 
