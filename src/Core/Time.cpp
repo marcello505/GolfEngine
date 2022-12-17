@@ -2,11 +2,14 @@
 // Created by marcello on 11/7/22.
 //
 
+#include <algorithm>
 #include "Time.h"
 
 // Setting default timescale as 1.0
 GameTic GolfEngine::Time::_timeScale {1.0f};
 GameTic GolfEngine::Time::_physicsDeltaTime {0.0f};
+GameTic GolfEngine::Time::_fpsPhysics {0.0f};
+GameTic GolfEngine::Time::_fpsRender {0.0f};
 
 GameTic GolfEngine::Time::getPhysicsDeltaTime() {
     return _physicsDeltaTime;
@@ -48,11 +51,11 @@ void GolfEngine::Time::measureRenderCall() {
     }
 }
 
-GameTic GolfEngine::Time::getPhysicsFps() const {
+GameTic GolfEngine::Time::getPhysicsFps() {
     return _fpsPhysics;
 }
 
-GameTic GolfEngine::Time::getRenderFps() const {
+GameTic GolfEngine::Time::getRenderFps() {
     return _fpsRender;
 }
 
@@ -61,5 +64,6 @@ GameTic GolfEngine::Time::getTimeScale() {
 }
 
 void GolfEngine::Time::setTimeScale(GameTic timeScale) {
-    _timeScale = timeScale;
+    //Ensure that the time scale is atleast 0.1;
+    _timeScale = std::max(0.1f, timeScale);
 }

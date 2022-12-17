@@ -26,7 +26,9 @@ set(SCRIPT_SOURCES
         scripts/MenuScripts/ExitButtonScript.cpp
         scripts/MenuScripts/TextUpdateScript.cpp
         scripts/MenuScripts/MusicVolumeButtonScript.cpp
-        scripts/MenuScripts/KeyConfigButtonScript.cpp)
+        scripts/MenuScripts/KeyConfigButtonScript.cpp
+        scripts/GameManagerScript.cpp
+        scripts/HUDScript.cpp)
 
 set(GAMEOBJECTS_SOURCES
         gameobjects/PlayerObject.cpp     
@@ -34,9 +36,12 @@ set(GAMEOBJECTS_SOURCES
         gameobjects/Projectile.cpp
         gameobjects/ProjectilePoolObject.cpp
         gameobjects/TestBlock.cpp
-        gameobjects/GameManager.cpp 
+        gameobjects/PhysicGameObject.cpp
+        gameobjects/GameManager.cpp
+        gameobjects/HUD.cpp
         gameobjects/EnemyObject.cpp
-        gameobjects/PhysicGameObject.cpp)
+        gameobjects/BloodSplatterParticleEffect.cpp
+        gameobjects/FinishLevelAreaObject.cpp)
 
 set(SCENE_SOURCES
         scenes/PlayerTestScene.cpp

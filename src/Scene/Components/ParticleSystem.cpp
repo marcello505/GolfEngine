@@ -17,11 +17,15 @@ _spritePath{spritePath}, _particlesPerSecond{particlesPerSecond}, _lifeTime{life
 }
 
 Particle& ParticleSystem::addParticle(){
-    particles.push_back(std::make_unique<Particle>(_spritePath,_velocity,_rotation, _pixelScale, _color));
+    int randomRotation = 0;
+    if(_randomStartRotation){
+        randomRotation = GolfEngine::Utilities::Random::getIntRange(0, 359);
+    }
+    particles.push_back(std::make_unique<Particle>(_spritePath,_velocity,_randomStartRotation? randomRotation : _rotation, _pixelScale, _color));
     auto& particle = particles.at(particles.size() - 1);
 
     auto transform = _gameObject->get().getWorldTransform();
-    transform.rotation += _rotation;
+    transform.rotation += particle->getSpriteRenderShape().rotation();
 
     transform.position.x += _position.x;
     transform.position.y += _position.y;
@@ -46,12 +50,19 @@ Particle& ParticleSystem::addParticle(){
 void ParticleSystem::play(bool looping) {
     _looping = looping;
 
-    auto& particle = addParticle();
-
-    auto renderService = GolfEngine::Services::Render::getService();
-    if(renderService)
-        renderService->addDrawable(particle);
-
+    // If not looping shoot all particles as a one shot
+    if(!_looping){
+        for(int i = 0; i < _particlesPerSecond; i++){
+            auto& particle = addParticle();
+            if(GolfEngine::Services::Render::hasService())
+                GolfEngine::Services::Render::getService()->addDrawable(particle);
+        }
+    }
+    else{
+        auto& particle = addParticle();
+        if(GolfEngine::Services::Render::hasService())
+            GolfEngine::Services::Render::getService()->addDrawable(particle);
+    }
 }
 
 void ParticleSystem::stop() {
@@ -124,7 +135,12 @@ void ParticleSystem::onUpdate() {
 }
 
 void ParticleSystem::onRemove() {
-
+    //Delete all particles
+    for(auto& particle : particles){
+        auto renderService = GolfEngine::Services::Render::getService();
+        if(renderService && renderService->isRegistered(*particle))
+            renderService->removeDrawable(*particle);
+    }
 }
 
 bool ParticleSystem::getActive() {
@@ -171,4 +187,8 @@ std::unique_ptr<ISnapshot> ParticleSystem::saveSnapshot() {
 
 void ParticleSystem::loadSnapshot(const ISnapshot& rawSnapshot) {
     //Empty on purpose
+}
+
+void ParticleSystem::setRandomStartRotation(bool randomRotation) {
+    _randomStartRotation = randomRotation;
 }
