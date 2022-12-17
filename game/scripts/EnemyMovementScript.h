@@ -18,20 +18,21 @@ public:
     void rotateEnemyToPosition(Vector2 targetPosition);
 
     std::unique_ptr<ISnapshot> saveSnapshot() override;
-
     void loadSnapshot(const ISnapshot& rawSnapshot) override;
 
 private:
-    float timePassed = 0;
     std::optional<std::reference_wrapper<Pathfinding>> pathfinding;
     bool chasing {false};
     GameObject& _target;
     int patrolIndex{0};
     Vector2 direction {0,0};
+
     bool checkIftargetIsInSight();
 
     struct Snapshot : public ISnapshot{
         bool chasing {};
+        int patrolIndex {};
+        Vector2 direction {0,0};
     };
 
 };
