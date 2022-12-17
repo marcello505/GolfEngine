@@ -54,6 +54,8 @@ int main(int argc, char* argv[]){
     actionMap->addInputKeyToAction(ACTION_GAME_MANAGER_RESTART, InputKey::Key_Backspace);
     actionMap->addAction(ACTION_GAME_MANAGER_EXIT);
     actionMap->addInputKeyToAction(ACTION_GAME_MANAGER_EXIT, InputKey::Key_Escape);
+    actionMap->addAction(ACTION_GAME_MANAGER_NEXT);
+    actionMap->addInputKeyToAction(ACTION_GAME_MANAGER_NEXT, InputKey::Key_Space);
     actionMap->addAction(ACTION_GAME_MANAGER_TIME_SCALE_UP);
     actionMap->addInputKeyToAction(ACTION_GAME_MANAGER_TIME_SCALE_UP, InputKey::Key_PageUp);
     actionMap->addAction(ACTION_GAME_MANAGER_TIME_SCALE_DOWN);

@@ -13,6 +13,7 @@
 #define ACTION_PLAYER_RELOAD "playerReload"
 #define ACTION_GAME_MANAGER_RESTART "restart"
 #define ACTION_GAME_MANAGER_EXIT "exitLevel"
+#define ACTION_GAME_MANAGER_NEXT "nextLevel"
 #define ACTION_GAME_MANAGER_TIME_SCALE_UP "timeScaleUp"
 #define ACTION_GAME_MANAGER_TIME_SCALE_DOWN "timeScaleDown"
 #define ACTION_GAME_MANAGER_TIME_SCALE_RESET "timeScaleReset"

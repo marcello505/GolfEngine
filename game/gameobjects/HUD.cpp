@@ -30,6 +30,11 @@ HUD::HUD(Scene &scene) {
                                                               "res/fonts/Rubik-VariableFont_wght.ttf",
                                                               Alignment::Center, false);
 
+    auto& levelCompleteText = scene.createNewGameObject<Text>((GameObject&)*this, Vector2{windowSize.x * 0.35f, windowSize.y * 0.95f}, 0, "",
+                                                                 32, Color(20, 255, 20, 255),
+                                                                 "res/fonts/Rubik-VariableFont_wght.ttf",
+                                                                 Alignment::Center, false);
+
     // Add HUB script to update text
-    addComponent<HUDScript>(&fpsText, &timeText, &highScoreTimeText, &quitConfirmationText);
+    addComponent<HUDScript>(&fpsText, &timeText, &highScoreTimeText, &quitConfirmationText, &levelCompleteText);
 }

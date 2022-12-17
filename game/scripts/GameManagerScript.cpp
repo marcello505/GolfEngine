@@ -15,6 +15,7 @@
 
 void GameManagerScript::restartLevel() {
     _timePassed = 0.0f;
+    _levelFinished = false;
     GolfEngine::SceneManager::GetSceneManager().getCurrentScene().loadCurrentSceneState(1);
     startRecordingReplay();
 }
@@ -48,6 +49,7 @@ void GameManagerScript::finishLevel() {
         // First time level has been completed, create high score entry
         GolfEngine::Core::getProjectSettings().setFloat(_highScoreKey, _timePassed);
     }
+    _levelFinished = true;
     GolfEngine::SceneManager::GetSceneManager().getCurrentScene().playReplay();
 }
 
@@ -59,7 +61,8 @@ void GameManagerScript::onStart() {
 
 void GameManagerScript::onUpdate() {
     ActionMap* actionMap = ActionMap::getActionMap();
-    _timePassed += GolfEngine::Time::getPhysicsDeltaTime();
+    if(!_levelFinished)
+        _timePassed += GolfEngine::Time::getPhysicsDeltaTime();
 
     if(actionMap->isJustPressed(ACTION_GAME_MANAGER_RESTART))
         restartLevel();
@@ -81,6 +84,7 @@ void GameManagerScript::onUpdate() {
         }
         else if(_waitingForQuitConfirmation && actionMap->isJustPressed(ACTION_GAME_MANAGER_EXIT)){
             //Escape level
+            GolfEngine::SceneManager::GetSceneManager().getCurrentScene().stopReplay();
             GolfEngine::SceneManager::GetSceneManager().loadScene("mainMenu");
         }
         else if(_waitingForQuitConfirmation && _quitConfirmationTimePassed >= 3.0f){
@@ -88,9 +92,16 @@ void GameManagerScript::onUpdate() {
         }
     }
 
+    //Finished level logic
+    if(_levelFinished && actionMap->isJustPressed(ACTION_GAME_MANAGER_NEXT)){
+        GolfEngine::SceneManager::GetSceneManager().getCurrentScene().stopReplay();
+        GolfEngine::SceneManager::GetSceneManager().loadScene(_nextLevelName);
+    }
+
 }
 
 void GameManagerScript::startRecordingReplay() {
+    GolfEngine::SceneManager::GetSceneManager().getCurrentScene().stopReplay();
     GolfEngine::SceneManager::GetSceneManager().getCurrentScene().startRecordingReplay(_playerActionsToLock, true);
 }
 float GameManagerScript::getTimePassed() const {
@@ -106,5 +117,9 @@ float GameManagerScript::getHighScoreTime() const {
 
 bool GameManagerScript::isWaitingForQuitConfirmation() const {
     return _waitingForQuitConfirmation;
+}
+
+bool GameManagerScript::isLevelFinished() const {
+    return _levelFinished;
 }
 

@@ -5,16 +5,21 @@
 #ifndef GOLFENGINE_GAMEMANAGERSCRIPT_H
 #define GOLFENGINE_GAMEMANAGERSCRIPT_H
 
+#include <utility>
+
 #include "Scene/Components/BehaviourScript.h"
 
 class GameManagerScript : public BehaviourScript {
 public:
+    explicit GameManagerScript(std::string nextLevelName) : _nextLevelName{std::move(nextLevelName)} {}
+
     void restartLevel();
     void tryFinishLevel();
 
     [[nodiscard]] float getTimePassed() const;
     [[nodiscard]] float getHighScoreTime() const;
     bool isWaitingForQuitConfirmation() const;
+    bool isLevelFinished() const;
 
     void onStart() override;
     void onUpdate() override;
@@ -34,6 +39,10 @@ private:
     // Exit level logic
     bool _waitingForQuitConfirmation {false};
     float _quitConfirmationTimePassed {0.0f};
+
+    // Next level logic
+    bool _levelFinished {false};
+    const std::string _nextLevelName;
 };
 
 
