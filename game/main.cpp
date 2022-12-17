@@ -12,7 +12,10 @@
 #include "scenes/SettingsScene.h"
 #include "Scene/Components/AudioSource.h"
 
+#include "scenes/Level2Scene.h"
+#include "scenes/Level1Scene.h"
 #include "scenes/SaveGameTestScene.h"
+#include "Services/Singletons/PathfindingSingleton.h"
 #include <SDL.h>
 
 
@@ -23,7 +26,9 @@ int main(int argc, char* argv[]){
     GolfEngine::Services::Render::getService()->setWindowTitle("Game name");
 
     //Render initialization
+
     GolfEngine::Services::Render::getService()->setScreenSize(1920, 1080);
+    GolfEngine::Services::Pathfinding::getService()->setGraphSize(1920,1920);
 
     //Set up controls
     auto* actionMap = ActionMap::getActionMap();
@@ -67,11 +72,16 @@ int main(int argc, char* argv[]){
     //Scene initialization
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
     sceneManager.addScene<PlayerTestScene>("playerTest");
+    sceneManager.addScene<Level1Scene>("level1");
+    sceneManager.addScene<Level2Scene>("level2");
     sceneManager.addScene<SaveGameTestScene>("saveGameTest");
     sceneManager.addSceneFactory<MainMenuScene>("mainMenu");
     sceneManager.addSceneFactory<SelectLevelScene>("selectLevel");
     sceneManager.addSceneFactory<SettingsScene>("settings");
     sceneManager.loadScene("mainMenu");
+    sceneManager.loadScene("level1");
+
+    //Render initialization
 
     gameLoop.start();
     return 0;
