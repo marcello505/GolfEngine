@@ -1,11 +1,13 @@
 //
 // Created by user on 12/13/2022.
 //
+#include <iostream>
 
-#include "GameManagerScript.h"
 #include "Input/ActionMap.h"
 #include "Core/SceneManager.h"
-#include <iostream>
+
+#include "GameManagerScript.h"
+#include "EnemyCollisionScript.h"
 
 void GameManagerScript::restartLevel() {
     GolfEngine::SceneManager::GetSceneManager().getCurrentScene().loadCurrentSceneState(1);
@@ -13,7 +15,19 @@ void GameManagerScript::restartLevel() {
 
 void GameManagerScript::tryFinishLevel() {
     // TODO check if all enemies have died before calling finishLevel()
-    finishLevel();
+    auto enemyGameObjects = GolfEngine::SceneManager::GetSceneManager().getCurrentScene().getGameObjectsWithTag("enemy");
+
+    bool allEnemiesDead {true};
+
+    for(const auto& enemy : enemyGameObjects){
+        if(enemy.get().hasComponent<EnemyCollisionScript>() && !enemy.get().getComponent<EnemyCollisionScript>().isDead()){
+            allEnemiesDead = false;
+            break;
+        }
+    }
+
+    if(allEnemiesDead)
+        finishLevel();
 }
 
 void GameManagerScript::finishLevel() {
