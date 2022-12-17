@@ -16,9 +16,9 @@ TEST_SUITE("IO"){
         fileStream.close();
 
         //Assert
-        CHECK(IO::resourceFileExists(path));
-        IO::deleteResourceFile(path);
-        CHECK_FALSE(IO::resourceFileExists(path));
+        CHECK(IO::resourceFileExists(path.string()));
+        IO::deleteResourceFile(path.string());
+        CHECK_FALSE(IO::resourceFileExists(path.string()));
     }
 
     TEST_CASE("deleteUserDataFile() deletes a file that was just created"){
@@ -31,9 +31,9 @@ TEST_SUITE("IO"){
         fileStream.close();
 
         //Assert
-        CHECK(IO::userDataFileExists(path));
-        IO::deleteUserDataFile(path);
-        CHECK_FALSE(IO::userDataFileExists(path));
+        CHECK(IO::userDataFileExists(path.string()));
+        IO::deleteUserDataFile(path.string());
+        CHECK_FALSE(IO::userDataFileExists(path.string()));
     }
 
     TEST_CASE("loadSettings() correctly loads in XML saved by saveSettings()"){
