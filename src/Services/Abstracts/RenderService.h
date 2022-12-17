@@ -18,8 +18,8 @@ public:
     virtual void render() = 0;
 
     virtual void setScreenSize(int width, int height) = 0;
-    virtual int getScreenSizeWidth() const = 0;
-    virtual int getScreenSizeHeight() const = 0;
+    [[nodiscard]] virtual int getScreenSizeWidth() const = 0;
+    [[nodiscard]] virtual int getScreenSizeHeight() const = 0;
     virtual Vector2 getCameraOffset() const = 0;
     virtual void setFullScreen(bool fullScreen) = 0;
     [[nodiscard]] virtual int screenSizeHeight() const = 0;

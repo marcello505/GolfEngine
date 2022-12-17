@@ -69,4 +69,8 @@ namespace GolfEngine {
         }
 
     }
+
+    std::string SceneManager::getCurrentSceneName() const {
+        return _lastScene;
+    }
 }
