@@ -3,23 +3,27 @@
 #include "Core/GameLoop.h"
 #include "Core/Settings.h"
 #include "Services/Singletons/RenderSingleton.h"
-#include <SDL.h>
-
-//TODO find something to fix this
-#include <SDL.h>
 
 // Game includes
 #include "scenes/PlayerTestScene.h"
+
+#include "scenes/MainMenuScene.h"
+#include "scenes/SelectLevelScene.h"
+#include "scenes/SettingsScene.h"
+#include "Scene/Components/AudioSource.h"
+
 #include "scenes/SaveGameTestScene.h"
 #include <SDL.h>
+
 
 
 int main(int argc, char* argv[]){
     GameLoop gameLoop {};
     gameLoop.useDefaultServices();
     GolfEngine::Services::Render::getService()->setWindowTitle("Game name");
+
     //Render initialization
-    GolfEngine::Services::Render::getService()->setScreenSize(1280, 720);
+    GolfEngine::Services::Render::getService()->setScreenSize(1920, 1080);
 
     //Set up controls
     auto* actionMap = ActionMap::getActionMap();
@@ -46,6 +50,10 @@ int main(int argc, char* argv[]){
     actionMap->addAction("playReplay");
     actionMap->addInputKeyToAction("playReplay", InputKey::Key_P);
 
+    //Set up menu controls
+    actionMap->addAction("clickButton");
+    actionMap->addInputKeyToAction("clickButton", Mouse_Left);
+
     // Save Game actions
     actionMap->addAction("saveGame");
     actionMap->addInputKeyToAction("saveGame", InputKey::Key_K);
@@ -60,9 +68,10 @@ int main(int argc, char* argv[]){
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
     sceneManager.addScene<PlayerTestScene>("playerTest");
     sceneManager.addScene<SaveGameTestScene>("saveGameTest");
-    sceneManager.loadScene("playerTest");
-
-
+    sceneManager.addSceneFactory<MainMenuScene>("mainMenu");
+    sceneManager.addSceneFactory<SelectLevelScene>("selectLevel");
+    sceneManager.addSceneFactory<SettingsScene>("settings");
+    sceneManager.loadScene("mainMenu");
 
     gameLoop.start();
     return 0;

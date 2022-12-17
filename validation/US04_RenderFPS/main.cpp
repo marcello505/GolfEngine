@@ -15,11 +15,13 @@ int main(int argc, char* argv[]){
 
     std::string fps =   std::to_string(gameLoop.time->getRenderFps());
 
+
     auto text = TextDrawable(Vector2(100,150),
                              Transform(Vector2(0,0), 0,Vector2(1,1)  ),  fps, 36 ,Color(), R"(..\..\..\validation\US04_RenderFPS\files\roman.ttf)", gameLoop );
 
     auto text2 = TextDrawable(Vector2(50,50),
                               Transform(Vector2(0,0), 0,Vector2(1,1)  ),  fps, 12 ,Color(), R"(..\..\..\validation\US04_RenderFPS\files\roman.ttf)", gameLoop );
+
 
     rs->addDrawable(text);
     rs->addDrawable(text2);

@@ -46,5 +46,8 @@ private:
     static void findPaths();
 };
 
+namespace GolfEngine::Core{
+    GameLoop& getRunningGameLoop();
+}
 
 #endif //SPC_PROJECT_GAMELOOP_H
