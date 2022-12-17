@@ -126,8 +126,8 @@ public:
     [[nodiscard]] bool isActiveSelf() const;
     [[nodiscard]] bool getActive() const;
     void setActive(bool active);
-    void onStart();
 
+    virtual void onStart();
     virtual void onUpdate();
 
     std::vector<std::reference_wrapper<GameObject>>& children();

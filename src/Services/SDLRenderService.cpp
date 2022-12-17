@@ -531,7 +531,7 @@ namespace GolfEngine::Services::Render {
             return std::nullopt;
     }
 
-    void SDLRenderService::setMainCamera(Camera &camera) {
+    void SDLRenderService::setMainCamera(const std::optional<std::reference_wrapper<Camera>>& camera) {
         _mainCamera = camera;
     }
 
