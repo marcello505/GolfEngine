@@ -26,7 +26,6 @@ int main(int argc, char* argv[]){
 
     //Render initialization
     GolfEngine::Services::Render::getService()->setScreenSize(1920, 1080);
-    GolfEngine::Services::Pathfinding::getService()->setGraphSize(1920,1920);
     GolfEngine::Services::Render::getService()->setWindowTitle("Game name");
 
     //Set up controls

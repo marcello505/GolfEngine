@@ -10,6 +10,8 @@
 #include "../gameobjects/GameManager.h"
 #include "../gameobjects/PhysicGameObject.h"
 #include "../gameobjects/EnemyObject.h"
+#include "Services/Singletons/PathfindingSingleton.h"
+#include "../gameobjects/HUD.h"
 
 void Level1Scene::build(Scene& scene) const {
     auto& root = scene.createNewGameObject<GameObject>();
@@ -107,6 +109,11 @@ void Level1Scene::build(Scene& scene) const {
     enemy14.setLocalPosition({870.f, 300.f});
 
     scene.createNewGameObject<GameManager>();
+
+    if(GolfEngine::Services::Pathfinding::hasService()) {
+        GolfEngine::Services::Pathfinding::getService()->setGraphSize(1980, 1980);
+        GolfEngine::Services::Pathfinding::getService()->setNodeDistance(50);
+    }
 
 
 }
