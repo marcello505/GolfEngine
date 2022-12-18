@@ -14,9 +14,7 @@
 class SDLAudioService : public AudioService {
 public:
     //Life Cycles
-    /// Initializes the audio device, automatically called by GameLoop
     void init() override;
-    /// Closes the audio device and clears cache, automatically called by GameLoop
     void free() override;
 
     // Audio Controls
@@ -24,35 +22,26 @@ public:
     void playMusic(const std::string& path, float volume, bool loop) override;
     void pauseMusic() override;
     void resumeMusic() override;
+    void toggleMusic() override;
     void stopMusic() override;
     void stopSfx() override;
+    void stopSfx(const std::string& path) override;
 
     // Volume
     float getMasterVolume() override;
     float getMusicVolume() override;
     float getSfxVolume() override;
-
-    /// Sets the _musicVolume field and updates the current volume of Music.
-    /// \param volume a value between 0.0 and 1.0, used as a factor to calculate volume.
     void setMusicVolume(float volume) override;
-    /// Sets the _sfxVolume field and updates the current volume of Sound effects.
-    /// \param volume a value between 0.0 and 1.0, used as a factor to calculate volume.
     void setSfxVolume(float volume) override;
-    /// Sets the _masterVolume field and updates the current volume of all audio.
-    /// \param volume a value between 0.0 and 1.0, used as a factor to calculate volume.
     void setMasterVolume(float volume) override;
-    /// Loads in the audio file as a sound effect, automatically called for play methods when neccesary.
-    /// \param path path to the audio file.
+
+    // Cache Methods
     void preloadSfx(const std::string& path) override;
-    /// Loads in the audio file as music, automatically called for play methods when neccesary.
-    /// \param path path to the audio file.
     void preloadMusic(const std::string& path) override;
 
+    // Getters
     bool isMusicPlaying() override;
     bool isMusicPaused() override;
-    void toggleMusic() override;
-
-    void stopSfx(const std::string& path) override;
 
 private:
     //Fields
@@ -64,7 +53,7 @@ private:
     std::map<std::string, Mix_Chunk*> _cachedChunks {};
     std::map<std::string, Mix_Music*> _cachedMusic {};
 
-    //Methods
+    // Helper Methods
     void clearCache() override;
     void updateMusicVolume();
     void updateSfxVolume(int channel);

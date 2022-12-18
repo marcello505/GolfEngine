@@ -18,14 +18,9 @@ private:
 public:
     SDLInputService();
 
-    /// Handles the inputs and updates the action map
+    // Input Service overrides
     void handleInputs() override;
-
-    /// Returns raw key press
-    /// \return Next raw key pressed
     InputKey getKeyPressed() override;
-
-    // Getters
     [[nodiscard]] bool hasReceivedQuitSignal() const override;
     [[nodiscard]] bool pressedKey() const override;
     void setKeyPressed(bool pressed) override;

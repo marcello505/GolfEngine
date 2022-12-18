@@ -11,9 +11,17 @@
 
 class PhysicsService {
 public:
+    /// Adds a Rigid Body to the physics engine
+    /// \param pRigidBody Rigid body to be added
     virtual void addRigidBody(RigidBody* pRigidBody) = 0;
+    /// Removes a Rigid Body from the physics engine
+    /// \param pRigidBody Rigid Body to be removed
     virtual void removeRigidBody(RigidBody* pRigidBody) = 0;
+    /// Update the physics engine
+    /// \param timeStep Amount of time to simulate
     virtual void update(GameTic timeStep) = 0;
+    /// Set the gravity scale of the physics world
+    /// \param vec2 Vector of the force/direction of gravity
     virtual void setGravity(const Vector2& vec2) = 0;
 
     //RigidBody specific methods - Getters

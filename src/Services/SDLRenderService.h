@@ -31,45 +31,20 @@ public:
     SDLRenderService(SDLRenderService &sdlRenderService) = delete;
     SDLRenderService &operator=(SDLRenderService *other) = delete;
 
-    /// Sets the title of the window
-    /// \param title new title
+    // Render Service overrides
     void setWindowTitle(const std::string& title) override;
-
-    /// Adds a drawable to the list of registered drawables
-    /// \param drawable to be added
     void addDrawable(Drawable& drawable) override;
-
-    /// Removes a drawable from the list of registered drawables
-    /// \param drawable to be removed
     void removeDrawable(Drawable& drawable) override;
-
-    /// Checks whether a drawable is registered
-    /// \param drawable to be checked
-    /// \return True if it is registered
     bool isRegistered(Drawable &drawable) override;
-
-    /// Renders all drawables in registered drawable list
     void render() override;
-
-    /// Sets the window size to the given sizes
-    /// \param width new width of window
-    /// \param height new height of window
     void setScreenSize(int width, int height) override;
-
-    /// Sets the window to fullscreen
-    /// \param fullScreen true is fullscreen
     void setFullScreen(bool fullScreen) override;
-
-    /// Registers a camera to be used in the scene
-    /// \param camera reference to camera, can be null to clear any camera
     void setMainCamera(const std::optional<std::reference_wrapper<Camera>>& camera) override;
-
-    // Getters
+    [[nodiscard]] std::optional<std::reference_wrapper<Camera>> getMainCamera() const override;
     [[nodiscard]] int screenSizeWidth() const override;
     [[nodiscard]] int screenSizeHeight() const override;
     [[nodiscard]] bool fullScreen() const override;
     [[nodiscard]] Vector2 getCameraOffset() const override;
-    [[nodiscard]] std::optional<std::reference_wrapper<Camera>> getMainCamera() const override;
 private:
     void renderRect(RectRenderShape &renderShape);
     void renderLine(LineRenderShape &renderShape);

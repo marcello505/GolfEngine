@@ -10,6 +10,9 @@
 
 class TileMapParserService {
 public:
+    /// Loads a map file
+    /// \param mapPath Path to the map file
+    /// \return TileMapRenderShape that holds all the info to render the map
     virtual TileMapRenderShape loadMap(const std::string& mapPath) = 0;
 
     // Virtual Destructors
