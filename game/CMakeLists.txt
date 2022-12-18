@@ -36,10 +36,10 @@ set(GAMEOBJECTS_SOURCES
         gameobjects/Projectile.cpp
         gameobjects/ProjectilePoolObject.cpp
         gameobjects/TestBlock.cpp
-        gameobjects/PhysicGameObject.cpp
-        gameobjects/GameManager.cpp
-        gameobjects/HUD.cpp
+        gameobjects/GameManager.cpp 
         gameobjects/EnemyObject.cpp
+        gameobjects/PhysicGameObject.cpp
+        gameobjects/HUD.cpp
         gameobjects/BloodSplatterParticleEffect.cpp
         gameobjects/FinishLevelAreaObject.cpp)
 
@@ -53,7 +53,6 @@ set(SCENE_SOURCES
         scenes/Level1Scene.cpp
         scenes/Level3Scene.cpp
         scenes/YouWonScene.cpp)
-
 
 # Resource files
 add_custom_target(Game_Resources ALL

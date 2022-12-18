@@ -3,34 +3,53 @@
 #include "Core/GameLoop.h"
 #include "Core/Settings.h"
 #include "Services/Singletons/RenderSingleton.h"
+#include "Services/Singletons/AudioSingleton.h"
+#include "Utilities/IO.h"
 
 // Game includes
 #include "utils/GameActions.h"
+#include "utils/GameSettings.h"
 #include "scenes/PlayerTestScene.h"
+#include "scenes/Level2Scene.h"
+#include "scenes/Level1Scene.h"
 
 #include "scenes/MainMenuScene.h"
 #include "scenes/SelectLevelScene.h"
 #include "scenes/SettingsScene.h"
+
 #include "scenes/YouWonScene.h"
 #include "Scene/Components/AudioSource.h"
-
-#include "scenes/Level2Scene.h"
-#include "scenes/Level1Scene.h"
 #include "scenes/SaveGameTestScene.h"
 #include "Services/Singletons/PathfindingSingleton.h"
 #include "scenes/Level3Scene.h"
 #include <SDL.h>
 
+#define PROJECT_SETTINGS_SAVE_PATH "ProjectSettings.xml"
 
 
 int main(int argc, char* argv[]){
+    // Load project settings save file
+    if(GolfEngine::Utilities::IO::userDataFileExists(PROJECT_SETTINGS_SAVE_PATH)){
+        auto savedSettings = GolfEngine::Utilities::IO::loadSettings(PROJECT_SETTINGS_SAVE_PATH);
+        GolfEngine::Core::getProjectSettings().fromXml(savedSettings.toXml());
+    }
+
     GameLoop gameLoop {};
     gameLoop.useDefaultServices();
 
     //Render initialization
-    GolfEngine::Services::Render::getService()->setWindowTitle("Game name");
     GolfEngine::Services::Render::getService()->setScreenSize(1920, 1080);
     GolfEngine::Services::Render::getService()->setWindowTitle("Game name");
+
+    // Init volume settings
+    auto& volumeSettings = GolfEngine::Core::getProjectSettings();
+    auto audioService = GolfEngine::Services::Audio::getService();
+    if(volumeSettings.hasFloat("MasterVolume"))
+        audioService->setMasterVolume(volumeSettings.getFloat("MasterVolume"));
+    if(volumeSettings.hasFloat("MusicVolume"))
+        audioService->setMusicVolume(volumeSettings.getFloat("MusicVolume"));
+    if(volumeSettings.hasFloat("SFXVolume"))
+        audioService->setSfxVolume(volumeSettings.getFloat("SFXVolume"));
 
     //Set up controls
     auto* actionMap = ActionMap::getActionMap();
@@ -87,6 +106,9 @@ int main(int argc, char* argv[]){
     GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS, true); //Render colliders
     GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_PATHFINDING, false); //Render pathfinding nodes
 
+    //Game-based debug settigns
+    GolfEngine::Core::getProjectSettings().setBool(GAME_SETTINGS_DEBUG_PRINT_PLAYER_POS, false); //Output player position in console
+
     //Scene initialization
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
     sceneManager.addScene<PlayerTestScene>("playerTest");
@@ -100,8 +122,10 @@ int main(int argc, char* argv[]){
     sceneManager.addSceneFactory<SettingsScene>("settings");
     sceneManager.loadScene("mainMenu");
 
-    //Render initialization
-
     gameLoop.start();
+
+    // Save project settings before closing the game
+    auto projectSettings = GolfEngine::Core::getProjectSettings();
+    GolfEngine::Utilities::IO::saveSettings(PROJECT_SETTINGS_SAVE_PATH, projectSettings);
     return 0;
 }

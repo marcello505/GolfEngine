@@ -2,6 +2,8 @@
 // Created by marcello on 11/29/22.
 //
 
+#include "../utils/GameSettings.h"
+#include "Core/Settings.h"
 #include "Scene/GameObjects/Camera.h"
 #include <iostream>
 #include "PlayerMovementScript.h"
@@ -34,8 +36,6 @@ void PlayerMovementScript::onUpdate() {
         }
 
         _rb->applyWorldForceToCenter(inputDirection.normalized() * playerSpeed);
-
-        std::cout << "X = " << _gameObject->get().getWorldTransform().position.x  << "Y = " << _gameObject->get().getWorldTransform().position.y << std::endl ;
     }
 
     //Point to mouse logic
@@ -43,6 +43,11 @@ void PlayerMovementScript::onUpdate() {
         float angleToMouse = _gameObject->get().getWorldTransform().position.angleToDegrees(Camera::screenToWorldSpace(_actionMap->getMousePosition())) - rotationOffset;
         _sprite->setRotation(angleToMouse); //angle to mouse + offset
     }
+
+    //Debug print player position
+    GolfEngine::Core::Settings& projectSettings = GolfEngine::Core::getProjectSettings();
+    if(projectSettings.hasBool(GAME_SETTINGS_DEBUG_PRINT_PLAYER_POS) && projectSettings.getBool(GAME_SETTINGS_DEBUG_PRINT_PLAYER_POS))
+        std::cout << "X = " << _gameObject->get().getWorldTransform().position.x  << "Y = " << _gameObject->get().getWorldTransform().position.y << std::endl ;
 }
 
 std::unique_ptr<ISnapshot> PlayerMovementScript::saveSnapshot() {

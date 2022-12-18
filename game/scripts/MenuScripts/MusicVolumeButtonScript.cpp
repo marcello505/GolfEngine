@@ -8,6 +8,7 @@
 #include "Core/GameLoop.h"
 #include "Scene/GameObjects/UIObject/Button.h"
 #include "Services/Singletons/AudioSingleton.h"
+#include "Core/Settings.h"
 
 void MusicVolumeButtonScript::onUpdate() {
 
@@ -17,14 +18,22 @@ void MusicVolumeButtonScript::onUpdate() {
     auto& btn = getParentGameObject<Button>();
 
     if(btn.isClicked()){ //if button is clicked
+        float newVolume;
         if(btn._text.value == "-"){
-            _audioService->setMusicVolume( _audioService->getMusicVolume() - 0.05f); //lower music volume
-            int volumeNumber = GolfEngine::Utilities::Math::roundToNearestMultiple(_audioService->getMusicVolume() * 100, 5);
-            _textUpdateScript->SetNewText(std::to_string(volumeNumber));
+            newVolume = _audioService->getMusicVolume() - 0.05f;
+            if(newVolume < 0.0f)
+                newVolume = 0.0f;
         } else {
-            _audioService->setMusicVolume( _audioService->getMusicVolume() + 0.05f); //higher music volume
-            int volumeNumber = GolfEngine::Utilities::Math::roundToNearestMultiple(_audioService->getMusicVolume() * 100, 5);
-            _textUpdateScript->SetNewText(std::to_string(volumeNumber));
+            newVolume = _audioService->getMusicVolume() + 0.05f;
+            if(newVolume > 1.0f)
+                newVolume = 1.0f;
         }
+
+        _audioService->setMusicVolume(newVolume); //lower music volume
+        int volumeInPercent = GolfEngine::Utilities::Math::roundToNearestMultiple(_audioService->getMusicVolume() * 100, 5);
+        _textUpdateScript->SetNewText(std::to_string(volumeInPercent));
+
+        // Update project settings
+        GolfEngine::Core::getProjectSettings().setFloat("MusicVolume", newVolume);
     }
 }

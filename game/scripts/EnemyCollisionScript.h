@@ -6,6 +6,7 @@
 #define GOLFENGINE_ENEMYCOLLISIONSCRIPT_H
 
 #include "Scene/Components/BehaviourScript.h"
+#include <Scene/Components/ParticleSystem.h>
 #include "EnemyMovementScript.h"
 
 class EnemyCollisionScript : public BehaviourScript {
@@ -25,6 +26,7 @@ private:
     struct Snapshot : public ISnapshot{
         bool death;
     };
+    ParticleSystem* _particleSystem;
 };
 
 #endif //GOLFENGINE_ENEMYCOLLISIONSCRIPT_H

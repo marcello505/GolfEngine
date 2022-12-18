@@ -12,7 +12,7 @@
 class EnemyObject : public GameObject{
 
 public:
-    EnemyObject(GameObject *target);
+    EnemyObject(GameObject *target, Scene& scene);
     void addPatrolPoint(Vector2 point);
 
     std::vector<Vector2> patrolPoints;

@@ -61,12 +61,16 @@ void EnemyMovementScript::rotateEnemyToPosition(Vector2 targetPosition) {
 std::unique_ptr<ISnapshot> EnemyMovementScript::saveSnapshot() {
     auto result = std::make_unique<Snapshot>();
     result->chasing = chasing;
+    result->patrolIndex = patrolIndex;
+    result->direction = direction;
     return result;
 }
 
 void EnemyMovementScript::loadSnapshot(const ISnapshot& rawSnapshot) {
     auto& snapshot = (Snapshot&)rawSnapshot;
     chasing = snapshot.chasing;
+    patrolIndex = snapshot.patrolIndex;
+    direction = snapshot.direction;
 }
 
 

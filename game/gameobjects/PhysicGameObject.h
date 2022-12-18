@@ -11,7 +11,7 @@
 class PhysicGameObject : public GameObject{
 
 public:
-    explicit PhysicGameObject(const std::string& imagePath, Vector2 pixelScale);
+    explicit PhysicGameObject(const std::string& imagePath, Vector2 pixelScale, Vector2 extents = Vector2{25.5f, 25.5f});
 private:
     std::string _imagePath;
 };

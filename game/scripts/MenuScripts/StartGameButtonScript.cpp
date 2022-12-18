@@ -26,7 +26,6 @@ void StartGameButtonScript::onUpdate() {
         else if(btn._text.value == "3") {
             sceneManager.loadScene("level3");
         }
-
     }
 }
 
