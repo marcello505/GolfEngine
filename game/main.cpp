@@ -98,7 +98,7 @@ int main(int argc, char* argv[]){
     sceneManager.addSceneFactory<MainMenuScene>("mainMenu");
     sceneManager.addSceneFactory<SelectLevelScene>("selectLevel");
     sceneManager.addSceneFactory<SettingsScene>("settings");
-    sceneManager.loadScene("youWonScene");
+    sceneManager.loadScene("mainMenu");
 
     //Render initialization
 
