@@ -42,48 +42,50 @@ void Level3Scene::build(Scene& scene) const {
     crate3.setLocalPosition({2160,1200});
 
     auto& crate4 = scene.createNewGameObject<PhysicGameObject>("res/sprites/crate.png",Vector2{10,10});
-    crate4.setLocalPosition({1130,1615});
+    crate4.setLocalPosition({1130,1620});
     auto& crate5 = scene.createNewGameObject<PhysicGameObject>("res/sprites/crate.png",Vector2{10,10});
-    crate5.setLocalPosition({1130,1660});
+    crate5.setLocalPosition({1130,1671});
     auto& crate6 = scene.createNewGameObject<PhysicGameObject>("res/sprites/crate.png",Vector2{10,10});
-    crate6.setLocalPosition({1130,1690});
+    crate6.setLocalPosition({1130,1722});
 
 
     //Setup enemies
-    auto& enemy1 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
-    enemy1.setLocalPosition({2630.f, 1240.f});
-    enemy1.addPatrolPoint({2330.f, 1240.f});
-    enemy1.addPatrolPoint({2530.f, 1140.f});
-    enemy1.addPatrolPoint({2630.f, 1240.f});
+    {
+        auto& enemy1 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
+        enemy1.setLocalPosition({2630.f, 1240.f});
+        enemy1.addPatrolPoint({2330.f, 1240.f});
+        enemy1.addPatrolPoint({2530.f, 1140.f});
+        enemy1.addPatrolPoint({2630.f, 1240.f});
 
-    auto& enemy2 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
-    enemy2.setLocalPosition({2320.f, 1150.f});
+        auto& enemy2 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
+        enemy2.setLocalPosition({2320.f, 1150.f});
 
-    auto& enemy3 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
-    enemy3.setLocalPosition({1715.f, 1866.f});
+        auto& enemy3 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
+        enemy3.setLocalPosition({1715.f, 1866.f});
 
-    auto& enemy4 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
-    enemy4.setLocalPosition({1060.f, 1520.f});
+        auto& enemy4 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
+        enemy4.setLocalPosition({1060.f, 1520.f});
 
-    auto& enemy5 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
-    enemy5.setLocalPosition({1440.f, 890.f});
-    enemy5.addPatrolPoint({850.f, 750.f});
-    enemy5.addPatrolPoint({720.f, 930.f});
-    enemy5.addPatrolPoint({1000.f, 750.f});
+        auto& enemy5 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
+        enemy5.setLocalPosition({1440.f, 890.f});
+        enemy5.addPatrolPoint({850.f, 750.f});
+        enemy5.addPatrolPoint({720.f, 930.f});
+        enemy5.addPatrolPoint({1000.f, 750.f});
 
-    auto& enemy6 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
-    enemy6.setLocalPosition({1000.f, 750.f});
-
-
-    auto& enemy7 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
-    enemy7.setLocalPosition({1540.f, 770.f});
+        auto& enemy6 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
+        enemy6.setLocalPosition({1000.f, 750.f});
 
 
-    auto& enemy8 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
-    enemy8.setLocalPosition({1670.f, 350.f});
-    enemy8.addPatrolPoint({1370.f, 350.f});
-    enemy8.addPatrolPoint({1370.f, 550.f});
-    enemy8.addPatrolPoint({1670.f, 350.f});
+        auto& enemy7 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
+        enemy7.setLocalPosition({1540.f, 770.f});
+
+
+        auto& enemy8 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
+        enemy8.setLocalPosition({1670.f, 350.f});
+        enemy8.addPatrolPoint({1370.f, 350.f});
+        enemy8.addPatrolPoint({1370.f, 550.f});
+        enemy8.addPatrolPoint({1670.f, 350.f});
+    }
 
     //Finish area
     scene.createNewGameObject<FinishLevelAreaObject>(Vector2{1300.0f, 400.0f}, Vector2{50.0f, 50.0f});
