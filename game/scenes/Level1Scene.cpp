@@ -12,6 +12,7 @@
 #include "../gameobjects/EnemyObject.h"
 #include "Services/Singletons/PathfindingSingleton.h"
 #include "../gameobjects/HUD.h"
+#include "../gameobjects/FinishLevelAreaObject.h"
 
 void Level1Scene::build(Scene& scene) const {
     auto& root = scene.createNewGameObject<GameObject>();
@@ -31,6 +32,9 @@ void Level1Scene::build(Scene& scene) const {
         player.setLocalPosition({1400.f, 1000.f});
         // Add camera to player
         scene.createNewGameObject<Camera>((GameObject &) player);
+
+    //Finish area
+    scene.createNewGameObject<FinishLevelAreaObject>(Vector2{700.0f, 290.0f}, Vector2{50.0f, 50.0f});
 
     //setup PhysicsObjects
         auto& crate1 = scene.createNewGameObject<PhysicGameObject>("res/sprites/crate.png",Vector2{10,10});

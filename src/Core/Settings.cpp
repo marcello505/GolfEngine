@@ -3,6 +3,7 @@
 //
 
 #include <exception>
+#include <memory>
 #include <stdexcept>
 #include <pugixml.hpp>
 #include <sstream>
