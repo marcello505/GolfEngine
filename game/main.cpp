@@ -104,7 +104,7 @@ int main(int argc, char* argv[]){
     GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_PATHFINDING, false); //Render pathfinding nodes
 
     //Game-based debug settigns
-    GolfEngine::Core::getProjectSettings().setBool(GAME_SETTINGS_DEBUG_PRINT_PLAYER_POS, true); //Output player position in console
+    GolfEngine::Core::getProjectSettings().setBool(GAME_SETTINGS_DEBUG_PRINT_PLAYER_POS, false); //Output player position in console
 
     //Scene initialization
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
