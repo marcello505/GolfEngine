@@ -99,7 +99,7 @@ void Level3Scene::build(Scene& scene) const {
         GolfEngine::Services::Pathfinding::getService()->setGraphStartPoint(0, 0);
         GolfEngine::Services::Pathfinding::getService()->setGraphSize(2850, 2100);
         GolfEngine::Services::Pathfinding::getService()->setNodeDistance(50);
-        GolfEngine::Services::Pathfinding::getService()->setMarginAroundRectColliders(0);
+        GolfEngine::Services::Pathfinding::getService()->setMarginAroundRectColliders(20);
     }
 
     // IMPORTANT! Create this object after the GameManager (GameManager.onStart() needs to happen before HUD.onStart())
