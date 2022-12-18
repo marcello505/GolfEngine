@@ -83,8 +83,8 @@ int main(int argc, char* argv[]){
 
     //Scene initialization
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
-    sceneManager.addScene<PlayerTestScene>("playerTest");
-    sceneManager.addScene<SaveGameTestScene>("saveGameTest");
+    sceneManager.addSceneFactory<PlayerTestScene>("playerTest");
+    sceneManager.addSceneFactory<SaveGameTestScene>("saveGameTest");
     sceneManager.addSceneFactory<MainMenuScene>("mainMenu");
     sceneManager.addSceneFactory<SelectLevelScene>("selectLevel");
     sceneManager.addSceneFactory<SettingsScene>("settings");

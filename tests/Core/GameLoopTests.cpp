@@ -60,8 +60,6 @@ namespace GameLoopTests{
         std::optional<std::reference_wrapper<Camera>> getMainCamera() const override { return {};}
         void setMainCamera(const std::optional<std::reference_wrapper<Camera>>& camera) override {}
         bool isRegistered(Drawable& drawable) override {return false;}
-        int getScreenSizeWidth() const override {return 0;}
-        int getScreenSizeHeight() const override {return 0;}
         Vector2 getCameraOffset() const override {return Vector2();}
         void setWindowTitle(const std::string& title) override {}
         int screenSizeHeight() const override { return 0; }
