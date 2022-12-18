@@ -135,7 +135,12 @@ void ParticleSystem::onUpdate() {
 }
 
 void ParticleSystem::onRemove() {
-
+    //Delete all particles
+    for(auto& particle : particles){
+        auto renderService = GolfEngine::Services::Render::getService();
+        if(renderService && renderService->isRegistered(*particle))
+            renderService->removeDrawable(*particle);
+    }
 }
 
 bool ParticleSystem::getActive() {
