@@ -24,7 +24,7 @@ void Level1Scene::build(Scene& scene) const {
     //Set up player
         auto &projectilePool = scene.createNewGameObject<ProjectilePoolObject>(root, std::ref(scene), 20);
 
-        auto &player = scene.createNewGameObject<PlayerObject>(&projectilePool.getComponent<ProjectilePoolScript>());
+        auto &player = scene.createNewGameObject<PlayerObject>(&projectilePool.getComponent<ProjectilePoolScript>(), std::ref(scene));
         player.setLocalPosition({1400.f, 1000.f});
         // Add camera to player
         scene.createNewGameObject<Camera>((GameObject &) player);
@@ -106,7 +106,7 @@ void Level1Scene::build(Scene& scene) const {
     auto& enemy14 = scene.createNewGameObject<EnemyObject>(root, &player);
     enemy14.setLocalPosition({870.f, 300.f});
 
-    scene.createNewGameObject<GameManager>();
+    scene.createNewGameObject<GameManager>("level2");
 
 
 }

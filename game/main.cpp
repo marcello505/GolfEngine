@@ -11,6 +11,7 @@
 #include "scenes/MainMenuScene.h"
 #include "scenes/SelectLevelScene.h"
 #include "scenes/SettingsScene.h"
+#include "scenes/YouWonScene.h"
 #include "Scene/Components/AudioSource.h"
 
 #include "scenes/Level2Scene.h"
@@ -93,6 +94,7 @@ int main(int argc, char* argv[]){
     sceneManager.addScene<Level2Scene>("level2");
     sceneManager.addScene<Level3Scene>("level3");
     sceneManager.addScene<SaveGameTestScene>("saveGameTest");
+    sceneManager.addScene<YouWonScene>("youWonScene");
     sceneManager.addSceneFactory<MainMenuScene>("mainMenu");
     sceneManager.addSceneFactory<SelectLevelScene>("selectLevel");
     sceneManager.addSceneFactory<SettingsScene>("settings");

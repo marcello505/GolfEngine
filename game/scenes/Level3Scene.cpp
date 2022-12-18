@@ -11,6 +11,8 @@
 #include "../gameobjects/PhysicGameObject.h"
 #include "../gameobjects/EnemyObject.h"
 #include "Services/Singletons/PathfindingSingleton.h"
+#include "../gameobjects/HUD.h"
+#include "../gameobjects/FinishLevelAreaObject.h"
 
 void Level3Scene::build(Scene& scene) const {
     auto& root = scene.createNewGameObject<GameObject>();
@@ -25,7 +27,7 @@ void Level3Scene::build(Scene& scene) const {
     //Set up player
     auto &projectilePool = scene.createNewGameObject<ProjectilePoolObject>(root, std::ref(scene), 20);
 
-    auto &player = scene.createNewGameObject<PlayerObject>(&projectilePool.getComponent<ProjectilePoolScript>());
+    auto &player = scene.createNewGameObject<PlayerObject>(&projectilePool.getComponent<ProjectilePoolScript>(), std::ref(scene));
     player.setLocalPosition({2080.f, 830.f});
     // Add camera to players
     scene.createNewGameObject<Camera>((GameObject &) player);
@@ -47,7 +49,7 @@ void Level3Scene::build(Scene& scene) const {
 
 
     //Setup enemies
-    auto& enemy1 = scene.createNewGameObject<EnemyObject>(root, &player);
+    /*auto& enemy1 = scene.createNewGameObject<EnemyObject>(root, &player);
     enemy1.setLocalPosition({2630.f, 1240.f});
     enemy1.addPatrolPoint({2330.f, 1240.f});
     enemy1.addPatrolPoint({2530.f, 1140.f});
@@ -80,13 +82,19 @@ void Level3Scene::build(Scene& scene) const {
     enemy8.setLocalPosition({1670.f, 350.f});
     enemy8.addPatrolPoint({1370.f, 350.f});
     enemy8.addPatrolPoint({1370.f, 550.f});
-    enemy8.addPatrolPoint({1670.f, 350.f});
+    enemy8.addPatrolPoint({1670.f, 350.f});*/
 
-    scene.createNewGameObject<GameManager>();
+    //Finish area
+    scene.createNewGameObject<FinishLevelAreaObject>(Vector2{1300.0f, 400.0f}, Vector2{50.0f, 50.0f});
+
+    scene.createNewGameObject<GameManager>("youWonScene");
 
     if(GolfEngine::Services::Pathfinding::hasService()) {
         GolfEngine::Services::Pathfinding::getService()->setGraphSize(2850, 2100);
         GolfEngine::Services::Pathfinding::getService()->setNodeDistance(50);
     }
+
+    // IMPORTANT! Create this object after the GameManager (GameManager.onStart() needs to happen before HUD.onStart())
+    scene.createNewGameObject<HUD>(std::ref(scene));
 
 }

@@ -22,7 +22,7 @@ void Level2Scene::build(Scene& scene) const {
     {
         auto& projectilePool = scene.createNewGameObject<ProjectilePoolObject>(root, std::ref(scene), 30);
         projectilePool.setLocalPosition(Vector2{-40, -40});
-        GameObject& player = scene.createNewGameObject<PlayerObject>(root, &projectilePool.getComponent<ProjectilePoolScript>());
+        GameObject& player = scene.createNewGameObject<PlayerObject>(root, &projectilePool.getComponent<ProjectilePoolScript>(), std::ref(scene));
         player.setLocalPosition(Vector2{1615, 1058});
 
         auto& cam = scene.createNewGameObject<Camera>(player, 1280.0f, 720.0f);
