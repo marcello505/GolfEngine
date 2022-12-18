@@ -9,7 +9,10 @@
 #include "../scripts/PlayerCollisionScript.h"
 #include "BloodSplatterParticleEffect.h"
 
+
 PlayerObject::PlayerObject(ProjectilePoolScript* projectilePoolScript, Scene& scene) {
+    tag = TAG_PLAYER;
+
     addComponent<BoxCollider>(Vector2{25.f, 25.f});
 
     RigidBodyDef rbDef {};

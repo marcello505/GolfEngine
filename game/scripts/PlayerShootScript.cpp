@@ -70,3 +70,12 @@ void PlayerShootScript::loadSnapshot(const ISnapshot &rawSnapshot) {
     BehaviourScript::setActive(snapshot.active);
     _currentAmmo = snapshot.currentAmmo;
 }
+
+int PlayerShootScript::getCurrentAmmo() const {
+    return _currentAmmo;
+}
+
+bool PlayerShootScript::isAlive() const {
+    return _active;
+}
+
