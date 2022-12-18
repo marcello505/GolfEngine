@@ -190,10 +190,6 @@ namespace GolfEngine::Core{
     //ProjectSettings
     std::unique_ptr<Settings> _projectSettings = std::make_unique<Settings>();
 
-    void initProjectSettings(Settings& settings){
-        _projectSettings = std::make_unique<Settings>(settings);
-    }
-
     Settings& getProjectSettings() {
         return *_projectSettings;
     }

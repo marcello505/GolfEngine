@@ -22,8 +22,8 @@
 int main(int argc, char* argv[]){
     // Load project settings save file
     if(GolfEngine::Utilities::IO::userDataFileExists(PROJECT_SETTINGS_SAVE_PATH)){
-        auto projectSettings = GolfEngine::Utilities::IO::loadSettings(PROJECT_SETTINGS_SAVE_PATH);
-        GolfEngine::Core::initProjectSettings(projectSettings);
+        auto savedSettings = GolfEngine::Utilities::IO::loadSettings(PROJECT_SETTINGS_SAVE_PATH);
+        GolfEngine::Core::getProjectSettings().fromXml(savedSettings.toXml());
     }
 
     GameLoop gameLoop {};
