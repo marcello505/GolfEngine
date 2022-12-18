@@ -17,6 +17,7 @@ public:
     Camera(float aspectWidth, float aspectHeight, Color backgroundColor = Color{50, 50, 50, 255});
     explicit Camera(Color backgroundColor = Color{50, 50, 50, 255});
 
+    // GameObject overrides
     void onStart() override;
 
     /// Sets the main camera in the render service

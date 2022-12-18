@@ -17,10 +17,6 @@ GameObject::~GameObject() {
     }
 }
 
-
-bool GameObject::isActiveInWorld() const {return false;}
-bool GameObject::isActiveSelf() const {return _active;}
-
 bool GameObject::getActive() const {
     return _active;
 }

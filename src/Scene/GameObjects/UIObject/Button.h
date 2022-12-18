@@ -14,16 +14,37 @@
 class Button : public UIObject{
 
 public:
+    ///
+    /// \param width
+    /// \param height
+    /// \param position
+    /// \param interactable
+    /// \param onClickActionName
+    /// \param textPosition
+    /// \param textRotation
+    /// \param textValue
+    /// \param textFontSize
+    /// \param textColor
+    /// \param textFilePath
+    /// \param textAlignment
     explicit Button(int width, int height, Vector2 position, bool interactable, std::string onClickActionName,
                     Vector2 textPosition, float textRotation, std::string textValue, size_t textFontSize, Color textColor,
                     std::string textFilePath, Alignment textAlignment);
     ~Button() override;
 
-    bool interactable() const;
+    /// Checks whether the button is interactable or not
+    [[nodiscard]] bool interactable() const;
+
+    // overrides
     RenderShape& getRenderShape() override;
     void onUpdate() override;
+
+    /// Sets the button to clicked
     void onClick();
+
+    /// Checks whether the button is clicked
     bool isClicked();
+
     struct {
         Vector2 position;
         float rotation;

@@ -107,6 +107,9 @@ public:
         return false;
     }
 
+    /// Function retrieves a list of references to components of type C
+    /// \tparam C Components to retrieve
+    /// \return A list of references to the found components, or an empty list when no components are found
     template<typename C>
     std::vector<std::reference_wrapper<C>> getComponents(){
         std::vector<std::reference_wrapper<C>> components{};
@@ -122,19 +125,40 @@ public:
         return std::move(components);
     }
 
-    [[nodiscard]] bool isActiveInWorld() const;
-    [[nodiscard]] bool isActiveSelf() const;
+    /// Check whether the gameObject is currently active
+    /// \return true if gameObject is active
     [[nodiscard]] bool getActive() const;
+
+    /// Set active state of gameObject (calls onActive on all attached components)
+    /// \param active new active state
     void setActive(bool active);
 
+    /// Calls onStart on all attached components
     virtual void onStart();
+
+    /// Calls onUpdate on all attached components
     virtual void onUpdate();
 
+    /// Get attached children
+    /// \return list of references to chidren attached to this gameObject
     std::vector<std::reference_wrapper<GameObject>>& children();
+
+    /// Get child from children at a specific index
+    /// \param index of child
+    /// \return reference to child gameObject
     GameObject& childAt(int index);
+
+    /// Get parent of this gameObject
+    /// \return reference to gameObject of parent
     [[nodiscard]] GameObject& parent() const;
+
+    /// Set the parent of this gameObject
+    /// \param parent to be set
     void setParent(GameObject& parent);
-    void addChild(GameObject &object);
+
+    /// Link child object to this gameObject
+    /// \param child to be set
+    void addChild(GameObject& child);
 
     /// Return the local transform
     /// \return const Transform reference to the local transform
@@ -151,11 +175,13 @@ public:
     /// \param rTransform the world transform that should be set
     void setWorldTransform(const Transform& rTransform);
 
-    //IPersistable methods
+    // IPersistable overrides
     std::unique_ptr<ISnapshot> saveSnapshot() override;
     void loadSnapshot(const ISnapshot& rawSnapshot) override;
-    bool isRecordable() const;
 
+    /// Get the recordable property of this gameObject
+    /// \return true if gameObject is recordable
+    bool isRecordable() const;
 };
 
 
