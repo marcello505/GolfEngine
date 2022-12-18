@@ -2383,7 +2383,7 @@
  </tile>
  <tile id="476">
   <properties>
-   <property name="collider" type="bool" value="false"/>
+   <property name="collider" type="bool" value="true"/>
   </properties>
  </tile>
  <tile id="477">

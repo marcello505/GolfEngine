@@ -31,6 +31,7 @@ void Level2Scene::build(Scene& scene) const {
     }
 
     //Set up player
+
     auto& projectilePool = scene.createNewGameObject<ProjectilePoolObject>(root, std::ref(scene), 30);
     projectilePool.setLocalPosition(Vector2{-40, -40});
     GameObject& player = scene.createNewGameObject<PlayerObject>(entities, &projectilePool.getComponent<ProjectilePoolScript>(), std::ref(scene));
@@ -94,7 +95,7 @@ void Level2Scene::build(Scene& scene) const {
     }
 
     //GameManager
-    scene.createNewGameObject<GameManager>("mainMenu");
+    scene.createNewGameObject<GameManager>("level3");
 
     //Set up Graph
     if(GolfEngine::Services::Pathfinding::hasService()) {
