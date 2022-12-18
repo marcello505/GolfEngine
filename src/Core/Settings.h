@@ -27,7 +27,6 @@ namespace GolfEngine::Core{
     /// Every setter will overwrite the previously set value, even if the type is different.
     class Settings {
     public:
-
         //Setters
         void setInteger(SETTINGS_KEY_PARAMETER key, int value);
         void setString(SETTINGS_KEY_PARAMETER key, const std::string& value);

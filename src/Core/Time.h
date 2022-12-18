@@ -12,13 +12,24 @@ typedef float GameTic;
 namespace GolfEngine{
     class Time {
     public:
-
         //Methods
+        /// Gets the current render fps
+        /// \return render fps
         static GameTic getRenderFps();
+        /// Gets the current physics fps
+        /// \return
         static GameTic getPhysicsFps();
-        GameTic getRenderDeltaTime() const;
+        /// Gets the delta time of the render frames
+        /// \return render delta time
+        [[nodiscard]] GameTic getRenderDeltaTime() const;
+        /// Gets the delta time of the physics frames
+        /// \return physics delta time
         static GameTic getPhysicsDeltaTime();
+        /// Gets the time scale of the game loop
+        /// \return time scale of game loop
         static GameTic getTimeScale();
+        /// Sets the time scale fo the game loop (influences the updates made in the physics world and scene)
+        /// \param timeScale to be set
         static void setTimeScale(GameTic timeScale);
 
         void measureRenderCall();

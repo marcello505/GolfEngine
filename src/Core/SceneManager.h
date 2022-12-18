@@ -64,14 +64,6 @@ public:
     /// Returns the name of the scene that was last loaded
     /// \return name of the scene
     [[nodiscard]] std::string getCurrentSceneName() const;
-
-    /// Adds a scene to the scene list
-    /// \param sceneName Name of the scene
-    /// \param newScene Pointer reference to the scene object
-    template<typename S>
-    void addScene(const std::string& sceneName) {
-        _scenes.insert({sceneName, std::make_unique<S>()});
-    }
 };
 
 }

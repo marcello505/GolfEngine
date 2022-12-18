@@ -64,6 +64,6 @@ GameTic GolfEngine::Time::getTimeScale() {
 }
 
 void GolfEngine::Time::setTimeScale(GameTic timeScale) {
-    //Ensure that the time scale is atleast 0.1;
+    //Ensure that the timescale is at least 0.1;
     _timeScale = std::max(0.1f, timeScale);
 }
