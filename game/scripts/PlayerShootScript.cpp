@@ -54,6 +54,7 @@ void PlayerShootScript::reloadWeapon() {
     if(!_reloading){
         _reloading = true;
         _audioSource->play("reload");
+        _animator->play("reload");
         _currentAmmo = _maxAmmo;
     }
 }

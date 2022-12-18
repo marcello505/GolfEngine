@@ -23,8 +23,10 @@ PlayerObject::PlayerObject(ProjectilePoolScript* projectilePoolScript, Scene& sc
     addComponent<SpriteComponent>("res/sprite_sheets/out.png", Vector2{1.0f, 1.0f}, Rect2{Vector2{0,0}, Vector2{128.0f, 126.0f}}, Vector2{}, 0, Vector2{40, 70});
     auto& animator = addComponent<Animator>("res/sprite_sheets/out.png", 6, 8, Vector2{128.0f, 126.0f});
     animator.addAnimation("idle", 0, 19, 15.0f);
-    animator.addAnimation("shoot", 40, 42, 25.0f);
+    animator.addAnimation("shoot", 20, 22, 25.0f);
+    animator.addAnimation("reload", 23, 42, 25.0f);
     animator.addReturnTransition("shoot", "idle");
+    animator.addReturnTransition("reload", "idle");
 
     addComponent<RigidBody>(rbDef);
     addComponent<PlayerMovementScript>();
