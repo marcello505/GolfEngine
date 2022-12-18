@@ -42,11 +42,11 @@ void Level3Scene::build(Scene& scene) const {
     crate3.setLocalPosition({2160,1200});
 
     auto& crate4 = scene.createNewGameObject<PhysicGameObject>("res/sprites/crate.png",Vector2{10,10});
-    crate4.setLocalPosition({1130,1620});
+    crate4.setLocalPosition({1130,1615});
     auto& crate5 = scene.createNewGameObject<PhysicGameObject>("res/sprites/crate.png",Vector2{10,10});
-    crate5.setLocalPosition({1130,1620});
+    crate5.setLocalPosition({1130,1660});
     auto& crate6 = scene.createNewGameObject<PhysicGameObject>("res/sprites/crate.png",Vector2{10,10});
-    crate6.setLocalPosition({1130,1620});
+    crate6.setLocalPosition({1130,1690});
 
 
     //Setup enemies
@@ -91,10 +91,10 @@ void Level3Scene::build(Scene& scene) const {
     scene.createNewGameObject<GameManager>("youWonScene");
 
     if(GolfEngine::Services::Pathfinding::hasService()) {
-/*        GolfEngine::Services::Pathfinding::getService()->setGraphStartPoint(0, 0);*/
+        GolfEngine::Services::Pathfinding::getService()->setGraphStartPoint(0, 0);
         GolfEngine::Services::Pathfinding::getService()->setGraphSize(2850, 2100);
         GolfEngine::Services::Pathfinding::getService()->setNodeDistance(50);
-/*        GolfEngine::Services::Pathfinding::getService()->setMarginAroundRectColliders(0);*/
+        GolfEngine::Services::Pathfinding::getService()->setMarginAroundRectColliders(0);
     }
 
     // IMPORTANT! Create this object after the GameManager (GameManager.onStart() needs to happen before HUD.onStart())
