@@ -15,7 +15,17 @@ void StartGameButtonScript::onUpdate() {
     auto& btn = getParentGameObject<Button>();
 
     if(btn.isClicked()){ //if button is clicked
-        sceneManager.loadScene(btn.name); //load playerTest scene
+        if(btn._text.value == "Start game"){
+            sceneManager.loadScene("level1");
+        } else if(btn._text.value == "1") {
+            sceneManager.loadScene("level1");
+        }
+        else if(btn._text.value == "2") {
+            sceneManager.loadScene("level2");
+        }
+        else if(btn._text.value == "3") {
+            sceneManager.loadScene("level3");
+        }
     }
 }
 
