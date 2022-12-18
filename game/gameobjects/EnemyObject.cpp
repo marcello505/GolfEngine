@@ -11,8 +11,10 @@
 #include "../scripts/EnemyCollisionScript.h"
 #include "Scene/Components/AudioSource.h"
 #include "Scene/Components/Pathfinding.h"
+#include "Scene/Components/ParticleSystem.h"
+#include "BloodSplatterParticleEffect.h"
 
-EnemyObject::EnemyObject(GameObject *target){
+EnemyObject::EnemyObject(GameObject *target, Scene& scene){
     tag = "enemy";
     addComponent<BoxCollider>(Vector2{12.5f, 12.5f});
 
@@ -31,6 +33,10 @@ EnemyObject::EnemyObject(GameObject *target){
     addComponent<Pathfinding>(target);
     addComponent<EnemyMovementScript>(target);
     addComponent<EnemyCollisionScript>();
+
+    // Blood splatter particle effect game object
+    scene.createNewGameObject<BloodSplatterParticleEffect>((GameObject&)*this);
+
 }
 
 void EnemyObject::addPatrolPoint(Vector2 point) {

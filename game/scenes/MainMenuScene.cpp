@@ -29,6 +29,7 @@ void MainMenuScene::build(Scene& scene) const {
                                                                       "Start game", 20, Color(),
                                                                       "res/fonts/Rubik-VariableFont_wght.ttf"
                                                                       , Alignment::Center);
+    startGameButton.name = "level1";
      StartGameButtonScript startGameScript;
      startGameScript.setParentGameObject(startGameButton);
      startGameButton.addComponent<StartGameButtonScript>(startGameScript);

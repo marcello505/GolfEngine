@@ -5,12 +5,13 @@
 #ifndef GOLFENGINE_TILEMAPPARSERSERVICE_H
 #define GOLFENGINE_TILEMAPPARSERSERVICE_H
 
+#include <filesystem>
 #include <string>
 #include "Scene/RenderShape/TileMapRenderShape.h"
 
 class TileMapParserService {
 public:
-    virtual TileMapRenderShape loadMap(const std::string& mapPath) = 0;
+    virtual TileMapRenderShape loadMap(const std::filesystem::path& mapPath) = 0;
 
     // Virtual Destructors
     virtual ~TileMapParserService() = default;

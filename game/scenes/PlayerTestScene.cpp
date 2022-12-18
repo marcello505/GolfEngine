@@ -63,7 +63,7 @@ void PlayerTestScene::build(Scene& scene) const {
     testEnemyCollision.tag = "enemy";
     testEnemyCollision.setLocalPosition({1000.0f, 500.0f});
 
- auto& enemy1 = scene.createNewGameObject<EnemyObject>(root, &player);
+ auto& enemy1 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
     enemy1.setLocalPosition({700.f, 400.f});
     enemy1.originalTransform = Transform({700.f, 400.f}, 0, {1,1});
     enemy1.addPatrolPoint({700.f, 400.f});
@@ -71,15 +71,15 @@ void PlayerTestScene::build(Scene& scene) const {
     enemy1.addPatrolPoint({800,500});
     enemy1.addPatrolPoint({700,500});
 
-    auto& enemy2 = scene.createNewGameObject<EnemyObject>(root, &player);
+    auto& enemy2 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
     enemy2.setLocalPosition({800.f, 100.f});
     enemy2.addPatrolPoint({800.f, 400.f});
     enemy2.addPatrolPoint({700.f, 50.f});
     enemy2.addPatrolPoint({700.f, 400.f});
 
-    auto& enemy3 = scene.createNewGameObject<EnemyObject>(root, &player);
+    auto& enemy3 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
    enemy3.setLocalPosition({400.f, 150.f});
-   auto& enemy4 = scene.createNewGameObject<EnemyObject>(root, &player);
+   auto& enemy4 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
    enemy4.setLocalPosition({850.f, 150.f});
 
     scene.createNewGameObject<GameManager>("mainMenu");

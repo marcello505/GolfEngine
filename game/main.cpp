@@ -9,12 +9,15 @@
 // Game includes
 #include "utils/GameActions.h"
 #include "scenes/PlayerTestScene.h"
+#include "scenes/Level2Scene.h"
+#include "scenes/Level1Scene.h"
 
 #include "scenes/MainMenuScene.h"
 #include "scenes/SelectLevelScene.h"
 #include "scenes/SettingsScene.h"
 
 #include "scenes/SaveGameTestScene.h"
+#include "Services/Singletons/PathfindingSingleton.h"
 #include <SDL.h>
 
 #define PROJECT_SETTINGS_SAVE_PATH "ProjectSettings.xml"
@@ -102,6 +105,8 @@ int main(int argc, char* argv[]){
     //Scene initialization
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
     sceneManager.addScene<PlayerTestScene>("playerTest");
+    sceneManager.addScene<Level1Scene>("level1");
+    sceneManager.addScene<Level2Scene>("level2");
     sceneManager.addScene<SaveGameTestScene>("saveGameTest");
     sceneManager.addSceneFactory<MainMenuScene>("mainMenu");
     sceneManager.addSceneFactory<SelectLevelScene>("selectLevel");
