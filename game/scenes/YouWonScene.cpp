@@ -6,12 +6,16 @@
 #include "Services/Singletons/RenderSingleton.h"
 #include "Scene/Components/SpriteComponent.h"
 #include "../scripts/MenuScripts/BackButtonScript.h"
+#include "Scene/Components/AudioSource.h"
 
 void YouWonScene::build(Scene& scene) const {
 
 
     auto *rs = GolfEngine::Services::Render::getService();
     auto &root = scene.createNewGameObject<GameObject>();
+    auto& levelMusic = root.addComponent<GolfEngine::Scene::Components::AudioSource>(true, true, false);
+    levelMusic.addSound("youWin", "res/music/martian_blues.mp3");
+    levelMusic.volume = 0.3f;
 
     auto &TitleText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 20,
                                                                     rs->screenSizeHeight() / 100 * 8),
