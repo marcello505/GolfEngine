@@ -95,7 +95,7 @@ void Level2Scene::build(Scene& scene) const {
     }
 
     //GameManager
-    scene.createNewGameObject<GameManager>("mainMenu");
+    scene.createNewGameObject<GameManager>("level3");
 
     //Set up Graph
     if(GolfEngine::Services::Pathfinding::hasService()) {
