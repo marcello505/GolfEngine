@@ -9,12 +9,16 @@
 #include "../scripts/MenuScripts/SelectLevelButtonScript.h"
 #include "../scripts/MenuScripts/SettingsButtonScript.h"
 #include "../scripts/MenuScripts/ExitButtonScript.h"
+#include "Scene/Components/AudioSource.h"
 
 void MainMenuScene::build(Scene& scene) const {
 
 
     auto* rs = GolfEngine::Services::Render::getService();
     auto& root = scene.createNewGameObject<GameObject>();
+    auto& levelMusic = root.addComponent<GolfEngine::Scene::Components::AudioSource>(true, true, false);
+    levelMusic.addSound("mainMenu", "res/music/welcome_to_egypt.mp3");
+    levelMusic.volume = 0.3f;
 
     auto& TitleText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 34,
                                                                     rs->screenSizeHeight() / 100 * 8),

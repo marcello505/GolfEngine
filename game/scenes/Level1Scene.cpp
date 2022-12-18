@@ -16,6 +16,9 @@
 
 void Level1Scene::build(Scene& scene) const {
     auto& root = scene.createNewGameObject<GameObject>();
+    auto& levelMusic = root.addComponent<GolfEngine::Scene::Components::AudioSource>(true, true, true);
+    levelMusic.addSound("level1", "res/music/birdsong.mp3");
+    levelMusic.volume = 0.3f;
 
     //load in tileset
     {
