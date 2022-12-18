@@ -40,16 +40,16 @@ void Level3Scene::build(Scene& scene) const {
     auto& crate1 = scene.createNewGameObject<PhysicGameObject>("res/sprites/crate.png",Vector2{10,10});
     crate1.setLocalPosition({2160,1100});
     auto& crate2 = scene.createNewGameObject<PhysicGameObject>("res/sprites/crate.png",Vector2{10,10});
-    crate2.setLocalPosition({2160,1150});
+    crate2.setLocalPosition({2160,1155});
     auto& crate3 = scene.createNewGameObject<PhysicGameObject>("res/sprites/crate.png",Vector2{10,10});
-    crate3.setLocalPosition({2160,1200});
+    crate3.setLocalPosition({2160,1210});
 
     auto& crate4 = scene.createNewGameObject<PhysicGameObject>("res/sprites/crate.png",Vector2{10,10});
     crate4.setLocalPosition({1130,1620});
     auto& crate5 = scene.createNewGameObject<PhysicGameObject>("res/sprites/crate.png",Vector2{10,10});
-    crate5.setLocalPosition({1130,1671});
+    crate5.setLocalPosition({1130,1675});
     auto& crate6 = scene.createNewGameObject<PhysicGameObject>("res/sprites/crate.png",Vector2{10,10});
-    crate6.setLocalPosition({1130,1722});
+    crate6.setLocalPosition({1130,1730});
 
 
     //Setup enemies
