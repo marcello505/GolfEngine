@@ -29,6 +29,10 @@ typedef struct Map{
 
 class TileMapRenderShape : public RenderShape {
 public:
+    /// RenderShape to render a tile map
+    /// \param imagePath path to tile set image
+    /// \param tileSet tile set data
+    /// \param map map data
     TileMapRenderShape(const std::string& imagePath, TileSet_t tileSet, Map_t map);
 
     // Rendershape overrides

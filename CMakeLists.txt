@@ -62,7 +62,6 @@ set(SCENE_SOURCES
         src/Scene/RenderShape/CircleRenderShape.cpp
         src/Scene/RenderShape/SpriteRenderShape.cpp
         src/Scene/RenderShape/ButtonRenderShape.cpp
-        src/Scene/RenderShape/ParticleSystemRenderShape.cpp
         src/Scene/RenderShape/TextRenderShape.cpp
         src/Scene/GameObjects/UIObject/Button.cpp
         src/Scene/GameObjects/UIObject/Text.cpp

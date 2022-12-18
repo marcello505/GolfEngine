@@ -11,6 +11,10 @@
 
 class LineRenderShape : public RenderShape {
 public:
+    /// RenderShape used to render a line
+    /// \param posA first position of line
+    /// \param posB second position of line
+    /// \param color color of line
     LineRenderShape(Vector2 posA, Vector2 posB, Color color = Color(255,255,255));
     RenderShapeType getType() override;
     void applyTransform(const Transform& transform) override;

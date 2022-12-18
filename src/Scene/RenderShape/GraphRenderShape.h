@@ -16,7 +16,6 @@ class GraphRenderShape : public RenderShape {
 public:
     RenderShapeType getType() override;
     void applyTransform(const Transform& transform) override;
-
     std::vector<std::unique_ptr<RectRenderShape>> nodes {};
 };
 

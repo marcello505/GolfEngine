@@ -12,6 +12,10 @@
 
 class ButtonRenderShape : public RenderShape{
 public:
+    /// RenderShape used to render a button
+    /// \param rectRenderShape rectangle to render button outline
+    /// \param textRenderShape text to render text inside button
+    /// \param alignment alignment of button
     ButtonRenderShape(RectRenderShape* rectRenderShape, TextRenderShape* textRenderShape, Alignment alignment);
     Alignment _textAlign;
     RenderShapeType getType() override;

@@ -11,6 +11,10 @@
 
 class CircleRenderShape : public RenderShape{
 public:
+    /// RenderShape used to render a circle
+    /// \param position position of circle
+    /// \param radius radius of circle
+    /// \param color color of circle
     CircleRenderShape(Vector2 position, float radius, Color color);
     RenderShapeType getType() override;
     void applyTransform(const Transform& transform) override;

@@ -12,6 +12,13 @@
 
 class TextRenderShape : public RenderShape {
 public:
+    /// RenderShape used to render text
+    /// \param pos position of text
+    /// \param rotation rotation of text
+    /// \param text text to render
+    /// \param fontSize fontSize of text
+    /// \param color color of text
+    /// \param filePath path to font
     TextRenderShape(const Vector2& pos, float rotation, const std::string& text, size_t fontSize, const Color& color, const std::string& filePath);
     RenderShapeType getType() override;
     void applyTransform(const Transform& transform) override;
