@@ -50,7 +50,7 @@ namespace GolfEngine::Scene::Components{
             }
 
             if(_playOnAwake && !_sounds.empty()){
-                play(_sounds.begin()->second, _loopOnAwake);
+                play(_sounds.begin()->first, _loopOnAwake);
             }
         }
     }

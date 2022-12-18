@@ -17,6 +17,9 @@
 void Level2Scene::build(Scene& scene) const {
     auto& root = scene.createNewGameObject<GameObject>();
     auto& entities = scene.createNewGameObject<GameObject>(root);
+    auto& levelMusic = root.addComponent<GolfEngine::Scene::Components::AudioSource>(true, true, true);
+    levelMusic.addSound("level2", "res/music/depth_charge.mp3");
+    levelMusic.volume = 0.3f;
 
     //load in tileset
     {
