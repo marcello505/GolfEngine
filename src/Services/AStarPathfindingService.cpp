@@ -141,8 +141,8 @@ namespace GolfEngine::Services::Pathfinding {
         //calculate and set helpVariables
         int height = _graphHeight;
         int width = _graphWidth;
-        int widthNodeDistance = _nodeDistance;
-        int heightNodeDistance = _nodeDistance;
+        int widthNodeDistance = _nodeDistance + _graphStartPointX;
+        int heightNodeDistance = _nodeDistance + _graphStartPointY;
         int nodeCounter = 0;
 
         //loops until full width and height are covered in nodes
@@ -161,7 +161,7 @@ namespace GolfEngine::Services::Pathfinding {
                 }
                 widthNodeDistance += _nodeDistance;
             }
-            widthNodeDistance = _nodeDistance;
+            widthNodeDistance = _nodeDistance + _graphStartPointX;
             heightNodeDistance += _nodeDistance;
         }
 
@@ -251,5 +251,10 @@ namespace GolfEngine::Services::Pathfinding {
 
     void AStarPathfindingService::setMaxPathsToCalculatePerTic(int maxPathsPerTic) {
         _maxPathsToCalculatePerTic = std::max(1, maxPathsPerTic);
+    }
+
+    void AStarPathfindingService::setGraphStartPoint(int x, int y) {
+        _graphStartPointX = x;
+        _graphStartPointY = y;
     }
 }

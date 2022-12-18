@@ -55,6 +55,11 @@ public:
     /// \param height height in world space (pixels)
     virtual void setGraphSize(int width, int height) = 0;
 
+    /// Sets the start point of where the graph should be generated in the scene
+    /// \param x position
+    /// \param y position
+    virtual void setGraphStartPoint(int x, int y) = 0;
+
     /// Set the maximum amount of paths to process each tic.
     /// By default this is set to 1
     /// \param maxPathsPerTic an integer of 1 or more

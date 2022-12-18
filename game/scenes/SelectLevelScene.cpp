@@ -63,13 +63,13 @@ void SelectLevelScene::build(Scene& scene) const {
                                                                   "Start game", 20, Color(),
                                                                   "res/fonts/Rubik-VariableFont_wght.ttf"
                                                                   ,Alignment::Center);
-    startLevelTwoButton.name = "playerTest";
+    startLevelTwoButton.name = "level2";
 
     script.setParentGameObject(startLevelTwoButton);
     startLevelTwoButton.addComponent<StartGameButtonScript>(script);
 
     auto& startLevelTwoImage = scene.createNewGameObject<GameObject>();
-    startLevelTwoImage.addComponent<SpriteComponent>("res/sprites/level-1.png");
+    startLevelTwoImage.addComponent<SpriteComponent>("res/sprites/level2.png");
     startLevelTwoImage.setWorldTransform(Transform(Vector2(rs->screenSizeWidth() / 2,
                                                            rs->screenSizeHeight() / 2.0), 0, Vector2(1,1)));
 

@@ -25,6 +25,8 @@ namespace GolfEngine::Services::Pathfinding{
 
         int _graphWidth {1920};
         int _graphHeight {1080};
+        int _graphStartPointX {0};
+        int _graphStartPointY {0};
         int _maxPathsToCalculatePerTic {1};
 
     public:
@@ -41,6 +43,7 @@ namespace GolfEngine::Services::Pathfinding{
         void setNodeDistance(int nodeDistance) override;
         void setMarginAroundRectColliders(int margin) override;
         void setGraphSize(int width, int height) override;
+        void setGraphStartPoint(int x, int y) override;
         void setMaxPathsToCalculatePerTic(int maxPathsPerTic) override;
 
         /// Calculation that estimates distance between two nodes
