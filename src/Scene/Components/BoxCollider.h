@@ -10,9 +10,14 @@
 
 class BoxCollider : public Collider {
 public:
-    //TODO make the _rectRenderShape initialisation more natural
-    explicit BoxCollider(const Vector2& vec2) : _shapeExtents{vec2}, _rectRenderShape{{{}, {vec2.x * 2, vec2.y * 2}}} {};
+    /// BoxCollider is used in combination with a Rigid Body (wont do anything on its own)
+    /// \param extends of box
+    explicit BoxCollider(const Vector2& extends) : _shapeExtents{extends}, _rectRenderShape{{{}, {extends.x * 2, extends.y * 2}}} {};
+    /// Collider shape of this collider
+    /// \return collider shape based on its properties
     ColliderShapes getColliderShape() override;
+    /// Get extends of this box
+    /// \return extends of this box
     [[nodiscard]] const Vector2& getShapeExtents() const;
 
     // Component overrides
@@ -23,13 +28,15 @@ public:
     void setActive(bool active) override;
     void setParentGameObject(GameObject& gameObject) override;
 
+    // IPersistable overrides
     std::unique_ptr<ISnapshot> saveSnapshot() override;
-
     void loadSnapshot(const ISnapshot& rawSnapshot) override;
 
     //Drawable overrides
     RenderShape& getRenderShape() override;
 
+    /// Set color of box collider
+    /// \param color to be set
     void setColor(Color color);
 
 private:

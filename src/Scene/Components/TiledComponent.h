@@ -30,7 +30,7 @@ public:
     /// Creates GameObjects with a BoxCollider for each tile with a collider property
     void initColliders();
 
-    // Snapshot methods for IPersistable
+    // IPersistable overrides
     std::unique_ptr<ISnapshot> saveSnapshot() override;
     void loadSnapshot(const ISnapshot& rawSnapshot) override;
 

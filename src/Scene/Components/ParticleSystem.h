@@ -14,6 +14,14 @@
 
 class ParticleSystem : public Component{
 public:
+    /// Component that creates a particle system
+    /// \param spritePath path to particle sprite
+    /// \param particlesPerSecond amount of particles to spawn per second (will shoot all at once when looping is set to false)
+    /// \param duration lifetime of particles
+    /// \param pixelScale pixel scale of particle sprite
+    /// \param position offset position
+    /// \param rotation rotation of particles
+    /// \param color color to blend with particle sprite
     ParticleSystem(const std::string &spritePath, int particlesPerSecond, float duration, Vector2 pixelScale = Vector2(),
                    Vector2 position = Vector2(), float rotation = 0, Color color = Color());
 
@@ -33,8 +41,8 @@ public:
     void setActive(bool active) override;
     void setParentGameObject(GameObject& gameObject) override;
 
+    // IPersistable overrides
     std::unique_ptr<ISnapshot> saveSnapshot() override;
-
     void loadSnapshot(const ISnapshot& rawSnapshot) override;
 
 //    setters
@@ -86,10 +94,8 @@ private:
     Vector2 _position;
     Color _color;
 
-
     int _countedFrames {0};
     int _fps{60};
-
 
     Vector2 _direction {1,0};
     float _velocity {1.0};
@@ -97,7 +103,6 @@ private:
 
     Vector2 _randomVelocity {0,0};
     float _rotationsPerSecond {0};
-
 };
 
 

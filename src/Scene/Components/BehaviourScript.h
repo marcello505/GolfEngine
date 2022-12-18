@@ -11,11 +11,11 @@
 class BehaviourScript : public Component {
 public:
     ~BehaviourScript() override = default;
-    virtual void onStart() override {}
-    virtual void onUpdate() override {}
-    virtual void onRemove() override {}
-    virtual bool getActive() override { return _active; }
-    virtual void setActive(bool active) override { _active = active; }
+    void onStart() override {}
+    void onUpdate() override {}
+    void onRemove() override {}
+    bool getActive() override { return _active; }
+    void setActive(bool active) override { _active = active; }
     void setParentGameObject(GameObject& gameObject) override { _gameObject = gameObject; }
     template<typename C>
     C& getParentGameObject() {return dynamic_cast<C&>(_gameObject->get()); }

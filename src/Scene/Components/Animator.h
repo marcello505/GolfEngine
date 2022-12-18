@@ -37,6 +37,7 @@ public:
     /// \param looping Loop the animation
     void play(const std::string& animation, bool looping = false);
 
+    /// Will stop current animation
     void stop();
 
     // Component overrides
@@ -46,6 +47,8 @@ public:
     bool getActive() override;
     void setActive(bool active) override;
     void setParentGameObject(GameObject& gameObject) override;
+
+    // IPersistable overrides
     std::unique_ptr<ISnapshot> saveSnapshot() override;
     void loadSnapshot(const ISnapshot& rawSnapshot) override;
 private:
@@ -69,9 +72,9 @@ private:
     Vector2 _pixelScale;
 
     struct Snapshot : public ISnapshot{
-        bool looping;
-        int countedFrames;
-        int currentCell;
+        bool looping {};
+        int countedFrames {};
+        int currentCell {};
         std::optional<std::reference_wrapper<Animation>> currentAnimation;
     };
 };

@@ -9,6 +9,8 @@
 
 class Drawable {
 public:
+    /// Get the render shape connected to this drawable
+    /// \return render shape
     virtual RenderShape& getRenderShape() = 0;
     // Virtual destructor
     virtual ~Drawable() = default;

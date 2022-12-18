@@ -33,6 +33,8 @@ struct RigidBodyDef{
 
 class RigidBody : public Component {
 public:
+    /// Component that gets registered to the physics engine
+    /// \param rigidBodyDef properties of the rigid body
     explicit RigidBody(const RigidBodyDef& rigidBodyDef) : _rigidBodyDef{rigidBodyDef} {}
     RigidBody() : RigidBody(RigidBodyDef{}) {}
 
@@ -43,14 +45,15 @@ public:
     bool getActive() override;
     void setActive(bool active) override;
     void setParentGameObject(GameObject& gameObject) override;
+
+    // Ipersistable overrides
     std::unique_ptr<ISnapshot> saveSnapshot() override;
     void loadSnapshot(const ISnapshot& rawSnapshot) override;
 
-
     //Getters
-    const RigidBodyDef& getRigidBodyDef() const;
-    std::vector<Collider*> getColliders() const;
-    GameObject* getParentGameObject() const;
+    [[nodiscard]] const RigidBodyDef& getRigidBodyDef() const;
+    [[nodiscard]] std::vector<Collider*> getColliders() const;
+    [[nodiscard]] GameObject* getParentGameObject() const;
 
     //Pass Through methods - Getters
     Vector2 getLinearVelocity();

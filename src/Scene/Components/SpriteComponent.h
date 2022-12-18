@@ -31,6 +31,8 @@ public:
     bool getActive() override;
     void setActive(bool active) override;
     void setParentGameObject(GameObject &gameObject) override;
+
+    // Ipersistable overrides
     std::unique_ptr<ISnapshot> saveSnapshot() override;
     void loadSnapshot(const ISnapshot& rawSnapshot) override;
 
