@@ -13,19 +13,27 @@ void YouWonScene::build(Scene& scene) const {
     auto *rs = GolfEngine::Services::Render::getService();
     auto &root = scene.createNewGameObject<GameObject>();
 
-    auto &TitleText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 34,
+    auto &TitleText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 20,
                                                                     rs->screenSizeHeight() / 100 * 8),
-                                                      0, "You won!", 70, Color(),
+                                                      0, "You slayed all the zombies!", 70, Color(),
                                                       "res/fonts/ZenDots-Regular.ttf",
                                                       Alignment::Center, false);
 
     auto &backButton = scene.createNewGameObject<Button>(root, 150, 100,
-                                                         Vector2(rs->screenSizeWidth() /
-                                                                 100.0 * 12.0,
-                                                                 rs->screenSizeHeight() /
-                                                                 100.0 * 12.0), 0,
+                                                         Vector2(rs->screenSizeWidth() / 2,
+                                                                 rs->screenSizeHeight() / 1.5), 0,
                                                          "clickButton", Vector2(0, 0), true,
                                                          "Back to menu", 20, Color(),
                                                          "res/fonts/Rubik-VariableFont_wght.ttf",
                                                          Alignment::Center);
+
+    BackButtonScript backScript;
+    backScript.setParentGameObject(backButton);
+    backButton.addComponent<BackButtonScript>(backScript);
+
+    auto& trophy = scene.createNewGameObject<GameObject>();
+    trophy.addComponent<SpriteComponent>("res/sprites/trophy.png");
+    trophy.setWorldTransform(Transform(Vector2( rs->screenSizeWidth() / 2.0,
+                                                 rs->screenSizeHeight() / 2.8),
+                                        0, Vector2(1,1)));
 }
