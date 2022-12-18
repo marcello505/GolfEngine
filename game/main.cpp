@@ -3,28 +3,49 @@
 #include "Core/GameLoop.h"
 #include "Core/Settings.h"
 #include "Services/Singletons/RenderSingleton.h"
+#include "Services/Singletons/AudioSingleton.h"
+#include "Utilities/IO.h"
 
 // Game includes
 #include "utils/GameActions.h"
 #include "scenes/PlayerTestScene.h"
+#include "scenes/Level2Scene.h"
+#include "scenes/Level1Scene.h"
 
 #include "scenes/MainMenuScene.h"
 #include "scenes/SelectLevelScene.h"
 #include "scenes/SettingsScene.h"
-#include "Scene/Components/AudioSource.h"
 
 #include "scenes/SaveGameTestScene.h"
+#include "Services/Singletons/PathfindingSingleton.h"
 #include <SDL.h>
 
+#define PROJECT_SETTINGS_SAVE_PATH "ProjectSettings.xml"
 
 
 int main(int argc, char* argv[]){
+    // Load project settings save file
+    if(GolfEngine::Utilities::IO::userDataFileExists(PROJECT_SETTINGS_SAVE_PATH)){
+        auto savedSettings = GolfEngine::Utilities::IO::loadSettings(PROJECT_SETTINGS_SAVE_PATH);
+        GolfEngine::Core::getProjectSettings().fromXml(savedSettings.toXml());
+    }
+
     GameLoop gameLoop {};
     gameLoop.useDefaultServices();
 
     //Render initialization
     GolfEngine::Services::Render::getService()->setScreenSize(1920, 1080);
     GolfEngine::Services::Render::getService()->setWindowTitle("Game name");
+
+    // Init volume settings
+    auto& volumeSettings = GolfEngine::Core::getProjectSettings();
+    auto audioService = GolfEngine::Services::Audio::getService();
+    if(volumeSettings.hasFloat("MasterVolume"))
+        audioService->setMasterVolume(volumeSettings.getFloat("MasterVolume"));
+    if(volumeSettings.hasFloat("MusicVolume"))
+        audioService->setMusicVolume(volumeSettings.getFloat("MusicVolume"));
+    if(volumeSettings.hasFloat("SFXVolume"))
+        audioService->setSfxVolume(volumeSettings.getFloat("SFXVolume"));
 
     //Set up controls
     auto* actionMap = ActionMap::getActionMap();
@@ -85,11 +106,17 @@ int main(int argc, char* argv[]){
     auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
     sceneManager.addSceneFactory<PlayerTestScene>("playerTest");
     sceneManager.addSceneFactory<SaveGameTestScene>("saveGameTest");
+    sceneManager.addSceneFactory<Level1Scene>("level1");
+    sceneManager.addSceneFactory<Level2Scene>("level2");
     sceneManager.addSceneFactory<MainMenuScene>("mainMenu");
     sceneManager.addSceneFactory<SelectLevelScene>("selectLevel");
     sceneManager.addSceneFactory<SettingsScene>("settings");
     sceneManager.loadScene("mainMenu");
 
     gameLoop.start();
+
+    // Save project settings before closing the game
+    auto projectSettings = GolfEngine::Core::getProjectSettings();
+    GolfEngine::Utilities::IO::saveSettings(PROJECT_SETTINGS_SAVE_PATH, projectSettings);
     return 0;
 }

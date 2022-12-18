@@ -62,7 +62,9 @@ private:
     bool _fullScreen;
     std::unique_ptr<SDL_Window, void(*)(SDL_Window*)> _window;
     std::unique_ptr<SDL_Renderer, void(*)(SDL_Renderer*)> _renderer;
-    std::vector<std::reference_wrapper<Drawable>> _drawables;
+//    std::vector<std::reference_wrapper<Drawable>> _drawables;
+
+    std::map<int, std::vector<std::reference_wrapper<Drawable>>> _drawables;
     std::map<std::string, std::unique_ptr<Texture>> _cachedTextures;
     std::map<std::pair<std::string ,size_t >,  std::unique_ptr<TTF_Font, void(*)(TTF_Font*)>> _cachedFonts;
 

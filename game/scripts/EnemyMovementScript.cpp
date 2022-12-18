@@ -21,7 +21,7 @@ void EnemyMovementScript::onUpdate() {
         rotateEnemyToPosition(_target.getWorldTransform().position);
         direction = pathfinding->get().getPathDirection();
         auto rb = &_gameObject.value().get().getComponent<RigidBody>();
-        rb->applyWorldForceToCenter(direction * 0.5);
+        rb->applyWorldForceToCenter(direction * 1);
     }else{
         chasing = checkIftargetIsInSight();
         auto& enemyObject = (EnemyObject &) _gameObject->get();

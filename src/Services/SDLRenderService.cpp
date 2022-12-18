@@ -55,14 +55,21 @@ namespace GolfEngine::Services::Render {
     }
 
     void SDLRenderService::addDrawable(Drawable& drawable) {
-        _drawables.emplace_back(std::ref(drawable));
+        if(_drawables.find(drawable.layer) == _drawables.end()){
+            std::vector<std::reference_wrapper<Drawable>> x =  std::vector<std::reference_wrapper<Drawable>>{};
+            _drawables.emplace(drawable.layer,x);
+        }
+
+        _drawables.at(drawable.layer).emplace_back(std::ref(drawable));
     }
 
     void SDLRenderService::removeDrawable(Drawable& drawable) {
-        _drawables.erase(std::find_if(_drawables.begin(), _drawables.end(), [&](const std::reference_wrapper<Drawable> &d) {
-            return &d.get() == &drawable;
-        }));
-    }
+            _drawables.at(drawable.layer).erase(
+                    std::find_if(_drawables.at(drawable.layer).begin(), _drawables.at(drawable.layer).end(), [&](const std::reference_wrapper<Drawable> &d) {
+                        return &d.get() == &drawable;
+                    }));
+        }
+
 
     void SDLRenderService::render() {
         // Clear screen
@@ -77,8 +84,8 @@ namespace GolfEngine::Services::Render {
         }
 
         // Loop through all registered drawables
-        for (auto drawable: _drawables) {
-
+        for (const auto& layer: _drawables) {
+            for (auto drawable: layer.second) {
             auto& renderShape = drawable.get().getRenderShape();
             switch (renderShape.getType()) {
                 case RenderShapeType::RectShape:
@@ -109,6 +116,7 @@ namespace GolfEngine::Services::Render {
                         renderRect(*shape);
                     }
                     break;
+            }
             }
         }
 
@@ -152,11 +160,14 @@ namespace GolfEngine::Services::Render {
     }
 
     bool SDLRenderService::isRegistered(Drawable& drawable) {
-        auto result = std::find_if(_drawables.begin(), _drawables.end(), [&](const std::reference_wrapper<Drawable> &d) {
-            return &d.get() == &drawable;
-        });
-        if(result != _drawables.end())
-            return true;
+        for (const auto& layer: _drawables) {
+            auto result = std::find_if(layer.second.begin(), layer.second.end(),
+                                       [&](const std::reference_wrapper<Drawable> &d) {
+                                           return &d.get() == &drawable;
+                                       });
+            if (result != layer.second.end())
+                return true;
+        }
         return false;
     }
 

@@ -36,15 +36,18 @@ set(GAMEOBJECTS_SOURCES
         gameobjects/Projectile.cpp
         gameobjects/ProjectilePoolObject.cpp
         gameobjects/TestBlock.cpp
-        gameobjects/GameManager.cpp
-        gameobjects/HUD.cpp
+        gameobjects/GameManager.cpp 
         gameobjects/EnemyObject.cpp
+        gameobjects/PhysicGameObject.cpp
+        gameobjects/HUD.cpp
         gameobjects/BloodSplatterParticleEffect.cpp
         gameobjects/FinishLevelAreaObject.cpp)
 
 set(SCENE_SOURCES
         scenes/PlayerTestScene.cpp
         scenes/SaveGameTestScene.cpp
+        scenes/Level2Scene.cpp
+        scenes/Level1Scene.cpp
         scenes/MainMenuScene.cpp
         scenes/SelectLevelScene.cpp
         scenes/SettingsScene.cpp)
