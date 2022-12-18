@@ -7,8 +7,8 @@
 #include "Scene/Components/RigidBody.h"
 #include "Scene/Components/SpriteComponent.h"
 
-PhysicGameObject::PhysicGameObject(const std::string &imagePath, Vector2 pixelScale){
-    addComponent<BoxCollider>(Vector2{25.f, 25.f});
+PhysicGameObject::PhysicGameObject(const std::string &imagePath, Vector2 pixelScale, Vector2 extents){
+    addComponent<BoxCollider>(extents);
 
     RigidBodyDef rbDef {};
 
