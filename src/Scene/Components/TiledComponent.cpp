@@ -61,7 +61,7 @@ void TiledComponent::initColliders() {
             auto result = std::find(colliderTiles.begin(), colliderTiles.end(), tile-1);
             if(result != colliderTiles.end()){
                 // If so, create a GameObject with a solid rigid body
-                auto& go = scene.createNewGameObject<GameObject>(_gameObject->get());
+                auto& go = scene.createNewGameObject<GameObject>(_gameObject->get(), nullptr, nullptr, false);
                 go.addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::StaticBody});
                 go.addComponent<BoxCollider>(Vector2{tileWidth * (scale.x/2), tileHeight * (scale.y/2)});
                 go.setLocalTransform(Transform{Vector2{(columnIndex * (tileWidth * scale.x)) + ((tileWidth*scale.x)/2), (rowIndex * (tileHeight * scale.y)) + ((tileHeight*scale.y)/2)}, 0, Vector2{1,1}});

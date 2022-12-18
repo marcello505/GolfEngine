@@ -54,6 +54,9 @@ void Scene::saveCurrentState(std::vector<std::unique_ptr<ISnapshot>>& list) {
     for(int i = 0; i < _gameObjects.size(); ++i){
         if(_gameObjects[i]->isRecordable())
             list.push_back(_gameObjects[i]->saveSnapshot());
+        else
+            //Dummy snapshot
+            list.push_back({});
     }
 }
 
