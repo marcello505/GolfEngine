@@ -14,6 +14,9 @@
 
 class Graph : Drawable {
 public:
+    /// Graph object to manage a graph used in pathfinding
+    /// \param nodes list of nodes inside graph
+    /// \param drawables list of drawable nodes
     explicit Graph(std::vector<Node> nodes, std::vector<std::unique_ptr<RectRenderShape>> drawables);
     ~Graph() override;
 
@@ -23,9 +26,12 @@ public:
     Graph& operator=(const Graph& other) = delete;
     Graph& operator=(const Graph&& other) = delete;
 
-    std::vector<Node> nodes {};
     RenderShape& getRenderShape() override;
+
+    /// Updates the list of drawables based on included in path, visited or unvisited
     void updateGraphColors();
+
+    std::vector<Node> nodes {};
 private:
     GraphRenderShape _renderShape {};
 };

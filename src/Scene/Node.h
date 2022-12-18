@@ -16,6 +16,10 @@ enum class NodeTags {
 
 };
 struct Node{
+    /// Node used inside graph for pathfinding
+    /// \param id unique id of node
+    /// \param position position of node
+    /// \param weight weight of node
     Node(int id, Vector2 position, int weight = 1) : id{id}, position{position}, weight{weight}, tag{NodeTags::None}{}
 
     int id;

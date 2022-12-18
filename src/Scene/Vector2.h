@@ -20,7 +20,6 @@ struct Vector2
     Vector2() : Vector2(0.0f, 0.0f){}
 
     //Methods
-
     /// Return the magnitude of the vector as a float.
     /// \return magnitude
     [[nodiscard]] float magnitude() const{
@@ -67,7 +66,9 @@ struct Vector2
     }
 
     //Operator Overloads
-    Vector2 operator+(Vector2& other) const{return {this->x + other.x, this->y + other.y};}
+    Vector2 operator+(Vector2& other) const{
+        return {this->x + other.x, this->y + other.y};
+    }
     Vector2& operator+=(const Vector2& b){
         x += b.x;
         y += b.y;
@@ -108,7 +109,6 @@ struct Vector2
             y * b
         };
     }
-
     Vector2 operator/(const Vector2& b) const{
         return {
                 x / b.x,
