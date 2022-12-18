@@ -8,7 +8,7 @@
 #include <Scene/GameObjects/UIObject/Text.h>
 
 HUD::HUD(Scene &scene) {
-    Vector2 windowSize {(float)GolfEngine::Services::Render::getService()->getScreenSizeWidth(), (float)GolfEngine::Services::Render::getService()->getScreenSizeHeight()};
+    Vector2 windowSize {(float)GolfEngine::Services::Render::getService()->screenSizeWidth(), (float)GolfEngine::Services::Render::getService()->screenSizeHeight()};
 
     auto& fpsText = scene.createNewGameObject<Text>((GameObject&)*this, Vector2{windowSize.x * 0.925f, 0}, 0, "",
                                                               20, Color(),

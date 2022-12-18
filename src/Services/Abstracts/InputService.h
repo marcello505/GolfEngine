@@ -11,8 +11,8 @@
 class InputService {
 public:
     virtual void handleInputs() = 0;
-    virtual bool hasReceivedQuitSignal() const = 0;
-    virtual bool pressedKey() const = 0;
+    [[nodiscard]] virtual bool hasReceivedQuitSignal() const = 0;
+    [[nodiscard]] virtual bool pressedKey() const = 0;
     virtual void setKeyPressed(bool pressed) = 0;
     virtual InputKey getKeyPressed() = 0;
     virtual std::string getKeyString(InputKey key) = 0;

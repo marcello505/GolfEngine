@@ -31,6 +31,7 @@ public:
     float getMasterVolume() override;
     float getMusicVolume() override;
     float getSfxVolume() override;
+
     /// Sets the _musicVolume field and updates the current volume of Music.
     /// \param volume a value between 0.0 and 1.0, used as a factor to calculate volume.
     void setMusicVolume(float volume) override;
@@ -46,7 +47,7 @@ public:
     /// Loads in the audio file as music, automatically called for play methods when neccesary.
     /// \param path path to the audio file.
     void preloadMusic(const std::string& path) override;
-    void clearCache() override;
+
     bool isMusicPlaying() override;
     bool isMusicPaused() override;
     void toggleMusic() override;
@@ -64,6 +65,7 @@ private:
     std::map<std::string, Mix_Music*> _cachedMusic {};
 
     //Methods
+    void clearCache() override;
     void updateMusicVolume();
     void updateSfxVolume(int channel);
     void updateSfxVolume();

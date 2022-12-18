@@ -549,14 +549,6 @@ namespace GolfEngine::Services::Render {
         _mainCamera = camera;
     }
 
-    int SDLRenderService::getScreenSizeWidth() const {
-        return _screenSizeWidth;
-    }
-
-    int SDLRenderService::getScreenSizeHeight() const {
-        return _screenSizeHeight;
-    }
-
     Vector2 SDLRenderService::getCameraOffset() const {
         if(_mainCamera)
             return camOffset;

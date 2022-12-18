@@ -17,13 +17,19 @@ private:
     bool _pressedKey {};
 public:
     SDLInputService();
+
+    /// Handles the inputs and updates the action map
     void handleInputs() override;
+
+    /// Returns raw key press
+    /// \return Next raw key pressed
     InputKey getKeyPressed() override;
-    bool hasReceivedQuitSignal() const override;
-    bool pressedKey() const override;
+
+    // Getters
+    [[nodiscard]] bool hasReceivedQuitSignal() const override;
+    [[nodiscard]] bool pressedKey() const override;
     void setKeyPressed(bool pressed) override;
     std::string getKeyString(InputKey key) override;
-
 };
 
 

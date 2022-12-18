@@ -27,11 +27,9 @@ namespace GolfEngine::Services::Render {
 class SDLRenderService : public RenderService {
 public:
     SDLRenderService();
-    // RAII
+
     SDLRenderService(SDLRenderService &sdlRenderService) = delete;
     SDLRenderService &operator=(SDLRenderService *other) = delete;
-    SDLRenderService(SDLRenderService &&other) noexcept;
-    SDLRenderService &operator=(SDLRenderService &&other) noexcept;
 
     /// Sets the title of the window
     /// \param title new title
@@ -45,6 +43,9 @@ public:
     /// \param drawable to be removed
     void removeDrawable(Drawable& drawable) override;
 
+    /// Checks whether a drawable is registered
+    /// \param drawable to be checked
+    /// \return True if it is registered
     bool isRegistered(Drawable &drawable) override;
 
     /// Renders all drawables in registered drawable list
@@ -59,15 +60,16 @@ public:
     /// \param fullScreen true is fullscreen
     void setFullScreen(bool fullScreen) override;
 
-    // Getters, setters
-    [[nodiscard]] int screenSizeWidth() const;
-    [[nodiscard]] int screenSizeHeight() const;
-    [[nodiscard]] bool fullScreen() const;
-    [[nodiscard]] std::optional<std::reference_wrapper<Camera>> getMainCamera() const override;
+    /// Registers a camera to be used in the scene
+    /// \param camera reference to camera, can be null to clear any camera
     void setMainCamera(const std::optional<std::reference_wrapper<Camera>>& camera) override;
-    [[nodiscard]] int getScreenSizeWidth() const override;
-    [[nodiscard]] int getScreenSizeHeight() const override;
+
+    // Getters
+    [[nodiscard]] int screenSizeWidth() const override;
+    [[nodiscard]] int screenSizeHeight() const override;
+    [[nodiscard]] bool fullScreen() const override;
     [[nodiscard]] Vector2 getCameraOffset() const override;
+    [[nodiscard]] std::optional<std::reference_wrapper<Camera>> getMainCamera() const override;
 private:
     void renderRect(RectRenderShape &renderShape);
     void renderLine(LineRenderShape &renderShape);
