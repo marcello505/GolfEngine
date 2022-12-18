@@ -50,7 +50,7 @@ void SelectLevelScene::build(Scene& scene) const {
     startLevelOneButton.addComponent<StartGameButtonScript>(script);
 
     auto& startLevelOneImage = scene.createNewGameObject<GameObject>();
-    startLevelOneImage.addComponent<SpriteComponent>("res/sprites/level1.png", Vector2(3,4.5));
+    startLevelOneImage.addComponent<SpriteComponent>("res/sprites/level1.png");
 
     startLevelOneImage.setWorldTransform(Transform(Vector2(rs->screenSizeWidth() / 5.0,rs->screenSizeHeight() / 2.0),
                                    0, Vector2(1,1)));
