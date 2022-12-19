@@ -233,28 +233,4 @@ TEST_CASE("Setting timescale"){
 
     //Clean up (needs to be done because otherwise the service will interfere with other tests)
     gameLoop.setPhysicsService(nullptr);
-
-    // Arrange
-    gameLoop  = GameLoop{};
-    dummyService = new GameLoopTests::DummyPhysicsService {};
-    auto* dummyRenderService = new GameLoopTests::DummyRenderService {};
-    gameLoop.setFramesPerSeccond(60.f);
-    dummyRenderService->gameLoop = &gameLoop;
-    dummyService->gameLoop = &gameLoop;
-    gameLoop.setRenderService(dummyRenderService);
-    gameLoop.setPhysicsService(dummyService);
-
-    // Act
-    GolfEngine::Core::Time::setTimeScale(0.0f);
-    gameLoop.start();
-
-    // Assert
-    SUBCASE("Physics FPS is 0 fps with a timescale of 0.0"){
-        CHECK_EQ(gameLoop.time->getPhysicsFps(), 0);
-        CHECK_GT(gameLoop.time->getRenderFps(), 0);
-    }
-
-    //Clean up (needs to be done because otherwise the service will interfere with other tests)
-    gameLoop.setRenderService(nullptr);
-    gameLoop.setPhysicsService(nullptr);
 }
