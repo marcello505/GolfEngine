@@ -19,6 +19,7 @@ EnemyObject::EnemyObject(GameObject *target, Scene& scene){
     addComponent<BoxCollider>(Vector2{12.5f, 12.5f});
 
 //
+    addComponent<SpriteComponent>("res/sprite_sheets/zombie.png", Vector2{2, 2}, Rect2{{}, {239, 221}});
     auto& animator = addComponent<Animator>("res/sprite_sheets/zombie.png", 7, 7, Vector2(239, 221), Vector2(2,2));
     animator.addAnimation("attack", 0, 8, 15.0f);
     animator.addAnimation("idle", 9, 25, 15.0f);
