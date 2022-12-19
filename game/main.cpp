@@ -39,7 +39,7 @@ int main(int argc, char* argv[]){
 
     //Render initialization
     GolfEngine::Services::Render::getService()->setScreenSize(1920, 1080);
-    GolfEngine::Services::Render::getService()->setWindowTitle("Game name");
+    GolfEngine::Services::Render::getService()->setWindowTitle("Zombie Slayer");
 
     // Init volume settings
     auto& volumeSettings = GolfEngine::Core::getProjectSettings();
