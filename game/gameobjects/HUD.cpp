@@ -31,10 +31,20 @@ HUD::HUD(Scene &scene) {
                                                               Alignment::Center, false);
 
     auto& levelCompleteText = scene.createNewGameObject<Text>((GameObject&)*this, Vector2{windowSize.x * 0.35f, windowSize.y * 0.95f}, 0, "",
-                                                                 32, Color(20, 255, 20, 255),
+                                                                 32, Color(20, 200, 20, 255),
                                                                  "res/fonts/Rubik-VariableFont_wght.ttf",
                                                                  Alignment::Center, false);
 
+    auto& youDiedText = scene.createNewGameObject<Text>((GameObject&)*this, Vector2{windowSize.x * 0.35f, windowSize.y * 0.6f}, 0, "",
+                                                              32, Color(255, 20, 20, 255),
+                                                              "res/fonts/Rubik-VariableFont_wght.ttf",
+                                                              Alignment::Center, false);
+
+    auto& ammoCounterText = scene.createNewGameObject<Text>((GameObject&)*this, Vector2{windowSize.x * 0.95f, windowSize.y * 0.95f}, 0, "",
+                                                        32, Color(),
+                                                        "res/fonts/Rubik-VariableFont_wght.ttf",
+                                                        Alignment::Center, false);
+
     // Add HUB script to update text
-    addComponent<HUDScript>(&fpsText, &timeText, &highScoreTimeText, &quitConfirmationText, &levelCompleteText);
+    addComponent<HUDScript>(&fpsText, &timeText, &highScoreTimeText, &quitConfirmationText, &levelCompleteText, &youDiedText, &ammoCounterText);
 }

@@ -53,6 +53,7 @@ void Level1Scene::build(Scene& scene) const {
 
         auto& crate5 = scene.createNewGameObject<PhysicGameObject>("res/sprites/crate.png",Vector2{10,10});
         crate5.setLocalPosition({740,710});
+
         auto& crate6 = scene.createNewGameObject<PhysicGameObject>("res/sprites/crate.png",Vector2{10,10});
         crate6.setLocalPosition({720,790});
 
@@ -117,6 +118,7 @@ void Level1Scene::build(Scene& scene) const {
     enemy14.setLocalPosition({870.f, 300.f});
 
     scene.createNewGameObject<GameManager>("level2");
+
 
     if(GolfEngine::Services::Pathfinding::hasService()) {
         GolfEngine::Services::Pathfinding::getService()->setGraphStartPoint(0, 0);

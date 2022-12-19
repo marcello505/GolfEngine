@@ -9,13 +9,22 @@
 #include <sstream>
 #include <iomanip>
 #include "HUDScript.h"
+#include "../gameobjects/PlayerObject.h"
 
 using namespace GolfEngine;
 
 HUDScript::HUDScript(Text* fpsText, Text* timeText, Text* highScoreTimeText, Text* quitConfirmationText,
-                     Text* levelCompleteText)
-        : _fpsText{fpsText}, _timeText{timeText}, _highScoreTimeText{highScoreTimeText}, _quitConfirmationText{quitConfirmationText}, _levelCompleteText{levelCompleteText}, _renderFPS{false} {
-    _gameManager = &GolfEngine::Core::SceneManager::GetSceneManager().getCurrentScene().getGameObjectWithTag("GameManager").getComponent<GameManagerScript>();
+                     Text* levelCompleteText, Text* youDiedText, Text* ammoCounterText)
+        : _fpsText{fpsText},
+        _timeText{timeText},
+        _highScoreTimeText{highScoreTimeText},
+        _quitConfirmationText{quitConfirmationText},
+        _levelCompleteText{levelCompleteText},
+        _youDiedText{youDiedText},
+        _ammoCounterText{ammoCounterText},
+        _renderFPS{false} {
+    _gameManager = &Core::SceneManager::GetSceneManager().getCurrentScene().getGameObjectWithTag("GameManager").getComponent<GameManagerScript>();
+    _playerShootScript = &Core::SceneManager::GetSceneManager().getCurrentScene().getGameObjectWithTag(TAG_PLAYER).getComponent<PlayerShootScript>();
 }
 
 void HUDScript::onStart() {
@@ -61,6 +70,17 @@ void HUDScript::onUpdate() {
     else{
         _levelCompleteText->_renderShape.setText("");
     }
+
+    // Update you died text
+    if(!_playerShootScript->isAlive()){
+        _youDiedText->_renderShape.setText("You Died! Press BackSpace to Restart");
+    }
+    else{
+        _youDiedText->_renderShape.setText("");
+    }
+
+    // Update ammo counter text
+    _ammoCounterText->_renderShape.setText((std::stringstream{} << _playerShootScript->getCurrentAmmo()).str());
 }
 
 void HUDScript::updateHighScoreText() {

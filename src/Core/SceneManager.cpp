@@ -2,6 +2,7 @@
 // Created by Lucas on 2-11-2022.
 //
 
+#include "Core/GameLoop.h"
 #include "SceneManager.h"
 #include "Services/Singletons/PathfindingSingleton.h"
 #include "Services/Singletons/RenderSingleton.h"
@@ -62,6 +63,9 @@ namespace GolfEngine::Core{
                 if(GolfEngine::Services::Pathfinding::hasService()){
                     GolfEngine::Services::Pathfinding::getService()->createGraph();
                 }
+
+                //Reset lag, meaning any late physics tics are reset
+                GolfEngine::Core::getRunningGameLoop().resetLag();
             }
             _nextScene.reset();
         }

@@ -68,9 +68,17 @@ namespace GolfEngine::Core {
         /// Stop the game loop
         void stop();
 
+        /// Resets the _previous field to the current time. This essentially makes it so that no time has passed between the last tic and the current tic.
+        /// This has the effect that the gameloop will stop trying to catch up with the physics frames that were "too late".
+        /// Mainly used by SceneManager to ignore the lost time when switching scenes
+        void resetLag();
+        
     private:
-        bool _running{true};
-        std::chrono::duration<GameTic, std::milli> _msPerUpdate{1000.f / 60};
+        bool _running {true};
+        std::chrono::duration<GameTic, std::milli> _msPerUpdate {1000.f/ 60};
+
+        /// This holds the specific timepoint when the last game tic was handled.
+        std::chrono::steady_clock::time_point _previous {};
 
         void processInput();
         void update();

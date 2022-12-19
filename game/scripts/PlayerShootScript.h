@@ -23,6 +23,9 @@ public:
     void onStart() override;
     void onUpdate() override;
 
+    int getCurrentAmmo() const;
+    bool isAlive() const;
+
     std::unique_ptr<ISnapshot> saveSnapshot() override;
     void loadSnapshot(const ISnapshot &rawSnapshot) override;
 private:

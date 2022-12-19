@@ -12,6 +12,8 @@
 #include "../scripts/PlayerShootScript.h"
 #include "Scene/Scene.h"
 
+#define TAG_PLAYER "player"
+
 using namespace GolfEngine::Scene;
 
 class PlayerObject : public GameObject {

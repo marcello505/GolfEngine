@@ -17,8 +17,11 @@
 #include "scenes/SelectLevelScene.h"
 #include "scenes/SettingsScene.h"
 
+#include "scenes/YouWonScene.h"
+#include "Scene/Components/AudioSource.h"
 #include "scenes/SaveGameTestScene.h"
 #include "Services/Singletons/PathfindingSingleton.h"
+#include "scenes/Level3Scene.h"
 #include <SDL.h>
 
 #define PROJECT_SETTINGS_SAVE_PATH "ProjectSettings.xml"
@@ -113,6 +116,8 @@ int main(int argc, char* argv[]){
     sceneManager.addSceneFactory<SaveGameTestScene>("saveGameTest");
     sceneManager.addSceneFactory<Level1Scene>("level1");
     sceneManager.addSceneFactory<Level2Scene>("level2");
+    sceneManager.addSceneFactory<Level3Scene>("level3");
+    sceneManager.addSceneFactory<YouWonScene>("youWonScene");
     sceneManager.addSceneFactory<MainMenuScene>("mainMenu");
     sceneManager.addSceneFactory<SelectLevelScene>("selectLevel");
     sceneManager.addSceneFactory<SettingsScene>("settings");

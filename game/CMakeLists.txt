@@ -46,11 +46,13 @@ set(GAMEOBJECTS_SOURCES
 set(SCENE_SOURCES
         scenes/PlayerTestScene.cpp
         scenes/SaveGameTestScene.cpp
-        scenes/Level2Scene.cpp
-        scenes/Level1Scene.cpp
         scenes/MainMenuScene.cpp
         scenes/SelectLevelScene.cpp
-        scenes/SettingsScene.cpp)
+        scenes/SettingsScene.cpp
+        scenes/Level2Scene.cpp
+        scenes/Level1Scene.cpp
+        scenes/Level3Scene.cpp
+        scenes/YouWonScene.cpp)
 
 # Resource files
 add_custom_target(Game_Resources ALL

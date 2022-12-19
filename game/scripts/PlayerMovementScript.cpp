@@ -21,7 +21,6 @@ void PlayerMovementScript::onStart() {
 }
 
 void PlayerMovementScript::onUpdate() {
-
     //Player movement logic
     {
         Vector2 inputDirection {};
