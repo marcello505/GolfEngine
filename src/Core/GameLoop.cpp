@@ -43,13 +43,13 @@ void GameLoop::start() {
     //Initialize services
     if(Audio::hasService()) Audio::getService()->init();
 
-    auto previous = std::chrono::steady_clock::now();
+    _previous = std::chrono::steady_clock::now();
     std::chrono::duration<GameTic, std::milli> lag {0.0f};
 
     while(_running){
         auto current = std::chrono::steady_clock::now();
-        auto elapsed = current - previous;
-        previous = current;
+        auto elapsed = current - _previous;
+        _previous = current;
         lag += elapsed;
 
         processInput();
@@ -156,4 +156,8 @@ bool GameLoop::isGameRunning() const {
 
 void GameLoop::setPathfindingService(PathfindingService* pathfindingService) {
     GolfEngine::Services::Pathfinding::setService(pathfindingService);
+}
+
+void GameLoop::resetLag() {
+    _previous = std::chrono::steady_clock::now();
 }
