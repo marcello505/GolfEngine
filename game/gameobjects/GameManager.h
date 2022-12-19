@@ -7,9 +7,11 @@
 
 #include "Scene/GameObjects/GameObject.h"
 
+using namespace GolfEngine::Scene;
+
 class GameManager : public GameObject{
 public:
-    GameManager(const std::string& nextLevelName);
+    explicit GameManager(const std::string& nextLevelName);
 };
 
 

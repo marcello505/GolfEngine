@@ -7,9 +7,11 @@
 
 #include "Scene/Components/BehaviourScript.h"
 
+using namespace GolfEngine::Scene::Components;
+
 class ExitButtonScript : public BehaviourScript{
 public:
-    virtual void onUpdate() override;
+    void onUpdate() override;
 };
 
 #endif //GOLFENGINE_EXITBUTTONSCRIPT_H

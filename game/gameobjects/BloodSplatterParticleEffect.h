@@ -8,6 +8,8 @@
 #include <Scene/GameObjects/GameObject.h>
 #include <Scene/Components/ParticleSystem.h>
 
+using namespace GolfEngine::Scene;
+
 class BloodSplatterParticleEffect : public GameObject{
 public:
     BloodSplatterParticleEffect();

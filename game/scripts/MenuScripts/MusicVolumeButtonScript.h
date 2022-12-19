@@ -9,6 +9,8 @@
 #include "Scene/Components/BehaviourScript.h"
 #include "TextUpdateScript.h"
 
+using namespace GolfEngine::Scene::Components;
+
 class MusicVolumeButtonScript : public BehaviourScript{
 public:
     explicit MusicVolumeButtonScript(TextUpdateScript* script) : _textUpdateScript{script} {}

@@ -7,12 +7,14 @@
 #include "SceneFactory.h"
 #include "Services/Singletons/PhysicsSingleton.h"
 
+using namespace GolfEngine::Core;
+
 int main(int argc, char* argv[]){
     GameLoop gameLoop{};
     gameLoop.useDefaultServices();
 
-    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
-    GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
+    SceneManager::GetSceneManager().loadScene("main");
 
     // Press Space to Stop Paritcles
     ActionMap::getActionMap()->addAction("Stop");

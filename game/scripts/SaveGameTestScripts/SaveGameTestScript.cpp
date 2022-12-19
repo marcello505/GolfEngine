@@ -8,8 +8,10 @@
 
 #define SAVE_GAME_PATH "saveGameTest.xml"
 
+using namespace GolfEngine;
+
 void SaveGameTestScript::onUpdate() {
-    auto& actionMap = *ActionMap::getActionMap();
+    auto& actionMap = *Input::ActionMap::getActionMap();
 
     if(actionMap.isJustPressed("saveGame")){
         GolfEngine::Core::Settings save {};

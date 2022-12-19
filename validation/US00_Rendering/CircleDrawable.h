@@ -11,6 +11,10 @@
 #include "Scene/Color.h"
 #include "Scene/RenderShape/CircleRenderShape.h"
 
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Scene::Render;
+using namespace GolfEngine::Scene::Components;
+
 class CircleDrawable : public Drawable {
 public:
 

@@ -1,9 +1,14 @@
 #include <doctest.h>
 #include "Core/GameLoop.h"
 
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Core;
+using namespace GolfEngine::Scene::Components;
+using namespace GolfEngine::Services;
+
 //This DummyInputService has been added to help Test GameLoop
 namespace GameLoopTests{
-    class DummyInputService : public InputService{
+    class DummyInputService : public Input::InputService{
     public:
 
         //InputService
@@ -30,7 +35,7 @@ namespace GameLoopTests{
     private:
     };
 
-    class DummyRenderService : public RenderService{
+class DummyRenderService : public GolfEngine::Services::Render::RenderService{
     public:
         //Fields
         std::chrono::duration<GameTic, std::milli> targetTime {1000};
@@ -60,8 +65,6 @@ namespace GameLoopTests{
         std::optional<std::reference_wrapper<Camera>> getMainCamera() const override { return {};}
         void setMainCamera(const std::optional<std::reference_wrapper<Camera>>& camera) override {}
         bool isRegistered(Drawable& drawable) override {return false;}
-        int getScreenSizeWidth() const override {return 0;}
-        int getScreenSizeHeight() const override {return 0;}
         Vector2 getCameraOffset() const override {return Vector2();}
         void setWindowTitle(const std::string& title) override {}
         int screenSizeHeight() const override { return 0; }
@@ -69,7 +72,7 @@ namespace GameLoopTests{
         bool fullScreen() const override { return false; }
     };
 
-    class DummyPhysicsService : public PhysicsService{
+    class DummyPhysicsService : public Physics::PhysicsService{
     public:
         //Fields
         std::chrono::duration<GameTic, std::milli> targetTime {1000};
@@ -197,7 +200,7 @@ TEST_CASE("Setting timescale"){
     gameLoop.setPhysicsService(dummyService);
 
     // Act
-    GolfEngine::Time::setTimeScale(0.5f);
+    GolfEngine::Core::Time::setTimeScale(0.5f);
     gameLoop.start();
 
     // Assert
@@ -218,7 +221,7 @@ TEST_CASE("Setting timescale"){
     gameLoop.setPhysicsService(dummyService);
 
     // Act
-    GolfEngine::Time::setTimeScale(2.0f);
+    GolfEngine::Core::Time::setTimeScale(2.0f);
     gameLoop.start();
 
     // Assert
@@ -229,29 +232,5 @@ TEST_CASE("Setting timescale"){
     }
 
     //Clean up (needs to be done because otherwise the service will interfere with other tests)
-    gameLoop.setPhysicsService(nullptr);
-
-    // Arrange
-    gameLoop  = GameLoop{};
-    dummyService = new GameLoopTests::DummyPhysicsService {};
-    auto* dummyRenderService = new GameLoopTests::DummyRenderService {};
-    gameLoop.setFramesPerSeccond(60.f);
-    dummyRenderService->gameLoop = &gameLoop;
-    dummyService->gameLoop = &gameLoop;
-    gameLoop.setRenderService(dummyRenderService);
-    gameLoop.setPhysicsService(dummyService);
-
-    // Act
-    GolfEngine::Time::setTimeScale(0.0f);
-    gameLoop.start();
-
-    // Assert
-    SUBCASE("Physics FPS is 0 fps with a timescale of 0.0"){
-        CHECK_EQ(gameLoop.time->getPhysicsFps(), 0);
-        CHECK_GT(gameLoop.time->getRenderFps(), 0);
-    }
-
-    //Clean up (needs to be done because otherwise the service will interfere with other tests)
-    gameLoop.setRenderService(nullptr);
     gameLoop.setPhysicsService(nullptr);
 }

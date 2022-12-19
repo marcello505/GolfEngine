@@ -9,9 +9,12 @@
 #include "Scene/Components/BehaviourScript.h"
 #include "Scene/Components/Pathfinding.h"
 
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Scene::Components;
+
 class EnemyMovementScript : public BehaviourScript{
 public:
-    EnemyMovementScript(GameObject* target);
+    explicit EnemyMovementScript(GameObject* target);
     void onStart() override;
 
     void onUpdate() override;

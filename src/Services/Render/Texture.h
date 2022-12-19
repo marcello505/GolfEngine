@@ -9,6 +9,8 @@
 #include <string>
 #include "../../Scene/Color.h"
 
+using namespace GolfEngine::Scene;
+
 namespace GolfEngine::Services::Render {
 
 class Texture {

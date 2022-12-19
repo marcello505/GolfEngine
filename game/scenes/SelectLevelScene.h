@@ -10,6 +10,8 @@
 #include "Scene/GameObjects/UIObject/Button.h"
 #include "Scene/GameObjects/UIObject/Text.h"
 
+using namespace GolfEngine::Scene;
+
 class SelectLevelScene : public ISceneFactory {
 public:
     void build(Scene& scene) const override;

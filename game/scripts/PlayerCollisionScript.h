@@ -12,6 +12,8 @@
 #include "PlayerMovementScript.h"
 #include "PlayerShootScript.h"
 
+using namespace GolfEngine::Scene::Components;
+
 class PlayerCollisionScript : public BehaviourScript {
     void onStart() override;
     void onCollisionEnter(RigidBody& other) override;

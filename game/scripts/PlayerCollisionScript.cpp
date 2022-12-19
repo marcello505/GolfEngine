@@ -7,7 +7,7 @@
 #include <iostream>
 
 void PlayerCollisionScript::onStart() {
-    auto& gm = GolfEngine::SceneManager::GetSceneManager().getCurrentScene().getGameObjectWithTag("GameManager");
+    auto& gm = GolfEngine::Core::SceneManager::GetSceneManager().getCurrentScene().getGameObjectWithTag("GameManager");
     _gameManager = &gm.getComponent<GameManagerScript>();
 
     if(_gameObject->get().hasComponent<PlayerMovementScript>())

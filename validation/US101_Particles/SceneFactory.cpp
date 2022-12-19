@@ -10,6 +10,9 @@
 #include "Scene/Components/CircleCollider.h"
 #include "Scene/Components/BoxCollider.h"
 
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Scene::Components;
+
 void SceneFactory::build(Scene& scene) const {
     auto& go = scene.createNewGameObject<GameObject>();
     go.addComponent<ParticleScript>();

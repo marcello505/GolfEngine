@@ -10,6 +10,8 @@
 
 #define TAG_FINISH "finish"
 
+using namespace GolfEngine::Scene;
+
 class FinishLevelAreaObject : public GameObject{
 public:
     explicit FinishLevelAreaObject(const Vector2& position, const Vector2& extents);

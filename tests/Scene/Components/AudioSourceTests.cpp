@@ -5,8 +5,10 @@
 #define GOLFENGINE_SINGLETON_PRIVATE
 #include "Services/Singletons/AudioSingleton.h"
 
+using namespace GolfEngine::Services;
+
 namespace AudioSourceTests{
-    class DummyAudioService : public AudioService{
+class DummyAudioService : public Audio::AudioService{
     public:
         bool calledPlayMusic {false};
         bool calledPlaySfx {false};

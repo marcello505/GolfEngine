@@ -9,12 +9,13 @@
 #include <string>
 #include "Scene/Vector2.h"
 
-struct Animation {
-    std::string name;
-    float playSpeed;
-    int beginCell;
-    int endCell;
-};
-
+namespace GolfEngine::Scene::Components {
+    struct Animation {
+        std::string name;
+        float playSpeed;
+        int beginCell;
+        int endCell;
+    };
+}
 
 #endif //GOLFENGINE_ANIMATION_H

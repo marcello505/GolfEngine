@@ -8,6 +8,9 @@
 #include "Scene/Components/RigidBody.h"
 #include "Scene/Components/SpriteComponent.h"
 
+using namespace GolfEngine::Input;
+using namespace GolfEngine::Scene::Components;
+
 void MovementScript::onUpdate() {
 
     auto lt = _gameObject->get().getLocalTransform();

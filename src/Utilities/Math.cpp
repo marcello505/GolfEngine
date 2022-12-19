@@ -18,7 +18,7 @@ namespace GolfEngine::Utilities::Math{
         return 180.0f * rad / M_PI;
     }
 
-    float atan2(const Vector2& vec) {
+    float atan2(const Scene::Vector2& vec) {
         float x = vec.x;
         float y = vec.y;
         return atan2f(y, x);

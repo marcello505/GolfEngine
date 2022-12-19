@@ -4,6 +4,8 @@
 
 #include "BloodSplatterParticleEffect.h"
 
+using namespace GolfEngine::Scene::Components;
+
 BloodSplatterParticleEffect::BloodSplatterParticleEffect() {
     name = "blood splatter";
 

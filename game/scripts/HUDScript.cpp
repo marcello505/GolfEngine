@@ -11,6 +11,8 @@
 #include "HUDScript.h"
 #include "../gameobjects/PlayerObject.h"
 
+using namespace GolfEngine;
+
 HUDScript::HUDScript(Text* fpsText, Text* timeText, Text* highScoreTimeText, Text* quitConfirmationText,
                      Text* levelCompleteText, Text* youDiedText, Text* ammoCounterText)
         : _fpsText{fpsText},
@@ -21,8 +23,8 @@ HUDScript::HUDScript(Text* fpsText, Text* timeText, Text* highScoreTimeText, Tex
         _youDiedText{youDiedText},
         _ammoCounterText{ammoCounterText},
         _renderFPS{false} {
-    _gameManager = &GolfEngine::SceneManager::GetSceneManager().getCurrentScene().getGameObjectWithTag("GameManager").getComponent<GameManagerScript>();
-    _playerShootScript = &GolfEngine::SceneManager::GetSceneManager().getCurrentScene().getGameObjectWithTag(TAG_PLAYER).getComponent<PlayerShootScript>();
+    _gameManager = &Core::SceneManager::GetSceneManager().getCurrentScene().getGameObjectWithTag("GameManager").getComponent<GameManagerScript>();
+    _playerShootScript = &Core::SceneManager::GetSceneManager().getCurrentScene().getGameObjectWithTag(TAG_PLAYER).getComponent<PlayerShootScript>();
 }
 
 void HUDScript::onStart() {
@@ -30,7 +32,7 @@ void HUDScript::onStart() {
 }
 
 void HUDScript::onUpdate() {
-    if(ActionMap::getActionMap()->isJustPressed("renderFPS")){
+    if(Input::ActionMap::getActionMap()->isJustPressed("renderFPS")){
         _renderFPS = !_renderFPS;
         _fpsText->_renderShape.setText("");
     }
@@ -38,7 +40,7 @@ void HUDScript::onUpdate() {
     // Update fps text
     if(_renderFPS){
         // Retrieve fps, convert to string and update text
-        std::string fps = std::to_string(static_cast<int>(GolfEngine::Time::getRenderFps()));
+        std::string fps = std::to_string(static_cast<int>(Core::Time::getRenderFps()));
         _fpsText->_renderShape.setText("FPS " + fps);
     }
 

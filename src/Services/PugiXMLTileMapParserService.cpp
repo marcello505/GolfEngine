@@ -9,7 +9,7 @@
 #include <filesystem>
 
 namespace GolfEngine::Services::TileMapParser {
-    TileMapRenderShape PugiXMLTileMapParserService::loadMap(const std::filesystem::path& mapPath) {
+    Render::TileMapRenderShape PugiXMLTileMapParserService::loadMap(const std::filesystem::path& mapPath) {
         pugi::xml_document doc;
 
         // Parse TileSet file
@@ -107,7 +107,7 @@ namespace GolfEngine::Services::TileMapParser {
         }
 
         // Create and return TileMapRenderShape
-        return std::move(TileMapRenderShape{tileSetImage.string(), TileSet_t{colliderTiles, tileSetWidth, tileSetHeight, tileSetColumns, imageWidth, imageHeight}, Map_t {map, tileWidth, tileHeight, columns, rows}});
+        return std::move(Render::TileMapRenderShape{tileSetImage.string(), Render::TileSet_t{colliderTiles, tileSetWidth, tileSetHeight, tileSetColumns, imageWidth, imageHeight}, Render::Map_t {map, tileWidth, tileHeight, columns, rows}});
     }
 
     std::string PugiXMLTileMapParserService::readFile(const std::filesystem::path& path) {

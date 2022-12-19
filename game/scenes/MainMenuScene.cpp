@@ -11,12 +11,14 @@
 #include "../scripts/MenuScripts/ExitButtonScript.h"
 #include "Scene/Components/AudioSource.h"
 
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Scene::Components;
+using namespace GolfEngine::Scene::UI;
+
 void MainMenuScene::build(Scene& scene) const {
-
-
     auto* rs = GolfEngine::Services::Render::getService();
     auto& root = scene.createNewGameObject<GameObject>();
-    auto& levelMusic = root.addComponent<GolfEngine::Scene::Components::AudioSource>(true, true, false);
+    auto& levelMusic = root.addComponent<AudioSource>(true, true, false);
     levelMusic.addSound("mainMenu", "res/music/welcome_to_egypt.mp3");
     levelMusic.volume = 0.3f;
 

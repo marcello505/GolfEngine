@@ -8,10 +8,12 @@
 #include <Scene/Components/BehaviourScript.h>
 #include "Input/ActionMap.h"
 
+using namespace GolfEngine::Input;
+using namespace GolfEngine::Scene::Components;
+
 class SaveStateScript : public BehaviourScript{
 public:
     void onStart() override;
-
     void onUpdate() override;
 
 private:

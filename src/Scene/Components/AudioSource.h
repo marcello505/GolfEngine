@@ -14,13 +14,15 @@
 namespace GolfEngine::Scene::Components{
     class AudioSource : public Component{
     public:
+        /// AudioSource component is used for playing music or sound effects
+        /// \param isMusic configure this audio source to play music or sound effects
+        /// \param playOnAwake play sfx or music on awake
+        /// \param loopOnAwake loop sfx or music on awake
         explicit AudioSource(bool isMusic, bool playOnAwake = false, bool loopOnAwake = false) :
         _isMusic{isMusic},
         _playOnAwake{playOnAwake},
         _loopOnAwake{loopOnAwake} {}
 
-        //=======
-        //Methods
         /// Will play the sound effect or music with the corresponding name
         /// \param sound name of sound to be played
         /// \param looping loop the sound
@@ -35,18 +37,18 @@ namespace GolfEngine::Scene::Components{
         /// \param path path to the sound file
         void addSound(const std::string& sound, const std::string& path);
 
+        // Component overrides
         void onStart() override;
         void onUpdate() override;
         void onRemove() override;
         bool getActive() override;
         void setActive(bool active) override;
         void setParentGameObject(GameObject& gameObject) override;
+
+        // IPersistable overrides
         std::unique_ptr<ISnapshot> saveSnapshot() override;
         void loadSnapshot(const ISnapshot& rawSnapshot) override;
 
-
-        //======
-        //Fields
         float volume {1.0f};
     private:
         std::optional<std::reference_wrapper<GameObject>> _parent {};
@@ -61,9 +63,7 @@ namespace GolfEngine::Scene::Components{
             float volume {};
         };
     };
-
 }
-
 
 
 #endif //GOLFENGINE_AUDIOSOURCE_H

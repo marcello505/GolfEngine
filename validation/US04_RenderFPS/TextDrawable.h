@@ -12,6 +12,11 @@
 #include "Scene/Rect2.h"
 #include "Core/GameLoop.h"
 
+using namespace GolfEngine::Core;
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Scene::Render;
+using namespace GolfEngine::Scene::Components;
+
 class TextDrawable : public Drawable {
 public:
     TextDrawable(Vector2 pos, Transform transform ,std::string text, size_t fontSize, Color color,  std::string filePath, GameLoop& gl);

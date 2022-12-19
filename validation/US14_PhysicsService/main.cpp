@@ -5,6 +5,10 @@
 #include "Scene/Components/BoxCollider.h"
 #include "Scene/Components/CircleCollider.h"
 
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Core;
+using namespace GolfEngine::Scene::Components;
+
 class SceneFactory : public ISceneFactory{
     void build(Scene &scene) const override{
         auto& groundObject = scene.createNewGameObject<GameObject>();
@@ -42,8 +46,8 @@ int main(int argc, char* argv[]){
     gameLoop.setPhysicsService(physicsService);
     gameLoop.setAudioService(nullptr); // Don't need audio for this test
 
-    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
-    GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
+    SceneManager::GetSceneManager().loadScene("main");
 
     gameLoop.start();
 

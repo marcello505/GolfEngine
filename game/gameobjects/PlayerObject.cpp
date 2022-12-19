@@ -9,6 +9,7 @@
 #include "../scripts/PlayerCollisionScript.h"
 #include "BloodSplatterParticleEffect.h"
 
+using namespace GolfEngine::Scene::Components;
 
 PlayerObject::PlayerObject(ProjectilePoolScript* projectilePoolScript, Scene& scene) {
     tag = TAG_PLAYER;

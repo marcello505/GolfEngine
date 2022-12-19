@@ -6,6 +6,9 @@
 #include "Core/SceneManager.h"
 #include "Scene/Components/BehaviourScript.h"
 
+using namespace GolfEngine;
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Scene::Components;
 
 namespace SceneTests{
     class DummyScript : public BehaviourScript{
@@ -27,7 +30,7 @@ namespace SceneTests{
     };
 
     class MainSceneFactory : public ISceneFactory{
-        void build(Scene& scene) const override{
+        void build(GolfEngine::Scene::Scene& scene) const override{
             auto& go = scene.createNewGameObject<PlayerDummy>();
         }
     };
@@ -35,13 +38,13 @@ namespace SceneTests{
 
 TEST_CASE("Loading a scene"){
     // Arrange
-    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneTests::MainSceneFactory>("main");
-    auto& prevScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
+    Core::SceneManager::GetSceneManager().addSceneFactory<SceneTests::MainSceneFactory>("main");
+    auto& prevScene = Core::SceneManager::GetSceneManager().getCurrentScene();
 
     // Act
-    GolfEngine::SceneManager::GetSceneManager().loadScene("main");
-    GolfEngine::SceneManager::GetSceneManager().updateSceneManager();
-    auto& currentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
+    Core::SceneManager::GetSceneManager().loadScene("main");
+    Core::SceneManager::GetSceneManager().updateSceneManager();
+    auto& currentScene = Core::SceneManager::GetSceneManager().getCurrentScene();
 
     // Assert
     CHECK_NE(&currentScene, &prevScene);
@@ -49,15 +52,15 @@ TEST_CASE("Loading a scene"){
 
 TEST_CASE("Reloading/Resetting a scene"){
     // Arrange
-    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneTests::MainSceneFactory>("main");
-    GolfEngine::SceneManager::GetSceneManager().loadScene("main");
-    auto& prevScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
+    Core::SceneManager::GetSceneManager().addSceneFactory<SceneTests::MainSceneFactory>("main");
+    Core::SceneManager::GetSceneManager().loadScene("main");
+    auto& prevScene = Core::SceneManager::GetSceneManager().getCurrentScene();
 
 
     // Act
-    GolfEngine::SceneManager::GetSceneManager().loadScene();
-    GolfEngine::SceneManager::GetSceneManager().updateSceneManager();
-    auto& currentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
+    Core::SceneManager::GetSceneManager().loadScene();
+    Core::SceneManager::GetSceneManager().updateSceneManager();
+    auto& currentScene = Core::SceneManager::GetSceneManager().getCurrentScene();
 
     // Assert
     CHECK_NE(&currentScene, &prevScene);

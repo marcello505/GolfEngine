@@ -134,7 +134,7 @@ namespace GolfEngine::Services::Pathfinding {
 
     void AStarPathfindingService::createGraph(){
         //Sets couple help variables
-        std::vector<std::unique_ptr<RectRenderShape>> drawables {};
+        std::vector<std::unique_ptr<Scene::Render::RectRenderShape>> drawables {};
         std::vector<Node> nodeList;
         std::vector<std::pair<int,int>> edges;
 
@@ -151,7 +151,7 @@ namespace GolfEngine::Services::Pathfinding {
                 //Checks if position is at valid place
                 if(isValidSpot(Vector2(widthNodeDistance, heightNodeDistance))){
                     //creates drawable used to visualize graph
-                    auto rect = std::make_unique<RectRenderShape>(Rect2(Vector2(widthNodeDistance, heightNodeDistance), Vector2(5, 5)), 0, Vector2{}, Color{});
+                    auto rect = std::make_unique<Scene::Render::RectRenderShape>(Rect2(Vector2(widthNodeDistance, heightNodeDistance), Vector2(5, 5)), 0, Vector2{}, Color{});
                     drawables.push_back(std::move(rect));
 
                     // add node to nodeList
@@ -189,9 +189,9 @@ namespace GolfEngine::Services::Pathfinding {
 
         for(auto& collider : colliders){
             //Calculates if node position is in rectangle then return false
-            if(collider->getRenderShape().getType() == RenderShapeType::RectShape){
+            if(collider->getRenderShape().getType() == Scene::Render::RenderShapeType::RectShape){
 
-                auto* rect = (RectRenderShape *) &collider->getRenderShape();
+                auto* rect = (Scene::Render::RectRenderShape *) &collider->getRenderShape();
                 auto LX = rect->rect().position.x - (rect->rect().size.x /2) - rectMargin ;
                 auto RX = rect->rect().position.x + (rect->rect().size.x/2 )+ rectMargin;
                 auto LY = rect->rect().position.y - (rect->rect().size.y/2) - rectMargin;
@@ -206,7 +206,7 @@ namespace GolfEngine::Services::Pathfinding {
             }else{
                 //Calculates if node position is in circle then return false
 
-                auto* circle = (CircleRenderShape *) &collider->getRenderShape();
+                auto* circle = (Scene::Render::CircleRenderShape *) &collider->getRenderShape();
                 auto x = pow((pos.x - circle->position().x),2);
                 auto y = pow((pos.y - circle->position().y),2);
                 auto r = pow(circle->radius()+10,2);

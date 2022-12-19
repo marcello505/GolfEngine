@@ -8,6 +8,8 @@
 
 #include "Scene/ISceneFactory.h"
 
+using namespace GolfEngine::Scene;
+
 class Level3Scene : public ISceneFactory{
 public:
     void build(Scene& scene) const override;

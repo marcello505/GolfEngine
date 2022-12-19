@@ -8,31 +8,36 @@
 #include "Scene/Components/Drawable.h"
 #include "Scene/RenderShape/SpriteRenderShape.h"
 
-class Particle : public Drawable {
-public:
-    Particle(std::string path, float velocity, float rotation, Vector2 pixelScale, Color color);
+namespace GolfEngine::Scene {
+    class Particle : public Components::Drawable {
+    public:
+        /// Particle object managed by ParticleSystem component
+        /// \param path sprite path
+        /// \param velocity velocity of particle
+        /// \param rotation rotation of particle
+        /// \param pixelScale initial pixel scale of particle
+        /// \param color color to blend with sprite image
+        Particle(std::string path, float velocity, float rotation, Vector2 pixelScale, Color color);
 
+        // Drawable override
+        Render::RenderShape &getRenderShape() override;
+        Render::SpriteRenderShape &getSpriteRenderShape();
 
-    // Drawable override
-    RenderShape& getRenderShape() override;
+        //getters
+        [[nodiscard]] float getRadian() const;
+        [[nodiscard]] float getVelocity() const;
 
-    SpriteRenderShape &getSpriteRenderShape();
+        //setters
+        void setRadian(float radian);
+        void setVelocity(float velocity);
 
-    //getters
-    float getRadian() const;
-    float getVelocity() const;
+        int lifeTime{0};
+    private:
+        Render::SpriteRenderShape _renderShape;
+        float _radian{0};
+        float _velocity{1};
 
-    //setters
-    void setRadian(float radian);
-    void setVelocity(float velocity);
+    };
+}
 
-    int lifeTime {0};
-
-
-private:
-    SpriteRenderShape _renderShape;
-    float _radian {0};
-    float _velocity{1};
-
-};
 #endif //GOLFENGINE_PARTICLE_H

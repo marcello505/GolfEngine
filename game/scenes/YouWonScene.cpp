@@ -8,9 +8,9 @@
 #include "../scripts/MenuScripts/BackButtonScript.h"
 #include "Scene/Components/AudioSource.h"
 
+using namespace GolfEngine::Scene::UI;
+
 void YouWonScene::build(Scene& scene) const {
-
-
     auto *rs = GolfEngine::Services::Render::getService();
     auto &root = scene.createNewGameObject<GameObject>();
     auto& levelMusic = root.addComponent<GolfEngine::Scene::Components::AudioSource>(true, true, false);

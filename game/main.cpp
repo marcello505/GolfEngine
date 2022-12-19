@@ -26,6 +26,7 @@
 
 #define PROJECT_SETTINGS_SAVE_PATH "ProjectSettings.xml"
 
+using namespace GolfEngine::Core;
 
 int main(int argc, char* argv[]){
     // Load project settings save file
@@ -106,17 +107,17 @@ int main(int argc, char* argv[]){
     GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS, true); //Render colliders
     GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_PATHFINDING, false); //Render pathfinding nodes
 
-    //Game-based debug settigns
+    //Game-based debug settings
     GolfEngine::Core::getProjectSettings().setBool(GAME_SETTINGS_DEBUG_PRINT_PLAYER_POS, false); //Output player position in console
 
     //Scene initialization
-    auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
-    sceneManager.addScene<PlayerTestScene>("playerTest");
-    sceneManager.addScene<Level1Scene>("level1");
-    sceneManager.addScene<Level2Scene>("level2");
-    sceneManager.addScene<Level3Scene>("level3");
-    sceneManager.addScene<SaveGameTestScene>("saveGameTest");
-    sceneManager.addScene<YouWonScene>("youWonScene");
+    auto& sceneManager = GolfEngine::Core::SceneManager::GetSceneManager();
+    sceneManager.addSceneFactory<PlayerTestScene>("playerTest");
+    sceneManager.addSceneFactory<SaveGameTestScene>("saveGameTest");
+    sceneManager.addSceneFactory<Level1Scene>("level1");
+    sceneManager.addSceneFactory<Level2Scene>("level2");
+    sceneManager.addSceneFactory<Level3Scene>("level3");
+    sceneManager.addSceneFactory<YouWonScene>("youWonScene");
     sceneManager.addSceneFactory<MainMenuScene>("mainMenu");
     sceneManager.addSceneFactory<SelectLevelScene>("selectLevel");
     sceneManager.addSceneFactory<SettingsScene>("settings");

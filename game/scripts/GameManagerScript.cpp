@@ -13,15 +13,17 @@
 #include "GameManagerScript.h"
 #include "EnemyCollisionScript.h"
 
+using namespace GolfEngine;
+
 void GameManagerScript::restartLevel() {
     _timePassed = 0.0f;
     _levelFinished = false;
-    GolfEngine::SceneManager::GetSceneManager().getCurrentScene().loadCurrentSceneState(1);
+    Core::SceneManager::GetSceneManager().getCurrentScene().loadCurrentSceneState(1);
     startRecordingReplay();
 }
 
 void GameManagerScript::tryFinishLevel() {
-    auto enemyGameObjects = GolfEngine::SceneManager::GetSceneManager().getCurrentScene().getGameObjectsWithTag("enemy");
+    auto enemyGameObjects = Core::SceneManager::GetSceneManager().getCurrentScene().getGameObjectsWithTag("enemy");
     bool allEnemiesDead {true};
 
     for(const auto& enemy : enemyGameObjects){
@@ -50,32 +52,32 @@ void GameManagerScript::finishLevel() {
         GolfEngine::Core::getProjectSettings().setFloat(_highScoreKey, _timePassed);
     }
     _levelFinished = true;
-    GolfEngine::SceneManager::GetSceneManager().getCurrentScene().playReplay();
+    Core::SceneManager::GetSceneManager().getCurrentScene().playReplay();
 }
 
 void GameManagerScript::onStart() {
-    _highScoreKey = GolfEngine::SceneManager::GetSceneManager().getCurrentSceneName() + "HighScore";
-    GolfEngine::SceneManager::GetSceneManager().getCurrentScene().saveCurrentSceneState(1);
+    _highScoreKey = Core::SceneManager::GetSceneManager().getCurrentSceneName() + "HighScore";
+    Core::SceneManager::GetSceneManager().getCurrentScene().saveCurrentSceneState(1);
     startRecordingReplay();
 }
 
 void GameManagerScript::onUpdate() {
-    ActionMap* actionMap = ActionMap::getActionMap();
+    Input::ActionMap* actionMap = Input::ActionMap::getActionMap();
     if(!_levelFinished)
-        _timePassed += GolfEngine::Time::getPhysicsDeltaTime();
+        _timePassed += Core::Time::getPhysicsDeltaTime();
 
     if(actionMap->isJustPressed(ACTION_GAME_MANAGER_RESTART))
         restartLevel();
     else if(actionMap->isJustPressed(ACTION_GAME_MANAGER_TIME_SCALE_UP))
-        GolfEngine::Time::setTimeScale(GolfEngine::Time::getTimeScale() + 0.1f);
+        Core::Time::setTimeScale(Core::Time::getTimeScale() + 0.1f);
     else if(actionMap->isJustPressed(ACTION_GAME_MANAGER_TIME_SCALE_DOWN))
-        GolfEngine::Time::setTimeScale(GolfEngine::Time::getTimeScale() - 0.1f);
+        Core::Time::setTimeScale(Core::Time::getTimeScale() - 0.1f);
     else if(actionMap->isJustPressed(ACTION_GAME_MANAGER_TIME_SCALE_RESET))
-        GolfEngine::Time::setTimeScale(1.0f);
+        Core::Time::setTimeScale(1.0f);
 
     //Exit level logic
     {
-        if(_waitingForQuitConfirmation) _quitConfirmationTimePassed += GolfEngine::Time::getPhysicsDeltaTime();
+        if(_waitingForQuitConfirmation) _quitConfirmationTimePassed += Core::Time::getPhysicsDeltaTime();
 
         if(!_waitingForQuitConfirmation && actionMap->isJustPressed(ACTION_GAME_MANAGER_EXIT)){
             //Esc was pressed once
@@ -84,8 +86,8 @@ void GameManagerScript::onUpdate() {
         }
         else if(_waitingForQuitConfirmation && actionMap->isJustPressed(ACTION_GAME_MANAGER_EXIT)){
             //Escape level
-            GolfEngine::SceneManager::GetSceneManager().getCurrentScene().stopReplay();
-            GolfEngine::SceneManager::GetSceneManager().loadScene("mainMenu");
+            Core::SceneManager::GetSceneManager().getCurrentScene().stopReplay();
+            Core::SceneManager::GetSceneManager().loadScene("mainMenu");
         }
         else if(_waitingForQuitConfirmation && _quitConfirmationTimePassed >= 3.0f){
             _waitingForQuitConfirmation = false;
@@ -94,15 +96,15 @@ void GameManagerScript::onUpdate() {
 
     //Finished level logic
     if(_levelFinished && actionMap->isJustPressed(ACTION_GAME_MANAGER_NEXT)){
-        GolfEngine::SceneManager::GetSceneManager().getCurrentScene().stopReplay();
-        GolfEngine::SceneManager::GetSceneManager().loadScene(_nextLevelName);
+        Core::SceneManager::GetSceneManager().getCurrentScene().stopReplay();
+        Core::SceneManager::GetSceneManager().loadScene(_nextLevelName);
     }
 
 }
 
 void GameManagerScript::startRecordingReplay() {
-    GolfEngine::SceneManager::GetSceneManager().getCurrentScene().stopReplay();
-    GolfEngine::SceneManager::GetSceneManager().getCurrentScene().startRecordingReplay(_playerActionsToLock, true);
+    Core::SceneManager::GetSceneManager().getCurrentScene().stopReplay();
+    Core::SceneManager::GetSceneManager().getCurrentScene().startRecordingReplay(_playerActionsToLock, true);
 }
 float GameManagerScript::getTimePassed() const {
     return _timePassed;

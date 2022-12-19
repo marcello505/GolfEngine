@@ -7,6 +7,8 @@
 
 #include <Scene/GameObjects/GameObject.h>
 
+using namespace GolfEngine::Scene;
+
 class TestBlock : public GameObject {
 public:
     explicit TestBlock(const Vector2& position, const Vector2& size = {15.0f, 15.0f});

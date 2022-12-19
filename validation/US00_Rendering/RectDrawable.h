@@ -10,6 +10,10 @@
 #include <memory>
 #include "Scene/Transform.h"
 
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Scene::Render;
+using namespace GolfEngine::Scene::Components;
+
 class RectDrawable : public Drawable {
 public:
     RectDrawable(Rect2 rect, Transform transform, Vector2 pivotPoint = Vector2(), Color color = Color(255,255,255));

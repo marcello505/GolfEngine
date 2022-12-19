@@ -11,6 +11,8 @@
 #include <SDL_ttf.h>
 #include <optional>
 
+using namespace GolfEngine::Scene::UI;
+
 namespace GolfEngine::Services::Render {
 
     SDLRenderService::SDLRenderService()
@@ -559,14 +561,6 @@ namespace GolfEngine::Services::Render {
 
     void SDLRenderService::setMainCamera(const std::optional<std::reference_wrapper<Camera>>& camera) {
         _mainCamera = camera;
-    }
-
-    int SDLRenderService::getScreenSizeWidth() const {
-        return _screenSizeWidth;
-    }
-
-    int SDLRenderService::getScreenSizeHeight() const {
-        return _screenSizeHeight;
     }
 
     Vector2 SDLRenderService::getCameraOffset() const {

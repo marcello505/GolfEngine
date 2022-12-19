@@ -16,7 +16,7 @@
 #include "../scripts/MenuScripts/KeyConfigButtonScript.h"
 #include "Services/Singletons/InputSingleton.h"
 
-
+using namespace GolfEngine::Scene::UI;
 
 void SettingsScene::build(Scene& scene) const {
 

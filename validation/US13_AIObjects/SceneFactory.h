@@ -8,6 +8,9 @@
 #include "Scene/ISceneFactory.h"
 #include "Scene/Components/Collider.h"
 
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Scene::Components;
+
 class SceneFactory : public ISceneFactory{
     void build(Scene& scene) const override;
     bool isValidSpot(Vector2 pos, std::vector<Collider*> colliders) const;

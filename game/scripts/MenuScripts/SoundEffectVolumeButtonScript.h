@@ -8,6 +8,8 @@
 #include "Scene/Components/BehaviourScript.h"
 #include "TextUpdateScript.h"
 
+using namespace GolfEngine::Scene::Components;
+
 class SoundEffectVolumeButtonScript : public BehaviourScript{
 public:
     explicit SoundEffectVolumeButtonScript(TextUpdateScript* script) : _textUpdateScript{script} {}

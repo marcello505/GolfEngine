@@ -7,6 +7,7 @@
 
 #include "Scene/ISceneFactory.h"
 
+using namespace GolfEngine::Scene;
 
 class PlayerTestScene : public ISceneFactory {
 public:

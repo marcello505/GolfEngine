@@ -8,6 +8,9 @@
 
 #include "ButtonClickScript.h"
 
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Scene::UI;
+
 void UIScene::build(Scene& scene) const
 {
     auto* rs = GolfEngine::Services::Render::getService();

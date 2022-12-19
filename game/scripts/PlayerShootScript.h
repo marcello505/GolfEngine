@@ -10,6 +10,8 @@
 #include "Scene/Components/Animator.h"
 #include "Scene/Components/AudioSource.h"
 
+using namespace GolfEngine::Scene::Components;
+
 class PlayerShootScript : public BehaviourScript {
 private:
     struct SnapShot : public ISnapshot{
@@ -32,7 +34,7 @@ private:
 private:
     Animator* _animator {};
     ProjectilePoolScript* _projectilePool {};
-    GolfEngine::Scene::Components::AudioSource* _audioSource {};
+    AudioSource* _audioSource {};
 
     int _currentAmmo;
     int _maxAmmo;

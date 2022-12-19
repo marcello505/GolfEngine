@@ -14,6 +14,8 @@
 
 #define TAG_PLAYER "player"
 
+using namespace GolfEngine::Scene;
+
 class PlayerObject : public GameObject {
 public:
     explicit PlayerObject(ProjectilePoolScript* projectilePoolScript, Scene& scene);

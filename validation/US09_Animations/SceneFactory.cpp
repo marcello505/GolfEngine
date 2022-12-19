@@ -9,6 +9,9 @@
 #include "Scene/Components/BehaviourScript.h"
 #include "Input/ActionMap.h"
 
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Input;
+
 class TestScript : public BehaviourScript {
     void onUpdate() override{
         if(ActionMap::getActionMap()->isJustPressed("test"))

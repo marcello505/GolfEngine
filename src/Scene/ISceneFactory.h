@@ -7,11 +7,16 @@
 
 #include "Scene.h"
 
-class ISceneFactory {
-public:
-    virtual ~ISceneFactory() = default;
-    virtual void build(Scene& scene) const = 0;
-};
+namespace GolfEngine::Scene {
+    class ISceneFactory {
+    public:
+        virtual ~ISceneFactory() = default;
+
+        /// Function used when scene is loaded (used to fill scene with gameObject)
+        /// \param scene reference to scnene to create new gameObjects
+        virtual void build(Scene &scene) const = 0;
+    };
+}
 
 
 #endif //GOLFENGINE_ISCENEFACTORY_H

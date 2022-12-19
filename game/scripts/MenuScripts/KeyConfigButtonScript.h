@@ -12,6 +12,8 @@
 #include "Scene/GameObjects/UIObject/Text.h"
 #include "TextUpdateScript.h"
 
+using namespace GolfEngine::Scene::Components;
+
 class KeyConfigButtonScript : public BehaviourScript{
 public:
     explicit KeyConfigButtonScript(std::string actionName, TextUpdateScript* script) : _textUpdateScript{script},

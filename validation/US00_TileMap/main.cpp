@@ -8,6 +8,10 @@
 #include "Scene/Components/BehaviourScript.h"
 #include "Scene/Components/BoxCollider.h"
 
+using namespace GolfEngine::Core;
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Scene::Components;
+
 class MoveScript : public BehaviourScript {
 public:
     void onUpdate() override{
@@ -52,8 +56,8 @@ int main(int argc, char* argv[]){
     ActionMap::getActionMap()->addAction("down");
     ActionMap::getActionMap()->addInputKeyToAction("down", Key_Down);
 
-    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
-    GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
+    SceneManager::GetSceneManager().loadScene("main");
 
     gameLoop.start();
     return 0;

@@ -8,7 +8,12 @@
 #include "../Abstracts/RenderService.h"
 
 namespace GolfEngine::Services::Render{
+    /// Retrieves the global instance of the Render Service
+    /// \return pointer reference to service
     RenderService* getService();
+
+    /// Checks whether there is an active global service
+    /// \return true if there is an active global service
     bool hasService();
     //TODO Add preprocessor commands to hide setService
 //#ifdef GOLFENGINE_SINGLETON_PRIVATE

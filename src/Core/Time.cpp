@@ -6,20 +6,20 @@
 #include "Time.h"
 
 // Setting default timescale as 1.0
-GameTic GolfEngine::Time::_timeScale {1.0f};
-GameTic GolfEngine::Time::_physicsDeltaTime {0.0f};
-GameTic GolfEngine::Time::_fpsPhysics {0.0f};
-GameTic GolfEngine::Time::_fpsRender {0.0f};
+GameTic GolfEngine::Core::Time::_timeScale {1.0f};
+GameTic GolfEngine::Core::Time::_physicsDeltaTime {0.0f};
+GameTic GolfEngine::Core::Time::_fpsPhysics {0.0f};
+GameTic GolfEngine::Core::Time::_fpsRender {0.0f};
 
-GameTic GolfEngine::Time::getPhysicsDeltaTime() {
+GameTic GolfEngine::Core::Time::getPhysicsDeltaTime() {
     return _physicsDeltaTime;
 }
 
-GameTic GolfEngine::Time::getRenderDeltaTime() const {
+GameTic GolfEngine::Core::Time::getRenderDeltaTime() const {
     return _renderDeltaTime;
 }
 
-void GolfEngine::Time::measurePhysicsCall() {
+void GolfEngine::Core::Time::measurePhysicsCall() {
     //TODO find a way to shield this against misuse (this should only be called by GameLoop)
     auto current = std::chrono::steady_clock::now();
     std::chrono::duration<GameTic, std::milli> elapsed = current - _previousPhysicsCall;
@@ -35,7 +35,7 @@ void GolfEngine::Time::measurePhysicsCall() {
     }
 }
 
-void GolfEngine::Time::measureRenderCall() {
+void GolfEngine::Core::Time::measureRenderCall() {
     //TODO find a way to shield this against misuse (this should only be called by GameLoop)
     auto current = std::chrono::steady_clock::now();
     std::chrono::duration<GameTic, std::milli> elapsed = current - _previousRenderCall;
@@ -51,19 +51,19 @@ void GolfEngine::Time::measureRenderCall() {
     }
 }
 
-GameTic GolfEngine::Time::getPhysicsFps() {
+GameTic GolfEngine::Core::Time::getPhysicsFps() {
     return _fpsPhysics;
 }
 
-GameTic GolfEngine::Time::getRenderFps() {
+GameTic GolfEngine::Core::Time::getRenderFps() {
     return _fpsRender;
 }
 
-GameTic GolfEngine::Time::getTimeScale() {
+GameTic GolfEngine::Core::Time::getTimeScale() {
     return _timeScale;
 }
 
-void GolfEngine::Time::setTimeScale(GameTic timeScale) {
-    //Ensure that the time scale is atleast 0.1;
+void GolfEngine::Core::Time::setTimeScale(GameTic timeScale) {
+    //Ensure that the timescale is at least 0.1;
     _timeScale = std::max(0.1f, timeScale);
 }

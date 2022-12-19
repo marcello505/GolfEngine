@@ -8,9 +8,11 @@
 
 #include "Scene/Components/BehaviourScript.h"
 
+using namespace GolfEngine::Scene::Components;
+
 class BackButtonScript : public BehaviourScript{
 public:
-    virtual void onUpdate() override;
+    void onUpdate() override;
 };
 
 

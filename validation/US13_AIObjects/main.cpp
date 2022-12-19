@@ -11,6 +11,9 @@
 #include <map>
 
 
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Core;
+
 int main(int argc, char* argv[])
 {
     //initialize gameloop and renderservice
@@ -33,8 +36,8 @@ int main(int argc, char* argv[])
     if(GolfEngine::Services::Pathfinding::hasService())
         GolfEngine::Services::Pathfinding::getService()->setMarginAroundRectColliders(10);
 
-    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
-    GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
+    SceneManager::GetSceneManager().loadScene("main");
 
     //start gameloop
     gameLoop.start();

@@ -3,6 +3,8 @@
 #include <iostream>
 #include "Services/SDLInputService.h"
 
+using namespace GolfEngine::Services::Input;
+
 int main(int argc, char* argv[])
 {
     SDL_Window* window = nullptr;

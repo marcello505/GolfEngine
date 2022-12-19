@@ -10,6 +10,8 @@
 #include <Scene/GameObjects/UIObject/Button.h>
 #include <Scene/GameObjects/UIObject/Alignment.h>
 
+using namespace GolfEngine::Scene;
+
 class UIScene : public ISceneFactory{
     void build(Scene& scene) const override;
 };

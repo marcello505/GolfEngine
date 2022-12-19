@@ -8,35 +8,46 @@
 #include "../RenderShape/RectRenderShape.h"
 #include "Collider.h"
 
-class BoxCollider : public Collider {
-public:
-    //TODO make the _rectRenderShape initialisation more natural
-    explicit BoxCollider(const Vector2& vec2) : _shapeExtents{vec2}, _rectRenderShape{{{}, {vec2.x * 2, vec2.y * 2}}} {};
-    ColliderShapes getColliderShape() override;
-    [[nodiscard]] const Vector2& getShapeExtents() const;
+namespace GolfEngine::Scene::Components {
+    class BoxCollider : public Collider {
+    public:
+        /// BoxCollider is used in combination with a Rigid Body (wont do anything on its own)
+        /// \param extends of box
+        explicit BoxCollider(const Vector2& extends) : _shapeExtents{extends},
+                                                       _rectRenderShape{{{}, {extends.x * 2, extends.y * 2}}} {};
 
-    // Component overrides
-    void onStart() override;
-    void onUpdate() override;
-    void onRemove() override;
-    bool getActive() override;
-    void setActive(bool active) override;
-    void setParentGameObject(GameObject& gameObject) override;
+        /// Collider shape of this collider
+        /// \return collider shape based on its properties
+        ColliderShapes getColliderShape() override;
 
-    std::unique_ptr<ISnapshot> saveSnapshot() override;
+        /// Get extends of this box
+        /// \return extends of this box
+        [[nodiscard]] const Vector2 &getShapeExtents() const;
 
-    void loadSnapshot(const ISnapshot& rawSnapshot) override;
+        // Component overrides
+        void onStart() override;
+        void onUpdate() override;
+        void onRemove() override;
+        bool getActive() override;
+        void setActive(bool active) override;
+        void setParentGameObject(GameObject &gameObject) override;
 
-    //Drawable overrides
-    RenderShape& getRenderShape() override;
+        // IPersistable overrides
+        std::unique_ptr<ISnapshot> saveSnapshot() override;
+        void loadSnapshot(const ISnapshot &rawSnapshot) override;
 
-    void setColor(Color color);
+        //Drawable overrides
+        Render::RenderShape &getRenderShape() override;
 
-private:
-    bool _active {true};
-    RectRenderShape _rectRenderShape;
-    const Vector2 _shapeExtents;
-};
+        /// Set color of box collider
+        /// \param color to be set
+        void setColor(Color color);
 
+    private:
+        bool _active{true};
+        Render::RectRenderShape _rectRenderShape;
+        const Vector2 _shapeExtents;
+    };
+}
 
 #endif //GOLFENGINE_BOXCOLLIDER_H

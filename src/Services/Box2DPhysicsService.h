@@ -10,13 +10,16 @@
 #include <optional>
 #include "Abstracts/PhysicsService.h"
 
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Scene::Components;
+
+namespace GolfEngine::Services::Physics{
 /// Box2D has it's own units than the ones used the game world, thus a conversion needs to happen inbetween the
 /// physics layer and the scene layer. This float is the factor used for this conversion.
 #define PhysicsSpaceToWorldSpace 100.0f
 #define DefaultVelocityIterations 8
 #define DefaultPositionIterations 3
 
-namespace GolfEngine::Services::Physics{
     class RaysCastCallback : public b2RayCastCallback
     {
     public:

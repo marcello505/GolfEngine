@@ -7,6 +7,8 @@
 
 #include "Wall.h"
 
+using namespace GolfEngine::Scene::Components;
+
 Wall::Wall(const Vector2& position, const Vector2& size) {
     addComponent<BoxCollider>(size);
     addComponent<RigidBody>(RigidBodyDef{RigidBodyTypes::StaticBody});

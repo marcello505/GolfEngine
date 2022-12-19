@@ -9,6 +9,8 @@
 
 #include "Scene/Components/BehaviourScript.h"
 
+using namespace GolfEngine::Scene::Components;
+
 class GameManagerScript : public BehaviourScript {
 public:
     explicit GameManagerScript(std::string nextLevelName) : _nextLevelName{std::move(nextLevelName)} {}

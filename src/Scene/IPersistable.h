@@ -7,15 +7,17 @@
 
 #include <memory>
 
-class ISnapshot{
-};
+namespace GolfEngine::Scene {
+    class ISnapshot {
+    };
 
-class IPersistable{
-public:
-    virtual ~IPersistable() = default;
+    class IPersistable {
+    public:
+        virtual ~IPersistable() = default;
 
-    virtual std::unique_ptr<ISnapshot> saveSnapshot() = 0;
-    virtual void loadSnapshot(const ISnapshot& rawSnapshot) = 0;
-};
+        virtual std::unique_ptr<ISnapshot> saveSnapshot() = 0;
+        virtual void loadSnapshot(const ISnapshot &rawSnapshot) = 0;
+    };
+}
 
 #endif //GOLFENGINE_IPERSISTABLE_H

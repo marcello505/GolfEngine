@@ -7,6 +7,8 @@
 #include "Scene/Components/RigidBody.h"
 #include "Scene/Components/SpriteComponent.h"
 
+using namespace GolfEngine::Scene::Components;
+
 FinishLevelAreaObject::FinishLevelAreaObject(const Vector2& position, const Vector2& extents) {
     tag = TAG_FINISH;
 
