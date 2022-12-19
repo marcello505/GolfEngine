@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <algorithm>
 #include <string>
+#include <optional>
 
 namespace GolfEngine::Services::Input {
     SDLInputService::SDLInputService() : _hasReceivedQuitSignal{false} {
@@ -29,8 +30,11 @@ namespace GolfEngine::Services::Input {
         {
             if (event.type == SDL_KEYDOWN) // if key is pressed
             {
-                setKeyPressed(true);
-                key = _inputBinds.find(SDL_GetKeyName(event.key.keysym.sym))->second; // get key
+                auto optKey = sdlEventToInputKey(event);
+                if(optKey){ // If key exists
+                    setKeyPressed(true);
+                    key = optKey.value();
+                }
             }
             if (event.type == SDL_KEYUP) // if key is pressed{
             {
@@ -58,6 +62,14 @@ namespace GolfEngine::Services::Input {
         return key;
     }
 
+    std::optional<InputKey> SDLInputService::sdlEventToInputKey(const SDL_Event &event) {
+        auto keyIt = _inputBinds.find(SDL_GetKeyName(event.key.keysym.sym));
+        if(keyIt != _inputBinds.end()){
+            return keyIt->second;
+        }
+        return {};
+    }
+
 // handle input via SDL
     void SDLInputService::handleInputs() {
         SDL_Event event;
@@ -66,14 +78,16 @@ namespace GolfEngine::Services::Input {
         {
             if (event.type == SDL_KEYDOWN) // if key is pressed
             {
-                auto key = _inputBinds.find(SDL_GetKeyName(event.key.keysym.sym))->second; // get key
-                _actionMap->setInputKeyPressed(key, true); // handle action for this key
+                auto key = sdlEventToInputKey(event);
+                if(key) // If key exists
+                    _actionMap->setInputKeyPressed(key.value(), true); // handle action for this key
             }
 
             if (event.type == SDL_KEYUP) // if key is released
             {
-                auto key = _inputBinds.find(SDL_GetKeyName(event.key.keysym.sym))->second; // get key
-                _actionMap->setInputKeyPressed(key, false); // handle action for this key
+                auto key = sdlEventToInputKey(event);
+                if(key) // If key exists
+                    _actionMap->setInputKeyPressed(key.value(), false); // handle action for this key
             }
 
             if (event.type == SDL_MOUSEBUTTONDOWN) // if mouse button is pressed
@@ -372,4 +386,5 @@ namespace GolfEngine::Services::Input {
     void SDLInputService::setKeyPressed(bool pressed) {
         _pressedKey = pressed;
     }
+
 }

@@ -6,6 +6,7 @@
 #include "../Input/ActionMap.h"
 #include "../Input/InputKey.h"
 #include <SDL.h>
+#include <optional>
 
 namespace GolfEngine::Services::Input {
     class SDLInputService : public InputService {
@@ -15,6 +16,8 @@ namespace GolfEngine::Services::Input {
 
         void bindKeys();
         void handleMouseEvent(SDL_Event event, bool pressed);
+
+        std::optional<InputKey> sdlEventToInputKey(const SDL_Event &event);
 
         bool _hasReceivedQuitSignal{};
         bool _pressedKey{};
