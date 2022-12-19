@@ -12,6 +12,8 @@
 #include "../scripts/PlayerShootScript.h"
 #include "Scene/Scene.h"
 
+#define TAG_PLAYER "player"
+
 class PlayerObject : public GameObject {
 public:
     explicit PlayerObject(ProjectilePoolScript* projectilePoolScript, Scene& scene);

@@ -16,6 +16,9 @@
 
 void Level1Scene::build(Scene& scene) const {
     auto& root = scene.createNewGameObject<GameObject>();
+    auto& levelMusic = root.addComponent<GolfEngine::Scene::Components::AudioSource>(true, true, true);
+    levelMusic.addSound("level1", "res/music/birdsong.mp3");
+    levelMusic.volume = 0.3f;
 
     //load in tileset
     {
@@ -50,6 +53,7 @@ void Level1Scene::build(Scene& scene) const {
 
         auto& crate5 = scene.createNewGameObject<PhysicGameObject>("res/sprites/crate.png",Vector2{10,10});
         crate5.setLocalPosition({740,710});
+
         auto& crate6 = scene.createNewGameObject<PhysicGameObject>("res/sprites/crate.png",Vector2{10,10});
         crate6.setLocalPosition({720,790});
 
@@ -113,11 +117,14 @@ void Level1Scene::build(Scene& scene) const {
     auto& enemy14 = scene.createNewGameObject<EnemyObject>(root, &player, std::ref(scene));
     enemy14.setLocalPosition({870.f, 300.f});
 
-    scene.createNewGameObject<GameManager>("mainMenu");
+    scene.createNewGameObject<GameManager>("level2");
+
 
     if(GolfEngine::Services::Pathfinding::hasService()) {
+        GolfEngine::Services::Pathfinding::getService()->setGraphStartPoint(0, 0);
         GolfEngine::Services::Pathfinding::getService()->setGraphSize(1980, 1980);
         GolfEngine::Services::Pathfinding::getService()->setNodeDistance(50);
+        GolfEngine::Services::Pathfinding::getService()->setMarginAroundRectColliders(0);
     }
     // IMPORTANT! Create this object after the GameManager (GameManager.onStart() needs to happen before HUD.onStart())
     scene.createNewGameObject<HUD>(std::ref(scene));
