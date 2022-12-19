@@ -9,6 +9,8 @@
 #include "Scene/Components/Pathfinding.h"
 #include "Core/Time.h"
 
+using namespace GolfEngine::Scene::Components;
+
 class DrawPathScript : public BehaviourScript{
 public:
     void onStart() override;

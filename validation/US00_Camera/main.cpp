@@ -10,6 +10,10 @@
 #include "Scene/Components/SpriteComponent.h"
 #include "Scene/Components/TiledComponent.h"
 
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Core;
+using namespace GolfEngine::Scene::Components;
+
 class MoveScript : public BehaviourScript{
     Camera* cam1, *cam2;
 public:
@@ -82,8 +86,8 @@ int main(int argc, char* argv[]){
     ActionMap::getActionMap()->addAction("switchCam");
     ActionMap::getActionMap()->addInputKeyToAction("switchCam", Key_Space);
 
-    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
-    GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
+    SceneManager::GetSceneManager().loadScene("main");
 
     gameLoop.start();
     return 0;

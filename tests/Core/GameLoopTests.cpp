@@ -1,9 +1,14 @@
 #include <doctest.h>
 #include "Core/GameLoop.h"
 
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Core;
+using namespace GolfEngine::Scene::Components;
+using namespace GolfEngine::Services;
+
 //This DummyInputService has been added to help Test GameLoop
 namespace GameLoopTests{
-    class DummyInputService : public InputService{
+    class DummyInputService : public Input::InputService{
     public:
 
         //InputService
@@ -30,7 +35,7 @@ namespace GameLoopTests{
     private:
     };
 
-    class DummyRenderService : public RenderService{
+class DummyRenderService : public GolfEngine::Services::Render::RenderService{
     public:
         //Fields
         std::chrono::duration<GameTic, std::milli> targetTime {1000};
@@ -67,7 +72,7 @@ namespace GameLoopTests{
         bool fullScreen() const override { return false; }
     };
 
-    class DummyPhysicsService : public PhysicsService{
+    class DummyPhysicsService : public Physics::PhysicsService{
     public:
         //Fields
         std::chrono::duration<GameTic, std::milli> targetTime {1000};
@@ -195,7 +200,7 @@ TEST_CASE("Setting timescale"){
     gameLoop.setPhysicsService(dummyService);
 
     // Act
-    GolfEngine::Time::setTimeScale(0.5f);
+    GolfEngine::Core::Time::setTimeScale(0.5f);
     gameLoop.start();
 
     // Assert
@@ -216,7 +221,7 @@ TEST_CASE("Setting timescale"){
     gameLoop.setPhysicsService(dummyService);
 
     // Act
-    GolfEngine::Time::setTimeScale(2.0f);
+    GolfEngine::Core::Time::setTimeScale(2.0f);
     gameLoop.start();
 
     // Assert
@@ -240,7 +245,7 @@ TEST_CASE("Setting timescale"){
     gameLoop.setPhysicsService(dummyService);
 
     // Act
-    GolfEngine::Time::setTimeScale(0.0f);
+    GolfEngine::Core::Time::setTimeScale(0.0f);
     gameLoop.start();
 
     // Assert

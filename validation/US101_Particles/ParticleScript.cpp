@@ -6,6 +6,8 @@
 #include "Input/ActionMap.h"
 #include "Scene/Components/ParticleSystem.h"
 
+using namespace GolfEngine::Input;
+
 void ParticleScript::onUpdate() {
 
     if(ActionMap::getActionMap()->isPressed("Stop")){

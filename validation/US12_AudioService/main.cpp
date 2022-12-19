@@ -8,6 +8,9 @@
 #define GOLFENGINE_SINGLETON_PRIVATE
 #include "Services/Singletons/AudioSingleton.h"
 
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Services::Audio;
+
 bool running = true; // outer loop input
 bool paused = false; // for pause/resume toggle
 std::vector<float> channelVolumes {50, 50, 50, 50}; // storage for channel volumes

@@ -5,8 +5,9 @@
 #ifndef GOLFENGINE_BUTTONCLICKSCRIPT_H
 #define GOLFENGINE_BUTTONCLICKSCRIPT_H
 
-
 #include "Scene/Components/BehaviourScript.h"
+
+using namespace GolfEngine::Scene::Components;
 
 class ButtonClickScript : public BehaviourScript{
 public:

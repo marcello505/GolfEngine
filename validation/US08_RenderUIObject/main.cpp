@@ -2,6 +2,8 @@
 #include "UIScene.h"
 #include <Services/SDLRenderService.h>
 
+using namespace GolfEngine::Core;
+
 int main(int argc, char* argv[])
 {
     //initialize gameloop
@@ -13,8 +15,8 @@ int main(int argc, char* argv[])
     ActionMap::getActionMap()->addInputKeyToAction("ClickButton", Mouse_Left);
 
     //setup scene
-    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<UIScene>("main");
-    GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    SceneManager::GetSceneManager().addSceneFactory<UIScene>("main");
+    SceneManager::GetSceneManager().loadScene("main");
 
     //start gameloop
     gameLoop.start();

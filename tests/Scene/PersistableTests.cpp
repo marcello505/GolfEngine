@@ -2,6 +2,8 @@
 
 #include "Scene/IPersistable.h"
 
+using namespace GolfEngine::Scene;
+
 namespace PersistableTests{
     class TestPersistable : public IPersistable{
     public:

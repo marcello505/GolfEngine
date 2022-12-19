@@ -10,6 +10,11 @@
 #include "Services/Singletons/RenderSingleton.h"
 #include "CircleDrawable.h"
 
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Scene::Render;
+using namespace GolfEngine::Scene::Components;
+using namespace GolfEngine::Services::Render;
+
 bool running;
 bool fullscreen;
 RectDrawable* rect;

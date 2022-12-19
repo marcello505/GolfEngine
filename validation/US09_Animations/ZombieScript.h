@@ -9,6 +9,8 @@
 #include "Scene/Components/Animator.h"
 #include "Core/Time.h"
 
+using namespace GolfEngine::Scene::Components;
+
 class ZombieScript : public BehaviourScript{
 public:
     void onStart() override;

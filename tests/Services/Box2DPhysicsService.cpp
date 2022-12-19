@@ -6,9 +6,12 @@
 #include "Scene/Components/CircleCollider.h"
 #include "Core/SceneManager.h"
 
+using namespace GolfEngine;
+using namespace GolfEngine::Scene;
+
 namespace Box2DPysicstest{
     class SceneFactory : public ISceneFactory{
-        void build(Scene &scene) const override{
+        void build(GolfEngine::Scene::Scene &scene) const override{
             auto& go = scene.createNewGameObject<GameObject>();
             go.addComponent<BoxCollider>(Vector2{50,50});
             go.addComponent<CircleCollider>(50);
@@ -40,10 +43,10 @@ TEST_CASE("RigidBody adds all colliders to the physics simulation"){
     //Arrange
     auto* box2DPhysicsService = new GolfEngine::Services::Physics::Box2DPhysicsService{};
     GolfEngine::Services::Physics::setService(box2DPhysicsService);
-    GolfEngine::SceneManager::GetSceneManager().clearScenes();
-    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<Box2DPysicstest::SceneFactory>("main");
-    GolfEngine::SceneManager::GetSceneManager().loadScene("main");
-    GolfEngine::SceneManager::GetSceneManager().updateSceneManager();
+    Core::SceneManager::GetSceneManager().clearScenes();
+    Core::SceneManager::GetSceneManager().addSceneFactory<Box2DPysicstest::SceneFactory>("main");
+    Core::SceneManager::GetSceneManager().loadScene("main");
+    Core::SceneManager::GetSceneManager().updateSceneManager();
     //Act
     //Arrange
     CHECK_EQ(box2DPhysicsService->getFixtureCount(), 2); //Added 2 Colliders and 1 RigidBody, thus the fixture count should be 2
@@ -53,13 +56,13 @@ TEST_CASE("RigidBody.addForceToCenter() causes movement"){
     //Arrange
     auto* box2DPhysicsService = new GolfEngine::Services::Physics::Box2DPhysicsService{};
     GolfEngine::Services::Physics::setService(box2DPhysicsService);
-    GolfEngine::SceneManager::GetSceneManager().clearScenes();
-    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<Box2DPysicstest::SceneFactory>("main");
-    GolfEngine::SceneManager::GetSceneManager().loadScene("main");
-    GolfEngine::SceneManager::GetSceneManager().updateSceneManager();
+    Core::SceneManager::GetSceneManager().clearScenes();
+    Core::SceneManager::GetSceneManager().addSceneFactory<Box2DPysicstest::SceneFactory>("main");
+    Core::SceneManager::GetSceneManager().loadScene("main");
+    Core::SceneManager::GetSceneManager().updateSceneManager();
 
     //Act
-    auto& gameObject = GolfEngine::SceneManager::GetSceneManager().getCurrentScene().getRootGameObject().childAt(0);
+    auto& gameObject = Core::SceneManager::GetSceneManager().getCurrentScene().getRootGameObject().childAt(0);
     auto& rigidBody = gameObject.getComponent<RigidBody>();
 
     //Assert

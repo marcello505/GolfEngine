@@ -8,8 +8,10 @@
 #include "Scene/Components/BoxCollider.h"
 #include "SceneFactory.h"
 
-const std::string mgsThemePath = "res/mgs-theme.mp3";
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Core;
 
+const std::string mgsThemePath = "res/mgs-theme.mp3";
 
 int main(int argc, char* argv[]){
 
@@ -26,8 +28,8 @@ int main(int argc, char* argv[]){
     ActionMap::getActionMap()->addInputKeyToAction("Up", Key_Up);
     ActionMap::getActionMap()->addInputKeyToAction("Down", Key_Down);
 
-    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
-    GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
+    SceneManager::GetSceneManager().loadScene("main");
 
     //gets AudioService services
     auto as = GolfEngine::Services::Audio::getService();

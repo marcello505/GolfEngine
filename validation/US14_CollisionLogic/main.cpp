@@ -8,6 +8,10 @@
 #include "Scene/Components/BehaviourScript.h"
 #include "Services/Box2DPhysicsService.h"
 
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Core;
+using namespace GolfEngine::Scene::Components;
+
 class PlayerScript : public BehaviourScript{
     void onUpdate() override{
         if(ActionMap::getActionMap()->isJustPressed("jump")){
@@ -84,8 +88,8 @@ int main(int argc, char* argv[]){
     ActionMap::getActionMap()->addAction("right");
     ActionMap::getActionMap()->addInputKeyToAction("right", Key_Right);
 
-    GolfEngine::SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
-    GolfEngine::SceneManager::GetSceneManager().loadScene("main");
+    SceneManager::GetSceneManager().addSceneFactory<SceneFactory>("main");
+    SceneManager::GetSceneManager().loadScene("main");
 
     gameLoop.start();
 
