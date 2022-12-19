@@ -1,0 +1,26 @@
+\hypertarget{_tile_map_parser_singleton_8h_source}{}\doxysection{Tile\+Map\+Parser\+Singleton.\+h}
+\label{_tile_map_parser_singleton_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Services/Singletons/TileMapParserSingleton.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Services/Singletons/TileMapParserSingleton.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by conner on 12/6/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef GOLFENGINE\_TILEMAPPARSERSINGLETON\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define GOLFENGINE\_TILEMAPPARSERSINGLETON\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}../Abstracts/TileMapParserService.h"{}}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{namespace }GolfEngine::Services::TileMapParser \{}
+\DoxyCodeLine{13     TileMapParserService\& getService();}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{17     \textcolor{keywordtype}{bool} hasService();}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#ifdef GOLFENGINE\_SINGLETON\_PRIVATE}}
+\DoxyCodeLine{20     \textcolor{keywordtype}{void} setService(TileMapParserService *service);}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{22 \}}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//GOLFENGINE\_TILEMAPPARSERSINGLETON\_H}}
+
+\end{DoxyCode}

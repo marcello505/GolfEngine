@@ -8,6 +8,9 @@
 #include "Scene/GameObjects/UIObject/Text.h"
 #include "Scene/Components/BehaviourScript.h"
 
+using namespace GolfEngine::Scene::UI;
+using namespace GolfEngine::Scene::Components;
+
 class ShotCounterScript : public BehaviourScript {
 public:
     explicit ShotCounterScript(Text* pText) : _text{pText} {}
@@ -16,7 +19,6 @@ public:
 
     void onUpdate() override;
     void updateText();
-
 
 private:
     Text* _text {};

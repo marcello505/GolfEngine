@@ -7,7 +7,7 @@
 
 #include <Scene/GameObjects/GameObject.h>
 
-class Projectile : public GameObject{
+class Projectile : public GolfEngine::Scene::GameObject{
 public:
     explicit Projectile();
 };

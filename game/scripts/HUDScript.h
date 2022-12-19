@@ -9,6 +9,9 @@
 #include <Scene/GameObjects/UIObject/Text.h>
 #include "GameManagerScript.h"
 
+using namespace GolfEngine::Scene::UI;
+using namespace GolfEngine::Scene::Components;
+
 class HUDScript : public BehaviourScript {
 public:
     HUDScript(Text* fpsText, Text* timeText, Text* highScoreTimeText, Text* quitConfirmationText, Text* levelCompleteText);

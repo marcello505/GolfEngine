@@ -1,0 +1,234 @@
+\hypertarget{class_render_service}{}\doxysection{Render\+Service Class Reference}
+\label{class_render_service}\index{RenderService@{RenderService}}
+Inheritance diagram for Render\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_render_service}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_render_service_a432e0a75a597ef24fe149ec1663af5f3}{set\+Window\+Title}} (const std\+::string \&title)=0
+\item 
+virtual void \mbox{\hyperlink{class_render_service_a25d82d74279e6790cb7fca753386a484}{add\+Drawable}} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_drawable}{Drawable}} \&drawable)=0
+\item 
+virtual void \mbox{\hyperlink{class_render_service_aa68c85eea60e82ccab0990f94c86d373}{remove\+Drawable}} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_drawable}{Drawable}} \&drawable)=0
+\item 
+virtual bool \mbox{\hyperlink{class_render_service_a5d4d932e1a14797bebd4431a924c3f26}{is\+Registered}} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_drawable}{Drawable}} \&drawable)=0
+\item 
+virtual void \mbox{\hyperlink{class_render_service_ac557d5534b805f673bbd9c0f1166daf9}{render}} ()=0
+\begin{DoxyCompactList}\small\item\em Renders all drawables in registered drawable list. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_render_service_a0cbb35446b2c9badfc1e238350f846d6}{set\+Screen\+Size}} (int width, int height)=0
+\item 
+virtual void \mbox{\hyperlink{class_render_service_a503c125be25f2e6921aaf022734519aa}{set\+Full\+Screen}} (bool \mbox{\hyperlink{class_render_service_a9531555637edd09cff5b39cae040bed3}{full\+Screen}})=0
+\item 
+virtual std\+::optional$<$ std\+::reference\+\_\+wrapper$<$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera}{Camera}} $>$ $>$ \mbox{\hyperlink{class_render_service_a06a0fbe4f792100ac631a0cc8dd627b9}{get\+Main\+Camera}} () const =0
+\item 
+virtual void \mbox{\hyperlink{class_render_service_a81efc7780e19efca453fe4336b487a6a}{set\+Main\+Camera}} (const std\+::optional$<$ std\+::reference\+\_\+wrapper$<$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera}{Camera}} $>$ $>$ \&camera)=0
+\item 
+virtual \mbox{\hyperlink{struct_vector2}{Vector2}} \mbox{\hyperlink{class_render_service_a1c4cafd85ae90f14015a7b0a666d2f72}{get\+Camera\+Offset}} () const =0
+\item 
+virtual int \mbox{\hyperlink{class_render_service_ab282b5593f3819383307d02044d796f8}{screen\+Size\+Height}} () const =0
+\item 
+virtual int \mbox{\hyperlink{class_render_service_a83798853a8e297078a448231f074e53e}{screen\+Size\+Width}} () const =0
+\item 
+virtual bool \mbox{\hyperlink{class_render_service_a9531555637edd09cff5b39cae040bed3}{full\+Screen}} () const =0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_render_service_a25d82d74279e6790cb7fca753386a484}\label{class_render_service_a25d82d74279e6790cb7fca753386a484}} 
+\index{RenderService@{RenderService}!addDrawable@{addDrawable}}
+\index{addDrawable@{addDrawable}!RenderService@{RenderService}}
+\doxysubsubsection{\texorpdfstring{addDrawable()}{addDrawable()}}
+{\footnotesize\ttfamily virtual void Render\+Service\+::add\+Drawable (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_drawable}{Drawable}} \&}]{drawable }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Adds a drawable to the list of registered drawables 
+\begin{DoxyParams}{Parameters}
+{\em drawable} & to be added \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_a9091f3c543c414085880ddb226629c32}{Golf\+Engine\+::\+Services\+::\+Render\+::\+SDLRender\+Service}}.
+
+\mbox{\Hypertarget{class_render_service_a9531555637edd09cff5b39cae040bed3}\label{class_render_service_a9531555637edd09cff5b39cae040bed3}} 
+\index{RenderService@{RenderService}!fullScreen@{fullScreen}}
+\index{fullScreen@{fullScreen}!RenderService@{RenderService}}
+\doxysubsubsection{\texorpdfstring{fullScreen()}{fullScreen()}}
+{\footnotesize\ttfamily virtual bool Render\+Service\+::full\+Screen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Is the window in fullscreen mode \begin{DoxyReturn}{Returns}
+true if window is in fullscreen mode 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_a2674eae095a583592fb01531c6ad3882}{Golf\+Engine\+::\+Services\+::\+Render\+::\+SDLRender\+Service}}.
+
+\mbox{\Hypertarget{class_render_service_a1c4cafd85ae90f14015a7b0a666d2f72}\label{class_render_service_a1c4cafd85ae90f14015a7b0a666d2f72}} 
+\index{RenderService@{RenderService}!getCameraOffset@{getCameraOffset}}
+\index{getCameraOffset@{getCameraOffset}!RenderService@{RenderService}}
+\doxysubsubsection{\texorpdfstring{getCameraOffset()}{getCameraOffset()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{struct_vector2}{Vector2}} Render\+Service\+::get\+Camera\+Offset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Gets the offset created by the currently registered camera \begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{struct_vector2}{Vector2}} of main camera offset 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_ac261f86c4104f46a0fcdbd1a72019440}{Golf\+Engine\+::\+Services\+::\+Render\+::\+SDLRender\+Service}}.
+
+\mbox{\Hypertarget{class_render_service_a06a0fbe4f792100ac631a0cc8dd627b9}\label{class_render_service_a06a0fbe4f792100ac631a0cc8dd627b9}} 
+\index{RenderService@{RenderService}!getMainCamera@{getMainCamera}}
+\index{getMainCamera@{getMainCamera}!RenderService@{RenderService}}
+\doxysubsubsection{\texorpdfstring{getMainCamera()}{getMainCamera()}}
+{\footnotesize\ttfamily virtual std\+::optional$<$ std\+::reference\+\_\+wrapper$<$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera}{Camera}} $>$ $>$ Render\+Service\+::get\+Main\+Camera (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Gets the current registered Camera \begin{DoxyReturn}{Returns}
+A reference to the currently registered Camera 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_ab31ea8c2ee50d46977980337b79f3008}{Golf\+Engine\+::\+Services\+::\+Render\+::\+SDLRender\+Service}}.
+
+\mbox{\Hypertarget{class_render_service_a5d4d932e1a14797bebd4431a924c3f26}\label{class_render_service_a5d4d932e1a14797bebd4431a924c3f26}} 
+\index{RenderService@{RenderService}!isRegistered@{isRegistered}}
+\index{isRegistered@{isRegistered}!RenderService@{RenderService}}
+\doxysubsubsection{\texorpdfstring{isRegistered()}{isRegistered()}}
+{\footnotesize\ttfamily virtual bool Render\+Service\+::is\+Registered (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_drawable}{Drawable}} \&}]{drawable }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Checks whether a drawable is registered 
+\begin{DoxyParams}{Parameters}
+{\em drawable} & to be checked \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if it is registered 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_ad1ad1ef55d0ee5a1a9ea64d791e04b9b}{Golf\+Engine\+::\+Services\+::\+Render\+::\+SDLRender\+Service}}.
+
+\mbox{\Hypertarget{class_render_service_aa68c85eea60e82ccab0990f94c86d373}\label{class_render_service_aa68c85eea60e82ccab0990f94c86d373}} 
+\index{RenderService@{RenderService}!removeDrawable@{removeDrawable}}
+\index{removeDrawable@{removeDrawable}!RenderService@{RenderService}}
+\doxysubsubsection{\texorpdfstring{removeDrawable()}{removeDrawable()}}
+{\footnotesize\ttfamily virtual void Render\+Service\+::remove\+Drawable (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_drawable}{Drawable}} \&}]{drawable }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Removes a drawable from the list of registered drawables 
+\begin{DoxyParams}{Parameters}
+{\em drawable} & to be removed \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_aa743dfc2b8b89b582bf1d2224f3a4c85}{Golf\+Engine\+::\+Services\+::\+Render\+::\+SDLRender\+Service}}.
+
+\mbox{\Hypertarget{class_render_service_ac557d5534b805f673bbd9c0f1166daf9}\label{class_render_service_ac557d5534b805f673bbd9c0f1166daf9}} 
+\index{RenderService@{RenderService}!render@{render}}
+\index{render@{render}!RenderService@{RenderService}}
+\doxysubsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily virtual void Render\+Service\+::render (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Renders all drawables in registered drawable list. 
+
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_a9bb68fe912e9d60d01fe13c5859843c7}{Golf\+Engine\+::\+Services\+::\+Render\+::\+SDLRender\+Service}}.
+
+\mbox{\Hypertarget{class_render_service_ab282b5593f3819383307d02044d796f8}\label{class_render_service_ab282b5593f3819383307d02044d796f8}} 
+\index{RenderService@{RenderService}!screenSizeHeight@{screenSizeHeight}}
+\index{screenSizeHeight@{screenSizeHeight}!RenderService@{RenderService}}
+\doxysubsubsection{\texorpdfstring{screenSizeHeight()}{screenSizeHeight()}}
+{\footnotesize\ttfamily virtual int Render\+Service\+::screen\+Size\+Height (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Gets the screen size height \begin{DoxyReturn}{Returns}
+Height of window in pixels 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_ab86d93d118ab810a6e951bf2334b38ca}{Golf\+Engine\+::\+Services\+::\+Render\+::\+SDLRender\+Service}}.
+
+\mbox{\Hypertarget{class_render_service_a83798853a8e297078a448231f074e53e}\label{class_render_service_a83798853a8e297078a448231f074e53e}} 
+\index{RenderService@{RenderService}!screenSizeWidth@{screenSizeWidth}}
+\index{screenSizeWidth@{screenSizeWidth}!RenderService@{RenderService}}
+\doxysubsubsection{\texorpdfstring{screenSizeWidth()}{screenSizeWidth()}}
+{\footnotesize\ttfamily virtual int Render\+Service\+::screen\+Size\+Width (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Gets the screen size width \begin{DoxyReturn}{Returns}
+Width of window in pixels 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_af1e89e6d897f074cd651b4b87aaa112d}{Golf\+Engine\+::\+Services\+::\+Render\+::\+SDLRender\+Service}}.
+
+\mbox{\Hypertarget{class_render_service_a503c125be25f2e6921aaf022734519aa}\label{class_render_service_a503c125be25f2e6921aaf022734519aa}} 
+\index{RenderService@{RenderService}!setFullScreen@{setFullScreen}}
+\index{setFullScreen@{setFullScreen}!RenderService@{RenderService}}
+\doxysubsubsection{\texorpdfstring{setFullScreen()}{setFullScreen()}}
+{\footnotesize\ttfamily virtual void Render\+Service\+::set\+Full\+Screen (\begin{DoxyParamCaption}\item[{bool}]{full\+Screen }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Sets the window to fullscreen 
+\begin{DoxyParams}{Parameters}
+{\em full\+Screen} & true is fullscreen \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_a7119b9157df671562e963c5dbf2962fd}{Golf\+Engine\+::\+Services\+::\+Render\+::\+SDLRender\+Service}}.
+
+\mbox{\Hypertarget{class_render_service_a81efc7780e19efca453fe4336b487a6a}\label{class_render_service_a81efc7780e19efca453fe4336b487a6a}} 
+\index{RenderService@{RenderService}!setMainCamera@{setMainCamera}}
+\index{setMainCamera@{setMainCamera}!RenderService@{RenderService}}
+\doxysubsubsection{\texorpdfstring{setMainCamera()}{setMainCamera()}}
+{\footnotesize\ttfamily virtual void Render\+Service\+::set\+Main\+Camera (\begin{DoxyParamCaption}\item[{const std\+::optional$<$ std\+::reference\+\_\+wrapper$<$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera}{Camera}} $>$ $>$ \&}]{camera }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Registers a camera to be used in the scene 
+\begin{DoxyParams}{Parameters}
+{\em camera} & reference to camera, can be null to clear any camera \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_a8d984ad280633606b9c3a8b73e6f0ad1}{Golf\+Engine\+::\+Services\+::\+Render\+::\+SDLRender\+Service}}.
+
+\mbox{\Hypertarget{class_render_service_a0cbb35446b2c9badfc1e238350f846d6}\label{class_render_service_a0cbb35446b2c9badfc1e238350f846d6}} 
+\index{RenderService@{RenderService}!setScreenSize@{setScreenSize}}
+\index{setScreenSize@{setScreenSize}!RenderService@{RenderService}}
+\doxysubsubsection{\texorpdfstring{setScreenSize()}{setScreenSize()}}
+{\footnotesize\ttfamily virtual void Render\+Service\+::set\+Screen\+Size (\begin{DoxyParamCaption}\item[{int}]{width,  }\item[{int}]{height }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Sets the window size to the given sizes 
+\begin{DoxyParams}{Parameters}
+{\em width} & new width of window \\
+\hline
+{\em height} & new height of window \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_a05116f229bc751e38f57dbb969a1668b}{Golf\+Engine\+::\+Services\+::\+Render\+::\+SDLRender\+Service}}.
+
+\mbox{\Hypertarget{class_render_service_a432e0a75a597ef24fe149ec1663af5f3}\label{class_render_service_a432e0a75a597ef24fe149ec1663af5f3}} 
+\index{RenderService@{RenderService}!setWindowTitle@{setWindowTitle}}
+\index{setWindowTitle@{setWindowTitle}!RenderService@{RenderService}}
+\doxysubsubsection{\texorpdfstring{setWindowTitle()}{setWindowTitle()}}
+{\footnotesize\ttfamily virtual void Render\+Service\+::set\+Window\+Title (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{title }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Sets the title of the window 
+\begin{DoxyParams}{Parameters}
+{\em title} & new title of window \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_abca3e4ffd36a1c8a9c62eecb2de14b8a}{Golf\+Engine\+::\+Services\+::\+Render\+::\+SDLRender\+Service}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Services/\+Abstracts/Render\+Service.\+h\end{DoxyCompactItemize}

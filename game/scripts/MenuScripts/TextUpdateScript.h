@@ -9,6 +9,9 @@
 #include "Scene/GameObjects/UIObject/Text.h"
 #include "Scene/ISceneFactory.h"
 
+using namespace GolfEngine::Scene::UI;
+using namespace GolfEngine::Scene::Components;
+
 class TextUpdateScript : public BehaviourScript{
 public:
     explicit TextUpdateScript(Text* pText) : _text{pText}, _newText{pText->_renderShape.text()}{}

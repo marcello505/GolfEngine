@@ -6,7 +6,7 @@
 #include "Services/Singletons/PathfindingSingleton.h"
 #include "Services/Singletons/RenderSingleton.h"
 
-namespace GolfEngine {
+namespace GolfEngine::Core{
     std::unique_ptr<SceneManager> SceneManager::sceneManager = nullptr;
 
     SceneManager::SceneManager() : _currentScene{nullptr} {
@@ -22,7 +22,7 @@ namespace GolfEngine {
         _nextScene = sceneName;
     }
 
-    Scene& SceneManager::getCurrentScene() {
+    Scene::Scene& SceneManager::getCurrentScene() {
         return *_currentScene;
     }
 
@@ -47,7 +47,7 @@ namespace GolfEngine {
 
             if (sceneFactory != _scenes.end()){
                 _lastScene = sceneName;
-                _currentScene = std::make_unique<Scene>();
+                _currentScene = std::make_unique<Scene::Scene>();
                 sceneFactory->second->build(*_currentScene);
 
                 //Reset camera to empty
@@ -63,8 +63,6 @@ namespace GolfEngine {
                     GolfEngine::Services::Pathfinding::getService()->createGraph();
                 }
             }
-
-
             _nextScene.reset();
         }
 

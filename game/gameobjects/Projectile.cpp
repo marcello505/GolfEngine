@@ -10,7 +10,7 @@
 
 Projectile::Projectile() {
     tag = "projectile";
-    addComponent<CircleCollider>(7.0f);
+    addComponent<GolfEngine::Scene::Components::CircleCollider>(7.0f);
     RigidBodyDef def {};
     def.intensiveCollisions = true;
     addComponent<RigidBody>(def);

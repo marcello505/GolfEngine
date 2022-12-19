@@ -1,0 +1,107 @@
+\hypertarget{class_sprite_render_shape}{}\doxysection{Sprite\+Render\+Shape Class Reference}
+\label{class_sprite_render_shape}\index{SpriteRenderShape@{SpriteRenderShape}}
+Inheritance diagram for Sprite\+Render\+Shape\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_sprite_render_shape}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_sprite_render_shape_aed218c850e4a8f6c01c179c9ae52e215}{Sprite\+Render\+Shape}} (std\+::string path, \mbox{\hyperlink{struct_vector2}{Vector2}} position=\mbox{\hyperlink{struct_vector2}{Vector2}}(), float rotation=0, \mbox{\hyperlink{struct_vector2}{Vector2}} pixel\+Scale=\mbox{\hyperlink{struct_vector2}{Vector2}}(1, 1), \mbox{\hyperlink{struct_rect2}{Rect2}} image\+Source=\mbox{\hyperlink{struct_rect2}{Rect2}}(), \mbox{\hyperlink{struct_vector2}{Vector2}} pivot\+Point=\mbox{\hyperlink{struct_vector2}{Vector2}}(), \mbox{\hyperlink{struct_color}{Color}} color=\mbox{\hyperlink{struct_color}{Color}}(255, 255, 255))
+\item 
+Render\+Shape\+Type \mbox{\hyperlink{class_sprite_render_shape_aa41232974d8db26fd6bd551a6d75e1ba}{get\+Type}} () override
+\item 
+void \mbox{\hyperlink{class_sprite_render_shape_a0892111b0645e0827dfab267df421939}{apply\+Transform}} (const \mbox{\hyperlink{struct_transform}{Transform}} \&transform) override
+\item 
+\mbox{\Hypertarget{class_sprite_render_shape_a38ad7ba8a516f52cfd41d447e2babe62}\label{class_sprite_render_shape_a38ad7ba8a516f52cfd41d447e2babe62}} 
+\mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries position} () const
+\item 
+\mbox{\Hypertarget{class_sprite_render_shape_a2bbae8b7c1e6f50bf038957b606d1af0}\label{class_sprite_render_shape_a2bbae8b7c1e6f50bf038957b606d1af0}} 
+\mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries pixel\+Scale} () const
+\item 
+\mbox{\Hypertarget{class_sprite_render_shape_ab8916888b687d16bcc15e5138ee777b3}\label{class_sprite_render_shape_ab8916888b687d16bcc15e5138ee777b3}} 
+float {\bfseries rotation} () const
+\item 
+\mbox{\Hypertarget{class_sprite_render_shape_ad8d9630ef1fba7cc2653de82917db5ce}\label{class_sprite_render_shape_ad8d9630ef1fba7cc2653de82917db5ce}} 
+std\+::string {\bfseries path} () const
+\item 
+\mbox{\Hypertarget{class_sprite_render_shape_a90622a8a493837980bfacca87bae9d20}\label{class_sprite_render_shape_a90622a8a493837980bfacca87bae9d20}} 
+\mbox{\hyperlink{struct_rect2}{Rect2}} {\bfseries image\+Source} () const
+\item 
+\mbox{\Hypertarget{class_sprite_render_shape_adafad803f57a1fb564e17b58071abbd9}\label{class_sprite_render_shape_adafad803f57a1fb564e17b58071abbd9}} 
+\mbox{\hyperlink{struct_color}{Color}} {\bfseries color} () const
+\item 
+\mbox{\Hypertarget{class_sprite_render_shape_af887f977c8043e61b6b55abb80abd2e1}\label{class_sprite_render_shape_af887f977c8043e61b6b55abb80abd2e1}} 
+\mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries pivot\+Point} () const
+\item 
+\mbox{\Hypertarget{class_sprite_render_shape_aee5b6e2fd93285494cb497556404f68b}\label{class_sprite_render_shape_aee5b6e2fd93285494cb497556404f68b}} 
+void {\bfseries set\+Path} (const std\+::string \&path)
+\item 
+\mbox{\Hypertarget{class_sprite_render_shape_ad73d9c8ea1a57ac0f47b4fdf29d9e87f}\label{class_sprite_render_shape_ad73d9c8ea1a57ac0f47b4fdf29d9e87f}} 
+void {\bfseries set\+Image\+Source} (\mbox{\hyperlink{struct_rect2}{Rect2}} image\+Source)
+\item 
+\mbox{\Hypertarget{class_sprite_render_shape_a5d5824a604b277296c5fb0a72506069c}\label{class_sprite_render_shape_a5d5824a604b277296c5fb0a72506069c}} 
+void {\bfseries set\+Color} (\mbox{\hyperlink{struct_color}{Color}} color)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_sprite_render_shape_aed218c850e4a8f6c01c179c9ae52e215}\label{class_sprite_render_shape_aed218c850e4a8f6c01c179c9ae52e215}} 
+\index{SpriteRenderShape@{SpriteRenderShape}!SpriteRenderShape@{SpriteRenderShape}}
+\index{SpriteRenderShape@{SpriteRenderShape}!SpriteRenderShape@{SpriteRenderShape}}
+\doxysubsubsection{\texorpdfstring{SpriteRenderShape()}{SpriteRenderShape()}}
+{\footnotesize\ttfamily Sprite\+Render\+Shape\+::\+Sprite\+Render\+Shape (\begin{DoxyParamCaption}\item[{std\+::string}]{path,  }\item[{\mbox{\hyperlink{struct_vector2}{Vector2}}}]{position = {\ttfamily \mbox{\hyperlink{struct_vector2}{Vector2}}()},  }\item[{float}]{rotation = {\ttfamily 0},  }\item[{\mbox{\hyperlink{struct_vector2}{Vector2}}}]{pixel\+Scale = {\ttfamily \mbox{\hyperlink{struct_vector2}{Vector2}}(1,1)},  }\item[{\mbox{\hyperlink{struct_rect2}{Rect2}}}]{image\+Source = {\ttfamily \mbox{\hyperlink{struct_rect2}{Rect2}}()},  }\item[{\mbox{\hyperlink{struct_vector2}{Vector2}}}]{pivot\+Point = {\ttfamily \mbox{\hyperlink{struct_vector2}{Vector2}}()},  }\item[{\mbox{\hyperlink{struct_color}{Color}}}]{color = {\ttfamily \mbox{\hyperlink{struct_color}{Color}}(255,255,255)} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the image (png or jpg) \\
+\hline
+{\em position} & Position at which the sprite should be drawn (center of image) \\
+\hline
+{\em rotation} & Angle of sprite in degrees \\
+\hline
+{\em pixel\+Scale} & Amount of pixels in image used per 1 pixel on screen (value of 2 will half the image size on screen) \\
+\hline
+{\em image\+Source} & Selection of image to render (default uses entire image (\mbox{\hyperlink{struct_rect2}{Rect2}}(\mbox{\hyperlink{struct_vector2}{Vector2(0,0)}}, \mbox{\hyperlink{struct_vector2}{Vector2(0,0)}})) \\
+\hline
+{\em pivot\+Point} & Custom pivot point in raw pixel value of point in image (default uses center of image (\mbox{\hyperlink{struct_vector2}{Vector2(0,0)}}) \\
+\hline
+{\em color} & \mbox{\hyperlink{struct_color}{Color}} used to blend with image (default white with no effect) \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sprite_render_shape_a0892111b0645e0827dfab267df421939}\label{class_sprite_render_shape_a0892111b0645e0827dfab267df421939}} 
+\index{SpriteRenderShape@{SpriteRenderShape}!applyTransform@{applyTransform}}
+\index{applyTransform@{applyTransform}!SpriteRenderShape@{SpriteRenderShape}}
+\doxysubsubsection{\texorpdfstring{applyTransform()}{applyTransform()}}
+{\footnotesize\ttfamily void Sprite\+Render\+Shape\+::apply\+Transform (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_transform}{Transform}} \&}]{transform }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Applies a transform to the \mbox{\hyperlink{class_render_shape}{Render\+Shape}} properties 
+\begin{DoxyParams}{Parameters}
+{\em transform} & \mbox{\hyperlink{struct_transform}{Transform}} to be applied \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_render_shape_a106c7a0283a25a57a1ad439f4c294309}{Render\+Shape}}.
+
+\mbox{\Hypertarget{class_sprite_render_shape_aa41232974d8db26fd6bd551a6d75e1ba}\label{class_sprite_render_shape_aa41232974d8db26fd6bd551a6d75e1ba}} 
+\index{SpriteRenderShape@{SpriteRenderShape}!getType@{getType}}
+\index{getType@{getType}!SpriteRenderShape@{SpriteRenderShape}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily Render\+Shape\+Type Sprite\+Render\+Shape\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_render_shape}{Render\+Shape}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Render\+Shape/Sprite\+Render\+Shape.\+h\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Render\+Shape/Sprite\+Render\+Shape.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,153 @@
+\hypertarget{class_tiled_component}{}\doxysection{Tiled\+Component Class Reference}
+\label{class_tiled_component}\index{TiledComponent@{TiledComponent}}
+Inheritance diagram for Tiled\+Component\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_tiled_component}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_tiled_component_a412c7e9e9f5c44a002cd418b48148bea}{Tiled\+Component}} (const std\+::string \&map\+Path, \mbox{\hyperlink{struct_vector2}{Vector2}} pixel\+Scale=\mbox{\hyperlink{struct_vector2}{Vector2}}\{1, 1\})
+\item 
+void \mbox{\hyperlink{class_tiled_component_aece6b6934ccb40fb176fe49138594c85}{on\+Start}} () override
+\item 
+void \mbox{\hyperlink{class_tiled_component_aa051b24125f0b03cb09cee696ed25d7f}{on\+Update}} () override
+\item 
+void \mbox{\hyperlink{class_tiled_component_a60a00eef9856633121b1738dd397e4c5}{on\+Remove}} () override
+\item 
+bool \mbox{\hyperlink{class_tiled_component_a36d9704bcb26123d100dddcb6db81270}{get\+Active}} () override
+\item 
+void \mbox{\hyperlink{class_tiled_component_ae9452af6d5c3dfbccf4831820c831935}{set\+Active}} (bool active) override
+\item 
+void \mbox{\hyperlink{class_tiled_component_a4b28589eb8867288a9500217e3537cf6}{set\+Parent\+Game\+Object}} (\mbox{\hyperlink{class_game_object}{Game\+Object}} \&game\+Object) override
+\item 
+\mbox{\hyperlink{class_render_shape}{Render\+Shape}} \& \mbox{\hyperlink{class_tiled_component_a9d935cc1167a0b0e8a90d44bbf003b6c}{get\+Render\+Shape}} () override
+\item 
+\mbox{\Hypertarget{class_tiled_component_a1db84d0cf4f7c944ce38945047d5731e}\label{class_tiled_component_a1db84d0cf4f7c944ce38945047d5731e}} 
+void {\bfseries init\+Colliders} ()
+\begin{DoxyCompactList}\small\item\em Creates Game\+Objects with a \mbox{\hyperlink{class_box_collider}{Box\+Collider}} for each tile with a collider property. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} $>$ \mbox{\hyperlink{class_tiled_component_a49a7eaf35feea570b7bd3c276b7673cd}{save\+Snapshot}} () override
+\item 
+void \mbox{\hyperlink{class_tiled_component_a0d300e5b10a5d2c1198af8e95ce086a8}{load\+Snapshot}} (const \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} \&raw\+Snapshot) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_tiled_component_a412c7e9e9f5c44a002cd418b48148bea}\label{class_tiled_component_a412c7e9e9f5c44a002cd418b48148bea}} 
+\index{TiledComponent@{TiledComponent}!TiledComponent@{TiledComponent}}
+\index{TiledComponent@{TiledComponent}!TiledComponent@{TiledComponent}}
+\doxysubsubsection{\texorpdfstring{TiledComponent()}{TiledComponent()}}
+{\footnotesize\ttfamily Tiled\+Component\+::\+Tiled\+Component (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{map\+Path,  }\item[{\mbox{\hyperlink{struct_vector2}{Vector2}}}]{pixel\+Scale = {\ttfamily \mbox{\hyperlink{struct_vector2}{Vector2}}\{1,1\}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+A component that loads and renders a tile map created in Tiled 
+\begin{DoxyParams}{Parameters}
+{\em map\+Path} & Path to the map (.tmx) file \\
+\hline
+{\em pixel\+Scale} & Base scale used to up/down-\/scale the tiles \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_tiled_component_a36d9704bcb26123d100dddcb6db81270}\label{class_tiled_component_a36d9704bcb26123d100dddcb6db81270}} 
+\index{TiledComponent@{TiledComponent}!getActive@{getActive}}
+\index{getActive@{getActive}!TiledComponent@{TiledComponent}}
+\doxysubsubsection{\texorpdfstring{getActive()}{getActive()}}
+{\footnotesize\ttfamily bool Tiled\+Component\+::get\+Active (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_tiled_component_a9d935cc1167a0b0e8a90d44bbf003b6c}\label{class_tiled_component_a9d935cc1167a0b0e8a90d44bbf003b6c}} 
+\index{TiledComponent@{TiledComponent}!getRenderShape@{getRenderShape}}
+\index{getRenderShape@{getRenderShape}!TiledComponent@{TiledComponent}}
+\doxysubsubsection{\texorpdfstring{getRenderShape()}{getRenderShape()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_render_shape}{Render\+Shape}} \& Tiled\+Component\+::get\+Render\+Shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Get the render shape connected to this drawable \begin{DoxyReturn}{Returns}
+render shape 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_drawable_ac786b2a1008169713173ac2bc770cefc}{Drawable}}.
+
+\mbox{\Hypertarget{class_tiled_component_a0d300e5b10a5d2c1198af8e95ce086a8}\label{class_tiled_component_a0d300e5b10a5d2c1198af8e95ce086a8}} 
+\index{TiledComponent@{TiledComponent}!loadSnapshot@{loadSnapshot}}
+\index{loadSnapshot@{loadSnapshot}!TiledComponent@{TiledComponent}}
+\doxysubsubsection{\texorpdfstring{loadSnapshot()}{loadSnapshot()}}
+{\footnotesize\ttfamily void Tiled\+Component\+::load\+Snapshot (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} \&}]{raw\+Snapshot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_persistable}{IPersistable}}.
+
+\mbox{\Hypertarget{class_tiled_component_a60a00eef9856633121b1738dd397e4c5}\label{class_tiled_component_a60a00eef9856633121b1738dd397e4c5}} 
+\index{TiledComponent@{TiledComponent}!onRemove@{onRemove}}
+\index{onRemove@{onRemove}!TiledComponent@{TiledComponent}}
+\doxysubsubsection{\texorpdfstring{onRemove()}{onRemove()}}
+{\footnotesize\ttfamily void Tiled\+Component\+::on\+Remove (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_tiled_component_aece6b6934ccb40fb176fe49138594c85}\label{class_tiled_component_aece6b6934ccb40fb176fe49138594c85}} 
+\index{TiledComponent@{TiledComponent}!onStart@{onStart}}
+\index{onStart@{onStart}!TiledComponent@{TiledComponent}}
+\doxysubsubsection{\texorpdfstring{onStart()}{onStart()}}
+{\footnotesize\ttfamily void Tiled\+Component\+::on\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_tiled_component_aa051b24125f0b03cb09cee696ed25d7f}\label{class_tiled_component_aa051b24125f0b03cb09cee696ed25d7f}} 
+\index{TiledComponent@{TiledComponent}!onUpdate@{onUpdate}}
+\index{onUpdate@{onUpdate}!TiledComponent@{TiledComponent}}
+\doxysubsubsection{\texorpdfstring{onUpdate()}{onUpdate()}}
+{\footnotesize\ttfamily void Tiled\+Component\+::on\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_tiled_component_a49a7eaf35feea570b7bd3c276b7673cd}\label{class_tiled_component_a49a7eaf35feea570b7bd3c276b7673cd}} 
+\index{TiledComponent@{TiledComponent}!saveSnapshot@{saveSnapshot}}
+\index{saveSnapshot@{saveSnapshot}!TiledComponent@{TiledComponent}}
+\doxysubsubsection{\texorpdfstring{saveSnapshot()}{saveSnapshot()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} $>$ Tiled\+Component\+::save\+Snapshot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_persistable}{IPersistable}}.
+
+\mbox{\Hypertarget{class_tiled_component_ae9452af6d5c3dfbccf4831820c831935}\label{class_tiled_component_ae9452af6d5c3dfbccf4831820c831935}} 
+\index{TiledComponent@{TiledComponent}!setActive@{setActive}}
+\index{setActive@{setActive}!TiledComponent@{TiledComponent}}
+\doxysubsubsection{\texorpdfstring{setActive()}{setActive()}}
+{\footnotesize\ttfamily void Tiled\+Component\+::set\+Active (\begin{DoxyParamCaption}\item[{bool}]{active }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_tiled_component_a4b28589eb8867288a9500217e3537cf6}\label{class_tiled_component_a4b28589eb8867288a9500217e3537cf6}} 
+\index{TiledComponent@{TiledComponent}!setParentGameObject@{setParentGameObject}}
+\index{setParentGameObject@{setParentGameObject}!TiledComponent@{TiledComponent}}
+\doxysubsubsection{\texorpdfstring{setParentGameObject()}{setParentGameObject()}}
+{\footnotesize\ttfamily void Tiled\+Component\+::set\+Parent\+Game\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_object}{Game\+Object}} \&}]{game\+Object }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Components/Tiled\+Component.\+h\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Components/Tiled\+Component.\+cpp\end{DoxyCompactItemize}

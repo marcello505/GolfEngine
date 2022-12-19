@@ -7,13 +7,14 @@
 #include "../GameObject.h"
 #include "Scene/Components/Drawable.h"
 
-class UIObject :  public GameObject, public Drawable {
-public:
-
-    float _width;
-    float _height;
-    Vector2 _position;
-};
+namespace GolfEngine::Scene::UI {
+    class UIObject : public GameObject, public Components::Drawable {
+    public:
+        float _width;
+        float _height;
+        Vector2 _position;
+    };
+}
 
 
 #endif //GOLFENGINE_UIOBJECT_H

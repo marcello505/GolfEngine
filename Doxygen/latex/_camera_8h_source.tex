@@ -1,0 +1,46 @@
+\hypertarget{_camera_8h_source}{}\doxysection{Camera.\+h}
+\label{_camera_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/GameObjects/Camera.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/GameObjects/Camera.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by conner on 11/2/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef SPC\_PROJECT\_CAMERA\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define SPC\_PROJECT\_CAMERA\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}GameObject.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}../Color.h"{}}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{namespace }GolfEngine::Scene \{}
+\DoxyCodeLine{12     \textcolor{keyword}{class }\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera}{Camera}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{GameObject}} \{}
+\DoxyCodeLine{13     \textcolor{keyword}{public}:}
+\DoxyCodeLine{18         \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera}{Camera}}(\textcolor{keywordtype}{float} aspectWidth, \textcolor{keywordtype}{float} aspectHeight, \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}} backgroundColor = \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}}\{50, 50, 50, 255\});}
+\DoxyCodeLine{19         \textcolor{keyword}{explicit} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera}{Camera}}(\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}} backgroundColor = \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}}\{50, 50, 50, 255\});}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21         \textcolor{comment}{// GameObject overrides}}
+\DoxyCodeLine{22         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera_a052d55fc73bcb2027cd4a0244d5f2ed2}{onStart}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{26         \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera_af81c7d370c3a62710ba4084304d6ec07}{setMainCamera}}(\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera}{Camera}} \&camera);}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{30         \textcolor{keyword}{static} std::optional<std::reference\_wrapper<Camera>> \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera_ae33bd6eff6cd0a48f9e72f26a427d8f9}{getMainCamera}}();}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{35         \textcolor{keyword}{static} \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera_a950ba6c571ec1cabc73a9edadef0867e}{screenToWorldSpace}}(\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} screenPos);}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{40         \textcolor{keyword}{static} \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera_ab9f92ed824af54cb8b5d38a5802c82be}{worldToScreenSpace}}(\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} worldPos);}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42         \textcolor{comment}{// Getters}}
+\DoxyCodeLine{43         [[nodiscard]] \textcolor{keywordtype}{float} aspectWidth() \textcolor{keyword}{const};}
+\DoxyCodeLine{44         [[nodiscard]] \textcolor{keywordtype}{float} aspectHeight() \textcolor{keyword}{const};}
+\DoxyCodeLine{45         [[nodiscard]] \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}} backgroundColor() \textcolor{keyword}{const};}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47     \textcolor{keyword}{private}:}
+\DoxyCodeLine{48         \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}} \_backgroundColor;}
+\DoxyCodeLine{49         \textcolor{keywordtype}{float} \_aspectWidth;}
+\DoxyCodeLine{50         \textcolor{keywordtype}{float} \_aspectHeight;}
+\DoxyCodeLine{51     \};}
+\DoxyCodeLine{52 \}}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//SPC\_PROJECT\_CAMERA\_H}}
+
+\end{DoxyCode}

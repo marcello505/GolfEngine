@@ -1,0 +1,233 @@
+\hypertarget{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service}{}\doxysection{Golf\+Engine\+::Services\+::Pathfinding\+::Pathfinding\+Service Class Reference}
+\label{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service}\index{GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}}
+Inheritance diagram for Golf\+Engine\+::Services\+::Pathfinding\+::Pathfinding\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::vector$<$ \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_node}{Node}} $>$ \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_ad088bad34dbcfc54eed82b160b72a632}{find\+Path}} (\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_node}{Node}} \&start, \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_node}{Node}} \&target, \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}} \&graph)=0
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_aa32c647df3b1bb7918c3d346c4c9e88b}{add\+Pathfinding}} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_pathfinding}{Components\+::\+Pathfinding}} \&pathfinding)=0
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a922e811dda3e0bc25968bd0ef1a10c73}{remove\+Pathfinding}} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_pathfinding}{Components\+::\+Pathfinding}} \&pathfinding)=0
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a4cfcbc0c3393a218c63f79434326fcb1}{find\+Path\+Every\+Tick}} ()=0
+\begin{DoxyCompactList}\small\item\em Is called every game tixk and checks if any registered components needs to be updated. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a81c5f74f46e27d29134a4b0ea07ba8db}{create\+Graph}} ()=0
+\begin{DoxyCompactList}\small\item\em Generates a graph in the scene. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}} \& \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a0857b00199afe029f81a518a8b059f31}{get\+Graph}} ()=0
+\item 
+virtual \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_node}{Node}} \& \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a933ea9a56874ec2be46d55b469ba6779}{covert\+Pos\+To\+Node}} (\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} position)=0
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a9665f11e007b66ebc550ab0086f9f9c3}{set\+Node\+Distance}} (int node\+Distance)=0
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a2b054941a8a1b6a3c0d29e9b794f44ef}{set\+Margin\+Around\+Rect\+Colliders}} (int margin)=0
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_aa0b35650203bab54c3ed3dee5a39cce8}{set\+Graph\+Size}} (int width, int height)=0
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a41b73704d5548aaf52e21696009a89cb}{set\+Graph\+Start\+Point}} (int x, int y)=0
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a9a3d7cdeb33557d9065d01199a8b79a7}{set\+Max\+Paths\+To\+Calculate\+Per\+Tic}} (int max\+Paths\+Per\+Tic)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_aa32c647df3b1bb7918c3d346c4c9e88b}\label{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_aa32c647df3b1bb7918c3d346c4c9e88b}} 
+\index{GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}!addPathfinding@{addPathfinding}}
+\index{addPathfinding@{addPathfinding}!GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}}
+\doxysubsubsection{\texorpdfstring{addPathfinding()}{addPathfinding()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+Pathfinding\+Service\+::add\+Pathfinding (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_pathfinding}{Components\+::\+Pathfinding}} \&}]{pathfinding }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+registers component auto update its own path 
+\begin{DoxyParams}{Parameters}
+{\em pathfinding} & component that needs updates \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_a67cb5fb6df2a305033c6f54bfdc22f7f}{Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+AStar\+Pathfinding\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a933ea9a56874ec2be46d55b469ba6779}\label{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a933ea9a56874ec2be46d55b469ba6779}} 
+\index{GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}!covertPosToNode@{covertPosToNode}}
+\index{covertPosToNode@{covertPosToNode}!GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}}
+\doxysubsubsection{\texorpdfstring{covertPosToNode()}{covertPosToNode()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_node}{Node}} \& Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+Pathfinding\+Service\+::covert\+Pos\+To\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}}}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Returns node closest to position 
+\begin{DoxyParams}{Parameters}
+{\em position} & position where node should be \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns node closest to given position 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_a0bbd67f0644a615efe31c5d94fa2f0a5}{Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+AStar\+Pathfinding\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a81c5f74f46e27d29134a4b0ea07ba8db}\label{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a81c5f74f46e27d29134a4b0ea07ba8db}} 
+\index{GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}!createGraph@{createGraph}}
+\index{createGraph@{createGraph}!GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}}
+\doxysubsubsection{\texorpdfstring{createGraph()}{createGraph()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+Pathfinding\+Service\+::create\+Graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Generates a graph in the scene. 
+
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_a8bdb63ac7c562778592f8968674e8cc6}{Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+AStar\+Pathfinding\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_ad088bad34dbcfc54eed82b160b72a632}\label{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_ad088bad34dbcfc54eed82b160b72a632}} 
+\index{GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}!findPath@{findPath}}
+\index{findPath@{findPath}!GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}}
+\doxysubsubsection{\texorpdfstring{findPath()}{findPath()}}
+{\footnotesize\ttfamily virtual std\+::vector$<$ \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_node}{Node}} $>$ Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+Pathfinding\+Service\+::find\+Path (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_node}{Node}} \&}]{start,  }\item[{\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_node}{Node}} \&}]{target,  }\item[{\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}} \&}]{graph }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Return path to given nodes 
+\begin{DoxyParams}{Parameters}
+{\em start} & Node where path needs to start \\
+\hline
+{\em target} & node that needs to be found \\
+\hline
+{\em graph} & Graph where all nodes can be found \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_a241c8070a651a52a8a01c7c4b6c7e44f}{Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+AStar\+Pathfinding\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a4cfcbc0c3393a218c63f79434326fcb1}\label{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a4cfcbc0c3393a218c63f79434326fcb1}} 
+\index{GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}!findPathEveryTick@{findPathEveryTick}}
+\index{findPathEveryTick@{findPathEveryTick}!GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}}
+\doxysubsubsection{\texorpdfstring{findPathEveryTick()}{findPathEveryTick()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+Pathfinding\+Service\+::find\+Path\+Every\+Tick (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Is called every game tixk and checks if any registered components needs to be updated. 
+
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_aea052c47b3d8fe8cf4157a4875b700d2}{Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+AStar\+Pathfinding\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a0857b00199afe029f81a518a8b059f31}\label{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a0857b00199afe029f81a518a8b059f31}} 
+\index{GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}!getGraph@{getGraph}}
+\index{getGraph@{getGraph}!GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}}
+\doxysubsubsection{\texorpdfstring{getGraph()}{getGraph()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}} \& Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+Pathfinding\+Service\+::get\+Graph (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Gets the current generated graph \begin{DoxyReturn}{Returns}
+Reference to the graph object 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_a8ed7fb0e09d68316967de0b06802892c}{Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+AStar\+Pathfinding\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a922e811dda3e0bc25968bd0ef1a10c73}\label{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a922e811dda3e0bc25968bd0ef1a10c73}} 
+\index{GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}!removePathfinding@{removePathfinding}}
+\index{removePathfinding@{removePathfinding}!GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}}
+\doxysubsubsection{\texorpdfstring{removePathfinding()}{removePathfinding()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+Pathfinding\+Service\+::remove\+Pathfinding (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_pathfinding}{Components\+::\+Pathfinding}} \&}]{pathfinding }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+removes component from registered components 
+\begin{DoxyParams}{Parameters}
+{\em pathfinding} & component that needs to be removed \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_a7b640ca6f6580a8df4237c724ed65f47}{Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+AStar\+Pathfinding\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_aa0b35650203bab54c3ed3dee5a39cce8}\label{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_aa0b35650203bab54c3ed3dee5a39cce8}} 
+\index{GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}!setGraphSize@{setGraphSize}}
+\index{setGraphSize@{setGraphSize}!GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}}
+\doxysubsubsection{\texorpdfstring{setGraphSize()}{setGraphSize()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+Pathfinding\+Service\+::set\+Graph\+Size (\begin{DoxyParamCaption}\item[{int}]{width,  }\item[{int}]{height }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Set the width and height of the graph that is created. 
+\begin{DoxyParams}{Parameters}
+{\em width} & width in world space (pixels) \\
+\hline
+{\em height} & height in world space (pixels) \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_a54e7be87aa7be2e54abce11e41ec9614}{Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+AStar\+Pathfinding\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a41b73704d5548aaf52e21696009a89cb}\label{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a41b73704d5548aaf52e21696009a89cb}} 
+\index{GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}!setGraphStartPoint@{setGraphStartPoint}}
+\index{setGraphStartPoint@{setGraphStartPoint}!GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}}
+\doxysubsubsection{\texorpdfstring{setGraphStartPoint()}{setGraphStartPoint()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+Pathfinding\+Service\+::set\+Graph\+Start\+Point (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Sets the start point of where the graph should be generated in the scene 
+\begin{DoxyParams}{Parameters}
+{\em x} & position \\
+\hline
+{\em y} & position \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_af1e1089a176dd1ef193814515d408052}{Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+AStar\+Pathfinding\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a2b054941a8a1b6a3c0d29e9b794f44ef}\label{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a2b054941a8a1b6a3c0d29e9b794f44ef}} 
+\index{GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}!setMarginAroundRectColliders@{setMarginAroundRectColliders}}
+\index{setMarginAroundRectColliders@{setMarginAroundRectColliders}!GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}}
+\doxysubsubsection{\texorpdfstring{setMarginAroundRectColliders()}{setMarginAroundRectColliders()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+Pathfinding\+Service\+::set\+Margin\+Around\+Rect\+Colliders (\begin{DoxyParamCaption}\item[{int}]{margin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Creates a margin around al rect colliders to avoid objects getting stuck 
+\begin{DoxyParams}{Parameters}
+{\em margin} & the margin around the rectangles. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_ace23344b095724e4c8dff707a215a095}{Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+AStar\+Pathfinding\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a9a3d7cdeb33557d9065d01199a8b79a7}\label{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a9a3d7cdeb33557d9065d01199a8b79a7}} 
+\index{GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}!setMaxPathsToCalculatePerTic@{setMaxPathsToCalculatePerTic}}
+\index{setMaxPathsToCalculatePerTic@{setMaxPathsToCalculatePerTic}!GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}}
+\doxysubsubsection{\texorpdfstring{setMaxPathsToCalculatePerTic()}{setMaxPathsToCalculatePerTic()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+Pathfinding\+Service\+::set\+Max\+Paths\+To\+Calculate\+Per\+Tic (\begin{DoxyParamCaption}\item[{int}]{max\+Paths\+Per\+Tic }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Set the maximum amount of paths to process each tic. By default this is set to 1 
+\begin{DoxyParams}{Parameters}
+{\em max\+Paths\+Per\+Tic} & an integer of 1 or more \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_a368793ec3cd09b8a82c748ec584a05ab}{Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+AStar\+Pathfinding\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a9665f11e007b66ebc550ab0086f9f9c3}\label{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service_a9665f11e007b66ebc550ab0086f9f9c3}} 
+\index{GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}!setNodeDistance@{setNodeDistance}}
+\index{setNodeDistance@{setNodeDistance}!GolfEngine::Services::Pathfinding::PathfindingService@{GolfEngine::Services::Pathfinding::PathfindingService}}
+\doxysubsubsection{\texorpdfstring{setNodeDistance()}{setNodeDistance()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+Pathfinding\+Service\+::set\+Node\+Distance (\begin{DoxyParamCaption}\item[{int}]{node\+Distance }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Determines the distance between all nodes in graph 
+\begin{DoxyParams}{Parameters}
+{\em node\+Distance} & distance between each node \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_ac3e6e56c82283ab4fe59bc6c6a234a62}{Golf\+Engine\+::\+Services\+::\+Pathfinding\+::\+AStar\+Pathfinding\+Service}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Services/\+Abstracts/Pathfinding\+Service.\+h\end{DoxyCompactItemize}

@@ -8,10 +8,12 @@
 #include <iostream>
 #include "PlayerMovementScript.h"
 
+using namespace GolfEngine;
+
 void PlayerMovementScript::onStart() {
     _sprite = &_gameObject.value().get().getComponent<SpriteComponent>();
     _rb = &_gameObject.value().get().getComponent<RigidBody>();
-    _actionMap = ActionMap::getActionMap();
+    _actionMap = Input::ActionMap::getActionMap();
 
     if(_gameObject.value().get().hasComponent<Animator>())
         _animator = &_gameObject.value().get().getComponent<Animator>();
@@ -41,7 +43,7 @@ void PlayerMovementScript::onUpdate() {
 
     //Point to mouse logic
     {
-        float angleToMouse = _gameObject->get().getWorldTransform().position.angleToDegrees(Camera::screenToWorldSpace(_actionMap->getMousePosition())) - rotationOffset;
+        float angleToMouse = _gameObject->get().getWorldTransform().position.angleToDegrees(GolfEngine::Scene::Camera::screenToWorldSpace(_actionMap->getMousePosition())) - rotationOffset;
         _sprite->setRotation(angleToMouse); //angle to mouse + offset
     }
 

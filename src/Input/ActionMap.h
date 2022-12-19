@@ -4,6 +4,7 @@
 
 #ifndef GOLFENGINE_ACTIONMAP_H
 #define GOLFENGINE_ACTIONMAP_H
+
 #include <map>
 #include <string>
 #include <vector>
@@ -11,13 +12,17 @@
 #include "Action.h"
 #include "InputKey.h"
 #include "../Scene/Vector2.h"
+
+using namespace GolfEngine::Scene;
+
+namespace GolfEngine::Input {
     class ActionMap {
     private:
         std::map<std::string, Action> _actions;
         std::map<InputKey, std::vector<Action>> _inputKeys;
         Vector2 mousePosition;
 
-        static ActionMap* actionMap;
+        static ActionMap *actionMap;
 
     public:
         ActionMap();
@@ -79,12 +84,14 @@
 
         /// Remove all input keys linked to an action
         /// \param action to remove the links from
-        void removeInputKeysFromAction(std::string& action);
+        void removeInputKeysFromAction(std::string &action);
 
         /// Primarily used by Replays to directly set the inputs
         /// \param action name of the action
         /// \param pressed value to set action.pressed to
         /// \param justInput value to set action.justInput to
-        void setActionPressed(const std::string& action, bool pressed, bool justInput);
+        void setActionPressed(const std::string &action, bool pressed, bool justInput);
     };
+}
+
 #endif //GOLFENGINE_ACTIONMAP_H

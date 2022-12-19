@@ -1,0 +1,27 @@
+\hypertarget{_pathfinding_singleton_8h_source}{}\doxysection{Pathfinding\+Singleton.\+h}
+\label{_pathfinding_singleton_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Services/Singletons/PathfindingSingleton.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Services/Singletons/PathfindingSingleton.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by Lucas on 2-\/12-\/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef GOLFENGINE\_PATHFINDINGSINGLETON\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define GOLFENGINE\_PATHFINDINGSINGLETON\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}../Abstracts/PathfindingService.h"{}}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{namespace }GolfEngine::Services::Pathfinding\{}
+\DoxyCodeLine{13     PathfindingService* getService();}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{17     \textcolor{keywordtype}{bool} hasService();}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#ifdef GOLFENGINE\_SINGLETON\_PRIVATE}}
+\DoxyCodeLine{19     \textcolor{keywordtype}{void} setService(PathfindingService* service);}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{21 \}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//GOLFENGINE\_PATHFINDINGSINGLETON\_H}}
+
+\end{DoxyCode}

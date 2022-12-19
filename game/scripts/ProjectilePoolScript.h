@@ -11,6 +11,8 @@
 
 #include "ProjectileScript.h"
 
+using namespace GolfEngine::Scene::Components;
+
 class ProjectilePoolScript : public BehaviourScript{
 public:
     /// Gets an projectile that is currently unactive

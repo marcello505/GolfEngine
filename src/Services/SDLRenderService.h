@@ -22,6 +22,8 @@
 #include "../Scene/RenderShape/TileMapRenderShape.h"
 #include "Scene/GameObjects/Camera.h"
 
+using namespace GolfEngine::Scene::Render;
+
 namespace GolfEngine::Services::Render {
 
 class SDLRenderService : public RenderService {

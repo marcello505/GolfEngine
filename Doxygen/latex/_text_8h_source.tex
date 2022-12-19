@@ -1,0 +1,38 @@
+\hypertarget{_text_8h_source}{}\doxysection{Text.\+h}
+\label{_text_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/GameObjects/UIObject/Text.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/GameObjects/UIObject/Text.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by Lucas on 2-\/11-\/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef GOLFENGINE\_TEXT\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define GOLFENGINE\_TEXT\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}Alignment.h"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}UIObject.h"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <Scene/RenderShape/TextRenderShape.h>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}../../Color.h"{}}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{keyword}{namespace }GolfEngine::Scene::UI \{}
+\DoxyCodeLine{17     \textcolor{keyword}{class }\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_u_i_1_1_text}{Text}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_u_i_1_1_u_i_object}{UIObject}} \{}
+\DoxyCodeLine{18     \textcolor{keyword}{public}:}
+\DoxyCodeLine{28         \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_u_i_1_1_text}{Text}}(\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} pos, \textcolor{keywordtype}{float} rotation, \textcolor{keyword}{const} std::string\& text, \textcolor{keywordtype}{size\_t} fontSize, \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}} color, \textcolor{keyword}{const} std::string\& filePath,}
+\DoxyCodeLine{29              Alignment alignment, \textcolor{keywordtype}{bool} isButtonPart);}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31         \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_u_i_1_1_text}{\string~Text}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33         \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_render_shape}{Render::RenderShape}} \&\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_u_i_1_1_text_a45445f1cf55a7ba71903b5bff5bdbf3a}{getRenderShape}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35         Alignment \_alignment;}
+\DoxyCodeLine{36         \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_text_render_shape}{Render::TextRenderShape}} \_renderShape;}
+\DoxyCodeLine{37     \};}
+\DoxyCodeLine{38 \}}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//GOLFENGINE\_TEXT\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,351 @@
+\hypertarget{class_s_d_l_audio_service}{}\doxysection{SDLAudio\+Service Class Reference}
+\label{class_s_d_l_audio_service}\index{SDLAudioService@{SDLAudioService}}
+Inheritance diagram for SDLAudio\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_s_d_l_audio_service}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_s_d_l_audio_service_ad80ec42f12d06df7b74761730139a01e}{init}} () override
+\begin{DoxyCompactList}\small\item\em Initializes the audio device, automatically called by \mbox{\hyperlink{class_game_loop}{Game\+Loop}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_s_d_l_audio_service_af0f6487c0167bf897d137ebd81d55ac7}{free}} () override
+\begin{DoxyCompactList}\small\item\em Closes the audio device and clears cache, automatically called by \mbox{\hyperlink{class_game_loop}{Game\+Loop}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_s_d_l_audio_service_ac23e514c47115b5b56e98f5883d228f7}{play\+Sfx}} (const std\+::string \&path, float volume, bool loop) override
+\item 
+void \mbox{\hyperlink{class_s_d_l_audio_service_a9cd853ad28932e77492eb5dac5b45ec2}{play\+Music}} (const std\+::string \&path, float volume, bool loop) override
+\item 
+void \mbox{\hyperlink{class_s_d_l_audio_service_a1c4adc1d0e55edb72afc71877d8eb482}{pause\+Music}} () override
+\begin{DoxyCompactList}\small\item\em Pause the music currently playing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_s_d_l_audio_service_aab6eb95f4a1f5b78f2bf0bf04c893826}{resume\+Music}} () override
+\begin{DoxyCompactList}\small\item\em Resume the music that is currently paused. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_s_d_l_audio_service_a5f61dae99c1be0d3d332c449ce4507d4}{toggle\+Music}} () override
+\begin{DoxyCompactList}\small\item\em Pauses or resumes the music based on its current state. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_s_d_l_audio_service_a6f985fa2e9ac499eef3f621fa627b3b0}{stop\+Music}} () override
+\begin{DoxyCompactList}\small\item\em Stop the music from playing (Not able to resume after) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_s_d_l_audio_service_a0aace4b8318aaeab141acff4502adf46}{stop\+Sfx}} () override
+\begin{DoxyCompactList}\small\item\em Stops all the sound effects from playing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_s_d_l_audio_service_a32afb68e5f9b604089fe8a98ff25ccde}{stop\+Sfx}} (const std\+::string \&path) override
+\item 
+float \mbox{\hyperlink{class_s_d_l_audio_service_ad620604443e081dceac0d8da3d3d40ff}{get\+Master\+Volume}} () override
+\item 
+float \mbox{\hyperlink{class_s_d_l_audio_service_a45637bd3e4574b517b4b7f08cbab0418}{get\+Music\+Volume}} () override
+\item 
+float \mbox{\hyperlink{class_s_d_l_audio_service_a6e01af580b4030293bde8658ffbd6a9b}{get\+Sfx\+Volume}} () override
+\item 
+void \mbox{\hyperlink{class_s_d_l_audio_service_afc80f31e7c766a7003dbd1ce739c0980}{set\+Music\+Volume}} (float volume) override
+\item 
+void \mbox{\hyperlink{class_s_d_l_audio_service_a00adfa2cbb7b6f9672246ff088e203e5}{set\+Sfx\+Volume}} (float volume) override
+\item 
+void \mbox{\hyperlink{class_s_d_l_audio_service_a89b5a9eaad35934e2952aea857d3121f}{set\+Master\+Volume}} (float volume) override
+\item 
+void \mbox{\hyperlink{class_s_d_l_audio_service_ab7887df0527fd42a9c82b12295a830fe}{preload\+Sfx}} (const std\+::string \&path) override
+\item 
+void \mbox{\hyperlink{class_s_d_l_audio_service_a210e0b112d4f5f59470025596501c6e0}{preload\+Music}} (const std\+::string \&path) override
+\item 
+bool \mbox{\hyperlink{class_s_d_l_audio_service_a72b390cd411ae9a266f86f97c644a7f8}{is\+Music\+Playing}} () override
+\item 
+bool \mbox{\hyperlink{class_s_d_l_audio_service_a6a401eace963703d488002b95e6c79e9}{is\+Music\+Paused}} () override
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_s_d_l_audio_service_af0f6487c0167bf897d137ebd81d55ac7}\label{class_s_d_l_audio_service_af0f6487c0167bf897d137ebd81d55ac7}} 
+\index{SDLAudioService@{SDLAudioService}!free@{free}}
+\index{free@{free}!SDLAudioService@{SDLAudioService}}
+\doxysubsubsection{\texorpdfstring{free()}{free()}}
+{\footnotesize\ttfamily void SDLAudio\+Service\+::free (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Closes the audio device and clears cache, automatically called by \mbox{\hyperlink{class_game_loop}{Game\+Loop}}. 
+
+
+
+Implements \mbox{\hyperlink{class_audio_service_a47b46cf55e1d0f5ba3e4de06bd9eb63d}{Audio\+Service}}.
+
+\mbox{\Hypertarget{class_s_d_l_audio_service_ad620604443e081dceac0d8da3d3d40ff}\label{class_s_d_l_audio_service_ad620604443e081dceac0d8da3d3d40ff}} 
+\index{SDLAudioService@{SDLAudioService}!getMasterVolume@{getMasterVolume}}
+\index{getMasterVolume@{getMasterVolume}!SDLAudioService@{SDLAudioService}}
+\doxysubsubsection{\texorpdfstring{getMasterVolume()}{getMasterVolume()}}
+{\footnotesize\ttfamily float SDLAudio\+Service\+::get\+Master\+Volume (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Returns the master volume \begin{DoxyReturn}{Returns}
+current master volume value 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_audio_service_a68da5c8aac35caaaf60b55ca89abb2a8}{Audio\+Service}}.
+
+\mbox{\Hypertarget{class_s_d_l_audio_service_a45637bd3e4574b517b4b7f08cbab0418}\label{class_s_d_l_audio_service_a45637bd3e4574b517b4b7f08cbab0418}} 
+\index{SDLAudioService@{SDLAudioService}!getMusicVolume@{getMusicVolume}}
+\index{getMusicVolume@{getMusicVolume}!SDLAudioService@{SDLAudioService}}
+\doxysubsubsection{\texorpdfstring{getMusicVolume()}{getMusicVolume()}}
+{\footnotesize\ttfamily float SDLAudio\+Service\+::get\+Music\+Volume (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Returns the music volume \begin{DoxyReturn}{Returns}
+current music volume value 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_audio_service_a2daae7e2b1f2e151720327d4031a7c5d}{Audio\+Service}}.
+
+\mbox{\Hypertarget{class_s_d_l_audio_service_a6e01af580b4030293bde8658ffbd6a9b}\label{class_s_d_l_audio_service_a6e01af580b4030293bde8658ffbd6a9b}} 
+\index{SDLAudioService@{SDLAudioService}!getSfxVolume@{getSfxVolume}}
+\index{getSfxVolume@{getSfxVolume}!SDLAudioService@{SDLAudioService}}
+\doxysubsubsection{\texorpdfstring{getSfxVolume()}{getSfxVolume()}}
+{\footnotesize\ttfamily float SDLAudio\+Service\+::get\+Sfx\+Volume (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Returns the sfx volume \begin{DoxyReturn}{Returns}
+current sfx volume value 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_audio_service_a6fabb868a5eeb9f65da3d7df50a9feac}{Audio\+Service}}.
+
+\mbox{\Hypertarget{class_s_d_l_audio_service_ad80ec42f12d06df7b74761730139a01e}\label{class_s_d_l_audio_service_ad80ec42f12d06df7b74761730139a01e}} 
+\index{SDLAudioService@{SDLAudioService}!init@{init}}
+\index{init@{init}!SDLAudioService@{SDLAudioService}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void SDLAudio\+Service\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Initializes the audio device, automatically called by \mbox{\hyperlink{class_game_loop}{Game\+Loop}}. 
+
+
+
+Implements \mbox{\hyperlink{class_audio_service_ae6e5a3a59c62c69a2b922badee59cf1b}{Audio\+Service}}.
+
+\mbox{\Hypertarget{class_s_d_l_audio_service_a6a401eace963703d488002b95e6c79e9}\label{class_s_d_l_audio_service_a6a401eace963703d488002b95e6c79e9}} 
+\index{SDLAudioService@{SDLAudioService}!isMusicPaused@{isMusicPaused}}
+\index{isMusicPaused@{isMusicPaused}!SDLAudioService@{SDLAudioService}}
+\doxysubsubsection{\texorpdfstring{isMusicPaused()}{isMusicPaused()}}
+{\footnotesize\ttfamily bool SDLAudio\+Service\+::is\+Music\+Paused (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Checks whether there is currently a paused music track \begin{DoxyReturn}{Returns}
+true if current music is paused 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_audio_service_ae33dea8521c8c8031456ee55059ef041}{Audio\+Service}}.
+
+\mbox{\Hypertarget{class_s_d_l_audio_service_a72b390cd411ae9a266f86f97c644a7f8}\label{class_s_d_l_audio_service_a72b390cd411ae9a266f86f97c644a7f8}} 
+\index{SDLAudioService@{SDLAudioService}!isMusicPlaying@{isMusicPlaying}}
+\index{isMusicPlaying@{isMusicPlaying}!SDLAudioService@{SDLAudioService}}
+\doxysubsubsection{\texorpdfstring{isMusicPlaying()}{isMusicPlaying()}}
+{\footnotesize\ttfamily bool SDLAudio\+Service\+::is\+Music\+Playing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Checks whether there is currently music playing \begin{DoxyReturn}{Returns}
+true if music is playing 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_audio_service_ae010e0454415b6be2b5fdb915c7e567c}{Audio\+Service}}.
+
+\mbox{\Hypertarget{class_s_d_l_audio_service_a1c4adc1d0e55edb72afc71877d8eb482}\label{class_s_d_l_audio_service_a1c4adc1d0e55edb72afc71877d8eb482}} 
+\index{SDLAudioService@{SDLAudioService}!pauseMusic@{pauseMusic}}
+\index{pauseMusic@{pauseMusic}!SDLAudioService@{SDLAudioService}}
+\doxysubsubsection{\texorpdfstring{pauseMusic()}{pauseMusic()}}
+{\footnotesize\ttfamily void SDLAudio\+Service\+::pause\+Music (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Pause the music currently playing. 
+
+
+
+Implements \mbox{\hyperlink{class_audio_service_ab38b1d06dc1768d59e3f5d3a11d1d934}{Audio\+Service}}.
+
+\mbox{\Hypertarget{class_s_d_l_audio_service_a9cd853ad28932e77492eb5dac5b45ec2}\label{class_s_d_l_audio_service_a9cd853ad28932e77492eb5dac5b45ec2}} 
+\index{SDLAudioService@{SDLAudioService}!playMusic@{playMusic}}
+\index{playMusic@{playMusic}!SDLAudioService@{SDLAudioService}}
+\doxysubsubsection{\texorpdfstring{playMusic()}{playMusic()}}
+{\footnotesize\ttfamily void SDLAudio\+Service\+::play\+Music (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path,  }\item[{float}]{volume,  }\item[{bool}]{loop }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Plays a music track 
+\begin{DoxyParams}{Parameters}
+{\em path} & Path of the music to be played \\
+\hline
+{\em volume} & Volume of the music to be played \\
+\hline
+{\em loop} & Loop the music after finish playing \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_audio_service_ad007c4a6e8652133a7d1bd921f3f515d}{Audio\+Service}}.
+
+\mbox{\Hypertarget{class_s_d_l_audio_service_ac23e514c47115b5b56e98f5883d228f7}\label{class_s_d_l_audio_service_ac23e514c47115b5b56e98f5883d228f7}} 
+\index{SDLAudioService@{SDLAudioService}!playSfx@{playSfx}}
+\index{playSfx@{playSfx}!SDLAudioService@{SDLAudioService}}
+\doxysubsubsection{\texorpdfstring{playSfx()}{playSfx()}}
+{\footnotesize\ttfamily void SDLAudio\+Service\+::play\+Sfx (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path,  }\item[{float}]{volume,  }\item[{bool}]{loop }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Plays a sound effect 
+\begin{DoxyParams}{Parameters}
+{\em path} & Path of the sound effect to be played \\
+\hline
+{\em volume} & Volume of the sound effect to be played \\
+\hline
+{\em loop} & Loop the sound effect after finish playing \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_audio_service_aaf91bb8da3c3ee4f20db81cd65bcfe87}{Audio\+Service}}.
+
+\mbox{\Hypertarget{class_s_d_l_audio_service_a210e0b112d4f5f59470025596501c6e0}\label{class_s_d_l_audio_service_a210e0b112d4f5f59470025596501c6e0}} 
+\index{SDLAudioService@{SDLAudioService}!preloadMusic@{preloadMusic}}
+\index{preloadMusic@{preloadMusic}!SDLAudioService@{SDLAudioService}}
+\doxysubsubsection{\texorpdfstring{preloadMusic()}{preloadMusic()}}
+{\footnotesize\ttfamily void SDLAudio\+Service\+::preload\+Music (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Loads a music file into the cache of the Audio Service 
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the music file to be cached \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_audio_service_a7ae5b0302a4000f33bd3c9a854206d4d}{Audio\+Service}}.
+
+\mbox{\Hypertarget{class_s_d_l_audio_service_ab7887df0527fd42a9c82b12295a830fe}\label{class_s_d_l_audio_service_ab7887df0527fd42a9c82b12295a830fe}} 
+\index{SDLAudioService@{SDLAudioService}!preloadSfx@{preloadSfx}}
+\index{preloadSfx@{preloadSfx}!SDLAudioService@{SDLAudioService}}
+\doxysubsubsection{\texorpdfstring{preloadSfx()}{preloadSfx()}}
+{\footnotesize\ttfamily void SDLAudio\+Service\+::preload\+Sfx (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Loads a sfx file into the cache of the Audio Service 
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the sfx file to be cached \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_audio_service_aa77934f225746031f542fa2276a41491}{Audio\+Service}}.
+
+\mbox{\Hypertarget{class_s_d_l_audio_service_aab6eb95f4a1f5b78f2bf0bf04c893826}\label{class_s_d_l_audio_service_aab6eb95f4a1f5b78f2bf0bf04c893826}} 
+\index{SDLAudioService@{SDLAudioService}!resumeMusic@{resumeMusic}}
+\index{resumeMusic@{resumeMusic}!SDLAudioService@{SDLAudioService}}
+\doxysubsubsection{\texorpdfstring{resumeMusic()}{resumeMusic()}}
+{\footnotesize\ttfamily void SDLAudio\+Service\+::resume\+Music (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Resume the music that is currently paused. 
+
+
+
+Implements \mbox{\hyperlink{class_audio_service_a6bb88a91e429671d46f065673b6f5749}{Audio\+Service}}.
+
+\mbox{\Hypertarget{class_s_d_l_audio_service_a89b5a9eaad35934e2952aea857d3121f}\label{class_s_d_l_audio_service_a89b5a9eaad35934e2952aea857d3121f}} 
+\index{SDLAudioService@{SDLAudioService}!setMasterVolume@{setMasterVolume}}
+\index{setMasterVolume@{setMasterVolume}!SDLAudioService@{SDLAudioService}}
+\doxysubsubsection{\texorpdfstring{setMasterVolume()}{setMasterVolume()}}
+{\footnotesize\ttfamily void SDLAudio\+Service\+::set\+Master\+Volume (\begin{DoxyParamCaption}\item[{float}]{volume }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Sets the \+\_\+master\+Volume field and updates the current volume of all audio. 
+\begin{DoxyParams}{Parameters}
+{\em volume} & a value between 0.\+0 and 1.\+0, used as a factor to calculate volume. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_audio_service_aba5f735242bd27d891df9a8fd6ebb6af}{Audio\+Service}}.
+
+\mbox{\Hypertarget{class_s_d_l_audio_service_afc80f31e7c766a7003dbd1ce739c0980}\label{class_s_d_l_audio_service_afc80f31e7c766a7003dbd1ce739c0980}} 
+\index{SDLAudioService@{SDLAudioService}!setMusicVolume@{setMusicVolume}}
+\index{setMusicVolume@{setMusicVolume}!SDLAudioService@{SDLAudioService}}
+\doxysubsubsection{\texorpdfstring{setMusicVolume()}{setMusicVolume()}}
+{\footnotesize\ttfamily void SDLAudio\+Service\+::set\+Music\+Volume (\begin{DoxyParamCaption}\item[{float}]{volume }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Sets the \+\_\+music\+Volume field and updates the current volume of Music. 
+\begin{DoxyParams}{Parameters}
+{\em volume} & a value between 0.\+0 and 1.\+0, used as a factor to calculate volume. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_audio_service_a0a489710c3a1c9cc5a6f76f2d9c293af}{Audio\+Service}}.
+
+\mbox{\Hypertarget{class_s_d_l_audio_service_a00adfa2cbb7b6f9672246ff088e203e5}\label{class_s_d_l_audio_service_a00adfa2cbb7b6f9672246ff088e203e5}} 
+\index{SDLAudioService@{SDLAudioService}!setSfxVolume@{setSfxVolume}}
+\index{setSfxVolume@{setSfxVolume}!SDLAudioService@{SDLAudioService}}
+\doxysubsubsection{\texorpdfstring{setSfxVolume()}{setSfxVolume()}}
+{\footnotesize\ttfamily void SDLAudio\+Service\+::set\+Sfx\+Volume (\begin{DoxyParamCaption}\item[{float}]{volume }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Sets the \+\_\+sfx\+Volume field and updates the current volume of Sound effects. 
+\begin{DoxyParams}{Parameters}
+{\em volume} & a value between 0.\+0 and 1.\+0, used as a factor to calculate volume. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_audio_service_a595cad0b91f9666ac62746f3086440f9}{Audio\+Service}}.
+
+\mbox{\Hypertarget{class_s_d_l_audio_service_a6f985fa2e9ac499eef3f621fa627b3b0}\label{class_s_d_l_audio_service_a6f985fa2e9ac499eef3f621fa627b3b0}} 
+\index{SDLAudioService@{SDLAudioService}!stopMusic@{stopMusic}}
+\index{stopMusic@{stopMusic}!SDLAudioService@{SDLAudioService}}
+\doxysubsubsection{\texorpdfstring{stopMusic()}{stopMusic()}}
+{\footnotesize\ttfamily void SDLAudio\+Service\+::stop\+Music (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Stop the music from playing (Not able to resume after) 
+
+
+
+Implements \mbox{\hyperlink{class_audio_service_a4fbf6e508205ef4b48603ee698e503e3}{Audio\+Service}}.
+
+\mbox{\Hypertarget{class_s_d_l_audio_service_a0aace4b8318aaeab141acff4502adf46}\label{class_s_d_l_audio_service_a0aace4b8318aaeab141acff4502adf46}} 
+\index{SDLAudioService@{SDLAudioService}!stopSfx@{stopSfx}}
+\index{stopSfx@{stopSfx}!SDLAudioService@{SDLAudioService}}
+\doxysubsubsection{\texorpdfstring{stopSfx()}{stopSfx()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void SDLAudio\+Service\+::stop\+Sfx (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Stops all the sound effects from playing. 
+
+
+
+Implements \mbox{\hyperlink{class_audio_service_a26c7f3a4d94250dea8acb7e455ffc465}{Audio\+Service}}.
+
+\mbox{\Hypertarget{class_s_d_l_audio_service_a32afb68e5f9b604089fe8a98ff25ccde}\label{class_s_d_l_audio_service_a32afb68e5f9b604089fe8a98ff25ccde}} 
+\index{SDLAudioService@{SDLAudioService}!stopSfx@{stopSfx}}
+\index{stopSfx@{stopSfx}!SDLAudioService@{SDLAudioService}}
+\doxysubsubsection{\texorpdfstring{stopSfx()}{stopSfx()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void SDLAudio\+Service\+::stop\+Sfx (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Stop a specific sound effect from playing 
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the sound effect that is playing \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_audio_service_aa54021d96aa1830e6f9ace28aeedd69f}{Audio\+Service}}.
+
+\mbox{\Hypertarget{class_s_d_l_audio_service_a5f61dae99c1be0d3d332c449ce4507d4}\label{class_s_d_l_audio_service_a5f61dae99c1be0d3d332c449ce4507d4}} 
+\index{SDLAudioService@{SDLAudioService}!toggleMusic@{toggleMusic}}
+\index{toggleMusic@{toggleMusic}!SDLAudioService@{SDLAudioService}}
+\doxysubsubsection{\texorpdfstring{toggleMusic()}{toggleMusic()}}
+{\footnotesize\ttfamily void SDLAudio\+Service\+::toggle\+Music (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Pauses or resumes the music based on its current state. 
+
+
+
+Implements \mbox{\hyperlink{class_audio_service_ac93d1c57d753b1b64cd1fff5c27fecd3}{Audio\+Service}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Services/SDLAudio\+Service.\+h\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Services/SDLAudio\+Service.\+cpp\end{DoxyCompactItemize}

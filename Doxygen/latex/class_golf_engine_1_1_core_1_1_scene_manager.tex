@@ -1,0 +1,104 @@
+\hypertarget{class_golf_engine_1_1_core_1_1_scene_manager}{}\doxysection{Golf\+Engine\+::Core\+::Scene\+Manager Class Reference}
+\label{class_golf_engine_1_1_core_1_1_scene_manager}\index{GolfEngine::Core::SceneManager@{GolfEngine::Core::SceneManager}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_scene_manager_ab2cf398cf0b8c08c8ebb483ff99f9ff5}{load\+Scene}} (const std\+::string \&scene\+Name=\char`\"{}\char`\"{})
+\item 
+{\footnotesize template$<$typename SF $>$ }\\void \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_scene_manager_ad5656e2d2772956abe178e96b8215317}{add\+Scene\+Factory}} (const std\+::string \&scene\+Name)
+\item 
+void \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_scene_manager_a373736bbf3adfc9e784007ae08facbb3}{update\+Scene\+Manager}} ()
+\item 
+\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_scene}{Scene\+::\+Scene}} \& \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_scene_manager_a10465a5a8a5e00b52839007243bff13c}{get\+Current\+Scene}} ()
+\item 
+bool \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_scene_manager_a9610aaff58a9ee42190d987118dcecc1}{has\+Current\+Scene}} ()
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_core_1_1_scene_manager_a00f045e34bdeefca9a89a30c8ce6e8e9}\label{class_golf_engine_1_1_core_1_1_scene_manager_a00f045e34bdeefca9a89a30c8ce6e8e9}} 
+void {\bfseries clear\+Scenes} ()
+\begin{DoxyCompactList}\small\item\em Clears the scenes map by deleting factories. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_scene_manager_a9e9da6d3664c20cff99c410c61a2f4cd}{get\+Current\+Scene\+Name}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_scene_manager}{Scene\+Manager}} \& \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_scene_manager_ab996b21a426dcbee76f956e4b45bc64a}{Get\+Scene\+Manager}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_golf_engine_1_1_core_1_1_scene_manager_ad5656e2d2772956abe178e96b8215317}\label{class_golf_engine_1_1_core_1_1_scene_manager_ad5656e2d2772956abe178e96b8215317}} 
+\index{GolfEngine::Core::SceneManager@{GolfEngine::Core::SceneManager}!addSceneFactory@{addSceneFactory}}
+\index{addSceneFactory@{addSceneFactory}!GolfEngine::Core::SceneManager@{GolfEngine::Core::SceneManager}}
+\doxysubsubsection{\texorpdfstring{addSceneFactory()}{addSceneFactory()}}
+{\footnotesize\ttfamily template$<$typename SF $>$ \\
+void Golf\+Engine\+::\+Core\+::\+Scene\+Manager\+::add\+Scene\+Factory (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{scene\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Adds a Scene Factory to the \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_scene_manager}{Scene\+Manager}}, which can create new scenes on command using the load\+Scene method 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em SF} & Scene Factory type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em scene\+Name} & Name of the scene this factory creates \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_golf_engine_1_1_core_1_1_scene_manager_a10465a5a8a5e00b52839007243bff13c}\label{class_golf_engine_1_1_core_1_1_scene_manager_a10465a5a8a5e00b52839007243bff13c}} 
+\index{GolfEngine::Core::SceneManager@{GolfEngine::Core::SceneManager}!getCurrentScene@{getCurrentScene}}
+\index{getCurrentScene@{getCurrentScene}!GolfEngine::Core::SceneManager@{GolfEngine::Core::SceneManager}}
+\doxysubsubsection{\texorpdfstring{getCurrentScene()}{getCurrentScene()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_scene}{Scene\+::\+Scene}} \& Golf\+Engine\+::\+Core\+::\+Scene\+Manager\+::get\+Current\+Scene (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns reference to \+\_\+current\+Scene \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_golf_engine_1_1_core_1_1_scene_manager_a9e9da6d3664c20cff99c410c61a2f4cd}\label{class_golf_engine_1_1_core_1_1_scene_manager_a9e9da6d3664c20cff99c410c61a2f4cd}} 
+\index{GolfEngine::Core::SceneManager@{GolfEngine::Core::SceneManager}!getCurrentSceneName@{getCurrentSceneName}}
+\index{getCurrentSceneName@{getCurrentSceneName}!GolfEngine::Core::SceneManager@{GolfEngine::Core::SceneManager}}
+\doxysubsubsection{\texorpdfstring{getCurrentSceneName()}{getCurrentSceneName()}}
+{\footnotesize\ttfamily std\+::string Golf\+Engine\+::\+Core\+::\+Scene\+Manager\+::get\+Current\+Scene\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Returns the name of the scene that was last loaded \begin{DoxyReturn}{Returns}
+name of the scene 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_golf_engine_1_1_core_1_1_scene_manager_ab996b21a426dcbee76f956e4b45bc64a}\label{class_golf_engine_1_1_core_1_1_scene_manager_ab996b21a426dcbee76f956e4b45bc64a}} 
+\index{GolfEngine::Core::SceneManager@{GolfEngine::Core::SceneManager}!GetSceneManager@{GetSceneManager}}
+\index{GetSceneManager@{GetSceneManager}!GolfEngine::Core::SceneManager@{GolfEngine::Core::SceneManager}}
+\doxysubsubsection{\texorpdfstring{GetSceneManager()}{GetSceneManager()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_scene_manager}{Scene\+Manager}} \& Golf\+Engine\+::\+Core\+::\+Scene\+Manager\+::\+Get\+Scene\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+This method is used to get access to the scene manager instance \begin{DoxyReturn}{Returns}
+Returns the global scene manager instance 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_golf_engine_1_1_core_1_1_scene_manager_a9610aaff58a9ee42190d987118dcecc1}\label{class_golf_engine_1_1_core_1_1_scene_manager_a9610aaff58a9ee42190d987118dcecc1}} 
+\index{GolfEngine::Core::SceneManager@{GolfEngine::Core::SceneManager}!hasCurrentScene@{hasCurrentScene}}
+\index{hasCurrentScene@{hasCurrentScene}!GolfEngine::Core::SceneManager@{GolfEngine::Core::SceneManager}}
+\doxysubsubsection{\texorpdfstring{hasCurrentScene()}{hasCurrentScene()}}
+{\footnotesize\ttfamily bool Golf\+Engine\+::\+Core\+::\+Scene\+Manager\+::has\+Current\+Scene (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Checks if there is an active scene \begin{DoxyReturn}{Returns}
+true if a scene is active 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_golf_engine_1_1_core_1_1_scene_manager_ab2cf398cf0b8c08c8ebb483ff99f9ff5}\label{class_golf_engine_1_1_core_1_1_scene_manager_ab2cf398cf0b8c08c8ebb483ff99f9ff5}} 
+\index{GolfEngine::Core::SceneManager@{GolfEngine::Core::SceneManager}!loadScene@{loadScene}}
+\index{loadScene@{loadScene}!GolfEngine::Core::SceneManager@{GolfEngine::Core::SceneManager}}
+\doxysubsubsection{\texorpdfstring{loadScene()}{loadScene()}}
+{\footnotesize\ttfamily void Golf\+Engine\+::\+Core\+::\+Scene\+Manager\+::load\+Scene (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{scene\+Name = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+A deferred call to load a new scene by setting the current\+Scene of a copy of the loaded scene The actual loading happens on the next \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_scene_manager_a373736bbf3adfc9e784007ae08facbb3}{update\+Scene\+Manager()}} call 
+\begin{DoxyParams}{Parameters}
+{\em scene\+Name} & Name of scene to load, if empty, current scene will be reloaded \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_golf_engine_1_1_core_1_1_scene_manager_a373736bbf3adfc9e784007ae08facbb3}\label{class_golf_engine_1_1_core_1_1_scene_manager_a373736bbf3adfc9e784007ae08facbb3}} 
+\index{GolfEngine::Core::SceneManager@{GolfEngine::Core::SceneManager}!updateSceneManager@{updateSceneManager}}
+\index{updateSceneManager@{updateSceneManager}!GolfEngine::Core::SceneManager@{GolfEngine::Core::SceneManager}}
+\doxysubsubsection{\texorpdfstring{updateSceneManager()}{updateSceneManager()}}
+{\footnotesize\ttfamily void Golf\+Engine\+::\+Core\+::\+Scene\+Manager\+::update\+Scene\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Update the scene manager if needed, should be called by the \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_game_loop}{Game\+Loop}} before updating the current scene. For now the only update action is loading in a new scene if \+\_\+next\+Scene has a value 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Core/Scene\+Manager.\+h\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Core/Scene\+Manager.\+cpp\end{DoxyCompactItemize}

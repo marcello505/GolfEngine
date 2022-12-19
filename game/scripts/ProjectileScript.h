@@ -8,6 +8,8 @@
 #include <Scene/Components/BehaviourScript.h>
 #include "Scene/Components/RigidBody.h"
 
+using namespace GolfEngine::Scene;
+using namespace GolfEngine::Scene::Components;
 
 class ProjectileScript : public BehaviourScript {
 public:

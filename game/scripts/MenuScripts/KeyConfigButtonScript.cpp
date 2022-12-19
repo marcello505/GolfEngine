@@ -9,7 +9,7 @@
 
 void KeyConfigButtonScript::onUpdate() {
 
-    auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
+    auto& sceneManager = GolfEngine::Core::SceneManager::GetSceneManager();
     auto* inputService = GolfEngine::Services::Input::getService();
     auto* actionMap = ActionMap::getActionMap();
 

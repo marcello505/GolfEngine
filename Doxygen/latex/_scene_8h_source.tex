@@ -1,0 +1,87 @@
+\hypertarget{_scene_8h_source}{}\doxysection{Scene.\+h}
+\label{_scene_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/Scene.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/Scene.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by conner on 11/21/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef GOLFENGINE\_SCENE\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define GOLFENGINE\_SCENE\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <optional>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}Replay.h"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}GameObjects/GameObject.h"{}}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{keyword}{namespace }GolfEngine::Scene \{}
+\DoxyCodeLine{16     \textcolor{keyword}{class }\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_scene}{Scene}} \{}
+\DoxyCodeLine{17     \textcolor{keyword}{private}:}
+\DoxyCodeLine{18         \textcolor{keyword}{enum class} ReplayState \{}
+\DoxyCodeLine{19             Idle,}
+\DoxyCodeLine{20             InitializeRecording,}
+\DoxyCodeLine{21             Recording,}
+\DoxyCodeLine{22             InitializePlaying,}
+\DoxyCodeLine{23             Playing}
+\DoxyCodeLine{24         \};}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26         \textcolor{keywordtype}{void} saveCurrentState(std::vector<std::unique\_ptr<ISnapshot>> \&list);}
+\DoxyCodeLine{27         \textcolor{keywordtype}{void} loadCurrentState(std::vector<std::unique\_ptr<ISnapshot>> \&list);}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29         std::map<int, std::vector<std::unique\_ptr<ISnapshot>>> \_saveStates;}
+\DoxyCodeLine{30     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{31         std::vector<std::unique\_ptr<GameObject>> \_gameObjects;}
+\DoxyCodeLine{32         std::unique\_ptr<std::reference\_wrapper<GameObject>> \_rootGameObject;}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34         \textcolor{comment}{//Recording fields}}
+\DoxyCodeLine{35         ReplayState \_replayState\{ReplayState::Idle\};}
+\DoxyCodeLine{36         \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_replay}{Replay}} \_replay\{\};}
+\DoxyCodeLine{37         \textcolor{keywordtype}{int} \_replayFrame\{\};}
+\DoxyCodeLine{38     \textcolor{keyword}{public}:}
+\DoxyCodeLine{39         \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_scene}{Scene}}();}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{43         [[nodiscard]] \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{GameObject}} \&\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_scene_ad78ab966295dc8766413876179e441c5}{getRootGameObject}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{48         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_scene_a9c2bb955b75f85b8c41aac91c6e4a06c}{startRecordingReplay}}(\textcolor{keyword}{const} std::vector<std::string> \&actionsToLock, \textcolor{keywordtype}{bool} recordMouse = \textcolor{keyword}{false});}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{51         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_scene_a1589816849dc0e3ba1488dc78bd51991}{stopRecordingReplay}}();}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{54         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_scene_a447365ad0fd3d8136dd13ca5af1d9712}{playReplay}}();}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{57         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_scene_a5e92f6875af79ab6d130c4be8303d396}{stopReplay}}();}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{61         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_scene_a1f9f04bd8166fef36a0e631f3f714946}{saveCurrentSceneState}}(\textcolor{keywordtype}{int} slot);}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{65         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_scene_ad54f1b8147ba0ba9abdfbd8599669bfc}{loadCurrentSceneState}}(\textcolor{keywordtype}{int} slot);}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{68         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_scene_ac341ec775de517767c5fcb44c734fefc}{startScene}}();}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{71         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_scene_af9ff1b12001456d3adfe99900256e5ab}{updateScene}}();}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{75         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_scene_aa8f01cdb17fe6cf63ff02970964e9bf4}{updateReplay}}();}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{80         [[nodiscard]] \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{GameObject}} \&\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_scene_a3f47908024ead2449d78d6dbbc37f398}{getGameObjectWithTag}}(\textcolor{keyword}{const} std::string \&tag) \textcolor{keyword}{const};}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{85         std::vector<std::reference\_wrapper<GameObject>> \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_scene_a05ba09b16945f8151d94eb68d93c6911}{getGameObjectsWithTag}}(\textcolor{keyword}{const} std::string \&tag);}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{91         \textcolor{keyword}{template}<\textcolor{keyword}{typename} GO, \textcolor{keyword}{typename} ... Args>}
+\DoxyCodeLine{92         GO \&\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_scene_a61643e1b5a9a35a4e6a94fa66a14c19d}{createNewGameObject}}(\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{GameObject}} \&parent, Args ... args) \{}
+\DoxyCodeLine{93             \_gameObjects.emplace\_back(std::make\_unique<GO>(args...));}
+\DoxyCodeLine{94             GO \&newGO = \textcolor{keyword}{reinterpret\_cast<}GO \&\textcolor{keyword}{>}(*\_gameObjects.back());}
+\DoxyCodeLine{95             newGO.setParent(parent);}
+\DoxyCodeLine{96             parent.\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_a46a280c26e7ba96e763d65c63bc259a5}{addChild}}(newGO);}
+\DoxyCodeLine{97             \textcolor{keywordflow}{return} newGO;}
+\DoxyCodeLine{98         \}}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{103         \textcolor{keyword}{template}<\textcolor{keyword}{typename} GO, \textcolor{keyword}{typename} ... Args>}
+\DoxyCodeLine{104         GO \&\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_scene_a25400e8e57cb2a56baa92eb46c78ccf8}{createNewGameObject}}(Args ... args) \{}
+\DoxyCodeLine{105             \textcolor{keywordflow}{return} createNewGameObject<GO>(\_rootGameObject-\/>get(), std::forward<Args>(args)...);}
+\DoxyCodeLine{106         \}}
+\DoxyCodeLine{107     \};}
+\DoxyCodeLine{108 \}}
+\DoxyCodeLine{109 }
+\DoxyCodeLine{110 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//GOLFENGINE\_SCENE\_H}}
+
+\end{DoxyCode}

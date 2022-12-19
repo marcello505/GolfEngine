@@ -9,7 +9,7 @@
 
 typedef float GameTic;
 
-namespace GolfEngine{
+namespace GolfEngine::Core{
     class Time {
     public:
         //Methods

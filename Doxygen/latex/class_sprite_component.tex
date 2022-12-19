@@ -1,0 +1,184 @@
+\hypertarget{class_sprite_component}{}\doxysection{Sprite\+Component Class Reference}
+\label{class_sprite_component}\index{SpriteComponent@{SpriteComponent}}
+Inheritance diagram for Sprite\+Component\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_sprite_component}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_sprite_component_a7e44b380d52e8aefe8bc0b1c91defcf1}{Sprite\+Component}} (const std\+::string \&path, \mbox{\hyperlink{struct_vector2}{Vector2}} pixel\+Scale=\mbox{\hyperlink{struct_vector2}{Vector2}}(1, 1), \mbox{\hyperlink{struct_rect2}{Rect2}} image\+Source=\mbox{\hyperlink{struct_rect2}{Rect2}}(), \mbox{\hyperlink{struct_vector2}{Vector2}} offset\+Position=\mbox{\hyperlink{struct_vector2}{Vector2}}(), float starting\+Rotation=0, \mbox{\hyperlink{struct_vector2}{Vector2}} pivot\+Point=\mbox{\hyperlink{struct_vector2}{Vector2}}(), \mbox{\hyperlink{struct_color}{Color}} color=\mbox{\hyperlink{struct_color}{Color}}())
+\item 
+void \mbox{\hyperlink{class_sprite_component_a9fd02c85d5f3d371e81245b3700ec0ed}{on\+Start}} () override
+\item 
+void \mbox{\hyperlink{class_sprite_component_ae2831e72ee0c7d844317eb145d1619f7}{on\+Update}} () override
+\item 
+void \mbox{\hyperlink{class_sprite_component_a2f7ab06b0333355e95e2110d5055296b}{on\+Remove}} () override
+\item 
+bool \mbox{\hyperlink{class_sprite_component_a54e3f066a975a2aa13db5df7a5cffba1}{get\+Active}} () override
+\item 
+void \mbox{\hyperlink{class_sprite_component_a00cb409c622167944c83ffa36c5931c7}{set\+Active}} (bool active) override
+\item 
+void \mbox{\hyperlink{class_sprite_component_a2ba756310027b1f5a38d2e64ebad960b}{set\+Parent\+Game\+Object}} (\mbox{\hyperlink{class_game_object}{Game\+Object}} \&game\+Object) override
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} $>$ \mbox{\hyperlink{class_sprite_component_ac5f39b7f2f628387394345381b2d1353}{save\+Snapshot}} () override
+\item 
+void \mbox{\hyperlink{class_sprite_component_a0ac5d6eae5e5414b98dba26e08ce9a36}{load\+Snapshot}} (const \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} \&raw\+Snapshot) override
+\item 
+\mbox{\hyperlink{class_render_shape}{Render\+Shape}} \& \mbox{\hyperlink{class_sprite_component_aa7480dfd4a0033809b5191894c72e547}{get\+Render\+Shape}} () override
+\item 
+\mbox{\Hypertarget{class_sprite_component_aa7664fdb9135615d4482f0a559a7a016}\label{class_sprite_component_aa7664fdb9135615d4482f0a559a7a016}} 
+std\+::string {\bfseries path} () const
+\item 
+\mbox{\Hypertarget{class_sprite_component_a235a4c8940aabe541c89a9863bb3f734}\label{class_sprite_component_a235a4c8940aabe541c89a9863bb3f734}} 
+\mbox{\hyperlink{struct_rect2}{Rect2}} {\bfseries image\+Source} () const
+\item 
+\mbox{\Hypertarget{class_sprite_component_aead124c1e32371097d6f216f508acefe}\label{class_sprite_component_aead124c1e32371097d6f216f508acefe}} 
+\mbox{\hyperlink{struct_color}{Color}} {\bfseries color} () const
+\item 
+\mbox{\Hypertarget{class_sprite_component_a8733d3d057cbcf651f4c9f87c01e5a46}\label{class_sprite_component_a8733d3d057cbcf651f4c9f87c01e5a46}} 
+float {\bfseries get\+Rotation} () const
+\item 
+\mbox{\Hypertarget{class_sprite_component_afbbd59602ab2616b4989fc86fe18d95c}\label{class_sprite_component_afbbd59602ab2616b4989fc86fe18d95c}} 
+void {\bfseries set\+Path} (const std\+::string \&path)
+\item 
+\mbox{\Hypertarget{class_sprite_component_a954180027926579e3a54d021f966c3e6}\label{class_sprite_component_a954180027926579e3a54d021f966c3e6}} 
+void {\bfseries set\+Image\+Source} (\mbox{\hyperlink{struct_rect2}{Rect2}} image\+Source)
+\item 
+\mbox{\Hypertarget{class_sprite_component_a3565760423ffb945b6d89c0b290b32f6}\label{class_sprite_component_a3565760423ffb945b6d89c0b290b32f6}} 
+void {\bfseries set\+Color} (\mbox{\hyperlink{struct_color}{Color}} color)
+\item 
+\mbox{\Hypertarget{class_sprite_component_a5a1800f246524432ae9dc095d40c48f8}\label{class_sprite_component_a5a1800f246524432ae9dc095d40c48f8}} 
+void {\bfseries set\+Rotation} (float degrees)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_sprite_component_a7e44b380d52e8aefe8bc0b1c91defcf1}\label{class_sprite_component_a7e44b380d52e8aefe8bc0b1c91defcf1}} 
+\index{SpriteComponent@{SpriteComponent}!SpriteComponent@{SpriteComponent}}
+\index{SpriteComponent@{SpriteComponent}!SpriteComponent@{SpriteComponent}}
+\doxysubsubsection{\texorpdfstring{SpriteComponent()}{SpriteComponent()}}
+{\footnotesize\ttfamily Sprite\+Component\+::\+Sprite\+Component (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path,  }\item[{\mbox{\hyperlink{struct_vector2}{Vector2}}}]{pixel\+Scale = {\ttfamily \mbox{\hyperlink{struct_vector2}{Vector2}}(1,1)},  }\item[{\mbox{\hyperlink{struct_rect2}{Rect2}}}]{image\+Source = {\ttfamily \mbox{\hyperlink{struct_rect2}{Rect2}}()},  }\item[{\mbox{\hyperlink{struct_vector2}{Vector2}}}]{offset\+Position = {\ttfamily \mbox{\hyperlink{struct_vector2}{Vector2}}()},  }\item[{float}]{starting\+Rotation = {\ttfamily 0},  }\item[{\mbox{\hyperlink{struct_vector2}{Vector2}}}]{pivot\+Point = {\ttfamily \mbox{\hyperlink{struct_vector2}{Vector2}}()},  }\item[{\mbox{\hyperlink{struct_color}{Color}}}]{color = {\ttfamily \mbox{\hyperlink{struct_color}{Color}}()} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+A Sprite component renders an sprite on the screen 
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the image (png or jpg) \\
+\hline
+{\em pixel\+Scale} & Amount of pixels in image used per 1 pixel on screen (value of 2 will half the image size on screen) \\
+\hline
+{\em image\+Source} & Selection of image to render (default uses entire image (\mbox{\hyperlink{struct_rect2}{Rect2}}(\mbox{\hyperlink{struct_vector2}{Vector2(0,0)}}, \mbox{\hyperlink{struct_vector2}{Vector2(0,0)}})) \\
+\hline
+{\em offset\+Position} & A starting value to offset the sprite position \\
+\hline
+{\em starting\+Rotation} & A starting rotation applied to the sprite \\
+\hline
+{\em pivot\+Point} & Custom pivot point in raw pixel value of point in image (default uses center of image (\mbox{\hyperlink{struct_vector2}{Vector2(0,0)}}) \\
+\hline
+{\em color} & \mbox{\hyperlink{struct_color}{Color}} used to blend with image (default white with no effect) \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sprite_component_a54e3f066a975a2aa13db5df7a5cffba1}\label{class_sprite_component_a54e3f066a975a2aa13db5df7a5cffba1}} 
+\index{SpriteComponent@{SpriteComponent}!getActive@{getActive}}
+\index{getActive@{getActive}!SpriteComponent@{SpriteComponent}}
+\doxysubsubsection{\texorpdfstring{getActive()}{getActive()}}
+{\footnotesize\ttfamily bool Sprite\+Component\+::get\+Active (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_sprite_component_aa7480dfd4a0033809b5191894c72e547}\label{class_sprite_component_aa7480dfd4a0033809b5191894c72e547}} 
+\index{SpriteComponent@{SpriteComponent}!getRenderShape@{getRenderShape}}
+\index{getRenderShape@{getRenderShape}!SpriteComponent@{SpriteComponent}}
+\doxysubsubsection{\texorpdfstring{getRenderShape()}{getRenderShape()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_render_shape}{Render\+Shape}} \& Sprite\+Component\+::get\+Render\+Shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Get the render shape connected to this drawable \begin{DoxyReturn}{Returns}
+render shape 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_drawable_ac786b2a1008169713173ac2bc770cefc}{Drawable}}.
+
+\mbox{\Hypertarget{class_sprite_component_a0ac5d6eae5e5414b98dba26e08ce9a36}\label{class_sprite_component_a0ac5d6eae5e5414b98dba26e08ce9a36}} 
+\index{SpriteComponent@{SpriteComponent}!loadSnapshot@{loadSnapshot}}
+\index{loadSnapshot@{loadSnapshot}!SpriteComponent@{SpriteComponent}}
+\doxysubsubsection{\texorpdfstring{loadSnapshot()}{loadSnapshot()}}
+{\footnotesize\ttfamily void Sprite\+Component\+::load\+Snapshot (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} \&}]{raw\+Snapshot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_persistable}{IPersistable}}.
+
+\mbox{\Hypertarget{class_sprite_component_a2f7ab06b0333355e95e2110d5055296b}\label{class_sprite_component_a2f7ab06b0333355e95e2110d5055296b}} 
+\index{SpriteComponent@{SpriteComponent}!onRemove@{onRemove}}
+\index{onRemove@{onRemove}!SpriteComponent@{SpriteComponent}}
+\doxysubsubsection{\texorpdfstring{onRemove()}{onRemove()}}
+{\footnotesize\ttfamily void Sprite\+Component\+::on\+Remove (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_sprite_component_a9fd02c85d5f3d371e81245b3700ec0ed}\label{class_sprite_component_a9fd02c85d5f3d371e81245b3700ec0ed}} 
+\index{SpriteComponent@{SpriteComponent}!onStart@{onStart}}
+\index{onStart@{onStart}!SpriteComponent@{SpriteComponent}}
+\doxysubsubsection{\texorpdfstring{onStart()}{onStart()}}
+{\footnotesize\ttfamily void Sprite\+Component\+::on\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_sprite_component_ae2831e72ee0c7d844317eb145d1619f7}\label{class_sprite_component_ae2831e72ee0c7d844317eb145d1619f7}} 
+\index{SpriteComponent@{SpriteComponent}!onUpdate@{onUpdate}}
+\index{onUpdate@{onUpdate}!SpriteComponent@{SpriteComponent}}
+\doxysubsubsection{\texorpdfstring{onUpdate()}{onUpdate()}}
+{\footnotesize\ttfamily void Sprite\+Component\+::on\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_sprite_component_ac5f39b7f2f628387394345381b2d1353}\label{class_sprite_component_ac5f39b7f2f628387394345381b2d1353}} 
+\index{SpriteComponent@{SpriteComponent}!saveSnapshot@{saveSnapshot}}
+\index{saveSnapshot@{saveSnapshot}!SpriteComponent@{SpriteComponent}}
+\doxysubsubsection{\texorpdfstring{saveSnapshot()}{saveSnapshot()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} $>$ Sprite\+Component\+::save\+Snapshot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_persistable}{IPersistable}}.
+
+\mbox{\Hypertarget{class_sprite_component_a00cb409c622167944c83ffa36c5931c7}\label{class_sprite_component_a00cb409c622167944c83ffa36c5931c7}} 
+\index{SpriteComponent@{SpriteComponent}!setActive@{setActive}}
+\index{setActive@{setActive}!SpriteComponent@{SpriteComponent}}
+\doxysubsubsection{\texorpdfstring{setActive()}{setActive()}}
+{\footnotesize\ttfamily void Sprite\+Component\+::set\+Active (\begin{DoxyParamCaption}\item[{bool}]{active }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_sprite_component_a2ba756310027b1f5a38d2e64ebad960b}\label{class_sprite_component_a2ba756310027b1f5a38d2e64ebad960b}} 
+\index{SpriteComponent@{SpriteComponent}!setParentGameObject@{setParentGameObject}}
+\index{setParentGameObject@{setParentGameObject}!SpriteComponent@{SpriteComponent}}
+\doxysubsubsection{\texorpdfstring{setParentGameObject()}{setParentGameObject()}}
+{\footnotesize\ttfamily void Sprite\+Component\+::set\+Parent\+Game\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_object}{Game\+Object}} \&}]{game\+Object }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Components/Sprite\+Component.\+h\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Components/Sprite\+Component.\+cpp\end{DoxyCompactItemize}

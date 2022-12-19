@@ -8,6 +8,8 @@
 
 #include "Scene/GameObjects/GameObject.h"
 
+using namespace GolfEngine::Scene;
+
 class PhysicGameObject : public GameObject{
 
 public:

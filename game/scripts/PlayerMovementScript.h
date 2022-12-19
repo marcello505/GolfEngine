@@ -14,6 +14,9 @@
 #include "../scripts/ProjectilePoolScript.h"
 #include "Scene/Components/Animator.h"
 
+using namespace GolfEngine::Input;
+using namespace GolfEngine::Scene::Components;
+
 class PlayerMovementScript : public BehaviourScript {
 private:
     struct Snapshot : public ISnapshot{

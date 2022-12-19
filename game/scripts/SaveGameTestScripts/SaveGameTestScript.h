@@ -9,6 +9,8 @@
 #include <Scene/GameObjects/GameObject.h>
 #include "ShotCounterScript.h"
 
+using namespace GolfEngine::Scene::Components;
+
 class SaveGameTestScript : public BehaviourScript{
 public:
     explicit SaveGameTestScript(RigidBody* playerGameObject, ShotCounterScript* shotCounterScript) : _player{playerGameObject}, _shotCounterScript{shotCounterScript} {}

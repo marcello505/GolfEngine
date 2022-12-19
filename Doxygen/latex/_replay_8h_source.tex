@@ -1,0 +1,30 @@
+\hypertarget{_replay_8h_source}{}\doxysection{Replay.\+h}
+\label{_replay_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/Replay.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/Replay.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by Lucas on 2-\/11-\/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef GOLFENGINE\_REPLAY\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define GOLFENGINE\_REPLAY\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}IPersistable.h"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}../Input/Action.h"{}}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{keyword}{namespace }GolfEngine::Scene \{}
+\DoxyCodeLine{15     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_replay}{Replay}} \{}
+\DoxyCodeLine{16         std::vector<std::unique\_ptr<ISnapshot>> startingState\{\};}
+\DoxyCodeLine{17         std::vector<std::vector<std::pair<bool, bool>>> inputs\{\};}
+\DoxyCodeLine{18         std::vector<std::string> lockedActions\{\};}
+\DoxyCodeLine{19         std::optional<std::vector<std::pair<int, int>>> mousePositions\{\};}
+\DoxyCodeLine{20     \};}
+\DoxyCodeLine{21 \}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//GOLFENGINE\_REPLAY\_H}}
+
+\end{DoxyCode}

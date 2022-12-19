@@ -8,6 +8,8 @@
 
 #include "Scene/Components/BehaviourScript.h"
 
+using namespace GolfEngine::Scene::Components;
+
 class StartGameButtonScript : public BehaviourScript{
 public:
     virtual void onUpdate() override;

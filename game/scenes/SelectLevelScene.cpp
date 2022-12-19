@@ -8,6 +8,8 @@
 #include "../scripts/MenuScripts/StartGameButtonScript.h"
 #include "../scripts/MenuScripts/BackButtonScript.h"
 
+using namespace GolfEngine::Scene::UI;
+
 void SelectLevelScene::build(Scene& scene) const {
 
 

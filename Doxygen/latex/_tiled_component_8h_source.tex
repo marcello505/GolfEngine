@@ -1,0 +1,45 @@
+\hypertarget{_tiled_component_8h_source}{}\doxysection{Tiled\+Component.\+h}
+\label{_tiled_component_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/Components/TiledComponent.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/Components/TiledComponent.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by conner on 12/5/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef GOLFENGINE\_TILEDCOMPONENT\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define GOLFENGINE\_TILEDCOMPONENT\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}Component.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}Scene/Components/Drawable.h"{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}Scene/RenderShape/TileMapRenderShape.h"{}}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{keyword}{namespace }GolfEngine::Scene::Components \{}
+\DoxyCodeLine{13     \textcolor{keyword}{class }\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component}{TiledComponent}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_component}{Component}}, \textcolor{keyword}{public} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_drawable}{Drawable}} \{}
+\DoxyCodeLine{14     \textcolor{keyword}{public}:}
+\DoxyCodeLine{18         \textcolor{keyword}{explicit} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component}{TiledComponent}}(\textcolor{keyword}{const} std::string \&mapPath, \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} pixelScale = \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}}\{1, 1\});}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20         \textcolor{comment}{// Component overrides}}
+\DoxyCodeLine{21         \textcolor{keywordtype}{void} onStart() \textcolor{keyword}{override};}
+\DoxyCodeLine{22         \textcolor{keywordtype}{void} onUpdate() \textcolor{keyword}{override};}
+\DoxyCodeLine{23         \textcolor{keywordtype}{void} onRemove() \textcolor{keyword}{override};}
+\DoxyCodeLine{24         \textcolor{keywordtype}{bool} getActive() \textcolor{keyword}{override};}
+\DoxyCodeLine{25         \textcolor{keywordtype}{void} setActive(\textcolor{keywordtype}{bool} active) \textcolor{keyword}{override};}
+\DoxyCodeLine{26         \textcolor{keywordtype}{void} setParentGameObject(\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{GameObject}} \&gameObject) \textcolor{keyword}{override};}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28         \textcolor{comment}{// Drawable overrides}}
+\DoxyCodeLine{29         \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_render_shape}{Render::RenderShape}} \&\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a565542a372c029db44c60c5d33c9e22a}{getRenderShape}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{32         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a85c94285781833693b4016b0b3031587}{initColliders}}();}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34         \textcolor{comment}{// IPersistable overrides}}
+\DoxyCodeLine{35         std::unique\_ptr<ISnapshot> saveSnapshot() \textcolor{keyword}{override};}
+\DoxyCodeLine{36         \textcolor{keywordtype}{void} loadSnapshot(\textcolor{keyword}{const} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_i_snapshot}{ISnapshot}} \&rawSnapshot) \textcolor{keyword}{override};}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     \textcolor{keyword}{private}:}
+\DoxyCodeLine{39         \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_tile_map_render_shape}{Render::TileMapRenderShape}} \_renderShape;}
+\DoxyCodeLine{40     \};}
+\DoxyCodeLine{41 \}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//GOLFENGINE\_TILEDCOMPONENT\_H}}
+
+\end{DoxyCode}

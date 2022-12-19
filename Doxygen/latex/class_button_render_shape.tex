@@ -1,0 +1,81 @@
+\hypertarget{class_button_render_shape}{}\doxysection{Button\+Render\+Shape Class Reference}
+\label{class_button_render_shape}\index{ButtonRenderShape@{ButtonRenderShape}}
+Inheritance diagram for Button\+Render\+Shape\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_button_render_shape}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_button_render_shape_a53becd8b3a7c0f5397549b4a9bc12bb6}{Button\+Render\+Shape}} (\mbox{\hyperlink{class_rect_render_shape}{Rect\+Render\+Shape}} $\ast$rect\+Render\+Shape, \mbox{\hyperlink{class_text_render_shape}{Text\+Render\+Shape}} $\ast$text\+Render\+Shape, Alignment alignment)
+\item 
+Render\+Shape\+Type \mbox{\hyperlink{class_button_render_shape_aaca4443b56ae6becaefe3619f4162804}{get\+Type}} () override
+\item 
+void \mbox{\hyperlink{class_button_render_shape_a3d07187d111fa024d8f5e245dd984510}{apply\+Transform}} (const \mbox{\hyperlink{struct_transform}{Transform}} \&transform) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_button_render_shape_af54aba9756d9c8ad3c4c3c23948c7b35}\label{class_button_render_shape_af54aba9756d9c8ad3c4c3c23948c7b35}} 
+Alignment {\bfseries \+\_\+text\+Align}
+\item 
+\mbox{\Hypertarget{class_button_render_shape_a658fcc59a46ac5117d60ab5a9df480e0}\label{class_button_render_shape_a658fcc59a46ac5117d60ab5a9df480e0}} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_rect_render_shape}{Rect\+Render\+Shape}} $>$ {\bfseries \+\_\+rect\+Render\+Shape} \{\}
+\item 
+\mbox{\Hypertarget{class_button_render_shape_a2dafff5ef04befb2db8521e7352d7090}\label{class_button_render_shape_a2dafff5ef04befb2db8521e7352d7090}} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_text_render_shape}{Text\+Render\+Shape}} $>$ {\bfseries \+\_\+text\+Render\+Shape} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_button_render_shape_a53becd8b3a7c0f5397549b4a9bc12bb6}\label{class_button_render_shape_a53becd8b3a7c0f5397549b4a9bc12bb6}} 
+\index{ButtonRenderShape@{ButtonRenderShape}!ButtonRenderShape@{ButtonRenderShape}}
+\index{ButtonRenderShape@{ButtonRenderShape}!ButtonRenderShape@{ButtonRenderShape}}
+\doxysubsubsection{\texorpdfstring{ButtonRenderShape()}{ButtonRenderShape()}}
+{\footnotesize\ttfamily Button\+Render\+Shape\+::\+Button\+Render\+Shape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_rect_render_shape}{Rect\+Render\+Shape}} $\ast$}]{rect\+Render\+Shape,  }\item[{\mbox{\hyperlink{class_text_render_shape}{Text\+Render\+Shape}} $\ast$}]{text\+Render\+Shape,  }\item[{Alignment}]{alignment }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{class_render_shape}{Render\+Shape}} used to render a button 
+\begin{DoxyParams}{Parameters}
+{\em rect\+Render\+Shape} & rectangle to render button outline \\
+\hline
+{\em text\+Render\+Shape} & text to render text inside button \\
+\hline
+{\em alignment} & alignment of button \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_button_render_shape_a3d07187d111fa024d8f5e245dd984510}\label{class_button_render_shape_a3d07187d111fa024d8f5e245dd984510}} 
+\index{ButtonRenderShape@{ButtonRenderShape}!applyTransform@{applyTransform}}
+\index{applyTransform@{applyTransform}!ButtonRenderShape@{ButtonRenderShape}}
+\doxysubsubsection{\texorpdfstring{applyTransform()}{applyTransform()}}
+{\footnotesize\ttfamily void Button\+Render\+Shape\+::apply\+Transform (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_transform}{Transform}} \&}]{transform }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Applies a transform to the \mbox{\hyperlink{class_render_shape}{Render\+Shape}} properties 
+\begin{DoxyParams}{Parameters}
+{\em transform} & \mbox{\hyperlink{struct_transform}{Transform}} to be applied \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_render_shape_a106c7a0283a25a57a1ad439f4c294309}{Render\+Shape}}.
+
+\mbox{\Hypertarget{class_button_render_shape_aaca4443b56ae6becaefe3619f4162804}\label{class_button_render_shape_aaca4443b56ae6becaefe3619f4162804}} 
+\index{ButtonRenderShape@{ButtonRenderShape}!getType@{getType}}
+\index{getType@{getType}!ButtonRenderShape@{ButtonRenderShape}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily Render\+Shape\+Type Button\+Render\+Shape\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_render_shape}{Render\+Shape}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Render\+Shape/Button\+Render\+Shape.\+h\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Render\+Shape/Button\+Render\+Shape.\+cpp\end{DoxyCompactItemize}

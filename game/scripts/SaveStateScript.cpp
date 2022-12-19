@@ -5,9 +5,11 @@
 #include <Core/SceneManager.h>
 #include "SaveStateScript.h"
 
+using namespace GolfEngine;
+
 void SaveStateScript::onUpdate() {
-    if(GolfEngine::SceneManager::GetSceneManager().hasCurrentScene()){
-        auto& currentScene = GolfEngine::SceneManager::GetSceneManager().getCurrentScene();
+    if(GolfEngine::Core::SceneManager::GetSceneManager().hasCurrentScene()){
+        auto& currentScene = GolfEngine::Core::SceneManager::GetSceneManager().getCurrentScene();
         if(_actionMap->isJustPressed("startRecordingReplay")){
             std::vector<std::string> actionsToLock {
                 "playerLeft",
@@ -28,5 +30,5 @@ void SaveStateScript::onUpdate() {
 }
 
 void SaveStateScript::onStart() {
-    _actionMap = ActionMap::getActionMap();
+    _actionMap = Input::ActionMap::getActionMap();
 }

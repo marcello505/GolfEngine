@@ -8,45 +8,47 @@
 #include "GameObject.h"
 #include "../Color.h"
 
-class Camera : public GameObject {
-public:
-    /// Camera object controls what gets displayed on the screen. (First camera created in the scene will be the main camera by default.)
-    /// \param aspectWidth width of the camera display
-    /// \param aspectHeight height of the camera display
-    /// \param backgroundColor color used on the background where no sprites are present
-    Camera(float aspectWidth, float aspectHeight, Color backgroundColor = Color{50, 50, 50, 255});
-    explicit Camera(Color backgroundColor = Color{50, 50, 50, 255});
+namespace GolfEngine::Scene {
+    class Camera : public GameObject {
+    public:
+        /// Camera object controls what gets displayed on the screen. (First camera created in the scene will be the main camera by default.)
+        /// \param aspectWidth width of the camera display
+        /// \param aspectHeight height of the camera display
+        /// \param backgroundColor color used on the background where no sprites are present
+        Camera(float aspectWidth, float aspectHeight, Color backgroundColor = Color{50, 50, 50, 255});
+        explicit Camera(Color backgroundColor = Color{50, 50, 50, 255});
 
-    // GameObject overrides
-    void onStart() override;
+        // GameObject overrides
+        void onStart() override;
 
-    /// Sets the main camera in the render service
-    /// \param camera reference to the camera to be set
-    static void setMainCamera(Camera& camera);
+        /// Sets the main camera in the render service
+        /// \param camera reference to the camera to be set
+        static void setMainCamera(Camera &camera);
 
-    /// Returns a reference to the current main camera if there is one present
-    /// \return reference to current main camera
-    static std::optional<std::reference_wrapper<Camera>> getMainCamera();
+        /// Returns a reference to the current main camera if there is one present
+        /// \return reference to current main camera
+        static std::optional<std::reference_wrapper<Camera>> getMainCamera();
 
-    /// Converts screen space position to a world space position
-    /// \param screenPos position to be converted
-    /// \return world position
-    static Vector2 screenToWorldSpace(Vector2 screenPos);
+        /// Converts screen space position to a world space position
+        /// \param screenPos position to be converted
+        /// \return world position
+        static Vector2 screenToWorldSpace(Vector2 screenPos);
 
-    /// Converts world space position to a screen space position
-    /// \param worldPos position to be converted
-    /// \return screen position
-    static Vector2 worldToScreenSpace(Vector2 worldPos);
+        /// Converts world space position to a screen space position
+        /// \param worldPos position to be converted
+        /// \return screen position
+        static Vector2 worldToScreenSpace(Vector2 worldPos);
 
-    // Getters
-    [[nodiscard]] float aspectWidth() const;
-    [[nodiscard]] float aspectHeight() const;
-    [[nodiscard]] Color backgroundColor() const;
-private:
-    Color _backgroundColor;
-    float _aspectWidth;
-    float _aspectHeight;
-};
+        // Getters
+        [[nodiscard]] float aspectWidth() const;
+        [[nodiscard]] float aspectHeight() const;
+        [[nodiscard]] Color backgroundColor() const;
 
+    private:
+        Color _backgroundColor;
+        float _aspectWidth;
+        float _aspectHeight;
+    };
+}
 
 #endif //SPC_PROJECT_CAMERA_H

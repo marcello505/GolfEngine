@@ -1,0 +1,178 @@
+\hypertarget{class_scene}{}\doxysection{Scene Class Reference}
+\label{class_scene}\index{Scene@{Scene}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_game_object}{Game\+Object}} \& \mbox{\hyperlink{class_scene_aa7362215a1865ee5c70eba6946d9c1fb}{get\+Root\+Game\+Object}} () const
+\item 
+void \mbox{\hyperlink{class_scene_ad68e6851453b8c6f3a467e610d8e7271}{start\+Recording\+Replay}} (const std\+::vector$<$ std\+::string $>$ \&actions\+To\+Lock, bool record\+Mouse=false)
+\item 
+\mbox{\Hypertarget{class_scene_aaf70de6991bda48d8612b8a075a70aa2}\label{class_scene_aaf70de6991bda48d8612b8a075a70aa2}} 
+void {\bfseries stop\+Recording\+Replay} ()
+\begin{DoxyCompactList}\small\item\em Stops the recording of the scene. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scene_ac9935f3a096ccd9f98b52a5e56294bed}\label{class_scene_ac9935f3a096ccd9f98b52a5e56294bed}} 
+void {\bfseries play\+Replay} ()
+\begin{DoxyCompactList}\small\item\em Play the saved recording. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scene_a79da26146e1d307d01b9316692148f59}\label{class_scene_a79da26146e1d307d01b9316692148f59}} 
+void {\bfseries stop\+Replay} ()
+\begin{DoxyCompactList}\small\item\em Stop playing the saved recording. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_scene_a1373132e3feaaafced6f814f39d16f24}{save\+Current\+Scene\+State}} (int slot)
+\item 
+void \mbox{\hyperlink{class_scene_a954b94ad00dc178fc99b44bb2b345ff0}{load\+Current\+Scene\+State}} (int slot)
+\item 
+\mbox{\Hypertarget{class_scene_a395ea1c87a4b18b8e464259b4fa92192}\label{class_scene_a395ea1c87a4b18b8e464259b4fa92192}} 
+virtual void {\bfseries start\+Scene} ()
+\begin{DoxyCompactList}\small\item\em Calls on\+Start on all game\+Objects in the scene. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_scene_a29ad9fb8d3ecf72ed266dc3cd891cf3a}\label{class_scene_a29ad9fb8d3ecf72ed266dc3cd891cf3a}} 
+virtual void {\bfseries update\+Scene} ()
+\begin{DoxyCompactList}\small\item\em Calls on\+Update on all game\+Objects in the scene. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_scene_af19fc51998d7714cb11cc1e9ca5b4c01}{update\+Replay}} ()
+\item 
+\mbox{\hyperlink{class_game_object}{Game\+Object}} \& \mbox{\hyperlink{class_scene_aeb28dd8b35cd18f879c7b510f68eac9b}{get\+Game\+Object\+With\+Tag}} (const std\+::string \&tag) const
+\item 
+std\+::vector$<$ std\+::reference\+\_\+wrapper$<$ \mbox{\hyperlink{class_game_object}{Game\+Object}} $>$ $>$ \mbox{\hyperlink{class_scene_a38a08f26b6a78b894d7314c9efd9766f}{get\+Game\+Objects\+With\+Tag}} (const std\+::string \&tag)
+\item 
+{\footnotesize template$<$typename GO , typename ... Args$>$ }\\GO \& \mbox{\hyperlink{class_scene_a9f8996dcb83d2d3f6c6f4b7f74e6d26e}{create\+New\+Game\+Object}} (\mbox{\hyperlink{class_game_object}{Game\+Object}} \&parent, Args ... args)
+\item 
+{\footnotesize template$<$typename GO , typename ... Args$>$ }\\GO \& \mbox{\hyperlink{class_scene_a5b50856030d9be9f5c22055cf147c97a}{create\+New\+Game\+Object}} (Args ... args)
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_scene_ab5acff5f7a07718f66ab7b32be9f2838}\label{class_scene_ab5acff5f7a07718f66ab7b32be9f2838}} 
+std\+::vector$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_game_object}{Game\+Object}} $>$ $>$ {\bfseries \+\_\+game\+Objects}
+\item 
+\mbox{\Hypertarget{class_scene_a4e0b9354335cc9472a971f3819da81d0}\label{class_scene_a4e0b9354335cc9472a971f3819da81d0}} 
+std\+::unique\+\_\+ptr$<$ std\+::reference\+\_\+wrapper$<$ \mbox{\hyperlink{class_game_object}{Game\+Object}} $>$ $>$ {\bfseries \+\_\+root\+Game\+Object}
+\item 
+\mbox{\Hypertarget{class_scene_a4aede1c6dd58c3ade4b6777e1c3eab40}\label{class_scene_a4aede1c6dd58c3ade4b6777e1c3eab40}} 
+Replay\+State {\bfseries \+\_\+replay\+State} \{Replay\+State\+::\+Idle\}
+\item 
+\mbox{\Hypertarget{class_scene_a3b280a1cf39fbe67dae28c18ff9187aa}\label{class_scene_a3b280a1cf39fbe67dae28c18ff9187aa}} 
+\mbox{\hyperlink{struct_replay}{Replay}} {\bfseries \+\_\+replay} \{\}
+\item 
+\mbox{\Hypertarget{class_scene_a780b259bde9ee73628974abdf5cd3468}\label{class_scene_a780b259bde9ee73628974abdf5cd3468}} 
+int {\bfseries \+\_\+replay\+Frame} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_scene_a5b50856030d9be9f5c22055cf147c97a}\label{class_scene_a5b50856030d9be9f5c22055cf147c97a}} 
+\index{Scene@{Scene}!createNewGameObject@{createNewGameObject}}
+\index{createNewGameObject@{createNewGameObject}!Scene@{Scene}}
+\doxysubsubsection{\texorpdfstring{createNewGameObject()}{createNewGameObject()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename GO , typename ... Args$>$ \\
+GO \& Scene\+::create\+New\+Game\+Object (\begin{DoxyParamCaption}\item[{Args ...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Creates a new \mbox{\hyperlink{class_game_object}{Game\+Object}} (with the root game\+Object of the scene as parent) 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em GO} & Type of \mbox{\hyperlink{class_game_object}{Game\+Object}} to be created \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+A reference to the newly created \mbox{\hyperlink{class_game_object}{Game\+Object}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_a9f8996dcb83d2d3f6c6f4b7f74e6d26e}\label{class_scene_a9f8996dcb83d2d3f6c6f4b7f74e6d26e}} 
+\index{Scene@{Scene}!createNewGameObject@{createNewGameObject}}
+\index{createNewGameObject@{createNewGameObject}!Scene@{Scene}}
+\doxysubsubsection{\texorpdfstring{createNewGameObject()}{createNewGameObject()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename GO , typename ... Args$>$ \\
+GO \& Scene\+::create\+New\+Game\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_object}{Game\+Object}} \&}]{parent,  }\item[{Args ...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Creates a new \mbox{\hyperlink{class_game_object}{Game\+Object}} 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em GO} & Type of \mbox{\hyperlink{class_game_object}{Game\+Object}} to be created \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & The parent of the \mbox{\hyperlink{class_game_object}{Game\+Object}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to the newly created \mbox{\hyperlink{class_game_object}{Game\+Object}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_a38a08f26b6a78b894d7314c9efd9766f}\label{class_scene_a38a08f26b6a78b894d7314c9efd9766f}} 
+\index{Scene@{Scene}!getGameObjectsWithTag@{getGameObjectsWithTag}}
+\index{getGameObjectsWithTag@{getGameObjectsWithTag}!Scene@{Scene}}
+\doxysubsubsection{\texorpdfstring{getGameObjectsWithTag()}{getGameObjectsWithTag()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::reference\+\_\+wrapper$<$ \mbox{\hyperlink{class_game_object}{Game\+Object}} $>$ $>$ Scene\+::get\+Game\+Objects\+With\+Tag (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{tag }\end{DoxyParamCaption})}
+
+Retrieves a list of game\+Objects with the corresponding tag 
+\begin{DoxyParams}{Parameters}
+{\em tag} & to be searched with \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+List of game\+Objects reference\+\_\+wrappers 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_aeb28dd8b35cd18f879c7b510f68eac9b}\label{class_scene_aeb28dd8b35cd18f879c7b510f68eac9b}} 
+\index{Scene@{Scene}!getGameObjectWithTag@{getGameObjectWithTag}}
+\index{getGameObjectWithTag@{getGameObjectWithTag}!Scene@{Scene}}
+\doxysubsubsection{\texorpdfstring{getGameObjectWithTag()}{getGameObjectWithTag()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_game_object}{Game\+Object}} \& Scene\+::get\+Game\+Object\+With\+Tag (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{tag }\end{DoxyParamCaption}) const}
+
+Retrieves a game\+Object with the corresponding tag 
+\begin{DoxyParams}{Parameters}
+{\em tag} & to be searched with \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a reference to a game\+Object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_aa7362215a1865ee5c70eba6946d9c1fb}\label{class_scene_aa7362215a1865ee5c70eba6946d9c1fb}} 
+\index{Scene@{Scene}!getRootGameObject@{getRootGameObject}}
+\index{getRootGameObject@{getRootGameObject}!Scene@{Scene}}
+\doxysubsubsection{\texorpdfstring{getRootGameObject()}{getRootGameObject()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_game_object}{Game\+Object}} \& Scene\+::get\+Root\+Game\+Object (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Gets the root game\+Object of the scene \begin{DoxyReturn}{Returns}
+reference to root game\+Object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_scene_a954b94ad00dc178fc99b44bb2b345ff0}\label{class_scene_a954b94ad00dc178fc99b44bb2b345ff0}} 
+\index{Scene@{Scene}!loadCurrentSceneState@{loadCurrentSceneState}}
+\index{loadCurrentSceneState@{loadCurrentSceneState}!Scene@{Scene}}
+\doxysubsubsection{\texorpdfstring{loadCurrentSceneState()}{loadCurrentSceneState()}}
+{\footnotesize\ttfamily void Scene\+::load\+Current\+Scene\+State (\begin{DoxyParamCaption}\item[{int}]{slot }\end{DoxyParamCaption})}
+
+Load a saved state of the scene 
+\begin{DoxyParams}{Parameters}
+{\em slot} & slot used to specify which save state to be loaded \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_scene_a1373132e3feaaafced6f814f39d16f24}\label{class_scene_a1373132e3feaaafced6f814f39d16f24}} 
+\index{Scene@{Scene}!saveCurrentSceneState@{saveCurrentSceneState}}
+\index{saveCurrentSceneState@{saveCurrentSceneState}!Scene@{Scene}}
+\doxysubsubsection{\texorpdfstring{saveCurrentSceneState()}{saveCurrentSceneState()}}
+{\footnotesize\ttfamily void Scene\+::save\+Current\+Scene\+State (\begin{DoxyParamCaption}\item[{int}]{slot }\end{DoxyParamCaption})}
+
+Save a state of the scene 
+\begin{DoxyParams}{Parameters}
+{\em slot} & slot used to save the state to (used to later reference in load function) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_scene_ad68e6851453b8c6f3a467e610d8e7271}\label{class_scene_ad68e6851453b8c6f3a467e610d8e7271}} 
+\index{Scene@{Scene}!startRecordingReplay@{startRecordingReplay}}
+\index{startRecordingReplay@{startRecordingReplay}!Scene@{Scene}}
+\doxysubsubsection{\texorpdfstring{startRecordingReplay()}{startRecordingReplay()}}
+{\footnotesize\ttfamily void Scene\+::start\+Recording\+Replay (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{actions\+To\+Lock,  }\item[{bool}]{record\+Mouse = {\ttfamily false} }\end{DoxyParamCaption})}
+
+Starts a recording of the scene 
+\begin{DoxyParams}{Parameters}
+{\em actions\+To\+Lock} & actions that get recorded and are locked when recording is played back \\
+\hline
+{\em record\+Mouse} & boolean for recording the mouse or not \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_scene_af19fc51998d7714cb11cc1e9ca5b4c01}\label{class_scene_af19fc51998d7714cb11cc1e9ca5b4c01}} 
+\index{Scene@{Scene}!updateReplay@{updateReplay}}
+\index{updateReplay@{updateReplay}!Scene@{Scene}}
+\doxysubsubsection{\texorpdfstring{updateReplay()}{updateReplay()}}
+{\footnotesize\ttfamily void Scene\+::update\+Replay (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Executes all the steps needed to handle recordings, wether it is playing a recording or making one. Should be executed before {\ttfamily \mbox{\hyperlink{class_scene_a29ad9fb8d3ecf72ed266dc3cd891cf3a}{update\+Scene()}}} 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/Scene.\+h\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/Scene.\+cpp\end{DoxyCompactItemize}

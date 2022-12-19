@@ -1,0 +1,75 @@
+\hypertarget{class_text}{}\doxysection{Text Class Reference}
+\label{class_text}\index{Text@{Text}}
+Inheritance diagram for Text\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_text}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_text_ab1a76c33ecc46b53386bad37f75fcc04}{Text}} (\mbox{\hyperlink{struct_vector2}{Vector2}} pos, float rotation, std\+::string text, size\+\_\+t font\+Size, \mbox{\hyperlink{struct_color}{Color}} color, std\+::string file\+Path, Alignment alignment, bool is\+Button\+Part)
+\item 
+\mbox{\hyperlink{class_render_shape}{Render\+Shape}} \& \mbox{\hyperlink{class_text_aecc68d9f64c0a65532c784510055a01b}{get\+Render\+Shape}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_text_aa0f33ebe792a19a42c2e9a2b3d0276d1}\label{class_text_aa0f33ebe792a19a42c2e9a2b3d0276d1}} 
+Alignment {\bfseries \+\_\+alignment}
+\item 
+\mbox{\Hypertarget{class_text_a3948335f780b59076ab5187c7963b468}\label{class_text_a3948335f780b59076ab5187c7963b468}} 
+\mbox{\hyperlink{class_text_render_shape}{Text\+Render\+Shape}} {\bfseries \+\_\+render\+Shape}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_text_ab1a76c33ecc46b53386bad37f75fcc04}\label{class_text_ab1a76c33ecc46b53386bad37f75fcc04}} 
+\index{Text@{Text}!Text@{Text}}
+\index{Text@{Text}!Text@{Text}}
+\doxysubsubsection{\texorpdfstring{Text()}{Text()}}
+{\footnotesize\ttfamily Text\+::\+Text (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_vector2}{Vector2}}}]{pos,  }\item[{float}]{rotation,  }\item[{std\+::string}]{text,  }\item[{size\+\_\+t}]{font\+Size,  }\item[{\mbox{\hyperlink{struct_color}{Color}}}]{color,  }\item[{std\+::string}]{file\+Path,  }\item[{Alignment}]{alignment,  }\item[{bool}]{is\+Button\+Part }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{class_text}{Text}} object used to render text on screen 
+\begin{DoxyParams}{Parameters}
+{\em pos} & position of text on screen \\
+\hline
+{\em rotation} & rotation of text on screen \\
+\hline
+{\em text} & starting text \\
+\hline
+{\em font\+Size} & of text \\
+\hline
+{\em color} & of text \\
+\hline
+{\em file\+Path} & of font \\
+\hline
+{\em alignment} & of text \\
+\hline
+{\em is\+Button\+Part} & is part of a button or not \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_text_aecc68d9f64c0a65532c784510055a01b}\label{class_text_aecc68d9f64c0a65532c784510055a01b}} 
+\index{Text@{Text}!getRenderShape@{getRenderShape}}
+\index{getRenderShape@{getRenderShape}!Text@{Text}}
+\doxysubsubsection{\texorpdfstring{getRenderShape()}{getRenderShape()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_render_shape}{Render\+Shape}} \& Text\+::get\+Render\+Shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Get the render shape connected to this drawable \begin{DoxyReturn}{Returns}
+render shape 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_drawable_ac786b2a1008169713173ac2bc770cefc}{Drawable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Game\+Objects/\+UIObject/Text.\+h\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Game\+Objects/\+UIObject/Text.\+cpp\end{DoxyCompactItemize}

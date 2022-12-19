@@ -11,6 +11,8 @@
 #include <SDL_ttf.h>
 #include <optional>
 
+using namespace GolfEngine::Scene::UI;
+
 namespace GolfEngine::Services::Render {
 
     SDLRenderService::SDLRenderService()

@@ -11,13 +11,14 @@
 #include "RenderShape.h"
 #include "RectRenderShape.h"
 
+namespace GolfEngine::Scene::Render {
+    class GraphRenderShape : public RenderShape {
+    public:
+        RenderShapeType getType() override;
+        void applyTransform(const Transform &transform) override;
 
-class GraphRenderShape : public RenderShape {
-public:
-    RenderShapeType getType() override;
-    void applyTransform(const Transform& transform) override;
-    std::vector<std::unique_ptr<RectRenderShape>> nodes {};
-};
-
+        std::vector<std::unique_ptr<RectRenderShape>> nodes{};
+    };
+}
 
 #endif //GOLFENGINE_GRAPHRENDERSHAPE_H

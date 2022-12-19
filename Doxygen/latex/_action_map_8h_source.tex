@@ -1,0 +1,66 @@
+\hypertarget{_action_map_8h_source}{}\doxysection{Action\+Map.\+h}
+\label{_action_map_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Input/ActionMap.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Input/ActionMap.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by olafv on 11/2/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef GOLFENGINE\_ACTIONMAP\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define GOLFENGINE\_ACTIONMAP\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}Action.h"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}InputKey.h"{}}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}../Scene/Vector2.h"{}}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{keyword}{using namespace }GolfEngine::Scene;}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{keyword}{namespace }GolfEngine::Input \{}
+\DoxyCodeLine{19     \textcolor{keyword}{class }\mbox{\hyperlink{class_golf_engine_1_1_input_1_1_action_map}{ActionMap}} \{}
+\DoxyCodeLine{20     \textcolor{keyword}{private}:}
+\DoxyCodeLine{21         std::map<std::string, Action> \_actions;}
+\DoxyCodeLine{22         std::map<InputKey, std::vector<Action>> \_inputKeys;}
+\DoxyCodeLine{23         \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} mousePosition;}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25         \textcolor{keyword}{static} \mbox{\hyperlink{class_golf_engine_1_1_input_1_1_action_map}{ActionMap}} *actionMap;}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27     \textcolor{keyword}{public}:}
+\DoxyCodeLine{28         \mbox{\hyperlink{class_golf_engine_1_1_input_1_1_action_map}{ActionMap}}();}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{32         \textcolor{keyword}{static} \mbox{\hyperlink{class_golf_engine_1_1_input_1_1_action_map}{ActionMap}} *\mbox{\hyperlink{class_golf_engine_1_1_input_1_1_action_map_aecb9ee9412db2be1997c4e94a713d195}{getActionMap}}();}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{35         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_input_1_1_action_map_a0bb5108d5d4cf89f05559e393de08501}{update}}();}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{39         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_input_1_1_action_map_a12394e8eda9d7728bdb7d4a31db5e4ae}{addAction}}(\textcolor{keyword}{const} std::string \&name);}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{44         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_input_1_1_action_map_a4c141ee01c59a43b26648e2c122d9a23}{addInputKeyToAction}}(\textcolor{keyword}{const} std::string \&action, InputKey inputKey);}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{49         [[nodiscard]] \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_golf_engine_1_1_input_1_1_action_map_a30c58b9d52d6df61ff824ee8754e0301}{isJustPressed}}(\textcolor{keyword}{const} std::string \&action) \textcolor{keyword}{const};}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{54         [[nodiscard]] \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_golf_engine_1_1_input_1_1_action_map_aac8766d411eddd58d42dd498294a3280}{isJustReleased}}(\textcolor{keyword}{const} std::string \&action) \textcolor{keyword}{const};}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{59         [[nodiscard]] \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_golf_engine_1_1_input_1_1_action_map_ad554e93e23140d1cdd6309bb1eda2362}{isPressed}}(\textcolor{keyword}{const} std::string \&action) \textcolor{keyword}{const};}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{64         [[nodiscard]] \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_golf_engine_1_1_input_1_1_action_map_a396bb07e9947be83f8c21e96034ef3bf}{isReleased}}(\textcolor{keyword}{const} std::string \&action) \textcolor{keyword}{const};}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{68         [[nodiscard]] \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \mbox{\hyperlink{class_golf_engine_1_1_input_1_1_action_map_a3fb4ea18a0c38d96c7cabbcf2d5093de}{getMousePosition}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{73         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_input_1_1_action_map_a4be65f24fc2d00a11a23ad2385c3d10c}{setMousePosition}}(\textcolor{keywordtype}{int} x, \textcolor{keywordtype}{int} y);}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{78         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_input_1_1_action_map_aafee49a2ddedba60542b3b0e8c6877bd}{setInputKeyPressed}}(InputKey inputKey, \textcolor{keywordtype}{bool} pressed);}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{83         std::vector<InputKey> \mbox{\hyperlink{class_golf_engine_1_1_input_1_1_action_map_a24bdf334ef8dafef6596c977fd072c8d}{getActionKeys}}(std::string action);}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{87         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_input_1_1_action_map_a470461d9b4d38f75dd323872f66ae58b}{removeInputKeysFromAction}}(std::string \&action);}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{93         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_input_1_1_action_map_afe293bc2d95d733f0baf88a71a8fcdc3}{setActionPressed}}(\textcolor{keyword}{const} std::string \&action, \textcolor{keywordtype}{bool} pressed, \textcolor{keywordtype}{bool} justInput);}
+\DoxyCodeLine{94     \};}
+\DoxyCodeLine{95 \}}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//GOLFENGINE\_ACTIONMAP\_H}}
+
+\end{DoxyCode}

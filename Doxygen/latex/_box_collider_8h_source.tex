@@ -1,0 +1,51 @@
+\hypertarget{_box_collider_8h_source}{}\doxysection{Box\+Collider.\+h}
+\label{_box_collider_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/Components/BoxCollider.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/Components/BoxCollider.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by jaaps on 02/11/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef GOLFENGINE\_BOXCOLLIDER\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define GOLFENGINE\_BOXCOLLIDER\_H}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}../Vector2.h"{}}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}../RenderShape/RectRenderShape.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}Collider.h"{}}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{namespace }GolfEngine::Scene::Components \{}
+\DoxyCodeLine{12     \textcolor{keyword}{class }\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_box_collider}{BoxCollider}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_collider}{Collider}} \{}
+\DoxyCodeLine{13     \textcolor{keyword}{public}:}
+\DoxyCodeLine{16         \textcolor{keyword}{explicit} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_box_collider_a17b87fad023e4056584896ec089fe55e}{BoxCollider}}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}}\& extends) : \_shapeExtents\{extends\},}
+\DoxyCodeLine{17                                                        \_rectRenderShape\{\{\{\}, \{extends.x * 2, extends.y * 2\}\}\} \{\};}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{21         ColliderShapes getColliderShape() \textcolor{keyword}{override};}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{25         [[nodiscard]] \textcolor{keyword}{const} Vector2 \&getShapeExtents() \textcolor{keyword}{const};}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27         \textcolor{comment}{// Component overrides}}
+\DoxyCodeLine{28         \textcolor{keywordtype}{void} onStart() \textcolor{keyword}{override};}
+\DoxyCodeLine{29         \textcolor{keywordtype}{void} onUpdate() \textcolor{keyword}{override};}
+\DoxyCodeLine{30         \textcolor{keywordtype}{void} onRemove() \textcolor{keyword}{override};}
+\DoxyCodeLine{31         \textcolor{keywordtype}{bool} getActive() \textcolor{keyword}{override};}
+\DoxyCodeLine{32         \textcolor{keywordtype}{void} setActive(\textcolor{keywordtype}{bool} active) \textcolor{keyword}{override};}
+\DoxyCodeLine{33         \textcolor{keywordtype}{void} setParentGameObject(GameObject \&gameObject) \textcolor{keyword}{override};}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35         \textcolor{comment}{// IPersistable overrides}}
+\DoxyCodeLine{36         std::unique\_ptr<ISnapshot> saveSnapshot() \textcolor{keyword}{override};}
+\DoxyCodeLine{37         \textcolor{keywordtype}{void} loadSnapshot(\textcolor{keyword}{const} ISnapshot \&rawSnapshot) \textcolor{keyword}{override};}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39         \textcolor{comment}{//Drawable overrides}}
+\DoxyCodeLine{40         Render::RenderShape \&getRenderShape() \textcolor{keyword}{override};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{44         \textcolor{keywordtype}{void} setColor(Color color);}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \textcolor{keyword}{private}:}
+\DoxyCodeLine{47         \textcolor{keywordtype}{bool} \_active\{\textcolor{keyword}{true}\};}
+\DoxyCodeLine{48         Render::RectRenderShape \_rectRenderShape;}
+\DoxyCodeLine{49         \textcolor{keyword}{const} Vector2 \_shapeExtents;}
+\DoxyCodeLine{50     \};}
+\DoxyCodeLine{51 \}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//GOLFENGINE\_BOXCOLLIDER\_H}}
+
+\end{DoxyCode}

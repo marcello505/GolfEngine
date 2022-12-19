@@ -1,0 +1,175 @@
+\hypertarget{class_rigid_body}{}\doxysection{Rigid\+Body Class Reference}
+\label{class_rigid_body}\index{RigidBody@{RigidBody}}
+Inheritance diagram for Rigid\+Body\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_rigid_body}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_rigid_body_a2253d81c9c0eb0f7d5987a58a05a66fd}{Rigid\+Body}} (const \mbox{\hyperlink{struct_rigid_body_def}{Rigid\+Body\+Def}} \&rigid\+Body\+Def)
+\item 
+void \mbox{\hyperlink{class_rigid_body_a90c107879814ad154444b2e2e50fa642}{on\+Start}} () override
+\item 
+void \mbox{\hyperlink{class_rigid_body_a7f6f082ab81b82b15c6d32bf3ab896ca}{on\+Update}} () override
+\item 
+void \mbox{\hyperlink{class_rigid_body_a0b51bd9da6c4b2c8582bbbc3be1c6633}{on\+Remove}} () override
+\item 
+bool \mbox{\hyperlink{class_rigid_body_ace794db08018a13e386c7966dd0b5139}{get\+Active}} () override
+\item 
+void \mbox{\hyperlink{class_rigid_body_a1d64dd9c4c5f41c0950a3ee4ffa01035}{set\+Active}} (bool active) override
+\item 
+void \mbox{\hyperlink{class_rigid_body_aa538ce23cddfcf48778dac65ea5e7888}{set\+Parent\+Game\+Object}} (\mbox{\hyperlink{class_game_object}{Game\+Object}} \&game\+Object) override
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} $>$ \mbox{\hyperlink{class_rigid_body_a97524c22e7981ac00f74ec815650d164}{save\+Snapshot}} () override
+\item 
+void \mbox{\hyperlink{class_rigid_body_a82f9d99a171198499a28523a7f3a9f9b}{load\+Snapshot}} (const \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} \&raw\+Snapshot) override
+\item 
+\mbox{\Hypertarget{class_rigid_body_a231af46ec872ad153094aa87a0a8c5fd}\label{class_rigid_body_a231af46ec872ad153094aa87a0a8c5fd}} 
+const \mbox{\hyperlink{struct_rigid_body_def}{Rigid\+Body\+Def}} \& {\bfseries get\+Rigid\+Body\+Def} () const
+\item 
+\mbox{\Hypertarget{class_rigid_body_a0a951dc4c24e0dcf96f57b8f08b4a605}\label{class_rigid_body_a0a951dc4c24e0dcf96f57b8f08b4a605}} 
+std\+::vector$<$ \mbox{\hyperlink{class_collider}{Collider}} $\ast$ $>$ {\bfseries get\+Colliders} () const
+\item 
+\mbox{\Hypertarget{class_rigid_body_a4146bc20a2dc503f32a548e32c121bbc}\label{class_rigid_body_a4146bc20a2dc503f32a548e32c121bbc}} 
+\mbox{\hyperlink{class_game_object}{Game\+Object}} $\ast$ {\bfseries get\+Parent\+Game\+Object} () const
+\item 
+\mbox{\Hypertarget{class_rigid_body_a98fa58a5a5fa8b728a9434db7c86bf96}\label{class_rigid_body_a98fa58a5a5fa8b728a9434db7c86bf96}} 
+\mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries get\+Linear\+Velocity} ()
+\item 
+\mbox{\Hypertarget{class_rigid_body_ad4e22f61906697c61507a69b9d26d3de}\label{class_rigid_body_ad4e22f61906697c61507a69b9d26d3de}} 
+float {\bfseries get\+Angular\+Velocity} ()
+\item 
+\mbox{\Hypertarget{class_rigid_body_a2c9b52bf3c8c6dc87d9ca195f231d9ac}\label{class_rigid_body_a2c9b52bf3c8c6dc87d9ca195f231d9ac}} 
+void {\bfseries apply\+Local\+Force\+To\+Center} (const \mbox{\hyperlink{struct_vector2}{Vector2}} \&force)
+\item 
+\mbox{\Hypertarget{class_rigid_body_ac9b9a6bbfe446cb22f399d695ba69a82}\label{class_rigid_body_ac9b9a6bbfe446cb22f399d695ba69a82}} 
+void {\bfseries apply\+World\+Force\+To\+Center} (const \mbox{\hyperlink{struct_vector2}{Vector2}} \&force)
+\item 
+\mbox{\Hypertarget{class_rigid_body_a238ab1725b94353ac9bfaa4cc1c1d9b0}\label{class_rigid_body_a238ab1725b94353ac9bfaa4cc1c1d9b0}} 
+void {\bfseries set\+Transform} (const \mbox{\hyperlink{struct_transform}{Transform}} \&transform)
+\item 
+\mbox{\Hypertarget{class_rigid_body_a0a5613751da06fedff32b08b7483b812}\label{class_rigid_body_a0a5613751da06fedff32b08b7483b812}} 
+void {\bfseries set\+Linear\+Damping} (float linear\+Damping)
+\item 
+\mbox{\Hypertarget{class_rigid_body_a8467996bb00671e49fa34e517199cfdb}\label{class_rigid_body_a8467996bb00671e49fa34e517199cfdb}} 
+void {\bfseries set\+Angular\+Damping} (float angular\+Damping)
+\item 
+\mbox{\Hypertarget{class_rigid_body_a60ce5390ecd4a46fee91d8217fc669ef}\label{class_rigid_body_a60ce5390ecd4a46fee91d8217fc669ef}} 
+void {\bfseries set\+Fixed\+Rotation} (bool fixed\+Rotation)
+\item 
+\mbox{\Hypertarget{class_rigid_body_a452caa52e54ea3d5e12c438ba42cc62e}\label{class_rigid_body_a452caa52e54ea3d5e12c438ba42cc62e}} 
+void {\bfseries set\+Gravity\+Scale} (float gravity\+Scale)
+\item 
+\mbox{\Hypertarget{class_rigid_body_a022a9c3f9c1a915aa063807c79285e10}\label{class_rigid_body_a022a9c3f9c1a915aa063807c79285e10}} 
+void {\bfseries set\+Linear\+Velocity} (const \mbox{\hyperlink{struct_vector2}{Vector2}} \&velocity)
+\item 
+\mbox{\Hypertarget{class_rigid_body_ade3d2d1a16383f395fe6a9e891d6c7e9}\label{class_rigid_body_ade3d2d1a16383f395fe6a9e891d6c7e9}} 
+void {\bfseries set\+Angular\+Velocity} (float omega)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_rigid_body_a2253d81c9c0eb0f7d5987a58a05a66fd}\label{class_rigid_body_a2253d81c9c0eb0f7d5987a58a05a66fd}} 
+\index{RigidBody@{RigidBody}!RigidBody@{RigidBody}}
+\index{RigidBody@{RigidBody}!RigidBody@{RigidBody}}
+\doxysubsubsection{\texorpdfstring{RigidBody()}{RigidBody()}}
+{\footnotesize\ttfamily Rigid\+Body\+::\+Rigid\+Body (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_rigid_body_def}{Rigid\+Body\+Def}} \&}]{rigid\+Body\+Def }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\mbox{\hyperlink{class_component}{Component}} that gets registered to the physics engine 
+\begin{DoxyParams}{Parameters}
+{\em rigid\+Body\+Def} & properties of the rigid body \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_rigid_body_ace794db08018a13e386c7966dd0b5139}\label{class_rigid_body_ace794db08018a13e386c7966dd0b5139}} 
+\index{RigidBody@{RigidBody}!getActive@{getActive}}
+\index{getActive@{getActive}!RigidBody@{RigidBody}}
+\doxysubsubsection{\texorpdfstring{getActive()}{getActive()}}
+{\footnotesize\ttfamily bool Rigid\+Body\+::get\+Active (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_rigid_body_a82f9d99a171198499a28523a7f3a9f9b}\label{class_rigid_body_a82f9d99a171198499a28523a7f3a9f9b}} 
+\index{RigidBody@{RigidBody}!loadSnapshot@{loadSnapshot}}
+\index{loadSnapshot@{loadSnapshot}!RigidBody@{RigidBody}}
+\doxysubsubsection{\texorpdfstring{loadSnapshot()}{loadSnapshot()}}
+{\footnotesize\ttfamily void Rigid\+Body\+::load\+Snapshot (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} \&}]{raw\+Snapshot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_persistable}{IPersistable}}.
+
+\mbox{\Hypertarget{class_rigid_body_a0b51bd9da6c4b2c8582bbbc3be1c6633}\label{class_rigid_body_a0b51bd9da6c4b2c8582bbbc3be1c6633}} 
+\index{RigidBody@{RigidBody}!onRemove@{onRemove}}
+\index{onRemove@{onRemove}!RigidBody@{RigidBody}}
+\doxysubsubsection{\texorpdfstring{onRemove()}{onRemove()}}
+{\footnotesize\ttfamily void Rigid\+Body\+::on\+Remove (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_rigid_body_a90c107879814ad154444b2e2e50fa642}\label{class_rigid_body_a90c107879814ad154444b2e2e50fa642}} 
+\index{RigidBody@{RigidBody}!onStart@{onStart}}
+\index{onStart@{onStart}!RigidBody@{RigidBody}}
+\doxysubsubsection{\texorpdfstring{onStart()}{onStart()}}
+{\footnotesize\ttfamily void Rigid\+Body\+::on\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_rigid_body_a7f6f082ab81b82b15c6d32bf3ab896ca}\label{class_rigid_body_a7f6f082ab81b82b15c6d32bf3ab896ca}} 
+\index{RigidBody@{RigidBody}!onUpdate@{onUpdate}}
+\index{onUpdate@{onUpdate}!RigidBody@{RigidBody}}
+\doxysubsubsection{\texorpdfstring{onUpdate()}{onUpdate()}}
+{\footnotesize\ttfamily void Rigid\+Body\+::on\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_rigid_body_a97524c22e7981ac00f74ec815650d164}\label{class_rigid_body_a97524c22e7981ac00f74ec815650d164}} 
+\index{RigidBody@{RigidBody}!saveSnapshot@{saveSnapshot}}
+\index{saveSnapshot@{saveSnapshot}!RigidBody@{RigidBody}}
+\doxysubsubsection{\texorpdfstring{saveSnapshot()}{saveSnapshot()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} $>$ Rigid\+Body\+::save\+Snapshot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_persistable}{IPersistable}}.
+
+\mbox{\Hypertarget{class_rigid_body_a1d64dd9c4c5f41c0950a3ee4ffa01035}\label{class_rigid_body_a1d64dd9c4c5f41c0950a3ee4ffa01035}} 
+\index{RigidBody@{RigidBody}!setActive@{setActive}}
+\index{setActive@{setActive}!RigidBody@{RigidBody}}
+\doxysubsubsection{\texorpdfstring{setActive()}{setActive()}}
+{\footnotesize\ttfamily void Rigid\+Body\+::set\+Active (\begin{DoxyParamCaption}\item[{bool}]{active }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_rigid_body_aa538ce23cddfcf48778dac65ea5e7888}\label{class_rigid_body_aa538ce23cddfcf48778dac65ea5e7888}} 
+\index{RigidBody@{RigidBody}!setParentGameObject@{setParentGameObject}}
+\index{setParentGameObject@{setParentGameObject}!RigidBody@{RigidBody}}
+\doxysubsubsection{\texorpdfstring{setParentGameObject()}{setParentGameObject()}}
+{\footnotesize\ttfamily void Rigid\+Body\+::set\+Parent\+Game\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_object}{Game\+Object}} \&}]{game\+Object }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Components/Rigid\+Body.\+h\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Components/Rigid\+Body.\+cpp\end{DoxyCompactItemize}

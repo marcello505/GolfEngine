@@ -1,0 +1,74 @@
+\hypertarget{class_golf_engine_1_1_scene_1_1_graph}{}\doxysection{Golf\+Engine\+::Scene\+::Graph Class Reference}
+\label{class_golf_engine_1_1_scene_1_1_graph}\index{GolfEngine::Scene::Graph@{GolfEngine::Scene::Graph}}
+Inheritance diagram for Golf\+Engine\+::Scene\+::Graph\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_golf_engine_1_1_scene_1_1_graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph_ae2f5e8726d00bdc17c62e6d6875e5b11}{Graph}} (std\+::vector$<$ \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_node}{Node}} $>$ nodes, std\+::vector$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_rect_render_shape}{Render\+::\+Rect\+Render\+Shape}} $>$ $>$ drawables)
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_graph_aee5745c5f4504b75f21b55233a150cd1}\label{class_golf_engine_1_1_scene_1_1_graph_aee5745c5f4504b75f21b55233a150cd1}} 
+{\bfseries Graph} (const \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}} \&other)=delete
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_graph_afbb6f2c943a275777bb6eadda483d5fa}\label{class_golf_engine_1_1_scene_1_1_graph_afbb6f2c943a275777bb6eadda483d5fa}} 
+{\bfseries Graph} (const \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}} \&\&other)=delete
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_graph_a7ca5fe21367e646ae2d24d15ec4703a9}\label{class_golf_engine_1_1_scene_1_1_graph_a7ca5fe21367e646ae2d24d15ec4703a9}} 
+\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}} \&other)=delete
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_graph_a9dd670346fe6a6cb3f971cd80676cde6}\label{class_golf_engine_1_1_scene_1_1_graph_a9dd670346fe6a6cb3f971cd80676cde6}} 
+\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}} \&\&other)=delete
+\item 
+\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_render_shape}{Render\+::\+Render\+Shape}} \& \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph_a7c633a1375a6b0026e71bab9eb693ff9}{get\+Render\+Shape}} () override
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_graph_a9211cd5c229ceaa9c509539933aee13d}\label{class_golf_engine_1_1_scene_1_1_graph_a9211cd5c229ceaa9c509539933aee13d}} 
+void {\bfseries update\+Graph\+Colors} ()
+\begin{DoxyCompactList}\small\item\em Updates the list of drawables based on included in path, visited or unvisited. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_graph_a4a15d24c92e0bc9c6efc8d22d7a0618e}\label{class_golf_engine_1_1_scene_1_1_graph_a4a15d24c92e0bc9c6efc8d22d7a0618e}} 
+std\+::vector$<$ \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_node}{Node}} $>$ {\bfseries nodes} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_graph_ae2f5e8726d00bdc17c62e6d6875e5b11}\label{class_golf_engine_1_1_scene_1_1_graph_ae2f5e8726d00bdc17c62e6d6875e5b11}} 
+\index{GolfEngine::Scene::Graph@{GolfEngine::Scene::Graph}!Graph@{Graph}}
+\index{Graph@{Graph}!GolfEngine::Scene::Graph@{GolfEngine::Scene::Graph}}
+\doxysubsubsection{\texorpdfstring{Graph()}{Graph()}}
+{\footnotesize\ttfamily Golf\+Engine\+::\+Scene\+::\+Graph\+::\+Graph (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_node}{Node}} $>$}]{nodes,  }\item[{std\+::vector$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_rect_render_shape}{Render\+::\+Rect\+Render\+Shape}} $>$ $>$}]{drawables }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}} object to manage a graph used in pathfinding 
+\begin{DoxyParams}{Parameters}
+{\em nodes} & list of nodes inside graph \\
+\hline
+{\em drawables} & list of drawable nodes \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_graph_a7c633a1375a6b0026e71bab9eb693ff9}\label{class_golf_engine_1_1_scene_1_1_graph_a7c633a1375a6b0026e71bab9eb693ff9}} 
+\index{GolfEngine::Scene::Graph@{GolfEngine::Scene::Graph}!getRenderShape@{getRenderShape}}
+\index{getRenderShape@{getRenderShape}!GolfEngine::Scene::Graph@{GolfEngine::Scene::Graph}}
+\doxysubsubsection{\texorpdfstring{getRenderShape()}{getRenderShape()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_render_shape}{Render\+::\+Render\+Shape}} \& Golf\+Engine\+::\+Scene\+::\+Graph\+::get\+Render\+Shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Get the render shape connected to this drawable \begin{DoxyReturn}{Returns}
+render shape 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_drawable_ad5694fb44b9d422893d8db4e34b94c3e}{Golf\+Engine\+::\+Scene\+::\+Components\+::\+Drawable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/Graph.\+h\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/Graph.\+cpp\end{DoxyCompactItemize}

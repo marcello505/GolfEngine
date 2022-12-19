@@ -7,10 +7,11 @@
 
 #include "Scene/GameObjects/GameObject.h"
 
-class Wall : public GameObject {
+using namespace GolfEngine::Scene;
+
+class Wall : public GolfEngine::Scene::GameObject {
 public:
     Wall(const Vector2& position, const Vector2& size);
-
 };
 
 

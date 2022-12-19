@@ -7,8 +7,10 @@
 #include "Input/ActionMap.h"
 #include "Core/Time.h"
 
+using namespace GolfEngine;
+
 void PlayerShootScript::onStart() {
-    _audioSource = &_gameObject.value().get().getComponent<GolfEngine::Scene::Components::AudioSource>();
+    _audioSource = &_gameObject.value().get().getComponent<AudioSource>();
 
     if (_gameObject->get().hasComponent<Animator>())
         _animator = &_gameObject->get().getComponent<Animator>();
@@ -16,7 +18,7 @@ void PlayerShootScript::onStart() {
 
 void PlayerShootScript::onUpdate() {
     //Handle shooting
-    if(ActionMap::getActionMap()->isJustPressed("playerShoot")){
+    if(Input::ActionMap::getActionMap()->isJustPressed("playerShoot")){
         if(_currentAmmo > 0 && !_reloading){
             _currentAmmo--;
 
@@ -27,7 +29,7 @@ void PlayerShootScript::onUpdate() {
             auto projectile = _projectilePool->getProjectile();
             if(projectile){
                 Transform projectileTransform {_gameObject->get().getWorldTransform()};
-                auto mouseWorldSpace {Camera::screenToWorldSpace(ActionMap::getActionMap()->getMousePosition())};
+                auto mouseWorldSpace {GolfEngine::Scene::Camera::screenToWorldSpace(Input::ActionMap::getActionMap()->getMousePosition())};
                 projectileTransform.rotation = _gameObject->get().getWorldTransform().position.angleToDegrees(mouseWorldSpace);
                 auto directionToMouse = _gameObject->get().getWorldTransform().position.directionTo(mouseWorldSpace);
                 projectileTransform.position += directionToMouse * 80.0f;
@@ -38,11 +40,11 @@ void PlayerShootScript::onUpdate() {
     }
 
     // Handle reloading
-    if(ActionMap::getActionMap()->isJustPressed("playerReload")){
+    if(Input::ActionMap::getActionMap()->isJustPressed("playerReload")){
         reloadWeapon();
     }
     if(_reloading){
-        _timePassedReloading += GolfEngine::Time::getPhysicsDeltaTime();
+        _timePassedReloading += Core::Time::getPhysicsDeltaTime();
         if(_timePassedReloading >= _reloadTime){
             _timePassedReloading = 0.0f;
             _reloading = false;

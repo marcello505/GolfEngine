@@ -1,0 +1,69 @@
+\hypertarget{_pathfinding_8h_source}{}\doxysection{Pathfinding.\+h}
+\label{_pathfinding_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/Components/Pathfinding.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/Components/Pathfinding.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by jaaps on 02/11/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef GOLFENGINE\_PATHFINDING\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define GOLFENGINE\_PATHFINDING\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}../Vector2.h"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}Component.h"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}Scene/Graph.h"{}}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{keyword}{namespace }GolfEngine::Scene::Components \{}
+\DoxyCodeLine{15     \textcolor{keyword}{class }\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_pathfinding}{Pathfinding}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_component}{Component}} \{}
+\DoxyCodeLine{16     \textcolor{keyword}{public}:}
+\DoxyCodeLine{20         \textcolor{keyword}{explicit} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_pathfinding}{Pathfinding}}(\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{GameObject}} *target, \textcolor{keywordtype}{float} recalculatePathTime = 0.1);}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22         \textcolor{comment}{// Overrides}}
+\DoxyCodeLine{23         \textcolor{keywordtype}{void} onStart() \textcolor{keyword}{override};}
+\DoxyCodeLine{24         \textcolor{keywordtype}{void} onUpdate() \textcolor{keyword}{override};}
+\DoxyCodeLine{25         \textcolor{keywordtype}{void} onRemove() \textcolor{keyword}{override};}
+\DoxyCodeLine{26         \textcolor{keywordtype}{bool} getActive() \textcolor{keyword}{override};}
+\DoxyCodeLine{27         \textcolor{keywordtype}{void} setActive(\textcolor{keywordtype}{bool} active) \textcolor{keyword}{override};}
+\DoxyCodeLine{28         \textcolor{keywordtype}{void} setParentGameObject(\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{GameObject}} \&gameObject) \textcolor{keyword}{override};}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{32         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_pathfinding_a458a1115c04c638a55f7fe7c400625f2}{setPath}}(\textcolor{keyword}{const} std::vector<Node> \&path);}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{36         std::vector<Node> \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_pathfinding_a8a42826414ab9214d41a21be172dce46}{getPath}}();}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{40         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_pathfinding_a498663a7155aeb8830e12b90a73125d4}{setTarget}}(\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{GameObject}} \&gameObject);}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{44         \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_pathfinding_adabb82b755d57ae1337daf19158a9c72}{getPathDirection}}();}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{49         \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_pathfinding_a68685c4713854473e2b8e13b7656957a}{getDirection}}(\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} target);}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{53         \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_pathfinding_a0bb08db809672e2b13e4836e2fd37bbc}{getTargetPosition}}();}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{57         [[nodiscard]] \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_pathfinding_afdfcfe402c2c1e5858ef9f1677d77e76}{getParentGameObjectPosition}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{61         \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_pathfinding_acd0df6ac8b33a9d15d5b3ef7f1c5b77a}{needsNewPath}}();}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63         \textcolor{comment}{// IPersistable overrides}}
+\DoxyCodeLine{64         std::unique\_ptr<ISnapshot> saveSnapshot() \textcolor{keyword}{override};}
+\DoxyCodeLine{65         \textcolor{keywordtype}{void} loadSnapshot(\textcolor{keyword}{const} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_i_snapshot}{ISnapshot}} \&rawSnapshot) \textcolor{keyword}{override};}
+\DoxyCodeLine{66 }
+\DoxyCodeLine{67     \textcolor{keyword}{private}:}
+\DoxyCodeLine{68         \textcolor{keywordtype}{int} \_countedFrames\{0\};}
+\DoxyCodeLine{69         std::reference\_wrapper<GameObject> \_target;}
+\DoxyCodeLine{70         std::vector<Node> \_path;}
+\DoxyCodeLine{71         \textcolor{keyword}{const} \textcolor{keywordtype}{int} \_fps;}
+\DoxyCodeLine{72         \textcolor{keywordtype}{float} \_recalculatePathTime;}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74         \textcolor{keyword}{struct }Snapshot : \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_i_snapshot}{ISnapshot}} \{}
+\DoxyCodeLine{75             \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{GameObject}} *target;}
+\DoxyCodeLine{76             \textcolor{keywordtype}{int} countedFrames;}
+\DoxyCodeLine{77             std::vector<Node> path;}
+\DoxyCodeLine{78             \textcolor{keywordtype}{float} recalculatePathTime;}
+\DoxyCodeLine{79         \};}
+\DoxyCodeLine{80     \};}
+\DoxyCodeLine{81 \}}
+\DoxyCodeLine{82 }
+\DoxyCodeLine{83 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//GOLFENGINE\_PATHFINDING\_H}}
+
+\end{DoxyCode}

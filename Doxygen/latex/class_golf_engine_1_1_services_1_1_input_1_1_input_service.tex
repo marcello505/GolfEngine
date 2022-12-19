@@ -1,0 +1,117 @@
+\hypertarget{class_golf_engine_1_1_services_1_1_input_1_1_input_service}{}\doxysection{Golf\+Engine\+::Services\+::Input\+::Input\+Service Class Reference}
+\label{class_golf_engine_1_1_services_1_1_input_1_1_input_service}\index{GolfEngine::Services::Input::InputService@{GolfEngine::Services::Input::InputService}}
+Inheritance diagram for Golf\+Engine\+::Services\+::Input\+::Input\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_golf_engine_1_1_services_1_1_input_1_1_input_service}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_input_1_1_input_service_af1c293daff7108079f30d707fa3b2cba}{handle\+Inputs}} ()=0
+\begin{DoxyCompactList}\small\item\em Handles the inputs and updates the action map. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_input_1_1_input_service_ac48d2a91544403423017e7f2736063c9}{has\+Received\+Quit\+Signal}} () const =0
+\item 
+virtual bool \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_input_1_1_input_service_ac433c3ce57587f6c84fddb2854e31210}{pressed\+Key}} () const =0
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_input_1_1_input_service_a3e031f012a39e711c9b3d876f6e0ed4f}{set\+Key\+Pressed}} (bool pressed)=0
+\item 
+virtual Input\+Key \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_input_1_1_input_service_a5fb1349206c04b683e6724ca3d9374d5}{get\+Key\+Pressed}} ()=0
+\item 
+virtual std\+::string \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_input_1_1_input_service_a33d49d0e44f2b63d82cb884deccabdd2}{get\+Key\+String}} (Input\+Key key)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_input_1_1_input_service_a5fb1349206c04b683e6724ca3d9374d5}\label{class_golf_engine_1_1_services_1_1_input_1_1_input_service_a5fb1349206c04b683e6724ca3d9374d5}} 
+\index{GolfEngine::Services::Input::InputService@{GolfEngine::Services::Input::InputService}!getKeyPressed@{getKeyPressed}}
+\index{getKeyPressed@{getKeyPressed}!GolfEngine::Services::Input::InputService@{GolfEngine::Services::Input::InputService}}
+\doxysubsubsection{\texorpdfstring{getKeyPressed()}{getKeyPressed()}}
+{\footnotesize\ttfamily virtual Input\+Key Golf\+Engine\+::\+Services\+::\+Input\+::\+Input\+Service\+::get\+Key\+Pressed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Returns next raw key press \begin{DoxyReturn}{Returns}
+Next raw key pressed 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_input_1_1_s_d_l_input_service_a4f0da1187049b1675b084a483b6d0394}{Golf\+Engine\+::\+Services\+::\+Input\+::\+SDLInput\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_input_1_1_input_service_a33d49d0e44f2b63d82cb884deccabdd2}\label{class_golf_engine_1_1_services_1_1_input_1_1_input_service_a33d49d0e44f2b63d82cb884deccabdd2}} 
+\index{GolfEngine::Services::Input::InputService@{GolfEngine::Services::Input::InputService}!getKeyString@{getKeyString}}
+\index{getKeyString@{getKeyString}!GolfEngine::Services::Input::InputService@{GolfEngine::Services::Input::InputService}}
+\doxysubsubsection{\texorpdfstring{getKeyString()}{getKeyString()}}
+{\footnotesize\ttfamily virtual std\+::string Golf\+Engine\+::\+Services\+::\+Input\+::\+Input\+Service\+::get\+Key\+String (\begin{DoxyParamCaption}\item[{Input\+Key}]{key }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Coverts an Input\+Key enum to string format 
+\begin{DoxyParams}{Parameters}
+{\em key} & to be converted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+string corresponding to the key input 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_input_1_1_s_d_l_input_service_ad0a76121c9e635b4d4840cb5d0b03457}{Golf\+Engine\+::\+Services\+::\+Input\+::\+SDLInput\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_input_1_1_input_service_af1c293daff7108079f30d707fa3b2cba}\label{class_golf_engine_1_1_services_1_1_input_1_1_input_service_af1c293daff7108079f30d707fa3b2cba}} 
+\index{GolfEngine::Services::Input::InputService@{GolfEngine::Services::Input::InputService}!handleInputs@{handleInputs}}
+\index{handleInputs@{handleInputs}!GolfEngine::Services::Input::InputService@{GolfEngine::Services::Input::InputService}}
+\doxysubsubsection{\texorpdfstring{handleInputs()}{handleInputs()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Input\+::\+Input\+Service\+::handle\+Inputs (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Handles the inputs and updates the action map. 
+
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_input_1_1_s_d_l_input_service_acb6ea4d75e6309b6e37145609b595901}{Golf\+Engine\+::\+Services\+::\+Input\+::\+SDLInput\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_input_1_1_input_service_ac48d2a91544403423017e7f2736063c9}\label{class_golf_engine_1_1_services_1_1_input_1_1_input_service_ac48d2a91544403423017e7f2736063c9}} 
+\index{GolfEngine::Services::Input::InputService@{GolfEngine::Services::Input::InputService}!hasReceivedQuitSignal@{hasReceivedQuitSignal}}
+\index{hasReceivedQuitSignal@{hasReceivedQuitSignal}!GolfEngine::Services::Input::InputService@{GolfEngine::Services::Input::InputService}}
+\doxysubsubsection{\texorpdfstring{hasReceivedQuitSignal()}{hasReceivedQuitSignal()}}
+{\footnotesize\ttfamily virtual bool Golf\+Engine\+::\+Services\+::\+Input\+::\+Input\+Service\+::has\+Received\+Quit\+Signal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Has the window received a quit signal \begin{DoxyReturn}{Returns}
+true if quit signal has been received 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_input_1_1_s_d_l_input_service_ae0c3a8348bd70a37cd1602f57a7081fc}{Golf\+Engine\+::\+Services\+::\+Input\+::\+SDLInput\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_input_1_1_input_service_ac433c3ce57587f6c84fddb2854e31210}\label{class_golf_engine_1_1_services_1_1_input_1_1_input_service_ac433c3ce57587f6c84fddb2854e31210}} 
+\index{GolfEngine::Services::Input::InputService@{GolfEngine::Services::Input::InputService}!pressedKey@{pressedKey}}
+\index{pressedKey@{pressedKey}!GolfEngine::Services::Input::InputService@{GolfEngine::Services::Input::InputService}}
+\doxysubsubsection{\texorpdfstring{pressedKey()}{pressedKey()}}
+{\footnotesize\ttfamily virtual bool Golf\+Engine\+::\+Services\+::\+Input\+::\+Input\+Service\+::pressed\+Key (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Check for if any key has been pressed \begin{DoxyReturn}{Returns}
+true if a key has been pressed 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_input_1_1_s_d_l_input_service_ab34bd563e6821f43186885c6aec9d9ca}{Golf\+Engine\+::\+Services\+::\+Input\+::\+SDLInput\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_input_1_1_input_service_a3e031f012a39e711c9b3d876f6e0ed4f}\label{class_golf_engine_1_1_services_1_1_input_1_1_input_service_a3e031f012a39e711c9b3d876f6e0ed4f}} 
+\index{GolfEngine::Services::Input::InputService@{GolfEngine::Services::Input::InputService}!setKeyPressed@{setKeyPressed}}
+\index{setKeyPressed@{setKeyPressed}!GolfEngine::Services::Input::InputService@{GolfEngine::Services::Input::InputService}}
+\doxysubsubsection{\texorpdfstring{setKeyPressed()}{setKeyPressed()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Input\+::\+Input\+Service\+::set\+Key\+Pressed (\begin{DoxyParamCaption}\item[{bool}]{pressed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Reset if a key has been pressed 
+\begin{DoxyParams}{Parameters}
+{\em pressed} & boolean for overriding key\+Pressed state \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_input_1_1_s_d_l_input_service_a6bee4b432917021cbc347e48f3244faa}{Golf\+Engine\+::\+Services\+::\+Input\+::\+SDLInput\+Service}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Services/\+Abstracts/Input\+Service.\+h\end{DoxyCompactItemize}

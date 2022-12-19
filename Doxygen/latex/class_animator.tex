@@ -1,0 +1,191 @@
+\hypertarget{class_animator}{}\doxysection{Animator Class Reference}
+\label{class_animator}\index{Animator@{Animator}}
+Inheritance diagram for Animator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_animator}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_animator_ac981efa5a71846b6cdd0b12960d21fdf}{Animator}} (std\+::string sprite\+Sheet\+Path, int sprite\+Sheet\+Rows, int sprite\+Sheet\+Cols, \mbox{\hyperlink{struct_vector2}{Vector2}} sprite\+Sheet\+Cell\+Size, \mbox{\hyperlink{struct_vector2}{Vector2}} pixel\+Scale=\mbox{\hyperlink{struct_vector2}{Vector2}}(1, 1))
+\item 
+void \mbox{\hyperlink{class_animator_aa765f642693d15df71ecb737d4c9c1f9}{add\+Animation}} (const std\+::string \&name, int begin\+Cell, int end\+Cell, float play\+Speed=1.\+0f)
+\item 
+void \mbox{\hyperlink{class_animator_a27cf0803a41e2b672ae90d46f465cdad}{add\+Return\+Transition}} (const std\+::string \&from, const std\+::string \&to)
+\item 
+void \mbox{\hyperlink{class_animator_a8ffcaa319a0045efdc9dccb3d2cfc6f7}{play}} (const std\+::string \&animation, bool looping=false)
+\item 
+\mbox{\Hypertarget{class_animator_a61e391528111eb4063e1bb0d086db486}\label{class_animator_a61e391528111eb4063e1bb0d086db486}} 
+void {\bfseries stop} ()
+\begin{DoxyCompactList}\small\item\em Will stop current animation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_animator_a1f17be712409c6486458af322552a34d}{on\+Start}} () override
+\item 
+void \mbox{\hyperlink{class_animator_a9fdb301c61a29f1e14399d018a5a38c8}{on\+Update}} () override
+\item 
+void \mbox{\hyperlink{class_animator_a9ca85155b79959bddad63edb17170719}{on\+Remove}} () override
+\item 
+bool \mbox{\hyperlink{class_animator_a82edab27631a01638359869d22f12bcb}{get\+Active}} () override
+\item 
+void \mbox{\hyperlink{class_animator_addb02e955bdb89caa309040110f35bc1}{set\+Active}} (bool active) override
+\item 
+void \mbox{\hyperlink{class_animator_a884be4a02f39446ace2cc23e2d40c20f}{set\+Parent\+Game\+Object}} (\mbox{\hyperlink{class_game_object}{Game\+Object}} \&game\+Object) override
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} $>$ \mbox{\hyperlink{class_animator_a5e2fde34a2ba47708600b9aae2857750}{save\+Snapshot}} () override
+\item 
+void \mbox{\hyperlink{class_animator_a07dea2c64ca430cb063d4612840e8c19}{load\+Snapshot}} (const \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} \&raw\+Snapshot) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_animator_ac981efa5a71846b6cdd0b12960d21fdf}\label{class_animator_ac981efa5a71846b6cdd0b12960d21fdf}} 
+\index{Animator@{Animator}!Animator@{Animator}}
+\index{Animator@{Animator}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{Animator()}{Animator()}}
+{\footnotesize\ttfamily Animator\+::\+Animator (\begin{DoxyParamCaption}\item[{std\+::string}]{sprite\+Sheet\+Path,  }\item[{int}]{sprite\+Sheet\+Rows,  }\item[{int}]{sprite\+Sheet\+Cols,  }\item[{\mbox{\hyperlink{struct_vector2}{Vector2}}}]{sprite\+Sheet\+Cell\+Size,  }\item[{\mbox{\hyperlink{struct_vector2}{Vector2}}}]{pixel\+Scale = {\ttfamily \mbox{\hyperlink{struct_vector2}{Vector2}}(1,1)} }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{class_animator}{Animator}} component manages a \mbox{\hyperlink{class_sprite_component}{Sprite\+Component}} by changing its sprite to simulate animations 
+\begin{DoxyParams}{Parameters}
+{\em sprite\+Sheet\+Path} & Path to the sprite sheet containing the various animations \\
+\hline
+{\em sprite\+Sheet\+Rows} & Amount of rows of cells in the sprite sheet \\
+\hline
+{\em sprite\+Sheet\+Cols} & Amount of columns of cells in the sprite sheet \\
+\hline
+{\em sprite\+Sheet\+Cell\+Size} & The size of a cell in the sprite sheet (rectangle containing a single sprite) \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_animator_aa765f642693d15df71ecb737d4c9c1f9}\label{class_animator_aa765f642693d15df71ecb737d4c9c1f9}} 
+\index{Animator@{Animator}!addAnimation@{addAnimation}}
+\index{addAnimation@{addAnimation}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{addAnimation()}{addAnimation()}}
+{\footnotesize\ttfamily void Animator\+::add\+Animation (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{int}]{begin\+Cell,  }\item[{int}]{end\+Cell,  }\item[{float}]{play\+Speed = {\ttfamily 1.0f} }\end{DoxyParamCaption})}
+
+Adds an animation to the list of animations 
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the animation to address later for playing \\
+\hline
+{\em begin\+Cell} & The cell at which the animation starts \\
+\hline
+{\em end\+Cell} & The cell at which the animation ends \\
+\hline
+{\em play\+Speed} & A multiplier at which the animation is played (1 frame per second $\ast$ play\+Speed) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_animator_a27cf0803a41e2b672ae90d46f465cdad}\label{class_animator_a27cf0803a41e2b672ae90d46f465cdad}} 
+\index{Animator@{Animator}!addReturnTransition@{addReturnTransition}}
+\index{addReturnTransition@{addReturnTransition}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{addReturnTransition()}{addReturnTransition()}}
+{\footnotesize\ttfamily void Animator\+::add\+Return\+Transition (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{from,  }\item[{const std\+::string \&}]{to }\end{DoxyParamCaption})}
+
+Adds an animation to return to after finishing playing a specific animation 
+\begin{DoxyParams}{Parameters}
+{\em from} & \mbox{\hyperlink{struct_animation}{Animation}} at which to return from \\
+\hline
+{\em to} & \mbox{\hyperlink{struct_animation}{Animation}} to which to after the from animation has finished \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_animator_a82edab27631a01638359869d22f12bcb}\label{class_animator_a82edab27631a01638359869d22f12bcb}} 
+\index{Animator@{Animator}!getActive@{getActive}}
+\index{getActive@{getActive}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{getActive()}{getActive()}}
+{\footnotesize\ttfamily bool Animator\+::get\+Active (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_animator_a07dea2c64ca430cb063d4612840e8c19}\label{class_animator_a07dea2c64ca430cb063d4612840e8c19}} 
+\index{Animator@{Animator}!loadSnapshot@{loadSnapshot}}
+\index{loadSnapshot@{loadSnapshot}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{loadSnapshot()}{loadSnapshot()}}
+{\footnotesize\ttfamily void Animator\+::load\+Snapshot (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} \&}]{raw\+Snapshot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_persistable}{IPersistable}}.
+
+\mbox{\Hypertarget{class_animator_a9ca85155b79959bddad63edb17170719}\label{class_animator_a9ca85155b79959bddad63edb17170719}} 
+\index{Animator@{Animator}!onRemove@{onRemove}}
+\index{onRemove@{onRemove}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{onRemove()}{onRemove()}}
+{\footnotesize\ttfamily void Animator\+::on\+Remove (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_animator_a1f17be712409c6486458af322552a34d}\label{class_animator_a1f17be712409c6486458af322552a34d}} 
+\index{Animator@{Animator}!onStart@{onStart}}
+\index{onStart@{onStart}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{onStart()}{onStart()}}
+{\footnotesize\ttfamily void Animator\+::on\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_animator_a9fdb301c61a29f1e14399d018a5a38c8}\label{class_animator_a9fdb301c61a29f1e14399d018a5a38c8}} 
+\index{Animator@{Animator}!onUpdate@{onUpdate}}
+\index{onUpdate@{onUpdate}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{onUpdate()}{onUpdate()}}
+{\footnotesize\ttfamily void Animator\+::on\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_animator_a8ffcaa319a0045efdc9dccb3d2cfc6f7}\label{class_animator_a8ffcaa319a0045efdc9dccb3d2cfc6f7}} 
+\index{Animator@{Animator}!play@{play}}
+\index{play@{play}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{play()}{play()}}
+{\footnotesize\ttfamily void Animator\+::play (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{animation,  }\item[{bool}]{looping = {\ttfamily false} }\end{DoxyParamCaption})}
+
+Plays an animation 
+\begin{DoxyParams}{Parameters}
+{\em animation} & Name of the animation to play \\
+\hline
+{\em looping} & Loop the animation \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_animator_a5e2fde34a2ba47708600b9aae2857750}\label{class_animator_a5e2fde34a2ba47708600b9aae2857750}} 
+\index{Animator@{Animator}!saveSnapshot@{saveSnapshot}}
+\index{saveSnapshot@{saveSnapshot}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{saveSnapshot()}{saveSnapshot()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} $>$ Animator\+::save\+Snapshot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_persistable}{IPersistable}}.
+
+\mbox{\Hypertarget{class_animator_addb02e955bdb89caa309040110f35bc1}\label{class_animator_addb02e955bdb89caa309040110f35bc1}} 
+\index{Animator@{Animator}!setActive@{setActive}}
+\index{setActive@{setActive}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{setActive()}{setActive()}}
+{\footnotesize\ttfamily void Animator\+::set\+Active (\begin{DoxyParamCaption}\item[{bool}]{active }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_animator_a884be4a02f39446ace2cc23e2d40c20f}\label{class_animator_a884be4a02f39446ace2cc23e2d40c20f}} 
+\index{Animator@{Animator}!setParentGameObject@{setParentGameObject}}
+\index{setParentGameObject@{setParentGameObject}!Animator@{Animator}}
+\doxysubsubsection{\texorpdfstring{setParentGameObject()}{setParentGameObject()}}
+{\footnotesize\ttfamily void Animator\+::set\+Parent\+Game\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_object}{Game\+Object}} \&}]{game\+Object }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Components/Animator.\+h\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Components/Animator.\+cpp\end{DoxyCompactItemize}

@@ -63,9 +63,7 @@ namespace GolfEngine::Scene::Components{
             float volume {};
         };
     };
-
 }
-
 
 
 #endif //GOLFENGINE_AUDIOSOURCE_H

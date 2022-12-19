@@ -12,7 +12,7 @@
 
 void MasterVolumeButtonScript::onUpdate() {
 
-    auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
+    auto& sceneManager = GolfEngine::Core::SceneManager::GetSceneManager();
     auto* _audioService = GolfEngine::Services::Audio::getService();
 
     auto& btn = getParentGameObject<Button>();

@@ -7,31 +7,31 @@
 
 namespace GolfEngine::Scene::Components{
     void AudioSource::play(const std::string& sound, bool looping) {
-        if(GolfEngine::Services::Audio::hasService() && _active){
+        if(Services::Audio::hasService() && _active){
             // Find sound path using key
             auto result = _sounds.find(sound);
             if(result == _sounds.end()) { return; }
 
             if(_isMusic){
-                GolfEngine::Services::Audio::getService()->playMusic(result->second, volume, looping);
+                Services::Audio::getService()->playMusic(result->second, volume, looping);
             }
             else{
-                GolfEngine::Services::Audio::getService()->playSfx(result->second, volume, looping);
+                Services::Audio::getService()->playSfx(result->second, volume, looping);
             }
         }
     }
 
     void AudioSource::stop(const std::string& sound) {
-        if(GolfEngine::Services::Audio::hasService() && _active){
+        if(Services::Audio::hasService() && _active){
             // Find sound path using key
             auto result = _sounds.find(sound);
             if(result == _sounds.end()) { return; }
 
             if(_isMusic){
-                GolfEngine::Services::Audio::getService()->stopMusic();
+                Services::Audio::getService()->stopMusic();
             }
             else{
-                GolfEngine::Services::Audio::getService()->stopSfx(result->second);
+                Services::Audio::getService()->stopSfx(result->second);
             }
         }
     }
@@ -53,13 +53,6 @@ namespace GolfEngine::Scene::Components{
                 play(_sounds.begin()->first, _loopOnAwake);
             }
         }
-    }
-
-    void AudioSource::onUpdate() {
-
-    }
-
-    void AudioSource::onRemove() {
     }
 
     bool AudioSource::getActive() {
@@ -96,5 +89,6 @@ namespace GolfEngine::Scene::Components{
         _sounds.insert({sound, path});
     }
 
+    void AudioSource::onUpdate() {}
+    void AudioSource::onRemove() {}
 }
-

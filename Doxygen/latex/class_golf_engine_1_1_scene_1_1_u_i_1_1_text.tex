@@ -1,0 +1,75 @@
+\hypertarget{class_golf_engine_1_1_scene_1_1_u_i_1_1_text}{}\doxysection{Golf\+Engine\+::Scene\+::UI\+::Text Class Reference}
+\label{class_golf_engine_1_1_scene_1_1_u_i_1_1_text}\index{GolfEngine::Scene::UI::Text@{GolfEngine::Scene::UI::Text}}
+Inheritance diagram for Golf\+Engine\+::Scene\+::UI\+::Text\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_golf_engine_1_1_scene_1_1_u_i_1_1_text}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_u_i_1_1_text_af5b8eec692980aab515e9a2dba1b3dbb}{Text}} (\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} pos, float rotation, const std\+::string \&text, size\+\_\+t font\+Size, \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}} color, const std\+::string \&file\+Path, Alignment alignment, bool is\+Button\+Part)
+\item 
+\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_render_shape}{Render\+::\+Render\+Shape}} \& \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_u_i_1_1_text_a45445f1cf55a7ba71903b5bff5bdbf3a}{get\+Render\+Shape}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_u_i_1_1_text_a292c75ed62c26449c8bd77c2ec14e26c}\label{class_golf_engine_1_1_scene_1_1_u_i_1_1_text_a292c75ed62c26449c8bd77c2ec14e26c}} 
+Alignment {\bfseries \+\_\+alignment}
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_u_i_1_1_text_a08b08f0e6475bf499c4c74fd19d98332}\label{class_golf_engine_1_1_scene_1_1_u_i_1_1_text_a08b08f0e6475bf499c4c74fd19d98332}} 
+\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_text_render_shape}{Render\+::\+Text\+Render\+Shape}} {\bfseries \+\_\+render\+Shape}
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_u_i_1_1_text_af5b8eec692980aab515e9a2dba1b3dbb}\label{class_golf_engine_1_1_scene_1_1_u_i_1_1_text_af5b8eec692980aab515e9a2dba1b3dbb}} 
+\index{GolfEngine::Scene::UI::Text@{GolfEngine::Scene::UI::Text}!Text@{Text}}
+\index{Text@{Text}!GolfEngine::Scene::UI::Text@{GolfEngine::Scene::UI::Text}}
+\doxysubsubsection{\texorpdfstring{Text()}{Text()}}
+{\footnotesize\ttfamily Golf\+Engine\+::\+Scene\+::\+UI\+::\+Text\+::\+Text (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}}}]{pos,  }\item[{float}]{rotation,  }\item[{const std\+::string \&}]{text,  }\item[{size\+\_\+t}]{font\+Size,  }\item[{\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}}}]{color,  }\item[{const std\+::string \&}]{file\+Path,  }\item[{Alignment}]{alignment,  }\item[{bool}]{is\+Button\+Part }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_u_i_1_1_text}{Text}} object used to render text on screen 
+\begin{DoxyParams}{Parameters}
+{\em pos} & position of text on screen \\
+\hline
+{\em rotation} & rotation of text on screen \\
+\hline
+{\em text} & starting text \\
+\hline
+{\em font\+Size} & of text \\
+\hline
+{\em color} & of text \\
+\hline
+{\em file\+Path} & of font \\
+\hline
+{\em alignment} & of text \\
+\hline
+{\em is\+Button\+Part} & is part of a button or not \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_u_i_1_1_text_a45445f1cf55a7ba71903b5bff5bdbf3a}\label{class_golf_engine_1_1_scene_1_1_u_i_1_1_text_a45445f1cf55a7ba71903b5bff5bdbf3a}} 
+\index{GolfEngine::Scene::UI::Text@{GolfEngine::Scene::UI::Text}!getRenderShape@{getRenderShape}}
+\index{getRenderShape@{getRenderShape}!GolfEngine::Scene::UI::Text@{GolfEngine::Scene::UI::Text}}
+\doxysubsubsection{\texorpdfstring{getRenderShape()}{getRenderShape()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_render_shape}{Render\+::\+Render\+Shape}} \& Golf\+Engine\+::\+Scene\+::\+UI\+::\+Text\+::get\+Render\+Shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Get the render shape connected to this drawable \begin{DoxyReturn}{Returns}
+render shape 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_drawable_ad5694fb44b9d422893d8db4e34b94c3e}{Golf\+Engine\+::\+Scene\+::\+Components\+::\+Drawable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Game\+Objects/\+UIObject/Text.\+h\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Game\+Objects/\+UIObject/Text.\+cpp\end{DoxyCompactItemize}

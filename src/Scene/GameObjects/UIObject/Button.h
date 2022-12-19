@@ -11,56 +11,61 @@
 #include <memory>
 
 
-class Button : public UIObject{
+namespace GolfEngine::Scene::UI {
+    class Button : public UIObject {
 
-public:
-    ///
-    /// \param width
-    /// \param height
-    /// \param position
-    /// \param interactable
-    /// \param onClickActionName
-    /// \param textPosition
-    /// \param textRotation
-    /// \param textValue
-    /// \param textFontSize
-    /// \param textColor
-    /// \param textFilePath
-    /// \param textAlignment
-    explicit Button(int width, int height, Vector2 position, bool interactable, std::string onClickActionName,
-                    Vector2 textPosition, float textRotation, std::string textValue, size_t textFontSize, Color textColor,
-                    std::string textFilePath, Alignment textAlignment);
-    ~Button() override;
+    public:
+        ///
+        /// \param width
+        /// \param height
+        /// \param position
+        /// \param interactable
+        /// \param onClickActionName
+        /// \param textPosition
+        /// \param textRotation
+        /// \param textValue
+        /// \param textFontSize
+        /// \param textColor
+        /// \param textFilePath
+        /// \param textAlignment
+        explicit Button(int width, int height, Vector2 position, bool interactable, std::string onClickActionName,
+                        Vector2 textPosition, float textRotation, std::string textValue, size_t textFontSize,
+                        Color textColor,
+                        std::string textFilePath, Alignment textAlignment);
 
-    /// Checks whether the button is interactable or not
-    [[nodiscard]] bool interactable() const;
+        ~Button() override;
 
-    // overrides
-    RenderShape& getRenderShape() override;
-    void onUpdate() override;
+        /// Checks whether the button is interactable or not
+        [[nodiscard]] bool interactable() const;
 
-    /// Sets the button to clicked
-    void onClick();
+        // overrides
+        Render::RenderShape &getRenderShape() override;
+        void onUpdate() override;
 
-    /// Checks whether the button is clicked
-    bool isClicked();
+        /// Sets the button to clicked
+        void onClick();
 
-    struct {
-        Vector2 position;
-        float rotation;
-        std::string value;
-        size_t fontSize;
-        Color color;
-        std::string filePath;
-        Alignment alignment;
-    } _text;
-private:
-    bool _isClicked;
-    bool _interactable;
-    std::string _onClickActionName;
-    void setShape();
-    std::unique_ptr<ButtonRenderShape> _buttonRenderShape {};
-};
+        /// Checks whether the button is clicked
+        [[nodiscard]] bool isClicked() const;
 
+        struct {
+            Vector2 position;
+            float rotation;
+            std::string value;
+            size_t fontSize;
+            Color color;
+            std::string filePath;
+            Alignment alignment;
+        } _text;
+    private:
+        bool _isClicked;
+        bool _interactable;
+        std::string _onClickActionName;
+
+        void setShape();
+
+        std::unique_ptr<Render::ButtonRenderShape> _buttonRenderShape{};
+    };
+}
 
 #endif //GOLFENGINE_BUTTON_H

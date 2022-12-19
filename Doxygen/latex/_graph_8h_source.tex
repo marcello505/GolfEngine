@@ -1,0 +1,44 @@
+\hypertarget{_graph_8h_source}{}\doxysection{Graph.\+h}
+\label{_graph_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/Graph.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/Graph.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by Lucas on 7-\/12-\/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef GOLFENGINE\_GRAPH\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define GOLFENGINE\_GRAPH\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <utility>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}./Node.h"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}Scene/Components/Drawable.h"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}Scene/RenderShape/GraphRenderShape.h"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{keyword}{namespace }GolfEngine::Scene \{}
+\DoxyCodeLine{16     \textcolor{keyword}{class }\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}} : \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_drawable}{Components::Drawable}} \{}
+\DoxyCodeLine{17     \textcolor{keyword}{public}:}
+\DoxyCodeLine{21         \textcolor{keyword}{explicit} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}}(std::vector<Node> nodes, std::vector<std::unique\_ptr<Render::RectRenderShape>> drawables);}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23         \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{\string~Graph}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25         \textcolor{comment}{//Rule of Five}}
+\DoxyCodeLine{26         \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}} \&other) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{27         \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}} \&\&other) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{28         \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}} \&operator=(\textcolor{keyword}{const} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}} \&other) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{29         \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}} \&operator=(\textcolor{keyword}{const} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}} \&\&other) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31         \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_render_shape}{Render::RenderShape}} \&\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph_a7c633a1375a6b0026e71bab9eb693ff9}{getRenderShape}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{34         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph_a9211cd5c229ceaa9c509539933aee13d}{updateGraphColors}}();}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36         std::vector<Node> nodes\{\};}
+\DoxyCodeLine{37     \textcolor{keyword}{private}:}
+\DoxyCodeLine{38         \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_graph_render_shape}{Render::GraphRenderShape}} \_renderShape\{\};}
+\DoxyCodeLine{39     \};}
+\DoxyCodeLine{40 \}}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//GOLFENGINE\_GRAPH\_H}}
+
+\end{DoxyCode}

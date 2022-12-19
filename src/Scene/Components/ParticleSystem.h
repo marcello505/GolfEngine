@@ -11,99 +11,98 @@
 #include "SpriteComponent.h"
 #include "Scene/Particle.h"
 
+namespace GolfEngine::Scene::Components {
+    class ParticleSystem : public Component {
+    public:
+        /// Component that creates a particle system
+        /// \param spritePath path to particle sprite
+        /// \param particlesPerSecond amount of particles to spawn per second (will shoot all at once when looping is set to false)
+        /// \param duration lifetime of particles
+        /// \param pixelScale pixel scale of particle sprite
+        /// \param position offset position
+        /// \param rotation rotation of particles
+        /// \param color color to blend with particle sprite
+        ParticleSystem(const std::string &spritePath, int particlesPerSecond, float duration,
+                       Vector2 pixelScale = Vector2(),
+                       Vector2 position = Vector2(), float rotation = 0, Color color = Color());
 
-class ParticleSystem : public Component{
-public:
-    /// Component that creates a particle system
-    /// \param spritePath path to particle sprite
-    /// \param particlesPerSecond amount of particles to spawn per second (will shoot all at once when looping is set to false)
-    /// \param duration lifetime of particles
-    /// \param pixelScale pixel scale of particle sprite
-    /// \param position offset position
-    /// \param rotation rotation of particles
-    /// \param color color to blend with particle sprite
-    ParticleSystem(const std::string &spritePath, int particlesPerSecond, float duration, Vector2 pixelScale = Vector2(),
-                   Vector2 position = Vector2(), float rotation = 0, Color color = Color());
+        /// starts the particles
+        /// \param looping Determines if particles should be looped or only fire once.
+        void play(bool looping);
 
-    /// starts the particles
-    /// \param looping Determines if particles should be looped or only fire once.
-    void play(bool looping);
+        /// Stops the particles if the were looping;
+        void stop();
 
-    /// Stops the particles if the were looping;
-    void stop();
+        // Component overrides
+        void onStart() override;
+        void onUpdate() override;
+        void onRemove() override;
+        bool getActive() override;
+        void setActive(bool active) override;
+        void setParentGameObject(GameObject &gameObject) override;
 
+        // IPersistable overrides
+        std::unique_ptr<ISnapshot> saveSnapshot() override;
+        void loadSnapshot(const ISnapshot &rawSnapshot) override;
 
-    // Component overrides
-    void onStart() override;
-    void onUpdate() override;
-    void onRemove() override;
-    bool getActive() override;
-    void setActive(bool active) override;
-    void setParentGameObject(GameObject& gameObject) override;
+        // Setters
+        /// Sets the velocity of all particles, only works if randomVelocity is {0,0}
+        /// \param velocity velocity that all particles will have
+        void setVelocity(float velocity);
 
-    // IPersistable overrides
-    std::unique_ptr<ISnapshot> saveSnapshot() override;
-    void loadSnapshot(const ISnapshot& rawSnapshot) override;
+        /// Sets the direction of all particles, only works if spread is {0,0}
+        /// \param direction direction that all particles will have
+        void setDirection(Vector2 direction);
 
-//    setters
-    /// Sets the velocity of all particles, only works if randomVelocity is {0,0}
-    /// \param velocity velocity that all particles will have
-    void setVelocity(float velocity);
+        /// Sets the spread that wil be used to calculate direction of single particle
+        /// \param spread (0-360) wil determine what min and max of the direction is
+        void setSpread(Vector2 spread);
 
-    /// Sets the direction of all particles, only works if spread is {0,0}
-    /// \param direction direction that all particles will have
-    void setDirection(Vector2 direction);
+        /// Determines if particles fades, or just disappears at once.
+        /// \param fade if true particles will fade.
+        void setFade(bool fade);
 
-    /// Sets the spread that wil be used to calculate direction of single particle
-    /// \example Vector2(60,120) each particle wil now have random direction between 60 and 120 degrees.
-    /// \param spread (0-360) wil determine what min and max of the direction is
-    void setSpread(Vector2 spread);
+        /// Sets the random velocity that wil be used to calculate the velocity of single particle
+        /// \param spread wil determine what min and max of the velocity is
+        void setRandomVelocity(Vector2 _randomVelocity);
 
-    /// Determines if particles fades, or just disappears at once.
-    /// \param fade if true particles will fade.
-    void setFade(bool fade);
+        /// Determines if particles will spin.
+        /// \param rotationsPerSecond the amount of rotation each particle makes every second.
+        void setRotationsPerSecond(float rotationsPerSecond);
 
-    /// Sets the random velocity that wil be used to calculate the velocity of single particle
-    /// \example Vector2(0.5,2) each particle wil now have random velocity between 0.5 and 2.
-    /// \param spread wil determine what min and max of the velocity is
-    void setRandomVelocity(Vector2 _randomVelocity);
+        /// Inits the particles with a random starting rotation
+        /// \param randomRotation if true particles will have a random starting rotation
+        void setRandomStartRotation(bool randomRotation);
 
-    /// Determines if particles will spin.
-    /// \param rotationsPerSecond the amount of rotation each particle makes every second.
-    void setRotationsPerSecond(float rotationsPerSecond);
+    private:
+        ///Creates a new particle and adds it to particles
+        Particle &addParticle();
 
-    /// Inits the particles with a random starting rotation
-    /// \param randomRotation if true particles will have a random starting rotation
-    void setRandomStartRotation(bool randomRotation);
-private:
-    ///Creates a new particle and adds it to particles
-    Particle& addParticle();
+        ///List of all particles
+        std::vector<std::unique_ptr<Particle>> particles{};
+        bool _fade{false};
+        bool _looping{false};
+        bool _randomStartRotation{false};
 
-    ///List of all particles
-    std::vector<std::unique_ptr<Particle>> particles {};
-    bool _fade {false};
-    bool _looping {false};
-    bool _randomStartRotation {false};
+        int _particlesPerSecond;
+        float _lifeTime;
 
-    int _particlesPerSecond;
-    float _lifeTime;
+        std::string _spritePath;
+        Vector2 _pixelScale;
+        float _rotation;
+        Vector2 _position;
+        Color _color;
 
-    std::string _spritePath;
-    Vector2 _pixelScale;
-    float _rotation;
-    Vector2 _position;
-    Color _color;
+        int _countedFrames{0};
+        int _fps{60};
 
-    int _countedFrames {0};
-    int _fps{60};
+        Vector2 _direction{1, 0};
+        float _velocity{1.0};
+        Vector2 _spread{0, 0};
 
-    Vector2 _direction {1,0};
-    float _velocity {1.0};
-    Vector2 _spread {0,0};
-
-    Vector2 _randomVelocity {0,0};
-    float _rotationsPerSecond {0};
-};
-
+        Vector2 _randomVelocity{0, 0};
+        float _rotationsPerSecond{0};
+    };
+}
 
 #endif //GOLFENGINE_PARTICLESYSTEM_H

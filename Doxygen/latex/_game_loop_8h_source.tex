@@ -1,0 +1,70 @@
+\hypertarget{_game_loop_8h_source}{}\doxysection{Game\+Loop.\+h}
+\label{_game_loop_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Core/GameLoop.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Core/GameLoop.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by Lucas on 2-\/11-\/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef SPC\_PROJECT\_GAMELOOP\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define SPC\_PROJECT\_GAMELOOP\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <chrono>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}../Services/Abstracts/AudioService.h"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}../Services/Abstracts/InputService.h"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}../Services/Abstracts/RenderService.h"{}}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}../Services/Abstracts/PhysicsService.h"{}}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}../Services/Abstracts/TileMapParserService.h"{}}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include "{}../Services/Abstracts/PathfindingService.h"{}}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include "{}SceneManager.h"{}}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include "{}../Input/ActionMap.h"{}}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include "{}Time.h"{}}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{keyword}{using namespace }GolfEngine::Services;}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22 \textcolor{keyword}{namespace }GolfEngine::Core \{}
+\DoxyCodeLine{23     \textcolor{keyword}{class }\mbox{\hyperlink{class_golf_engine_1_1_core_1_1_game_loop}{GameLoop}} \{}
+\DoxyCodeLine{24     \textcolor{keyword}{public}:}
+\DoxyCodeLine{25         \textcolor{comment}{//Fields}}
+\DoxyCodeLine{26         std::unique\_ptr<Time> time = std::make\_unique<Time>();}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28         \textcolor{comment}{//Getters and Setters}}
+\DoxyCodeLine{31 \textcolor{comment}{}        \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_game_loop_aac548bd8df511cd4273241a01ffb9389}{setAudioService}}(\mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service}{Services::Audio::AudioService}} *audioService);}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{35         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_game_loop_ada50fa5df5d65c8047c94be7a7a6ec49}{setInputService}}(\mbox{\hyperlink{class_golf_engine_1_1_services_1_1_input_1_1_input_service}{Services::Input::InputService}} *inputService);}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{39         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_game_loop_ab41242875b0159b70858cd02c79531a2}{setRenderService}}(\mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_render_service}{Services::Render::RenderService}} *renderService);}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{43         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_game_loop_a79ad7bea35d2f0e1a705ef87ba29d69f}{setPhysicsService}}(\mbox{\hyperlink{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service}{Services::Physics::PhysicsService}} *physicsService);}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{47         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_game_loop_a79220b0ba9c8ab7b0a82441674d28c19}{setTileMapParserService}}(\mbox{\hyperlink{class_golf_engine_1_1_services_1_1_tile_map_parser_1_1_tile_map_parser_service}{Services::TileMapParser::TileMapParserService}} *tileMapParserService);}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{51         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_game_loop_ad5be40579d3e84806eaa59a679b11678}{setPathfindingService}}(\mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service}{Services::Pathfinding::PathfindingService}} *pathfindingService);}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{55         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_game_loop_abfb6418834fabeb1644dc8adcbe92b95}{setFramesPerSeccond}}(GameTic fps);}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{59         [[nodiscard]] \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_game_loop_af888169b1bcb3bcc777ec69af26e87c4}{isGameRunning}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61         \textcolor{comment}{//Methods}}
+\DoxyCodeLine{63 \textcolor{comment}{}        \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_game_loop_a6ee77f7fd516045c274b69792b24f0e8}{useDefaultServices}}();}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{66         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_game_loop_ac3600e7fe529f12ed892f65beb3b9910}{start}}();}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{69         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_game_loop_a6bc9027583081992b5cce19c120a2f26}{stop}}();}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71     \textcolor{keyword}{private}:}
+\DoxyCodeLine{72         \textcolor{keywordtype}{bool} \_running\{\textcolor{keyword}{true}\};}
+\DoxyCodeLine{73         std::chrono::duration<GameTic, std::milli> \_msPerUpdate\{1000.f / 60\};}
+\DoxyCodeLine{74 }
+\DoxyCodeLine{75         \textcolor{keywordtype}{void} processInput();}
+\DoxyCodeLine{76         \textcolor{keywordtype}{void} update();}
+\DoxyCodeLine{77         \textcolor{keywordtype}{void} render();}
+\DoxyCodeLine{78         \textcolor{keyword}{static} \textcolor{keywordtype}{void} findPaths();}
+\DoxyCodeLine{79     \};}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81     \mbox{\hyperlink{class_golf_engine_1_1_core_1_1_game_loop}{GameLoop}} \&getRunningGameLoop();}
+\DoxyCodeLine{82 \}}
+\DoxyCodeLine{83 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//SPC\_PROJECT\_GAMELOOP\_H}}
+
+\end{DoxyCode}

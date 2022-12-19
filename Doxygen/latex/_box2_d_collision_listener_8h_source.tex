@@ -1,0 +1,31 @@
+\hypertarget{_box2_d_collision_listener_8h_source}{}\doxysection{Box2\+DCollision\+Listener.\+h}
+\label{_box2_d_collision_listener_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Services/Physics/Box2DCollisionListener.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Services/Physics/Box2DCollisionListener.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by conner on 11/29/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef GOLFENGINE\_BOX2DCOLLISIONLISTENER\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define GOLFENGINE\_BOX2DCOLLISIONLISTENER\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <box2d/box2d.h>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}../Box2DPhysicsService.h"{}}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{namespace }GolfEngine::Services::Physics \{}
+\DoxyCodeLine{12     \textcolor{keyword}{class }\mbox{\hyperlink{class_golf_engine_1_1_services_1_1_physics_1_1_box2_d_collision_listener}{Box2DCollisionListener}} : \textcolor{keyword}{public} b2ContactListener \{}
+\DoxyCodeLine{13     \textcolor{keyword}{public}:}
+\DoxyCodeLine{14         \textcolor{keyword}{explicit} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_physics_1_1_box2_d_collision_listener}{Box2DCollisionListener}}(\mbox{\hyperlink{class_golf_engine_1_1_services_1_1_physics_1_1_box2_d_physics_service}{Box2DPhysicsService}}\& box2DPhysicsService);}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16         \textcolor{comment}{// b2ContactListener overrides}}
+\DoxyCodeLine{17         \textcolor{keywordtype}{void} BeginContact(b2Contact *contact) \textcolor{keyword}{override};}
+\DoxyCodeLine{18         \textcolor{keywordtype}{void} EndContact(b2Contact *contact) \textcolor{keyword}{override};}
+\DoxyCodeLine{19     \textcolor{keyword}{private}:}
+\DoxyCodeLine{20         \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_physics_1_1_box2_d_physics_service}{Box2DPhysicsService}}\& \_physicsService;}
+\DoxyCodeLine{21     \};}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 \}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//GOLFENGINE\_BOX2DCOLLISIONLISTENER\_H}}
+
+\end{DoxyCode}

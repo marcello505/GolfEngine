@@ -1,0 +1,116 @@
+\hypertarget{class_button}{}\doxysection{Button Class Reference}
+\label{class_button}\index{Button@{Button}}
+Inheritance diagram for Button\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_button}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_button_a3f41403796181b7577b58d3354064332}{Button}} (int width, int height, \mbox{\hyperlink{struct_vector2}{Vector2}} position, bool \mbox{\hyperlink{class_button_a7671f5520442fc9077e2a89f232b0d2c}{interactable}}, std\+::string on\+Click\+Action\+Name, \mbox{\hyperlink{struct_vector2}{Vector2}} text\+Position, float text\+Rotation, std\+::string text\+Value, size\+\_\+t text\+Font\+Size, \mbox{\hyperlink{struct_color}{Color}} text\+Color, std\+::string text\+File\+Path, Alignment text\+Alignment)
+\item 
+\mbox{\Hypertarget{class_button_a7671f5520442fc9077e2a89f232b0d2c}\label{class_button_a7671f5520442fc9077e2a89f232b0d2c}} 
+bool {\bfseries interactable} () const
+\begin{DoxyCompactList}\small\item\em Checks whether the button is interactable or not. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_render_shape}{Render\+Shape}} \& \mbox{\hyperlink{class_button_a1b1b0cad36c02d9753ba248159fdae49}{get\+Render\+Shape}} () override
+\item 
+void \mbox{\hyperlink{class_button_afbccf91d6292db9cb11c198f53b92b1a}{on\+Update}} () override
+\begin{DoxyCompactList}\small\item\em Calls on\+Update on all attached components. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_button_ae0fef75f8dd8a25ae122a379ad330400}\label{class_button_ae0fef75f8dd8a25ae122a379ad330400}} 
+void {\bfseries on\+Click} ()
+\begin{DoxyCompactList}\small\item\em Sets the button to clicked. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_button_acd766bf2e64e1aa93ad4c8a16b343347}\label{class_button_acd766bf2e64e1aa93ad4c8a16b343347}} 
+bool {\bfseries is\+Clicked} ()
+\begin{DoxyCompactList}\small\item\em Checks whether the button is clicked. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_button_abee2a9503dfa4995c0d72b40394a13e7}\label{class_button_abee2a9503dfa4995c0d72b40394a13e7}} 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+struct \{\\
+\>\mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries position}\\
+\>float {\bfseries rotation}\\
+\>std::string {\bfseries value}\\
+\>size\_t {\bfseries fontSize}\\
+\>\mbox{\hyperlink{struct_color}{Color}} {\bfseries color}\\
+\>std::string {\bfseries filePath}\\
+\>Alignment {\bfseries alignment}\\
+\} {\bfseries \_text}\\
+
+\end{tabbing}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_button_a3f41403796181b7577b58d3354064332}\label{class_button_a3f41403796181b7577b58d3354064332}} 
+\index{Button@{Button}!Button@{Button}}
+\index{Button@{Button}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{Button()}{Button()}}
+{\footnotesize\ttfamily Button\+::\+Button (\begin{DoxyParamCaption}\item[{int}]{width,  }\item[{int}]{height,  }\item[{\mbox{\hyperlink{struct_vector2}{Vector2}}}]{position,  }\item[{bool}]{interactable,  }\item[{std\+::string}]{on\+Click\+Action\+Name,  }\item[{\mbox{\hyperlink{struct_vector2}{Vector2}}}]{text\+Position,  }\item[{float}]{text\+Rotation,  }\item[{std\+::string}]{text\+Value,  }\item[{size\+\_\+t}]{text\+Font\+Size,  }\item[{\mbox{\hyperlink{struct_color}{Color}}}]{text\+Color,  }\item[{std\+::string}]{text\+File\+Path,  }\item[{Alignment}]{text\+Alignment }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em width} & \\
+\hline
+{\em height} & \\
+\hline
+{\em position} & \\
+\hline
+{\em interactable} & \\
+\hline
+{\em on\+Click\+Action\+Name} & \\
+\hline
+{\em text\+Position} & \\
+\hline
+{\em text\+Rotation} & \\
+\hline
+{\em text\+Value} & \\
+\hline
+{\em text\+Font\+Size} & \\
+\hline
+{\em text\+Color} & \\
+\hline
+{\em text\+File\+Path} & \\
+\hline
+{\em text\+Alignment} & \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_button_a1b1b0cad36c02d9753ba248159fdae49}\label{class_button_a1b1b0cad36c02d9753ba248159fdae49}} 
+\index{Button@{Button}!getRenderShape@{getRenderShape}}
+\index{getRenderShape@{getRenderShape}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{getRenderShape()}{getRenderShape()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_render_shape}{Render\+Shape}} \& Button\+::get\+Render\+Shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Get the render shape connected to this drawable \begin{DoxyReturn}{Returns}
+render shape 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_drawable_ac786b2a1008169713173ac2bc770cefc}{Drawable}}.
+
+\mbox{\Hypertarget{class_button_afbccf91d6292db9cb11c198f53b92b1a}\label{class_button_afbccf91d6292db9cb11c198f53b92b1a}} 
+\index{Button@{Button}!onUpdate@{onUpdate}}
+\index{onUpdate@{onUpdate}!Button@{Button}}
+\doxysubsubsection{\texorpdfstring{onUpdate()}{onUpdate()}}
+{\footnotesize\ttfamily void Button\+::on\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Calls on\+Update on all attached components. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_game_object_a5f6b084bd5522f10dfdc2ac3b693745c}{Game\+Object}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Game\+Objects/\+UIObject/Button.\+h\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Game\+Objects/\+UIObject/Button.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,87 @@
+\hypertarget{class_tile_map_render_shape}{}\doxysection{Tile\+Map\+Render\+Shape Class Reference}
+\label{class_tile_map_render_shape}\index{TileMapRenderShape@{TileMapRenderShape}}
+Inheritance diagram for Tile\+Map\+Render\+Shape\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_tile_map_render_shape}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_tile_map_render_shape_a83cc3d03ba77f59e6495bfa3b2f87e9d}{Tile\+Map\+Render\+Shape}} (const std\+::string \&image\+Path, \mbox{\hyperlink{struct_tile_set}{Tile\+Set\+\_\+t}} tile\+Set, \mbox{\hyperlink{struct_map}{Map\+\_\+t}} map)
+\item 
+void \mbox{\hyperlink{class_tile_map_render_shape_a0a81376a00fd3046ea15295ce3073758}{apply\+Transform}} (const \mbox{\hyperlink{struct_transform}{Transform}} \&transform) override
+\item 
+Render\+Shape\+Type \mbox{\hyperlink{class_tile_map_render_shape_a96a01da7c0c2d7d6e10b42fb470be843}{get\+Type}} () override
+\item 
+\mbox{\Hypertarget{class_tile_map_render_shape_ae08b1fb64d38ce1f0de1269e154b5973}\label{class_tile_map_render_shape_ae08b1fb64d38ce1f0de1269e154b5973}} 
+std\+::string {\bfseries image\+Path} () const
+\item 
+\mbox{\Hypertarget{class_tile_map_render_shape_afe226e1854f9799245215c320c898d8f}\label{class_tile_map_render_shape_afe226e1854f9799245215c320c898d8f}} 
+const \mbox{\hyperlink{struct_tile_set}{Tile\+Set\+\_\+t}} \& {\bfseries tile\+Set} () const
+\item 
+\mbox{\Hypertarget{class_tile_map_render_shape_a54a9f68c1ebd021c12cbbe42c85887d4}\label{class_tile_map_render_shape_a54a9f68c1ebd021c12cbbe42c85887d4}} 
+const \mbox{\hyperlink{struct_map}{Map\+\_\+t}} \& {\bfseries map} () const
+\item 
+\mbox{\Hypertarget{class_tile_map_render_shape_aa1408d00cab223f7f30c8f5d306975f3}\label{class_tile_map_render_shape_aa1408d00cab223f7f30c8f5d306975f3}} 
+const \mbox{\hyperlink{struct_vector2}{Vector2}} \& {\bfseries position} () const
+\item 
+\mbox{\Hypertarget{class_tile_map_render_shape_a27221062062a7a7c3d1f4ee8f5b99504}\label{class_tile_map_render_shape_a27221062062a7a7c3d1f4ee8f5b99504}} 
+const \mbox{\hyperlink{struct_vector2}{Vector2}} \& {\bfseries scale} () const
+\item 
+\mbox{\Hypertarget{class_tile_map_render_shape_a7a56e11c0b89db2809a60e12d344e04b}\label{class_tile_map_render_shape_a7a56e11c0b89db2809a60e12d344e04b}} 
+void {\bfseries set\+Pixel\+Scale} (\mbox{\hyperlink{struct_vector2}{Vector2}} scale)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_tile_map_render_shape_a83cc3d03ba77f59e6495bfa3b2f87e9d}\label{class_tile_map_render_shape_a83cc3d03ba77f59e6495bfa3b2f87e9d}} 
+\index{TileMapRenderShape@{TileMapRenderShape}!TileMapRenderShape@{TileMapRenderShape}}
+\index{TileMapRenderShape@{TileMapRenderShape}!TileMapRenderShape@{TileMapRenderShape}}
+\doxysubsubsection{\texorpdfstring{TileMapRenderShape()}{TileMapRenderShape()}}
+{\footnotesize\ttfamily Tile\+Map\+Render\+Shape\+::\+Tile\+Map\+Render\+Shape (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{image\+Path,  }\item[{\mbox{\hyperlink{struct_tile_set}{Tile\+Set\+\_\+t}}}]{tile\+Set,  }\item[{\mbox{\hyperlink{struct_map}{Map\+\_\+t}}}]{map }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{class_render_shape}{Render\+Shape}} to render a tile map 
+\begin{DoxyParams}{Parameters}
+{\em image\+Path} & path to tile set image \\
+\hline
+{\em tile\+Set} & tile set data \\
+\hline
+{\em map} & map data \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_tile_map_render_shape_a0a81376a00fd3046ea15295ce3073758}\label{class_tile_map_render_shape_a0a81376a00fd3046ea15295ce3073758}} 
+\index{TileMapRenderShape@{TileMapRenderShape}!applyTransform@{applyTransform}}
+\index{applyTransform@{applyTransform}!TileMapRenderShape@{TileMapRenderShape}}
+\doxysubsubsection{\texorpdfstring{applyTransform()}{applyTransform()}}
+{\footnotesize\ttfamily void Tile\+Map\+Render\+Shape\+::apply\+Transform (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_transform}{Transform}} \&}]{transform }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Applies a transform to the \mbox{\hyperlink{class_render_shape}{Render\+Shape}} properties 
+\begin{DoxyParams}{Parameters}
+{\em transform} & \mbox{\hyperlink{struct_transform}{Transform}} to be applied \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_render_shape_a106c7a0283a25a57a1ad439f4c294309}{Render\+Shape}}.
+
+\mbox{\Hypertarget{class_tile_map_render_shape_a96a01da7c0c2d7d6e10b42fb470be843}\label{class_tile_map_render_shape_a96a01da7c0c2d7d6e10b42fb470be843}} 
+\index{TileMapRenderShape@{TileMapRenderShape}!getType@{getType}}
+\index{getType@{getType}!TileMapRenderShape@{TileMapRenderShape}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily Render\+Shape\+Type Tile\+Map\+Render\+Shape\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_render_shape}{Render\+Shape}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Render\+Shape/Tile\+Map\+Render\+Shape.\+h\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Render\+Shape/Tile\+Map\+Render\+Shape.\+cpp\end{DoxyCompactItemize}

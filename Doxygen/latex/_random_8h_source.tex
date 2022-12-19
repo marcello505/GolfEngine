@@ -1,0 +1,43 @@
+\hypertarget{_random_8h_source}{}\doxysection{Random.\+h}
+\label{_random_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Utilities/Random.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Utilities/Random.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by marcello on 12-\/12-\/22.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef GOLFENGINE\_RANDOM\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define GOLFENGINE\_RANDOM\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <random>}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{keyword}{namespace }GolfEngine::Utilities \{}
+\DoxyCodeLine{11     \textcolor{keyword}{class }\mbox{\hyperlink{class_golf_engine_1_1_utilities_1_1_random}{Random}}\{}
+\DoxyCodeLine{12     \textcolor{keyword}{public}:}
+\DoxyCodeLine{13         \textcolor{comment}{// ========}}
+\DoxyCodeLine{14         \textcolor{comment}{// Getters}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{21         \textcolor{keyword}{template}<\textcolor{keyword}{class} T> \textcolor{keyword}{static} T \mbox{\hyperlink{class_golf_engine_1_1_utilities_1_1_random_a76ff666861ffc19971188838c382a6b8}{getIntRange}}(T min, T max)\{}
+\DoxyCodeLine{22             std::uniform\_int\_distribution<T> dist \{min, max\};}
+\DoxyCodeLine{23             \textcolor{keywordflow}{return} dist(randomEngine);}
+\DoxyCodeLine{24         \}}
+\DoxyCodeLine{30         \textcolor{keyword}{template}<\textcolor{keyword}{class} T> \textcolor{keyword}{static} T \mbox{\hyperlink{class_golf_engine_1_1_utilities_1_1_random_af4684196ed98f3f2639a67ecd6e9dace}{getRealRange}}(T min, T max)\{}
+\DoxyCodeLine{31             std::uniform\_real\_distribution<T> dist \{min, max\};}
+\DoxyCodeLine{32             \textcolor{keywordflow}{return} dist(randomEngine);}
+\DoxyCodeLine{33         \}}
+\DoxyCodeLine{36         \textcolor{keyword}{static} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_golf_engine_1_1_utilities_1_1_random_ad01b1851244f9bd7fffec99d291aef73}{getBool}}();}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38         \textcolor{comment}{// =========}}
+\DoxyCodeLine{39         \textcolor{comment}{// Setters}}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{43         \textcolor{keyword}{static} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_utilities_1_1_random_aea1bb1b05e776e54cc1f561be8c45bce}{setSeed}}(std::default\_random\_engine::result\_type s);}
+\DoxyCodeLine{45         \textcolor{keyword}{static} std::random\_device::result\_type \mbox{\hyperlink{class_golf_engine_1_1_utilities_1_1_random_a58d0fe3fc296bb829abe89d7600ddcd9}{setRandomSeed}}();}
+\DoxyCodeLine{46     \textcolor{keyword}{private}:}
+\DoxyCodeLine{47         \textcolor{keyword}{static} std::default\_random\_engine randomEngine;}
+\DoxyCodeLine{48     \};}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50 \}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//GOLFENGINE\_RANDOM\_H}}
+
+\end{DoxyCode}

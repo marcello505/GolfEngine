@@ -1,0 +1,99 @@
+\hypertarget{class_text_render_shape}{}\doxysection{Text\+Render\+Shape Class Reference}
+\label{class_text_render_shape}\index{TextRenderShape@{TextRenderShape}}
+Inheritance diagram for Text\+Render\+Shape\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_text_render_shape}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_text_render_shape_a1296d423401b117d2210b02043496dc3}{Text\+Render\+Shape}} (const \mbox{\hyperlink{struct_vector2}{Vector2}} \&pos, float rotation, const std\+::string \&text, size\+\_\+t font\+Size, const \mbox{\hyperlink{struct_color}{Color}} \&color, const std\+::string \&file\+Path)
+\item 
+Render\+Shape\+Type \mbox{\hyperlink{class_text_render_shape_a48938e264babd1418352684fbabe7e09}{get\+Type}} () override
+\item 
+void \mbox{\hyperlink{class_text_render_shape_a5f3cf4031e658106239944e32d4631ef}{apply\+Transform}} (const \mbox{\hyperlink{struct_transform}{Transform}} \&transform) override
+\item 
+\mbox{\Hypertarget{class_text_render_shape_a7876e4b5962b8375d3f8102f12c97560}\label{class_text_render_shape_a7876e4b5962b8375d3f8102f12c97560}} 
+void {\bfseries set\+Text} (const std\+::string \&text)
+\item 
+\mbox{\Hypertarget{class_text_render_shape_ae2730fe1da2d115c1b8f57256061daf7}\label{class_text_render_shape_ae2730fe1da2d115c1b8f57256061daf7}} 
+void {\bfseries set\+Position} (\mbox{\hyperlink{struct_vector2}{Vector2}} pos)
+\item 
+\mbox{\Hypertarget{class_text_render_shape_a5b4c8126088ac954976207315146feed}\label{class_text_render_shape_a5b4c8126088ac954976207315146feed}} 
+\mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries position} () const
+\item 
+\mbox{\Hypertarget{class_text_render_shape_a34bb3b46b020864232dd0446aa10cc6f}\label{class_text_render_shape_a34bb3b46b020864232dd0446aa10cc6f}} 
+float {\bfseries rotation} () const
+\item 
+\mbox{\Hypertarget{class_text_render_shape_a5a2c4524e534c56ad44aada9df8b434d}\label{class_text_render_shape_a5a2c4524e534c56ad44aada9df8b434d}} 
+std\+::string {\bfseries text} () const
+\item 
+\mbox{\Hypertarget{class_text_render_shape_a07be0227aa9b3ef306afbf5d04e8c136}\label{class_text_render_shape_a07be0227aa9b3ef306afbf5d04e8c136}} 
+\mbox{\hyperlink{struct_color}{Color}} {\bfseries color} () const
+\item 
+\mbox{\Hypertarget{class_text_render_shape_ac2e026b904ebd5aa1e1d9e8fa4c9b246}\label{class_text_render_shape_ac2e026b904ebd5aa1e1d9e8fa4c9b246}} 
+std\+::string {\bfseries file\+Path} () const
+\item 
+\mbox{\Hypertarget{class_text_render_shape_a5e3af191ec73713b938e08b2e6715da8}\label{class_text_render_shape_a5e3af191ec73713b938e08b2e6715da8}} 
+size\+\_\+t {\bfseries font\+Size} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_text_render_shape_a1296d423401b117d2210b02043496dc3}\label{class_text_render_shape_a1296d423401b117d2210b02043496dc3}} 
+\index{TextRenderShape@{TextRenderShape}!TextRenderShape@{TextRenderShape}}
+\index{TextRenderShape@{TextRenderShape}!TextRenderShape@{TextRenderShape}}
+\doxysubsubsection{\texorpdfstring{TextRenderShape()}{TextRenderShape()}}
+{\footnotesize\ttfamily Text\+Render\+Shape\+::\+Text\+Render\+Shape (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_vector2}{Vector2}} \&}]{pos,  }\item[{float}]{rotation,  }\item[{const std\+::string \&}]{text,  }\item[{size\+\_\+t}]{font\+Size,  }\item[{const \mbox{\hyperlink{struct_color}{Color}} \&}]{color,  }\item[{const std\+::string \&}]{file\+Path }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{class_render_shape}{Render\+Shape}} used to render text 
+\begin{DoxyParams}{Parameters}
+{\em pos} & position of text \\
+\hline
+{\em rotation} & rotation of text \\
+\hline
+{\em text} & text to render \\
+\hline
+{\em font\+Size} & font\+Size of text \\
+\hline
+{\em color} & color of text \\
+\hline
+{\em file\+Path} & path to font \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_text_render_shape_a5f3cf4031e658106239944e32d4631ef}\label{class_text_render_shape_a5f3cf4031e658106239944e32d4631ef}} 
+\index{TextRenderShape@{TextRenderShape}!applyTransform@{applyTransform}}
+\index{applyTransform@{applyTransform}!TextRenderShape@{TextRenderShape}}
+\doxysubsubsection{\texorpdfstring{applyTransform()}{applyTransform()}}
+{\footnotesize\ttfamily void Text\+Render\+Shape\+::apply\+Transform (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_transform}{Transform}} \&}]{transform }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Applies a transform to the \mbox{\hyperlink{class_render_shape}{Render\+Shape}} properties 
+\begin{DoxyParams}{Parameters}
+{\em transform} & \mbox{\hyperlink{struct_transform}{Transform}} to be applied \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_render_shape_a106c7a0283a25a57a1ad439f4c294309}{Render\+Shape}}.
+
+\mbox{\Hypertarget{class_text_render_shape_a48938e264babd1418352684fbabe7e09}\label{class_text_render_shape_a48938e264babd1418352684fbabe7e09}} 
+\index{TextRenderShape@{TextRenderShape}!getType@{getType}}
+\index{getType@{getType}!TextRenderShape@{TextRenderShape}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily Render\+Shape\+Type Text\+Render\+Shape\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_render_shape}{Render\+Shape}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Render\+Shape/Text\+Render\+Shape.\+h\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Render\+Shape/Text\+Render\+Shape.\+cpp\end{DoxyCompactItemize}

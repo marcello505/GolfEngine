@@ -1,0 +1,131 @@
+\hypertarget{class_behaviour_script}{}\doxysection{Behaviour\+Script Class Reference}
+\label{class_behaviour_script}\index{BehaviourScript@{BehaviourScript}}
+Inheritance diagram for Behaviour\+Script\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_behaviour_script}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_behaviour_script_a320d5871eb42f41d2e60751ddfa7f816}{on\+Start}} () override
+\item 
+void \mbox{\hyperlink{class_behaviour_script_a70a351393a29857fd94c3d3b716c2395}{on\+Update}} () override
+\item 
+void \mbox{\hyperlink{class_behaviour_script_a1abf420bc708dc99f3fa657b503d5f63}{on\+Remove}} () override
+\item 
+bool \mbox{\hyperlink{class_behaviour_script_ab3f37abdec94f0eba724072f58cc3fda}{get\+Active}} () override
+\item 
+void \mbox{\hyperlink{class_behaviour_script_a11c0b9954cb4aa0e02755cf4d6eb9234}{set\+Active}} (bool active) override
+\item 
+void \mbox{\hyperlink{class_behaviour_script_a91ff3d7488ca7f25d17c05091581ace8}{set\+Parent\+Game\+Object}} (\mbox{\hyperlink{class_game_object}{Game\+Object}} \&game\+Object) override
+\item 
+\mbox{\Hypertarget{class_behaviour_script_a0cc8537e85f6b53145247596d5099b6b}\label{class_behaviour_script_a0cc8537e85f6b53145247596d5099b6b}} 
+{\footnotesize template$<$typename C $>$ }\\C \& {\bfseries get\+Parent\+Game\+Object} ()
+\item 
+\mbox{\Hypertarget{class_behaviour_script_aa01684ea5cc3f2b69280a057164c8107}\label{class_behaviour_script_aa01684ea5cc3f2b69280a057164c8107}} 
+virtual void {\bfseries on\+Collision\+Enter} (\mbox{\hyperlink{class_rigid_body}{Rigid\+Body}} \&other)
+\item 
+\mbox{\Hypertarget{class_behaviour_script_a1326bddc7160725756ec23796f74d3af}\label{class_behaviour_script_a1326bddc7160725756ec23796f74d3af}} 
+virtual void {\bfseries on\+Collision\+Exit} (\mbox{\hyperlink{class_rigid_body}{Rigid\+Body}} \&other)
+\item 
+\mbox{\Hypertarget{class_behaviour_script_aee5466c8daf949841058db9ed9fbb757}\label{class_behaviour_script_aee5466c8daf949841058db9ed9fbb757}} 
+virtual void {\bfseries on\+Area\+Enter} (\mbox{\hyperlink{class_rigid_body}{Rigid\+Body}} \&other)
+\item 
+\mbox{\Hypertarget{class_behaviour_script_aa6c0d0890839d01d154c037dc9f4f6b9}\label{class_behaviour_script_aa6c0d0890839d01d154c037dc9f4f6b9}} 
+virtual void {\bfseries on\+Area\+Exit} (\mbox{\hyperlink{class_rigid_body}{Rigid\+Body}} \&other)
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} $>$ \mbox{\hyperlink{class_behaviour_script_a53009c1c8694be9434d2e50d45c1e4f8}{save\+Snapshot}} () override
+\item 
+void \mbox{\hyperlink{class_behaviour_script_afc4deefd949d440fd8a557319ad722a6}{load\+Snapshot}} (const \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} \&raw\+Snapshot) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_behaviour_script_ab3f37abdec94f0eba724072f58cc3fda}\label{class_behaviour_script_ab3f37abdec94f0eba724072f58cc3fda}} 
+\index{BehaviourScript@{BehaviourScript}!getActive@{getActive}}
+\index{getActive@{getActive}!BehaviourScript@{BehaviourScript}}
+\doxysubsubsection{\texorpdfstring{getActive()}{getActive()}}
+{\footnotesize\ttfamily bool Behaviour\+Script\+::get\+Active (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_behaviour_script_afc4deefd949d440fd8a557319ad722a6}\label{class_behaviour_script_afc4deefd949d440fd8a557319ad722a6}} 
+\index{BehaviourScript@{BehaviourScript}!loadSnapshot@{loadSnapshot}}
+\index{loadSnapshot@{loadSnapshot}!BehaviourScript@{BehaviourScript}}
+\doxysubsubsection{\texorpdfstring{loadSnapshot()}{loadSnapshot()}}
+{\footnotesize\ttfamily void Behaviour\+Script\+::load\+Snapshot (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} \&}]{raw\+Snapshot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_persistable}{IPersistable}}.
+
+\mbox{\Hypertarget{class_behaviour_script_a1abf420bc708dc99f3fa657b503d5f63}\label{class_behaviour_script_a1abf420bc708dc99f3fa657b503d5f63}} 
+\index{BehaviourScript@{BehaviourScript}!onRemove@{onRemove}}
+\index{onRemove@{onRemove}!BehaviourScript@{BehaviourScript}}
+\doxysubsubsection{\texorpdfstring{onRemove()}{onRemove()}}
+{\footnotesize\ttfamily void Behaviour\+Script\+::on\+Remove (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_behaviour_script_a320d5871eb42f41d2e60751ddfa7f816}\label{class_behaviour_script_a320d5871eb42f41d2e60751ddfa7f816}} 
+\index{BehaviourScript@{BehaviourScript}!onStart@{onStart}}
+\index{onStart@{onStart}!BehaviourScript@{BehaviourScript}}
+\doxysubsubsection{\texorpdfstring{onStart()}{onStart()}}
+{\footnotesize\ttfamily void Behaviour\+Script\+::on\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_behaviour_script_a70a351393a29857fd94c3d3b716c2395}\label{class_behaviour_script_a70a351393a29857fd94c3d3b716c2395}} 
+\index{BehaviourScript@{BehaviourScript}!onUpdate@{onUpdate}}
+\index{onUpdate@{onUpdate}!BehaviourScript@{BehaviourScript}}
+\doxysubsubsection{\texorpdfstring{onUpdate()}{onUpdate()}}
+{\footnotesize\ttfamily void Behaviour\+Script\+::on\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_behaviour_script_a53009c1c8694be9434d2e50d45c1e4f8}\label{class_behaviour_script_a53009c1c8694be9434d2e50d45c1e4f8}} 
+\index{BehaviourScript@{BehaviourScript}!saveSnapshot@{saveSnapshot}}
+\index{saveSnapshot@{saveSnapshot}!BehaviourScript@{BehaviourScript}}
+\doxysubsubsection{\texorpdfstring{saveSnapshot()}{saveSnapshot()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} $>$ Behaviour\+Script\+::save\+Snapshot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_persistable}{IPersistable}}.
+
+\mbox{\Hypertarget{class_behaviour_script_a11c0b9954cb4aa0e02755cf4d6eb9234}\label{class_behaviour_script_a11c0b9954cb4aa0e02755cf4d6eb9234}} 
+\index{BehaviourScript@{BehaviourScript}!setActive@{setActive}}
+\index{setActive@{setActive}!BehaviourScript@{BehaviourScript}}
+\doxysubsubsection{\texorpdfstring{setActive()}{setActive()}}
+{\footnotesize\ttfamily void Behaviour\+Script\+::set\+Active (\begin{DoxyParamCaption}\item[{bool}]{active }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_behaviour_script_a91ff3d7488ca7f25d17c05091581ace8}\label{class_behaviour_script_a91ff3d7488ca7f25d17c05091581ace8}} 
+\index{BehaviourScript@{BehaviourScript}!setParentGameObject@{setParentGameObject}}
+\index{setParentGameObject@{setParentGameObject}!BehaviourScript@{BehaviourScript}}
+\doxysubsubsection{\texorpdfstring{setParentGameObject()}{setParentGameObject()}}
+{\footnotesize\ttfamily void Behaviour\+Script\+::set\+Parent\+Game\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_object}{Game\+Object}} \&}]{game\+Object }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Components/Behaviour\+Script.\+h\end{DoxyCompactItemize}

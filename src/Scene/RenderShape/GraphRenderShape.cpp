@@ -6,10 +6,12 @@
 #include <stdexcept>
 #include "GraphRenderShape.h"
 
-RenderShapeType GraphRenderShape::getType() {
-    return RenderShapeType::GraphRenderShape;
-}
+namespace GolfEngine::Scene::Render {
+    RenderShapeType GraphRenderShape::getType() {
+        return RenderShapeType::GraphRenderShape;
+    }
 
-void GraphRenderShape::applyTransform(const Transform& transform) {
-    throw std::logic_error("ApplyTransform is intentionally not implemented");
+    void GraphRenderShape::applyTransform(const Transform &transform) {
+        throw std::logic_error("ApplyTransform is intentionally not implemented");
+    }
 }

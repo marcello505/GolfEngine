@@ -1,0 +1,353 @@
+\hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service}{}\doxysection{Golf\+Engine\+::Services\+::Audio\+::Audio\+Service Class Reference}
+\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service}\index{GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}}
+Inheritance diagram for Golf\+Engine\+::Services\+::Audio\+::Audio\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a91be02974ccd81a61cfc11c74efc0259}{init}} ()=0
+\begin{DoxyCompactList}\small\item\em Initializes the audio device, automatically called by Game\+Loop. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a72af61b9785c8f23684569c5562d9207}{free}} ()=0
+\begin{DoxyCompactList}\small\item\em Closes the audio device and clears cache, automatically called by Game\+Loop. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a854418aa65e71bcd548d144aaef12152}{play\+Sfx}} (const std\+::string \&path, float volume, bool loop)=0
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a8c4d404a11559d6b830a2f0fc82fbee4}{play\+Music}} (const std\+::string \&path, float volume, bool loop)=0
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_aa5a1829b8efabb51b7e3660289e4fb9d}{pause\+Music}} ()=0
+\begin{DoxyCompactList}\small\item\em Pause the music currently playing. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a9a036fb03fd750966bf735c9dc8ee016}{resume\+Music}} ()=0
+\begin{DoxyCompactList}\small\item\em Resume the music that is currently paused. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_aebd1603d38ef4ef360e6937c94d463c1}{toggle\+Music}} ()=0
+\begin{DoxyCompactList}\small\item\em Pauses or resumes the music based on its current state. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a5ec4ed5a7290d754b31fd0d4c89bd78c}{stop\+Music}} ()=0
+\begin{DoxyCompactList}\small\item\em Stop the music from playing (Not able to resume after) \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a5ebce49c97656efb3beb91716d646796}{stop\+Sfx}} ()=0
+\begin{DoxyCompactList}\small\item\em Stops all the sound effects from playing. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a1c5a9686a81a7f957553c622cd855602}{stop\+Sfx}} (const std\+::string \&path)=0
+\item 
+virtual float \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a7a6202bf6e155f64574235e711153637}{get\+Master\+Volume}} ()=0
+\item 
+virtual float \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_af60f3466cf71c62d4e28adc48b0458f5}{get\+Music\+Volume}} ()=0
+\item 
+virtual float \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a85623945d467854a3d42359e764b80d0}{get\+Sfx\+Volume}} ()=0
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_aa130018ebe9d8e2610c5f2fc3f68e934}{set\+Master\+Volume}} (float volume)=0
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a5f12d5c023c7dc1e9b71abb6d0e098c2}{set\+Music\+Volume}} (float volume)=0
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a7f2d3eb189d8104ed1dcbbbd1ebbc19e}{set\+Sfx\+Volume}} (float volume)=0
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a9f9ed4c23da20424722fd973a86d0098}{preload\+Sfx}} (const std\+::string \&path)=0
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a293172ae7328c0108b6dd2e5914bae8d}{preload\+Music}} (const std\+::string \&path)=0
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a7a5d4e00c1e852efd945c6c598108398}\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a7a5d4e00c1e852efd945c6c598108398}} 
+virtual void {\bfseries clear\+Cache} ()=0
+\begin{DoxyCompactList}\small\item\em Clears the entire cache of the Audio Service. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_acd39236858e75bb0f807e78010969f36}{is\+Music\+Playing}} ()=0
+\item 
+virtual bool \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a62e8a8921df0ecab183bc85afe6a3eb8}{is\+Music\+Paused}} ()=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a72af61b9785c8f23684569c5562d9207}\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a72af61b9785c8f23684569c5562d9207}} 
+\index{GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}!free@{free}}
+\index{free@{free}!GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}}
+\doxysubsubsection{\texorpdfstring{free()}{free()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Audio\+::\+Audio\+Service\+::free (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Closes the audio device and clears cache, automatically called by Game\+Loop. 
+
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_s_d_l_audio_service_a362cbba5852105de8542598b5d3d8a73}{Golf\+Engine\+::\+Services\+::\+Audio\+::\+SDLAudio\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a7a6202bf6e155f64574235e711153637}\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a7a6202bf6e155f64574235e711153637}} 
+\index{GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}!getMasterVolume@{getMasterVolume}}
+\index{getMasterVolume@{getMasterVolume}!GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}}
+\doxysubsubsection{\texorpdfstring{getMasterVolume()}{getMasterVolume()}}
+{\footnotesize\ttfamily virtual float Golf\+Engine\+::\+Services\+::\+Audio\+::\+Audio\+Service\+::get\+Master\+Volume (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Returns the master volume \begin{DoxyReturn}{Returns}
+current master volume value 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_s_d_l_audio_service_a7135bd9407e7e16b2db54d1980b2381f}{Golf\+Engine\+::\+Services\+::\+Audio\+::\+SDLAudio\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_af60f3466cf71c62d4e28adc48b0458f5}\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_af60f3466cf71c62d4e28adc48b0458f5}} 
+\index{GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}!getMusicVolume@{getMusicVolume}}
+\index{getMusicVolume@{getMusicVolume}!GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}}
+\doxysubsubsection{\texorpdfstring{getMusicVolume()}{getMusicVolume()}}
+{\footnotesize\ttfamily virtual float Golf\+Engine\+::\+Services\+::\+Audio\+::\+Audio\+Service\+::get\+Music\+Volume (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Returns the music volume \begin{DoxyReturn}{Returns}
+current music volume value 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_s_d_l_audio_service_a4cdc020eaee37170b6c4417de9c37d00}{Golf\+Engine\+::\+Services\+::\+Audio\+::\+SDLAudio\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a85623945d467854a3d42359e764b80d0}\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a85623945d467854a3d42359e764b80d0}} 
+\index{GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}!getSfxVolume@{getSfxVolume}}
+\index{getSfxVolume@{getSfxVolume}!GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}}
+\doxysubsubsection{\texorpdfstring{getSfxVolume()}{getSfxVolume()}}
+{\footnotesize\ttfamily virtual float Golf\+Engine\+::\+Services\+::\+Audio\+::\+Audio\+Service\+::get\+Sfx\+Volume (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Returns the sfx volume \begin{DoxyReturn}{Returns}
+current sfx volume value 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_s_d_l_audio_service_a587fe14c2d20bdf7d1cb2082b8424cc9}{Golf\+Engine\+::\+Services\+::\+Audio\+::\+SDLAudio\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a91be02974ccd81a61cfc11c74efc0259}\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a91be02974ccd81a61cfc11c74efc0259}} 
+\index{GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}!init@{init}}
+\index{init@{init}!GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Audio\+::\+Audio\+Service\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Initializes the audio device, automatically called by Game\+Loop. 
+
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_s_d_l_audio_service_ad6c4411de816f3b7d421dd16dc460d7f}{Golf\+Engine\+::\+Services\+::\+Audio\+::\+SDLAudio\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a62e8a8921df0ecab183bc85afe6a3eb8}\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a62e8a8921df0ecab183bc85afe6a3eb8}} 
+\index{GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}!isMusicPaused@{isMusicPaused}}
+\index{isMusicPaused@{isMusicPaused}!GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}}
+\doxysubsubsection{\texorpdfstring{isMusicPaused()}{isMusicPaused()}}
+{\footnotesize\ttfamily virtual bool Golf\+Engine\+::\+Services\+::\+Audio\+::\+Audio\+Service\+::is\+Music\+Paused (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Checks whether there is currently a paused music track \begin{DoxyReturn}{Returns}
+true if current music is paused 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_s_d_l_audio_service_a896774c41520b354f0b2c020ab0e5455}{Golf\+Engine\+::\+Services\+::\+Audio\+::\+SDLAudio\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_acd39236858e75bb0f807e78010969f36}\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_acd39236858e75bb0f807e78010969f36}} 
+\index{GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}!isMusicPlaying@{isMusicPlaying}}
+\index{isMusicPlaying@{isMusicPlaying}!GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}}
+\doxysubsubsection{\texorpdfstring{isMusicPlaying()}{isMusicPlaying()}}
+{\footnotesize\ttfamily virtual bool Golf\+Engine\+::\+Services\+::\+Audio\+::\+Audio\+Service\+::is\+Music\+Playing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Checks whether there is currently music playing \begin{DoxyReturn}{Returns}
+true if music is playing 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_s_d_l_audio_service_acdfc1874db3b2effd4a166533fb73099}{Golf\+Engine\+::\+Services\+::\+Audio\+::\+SDLAudio\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_aa5a1829b8efabb51b7e3660289e4fb9d}\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_aa5a1829b8efabb51b7e3660289e4fb9d}} 
+\index{GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}!pauseMusic@{pauseMusic}}
+\index{pauseMusic@{pauseMusic}!GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}}
+\doxysubsubsection{\texorpdfstring{pauseMusic()}{pauseMusic()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Audio\+::\+Audio\+Service\+::pause\+Music (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Pause the music currently playing. 
+
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_s_d_l_audio_service_a52061c0ba05804ac8885be0afe54e208}{Golf\+Engine\+::\+Services\+::\+Audio\+::\+SDLAudio\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a8c4d404a11559d6b830a2f0fc82fbee4}\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a8c4d404a11559d6b830a2f0fc82fbee4}} 
+\index{GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}!playMusic@{playMusic}}
+\index{playMusic@{playMusic}!GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}}
+\doxysubsubsection{\texorpdfstring{playMusic()}{playMusic()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Audio\+::\+Audio\+Service\+::play\+Music (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path,  }\item[{float}]{volume,  }\item[{bool}]{loop }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Plays a music track 
+\begin{DoxyParams}{Parameters}
+{\em path} & Path of the music to be played \\
+\hline
+{\em volume} & Volume of the music to be played \\
+\hline
+{\em loop} & Loop the music after finish playing \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_s_d_l_audio_service_ade342483b91c4e895107587842d905ee}{Golf\+Engine\+::\+Services\+::\+Audio\+::\+SDLAudio\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a854418aa65e71bcd548d144aaef12152}\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a854418aa65e71bcd548d144aaef12152}} 
+\index{GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}!playSfx@{playSfx}}
+\index{playSfx@{playSfx}!GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}}
+\doxysubsubsection{\texorpdfstring{playSfx()}{playSfx()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Audio\+::\+Audio\+Service\+::play\+Sfx (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path,  }\item[{float}]{volume,  }\item[{bool}]{loop }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Plays a sound effect 
+\begin{DoxyParams}{Parameters}
+{\em path} & Path of the sound effect to be played \\
+\hline
+{\em volume} & Volume of the sound effect to be played \\
+\hline
+{\em loop} & Loop the sound effect after finish playing \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_s_d_l_audio_service_af02a294ea9afa139e8a42e5be0c721a5}{Golf\+Engine\+::\+Services\+::\+Audio\+::\+SDLAudio\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a293172ae7328c0108b6dd2e5914bae8d}\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a293172ae7328c0108b6dd2e5914bae8d}} 
+\index{GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}!preloadMusic@{preloadMusic}}
+\index{preloadMusic@{preloadMusic}!GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}}
+\doxysubsubsection{\texorpdfstring{preloadMusic()}{preloadMusic()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Audio\+::\+Audio\+Service\+::preload\+Music (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Loads a music file into the cache of the Audio Service 
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the music file to be cached \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_s_d_l_audio_service_aa8c6a2f15a8c25708025cb598964e2d6}{Golf\+Engine\+::\+Services\+::\+Audio\+::\+SDLAudio\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a9f9ed4c23da20424722fd973a86d0098}\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a9f9ed4c23da20424722fd973a86d0098}} 
+\index{GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}!preloadSfx@{preloadSfx}}
+\index{preloadSfx@{preloadSfx}!GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}}
+\doxysubsubsection{\texorpdfstring{preloadSfx()}{preloadSfx()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Audio\+::\+Audio\+Service\+::preload\+Sfx (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Loads a sfx file into the cache of the Audio Service 
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the sfx file to be cached \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_s_d_l_audio_service_a18caf8d822ebeb18a2adeed85e11099f}{Golf\+Engine\+::\+Services\+::\+Audio\+::\+SDLAudio\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a9a036fb03fd750966bf735c9dc8ee016}\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a9a036fb03fd750966bf735c9dc8ee016}} 
+\index{GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}!resumeMusic@{resumeMusic}}
+\index{resumeMusic@{resumeMusic}!GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}}
+\doxysubsubsection{\texorpdfstring{resumeMusic()}{resumeMusic()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Audio\+::\+Audio\+Service\+::resume\+Music (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Resume the music that is currently paused. 
+
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_s_d_l_audio_service_ae23ab222253701fe0fe19ed0b9eb85c9}{Golf\+Engine\+::\+Services\+::\+Audio\+::\+SDLAudio\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_aa130018ebe9d8e2610c5f2fc3f68e934}\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_aa130018ebe9d8e2610c5f2fc3f68e934}} 
+\index{GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}!setMasterVolume@{setMasterVolume}}
+\index{setMasterVolume@{setMasterVolume}!GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}}
+\doxysubsubsection{\texorpdfstring{setMasterVolume()}{setMasterVolume()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Audio\+::\+Audio\+Service\+::set\+Master\+Volume (\begin{DoxyParamCaption}\item[{float}]{volume }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Sets the \+\_\+master\+Volume field and updates the current volume of all audio. 
+\begin{DoxyParams}{Parameters}
+{\em volume} & a value between 0.\+0 and 1.\+0, used as a factor to calculate volume. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_s_d_l_audio_service_ab34d2984b5444ce23c0d10d7ecf139ff}{Golf\+Engine\+::\+Services\+::\+Audio\+::\+SDLAudio\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a5f12d5c023c7dc1e9b71abb6d0e098c2}\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a5f12d5c023c7dc1e9b71abb6d0e098c2}} 
+\index{GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}!setMusicVolume@{setMusicVolume}}
+\index{setMusicVolume@{setMusicVolume}!GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}}
+\doxysubsubsection{\texorpdfstring{setMusicVolume()}{setMusicVolume()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Audio\+::\+Audio\+Service\+::set\+Music\+Volume (\begin{DoxyParamCaption}\item[{float}]{volume }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Sets the \+\_\+music\+Volume field and updates the current volume of Music. 
+\begin{DoxyParams}{Parameters}
+{\em volume} & a value between 0.\+0 and 1.\+0, used as a factor to calculate volume. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_s_d_l_audio_service_af5842825161bac818ce90de1a2e95808}{Golf\+Engine\+::\+Services\+::\+Audio\+::\+SDLAudio\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a7f2d3eb189d8104ed1dcbbbd1ebbc19e}\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a7f2d3eb189d8104ed1dcbbbd1ebbc19e}} 
+\index{GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}!setSfxVolume@{setSfxVolume}}
+\index{setSfxVolume@{setSfxVolume}!GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}}
+\doxysubsubsection{\texorpdfstring{setSfxVolume()}{setSfxVolume()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Audio\+::\+Audio\+Service\+::set\+Sfx\+Volume (\begin{DoxyParamCaption}\item[{float}]{volume }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Sets the \+\_\+sfx\+Volume field and updates the current volume of Sound effects. 
+\begin{DoxyParams}{Parameters}
+{\em volume} & a value between 0.\+0 and 1.\+0, used as a factor to calculate volume. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_s_d_l_audio_service_ab7a1de3d7afcb58735d36c9a2feb496f}{Golf\+Engine\+::\+Services\+::\+Audio\+::\+SDLAudio\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a5ec4ed5a7290d754b31fd0d4c89bd78c}\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a5ec4ed5a7290d754b31fd0d4c89bd78c}} 
+\index{GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}!stopMusic@{stopMusic}}
+\index{stopMusic@{stopMusic}!GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}}
+\doxysubsubsection{\texorpdfstring{stopMusic()}{stopMusic()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Audio\+::\+Audio\+Service\+::stop\+Music (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Stop the music from playing (Not able to resume after) 
+
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_s_d_l_audio_service_ac194911469bb6ef0a90389a7dc757bf4}{Golf\+Engine\+::\+Services\+::\+Audio\+::\+SDLAudio\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a5ebce49c97656efb3beb91716d646796}\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a5ebce49c97656efb3beb91716d646796}} 
+\index{GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}!stopSfx@{stopSfx}}
+\index{stopSfx@{stopSfx}!GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}}
+\doxysubsubsection{\texorpdfstring{stopSfx()}{stopSfx()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Audio\+::\+Audio\+Service\+::stop\+Sfx (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Stops all the sound effects from playing. 
+
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_s_d_l_audio_service_a60550fba35065d44a8ad365286c0ce24}{Golf\+Engine\+::\+Services\+::\+Audio\+::\+SDLAudio\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a1c5a9686a81a7f957553c622cd855602}\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_a1c5a9686a81a7f957553c622cd855602}} 
+\index{GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}!stopSfx@{stopSfx}}
+\index{stopSfx@{stopSfx}!GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}}
+\doxysubsubsection{\texorpdfstring{stopSfx()}{stopSfx()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Audio\+::\+Audio\+Service\+::stop\+Sfx (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Stop a specific sound effect from playing 
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to the sound effect that is playing \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_s_d_l_audio_service_aa0503901e315669f806f533bd9c0ec49}{Golf\+Engine\+::\+Services\+::\+Audio\+::\+SDLAudio\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_aebd1603d38ef4ef360e6937c94d463c1}\label{class_golf_engine_1_1_services_1_1_audio_1_1_audio_service_aebd1603d38ef4ef360e6937c94d463c1}} 
+\index{GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}!toggleMusic@{toggleMusic}}
+\index{toggleMusic@{toggleMusic}!GolfEngine::Services::Audio::AudioService@{GolfEngine::Services::Audio::AudioService}}
+\doxysubsubsection{\texorpdfstring{toggleMusic()}{toggleMusic()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Audio\+::\+Audio\+Service\+::toggle\+Music (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Pauses or resumes the music based on its current state. 
+
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_audio_1_1_s_d_l_audio_service_ab158f8bfcbd816dc3ec033fc4a2f5495}{Golf\+Engine\+::\+Services\+::\+Audio\+::\+SDLAudio\+Service}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Services/\+Abstracts/Audio\+Service.\+h\end{DoxyCompactItemize}

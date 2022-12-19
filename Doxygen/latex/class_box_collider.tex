@@ -1,0 +1,187 @@
+\hypertarget{class_box_collider}{}\doxysection{Box\+Collider Class Reference}
+\label{class_box_collider}\index{BoxCollider@{BoxCollider}}
+Inheritance diagram for Box\+Collider\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_box_collider}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_box_collider_a0ac713d93bed71ee5f7b2f7b76513b06}{Box\+Collider}} (const \mbox{\hyperlink{struct_vector2}{Vector2}} \&extends)
+\item 
+Collider\+Shapes \mbox{\hyperlink{class_box_collider_a7e67fa31170447f4803ebab48b8861ad}{get\+Collider\+Shape}} () override
+\item 
+const \mbox{\hyperlink{struct_vector2}{Vector2}} \& \mbox{\hyperlink{class_box_collider_a33ddfe9d2c1ee70216d71d5d83b0d707}{get\+Shape\+Extents}} () const
+\item 
+void \mbox{\hyperlink{class_box_collider_aab8b9c53f1b689135b6118af6815a1bb}{on\+Start}} () override
+\item 
+void \mbox{\hyperlink{class_box_collider_af412b1418884458e4214ace9d27dcdca}{on\+Update}} () override
+\item 
+void \mbox{\hyperlink{class_box_collider_a75fa2dfa65b13d34456c8cf3515c527f}{on\+Remove}} () override
+\item 
+bool \mbox{\hyperlink{class_box_collider_a45756690cb507557ec520cb8d43d3cba}{get\+Active}} () override
+\item 
+void \mbox{\hyperlink{class_box_collider_ad3569f5c8caee2a66f188e89f83dd243}{set\+Active}} (bool active) override
+\item 
+void \mbox{\hyperlink{class_box_collider_a2c93dece4ba21f62870b09347025906e}{set\+Parent\+Game\+Object}} (\mbox{\hyperlink{class_game_object}{Game\+Object}} \&game\+Object) override
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} $>$ \mbox{\hyperlink{class_box_collider_a2c876069a6d021182ff6438dbac686db}{save\+Snapshot}} () override
+\item 
+void \mbox{\hyperlink{class_box_collider_ab262b5e81329d2f9855260bd54379d1b}{load\+Snapshot}} (const \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} \&raw\+Snapshot) override
+\item 
+\mbox{\hyperlink{class_render_shape}{Render\+Shape}} \& \mbox{\hyperlink{class_box_collider_a229e89e9e9525c690a5aaac2199ff0ac}{get\+Render\+Shape}} () override
+\item 
+void \mbox{\hyperlink{class_box_collider_ae6fb22a29c2eb29697b0b39cc79afab8}{set\+Color}} (\mbox{\hyperlink{struct_color}{Color}} color)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_box_collider_a0ac713d93bed71ee5f7b2f7b76513b06}\label{class_box_collider_a0ac713d93bed71ee5f7b2f7b76513b06}} 
+\index{BoxCollider@{BoxCollider}!BoxCollider@{BoxCollider}}
+\index{BoxCollider@{BoxCollider}!BoxCollider@{BoxCollider}}
+\doxysubsubsection{\texorpdfstring{BoxCollider()}{BoxCollider()}}
+{\footnotesize\ttfamily Box\+Collider\+::\+Box\+Collider (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_vector2}{Vector2}} \&}]{extends }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\mbox{\hyperlink{class_box_collider}{Box\+Collider}} is used in combination with a Rigid Body (wont do anything on its own) 
+\begin{DoxyParams}{Parameters}
+{\em extends} & of box \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_box_collider_a45756690cb507557ec520cb8d43d3cba}\label{class_box_collider_a45756690cb507557ec520cb8d43d3cba}} 
+\index{BoxCollider@{BoxCollider}!getActive@{getActive}}
+\index{getActive@{getActive}!BoxCollider@{BoxCollider}}
+\doxysubsubsection{\texorpdfstring{getActive()}{getActive()}}
+{\footnotesize\ttfamily bool Box\+Collider\+::get\+Active (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_box_collider_a7e67fa31170447f4803ebab48b8861ad}\label{class_box_collider_a7e67fa31170447f4803ebab48b8861ad}} 
+\index{BoxCollider@{BoxCollider}!getColliderShape@{getColliderShape}}
+\index{getColliderShape@{getColliderShape}!BoxCollider@{BoxCollider}}
+\doxysubsubsection{\texorpdfstring{getColliderShape()}{getColliderShape()}}
+{\footnotesize\ttfamily Collider\+Shapes Box\+Collider\+::get\+Collider\+Shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\hyperlink{class_collider}{Collider}} shape of this collider \begin{DoxyReturn}{Returns}
+collider shape based on its properties 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_collider}{Collider}}.
+
+\mbox{\Hypertarget{class_box_collider_a229e89e9e9525c690a5aaac2199ff0ac}\label{class_box_collider_a229e89e9e9525c690a5aaac2199ff0ac}} 
+\index{BoxCollider@{BoxCollider}!getRenderShape@{getRenderShape}}
+\index{getRenderShape@{getRenderShape}!BoxCollider@{BoxCollider}}
+\doxysubsubsection{\texorpdfstring{getRenderShape()}{getRenderShape()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_render_shape}{Render\+Shape}} \& Box\+Collider\+::get\+Render\+Shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Get the render shape connected to this drawable \begin{DoxyReturn}{Returns}
+render shape 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_drawable_ac786b2a1008169713173ac2bc770cefc}{Drawable}}.
+
+\mbox{\Hypertarget{class_box_collider_a33ddfe9d2c1ee70216d71d5d83b0d707}\label{class_box_collider_a33ddfe9d2c1ee70216d71d5d83b0d707}} 
+\index{BoxCollider@{BoxCollider}!getShapeExtents@{getShapeExtents}}
+\index{getShapeExtents@{getShapeExtents}!BoxCollider@{BoxCollider}}
+\doxysubsubsection{\texorpdfstring{getShapeExtents()}{getShapeExtents()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{struct_vector2}{Vector2}} \& Box\+Collider\+::get\+Shape\+Extents (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Get extends of this box \begin{DoxyReturn}{Returns}
+extends of this box 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_box_collider_ab262b5e81329d2f9855260bd54379d1b}\label{class_box_collider_ab262b5e81329d2f9855260bd54379d1b}} 
+\index{BoxCollider@{BoxCollider}!loadSnapshot@{loadSnapshot}}
+\index{loadSnapshot@{loadSnapshot}!BoxCollider@{BoxCollider}}
+\doxysubsubsection{\texorpdfstring{loadSnapshot()}{loadSnapshot()}}
+{\footnotesize\ttfamily void Box\+Collider\+::load\+Snapshot (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} \&}]{raw\+Snapshot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_persistable}{IPersistable}}.
+
+\mbox{\Hypertarget{class_box_collider_a75fa2dfa65b13d34456c8cf3515c527f}\label{class_box_collider_a75fa2dfa65b13d34456c8cf3515c527f}} 
+\index{BoxCollider@{BoxCollider}!onRemove@{onRemove}}
+\index{onRemove@{onRemove}!BoxCollider@{BoxCollider}}
+\doxysubsubsection{\texorpdfstring{onRemove()}{onRemove()}}
+{\footnotesize\ttfamily void Box\+Collider\+::on\+Remove (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_box_collider_aab8b9c53f1b689135b6118af6815a1bb}\label{class_box_collider_aab8b9c53f1b689135b6118af6815a1bb}} 
+\index{BoxCollider@{BoxCollider}!onStart@{onStart}}
+\index{onStart@{onStart}!BoxCollider@{BoxCollider}}
+\doxysubsubsection{\texorpdfstring{onStart()}{onStart()}}
+{\footnotesize\ttfamily void Box\+Collider\+::on\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_box_collider_af412b1418884458e4214ace9d27dcdca}\label{class_box_collider_af412b1418884458e4214ace9d27dcdca}} 
+\index{BoxCollider@{BoxCollider}!onUpdate@{onUpdate}}
+\index{onUpdate@{onUpdate}!BoxCollider@{BoxCollider}}
+\doxysubsubsection{\texorpdfstring{onUpdate()}{onUpdate()}}
+{\footnotesize\ttfamily void Box\+Collider\+::on\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_box_collider_a2c876069a6d021182ff6438dbac686db}\label{class_box_collider_a2c876069a6d021182ff6438dbac686db}} 
+\index{BoxCollider@{BoxCollider}!saveSnapshot@{saveSnapshot}}
+\index{saveSnapshot@{saveSnapshot}!BoxCollider@{BoxCollider}}
+\doxysubsubsection{\texorpdfstring{saveSnapshot()}{saveSnapshot()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_i_snapshot}{ISnapshot}} $>$ Box\+Collider\+::save\+Snapshot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_i_persistable}{IPersistable}}.
+
+\mbox{\Hypertarget{class_box_collider_ad3569f5c8caee2a66f188e89f83dd243}\label{class_box_collider_ad3569f5c8caee2a66f188e89f83dd243}} 
+\index{BoxCollider@{BoxCollider}!setActive@{setActive}}
+\index{setActive@{setActive}!BoxCollider@{BoxCollider}}
+\doxysubsubsection{\texorpdfstring{setActive()}{setActive()}}
+{\footnotesize\ttfamily void Box\+Collider\+::set\+Active (\begin{DoxyParamCaption}\item[{bool}]{active }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+\mbox{\Hypertarget{class_box_collider_ae6fb22a29c2eb29697b0b39cc79afab8}\label{class_box_collider_ae6fb22a29c2eb29697b0b39cc79afab8}} 
+\index{BoxCollider@{BoxCollider}!setColor@{setColor}}
+\index{setColor@{setColor}!BoxCollider@{BoxCollider}}
+\doxysubsubsection{\texorpdfstring{setColor()}{setColor()}}
+{\footnotesize\ttfamily void Box\+Collider\+::set\+Color (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_color}{Color}}}]{color }\end{DoxyParamCaption})}
+
+Set color of box collider 
+\begin{DoxyParams}{Parameters}
+{\em color} & to be set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_box_collider_a2c93dece4ba21f62870b09347025906e}\label{class_box_collider_a2c93dece4ba21f62870b09347025906e}} 
+\index{BoxCollider@{BoxCollider}!setParentGameObject@{setParentGameObject}}
+\index{setParentGameObject@{setParentGameObject}!BoxCollider@{BoxCollider}}
+\doxysubsubsection{\texorpdfstring{setParentGameObject()}{setParentGameObject()}}
+{\footnotesize\ttfamily void Box\+Collider\+::set\+Parent\+Game\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_object}{Game\+Object}} \&}]{game\+Object }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_component}{Component}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Components/Box\+Collider.\+h\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Components/Box\+Collider.\+cpp\end{DoxyCompactItemize}

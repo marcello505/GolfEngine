@@ -6,9 +6,11 @@
 #include "Core/GameLoop.h"
 #include "Scene/GameObjects/UIObject/Button.h"
 
+using namespace GolfEngine::Scene::UI;
+
 void ExitButtonScript::onUpdate() {
 
-    auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
+    auto& sceneManager = GolfEngine::Core::SceneManager::GetSceneManager();
 
     auto& btn = getParentGameObject<Button>();
 

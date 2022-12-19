@@ -1,0 +1,39 @@
+\hypertarget{_input_service_8h_source}{}\doxysection{Input\+Service.\+h}
+\label{_input_service_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Services/Abstracts/InputService.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Services/Abstracts/InputService.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by conner on 11/2/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef SPC\_PROJECT\_INPUTSERVICE\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define SPC\_PROJECT\_INPUTSERVICE\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}Input/InputKey.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{using namespace }GolfEngine::Input;}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{keyword}{namespace }GolfEngine::Services::Input \{}
+\DoxyCodeLine{14     \textcolor{keyword}{class }\mbox{\hyperlink{class_golf_engine_1_1_services_1_1_input_1_1_input_service}{InputService}} \{}
+\DoxyCodeLine{15     \textcolor{keyword}{public}:}
+\DoxyCodeLine{17         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_input_1_1_input_service_af1c293daff7108079f30d707fa3b2cba}{handleInputs}}() = 0;}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{21         [[nodiscard]] \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_input_1_1_input_service_ac48d2a91544403423017e7f2736063c9}{hasReceivedQuitSignal}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{25         [[nodiscard]] \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_input_1_1_input_service_ac433c3ce57587f6c84fddb2854e31210}{pressedKey}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{29         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_input_1_1_input_service_a3e031f012a39e711c9b3d876f6e0ed4f}{setKeyPressed}}(\textcolor{keywordtype}{bool} pressed) = 0;}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{33         \textcolor{keyword}{virtual} InputKey \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_input_1_1_input_service_a5fb1349206c04b683e6724ca3d9374d5}{getKeyPressed}}() = 0;}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{38         \textcolor{keyword}{virtual} std::string \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_input_1_1_input_service_a33d49d0e44f2b63d82cb884deccabdd2}{getKeyString}}(InputKey key) = 0;}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40         \textcolor{comment}{// Virtual Destructors}}
+\DoxyCodeLine{41         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_input_1_1_input_service}{\string~InputService}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{42     \};}
+\DoxyCodeLine{43 \}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//SPC\_PROJECT\_INPUTSERVICE\_H}}
+
+\end{DoxyCode}

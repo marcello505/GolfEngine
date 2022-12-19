@@ -8,13 +8,15 @@
 #include "Abstracts/TileMapParserService.h"
 #include <memory>
 
+using namespace GolfEngine::Scene;
+
 namespace GolfEngine::Services::TileMapParser {
     class PugiXMLTileMapParserService : public TileMapParserService {
     public:
         /// Loads a .tmx map file created in Tiled
         /// \param mapPath Path to the map file
         /// \return TileMapRenderShape that holds all the info to render the map
-        TileMapRenderShape loadMap(const std::filesystem::path& mapPath) override;
+        GolfEngine::Scene::Render::TileMapRenderShape loadMap(const std::filesystem::path& mapPath) override;
     private:
         std::string readFile(const std::filesystem::path& path);
     };

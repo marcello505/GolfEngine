@@ -6,9 +6,11 @@
 #include "SettingsButtonScript.h"
 #include "Scene/GameObjects/UIObject/Button.h"
 
+using namespace GolfEngine::Scene::UI;
+
 void SettingsButtonScript::onUpdate() {
 
-    auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
+    auto& sceneManager = GolfEngine::Core::SceneManager::GetSceneManager();
 
     //get range of button area to check if we clicked there
     auto& btn = getParentGameObject<Button>();

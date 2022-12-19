@@ -1,0 +1,128 @@
+\hypertarget{class_golf_engine_1_1_scene_1_1_camera}{}\doxysection{Golf\+Engine\+::Scene\+::Camera Class Reference}
+\label{class_golf_engine_1_1_scene_1_1_camera}\index{GolfEngine::Scene::Camera@{GolfEngine::Scene::Camera}}
+Inheritance diagram for Golf\+Engine\+::Scene\+::Camera\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_golf_engine_1_1_scene_1_1_camera}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera_a3a23b44834a52ceceb26c8ce2c2ec39c}{Camera}} (float aspect\+Width, float aspect\+Height, \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}} background\+Color=\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}}\{50, 50, 50, 255\})
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_camera_a9bef92695895a282187e7297711cd66e}\label{class_golf_engine_1_1_scene_1_1_camera_a9bef92695895a282187e7297711cd66e}} 
+{\bfseries Camera} (\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}} background\+Color=\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}}\{50, 50, 50, 255\})
+\item 
+void \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera_a052d55fc73bcb2027cd4a0244d5f2ed2}{on\+Start}} () override
+\begin{DoxyCompactList}\small\item\em Calls on\+Start on all attached components. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_camera_a9ed621a353f9118f3adff0b90ad52b69}\label{class_golf_engine_1_1_scene_1_1_camera_a9ed621a353f9118f3adff0b90ad52b69}} 
+float {\bfseries aspect\+Width} () const
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_camera_a098b9ada62756e71f98bfb37e21b0228}\label{class_golf_engine_1_1_scene_1_1_camera_a098b9ada62756e71f98bfb37e21b0228}} 
+float {\bfseries aspect\+Height} () const
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_camera_a660bcc6c69eaf9d9ef0a59415bd4c9a1}\label{class_golf_engine_1_1_scene_1_1_camera_a660bcc6c69eaf9d9ef0a59415bd4c9a1}} 
+\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}} {\bfseries background\+Color} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera_af81c7d370c3a62710ba4084304d6ec07}{set\+Main\+Camera}} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera}{Camera}} \&camera)
+\item 
+static std\+::optional$<$ std\+::reference\+\_\+wrapper$<$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera}{Camera}} $>$ $>$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera_ae33bd6eff6cd0a48f9e72f26a427d8f9}{get\+Main\+Camera}} ()
+\item 
+static \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera_a950ba6c571ec1cabc73a9edadef0867e}{screen\+To\+World\+Space}} (\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} screen\+Pos)
+\item 
+static \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera_ab9f92ed824af54cb8b5d38a5802c82be}{world\+To\+Screen\+Space}} (\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} world\+Pos)
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_camera_a3a23b44834a52ceceb26c8ce2c2ec39c}\label{class_golf_engine_1_1_scene_1_1_camera_a3a23b44834a52ceceb26c8ce2c2ec39c}} 
+\index{GolfEngine::Scene::Camera@{GolfEngine::Scene::Camera}!Camera@{Camera}}
+\index{Camera@{Camera}!GolfEngine::Scene::Camera@{GolfEngine::Scene::Camera}}
+\doxysubsubsection{\texorpdfstring{Camera()}{Camera()}}
+{\footnotesize\ttfamily Golf\+Engine\+::\+Scene\+::\+Camera\+::\+Camera (\begin{DoxyParamCaption}\item[{float}]{aspect\+Width,  }\item[{float}]{aspect\+Height,  }\item[{\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}}}]{background\+Color = {\ttfamily \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}}\{50,~50,~50,~255\}} }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera}{Camera}} object controls what gets displayed on the screen. (First camera created in the scene will be the main camera by default.) 
+\begin{DoxyParams}{Parameters}
+{\em aspect\+Width} & width of the camera display \\
+\hline
+{\em aspect\+Height} & height of the camera display \\
+\hline
+{\em background\+Color} & color used on the background where no sprites are present \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_camera_ae33bd6eff6cd0a48f9e72f26a427d8f9}\label{class_golf_engine_1_1_scene_1_1_camera_ae33bd6eff6cd0a48f9e72f26a427d8f9}} 
+\index{GolfEngine::Scene::Camera@{GolfEngine::Scene::Camera}!getMainCamera@{getMainCamera}}
+\index{getMainCamera@{getMainCamera}!GolfEngine::Scene::Camera@{GolfEngine::Scene::Camera}}
+\doxysubsubsection{\texorpdfstring{getMainCamera()}{getMainCamera()}}
+{\footnotesize\ttfamily std\+::optional$<$ std\+::reference\+\_\+wrapper$<$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera}{Camera}} $>$ $>$ Golf\+Engine\+::\+Scene\+::\+Camera\+::get\+Main\+Camera (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Returns a reference to the current main camera if there is one present \begin{DoxyReturn}{Returns}
+reference to current main camera 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_camera_a052d55fc73bcb2027cd4a0244d5f2ed2}\label{class_golf_engine_1_1_scene_1_1_camera_a052d55fc73bcb2027cd4a0244d5f2ed2}} 
+\index{GolfEngine::Scene::Camera@{GolfEngine::Scene::Camera}!onStart@{onStart}}
+\index{onStart@{onStart}!GolfEngine::Scene::Camera@{GolfEngine::Scene::Camera}}
+\doxysubsubsection{\texorpdfstring{onStart()}{onStart()}}
+{\footnotesize\ttfamily void Golf\+Engine\+::\+Scene\+::\+Camera\+::on\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Calls on\+Start on all attached components. 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_aeb4505baa81e006f1a4737357b284cef}{Golf\+Engine\+::\+Scene\+::\+Game\+Object}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_camera_a950ba6c571ec1cabc73a9edadef0867e}\label{class_golf_engine_1_1_scene_1_1_camera_a950ba6c571ec1cabc73a9edadef0867e}} 
+\index{GolfEngine::Scene::Camera@{GolfEngine::Scene::Camera}!screenToWorldSpace@{screenToWorldSpace}}
+\index{screenToWorldSpace@{screenToWorldSpace}!GolfEngine::Scene::Camera@{GolfEngine::Scene::Camera}}
+\doxysubsubsection{\texorpdfstring{screenToWorldSpace()}{screenToWorldSpace()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} Golf\+Engine\+::\+Scene\+::\+Camera\+::screen\+To\+World\+Space (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}}}]{screen\+Pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Converts screen space position to a world space position 
+\begin{DoxyParams}{Parameters}
+{\em screen\+Pos} & position to be converted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+world position 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_camera_af81c7d370c3a62710ba4084304d6ec07}\label{class_golf_engine_1_1_scene_1_1_camera_af81c7d370c3a62710ba4084304d6ec07}} 
+\index{GolfEngine::Scene::Camera@{GolfEngine::Scene::Camera}!setMainCamera@{setMainCamera}}
+\index{setMainCamera@{setMainCamera}!GolfEngine::Scene::Camera@{GolfEngine::Scene::Camera}}
+\doxysubsubsection{\texorpdfstring{setMainCamera()}{setMainCamera()}}
+{\footnotesize\ttfamily void Golf\+Engine\+::\+Scene\+::\+Camera\+::set\+Main\+Camera (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera}{Camera}} \&}]{camera }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Sets the main camera in the render service 
+\begin{DoxyParams}{Parameters}
+{\em camera} & reference to the camera to be set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_camera_ab9f92ed824af54cb8b5d38a5802c82be}\label{class_golf_engine_1_1_scene_1_1_camera_ab9f92ed824af54cb8b5d38a5802c82be}} 
+\index{GolfEngine::Scene::Camera@{GolfEngine::Scene::Camera}!worldToScreenSpace@{worldToScreenSpace}}
+\index{worldToScreenSpace@{worldToScreenSpace}!GolfEngine::Scene::Camera@{GolfEngine::Scene::Camera}}
+\doxysubsubsection{\texorpdfstring{worldToScreenSpace()}{worldToScreenSpace()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} Golf\+Engine\+::\+Scene\+::\+Camera\+::world\+To\+Screen\+Space (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}}}]{world\+Pos }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Converts world space position to a screen space position 
+\begin{DoxyParams}{Parameters}
+{\em world\+Pos} & position to be converted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+screen position 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Game\+Objects/Camera.\+h\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Game\+Objects/Camera.\+cpp\end{DoxyCompactItemize}

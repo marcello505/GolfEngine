@@ -8,6 +8,8 @@
 #include <Scene/GameObjects/GameObject.h>
 #include <Scene/Scene.h>
 
+using namespace GolfEngine::Scene;
+
 class HUD : public GameObject {
 public:
     explicit HUD(Scene& scene);

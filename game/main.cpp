@@ -23,6 +23,7 @@
 
 #define PROJECT_SETTINGS_SAVE_PATH "ProjectSettings.xml"
 
+using namespace GolfEngine::Core;
 
 int main(int argc, char* argv[]){
     // Load project settings save file
@@ -107,7 +108,7 @@ int main(int argc, char* argv[]){
     GolfEngine::Core::getProjectSettings().setBool(GAME_SETTINGS_DEBUG_PRINT_PLAYER_POS, false); //Output player position in console
 
     //Scene initialization
-    auto& sceneManager = GolfEngine::SceneManager::GetSceneManager();
+    auto& sceneManager = GolfEngine::Core::SceneManager::GetSceneManager();
     sceneManager.addSceneFactory<PlayerTestScene>("playerTest");
     sceneManager.addSceneFactory<SaveGameTestScene>("saveGameTest");
     sceneManager.addSceneFactory<Level1Scene>("level1");

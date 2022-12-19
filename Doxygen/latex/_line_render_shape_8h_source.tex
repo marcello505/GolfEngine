@@ -1,0 +1,38 @@
+\hypertarget{_line_render_shape_8h_source}{}\doxysection{Line\+Render\+Shape.\+h}
+\label{_line_render_shape_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/RenderShape/LineRenderShape.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/RenderShape/LineRenderShape.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by conner on 11/2/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef SPC\_PROJECT\_LINERENDERSHAPE\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define SPC\_PROJECT\_LINERENDERSHAPE\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}RenderShape.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}../Vector2.h"{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}../Color.h"{}}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{keyword}{namespace }GolfEngine::Scene::Render \{}
+\DoxyCodeLine{13     \textcolor{keyword}{class }\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_line_render_shape}{LineRenderShape}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_render_shape}{RenderShape}} \{}
+\DoxyCodeLine{14     \textcolor{keyword}{public}:}
+\DoxyCodeLine{19         \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_line_render_shape}{LineRenderShape}}(\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} posA, \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} posB, \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}} color = \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}}(255, 255, 255));}
+\DoxyCodeLine{20         RenderShapeType getType() \textcolor{keyword}{override};}
+\DoxyCodeLine{21         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_line_render_shape_af9b060bb04a112e8ff267ce599cafe6e}{applyTransform}}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_transform}{Transform}} \&transform) \textcolor{keyword}{override};}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23         \textcolor{comment}{// Getter}}
+\DoxyCodeLine{24         [[nodiscard]] \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} positionA() \textcolor{keyword}{const};}
+\DoxyCodeLine{25         [[nodiscard]] \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} positionB() \textcolor{keyword}{const};}
+\DoxyCodeLine{26         [[nodiscard]] \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}} color() \textcolor{keyword}{const};}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28     \textcolor{keyword}{private}:}
+\DoxyCodeLine{29         \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \_positionA;}
+\DoxyCodeLine{30         \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \_positionB;}
+\DoxyCodeLine{31         \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}} \_color;}
+\DoxyCodeLine{32     \};}
+\DoxyCodeLine{33 \}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//SPC\_PROJECT\_LINERENDERSHAPE\_H}}
+
+\end{DoxyCode}

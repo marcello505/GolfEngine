@@ -1,0 +1,74 @@
+\hypertarget{class_graph}{}\doxysection{Graph Class Reference}
+\label{class_graph}\index{Graph@{Graph}}
+Inheritance diagram for Graph\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_graph_a19770d3bfda0bf9b40c1b72e0bf8e65a}{Graph}} (std\+::vector$<$ \mbox{\hyperlink{struct_node}{Node}} $>$ nodes, std\+::vector$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_rect_render_shape}{Rect\+Render\+Shape}} $>$ $>$ drawables)
+\item 
+\mbox{\Hypertarget{class_graph_a0fccf53dde7554af9c7044802356df3f}\label{class_graph_a0fccf53dde7554af9c7044802356df3f}} 
+{\bfseries Graph} (const \mbox{\hyperlink{class_graph}{Graph}} \&other)=delete
+\item 
+\mbox{\Hypertarget{class_graph_a9a433c6986e46aba89bfc30b42f34a89}\label{class_graph_a9a433c6986e46aba89bfc30b42f34a89}} 
+{\bfseries Graph} (const \mbox{\hyperlink{class_graph}{Graph}} \&\&other)=delete
+\item 
+\mbox{\Hypertarget{class_graph_a68a532df0e4f3df89a63650130b791bd}\label{class_graph_a68a532df0e4f3df89a63650130b791bd}} 
+\mbox{\hyperlink{class_graph}{Graph}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_graph}{Graph}} \&other)=delete
+\item 
+\mbox{\Hypertarget{class_graph_aca7852bcbb849812e08eb0e77e22ad18}\label{class_graph_aca7852bcbb849812e08eb0e77e22ad18}} 
+\mbox{\hyperlink{class_graph}{Graph}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_graph}{Graph}} \&\&other)=delete
+\item 
+\mbox{\hyperlink{class_render_shape}{Render\+Shape}} \& \mbox{\hyperlink{class_graph_a165f275259577b61efe81eca95f73430}{get\+Render\+Shape}} () override
+\item 
+\mbox{\Hypertarget{class_graph_aae88f0b3f834f64eb206148965c3f829}\label{class_graph_aae88f0b3f834f64eb206148965c3f829}} 
+void {\bfseries update\+Graph\+Colors} ()
+\begin{DoxyCompactList}\small\item\em Updates the list of drawables based on included in path, visited or unvisited. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_graph_a1aee641ef193a893ab2833d8874ad2f5}\label{class_graph_a1aee641ef193a893ab2833d8874ad2f5}} 
+std\+::vector$<$ \mbox{\hyperlink{struct_node}{Node}} $>$ {\bfseries nodes} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_graph_a19770d3bfda0bf9b40c1b72e0bf8e65a}\label{class_graph_a19770d3bfda0bf9b40c1b72e0bf8e65a}} 
+\index{Graph@{Graph}!Graph@{Graph}}
+\index{Graph@{Graph}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{Graph()}{Graph()}}
+{\footnotesize\ttfamily Graph\+::\+Graph (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{struct_node}{Node}} $>$}]{nodes,  }\item[{std\+::vector$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_rect_render_shape}{Rect\+Render\+Shape}} $>$ $>$}]{drawables }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+\mbox{\hyperlink{class_graph}{Graph}} object to manage a graph used in pathfinding 
+\begin{DoxyParams}{Parameters}
+{\em nodes} & list of nodes inside graph \\
+\hline
+{\em drawables} & list of drawable nodes \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_graph_a165f275259577b61efe81eca95f73430}\label{class_graph_a165f275259577b61efe81eca95f73430}} 
+\index{Graph@{Graph}!getRenderShape@{getRenderShape}}
+\index{getRenderShape@{getRenderShape}!Graph@{Graph}}
+\doxysubsubsection{\texorpdfstring{getRenderShape()}{getRenderShape()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_render_shape}{Render\+Shape}} \& Graph\+::get\+Render\+Shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Get the render shape connected to this drawable \begin{DoxyReturn}{Returns}
+render shape 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_drawable_ac786b2a1008169713173ac2bc770cefc}{Drawable}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/Graph.\+h\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/Graph.\+cpp\end{DoxyCompactItemize}

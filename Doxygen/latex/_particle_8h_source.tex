@@ -1,0 +1,43 @@
+\hypertarget{_particle_8h_source}{}\doxysection{Particle.\+h}
+\label{_particle_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/Particle.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/Particle.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by Lucas on 28-\/11-\/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef GOLFENGINE\_PARTICLE\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define GOLFENGINE\_PARTICLE\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}Scene/Components/Drawable.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}Scene/RenderShape/SpriteRenderShape.h"{}}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{namespace }GolfEngine::Scene \{}
+\DoxyCodeLine{12     \textcolor{keyword}{class }\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_particle}{Particle}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_drawable}{Components::Drawable}} \{}
+\DoxyCodeLine{13     \textcolor{keyword}{public}:}
+\DoxyCodeLine{20         \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_particle}{Particle}}(std::string path, \textcolor{keywordtype}{float} velocity, \textcolor{keywordtype}{float} rotation, \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} pixelScale, \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}} color);}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22         \textcolor{comment}{// Drawable override}}
+\DoxyCodeLine{23         \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_render_shape}{Render::RenderShape}} \&\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_particle_aab5a850cd1e1263c6e3ab60753cab113}{getRenderShape}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{24         \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_sprite_render_shape}{Render::SpriteRenderShape}} \&getSpriteRenderShape();}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26         \textcolor{comment}{//getters}}
+\DoxyCodeLine{27         [[nodiscard]] \textcolor{keywordtype}{float} getRadian() \textcolor{keyword}{const};}
+\DoxyCodeLine{28         [[nodiscard]] \textcolor{keywordtype}{float} getVelocity() \textcolor{keyword}{const};}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30         \textcolor{comment}{//setters}}
+\DoxyCodeLine{31         \textcolor{keywordtype}{void} setRadian(\textcolor{keywordtype}{float} radian);}
+\DoxyCodeLine{32         \textcolor{keywordtype}{void} setVelocity(\textcolor{keywordtype}{float} velocity);}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34         \textcolor{keywordtype}{int} lifeTime\{0\};}
+\DoxyCodeLine{35     \textcolor{keyword}{private}:}
+\DoxyCodeLine{36         \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_sprite_render_shape}{Render::SpriteRenderShape}} \_renderShape;}
+\DoxyCodeLine{37         \textcolor{keywordtype}{float} \_radian\{0\};}
+\DoxyCodeLine{38         \textcolor{keywordtype}{float} \_velocity\{1\};}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40     \};}
+\DoxyCodeLine{41 \}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//GOLFENGINE\_PARTICLE\_H}}
+
+\end{DoxyCode}

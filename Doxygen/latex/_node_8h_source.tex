@@ -1,0 +1,40 @@
+\hypertarget{_node_8h_source}{}\doxysection{Node.\+h}
+\label{_node_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/Node.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/Node.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by Lucas on 7-\/12-\/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef GOLFENGINE\_NODE\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define GOLFENGINE\_NODE\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}./Vector2.h"{}}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{keyword}{namespace }GolfEngine::Scene \{}
+\DoxyCodeLine{13     \textcolor{keyword}{enum class} NodeTags \{}
+\DoxyCodeLine{14         None,}
+\DoxyCodeLine{15         Visited,}
+\DoxyCodeLine{16         Path}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18     \};}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_node}{Node}} \{}
+\DoxyCodeLine{25         \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_node_ae026c343e1044fddea8c3ca4576cfa57}{Node}}(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id}, \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} position, \textcolor{keywordtype}{int} weight = 1) : id\{id\}, position\{position\}, weight\{weight\},}
+\DoxyCodeLine{26                                                          tag\{NodeTags::None\} \{\}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28         \textcolor{keywordtype}{int} id;}
+\DoxyCodeLine{29         \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} position;}
+\DoxyCodeLine{30         NodeTags tag;}
+\DoxyCodeLine{31         \textcolor{keywordtype}{int} weight;}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33         std::vector<int> edges\{\};}
+\DoxyCodeLine{34     \};}
+\DoxyCodeLine{35 \}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//GOLFENGINE\_NODE\_H}}
+
+\end{DoxyCode}

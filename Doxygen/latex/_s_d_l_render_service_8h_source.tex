@@ -1,0 +1,85 @@
+\hypertarget{_s_d_l_render_service_8h_source}{}\doxysection{SDLRender\+Service.\+h}
+\label{_s_d_l_render_service_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Services/SDLRenderService.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Services/SDLRenderService.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by conner on 11/2/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef SPC\_PROJECT\_SDLRENDERSERVICE\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define SPC\_PROJECT\_SDLRENDERSERVICE\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}Abstracts/RenderService.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <SDL.h>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <SDL\_ttf.h>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include "{}../Scene/RenderShape/RectRenderShape.h"{}}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include "{}../Scene/RenderShape/LineRenderShape.h"{}}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include "{}../Scene/RenderShape/SpriteRenderShape.h"{}}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include "{}../Scene/RenderShape/CircleRenderShape.h"{}}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include "{}../Scene/RenderShape/ButtonRenderShape.h"{}}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include "{}Render/Texture.h"{}}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include "{}../Scene/RenderShape/TextRenderShape.h"{}}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include "{}../Scene/RenderShape/TileMapRenderShape.h"{}}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include "{}Scene/GameObjects/Camera.h"{}}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{keyword}{using namespace }GolfEngine::Scene::Render;}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{namespace }GolfEngine::Services::Render \{}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{keyword}{class }\mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service}{SDLRenderService}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_render_service}{RenderService}} \{}
+\DoxyCodeLine{30 \textcolor{keyword}{public}:}
+\DoxyCodeLine{31     \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service}{SDLRenderService}}();}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service}{SDLRenderService}}(\mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service}{SDLRenderService}} \&sdlRenderService) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{34     \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service}{SDLRenderService}} \&operator=(\mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service}{SDLRenderService}} *other) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36     \textcolor{comment}{// Render Service overrides}}
+\DoxyCodeLine{37     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_abca3e4ffd36a1c8a9c62eecb2de14b8a}{setWindowTitle}}(\textcolor{keyword}{const} std::string\& title) \textcolor{keyword}{override};}
+\DoxyCodeLine{38     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_a9091f3c543c414085880ddb226629c32}{addDrawable}}(\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_drawable}{Drawable}}\& drawable) \textcolor{keyword}{override};}
+\DoxyCodeLine{39     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_aa743dfc2b8b89b582bf1d2224f3a4c85}{removeDrawable}}(\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_drawable}{Drawable}}\& drawable) \textcolor{keyword}{override};}
+\DoxyCodeLine{40     \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_ad1ad1ef55d0ee5a1a9ea64d791e04b9b}{isRegistered}}(\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_drawable}{Drawable}} \&drawable) \textcolor{keyword}{override};}
+\DoxyCodeLine{41     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_a9bb68fe912e9d60d01fe13c5859843c7}{render}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{42     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_a05116f229bc751e38f57dbb969a1668b}{setScreenSize}}(\textcolor{keywordtype}{int} width, \textcolor{keywordtype}{int} height) \textcolor{keyword}{override};}
+\DoxyCodeLine{43     \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_a7119b9157df671562e963c5dbf2962fd}{setFullScreen}}(\textcolor{keywordtype}{bool} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_a2674eae095a583592fb01531c6ad3882}{fullScreen}}) \textcolor{keyword}{override};}
+\DoxyCodeLine{44     \textcolor{keywordtype}{void} setMainCamera(\textcolor{keyword}{const} std::optional<std::reference\_wrapper<Camera>>\& camera) \textcolor{keyword}{override};}
+\DoxyCodeLine{45     [[nodiscard]] std::optional<std::reference\_wrapper<Camera>> \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_ab31ea8c2ee50d46977980337b79f3008}{getMainCamera}}() \textcolor{keyword}{const override};}
+\DoxyCodeLine{46     [[nodiscard]] \textcolor{keywordtype}{int} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_af1e89e6d897f074cd651b4b87aaa112d}{screenSizeWidth}}() \textcolor{keyword}{const override};}
+\DoxyCodeLine{47     [[nodiscard]] \textcolor{keywordtype}{int} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_ab86d93d118ab810a6e951bf2334b38ca}{screenSizeHeight}}() \textcolor{keyword}{const override};}
+\DoxyCodeLine{48     [[nodiscard]] \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_a2674eae095a583592fb01531c6ad3882}{fullScreen}}() \textcolor{keyword}{const override};}
+\DoxyCodeLine{49     [[nodiscard]] \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_s_d_l_render_service_ac261f86c4104f46a0fcdbd1a72019440}{getCameraOffset}}() \textcolor{keyword}{const override};}
+\DoxyCodeLine{50 \textcolor{keyword}{private}:}
+\DoxyCodeLine{51     \textcolor{keywordtype}{void} renderRect(\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_rect_render_shape}{RectRenderShape}} \&renderShape);}
+\DoxyCodeLine{52     \textcolor{keywordtype}{void} renderLine(\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_line_render_shape}{LineRenderShape}} \&renderShape);}
+\DoxyCodeLine{53     \textcolor{keywordtype}{void} renderText(\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_text_render_shape}{TextRenderShape}} \&renderShape);}
+\DoxyCodeLine{54     \textcolor{keywordtype}{void} renderCircle(\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_circle_render_shape}{CircleRenderShape}} \&renderShape);}
+\DoxyCodeLine{55     \textcolor{keywordtype}{void} renderButton(\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_button_render_shape}{ButtonRenderShape}} \&renderShape);}
+\DoxyCodeLine{56     \textcolor{keywordtype}{void} renderTileMap(\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_tile_map_render_shape}{TileMapRenderShape}} \&renderShape);}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58     \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_texture}{Texture}}\& loadSprite(\textcolor{keyword}{const} std::string\& path);}
+\DoxyCodeLine{59     \textcolor{keywordtype}{void} renderSprite(\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_sprite_render_shape}{SpriteRenderShape}} \&renderShape);}
+\DoxyCodeLine{60     TTF\_Font\& loadFont(\textcolor{keyword}{const} std::string \&path, \textcolor{keywordtype}{size\_t} fontSize);}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62     \textcolor{keywordtype}{int} \_screenSizeWidth;}
+\DoxyCodeLine{63     \textcolor{keywordtype}{int} \_screenSizeHeight;}
+\DoxyCodeLine{64     \textcolor{keywordtype}{bool} \_fullScreen;}
+\DoxyCodeLine{65     std::unique\_ptr<SDL\_Window, void(*)(SDL\_Window*)> \_window;}
+\DoxyCodeLine{66     std::unique\_ptr<SDL\_Renderer, void(*)(SDL\_Renderer*)> \_renderer;}
+\DoxyCodeLine{67 \textcolor{comment}{//    std::vector<std::reference\_wrapper<Drawable>> \_drawables;}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69     std::map<int, std::vector<std::reference\_wrapper<Drawable>>> \_drawables;}
+\DoxyCodeLine{70     std::map<std::string, std::unique\_ptr<Texture>> \_cachedTextures;}
+\DoxyCodeLine{71     std::map<std::pair<std::string ,size\_t >,  std::unique\_ptr<TTF\_Font, void(*)(TTF\_Font*)>> \_cachedFonts;}
+\DoxyCodeLine{72 }
+\DoxyCodeLine{73     std::optional<std::reference\_wrapper<Camera>> \_mainCamera;}
+\DoxyCodeLine{74     \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} camOffset;}
+\DoxyCodeLine{75 \};}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \}}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//SPC\_PROJECT\_SDLRENDERSERVICE\_H}}
+
+\end{DoxyCode}

@@ -7,6 +7,8 @@
 #include "Scene/Components/RigidBody.h"
 #include "Scene/Components/SpriteComponent.h"
 
+using namespace GolfEngine::Scene::Components;
+
 PhysicGameObject::PhysicGameObject(const std::string &imagePath, Vector2 pixelScale, Vector2 extents){
     addComponent<BoxCollider>(extents);
 
@@ -15,10 +17,6 @@ PhysicGameObject::PhysicGameObject(const std::string &imagePath, Vector2 pixelSc
     rbDef.linearDamping = 5.0f;
     rbDef.angularDamping = 3.0f;
 
-
     addComponent<SpriteComponent>(imagePath, pixelScale);
-
-
     addComponent<RigidBody>(rbDef);
-
 }

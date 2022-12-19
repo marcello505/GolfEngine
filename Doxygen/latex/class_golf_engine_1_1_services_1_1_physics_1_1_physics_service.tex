@@ -1,0 +1,129 @@
+\hypertarget{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service}{}\doxysection{Golf\+Engine\+::Services\+::Physics\+::Physics\+Service Class Reference}
+\label{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service}\index{GolfEngine::Services::Physics::PhysicsService@{GolfEngine::Services::Physics::PhysicsService}}
+Inheritance diagram for Golf\+Engine\+::Services\+::Physics\+::Physics\+Service\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a95c1660588c82c60d69f1008ce40ce78}{add\+Rigid\+Body}} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_rigid_body}{Components\+::\+Rigid\+Body}} $\ast$p\+Rigid\+Body)=0
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_af3aec371778e0cd9b341c1b5dcb0da80}{remove\+Rigid\+Body}} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_rigid_body}{Components\+::\+Rigid\+Body}} $\ast$p\+Rigid\+Body)=0
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a10e97c0db7b995873cfb240c3302acce}{update}} (Game\+Tic time\+Step)=0
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a8a5e8bfefd748f88b4424cec8dffbe06}{set\+Gravity}} (const \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \&vec2)=0
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_acd39ca82e056196d9e0aba426efc5039}\label{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_acd39ca82e056196d9e0aba426efc5039}} 
+virtual \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} {\bfseries get\+Linear\+Velocity} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_rigid_body}{Components\+::\+Rigid\+Body}} $\ast$p\+Body)=0
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a1602f6d836bf956c7b50d36092205b55}\label{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a1602f6d836bf956c7b50d36092205b55}} 
+virtual float {\bfseries get\+Angular\+Velocity} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_rigid_body}{Components\+::\+Rigid\+Body}} $\ast$p\+Body)=0
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_aebb18e7378baa26781110c9a8f96287a}\label{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_aebb18e7378baa26781110c9a8f96287a}} 
+virtual void {\bfseries apply\+Local\+Force\+To\+Center} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_rigid_body}{Components\+::\+Rigid\+Body}} $\ast$p\+Rigid\+Body, const \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \&force)=0
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a4973f3e68ca4e64e946f4779063e1ac1}\label{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a4973f3e68ca4e64e946f4779063e1ac1}} 
+virtual void {\bfseries apply\+World\+Force\+To\+Center} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_rigid_body}{Components\+::\+Rigid\+Body}} $\ast$p\+Rigid\+Body, const \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \&force)=0
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a8fefb8110cae2f07137471ad2ffd9bfe}\label{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a8fefb8110cae2f07137471ad2ffd9bfe}} 
+virtual void {\bfseries set\+Transform} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_rigid_body}{Components\+::\+Rigid\+Body}} $\ast$p\+Rigid\+Body, const \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_transform}{Transform}} \&transform)=0
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a6cb18e58094c042498b3980703aa36a5}\label{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a6cb18e58094c042498b3980703aa36a5}} 
+virtual void {\bfseries set\+Enabled} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_rigid_body}{Components\+::\+Rigid\+Body}} $\ast$p\+Rigid\+Body, bool enabled)=0
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a62b4650aad513f1d4b37055bcf58f9ba}\label{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a62b4650aad513f1d4b37055bcf58f9ba}} 
+virtual void {\bfseries set\+Linear\+Damping} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_rigid_body}{Components\+::\+Rigid\+Body}} $\ast$p\+Rigid\+Body, float linear\+Damping)=0
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_ac3f8aca07cf9a6247d9d4b6eb8a98f39}\label{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_ac3f8aca07cf9a6247d9d4b6eb8a98f39}} 
+virtual void {\bfseries set\+Angular\+Damping} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_rigid_body}{Components\+::\+Rigid\+Body}} $\ast$p\+Rigid\+Body, float angular\+Damping)=0
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a22009e72c9658699a0028a8706a40564}\label{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a22009e72c9658699a0028a8706a40564}} 
+virtual void {\bfseries set\+Fixed\+Rotation} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_rigid_body}{Components\+::\+Rigid\+Body}} $\ast$p\+Rigid\+Body, bool fixed\+Rotation)=0
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_abe2018e7d7e5a7b1e9f4fe6cc20b3f86}\label{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_abe2018e7d7e5a7b1e9f4fe6cc20b3f86}} 
+virtual void {\bfseries set\+Gravity\+Scale} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_rigid_body}{Components\+::\+Rigid\+Body}} $\ast$p\+Rigid\+Body, float gravity\+Scale)=0
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a1d0ec80d39ed16d9cd6d81982d694303}\label{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a1d0ec80d39ed16d9cd6d81982d694303}} 
+virtual std\+::vector$<$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_collider}{Components\+::\+Collider}} $\ast$ $>$ {\bfseries get\+Static\+Colliders} ()=0
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_aa163aa379f7c11173e503b3594f54052}\label{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_aa163aa379f7c11173e503b3594f54052}} 
+virtual void {\bfseries set\+Linear\+Velocity} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_rigid_body}{Components\+::\+Rigid\+Body}} $\ast$p\+Rigid\+Body, const \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \&velocity)=0
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_af7ff22aca3b32caf9d4c0c217246e713}\label{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_af7ff22aca3b32caf9d4c0c217246e713}} 
+virtual void {\bfseries set\+Angular\+Velocity} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_rigid_body}{Components\+::\+Rigid\+Body}} $\ast$p\+Rigid\+Body, float omega)=0
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_aaa0db48616ee007e50fbe2e9dfa32054}\label{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_aaa0db48616ee007e50fbe2e9dfa32054}} 
+virtual bool {\bfseries raycast\+World} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_rigid_body}{Components\+::\+Rigid\+Body}} $\ast$start, \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_rigid_body}{Components\+::\+Rigid\+Body}} $\ast$target)=0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a95c1660588c82c60d69f1008ce40ce78}\label{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a95c1660588c82c60d69f1008ce40ce78}} 
+\index{GolfEngine::Services::Physics::PhysicsService@{GolfEngine::Services::Physics::PhysicsService}!addRigidBody@{addRigidBody}}
+\index{addRigidBody@{addRigidBody}!GolfEngine::Services::Physics::PhysicsService@{GolfEngine::Services::Physics::PhysicsService}}
+\doxysubsubsection{\texorpdfstring{addRigidBody()}{addRigidBody()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Physics\+::\+Physics\+Service\+::add\+Rigid\+Body (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_rigid_body}{Components\+::\+Rigid\+Body}} $\ast$}]{p\+Rigid\+Body }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Adds a Rigid Body to the physics engine 
+\begin{DoxyParams}{Parameters}
+{\em p\+Rigid\+Body} & Rigid body to be added \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_physics_1_1_box2_d_physics_service_ab8e8a761b435f8fc48db65c4790b9660}{Golf\+Engine\+::\+Services\+::\+Physics\+::\+Box2\+DPhysics\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_af3aec371778e0cd9b341c1b5dcb0da80}\label{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_af3aec371778e0cd9b341c1b5dcb0da80}} 
+\index{GolfEngine::Services::Physics::PhysicsService@{GolfEngine::Services::Physics::PhysicsService}!removeRigidBody@{removeRigidBody}}
+\index{removeRigidBody@{removeRigidBody}!GolfEngine::Services::Physics::PhysicsService@{GolfEngine::Services::Physics::PhysicsService}}
+\doxysubsubsection{\texorpdfstring{removeRigidBody()}{removeRigidBody()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Physics\+::\+Physics\+Service\+::remove\+Rigid\+Body (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_rigid_body}{Components\+::\+Rigid\+Body}} $\ast$}]{p\+Rigid\+Body }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Removes a Rigid Body from the physics engine 
+\begin{DoxyParams}{Parameters}
+{\em p\+Rigid\+Body} & Rigid Body to be removed \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_physics_1_1_box2_d_physics_service_a2a9ec0b7b2e0937b7c531c7e4b8e5aa7}{Golf\+Engine\+::\+Services\+::\+Physics\+::\+Box2\+DPhysics\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a8a5e8bfefd748f88b4424cec8dffbe06}\label{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a8a5e8bfefd748f88b4424cec8dffbe06}} 
+\index{GolfEngine::Services::Physics::PhysicsService@{GolfEngine::Services::Physics::PhysicsService}!setGravity@{setGravity}}
+\index{setGravity@{setGravity}!GolfEngine::Services::Physics::PhysicsService@{GolfEngine::Services::Physics::PhysicsService}}
+\doxysubsubsection{\texorpdfstring{setGravity()}{setGravity()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Physics\+::\+Physics\+Service\+::set\+Gravity (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \&}]{vec2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Set the gravity scale of the physics world 
+\begin{DoxyParams}{Parameters}
+{\em vec2} & Vector of the force/direction of gravity \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_physics_1_1_box2_d_physics_service_a98321713ab514b06415fd5d735b5b718}{Golf\+Engine\+::\+Services\+::\+Physics\+::\+Box2\+DPhysics\+Service}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a10e97c0db7b995873cfb240c3302acce}\label{class_golf_engine_1_1_services_1_1_physics_1_1_physics_service_a10e97c0db7b995873cfb240c3302acce}} 
+\index{GolfEngine::Services::Physics::PhysicsService@{GolfEngine::Services::Physics::PhysicsService}!update@{update}}
+\index{update@{update}!GolfEngine::Services::Physics::PhysicsService@{GolfEngine::Services::Physics::PhysicsService}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily virtual void Golf\+Engine\+::\+Services\+::\+Physics\+::\+Physics\+Service\+::update (\begin{DoxyParamCaption}\item[{Game\+Tic}]{time\+Step }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Update the physics engine 
+\begin{DoxyParams}{Parameters}
+{\em time\+Step} & Amount of time to simulate \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_physics_1_1_box2_d_physics_service_a6d8605ebcee4f1eb7222fe977699d9eb}{Golf\+Engine\+::\+Services\+::\+Physics\+::\+Box2\+DPhysics\+Service}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Services/\+Abstracts/Physics\+Service.\+h\end{DoxyCompactItemize}

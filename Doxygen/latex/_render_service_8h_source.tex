@@ -1,0 +1,53 @@
+\hypertarget{_render_service_8h_source}{}\doxysection{Render\+Service.\+h}
+\label{_render_service_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Services/Abstracts/RenderService.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Services/Abstracts/RenderService.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by conner on 11/2/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef SPC\_PROJECT\_RENDERSERVICE\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define SPC\_PROJECT\_RENDERSERVICE\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}../../Scene/Components/Drawable.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}../../Scene/GameObjects/Camera.h"{}}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{using namespace }GolfEngine::Scene::Components;}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{keyword}{namespace }GolfEngine::Services::Render \{}
+\DoxyCodeLine{14     \textcolor{keyword}{class }\mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_render_service}{RenderService}} \{}
+\DoxyCodeLine{15     \textcolor{keyword}{public}:}
+\DoxyCodeLine{18         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_render_service_a2c91edb7986fd15db732908643c4a380}{setWindowTitle}}(\textcolor{keyword}{const} std::string \&title) = 0;}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{22         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_render_service_a08813609cead51bf0d3b59a57712e30f}{addDrawable}}(\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_drawable}{Drawable}} \&drawable) = 0;}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{26         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_render_service_a842da832342aea8cb78b98de59681fe8}{removeDrawable}}(\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_drawable}{Drawable}} \&drawable) = 0;}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{31         \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_render_service_a09dfc763ad77043d70fde9159b6fd929}{isRegistered}}(\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_drawable}{Drawable}} \&drawable) = 0;}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{34         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_render_service_ab985d8b9e9bbd0b29bf5ed2f2ba826f3}{render}}() = 0;}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{39         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_render_service_aa06289bf97463c372f3ca906f8f4b0f5}{setScreenSize}}(\textcolor{keywordtype}{int} width, \textcolor{keywordtype}{int} height) = 0;}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{43         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_render_service_a59e02f41f120f22f7301cc5d5da7a00e}{setFullScreen}}(\textcolor{keywordtype}{bool} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_render_service_af9ae3a08380f3fcd6c0da3f518dcdd26}{fullScreen}}) = 0;}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{47         [[nodiscard]] \textcolor{keyword}{virtual} std::optional<std::reference\_wrapper<Scene::Camera>> \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_render_service_ae0d16231321e7e2fda1e0356e3c5a339}{getMainCamera}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{51         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_render_service_ac4589cea68c4e704b18aad87e013489b}{setMainCamera}}(\textcolor{keyword}{const} std::optional<std::reference\_wrapper<Scene::Camera>> \&camera) = 0;}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{55         [[nodiscard]] \textcolor{keyword}{virtual} \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Scene::Vector2}} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_render_service_a10e484441864329b61cf56db15872a75}{getCameraOffset}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{59         [[nodiscard]] \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_render_service_a0fcbcf0d04b8d2e781227fe3a8de2eb5}{screenSizeHeight}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{63         [[nodiscard]] \textcolor{keyword}{virtual} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_render_service_ad4a2fca45b03de6436c7a781a4597e2f}{screenSizeWidth}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{67         [[nodiscard]] \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_render_service_af9ae3a08380f3fcd6c0da3f518dcdd26}{fullScreen}}() \textcolor{keyword}{const} = 0;}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69         \textcolor{comment}{// Virtual Destructors}}
+\DoxyCodeLine{70         \textcolor{keyword}{virtual} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_render_1_1_render_service}{\string~RenderService}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{71     \};}
+\DoxyCodeLine{72 \}}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//SPC\_PROJECT\_RENDERSERVICE\_H}}
+
+\end{DoxyCode}

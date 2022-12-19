@@ -1,0 +1,73 @@
+\hypertarget{_a_star_pathfinding_service_8h_source}{}\doxysection{AStar\+Pathfinding\+Service.\+h}
+\label{_a_star_pathfinding_service_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Services/AStarPathfindingService.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Services/AStarPathfindingService.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by Lucas on 4-\/12-\/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef GOLFENGINE\_ASTARPATHFINDINGSERVICE\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define GOLFENGINE\_ASTARPATHFINDINGSERVICE\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}Abstracts/PathfindingService.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}Scene/Components/Collider.h"{}}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <limits>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <queue>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <functional>}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{keyword}{using namespace }GolfEngine::Scene;}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{keyword}{namespace }GolfEngine::Services::Pathfinding\{}
+\DoxyCodeLine{18     \textcolor{keyword}{using }node\_priority\_queue = std::priority\_queue<}
+\DoxyCodeLine{19        \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_node}{Node}}, std::vector<Node>, std::function<bool(\textcolor{keyword}{const} \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_node}{Node}} \&, \textcolor{keyword}{const} \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_node}{Node}} \&)>>;}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     \textcolor{keyword}{class }\mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service}{AStarPathfindingService}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_pathfinding_service}{PathfindingService}} \{}
+\DoxyCodeLine{22     \textcolor{keyword}{private}:}
+\DoxyCodeLine{23         std::vector<std::reference\_wrapper<class Pathfinding>> \_pathfindingComponents ;}
+\DoxyCodeLine{24         std::unique\_ptr<Graph> \_graph;}
+\DoxyCodeLine{25         \textcolor{keywordtype}{int} \_nodeDistance \{50\};}
+\DoxyCodeLine{26         \textcolor{keywordtype}{int} rectMargin\{0\};}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28         \textcolor{keywordtype}{int} \_graphWidth \{1920\};}
+\DoxyCodeLine{29         \textcolor{keywordtype}{int} \_graphHeight \{1080\};}
+\DoxyCodeLine{30         \textcolor{keywordtype}{int} \_graphStartPointX \{0\};}
+\DoxyCodeLine{31         \textcolor{keywordtype}{int} \_graphStartPointY \{0\};}
+\DoxyCodeLine{32         \textcolor{keywordtype}{int} \_maxPathsToCalculatePerTic \{1\};}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34     \textcolor{keyword}{public}:}
+\DoxyCodeLine{35         \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service}{AStarPathfindingService}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37         \textcolor{comment}{// Pathfinding Service overrides}}
+\DoxyCodeLine{38         std::vector<Node> \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_a241c8070a651a52a8a01c7c4b6c7e44f}{findPath}}(\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_node}{Node}}\& start, \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_node}{Node}}\& target, \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}}\& graph) \textcolor{keyword}{override};}
+\DoxyCodeLine{39         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_a67cb5fb6df2a305033c6f54bfdc22f7f}{addPathfinding}}(\textcolor{keyword}{class} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_pathfinding}{Pathfinding}}\& pathfinding) \textcolor{keyword}{override};}
+\DoxyCodeLine{40         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_a7b640ca6f6580a8df4237c724ed65f47}{removePathfinding}}(\textcolor{keyword}{class} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_pathfinding}{Pathfinding}}\& pathfinding) \textcolor{keyword}{override};}
+\DoxyCodeLine{41         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_aea052c47b3d8fe8cf4157a4875b700d2}{findPathEveryTick}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{42         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_a8bdb63ac7c562778592f8968674e8cc6}{createGraph}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{43         \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_graph}{Graph}}\& \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_a8ed7fb0e09d68316967de0b06802892c}{getGraph}}() \textcolor{keyword}{override};}
+\DoxyCodeLine{44         \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_node}{Node}} \&\mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_a0bbd67f0644a615efe31c5d94fa2f0a5}{covertPosToNode}}(\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} position) \textcolor{keyword}{override};}
+\DoxyCodeLine{45         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_ac3e6e56c82283ab4fe59bc6c6a234a62}{setNodeDistance}}(\textcolor{keywordtype}{int} nodeDistance) \textcolor{keyword}{override};}
+\DoxyCodeLine{46         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_ace23344b095724e4c8dff707a215a095}{setMarginAroundRectColliders}}(\textcolor{keywordtype}{int} margin) \textcolor{keyword}{override};}
+\DoxyCodeLine{47         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_a54e7be87aa7be2e54abce11e41ec9614}{setGraphSize}}(\textcolor{keywordtype}{int} width, \textcolor{keywordtype}{int} height) \textcolor{keyword}{override};}
+\DoxyCodeLine{48         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_af1e1089a176dd1ef193814515d408052}{setGraphStartPoint}}(\textcolor{keywordtype}{int} x, \textcolor{keywordtype}{int} y) \textcolor{keyword}{override};}
+\DoxyCodeLine{49         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_a368793ec3cd09b8a82c748ec584a05ab}{setMaxPathsToCalculatePerTic}}(\textcolor{keywordtype}{int} maxPathsPerTic) \textcolor{keyword}{override};}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{55         \textcolor{keywordtype}{int} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_a87b7601ec1b0cc8a89216ff488e10d0e}{calculateHeuristic}}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_node}{Node}}\& n, \textcolor{keyword}{const} \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_node}{Node}}\& target);}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{60         [[nodiscard]] \textcolor{keywordtype}{bool} \mbox{\hyperlink{class_golf_engine_1_1_services_1_1_pathfinding_1_1_a_star_pathfinding_service_a4d806ae021c0beb29a052c939df03ba6}{isValidSpot}}(\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} pos) \textcolor{keyword}{const};}
+\DoxyCodeLine{61     \};}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_golf_engine_1_1_services_1_1_pathfinding_1_1heuristic_values}{heuristicValues}} \{}
+\DoxyCodeLine{64         \textcolor{comment}{//g = costs from start to current cell}}
+\DoxyCodeLine{65         \textcolor{comment}{//h = estimated costs from current to final cell}}
+\DoxyCodeLine{66         \textcolor{comment}{//f = sum of G + H}}
+\DoxyCodeLine{67         \textcolor{comment}{// parent = ID of parent}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69         \textcolor{keywordtype}{int} g, h, f, parent;}
+\DoxyCodeLine{70         \mbox{\hyperlink{struct_golf_engine_1_1_services_1_1_pathfinding_1_1heuristic_values}{heuristicValues}}() : g(0), h(std::numeric\_limits<int>::max()), f(std::numeric\_limits<int>::max()), parent(-\/1) \{\}}
+\DoxyCodeLine{71         \mbox{\hyperlink{struct_golf_engine_1_1_services_1_1_pathfinding_1_1heuristic_values}{heuristicValues}}(\textcolor{keywordtype}{int} \_g, \textcolor{keywordtype}{int} \_h, \textcolor{keywordtype}{int} \_f, \textcolor{keywordtype}{int} \_parent)}
+\DoxyCodeLine{72                 : g(\_g), h(\_h), f(\_f), parent(\_parent) \{\}}
+\DoxyCodeLine{73     \};}
+\DoxyCodeLine{74 \}}
+\DoxyCodeLine{75 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//GOLFENGINE\_ASTARPATHFINDINGSERVICE\_H}}
+
+\end{DoxyCode}

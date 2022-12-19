@@ -1,0 +1,86 @@
+\hypertarget{class_rect_render_shape}{}\doxysection{Rect\+Render\+Shape Class Reference}
+\label{class_rect_render_shape}\index{RectRenderShape@{RectRenderShape}}
+Inheritance diagram for Rect\+Render\+Shape\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_rect_render_shape}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_rect_render_shape_ac0e010e5c52c118c779f72a333696a2b}{Rect\+Render\+Shape}} (\mbox{\hyperlink{struct_rect2}{Rect2}} rect, float rotation=0, \mbox{\hyperlink{struct_vector2}{Vector2}} pivot\+Point=\mbox{\hyperlink{struct_vector2}{Vector2}}(), \mbox{\hyperlink{struct_color}{Color}} color=\mbox{\hyperlink{struct_color}{Color}}(255, 255, 255))
+\item 
+Render\+Shape\+Type \mbox{\hyperlink{class_rect_render_shape_abbda8591eb66f0ed2ec2b18c3f078bf9}{get\+Type}} () override
+\item 
+void \mbox{\hyperlink{class_rect_render_shape_acf307c65b568bbfe8408ef713143df33}{apply\+Transform}} (const \mbox{\hyperlink{struct_transform}{Transform}} \&transform) override
+\item 
+\mbox{\Hypertarget{class_rect_render_shape_a17efb8d41254dd282277f0f39b68d1c6}\label{class_rect_render_shape_a17efb8d41254dd282277f0f39b68d1c6}} 
+\mbox{\hyperlink{struct_rect2}{Rect2}} {\bfseries rect} () const
+\item 
+\mbox{\Hypertarget{class_rect_render_shape_a7de98e4e14f49a108c86715c61a8ac2a}\label{class_rect_render_shape_a7de98e4e14f49a108c86715c61a8ac2a}} 
+float {\bfseries rotation} () const
+\item 
+\mbox{\Hypertarget{class_rect_render_shape_ab985a5bb00331fc5f42437c1b8d3edff}\label{class_rect_render_shape_ab985a5bb00331fc5f42437c1b8d3edff}} 
+\mbox{\hyperlink{struct_color}{Color}} {\bfseries color} () const
+\item 
+\mbox{\Hypertarget{class_rect_render_shape_a8222f8b87eef9a49c2eaa74f9c499c30}\label{class_rect_render_shape_a8222f8b87eef9a49c2eaa74f9c499c30}} 
+\mbox{\hyperlink{struct_vector2}{Vector2}} {\bfseries pivot\+Point} () const
+\item 
+\mbox{\Hypertarget{class_rect_render_shape_aba771045243560b62d75340e8f4218ee}\label{class_rect_render_shape_aba771045243560b62d75340e8f4218ee}} 
+void {\bfseries set\+Color} (\mbox{\hyperlink{struct_color}{Color}} color)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_rect_render_shape_ac0e010e5c52c118c779f72a333696a2b}\label{class_rect_render_shape_ac0e010e5c52c118c779f72a333696a2b}} 
+\index{RectRenderShape@{RectRenderShape}!RectRenderShape@{RectRenderShape}}
+\index{RectRenderShape@{RectRenderShape}!RectRenderShape@{RectRenderShape}}
+\doxysubsubsection{\texorpdfstring{RectRenderShape()}{RectRenderShape()}}
+{\footnotesize\ttfamily Rect\+Render\+Shape\+::\+Rect\+Render\+Shape (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_rect2}{Rect2}}}]{rect,  }\item[{float}]{rotation = {\ttfamily 0},  }\item[{\mbox{\hyperlink{struct_vector2}{Vector2}}}]{pivot\+Point = {\ttfamily \mbox{\hyperlink{struct_vector2}{Vector2}}()},  }\item[{\mbox{\hyperlink{struct_color}{Color}}}]{color = {\ttfamily \mbox{\hyperlink{struct_color}{Color}}(255,~255,~255)} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em rect} & Rect with position (center of rectangle) and initial size in pixels \\
+\hline
+{\em rotation} & Angle of rectangle in degrees \\
+\hline
+{\em pivot\+Point} & Custom pivot point relative to the size given in rect parameter (size/2 = center) \\
+\hline
+{\em color} & \mbox{\hyperlink{struct_color}{Color}} used to draw the rectangle \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_rect_render_shape_acf307c65b568bbfe8408ef713143df33}\label{class_rect_render_shape_acf307c65b568bbfe8408ef713143df33}} 
+\index{RectRenderShape@{RectRenderShape}!applyTransform@{applyTransform}}
+\index{applyTransform@{applyTransform}!RectRenderShape@{RectRenderShape}}
+\doxysubsubsection{\texorpdfstring{applyTransform()}{applyTransform()}}
+{\footnotesize\ttfamily void Rect\+Render\+Shape\+::apply\+Transform (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_transform}{Transform}} \&}]{transform }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Applies a transform to the \mbox{\hyperlink{class_render_shape}{Render\+Shape}} properties 
+\begin{DoxyParams}{Parameters}
+{\em transform} & \mbox{\hyperlink{struct_transform}{Transform}} to be applied \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_render_shape_a106c7a0283a25a57a1ad439f4c294309}{Render\+Shape}}.
+
+\mbox{\Hypertarget{class_rect_render_shape_abbda8591eb66f0ed2ec2b18c3f078bf9}\label{class_rect_render_shape_abbda8591eb66f0ed2ec2b18c3f078bf9}} 
+\index{RectRenderShape@{RectRenderShape}!getType@{getType}}
+\index{getType@{getType}!RectRenderShape@{RectRenderShape}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily Render\+Shape\+Type Rect\+Render\+Shape\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_render_shape}{Render\+Shape}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Render\+Shape/Rect\+Render\+Shape.\+h\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Render\+Shape/Rect\+Render\+Shape.\+cpp\end{DoxyCompactItemize}

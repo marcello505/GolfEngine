@@ -1,0 +1,54 @@
+\hypertarget{_sprite_render_shape_8h_source}{}\doxysection{Sprite\+Render\+Shape.\+h}
+\label{_sprite_render_shape_8h_source}\index{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/RenderShape/SpriteRenderShape.h@{D:/Avans/Jaar4/MinorSPC/SPC-\/Project/src/Scene/RenderShape/SpriteRenderShape.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//}}
+\DoxyCodeLine{2 \textcolor{comment}{// Created by conner on 11/2/2022.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef SPC\_PROJECT\_SPRITERENDERSHAPE\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define SPC\_PROJECT\_SPRITERENDERSHAPE\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}RenderShape.h"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}../Rect2.h"{}}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include "{}../Color.h"{}}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{keyword}{namespace }GolfEngine::Scene::Render \{}
+\DoxyCodeLine{15     \textcolor{keyword}{class }\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_sprite_render_shape}{SpriteRenderShape}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_render_shape}{RenderShape}} \{}
+\DoxyCodeLine{16     \textcolor{keyword}{public}:}
+\DoxyCodeLine{24         \textcolor{keyword}{explicit} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_sprite_render_shape}{SpriteRenderShape}}(std::string path, \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} position = \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}}(), \textcolor{keywordtype}{float} rotation = 0,}
+\DoxyCodeLine{25                                    \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} pixelScale = \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}}(1, 1), \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_rect2}{Rect2}} imageSource = \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_rect2}{Rect2}}(),}
+\DoxyCodeLine{26                                    \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} pivotPoint = \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}}(), \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}} color = \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}}(255, 255, 255));}
+\DoxyCodeLine{27         RenderShapeType getType() \textcolor{keyword}{override};}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{31         \textcolor{keywordtype}{void} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_sprite_render_shape_aaf511a4592a3cd12f950bdbecb84358a}{applyTransform}}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_transform}{Transform}} \&transform) \textcolor{keyword}{override};}
+\DoxyCodeLine{32         [[nodiscard]] \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} position() \textcolor{keyword}{const};}
+\DoxyCodeLine{33         [[nodiscard]] \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} pixelScale() \textcolor{keyword}{const};}
+\DoxyCodeLine{34         [[nodiscard]] \textcolor{keywordtype}{float} rotation() \textcolor{keyword}{const};}
+\DoxyCodeLine{35         [[nodiscard]] std::string path() \textcolor{keyword}{const};}
+\DoxyCodeLine{36         [[nodiscard]] \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_rect2}{Rect2}} imageSource() \textcolor{keyword}{const};}
+\DoxyCodeLine{37         [[nodiscard]] \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}} color() \textcolor{keyword}{const};}
+\DoxyCodeLine{38         [[nodiscard]] \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} pivotPoint() \textcolor{keyword}{const};}
+\DoxyCodeLine{39         \textcolor{keywordtype}{void} setPath(\textcolor{keyword}{const} std::string \&path);}
+\DoxyCodeLine{40         \textcolor{keywordtype}{void} setImageSource(\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_rect2}{Rect2}} imageSource);}
+\DoxyCodeLine{41         \textcolor{keywordtype}{void} setColor(\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}} color);}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43     \textcolor{keyword}{private}:}
+\DoxyCodeLine{44         \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \_position;}
+\DoxyCodeLine{45         \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \_pixelScale;}
+\DoxyCodeLine{46         \textcolor{keywordtype}{float} \_rotation;}
+\DoxyCodeLine{47         std::string \_path;}
+\DoxyCodeLine{48         \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_rect2}{Rect2}} \_imageSource;}
+\DoxyCodeLine{49         \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_color}{Color}} \_color;}
+\DoxyCodeLine{50         \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \_initialPixelScale;}
+\DoxyCodeLine{51         \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \_pivotPoint;}
+\DoxyCodeLine{52         \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \_initialPosition;}
+\DoxyCodeLine{53     \};}
+\DoxyCodeLine{54 \}}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//SPC\_PROJECT\_SPRITERENDERSHAPE\_H}}
+
+\end{DoxyCode}

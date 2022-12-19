@@ -11,6 +11,8 @@
 #include <queue>
 #include <functional>
 
+using namespace GolfEngine::Scene;
+
 namespace GolfEngine::Services::Pathfinding{
     ///small queue used to determine where nodes needs to be placed
     using node_priority_queue = std::priority_queue<

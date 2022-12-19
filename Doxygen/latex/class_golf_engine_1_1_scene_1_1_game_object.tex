@@ -1,0 +1,354 @@
+\hypertarget{class_golf_engine_1_1_scene_1_1_game_object}{}\doxysection{Golf\+Engine\+::Scene\+::Game\+Object Class Reference}
+\label{class_golf_engine_1_1_scene_1_1_game_object}\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+Inheritance diagram for Golf\+Engine\+::Scene\+::Game\+Object\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.752094cm]{class_golf_engine_1_1_scene_1_1_game_object}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_ac115af1d9929847fd2532b8aef718fa5}{Game\+Object}} (const char $\ast$name=nullptr, const char $\ast$tag=nullptr, bool recordable=true)
+\item 
+{\footnotesize template$<$typename C , typename ... Args$>$ }\\C \& \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_aa127686897983556ebcaaead87946e75}{add\+Component}} (Args... args)
+\item 
+{\footnotesize template$<$typename C $>$ }\\C \& \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_a41013d8689c02f2111d967a6a6be5e43}{get\+Component}} () const
+\item 
+{\footnotesize template$<$typename C $>$ }\\void \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_a4d1b7413734953176612a5f84fddcc15}{remove\+Component}} ()
+\item 
+{\footnotesize template$<$typename C $>$ }\\bool \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_ab22b80170f2ce4612750474e0663d159}{has\+Component}} ()
+\item 
+{\footnotesize template$<$typename C $>$ }\\std\+::vector$<$ std\+::reference\+\_\+wrapper$<$ C $>$ $>$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_afe4e68a1f5e6a9de0d27fc5e67372f47}{get\+Components}} ()
+\item 
+bool \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_a2c9fa198daafec780d7e7591f84888ad}{get\+Active}} () const
+\item 
+void \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_a9e2cc1d1b5540e5c2a4eabd7aa2305a6}{set\+Active}} (bool active)
+\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_aeb4505baa81e006f1a4737357b284cef}{on\+Start}} ()
+\begin{DoxyCompactList}\small\item\em Calls on\+Start on all attached components. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_a87981e4c5477de161b21d08c9bed1483}{on\+Update}} ()
+\begin{DoxyCompactList}\small\item\em Calls on\+Update on all attached components. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::reference\+\_\+wrapper$<$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{Game\+Object}} $>$ $>$ \& \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_a537b8f4db98d65989797e10474f91c09}{children}} ()
+\item 
+\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{Game\+Object}} \& \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_aacf3c397c5853f5b2c612333a92b9240}{child\+At}} (int index)
+\item 
+\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{Game\+Object}} \& \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_ad58f7e4feaa3714d33762903afc07b76}{parent}} () const
+\item 
+void \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_afcd781f66efdff5f7230868dde5948e0}{set\+Parent}} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{Game\+Object}} \&\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_ad58f7e4feaa3714d33762903afc07b76}{parent}})
+\item 
+void \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_a46a280c26e7ba96e763d65c63bc259a5}{add\+Child}} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{Game\+Object}} \&child)
+\item 
+const \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_transform}{Transform}} \& \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_a2646a0a9a51654106a16b50c7162af4b}{get\+Local\+Transform}} () const
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_a72b24756171511064d38d857abf2d674}\label{class_golf_engine_1_1_scene_1_1_game_object_a72b24756171511064d38d857abf2d674}} 
+void {\bfseries set\+Local\+Transform} (const \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_transform}{Transform}} \&r\+Transform)
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_afa229d59cd1a4d3745bc55b660b3e555}\label{class_golf_engine_1_1_scene_1_1_game_object_afa229d59cd1a4d3745bc55b660b3e555}} 
+void {\bfseries set\+Local\+Position} (const \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} \&r\+Position)
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_a4d2dbfbd006c3c8dc8cac234e4a93523}\label{class_golf_engine_1_1_scene_1_1_game_object_a4d2dbfbd006c3c8dc8cac234e4a93523}} 
+void {\bfseries set\+Local\+Rotation} (const float \&rotation)
+\item 
+\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_transform}{Transform}} \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_a43a9b49cdfe86e43bca110acfdd237a1}{get\+World\+Transform}} () const
+\item 
+void \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_aa8ef682b4bb909cc4a65e3b725be6662}{set\+World\+Transform}} (const \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_transform}{Transform}} \&r\+Transform)
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_i_snapshot}{ISnapshot}} $>$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_a1cabf494b8d30a821bf809355bcb4e4e}{save\+Snapshot}} () override
+\item 
+void \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_a4c8b4e39b43b7bcb3ad387ac2eedaf5b}{load\+Snapshot}} (const \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_i_snapshot}{ISnapshot}} \&raw\+Snapshot) override
+\item 
+bool \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object_abf404bbddd342e800793622d7be4e477}{is\+Recordable}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_a5c62e0600a51f0880647fa561d2e60b5}\label{class_golf_engine_1_1_scene_1_1_game_object_a5c62e0600a51f0880647fa561d2e60b5}} 
+std\+::string {\bfseries name}
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_a9b2c0c6026f5792265e59e7ad5213983}\label{class_golf_engine_1_1_scene_1_1_game_object_a9b2c0c6026f5792265e59e7ad5213983}} 
+std\+::string {\bfseries tag}
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_a3192013b22bf33addfe94306f56fafff}\label{class_golf_engine_1_1_scene_1_1_game_object_a3192013b22bf33addfe94306f56fafff}} 
+std\+::uint32\+\_\+t {\bfseries layer}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_ae0a73aec2b6299480634fc12a23e1b25}\label{class_golf_engine_1_1_scene_1_1_game_object_ae0a73aec2b6299480634fc12a23e1b25}} 
+bool {\bfseries \+\_\+active}
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_a3dce3b47028ed389283b21a6af682165}\label{class_golf_engine_1_1_scene_1_1_game_object_a3dce3b47028ed389283b21a6af682165}} 
+std\+::unique\+\_\+ptr$<$ std\+::reference\+\_\+wrapper$<$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{Game\+Object}} $>$ $>$ {\bfseries \+\_\+parent}
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_a8e6a0f06593857c978a2cf7a70e83d13}\label{class_golf_engine_1_1_scene_1_1_game_object_a8e6a0f06593857c978a2cf7a70e83d13}} 
+std\+::vector$<$ std\+::reference\+\_\+wrapper$<$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{Game\+Object}} $>$ $>$ {\bfseries \+\_\+children}
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_ad73a25de16fb8420467d59ee827aafc8}\label{class_golf_engine_1_1_scene_1_1_game_object_ad73a25de16fb8420467d59ee827aafc8}} 
+std\+::vector$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_component}{Component}} $>$ $>$ {\bfseries \+\_\+components}
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_a82703a4fe03cbc3eeb401fe31e5c1c4c}\label{class_golf_engine_1_1_scene_1_1_game_object_a82703a4fe03cbc3eeb401fe31e5c1c4c}} 
+\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_transform}{Transform}} {\bfseries \+\_\+local\+Transform} \{\}
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_afbf8edb4390404318f0d6a31a91870c7}\label{class_golf_engine_1_1_scene_1_1_game_object_afbf8edb4390404318f0d6a31a91870c7}} 
+const bool {\bfseries \+\_\+recordable}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_ac115af1d9929847fd2532b8aef718fa5}\label{class_golf_engine_1_1_scene_1_1_game_object_ac115af1d9929847fd2532b8aef718fa5}} 
+\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}!GameObject@{GameObject}}
+\index{GameObject@{GameObject}!GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+\doxysubsubsection{\texorpdfstring{GameObject()}{GameObject()}}
+{\footnotesize\ttfamily Golf\+Engine\+::\+Scene\+::\+Game\+Object\+::\+Game\+Object (\begin{DoxyParamCaption}\item[{const char $\ast$}]{name = {\ttfamily nullptr},  }\item[{const char $\ast$}]{tag = {\ttfamily nullptr},  }\item[{bool}]{recordable = {\ttfamily true} }\end{DoxyParamCaption})}
+
+\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{Game\+Object}} constructor 
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{Game\+Object}} (nullptr is results in \char`\"{}\char`\"{}) \\
+\hline
+{\em tag} & The tag of the \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{Game\+Object}} (nullptr results in \char`\"{}default\char`\"{}) \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_a46a280c26e7ba96e763d65c63bc259a5}\label{class_golf_engine_1_1_scene_1_1_game_object_a46a280c26e7ba96e763d65c63bc259a5}} 
+\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}!addChild@{addChild}}
+\index{addChild@{addChild}!GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+\doxysubsubsection{\texorpdfstring{addChild()}{addChild()}}
+{\footnotesize\ttfamily void Golf\+Engine\+::\+Scene\+::\+Game\+Object\+::add\+Child (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{Game\+Object}} \&}]{child }\end{DoxyParamCaption})}
+
+Link child object to this game\+Object 
+\begin{DoxyParams}{Parameters}
+{\em child} & to be set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_aa127686897983556ebcaaead87946e75}\label{class_golf_engine_1_1_scene_1_1_game_object_aa127686897983556ebcaaead87946e75}} 
+\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}!addComponent@{addComponent}}
+\index{addComponent@{addComponent}!GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+\doxysubsubsection{\texorpdfstring{addComponent()}{addComponent()}}
+{\footnotesize\ttfamily template$<$typename C , typename ... Args$>$ \\
+C \& Golf\+Engine\+::\+Scene\+::\+Game\+Object\+::add\+Component (\begin{DoxyParamCaption}\item[{Args...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function creates a new \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_component}{Component}} for the \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{Game\+Object}} 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em C} & \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_component}{Component}} to create \\
+\hline
+{\em Args} & Arguments needed for constructor of C \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+A reference to newly created component 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_aacf3c397c5853f5b2c612333a92b9240}\label{class_golf_engine_1_1_scene_1_1_game_object_aacf3c397c5853f5b2c612333a92b9240}} 
+\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}!childAt@{childAt}}
+\index{childAt@{childAt}!GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+\doxysubsubsection{\texorpdfstring{childAt()}{childAt()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{Game\+Object}} \& Golf\+Engine\+::\+Scene\+::\+Game\+Object\+::child\+At (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+Get child from children at a specific index 
+\begin{DoxyParams}{Parameters}
+{\em index} & of child \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+reference to child game\+Object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_a537b8f4db98d65989797e10474f91c09}\label{class_golf_engine_1_1_scene_1_1_game_object_a537b8f4db98d65989797e10474f91c09}} 
+\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}!children@{children}}
+\index{children@{children}!GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+\doxysubsubsection{\texorpdfstring{children()}{children()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::reference\+\_\+wrapper$<$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{Game\+Object}} $>$ $>$ \& Golf\+Engine\+::\+Scene\+::\+Game\+Object\+::children (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get attached children \begin{DoxyReturn}{Returns}
+list of references to chidren attached to this game\+Object 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_a2c9fa198daafec780d7e7591f84888ad}\label{class_golf_engine_1_1_scene_1_1_game_object_a2c9fa198daafec780d7e7591f84888ad}} 
+\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}!getActive@{getActive}}
+\index{getActive@{getActive}!GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+\doxysubsubsection{\texorpdfstring{getActive()}{getActive()}}
+{\footnotesize\ttfamily bool Golf\+Engine\+::\+Scene\+::\+Game\+Object\+::get\+Active (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Check whether the game\+Object is currently active \begin{DoxyReturn}{Returns}
+true if game\+Object is active 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_a41013d8689c02f2111d967a6a6be5e43}\label{class_golf_engine_1_1_scene_1_1_game_object_a41013d8689c02f2111d967a6a6be5e43}} 
+\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}!getComponent@{getComponent}}
+\index{getComponent@{getComponent}!GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+\doxysubsubsection{\texorpdfstring{getComponent()}{getComponent()}}
+{\footnotesize\ttfamily template$<$typename C $>$ \\
+C \& Golf\+Engine\+::\+Scene\+::\+Game\+Object\+::get\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function retrieves a reference to a component of type C 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em C} & \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_component}{Component}} to retrieve \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+A reference to the found component, or nullptr when component is not found 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_afe4e68a1f5e6a9de0d27fc5e67372f47}\label{class_golf_engine_1_1_scene_1_1_game_object_afe4e68a1f5e6a9de0d27fc5e67372f47}} 
+\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}!getComponents@{getComponents}}
+\index{getComponents@{getComponents}!GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+\doxysubsubsection{\texorpdfstring{getComponents()}{getComponents()}}
+{\footnotesize\ttfamily template$<$typename C $>$ \\
+std\+::vector$<$ std\+::reference\+\_\+wrapper$<$ C $>$ $>$ Golf\+Engine\+::\+Scene\+::\+Game\+Object\+::get\+Components (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Function retrieves a list of references to components of type C 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em C} & Components to retrieve \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+A list of references to the found components, or an empty list when no components are found 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_a2646a0a9a51654106a16b50c7162af4b}\label{class_golf_engine_1_1_scene_1_1_game_object_a2646a0a9a51654106a16b50c7162af4b}} 
+\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}!getLocalTransform@{getLocalTransform}}
+\index{getLocalTransform@{getLocalTransform}!GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+\doxysubsubsection{\texorpdfstring{getLocalTransform()}{getLocalTransform()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_transform}{Transform}} \& Golf\+Engine\+::\+Scene\+::\+Game\+Object\+::get\+Local\+Transform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Return the local transform \begin{DoxyReturn}{Returns}
+const \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_transform}{Transform}} reference to the local transform 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_a43a9b49cdfe86e43bca110acfdd237a1}\label{class_golf_engine_1_1_scene_1_1_game_object_a43a9b49cdfe86e43bca110acfdd237a1}} 
+\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}!getWorldTransform@{getWorldTransform}}
+\index{getWorldTransform@{getWorldTransform}!GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+\doxysubsubsection{\texorpdfstring{getWorldTransform()}{getWorldTransform()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_transform}{Transform}} Golf\+Engine\+::\+Scene\+::\+Game\+Object\+::get\+World\+Transform (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Calculates the current world transform and returns it \begin{DoxyReturn}{Returns}
+A \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_transform}{Transform}} instance which is the current world transform 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_ab22b80170f2ce4612750474e0663d159}\label{class_golf_engine_1_1_scene_1_1_game_object_ab22b80170f2ce4612750474e0663d159}} 
+\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}!hasComponent@{hasComponent}}
+\index{hasComponent@{hasComponent}!GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+\doxysubsubsection{\texorpdfstring{hasComponent()}{hasComponent()}}
+{\footnotesize\ttfamily template$<$typename C $>$ \\
+bool Golf\+Engine\+::\+Scene\+::\+Game\+Object\+::has\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Checks if the \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{Game\+Object}} has a component of type C 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em C} & The type of component to check \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+true if component is present in \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{Game\+Object}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_abf404bbddd342e800793622d7be4e477}\label{class_golf_engine_1_1_scene_1_1_game_object_abf404bbddd342e800793622d7be4e477}} 
+\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}!isRecordable@{isRecordable}}
+\index{isRecordable@{isRecordable}!GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+\doxysubsubsection{\texorpdfstring{isRecordable()}{isRecordable()}}
+{\footnotesize\ttfamily bool Golf\+Engine\+::\+Scene\+::\+Game\+Object\+::is\+Recordable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Get the recordable property of this game\+Object \begin{DoxyReturn}{Returns}
+true if game\+Object is recordable 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_a4c8b4e39b43b7bcb3ad387ac2eedaf5b}\label{class_golf_engine_1_1_scene_1_1_game_object_a4c8b4e39b43b7bcb3ad387ac2eedaf5b}} 
+\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}!loadSnapshot@{loadSnapshot}}
+\index{loadSnapshot@{loadSnapshot}!GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+\doxysubsubsection{\texorpdfstring{loadSnapshot()}{loadSnapshot()}}
+{\footnotesize\ttfamily void Golf\+Engine\+::\+Scene\+::\+Game\+Object\+::load\+Snapshot (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_i_snapshot}{ISnapshot}} \&}]{raw\+Snapshot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_i_persistable}{Golf\+Engine\+::\+Scene\+::\+IPersistable}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_aeb4505baa81e006f1a4737357b284cef}\label{class_golf_engine_1_1_scene_1_1_game_object_aeb4505baa81e006f1a4737357b284cef}} 
+\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}!onStart@{onStart}}
+\index{onStart@{onStart}!GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+\doxysubsubsection{\texorpdfstring{onStart()}{onStart()}}
+{\footnotesize\ttfamily void Golf\+Engine\+::\+Scene\+::\+Game\+Object\+::on\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Calls on\+Start on all attached components. 
+
+
+
+Reimplemented in \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_camera_a052d55fc73bcb2027cd4a0244d5f2ed2}{Golf\+Engine\+::\+Scene\+::\+Camera}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_a87981e4c5477de161b21d08c9bed1483}\label{class_golf_engine_1_1_scene_1_1_game_object_a87981e4c5477de161b21d08c9bed1483}} 
+\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}!onUpdate@{onUpdate}}
+\index{onUpdate@{onUpdate}!GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+\doxysubsubsection{\texorpdfstring{onUpdate()}{onUpdate()}}
+{\footnotesize\ttfamily void Golf\+Engine\+::\+Scene\+::\+Game\+Object\+::on\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Calls on\+Update on all attached components. 
+
+
+
+Reimplemented in \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_u_i_1_1_button_a38c3c698a820a5f2db289f05345ca28d}{Golf\+Engine\+::\+Scene\+::\+UI\+::\+Button}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_ad58f7e4feaa3714d33762903afc07b76}\label{class_golf_engine_1_1_scene_1_1_game_object_ad58f7e4feaa3714d33762903afc07b76}} 
+\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}!parent@{parent}}
+\index{parent@{parent}!GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+\doxysubsubsection{\texorpdfstring{parent()}{parent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{Game\+Object}} \& Golf\+Engine\+::\+Scene\+::\+Game\+Object\+::parent (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Get parent of this game\+Object \begin{DoxyReturn}{Returns}
+reference to game\+Object of parent 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_a4d1b7413734953176612a5f84fddcc15}\label{class_golf_engine_1_1_scene_1_1_game_object_a4d1b7413734953176612a5f84fddcc15}} 
+\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}!removeComponent@{removeComponent}}
+\index{removeComponent@{removeComponent}!GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+\doxysubsubsection{\texorpdfstring{removeComponent()}{removeComponent()}}
+{\footnotesize\ttfamily template$<$typename C $>$ \\
+void Golf\+Engine\+::\+Scene\+::\+Game\+Object\+::remove\+Component (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Removes component from \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{Game\+Object}} 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em C} & \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_component}{Component}} to remove \\
+\hline
+\end{DoxyTemplParams}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_a1cabf494b8d30a821bf809355bcb4e4e}\label{class_golf_engine_1_1_scene_1_1_game_object_a1cabf494b8d30a821bf809355bcb4e4e}} 
+\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}!saveSnapshot@{saveSnapshot}}
+\index{saveSnapshot@{saveSnapshot}!GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+\doxysubsubsection{\texorpdfstring{saveSnapshot()}{saveSnapshot()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_i_snapshot}{ISnapshot}} $>$ Golf\+Engine\+::\+Scene\+::\+Game\+Object\+::save\+Snapshot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_i_persistable}{Golf\+Engine\+::\+Scene\+::\+IPersistable}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_a9e2cc1d1b5540e5c2a4eabd7aa2305a6}\label{class_golf_engine_1_1_scene_1_1_game_object_a9e2cc1d1b5540e5c2a4eabd7aa2305a6}} 
+\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}!setActive@{setActive}}
+\index{setActive@{setActive}!GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+\doxysubsubsection{\texorpdfstring{setActive()}{setActive()}}
+{\footnotesize\ttfamily void Golf\+Engine\+::\+Scene\+::\+Game\+Object\+::set\+Active (\begin{DoxyParamCaption}\item[{bool}]{active }\end{DoxyParamCaption})}
+
+Set active state of game\+Object (calls on\+Active on all attached components) 
+\begin{DoxyParams}{Parameters}
+{\em active} & new active state \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_afcd781f66efdff5f7230868dde5948e0}\label{class_golf_engine_1_1_scene_1_1_game_object_afcd781f66efdff5f7230868dde5948e0}} 
+\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}!setParent@{setParent}}
+\index{setParent@{setParent}!GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+\doxysubsubsection{\texorpdfstring{setParent()}{setParent()}}
+{\footnotesize\ttfamily void Golf\+Engine\+::\+Scene\+::\+Game\+Object\+::set\+Parent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{Game\+Object}} \&}]{parent }\end{DoxyParamCaption})}
+
+Set the parent of this game\+Object 
+\begin{DoxyParams}{Parameters}
+{\em parent} & to be set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_game_object_aa8ef682b4bb909cc4a65e3b725be6662}\label{class_golf_engine_1_1_scene_1_1_game_object_aa8ef682b4bb909cc4a65e3b725be6662}} 
+\index{GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}!setWorldTransform@{setWorldTransform}}
+\index{setWorldTransform@{setWorldTransform}!GolfEngine::Scene::GameObject@{GolfEngine::Scene::GameObject}}
+\doxysubsubsection{\texorpdfstring{setWorldTransform()}{setWorldTransform()}}
+{\footnotesize\ttfamily void Golf\+Engine\+::\+Scene\+::\+Game\+Object\+::set\+World\+Transform (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_transform}{Transform}} \&}]{r\+Transform }\end{DoxyParamCaption})}
+
+Sets the current local transform so that it matches the given world transform 
+\begin{DoxyParams}{Parameters}
+{\em r\+Transform} & the world transform that should be set \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Game\+Objects/Game\+Object.\+h\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Game\+Objects/Game\+Object.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,153 @@
+\hypertarget{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component}{}\doxysection{Golf\+Engine\+::Scene\+::Components\+::Tiled\+Component Class Reference}
+\label{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component}\index{GolfEngine::Scene::Components::TiledComponent@{GolfEngine::Scene::Components::TiledComponent}}
+Inheritance diagram for Golf\+Engine\+::Scene\+::Components\+::Tiled\+Component\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.847458cm]{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a019b3782b153d65e0721295ad6258208}{Tiled\+Component}} (const std\+::string \&map\+Path, \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}} pixel\+Scale=\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}}\{1, 1\})
+\item 
+void \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a76e25df3fec4b552f1e5ebe7e8869bd5}{on\+Start}} () override
+\item 
+void \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a1411771c394cca9bdddeaec7fc34b77a}{on\+Update}} () override
+\item 
+void \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a46ee8f50cbb4e1bc91c9ad210c4314cd}{on\+Remove}} () override
+\item 
+bool \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_ad9181b93a3ca5a8ffc3406aa4df36fec}{get\+Active}} () override
+\item 
+void \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_abf9c209eafc26c1037dda6c34c7c3e9d}{set\+Active}} (bool active) override
+\item 
+void \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_aeb94bb377a6d05e846802960e16ffc09}{set\+Parent\+Game\+Object}} (\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{Game\+Object}} \&game\+Object) override
+\item 
+\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_render_shape}{Render\+::\+Render\+Shape}} \& \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a565542a372c029db44c60c5d33c9e22a}{get\+Render\+Shape}} () override
+\item 
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a85c94285781833693b4016b0b3031587}\label{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a85c94285781833693b4016b0b3031587}} 
+void {\bfseries init\+Colliders} ()
+\begin{DoxyCompactList}\small\item\em Creates Game\+Objects with a \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_box_collider}{Box\+Collider}} for each tile with a collider property. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_i_snapshot}{ISnapshot}} $>$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a8380701733fcb5e9fd4e8218b753a3a9}{save\+Snapshot}} () override
+\item 
+void \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a0cdc74e44986cd628a7a4c4974fb87a0}{load\+Snapshot}} (const \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_i_snapshot}{ISnapshot}} \&raw\+Snapshot) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a019b3782b153d65e0721295ad6258208}\label{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a019b3782b153d65e0721295ad6258208}} 
+\index{GolfEngine::Scene::Components::TiledComponent@{GolfEngine::Scene::Components::TiledComponent}!TiledComponent@{TiledComponent}}
+\index{TiledComponent@{TiledComponent}!GolfEngine::Scene::Components::TiledComponent@{GolfEngine::Scene::Components::TiledComponent}}
+\doxysubsubsection{\texorpdfstring{TiledComponent()}{TiledComponent()}}
+{\footnotesize\ttfamily Golf\+Engine\+::\+Scene\+::\+Components\+::\+Tiled\+Component\+::\+Tiled\+Component (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{map\+Path,  }\item[{\mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}}}]{pixel\+Scale = {\ttfamily \mbox{\hyperlink{struct_golf_engine_1_1_scene_1_1_vector2}{Vector2}}\{1,~1\}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+A component that loads and renders a tile map created in Tiled 
+\begin{DoxyParams}{Parameters}
+{\em map\+Path} & Path to the map (.tmx) file \\
+\hline
+{\em pixel\+Scale} & Base scale used to up/down-\/scale the tiles \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_ad9181b93a3ca5a8ffc3406aa4df36fec}\label{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_ad9181b93a3ca5a8ffc3406aa4df36fec}} 
+\index{GolfEngine::Scene::Components::TiledComponent@{GolfEngine::Scene::Components::TiledComponent}!getActive@{getActive}}
+\index{getActive@{getActive}!GolfEngine::Scene::Components::TiledComponent@{GolfEngine::Scene::Components::TiledComponent}}
+\doxysubsubsection{\texorpdfstring{getActive()}{getActive()}}
+{\footnotesize\ttfamily bool Golf\+Engine\+::\+Scene\+::\+Components\+::\+Tiled\+Component\+::get\+Active (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_component}{Golf\+Engine\+::\+Scene\+::\+Component}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a565542a372c029db44c60c5d33c9e22a}\label{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a565542a372c029db44c60c5d33c9e22a}} 
+\index{GolfEngine::Scene::Components::TiledComponent@{GolfEngine::Scene::Components::TiledComponent}!getRenderShape@{getRenderShape}}
+\index{getRenderShape@{getRenderShape}!GolfEngine::Scene::Components::TiledComponent@{GolfEngine::Scene::Components::TiledComponent}}
+\doxysubsubsection{\texorpdfstring{getRenderShape()}{getRenderShape()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_render_1_1_render_shape}{Render\+::\+Render\+Shape}} \& Golf\+Engine\+::\+Scene\+::\+Components\+::\+Tiled\+Component\+::get\+Render\+Shape (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Get the render shape connected to this drawable \begin{DoxyReturn}{Returns}
+render shape 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_components_1_1_drawable_ad5694fb44b9d422893d8db4e34b94c3e}{Golf\+Engine\+::\+Scene\+::\+Components\+::\+Drawable}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a0cdc74e44986cd628a7a4c4974fb87a0}\label{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a0cdc74e44986cd628a7a4c4974fb87a0}} 
+\index{GolfEngine::Scene::Components::TiledComponent@{GolfEngine::Scene::Components::TiledComponent}!loadSnapshot@{loadSnapshot}}
+\index{loadSnapshot@{loadSnapshot}!GolfEngine::Scene::Components::TiledComponent@{GolfEngine::Scene::Components::TiledComponent}}
+\doxysubsubsection{\texorpdfstring{loadSnapshot()}{loadSnapshot()}}
+{\footnotesize\ttfamily void Golf\+Engine\+::\+Scene\+::\+Components\+::\+Tiled\+Component\+::load\+Snapshot (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_i_snapshot}{ISnapshot}} \&}]{raw\+Snapshot }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_i_persistable}{Golf\+Engine\+::\+Scene\+::\+IPersistable}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a46ee8f50cbb4e1bc91c9ad210c4314cd}\label{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a46ee8f50cbb4e1bc91c9ad210c4314cd}} 
+\index{GolfEngine::Scene::Components::TiledComponent@{GolfEngine::Scene::Components::TiledComponent}!onRemove@{onRemove}}
+\index{onRemove@{onRemove}!GolfEngine::Scene::Components::TiledComponent@{GolfEngine::Scene::Components::TiledComponent}}
+\doxysubsubsection{\texorpdfstring{onRemove()}{onRemove()}}
+{\footnotesize\ttfamily void Golf\+Engine\+::\+Scene\+::\+Components\+::\+Tiled\+Component\+::on\+Remove (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_component}{Golf\+Engine\+::\+Scene\+::\+Component}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a76e25df3fec4b552f1e5ebe7e8869bd5}\label{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a76e25df3fec4b552f1e5ebe7e8869bd5}} 
+\index{GolfEngine::Scene::Components::TiledComponent@{GolfEngine::Scene::Components::TiledComponent}!onStart@{onStart}}
+\index{onStart@{onStart}!GolfEngine::Scene::Components::TiledComponent@{GolfEngine::Scene::Components::TiledComponent}}
+\doxysubsubsection{\texorpdfstring{onStart()}{onStart()}}
+{\footnotesize\ttfamily void Golf\+Engine\+::\+Scene\+::\+Components\+::\+Tiled\+Component\+::on\+Start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_component}{Golf\+Engine\+::\+Scene\+::\+Component}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a1411771c394cca9bdddeaec7fc34b77a}\label{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a1411771c394cca9bdddeaec7fc34b77a}} 
+\index{GolfEngine::Scene::Components::TiledComponent@{GolfEngine::Scene::Components::TiledComponent}!onUpdate@{onUpdate}}
+\index{onUpdate@{onUpdate}!GolfEngine::Scene::Components::TiledComponent@{GolfEngine::Scene::Components::TiledComponent}}
+\doxysubsubsection{\texorpdfstring{onUpdate()}{onUpdate()}}
+{\footnotesize\ttfamily void Golf\+Engine\+::\+Scene\+::\+Components\+::\+Tiled\+Component\+::on\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_component}{Golf\+Engine\+::\+Scene\+::\+Component}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a8380701733fcb5e9fd4e8218b753a3a9}\label{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_a8380701733fcb5e9fd4e8218b753a3a9}} 
+\index{GolfEngine::Scene::Components::TiledComponent@{GolfEngine::Scene::Components::TiledComponent}!saveSnapshot@{saveSnapshot}}
+\index{saveSnapshot@{saveSnapshot}!GolfEngine::Scene::Components::TiledComponent@{GolfEngine::Scene::Components::TiledComponent}}
+\doxysubsubsection{\texorpdfstring{saveSnapshot()}{saveSnapshot()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_i_snapshot}{ISnapshot}} $>$ Golf\+Engine\+::\+Scene\+::\+Components\+::\+Tiled\+Component\+::save\+Snapshot (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_i_persistable}{Golf\+Engine\+::\+Scene\+::\+IPersistable}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_abf9c209eafc26c1037dda6c34c7c3e9d}\label{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_abf9c209eafc26c1037dda6c34c7c3e9d}} 
+\index{GolfEngine::Scene::Components::TiledComponent@{GolfEngine::Scene::Components::TiledComponent}!setActive@{setActive}}
+\index{setActive@{setActive}!GolfEngine::Scene::Components::TiledComponent@{GolfEngine::Scene::Components::TiledComponent}}
+\doxysubsubsection{\texorpdfstring{setActive()}{setActive()}}
+{\footnotesize\ttfamily void Golf\+Engine\+::\+Scene\+::\+Components\+::\+Tiled\+Component\+::set\+Active (\begin{DoxyParamCaption}\item[{bool}]{active }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_component}{Golf\+Engine\+::\+Scene\+::\+Component}}.
+
+\mbox{\Hypertarget{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_aeb94bb377a6d05e846802960e16ffc09}\label{class_golf_engine_1_1_scene_1_1_components_1_1_tiled_component_aeb94bb377a6d05e846802960e16ffc09}} 
+\index{GolfEngine::Scene::Components::TiledComponent@{GolfEngine::Scene::Components::TiledComponent}!setParentGameObject@{setParentGameObject}}
+\index{setParentGameObject@{setParentGameObject}!GolfEngine::Scene::Components::TiledComponent@{GolfEngine::Scene::Components::TiledComponent}}
+\doxysubsubsection{\texorpdfstring{setParentGameObject()}{setParentGameObject()}}
+{\footnotesize\ttfamily void Golf\+Engine\+::\+Scene\+::\+Components\+::\+Tiled\+Component\+::set\+Parent\+Game\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_game_object}{Game\+Object}} \&}]{game\+Object }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_golf_engine_1_1_scene_1_1_component}{Golf\+Engine\+::\+Scene\+::\+Component}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Components/Tiled\+Component.\+h\item 
+D\+:/\+Avans/\+Jaar4/\+Minor\+SPC/\+SPC-\/\+Project/src/\+Scene/\+Components/Tiled\+Component.\+cpp\end{DoxyCompactItemize}

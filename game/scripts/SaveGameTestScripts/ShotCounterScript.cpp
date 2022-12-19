@@ -8,8 +8,10 @@
 
 #include "ShotCounterScript.h"
 
+using namespace GolfEngine;
+
 void ShotCounterScript::onUpdate() {
-    auto& actionMap = *ActionMap::getActionMap();
+    auto& actionMap = *Input::ActionMap::getActionMap();
 
     if(actionMap.isJustPressed("playerShoot")){
         shotsFired++;

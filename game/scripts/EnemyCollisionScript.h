@@ -9,6 +9,8 @@
 #include <Scene/Components/ParticleSystem.h>
 #include "EnemyMovementScript.h"
 
+using namespace GolfEngine::Scene::Components;
+
 class EnemyCollisionScript : public BehaviourScript {
 public:
     void onStart() override;
