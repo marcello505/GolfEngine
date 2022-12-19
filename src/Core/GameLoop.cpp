@@ -32,6 +32,10 @@ namespace GolfEngine::Core {
         }
     }
 
+    bool hasRunningGameLoop() {
+        return _currentlyRunningGameLoop != nullptr;
+    }
+
 
     void GameLoop::start() {
         //Set this GameLoop as the currently running GameLoop

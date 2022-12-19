@@ -87,5 +87,6 @@ namespace GolfEngine::Core {
     };
 
     GameLoop &getRunningGameLoop();
+    bool hasRunningGameLoop();
 }
 #endif //SPC_PROJECT_GAMELOOP_H

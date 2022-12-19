@@ -65,7 +65,8 @@ namespace GolfEngine::Core{
                 }
 
                 //Reset lag, meaning any late physics tics are reset
-                GolfEngine::Core::getRunningGameLoop().resetLag();
+                if(GolfEngine::Core::hasRunningGameLoop())
+                    GolfEngine::Core::getRunningGameLoop().resetLag();
             }
             _nextScene.reset();
         }
