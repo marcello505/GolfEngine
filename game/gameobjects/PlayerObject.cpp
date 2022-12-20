@@ -38,6 +38,7 @@ PlayerObject::PlayerObject(ProjectilePoolScript* projectilePoolScript, Scene& sc
     audioSource.addSound("shoot", "res/audio/short-shot.ogg");
     audioSource.addSound("reload", "res/audio/gun-reload.wav");
     audioSource.addSound("death", "res/audio/blood_splatter.mp3");
+    audioSource.addSound("empty_gun", "res/audio/empty-gun.ogg");
 
     // Blood splatter particle effect game object
     scene.createNewGameObject<BloodSplatterParticleEffect>((GameObject&)*this);

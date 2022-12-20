@@ -37,6 +37,10 @@ void PlayerShootScript::onUpdate() {
                 projectile.value().get().shoot(projectileTransform, directionToMouse);
             }
         }
+        else if(!_reloading){
+            //Gun is empty and is currently not being reloaded
+            _audioSource->play("empty_gun");
+        }
     }
 
     // Handle reloading
