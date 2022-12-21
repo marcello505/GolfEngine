@@ -104,7 +104,7 @@ int main(int argc, char* argv[]){
     actionMap->addInputKeyToAction("renderFPS", Key_F9);
 
     //Debug settings
-    GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS, true); //Render colliders
+    GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_COLLIDERS, false); //Render colliders
     GolfEngine::Core::getProjectSettings().setBool(PROJECT_SETTINGS_BOOL_RENDER_PATHFINDING, false); //Render pathfinding nodes
 
     //Game-based debug settings

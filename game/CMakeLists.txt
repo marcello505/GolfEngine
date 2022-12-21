@@ -66,3 +66,7 @@ add_executable(Game
         main.cpp)
 target_link_libraries(Game GolfEngine)
 add_dependencies(Game Game_Resources)
+if(WIN32)
+    # Windows specific option to make the C++ std static
+    target_link_libraries(Game -static)
+endif()
