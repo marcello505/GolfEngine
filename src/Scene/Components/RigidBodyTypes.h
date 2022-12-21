@@ -5,13 +5,14 @@
 #ifndef GOLFENGINE_RIGIDBODYTYPES_H
 #define GOLFENGINE_RIGIDBODYTYPES_H
 
-
-enum class RigidBodyTypes {
-    DynamicBody,
-    StaticBody,
-    KinematicBody,
-    AreaBody,
-};
+namespace GolfEngine::Scene::Components {
+    enum class RigidBodyTypes {
+        DynamicBody,
+        StaticBody,
+        KinematicBody,
+        AreaBody,
+    };
+}
 
 
 #endif //GOLFENGINE_RIGIDBODYTYPES_H

@@ -1,5 +1,5 @@
 //
-// Created by jaaps on 02/11/2022.
+// Created by conner on 02/11/2022.
 //
 
 #ifndef GOLFENGINE_ANIMATION_H
@@ -7,16 +7,15 @@
 
 
 #include <string>
+#include "Scene/Vector2.h"
 
-struct Animation {
-
-    std::string spriteSheetPath;
-    float playSpeed;
-    int rows;
-    int cols;
-    int beginCell;
-    int endCell;
-};
-
+namespace GolfEngine::Scene::Components {
+    struct Animation {
+        std::string name;
+        float playSpeed;
+        int beginCell;
+        int endCell;
+    };
+}
 
 #endif //GOLFENGINE_ANIMATION_H

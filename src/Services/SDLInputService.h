@@ -1,17 +1,37 @@
-//
-// Created by conner on 11/2/2022.
-//
 
 #ifndef SPC_PROJECT_SDLINPUTSERVICE_H
 #define SPC_PROJECT_SDLINPUTSERVICE_H
 
 #include "Abstracts/InputService.h"
+#include "../Input/ActionMap.h"
+#include "../Input/InputKey.h"
+#include <SDL.h>
+#include <optional>
 
-class SDLInputService : public InputService {
-public:
-    SDLInputService();
-    void handleInputs() override;
-};
+namespace GolfEngine::Services::Input {
+    class SDLInputService : public InputService {
+    private:
+        ActionMap *_actionMap;
+        std::map<std::string, InputKey> _inputBinds;
 
+        void bindKeys();
+        void handleMouseEvent(SDL_Event event, bool pressed);
+
+        std::optional<InputKey> sdlEventToInputKey(const SDL_Event &event);
+
+        bool _hasReceivedQuitSignal{};
+        bool _pressedKey{};
+    public:
+        SDLInputService();
+
+        // Input Service overrides
+        void handleInputs() override;
+        InputKey getKeyPressed() override;
+        [[nodiscard]] bool hasReceivedQuitSignal() const override;
+        [[nodiscard]] bool pressedKey() const override;
+        void setKeyPressed(bool pressed) override;
+        std::string getKeyString(InputKey key) override;
+    };
+}
 
 #endif //SPC_PROJECT_SDLINPUTSERVICE_H

@@ -5,18 +5,68 @@
 #ifndef SPC_PROJECT_SCENEMANAGER_H
 #define SPC_PROJECT_SCENEMANAGER_H
 
+#include <map>
+#include <memory>
+#include <optional>
 
-#include <vector>
 #include "../Scene/Scene.h"
+#include "../Scene/ISceneFactory.h"
+
+using namespace GolfEngine::Scene;
+//class ISceneFactory;
+
+namespace GolfEngine::Core {
 
 class SceneManager {
 private:
-    std::vector<Scene> scenes;
-public:
-    void changeScene(const Scene& scene);
-    void addScene(const Scene& scene);
+    std::map<std::string, std::unique_ptr<Scene::ISceneFactory>> _scenes;
+    std::unique_ptr<Scene::Scene> _currentScene;
+    std::string _lastScene;
 
+    // If this has a value, then the next call to updateSceneManager() will change the scene to the string given
+    std::optional<std::string> _nextScene {};
+
+    static std::unique_ptr<SceneManager> sceneManager;
+
+    SceneManager();
+public:
+    /// This method is used to get access to the scene manager instance
+    /// \return Returns the global scene manager instance
+    static SceneManager& GetSceneManager();
+
+    /// A deferred call to load  a new scene by setting the currentScene of a copy of the loaded scene
+    /// The actual loading happens on the next updateSceneManager() call
+    /// \param sceneName Name of scene to load, if empty, current scene will be reloaded
+    void loadScene(const std::string &sceneName = "");
+
+    /// Adds a Scene Factory to the SceneManager, which can create new scenes on command using the loadScene method
+    /// \tparam SF Scene Factory type
+    /// \param sceneName Name of the scene this factory creates
+    template<typename SF>
+    void addSceneFactory(const std::string& sceneName){
+        _scenes.insert(std::make_pair(sceneName, std::make_unique<SF>()));
+    }
+
+    /// Update the scene manager if needed, should be called by the GameLoop before updating the current scene.
+    /// For now the only update action is loading in a new scene if _nextScene has a value
+    void updateSceneManager();
+
+    /// Returns reference to _currentScene
+    /// \return
+    Scene::Scene& getCurrentScene();
+
+    /// Checks if there is an active scene
+    /// \return true if a scene is active
+    bool hasCurrentScene();
+
+    /// Clears the scenes map by deleting factories
+    void clearScenes();
+
+    /// Returns the name of the scene that was last loaded
+    /// \return name of the scene
+    [[nodiscard]] std::string getCurrentSceneName() const;
 };
 
+}
 
 #endif //SPC_PROJECT_SCENEMANAGER_H

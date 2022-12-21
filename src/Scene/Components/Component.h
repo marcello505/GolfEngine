@@ -5,17 +5,28 @@
 #ifndef GOLFENGINE_COMPONENT_H
 #define GOLFENGINE_COMPONENT_H
 
+#include <optional>
 
-class Component {
-private:
-    bool _active;
-public:
-    virtual void onStart() = 0;
-    virtual void onUpdate() = 0;
-    virtual void onRemove() = 0;
-    bool getActive();
-    void setActive(bool active);
-};
+#include "../IPersistable.h"
+#include "../GameObjects/GameObject.h"
 
+namespace GolfEngine::Scene {
+    // Forward declaration
+    class GameObject;
+
+    class Component : public IPersistable {
+    protected:
+        bool _active;
+        std::optional<std::reference_wrapper<GameObject>> _gameObject;
+    public:
+        virtual ~Component() = default;
+        virtual void onStart() = 0;
+        virtual void onUpdate() = 0;
+        virtual void onRemove() = 0;
+        virtual bool getActive() = 0;
+        virtual void setActive(bool active) = 0;
+        virtual void setParentGameObject(GameObject &gameObject) = 0;
+    };
+}
 
 #endif //GOLFENGINE_COMPONENT_H

@@ -5,12 +5,18 @@
 #ifndef SPC_PROJECT_RENDERSHAPETYPE_H
 #define SPC_PROJECT_RENDERSHAPETYPE_H
 
-enum class RenderShapeType {
-    LineShape,
-    CircleShape,
-    RectShape,
-    SpriteShape,
-    ParticleSystemShape
-};
+namespace GolfEngine::Scene::Render {
+    enum class RenderShapeType {
+        LineShape,
+        CircleShape,
+        RectShape,
+        SpriteShape,
+        ParticleSystemShape,
+        TextRenderShape,
+        ButtonRenderShape,
+        TileMapRenderShape,
+        GraphRenderShape
+    };
+}
 
 #endif //SPC_PROJECT_RENDERSHAPETYPE_H
