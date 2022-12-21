@@ -120,4 +120,4 @@ add_subdirectory(validation/US13_AIObjects)
 add_subdirectory(validation/US14_CollisionLogic)
 add_subdirectory(validation/US00_TileMap)
 add_subdirectory(validation/US00_Camera)
-
+add_subdirectory(validation/LimitTest_Physics)
