@@ -8,6 +8,7 @@
 
 #include "Scene/Components/BehaviourScript.h"
 #include "Scene/Components/Pathfinding.h"
+#include <Scene/Components/AudioSource.h>
 
 using namespace GolfEngine::Scene;
 using namespace GolfEngine::Scene::Components;
@@ -24,11 +25,12 @@ public:
     void loadSnapshot(const ISnapshot& rawSnapshot) override;
 
 private:
-    std::optional<std::reference_wrapper<Pathfinding>> pathfinding;
-    bool chasing {false};
+    AudioSource* _audioSource {};
+    std::optional<std::reference_wrapper<Pathfinding>> _pathfinding;
+    bool _chasing {false};
     GameObject& _target;
-    int patrolIndex{0};
-    Vector2 direction {0,0};
+    int _patrolIndex{0};
+    Vector2 _direction {0,0};
 
     bool checkIftargetIsInSight();
 

@@ -18,7 +18,6 @@ EnemyObject::EnemyObject(GameObject *target, Scene& scene){
     tag = "enemy";
     addComponent<BoxCollider>(Vector2{12.5f, 12.5f});
 
-//
     addComponent<SpriteComponent>("res/sprite_sheets/zombie.png", Vector2{2, 2}, Rect2{{}, {239, 221}});
     auto& animator = addComponent<Animator>("res/sprite_sheets/zombie.png", 7, 7, Vector2(239, 221), Vector2(2,2));
     animator.addAnimation("attack", 0, 8, 15.0f);
@@ -26,11 +25,13 @@ EnemyObject::EnemyObject(GameObject *target, Scene& scene){
     animator.addAnimation("moving", 26, 42, 15.0f);
     animator.addReturnTransition("attack", "idle");
     animator.play("idle", true);
-//
+
     RigidBodyDef rbDef {};
     rbDef.linearDamping = 5.0f;
     addComponent<RigidBody>(rbDef);
-    addComponent<GolfEngine::Scene::Components::AudioSource>("res/audio/Zombie-Sound.ogg", false);
+    auto& audioComp = addComponent<AudioSource>(false);
+    audioComp.addSound("spotted", "res/audio/Zombie-Sound.ogg");
+    audioComp.addSound("death", "res/audio/Zombie-Death.wav");
     addComponent<Pathfinding>(target);
     addComponent<EnemyMovementScript>(target);
     addComponent<EnemyCollisionScript>();
