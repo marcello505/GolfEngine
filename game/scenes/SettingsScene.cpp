@@ -352,4 +352,32 @@ void SettingsScene::build(Scene& scene) const {
     keyConfigScriptPlayerShoot.setParentGameObject(playerShootKeyButton);
     playerShootKeyButton.addComponent<KeyConfigButtonScript>(keyConfigScriptPlayerShoot);
 
+
+    //playerReload
+
+    std::string playerReloadInputKey = inputService->getKeyString(actionMap->getActionKeys("playerReload")[0]);
+
+    auto& playerReloadKeyText = scene.createNewGameObject<Text>(root, Vector2(rs->screenSizeWidth() / 100 * 63,
+                                                                             rs->screenSizeHeight() / 100 * 84),0,
+                                                               "playerReload ( " + playerReloadInputKey + " )"  ,20,
+                                                               Color(), "res/fonts/ZenDots-Regular.ttf",
+                                                               Alignment::Center, false);
+
+    auto& playerReloadTextUpdateScript =
+            playerReloadKeyText.addComponent<TextUpdateScript>(&playerReloadKeyText);
+    playerReloadTextUpdateScript.setParentGameObject(playerReloadKeyText);
+    playerReloadKeyText.addComponent<TextUpdateScript>(playerReloadTextUpdateScript);
+
+    auto& playerReloadKeyButton = scene.createNewGameObject<Button>(root, 120, 40,
+                                                                   Vector2(rs->screenSizeWidth() / 100 * 85,
+                                                                           rs->screenSizeHeight() / 100 * 85),true,
+                                                                   "clickButton", Vector2(0, 0), 0,
+                                                                   "Change key", 20, Color(),
+                                                                   "res/fonts/Rubik-VariableFont_wght.ttf"
+                                                                    ,Alignment::Center);
+
+    auto keyConfigScriptPlayerReload = KeyConfigButtonScript("playerReload", &playerReloadTextUpdateScript);
+    keyConfigScriptPlayerReload.setParentGameObject(playerReloadKeyButton);
+    playerReloadKeyButton.addComponent<KeyConfigButtonScript>(keyConfigScriptPlayerReload);
+
 }
