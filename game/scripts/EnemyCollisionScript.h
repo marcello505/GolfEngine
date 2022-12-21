@@ -7,6 +7,7 @@
 
 #include "Scene/Components/BehaviourScript.h"
 #include <Scene/Components/ParticleSystem.h>
+#include <Scene/Components/AudioSource.h>
 #include "EnemyMovementScript.h"
 
 using namespace GolfEngine::Scene::Components;
@@ -16,7 +17,7 @@ public:
     void onStart() override;
     void onUpdate() override;
     void onCollisionEnter(RigidBody& other) override;
-    bool isDead();
+    bool isDead() const;
 
 
     std::unique_ptr<ISnapshot> saveSnapshot() override;
@@ -29,6 +30,7 @@ private:
         bool death;
     };
     ParticleSystem* _particleSystem;
+    AudioSource* _audioSource;
 };
 
 #endif //GOLFENGINE_ENEMYCOLLISIONSCRIPT_H

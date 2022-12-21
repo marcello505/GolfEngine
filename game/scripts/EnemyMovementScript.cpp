@@ -8,39 +8,47 @@
 #include "Scene/Components/Animator.h"
 
 EnemyMovementScript::EnemyMovementScript(GameObject* target) : _target{*target}  {
-
 }
+
 void EnemyMovementScript::onStart() {
-    pathfinding = _gameObject->get().getComponent<Pathfinding>();
+    if(_gameObject->get().hasComponent<Pathfinding>())
+        _pathfinding = _gameObject->get().getComponent<Pathfinding>();
+
+    if(_gameObject->get().hasComponent<AudioSource>())
+        _audioSource = &_gameObject->get().getComponent<AudioSource>();
 }
 
 void EnemyMovementScript::onUpdate() {
 
-    if(chasing) {
+    if(_chasing) {
         _gameObject->get().getComponent<Animator>().play("moving",true);
         rotateEnemyToPosition(_target.getWorldTransform().position);
-        direction = pathfinding->get().getPathDirection();
+        _direction = _pathfinding->get().getPathDirection();
         auto rb = &_gameObject.value().get().getComponent<RigidBody>();
-        rb->applyWorldForceToCenter(direction * 1);
+        rb->applyWorldForceToCenter(_direction * 1);
     }else{
-        chasing = checkIftargetIsInSight();
+        _chasing = checkIftargetIsInSight();
+        // Play sfx for spotting player
+        if(_chasing)
+            _audioSource->play("spotted");
+
         auto& enemyObject = (EnemyObject &) _gameObject->get();
         if(!enemyObject.patrolPoints.empty()) {
             _gameObject->get().getComponent<Animator>().play("moving",true);
 
             auto currPos = enemyObject.getWorldTransform().position;
-            if(static_cast<int>(currPos.x) == enemyObject.patrolPoints.at(patrolIndex).x && static_cast<int>(currPos.y) == enemyObject.patrolPoints.at(patrolIndex).y){
-                if (patrolIndex == enemyObject.patrolPoints.size()-1 ){
-                    patrolIndex = 0;
+            if(static_cast<int>(currPos.x) == enemyObject.patrolPoints.at(_patrolIndex).x && static_cast<int>(currPos.y) == enemyObject.patrolPoints.at(_patrolIndex).y){
+                if (_patrolIndex == enemyObject.patrolPoints.size()-1 ){
+                    _patrolIndex = 0;
                 }else {
-                    patrolIndex++;
+                    _patrolIndex++;
                 }
             }
-            rotateEnemyToPosition(enemyObject.patrolPoints.at(patrolIndex));
+            rotateEnemyToPosition(enemyObject.patrolPoints.at(_patrolIndex));
 
-            direction = pathfinding->get().getDirection(enemyObject.patrolPoints.at(patrolIndex));
+            _direction = _pathfinding->get().getDirection(enemyObject.patrolPoints.at(_patrolIndex));
             auto rb = &_gameObject.value().get().getComponent<RigidBody>();
-            rb->applyWorldForceToCenter(direction *0.1);
+            rb->applyWorldForceToCenter(_direction *0.1);
         }
     }
 }
@@ -60,17 +68,17 @@ void EnemyMovementScript::rotateEnemyToPosition(Vector2 targetPosition) {
 
 std::unique_ptr<ISnapshot> EnemyMovementScript::saveSnapshot() {
     auto result = std::make_unique<Snapshot>();
-    result->chasing = chasing;
-    result->patrolIndex = patrolIndex;
-    result->direction = direction;
+    result->chasing = _chasing;
+    result->patrolIndex = _patrolIndex;
+    result->direction = _direction;
     return result;
 }
 
 void EnemyMovementScript::loadSnapshot(const ISnapshot& rawSnapshot) {
     auto& snapshot = (Snapshot&)rawSnapshot;
-    chasing = snapshot.chasing;
-    patrolIndex = snapshot.patrolIndex;
-    direction = snapshot.direction;
+    _chasing = snapshot.chasing;
+    _patrolIndex = snapshot.patrolIndex;
+    _direction = snapshot.direction;
 }
 
 

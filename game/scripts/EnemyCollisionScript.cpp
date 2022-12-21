@@ -11,6 +11,8 @@ void EnemyCollisionScript::onStart() {
     if(_gameObject->get().hasComponent<EnemyMovementScript>())
         _enemyMovement = &_gameObject->get().getComponent<EnemyMovementScript>();
 
+    if(_gameObject->get().hasComponent<AudioSource>())
+        _audioSource = &_gameObject->get().getComponent<AudioSource>();
 
     // Get blood splatter particle system from child
     auto& children = _gameObject->get().children();
@@ -33,8 +35,8 @@ void EnemyCollisionScript::onUpdate() {
 
 void EnemyCollisionScript::onCollisionEnter(RigidBody &other) {
     if(other.getParentGameObject()->tag == "projectile"){
-        // TODO add some "death" effects (maybe change to a death animation?)
-       _particleSystem->play(false);
+        _audioSource->play("death");
+        _particleSystem->play(false);
         _death = true;
     }
 }
@@ -52,7 +54,7 @@ void EnemyCollisionScript::loadSnapshot(const ISnapshot& rawSnapshot) {
     _death = snapshot.death;
 }
 
-bool EnemyCollisionScript::isDead() {
+bool EnemyCollisionScript::isDead() const {
     return _death;
 }
 
